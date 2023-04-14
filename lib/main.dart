@@ -1,4 +1,6 @@
+import 'package:dujo_kerala_website/ui%20team/abin/alumini_accocation/alumni_assocation.dart';
 import 'package:dujo_kerala_website/view/web/home/dujo_home.dart';
+import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/teachers_panel_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,7 +42,11 @@ class MyApp extends StatelessWidget {
                 // ignore: deprecated_member_use
                 accentColor: const Color(0xFF02BB9F),
               ),
-              home: DujoHomePage());
+              home: 
+             // AlumniAssocation()
+             ClassTeacherAdmin(schoolID: '',teacherEmail:'' ,teacherID: '',)
+             // DujoHomePage()
+              );
         });
   }
 }

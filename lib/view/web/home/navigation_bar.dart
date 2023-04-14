@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import '../login/admin/admin_DashBoard/create_Admin/add_new_admin.dart';
 import '../login/loginscreen.dart';
-import '../widgets/drop_DownList/schoolDropDownList.dart';
+import '../widgets/drop_DownList/schoolDropDownList.dart'; 
 
 class NavigationBarWidget extends StatelessWidget {
   TextEditingController schoolIdController = TextEditingController();
@@ -13,12 +13,10 @@ class NavigationBarWidget extends StatelessWidget {
   });
 
   final Size screenSize;
-  final Uri _faceBookUrl =
-      Uri.parse('https://www.facebook.com/profile.php?id=100091062978371');
+    final Uri _faceBookUrl = Uri.parse('https://www.facebook.com/profile.php?id=100091062978371');
   final Uri _twitterUrl = Uri.parse('https://twitter.com/LeptonDujo');
   final Uri _instaUrl = Uri.parse('https://www.instagram.com/leptondujo/');
-  final Uri _utubeUrl =
-      Uri.parse('https://www.youtube.com/@LEPTONDUJO/featured');
+  final Uri _utubeUrl = Uri.parse('https://www.youtube.com/@LEPTONDUJO/featured');
   final Uri _leptonUrl = Uri.parse('http://www.leptoncommunications.com');
 
   Future<void> _launchFacebookUrl() async {
@@ -55,48 +53,42 @@ class NavigationBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
         width: double.infinity,
-        //height: 130,
+      height: screenSize.width/10,
         child: Row(
           children: [
-            const Icon(Icons.phone, color: Color.fromARGB(255, 4, 157, 228)),
+            Icon(Icons.phone,color: Color.fromARGB(255, 4, 157, 228),size: screenSize.width/50),
 
             GestureDetector(
-                onTap: () {},
-                child: const Text('04714053483',
-                    style: TextStyle(color: Colors.black, fontSize: 16))),
-            const SizedBox(
-              width: 20,
+              onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return AddNewAdmin(
+                  schoolID: 'MarthCheng13283',
+                );
+              },));
+              },
+              child: Text('+04714053483',style: TextStyle(color: Colors.black,fontSize: screenSize.width/98))),
+            SizedBox(
+              width: screenSize.width/55,
             ),
+           
+            Icon(Icons.phone_android,color: Colors.black,size: screenSize.width/50),
 
-            const Icon(
-              Icons.phone_android,
-              color: Colors.black,
+              Text('9746366651',style: TextStyle(color: Colors.black,fontSize: screenSize.width/98)),
+              SizedBox(
+              width: screenSize.width/55,
             ),
+           
+              Icon(Icons.mail_outline,color: Color.fromARGB(255, 255, 0, 0),size: screenSize.width/50),
 
-            const Text('9746366651',
-                style: TextStyle(color: Colors.black, fontSize: 16)),
-            const SizedBox(
-              width: 20,
-            ),
-
-            const Icon(Icons.mail_outline,
-                color: Color.fromARGB(255, 255, 0, 0)),
-
-            const Text('info@leptondujo.com',
-                style: TextStyle(
-                    color: Color.fromARGB(255, 0, 0, 0), fontSize: 16)),
-            const SizedBox(
-              width: 50,
-            ),
-
+                Text('info@leptondujo.com',style: TextStyle(color: Color.fromARGB(255, 0, 0, 0),fontSize: screenSize.width/98)),
             SizedBox(
               width: screenSize.width * 0.3,
-            ),
-            // GestureDetector(
+            ), 
+            // GestureDetector( 
             //   onTap: (){
             //     Navigator.push(context, MaterialPageRoute(builder: ((context) =>RequestedSchoolsApproval())));
-            //   },
-
+            //   }, 
+              
             //   child: Text(
             //     'Super Admin', style: TextStyle(color: Colors.black),
             //   ),
@@ -127,7 +119,7 @@ class NavigationBarWidget extends StatelessWidget {
                             await Navigator.push(context, MaterialPageRoute(
                               builder: (context) {
                                 return LoginScreen(
-                                  schoolID: schoolListValue?["id"],
+                                  schoolID: schoolListValue!["id"],
                                 );
                               },
                             ));
@@ -144,93 +136,86 @@ class NavigationBarWidget extends StatelessWidget {
                   },
                 );
               },
-              child: const SizedBox(
-                height: 30,
-                width: 75,
+              child: SizedBox(
+                height: screenSize.width/50,
+                width: screenSize.width/20,
                 child: Center(
                   child: Text(
                     "Login",
                     style: TextStyle(
-                        color: Colors.red, fontWeight: FontWeight.bold),
+                        color: Colors.red, fontWeight: FontWeight.bold,fontSize: screenSize.width/80),
                   ),
                 ),
               ),
             ),
             SizedBox(
-              width: screenSize.width * 1 / 20,
+                width: screenSize.width * 1 /30 ,
+              ),
+            InkWell(
+              onTap: () {
+                 _launchFacebookUrl();
+              },
+              child: CircleAvatar(
+                radius: screenSize.width * 1 / 55,
+                backgroundColor: Colors.transparent,
+                child: Image.asset(
+                  "assets/images/frdd.png",
+                  height: screenSize.width * 1 / 75,
+                  width: screenSize.width * 1 / 60,
+                ),
+              ),
             ),
-            Row(
-                //mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  // SizedBox(
-                  //   width: screenSize.width * 1 / 15,
-                  // ),
-                  InkWell(
-                    onTap: () {
-                      _launchFacebookUrl();
-                    },
-                    child: CircleAvatar(
-                      radius: screenSize.width * 1 / 55,
-                      backgroundColor: Colors.transparent,
-                      child: Image.asset(
-                        "assets/images/frdd.png",
-                        height: screenSize.width * 1 / 75,
-                        //  width: screenSize.width * 1 / 60,
-                      ),
-                    ),
-                  ),
-                  // SizedBox(
-                  //   width: screenSize.width * 1 / 60,
-                  // ),
-                  InkWell(
-                    onTap: () {
-                      _launchInstaUrl();
-                    },
-                    child: CircleAvatar(
-                      radius: screenSize.width * 1 / 60,
-                      backgroundColor: Colors.transparent,
-                      child: Image.asset(
-                        "assets/images/instag.png",
-                        height: screenSize.width * 1 / 50,
-                        // width: screenSize.width * 1 / 50,
-                      ),
-                    ),
-                  ),
-                  // SizedBox(
-                  //   width: screenSize.width * 1 / 60,
-                  // ),
-                  InkWell(
-                    onTap: () {
-                      _launchTwitterUrl();
-                    },
-                    child: CircleAvatar(
-                      radius: screenSize.width * 1 / 60,
-                      backgroundColor: Colors.transparent,
-                      child: Image.asset(
-                        "assets/images/twitt.png",
-                        height: screenSize.width * 1 / 65,
-                        //  width: screenSize.width * 1 / 65,
-                      ),
-                    ),
-                  ),
-                  // SizedBox(
-                  //   width: screenSize.width * 1 / 70,
-                  // ),
-                  InkWell(
-                    onTap: () {
-                      _launchyouTubeUrl();
-                    },
-                    child: CircleAvatar(
-                      radius: screenSize.width * 1 / 60,
-                      backgroundColor: Colors.transparent,
-                      child: Image.asset(
-                        "assets/images/utube.png",
-                        height: screenSize.width * 1 / 62,
-                        //  width: screenSize.width * 1 / 62,
-                      ),
-                    ),
-                  ),
-                ]),
+            // SizedBox(
+            //   width: screenSize.width * 1 / 60,
+            // ),
+            InkWell(
+              onTap: () {
+                _launchInstaUrl();
+              },
+              child: CircleAvatar(
+                radius: screenSize.width * 1 / 60,
+                backgroundColor: Colors.transparent,
+                child: Image.asset(
+                  "assets/images/instag.png",
+                  height: screenSize.width * 1 / 50,
+                  width: screenSize.width * 1 / 50,
+                ),
+              ),
+            ),
+            // SizedBox(
+            //   width: screenSize.width * 1 / 60,
+            // ),
+            InkWell(
+              onTap: () {
+                 _launchTwitterUrl();
+              },
+              child: CircleAvatar(
+                radius: screenSize.width * 1 / 60,
+                backgroundColor: Colors.transparent,
+                child: Image.asset(
+                  "assets/images/twitt.png",
+                  height: screenSize.width * 1 / 65,
+                  width: screenSize.width * 1 / 65,
+                ),
+              ),
+            ),
+            // SizedBox(
+            //   width: screenSize.width * 1 / 70,
+            // ),
+            InkWell(
+              onTap: () {
+                _launchyouTubeUrl();
+              },
+              child: CircleAvatar(
+                radius: screenSize.width * 1 / 60,
+                backgroundColor: Colors.transparent,
+                child: Image.asset(
+                  "assets/images/utube.png",
+                  height: screenSize.width * 1 / 62,
+                  width: screenSize.width * 1 / 62,
+                ),
+              ),
+            ),
           ],
         ));
   }

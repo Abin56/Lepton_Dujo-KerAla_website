@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:lottie/lottie.dart';
 
-import '../../../../../colors/colors.dart';
+import '../../../view/colors/colors.dart';
 
 
 

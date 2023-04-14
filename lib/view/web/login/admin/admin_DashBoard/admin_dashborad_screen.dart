@@ -24,7 +24,7 @@ import 'achievements/achievements.dart';
 import 'admin_notice copy/admin_notice_new_ui/admin_notice_show_new.dart';
 import 'admin_notice/add_new_notices.dart';
 import 'all_Students/all_students_view_Screen.dart';
-import 'alumini_accocation/alumni_assocation.dart';
+import '../../../../../ui team/abin/alumini_accocation/alumni_assocation.dart';
 import 'bus_Route/bus_route.dart';
 import 'classes/add_class.dart';
 import 'create_Admin/add_new_admin.dart';
@@ -127,7 +127,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
   List<String> viewListNames = [
     'All Students',
     'School'
-        'Teachers',
+    'Teachers',
     'Classes',
     'Notices',
     'Meetings',
@@ -174,8 +174,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       AddNewNotices(schoolId: widget.schoolID), //19
       FoodBeverages(), //AddNewNotices(schoolId: widget.schoolID), //20
       SelectType(schoolID: widget.schoolID), //21
-      //const FoodBeverages(), //22
-      const AlumniAssocation(), //23
+      const AlumniAssocation(), //22
+       const FeesUpdates(),//23
       const FeesUpdates(), //24
       NonTeachingLogin(schoolID: widget.schoolID), //25t6yg
       AdminScholarships(schoolID: widget.schoolID), //26
