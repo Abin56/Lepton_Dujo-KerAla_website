@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../../../controller/Getx/admin/sampoorna/sampoorna_controller.dart';
 import 'const.dart';
 
 class RadioButtonWidget extends StatelessWidget {
@@ -81,9 +83,11 @@ class TextFormFieldTextWidget extends StatelessWidget {
     super.key,
     required this.title,
     required this.controller,
+    required this.validator,
   });
   final String title;
   final TextEditingController controller;
+  final String? Function(String?) validator;
 
   @override
   Widget build(BuildContext context) {
@@ -101,6 +105,15 @@ class TextFormFieldTextWidget extends StatelessWidget {
           child: SizedBox(
             width: size.width * .3,
             child: TextFormField(
+              validator: validator,
+              onChanged: (value) {
+                if (Get.find<SampoornaController>().autoValidationIsOn) {
+                  Get.find<SampoornaController>()
+                      .sampoornaFormKey
+                      .currentState!
+                      .validate();
+                }
+              },
               controller: controller,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),

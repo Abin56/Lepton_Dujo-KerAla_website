@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../controller/Getx/admin/sampoorna/sampoorna_controller.dart';
+import '../../../constant/constant.dart';
 import 'const.dart';
 import 'widgets.dart';
 
@@ -20,21 +21,27 @@ class CurrentDetailWidget extends StatelessWidget {
           children: <Widget>[
             Flexible(
               child: TextFormFieldTextWidget(
-                  title: 'Class',
-                  controller:
-                      Get.find<SampoornaController>().currentClassController),
+                title: 'Class',
+                controller:
+                    Get.find<SampoornaController>().currentClassController,
+                validator: checkFieldEmpty,
+              ),
             ),
             Flexible(
               child: TextFormFieldTextWidget(
-                  title: 'Division',
-                  controller: Get.find<SampoornaController>()
-                      .currentDivisionController),
+                title: 'Division',
+                controller:
+                    Get.find<SampoornaController>().currentDivisionController,
+                validator: checkFieldEmpty,
+              ),
             ),
             Flexible(
               child: TextFormFieldTextWidget(
-                  title: 'Total No of working days',
-                  controller:
-                      Get.find<SampoornaController>().totalControllerNoOfDays),
+                title: 'Total No of working days',
+                controller:
+                    Get.find<SampoornaController>().totalControllerNoOfDays,
+                validator: checkFieldEmpty,
+              ),
             ),
           ],
         ),

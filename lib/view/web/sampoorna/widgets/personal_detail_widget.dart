@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../controller/Getx/admin/sampoorna/sampoorna_controller.dart';
+import '../../../constant/constant.dart';
 import 'const.dart';
 import 'widgets.dart';
 
@@ -23,9 +24,11 @@ class PersonalDetailWidget extends StatelessWidget {
                 child: SizedBox(
                   width: size.width * .50,
                   child: TextFormFieldTextWidget(
-                      title: 'Name of Student (English)',
-                      controller: Get.find<SampoornaController>()
-                          .nameOfStudentController),
+                    title: 'Name of Student (English)',
+                    controller:
+                        Get.find<SampoornaController>().nameOfStudentController,
+                    validator: checkFieldEmpty,
+                  ),
                 ),
               ),
               kHeight20,
@@ -108,6 +111,7 @@ class PersonalDetailWidget extends StatelessWidget {
                   title: '',
                   controller:
                       Get.find<SampoornaController>().nationalityController,
+                  validator: checkFieldEmpty,
                 ))
               ],
             ),
@@ -122,23 +126,29 @@ class PersonalDetailWidget extends StatelessWidget {
             children: <Widget>[
               Flexible(
                 child: TextFormFieldTextWidget(
-                    title: 'Class',
-                    controller: Get.find<SampoornaController>()
-                        .academicClassController),
+                  title: 'Class',
+                  controller:
+                      Get.find<SampoornaController>().academicClassController,
+                  validator: checkFieldEmpty,
+                ),
               ),
               kHeight20,
               Flexible(
                 child: TextFormFieldTextWidget(
-                    title: 'Year',
-                    controller:
-                        Get.find<SampoornaController>().academicyearController),
+                  title: 'Year',
+                  controller:
+                      Get.find<SampoornaController>().academicyearController,
+                  validator: checkFieldEmpty,
+                ),
               ),
               kHeight20,
               Flexible(
                 child: TextFormFieldTextWidget(
-                    title: 'Result',
-                    controller: Get.find<SampoornaController>()
-                        .academicresultController),
+                  title: 'Result',
+                  controller:
+                      Get.find<SampoornaController>().academicresultController,
+                  validator: checkFieldEmpty,
+                ),
               ),
             ],
           ),
@@ -152,22 +162,27 @@ class PersonalDetailWidget extends StatelessWidget {
             children: <Widget>[
               Flexible(
                 child: TextFormFieldTextWidget(
-                    title: 'Arts',
-                    controller: Get.find<SampoornaController>().artsController),
+                  title: 'Arts',
+                  controller: Get.find<SampoornaController>().artsController,
+                  validator: checkFieldEmpty,
+                ),
               ),
               kHeight20,
               Flexible(
                 child: TextFormFieldTextWidget(
-                    title: 'Sports',
-                    controller:
-                        Get.find<SampoornaController>().sportsController),
+                  title: 'Sports',
+                  controller: Get.find<SampoornaController>().sportsController,
+                  validator: checkFieldEmpty,
+                ),
               ),
               kHeight20,
               Flexible(
                 child: TextFormFieldTextWidget(
-                    title: 'Technology',
-                    controller:
-                        Get.find<SampoornaController>().technologyController),
+                  title: 'Technology',
+                  controller:
+                      Get.find<SampoornaController>().technologyController,
+                  validator: checkFieldEmpty,
+                ),
               ),
             ],
           ),
@@ -181,23 +196,29 @@ class PersonalDetailWidget extends StatelessWidget {
             children: <Widget>[
               Flexible(
                 child: TextFormFieldTextWidget(
-                    title: 'Schoo Level',
-                    controller:
-                        Get.find<SampoornaController>().schoolLevelController),
+                  title: 'Schoo Level',
+                  controller:
+                      Get.find<SampoornaController>().schoolLevelController,
+                  validator: checkFieldEmpty,
+                ),
               ),
               kHeight20,
               Flexible(
                 child: TextFormFieldTextWidget(
-                    title: 'District Level',
-                    controller: Get.find<SampoornaController>()
-                        .districtLevelController),
+                  title: 'District Level',
+                  controller:
+                      Get.find<SampoornaController>().districtLevelController,
+                  validator: checkFieldEmpty,
+                ),
               ),
               kHeight20,
               Flexible(
                 child: TextFormFieldTextWidget(
-                    title: 'State Level',
-                    controller:
-                        Get.find<SampoornaController>().stateLevelController),
+                  title: 'State Level',
+                  controller:
+                      Get.find<SampoornaController>().stateLevelController,
+                  validator: checkFieldEmpty,
+                ),
               ),
             ],
           ),
@@ -206,16 +227,19 @@ class PersonalDetailWidget extends StatelessWidget {
             children: <Widget>[
               Flexible(
                 child: TextFormFieldTextWidget(
-                    title: 'Scholarship ',
-                    controller:
-                        Get.find<SampoornaController>().scholarShipController),
+                  title: 'Scholarship ',
+                  controller:
+                      Get.find<SampoornaController>().scholarShipController,
+                  validator: checkFieldEmpty,
+                ),
               ),
               kHeight20,
               Flexible(
                 child: TextFormFieldTextWidget(
-                    title: 'Skills',
-                    controller:
-                        Get.find<SampoornaController>().skillsController),
+                  title: 'Skills',
+                  controller: Get.find<SampoornaController>().skillsController,
+                  validator: checkFieldEmpty,
+                ),
               ),
               kHeight20,
             ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../controller/Getx/admin/sampoorna/sampoorna_controller.dart';
+import '../../../constant/constant.dart';
 import 'const.dart';
 import 'widgets.dart';
 
@@ -19,21 +19,26 @@ class AdmissionDetailWidget extends StatelessWidget {
           children: <Widget>[
             Flexible(
               child: TextFormFieldTextWidget(
-                  title: 'Date of Admission',
-                  controller: Get.find<SampoornaController>()
-                      .dateOfAdmissionController),
+                title: 'Date of Admission',
+                controller:
+                    Get.find<SampoornaController>().dateOfAdmissionController,
+                validator: checkFieldEmpty,
+              ),
             ),
             Flexible(
               child: TextFormFieldTextWidget(
-                  title: 'Place of Birth',
-                  controller:
-                      Get.find<SampoornaController>().placeOfBirthController),
+                title: 'Place of Birth',
+                controller:
+                    Get.find<SampoornaController>().placeOfBirthController,
+                validator: checkFieldEmpty,
+              ),
             ),
             Flexible(
               child: TextFormFieldTextWidget(
                 title: 'Date of Birth',
                 controller:
                     Get.find<SampoornaController>().dateOfBirhtController,
+                validator: checkFieldEmpty,
               ),
             ),
             Flexible(
@@ -41,6 +46,7 @@ class AdmissionDetailWidget extends StatelessWidget {
                 title: 'Blood Group',
                 controller:
                     Get.find<SampoornaController>().bloodGroupController,
+                validator: checkFieldEmpty,
               ),
             ),
           ],
@@ -334,8 +340,10 @@ class AdmissionDetailWidget extends StatelessWidget {
         ),
         kHeight20,
         TextFormFieldTextWidget(
-            title: 'Caste',
-            controller: Get.find<SampoornaController>().casteController),
+          title: 'Caste',
+          controller: Get.find<SampoornaController>().casteController,
+          validator: checkFieldEmpty,
+        ),
       ],
     );
   }

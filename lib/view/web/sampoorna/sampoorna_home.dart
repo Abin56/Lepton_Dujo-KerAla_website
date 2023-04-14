@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../controller/Getx/admin/sampoorna/sampoorna_controller.dart';
+import '../../constant/constant.dart';
 import 'widgets/address_detail_widget.dart';
 import 'widgets/admission_detail_widget.dart';
 import 'widgets/club_widget.dart';
@@ -23,6 +24,8 @@ class SampoornaHomeScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Form(
+        key: sampoornaController.sampoornaFormKey,
+        autovalidateMode: AutovalidateMode.disabled,
         child: SingleChildScrollView(
           child: Padding(
               padding: const EdgeInsets.all(30.0),
@@ -38,6 +41,7 @@ class SampoornaHomeScreen extends StatelessWidget {
                           TitleWidget(size: size),
                           kHeight30,
                           TextFormFieldTextWidget(
+                            validator: checkFieldEmpty,
                             title: 'School Code',
                             controller:
                                 sampoornaController.schoolCodecontroller,
@@ -101,14 +105,17 @@ class SampoornaHomeScreen extends StatelessWidget {
                           ),
                           kHeight20,
                           TextFormFieldTextWidget(
-                              title: 'Identification Mark 1',
-                              controller: sampoornaController
-                                  .identificationMark1Controller),
+                            title: 'Identification Mark 1',
+                            controller: sampoornaController
+                                .identificationMark1Controller,
+                            validator: checkFieldEmpty,
+                          ),
                           kHeight20,
                           TextFormFieldTextWidget(
                             title: 'Identification Mark 2',
                             controller: sampoornaController
                                 .identificationMark2Controller,
+                            validator: checkFieldEmpty,
                           ),
                           kHeight50,
                           MemberShipWidget(
@@ -195,6 +202,7 @@ class VaccinationDetailWidget extends StatelessWidget {
               title: 'Date of vaccination',
               controller:
                   Get.find<SampoornaController>().dateOfVaccinationController,
+              validator: checkFieldEmpty,
             ),
           ),
         ],
@@ -260,6 +268,7 @@ class MemberShipWidget extends StatelessWidget {
               title: 'Games or Extracurricular Activities',
               controller: Get.find<SampoornaController>()
                   .gameOfExtraCurricularActivtyController,
+              validator: checkFieldEmpty,
             ),
           ),
         ],
@@ -291,6 +300,7 @@ class TeachersOpinionWidget extends StatelessWidget {
             title: '',
             controller:
                 Get.find<SampoornaController>().teacherOpinionController,
+            validator: checkFieldEmpty,
           ),
         ),
       ],
@@ -309,6 +319,7 @@ class PreviuosClassAndDivisionWidget extends StatelessWidget {
       title: 'Previous Class & Division',
       controller:
           Get.find<SampoornaController>().previousClassAndDivisionController,
+      validator: checkFieldEmpty,
     );
   }
 }
@@ -324,15 +335,19 @@ class ClassOfAdmissionWidget extends StatelessWidget {
       children: <Widget>[
         Flexible(
           child: TextFormFieldTextWidget(
-              title: 'Std on Admission',
-              controller:
-                  Get.find<SampoornaController>().stdOnAdmissionController),
+            title: 'Std on Admission',
+            controller:
+                Get.find<SampoornaController>().stdOnAdmissionController,
+            validator: checkFieldEmpty,
+          ),
         ),
         Flexible(
           child: TextFormFieldTextWidget(
-              title: 'Division on Admission',
-              controller: Get.find<SampoornaController>()
-                  .divisionOnAdmissionController),
+            title: 'Division on Admission',
+            controller:
+                Get.find<SampoornaController>().divisionOnAdmissionController,
+            validator: checkFieldEmpty,
+          ),
         ),
       ],
     );
@@ -352,6 +367,7 @@ class StdAdmissionWidget extends StatelessWidget {
           child: TextFormFieldTextWidget(
             title: 'Std & Div',
             controller: Get.find<SampoornaController>().stdAndDivController,
+            validator: checkFieldEmpty,
           ),
         ),
         kHeight20,
@@ -360,6 +376,7 @@ class StdAdmissionWidget extends StatelessWidget {
             title: 'Admission Number',
             controller:
                 Get.find<SampoornaController>().admissionNumberController,
+            validator: checkFieldEmpty,
           ),
         ),
       ],
