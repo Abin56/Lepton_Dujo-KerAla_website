@@ -232,16 +232,20 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                     .doc(widget.schoolID)
                                     .set({
                                   'batchYear': schoolBatchYearListValue!['id']
-                                }, SetOptions(merge: true)).then((value) =>
-                                        Navigator.pushReplacement(context,
-                                            MaterialPageRoute(
-                                          builder: (context) {
-                                            return AdminDashBoardPage(
-                                                loginTime:
-                                                    LoginTimeIDSavingClass.id,
-                                                schoolID: widget.schoolID);
-                                          },
-                                        )));
+                                }, SetOptions(merge: true)).then((value) async {
+                                  await getFireBaseData.getBatchYearId();
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return AdminDashBoardPage(
+                                            loginTime:
+                                                LoginTimeIDSavingClass.id,
+                                            schoolID: widget.schoolID);
+                                      },
+                                    ),
+                                  );
+                                });
                               },
                               child: ButtonContainerWidget(
                                 curving: 20,
@@ -467,18 +471,26 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                                 SetOptions(
                                                                     merge:
                                                                         true)).then(
-                                                                (value) =>
-                                                                    Navigator.pushReplacement(
-                                                                        context,
-                                                                        MaterialPageRoute(
-                                                                      builder:
-                                                                          (context) {
-                                                                        return AdminDashBoardPage(
-                                                                            loginTime:
-                                                                                LoginTimeIDSavingClass.id,
-                                                                            schoolID: widget.schoolID);
-                                                                      },
-                                                                    )));
+                                                                (value) async {
+                                                          await getFireBaseData
+                                                              .getBatchYearId();
+                                                          // ignore: use_build_context_synchronously
+                                                          Navigator
+                                                              .pushReplacement(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder:
+                                                                  (context) {
+                                                                return AdminDashBoardPage(
+                                                                    loginTime:
+                                                                        LoginTimeIDSavingClass
+                                                                            .id,
+                                                                    schoolID: widget
+                                                                        .schoolID);
+                                                              },
+                                                            ),
+                                                          );
+                                                        });
                                                       },
                                                       child: Text(
                                                         'Set BatchYear',
