@@ -65,4 +65,5 @@ class AdminLoginDetailHistoryModel {
 
 class LoginTimeIDSavingClass {
   static String id = '';
+  static String date ='';
 }

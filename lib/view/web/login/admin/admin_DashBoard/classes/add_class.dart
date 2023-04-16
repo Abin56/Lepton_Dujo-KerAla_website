@@ -1,8 +1,10 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../../model/create_classModel/create_classModel.dart';
 import '../../../../../../model/teacher/add_teacher_model.dart';
 import '../../../../../colors/colors.dart';
@@ -109,7 +111,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                       CreateClassesAddToFireBase().createClassesController(
                           classDetails,
                           context,
-                          schoolID,
+                          Get.find<AdminLoginScreenController>().schoolID,
                           classesInchargeListValue!["id"]
                           );
                     },

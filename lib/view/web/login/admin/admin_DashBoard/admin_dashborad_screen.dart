@@ -10,7 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'dart:html' as html;
 import 'package:lottie/lottie.dart';
+import '../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../model/loginHistory_model/login_history_model.dart';
 import '../../../../colors/colors.dart';
@@ -522,24 +524,39 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                               content: SingleChildScrollView(
                                                 child: ListBody(
                                                   children: const <Widget>[
-                                                    Text('Are You Sure ?')
+                                                    Text(
+                                                        'Are You Sure want to logout?')
                                                   ],
                                                 ),
                                               ),
                                               actions: <Widget>[
                                                 TextButton(
+                                                  child: const Text('cancel'),
+                                                  onPressed: () async {
+                                                    Navigator.pop(context);
+                                                  },
+                                                ),
+                                                TextButton(
                                                   child: const Text('ok'),
                                                   onPressed: () async {
+                                                    log(LoginTimeIDSavingClass
+                                                        .date);
                                                     await FirebaseFirestore
                                                         .instance
                                                         .collection(
                                                             "SchoolListCollection")
-                                                        .doc(widget.schoolID)
+                                                        .doc(Get
+                                                                .find<
+                                                                    AdminLoginScreenController>()
+                                                            .schoolID)
                                                         .collection(
                                                             "LoginHistory")
-                                                        .doc(widget.date)
+                                                        .doc(
+                                                            LoginTimeIDSavingClass
+                                                                .date)
                                                         .collection(
-                                                            widget.date!)
+                                                            LoginTimeIDSavingClass
+                                                                .date)
                                                         .doc(
                                                             LoginTimeIDSavingClass
                                                                 .id)
@@ -552,15 +569,19 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                             SetOptions(
                                                                 merge:
                                                                     true)).then(
-                                                            (value) => Navigator
-                                                                    .pushReplacement(
-                                                                        context,
-                                                                        MaterialPageRoute(
-                                                                  builder:
-                                                                      (context) {
-                                                                    return DujoHomePage();
-                                                                  },
-                                                                )));
+                                                            (value) {
+                                                      html.window.location
+                                                          .reload();
+
+                                                      // Navigator.pushReplacement(
+                                                      //   context,
+                                                      //   MaterialPageRoute(
+                                                      //     builder: (context) {
+                                                      //       return DujoHomePage();
+                                                      //     },
+                                                      //   ),
+                                                      // );
+                                                    });
                                                   },
                                                 ),
                                               ],

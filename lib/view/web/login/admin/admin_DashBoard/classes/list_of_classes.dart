@@ -6,12 +6,13 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../../controller/class_list/class_list_model.dart';
+import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../model/create_classModel/create_classModel.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
 import 'details_ofClasses.dart';
-
 
 class ListOfClassesScreen extends StatefulWidget {
   String schoolID;
@@ -30,7 +31,7 @@ class _ListOfClassesScreenState extends State<ListOfClassesScreen> {
 
   @override
   void initState() {
-getStudntsCount();
+    getStudntsCount();
     getMaleCount();
     // TODO: implement initState
     super.initState();
@@ -42,14 +43,16 @@ getStudntsCount();
     double _w = MediaQuery.of(context).size.width;
     double _h = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(title: Text('Classes List'),
-      backgroundColor: adminePrimayColor),
+      appBar: AppBar(
+          title: Text('Classes List'), backgroundColor: adminePrimayColor),
       body: SafeArea(
           child: StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection("SchoolListCollection")
-            .doc(widget.schoolID)
-            .collection('Classes')
+            .doc(Get.find<AdminLoginScreenController>().schoolID)
+            .collection(Get.find<GetFireBaseData>().bYear.value)
+            .doc(Get.find<GetFireBaseData>().bYear.value)
+            .collection("Classes")
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -94,9 +97,8 @@ getStudntsCount();
                             children: List.generate(
                               snapshot.data!.docs.length,
                               (int index) {
-                                AddClassesModel data =
-                                    AddClassesModel.fromJson(
-                                        snapshot.data!.docs[index].data());
+                                AddClassesModel data = AddClassesModel.fromJson(
+                                    snapshot.data!.docs[index].data());
                                 allData.add(data);
                                 return AnimationConfiguration.staggeredGrid(
                                   position: index,
@@ -124,10 +126,13 @@ getStudntsCount();
                                                 children: [
                                                   const CircleAvatar(
                                                     radius: 60,
-                                                    backgroundColor: Color.fromARGB(255, 210, 235, 255),
+                                                    backgroundColor:
+                                                        Color.fromARGB(
+                                                            255, 210, 235, 255),
                                                     child: CircleAvatar(
                                                       radius: 50,
-                                                      backgroundColor: Colors.transparent,
+                                                      backgroundColor:
+                                                          Colors.transparent,
                                                       backgroundImage: AssetImage(
                                                           'assets/images/classes.png'),
                                                     ),
@@ -208,8 +213,10 @@ getStudntsCount();
   Future<void> getStudntsCount() async {
     var a = await FirebaseFirestore.instance
         .collection("SchoolListCollection")
-        .doc(widget.schoolID)
-        .collection('Classes')
+        .doc(Get.find<AdminLoginScreenController>().schoolID)
+        .collection(Get.find<GetFireBaseData>().bYear.value)
+        .doc(Get.find<GetFireBaseData>().bYear.value)
+        .collection("Classes")
         .get();
     final data = a.docs.map((e) {
       return e.data()['id'];
@@ -218,8 +225,10 @@ getStudntsCount();
     for (int i = 0; i <= data.length - 1; i++) {
       var b = await FirebaseFirestore.instance
           .collection("SchoolListCollection")
-          .doc(widget.schoolID)
-          .collection('Classes')
+          .doc(Get.find<AdminLoginScreenController>().schoolID)
+          .collection(Get.find<GetFireBaseData>().bYear.value)
+          .doc(Get.find<GetFireBaseData>().bYear.value)
+          .collection("Classes")
           .doc(data[i])
           .collection('Students')
           .get();
@@ -235,8 +244,10 @@ getStudntsCount();
   Future<void> getMaleCount() async {
     var a = await FirebaseFirestore.instance
         .collection("SchoolListCollection")
-        .doc(widget.schoolID)
-        .collection('Classes')
+        .doc(Get.find<AdminLoginScreenController>().schoolID)
+        .collection(Get.find<GetFireBaseData>().bYear.value)
+        .doc(Get.find<GetFireBaseData>().bYear.value)
+        .collection("Classes")
         .get();
     final data = a.docs.map((e) {
       return e.data()['id'];
@@ -248,8 +259,10 @@ getStudntsCount();
     for (int i = 0; i <= data.length - 1; i++) {
       var b = await FirebaseFirestore.instance
           .collection("SchoolListCollection")
-          .doc(widget.schoolID)
-          .collection('Classes')
+          .doc(Get.find<AdminLoginScreenController>().schoolID)
+          .collection(Get.find<GetFireBaseData>().bYear.value)
+          .doc(Get.find<GetFireBaseData>().bYear.value)
+          .collection("Classes")
           .doc(data[i])
           .collection('Students')
           .get();

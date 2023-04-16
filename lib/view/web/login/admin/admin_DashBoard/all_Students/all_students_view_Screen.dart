@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -25,8 +27,6 @@ class _AllStudentListState extends State<AllStudentList> {
   final getxController = Get.put(ClassProfileList());
 
   @override
-
-
   Widget build(BuildContext context) {
     List<AddClassesModel> allData = [];
     int columnCount = 3;
@@ -86,7 +86,7 @@ class _AllStudentListState extends State<AllStudentList> {
                               (int index) {
                                 StudentData data = StudentData.fromJson(
                                     snapshot.data!.docs[index].data());
-                              
+
                                 return AnimationConfiguration.staggeredGrid(
                                   position: index,
                                   duration: const Duration(milliseconds: 300),
@@ -129,7 +129,7 @@ class _AllStudentListState extends State<AllStudentList> {
                                                     data.studentName,
                                                     style:
                                                         GoogleFonts.montserrat(
-                                                           letterSpacing: 1,
+                                                            letterSpacing: 1,
                                                             color: Colors.grey,
                                                             fontSize: 18,
                                                             fontWeight:
@@ -146,14 +146,39 @@ class _AllStudentListState extends State<AllStudentList> {
                                                     ),
                                                   ),
                                                   sizedBoxH10,
-                                                  Text(
-                                                    "Class : ${data.wclass}",
-                                                    style: GoogleFonts.poppins(
-                                                        color: Colors.black,
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w700),
-                                                  ),
+                                                  FutureBuilder(
+                                                      future: FirebaseFirestore
+                                                          .instance
+                                                          .collection(
+                                                              "SchoolListCollection")
+                                                          .doc("MarthCheng13283")
+                                                          .collection("Classes")
+                                                          .doc(data.wclass)
+                                                          .get(),
+                                                      builder:
+                                                          (context, snapshot) {
+                                                        if (snapshot.hasData) {
+                                                          log(data.wclass);
+                                                          log('>>>>>>>>>${snapshot.data!.data()!['className'].toString()}');
+                                                          return Text(
+                                                            "${snapshot.data!.data()!['className']}",
+                                                            style: GoogleFonts
+                                                                .poppins(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontSize:
+                                                                        16,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w700),
+                                                          );
+                                                        } else {
+                                                          return const Center(
+                                                            child:
+                                                                CircularProgressIndicator(),
+                                                          );
+                                                        }
+                                                      }),
                                                   sizedBoxH10,
                                                   Text(
                                                     "Phone No ${data.parentPhNo}",
