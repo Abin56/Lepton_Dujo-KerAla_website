@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../controller/Getx/admin/sampoorna/sampoorna_controller.dart';
-import '../../constant/constant.dart';
+import '../../../../../../controller/Getx/admin/sampoorna/sampoorna_controller.dart';
+import '../../../../../constant/constant.dart';
 import 'widgets/address_detail_widget.dart';
 import 'widgets/admission_detail_widget.dart';
 import 'widgets/club_widget.dart';
-import 'widgets/const.dart';
 import 'widgets/current_detail_widget.dart';
 import 'widgets/parent_details_widget.dart';
 import 'widgets/personal_detail_widget.dart';
@@ -39,97 +38,97 @@ class SampoornaHomeScreen extends StatelessWidget {
                         children: <Widget>[
                           //title
                           TitleWidget(size: size),
-                          kHeight30,
+                          sizedBoxH30,
                           TextFormFieldTextWidget(
                             validator: checkFieldEmpty,
                             title: 'School Code',
                             controller:
                                 sampoornaController.schoolCodecontroller,
                           ),
-                          kHeight20,
+                          sizedBoxH20,
                           //std admission number
                           const StdAdmissionWidget(),
-                          kHeight30,
+                          sizedBoxH30,
                           //Personal Detail
                           const ContentTitleWidget(
                             title: '1. Personal Details :',
                           ),
-                          kHeight20,
+                          sizedBoxH20,
                           const PersonalDetailWidget(),
-                          kHeight50,
+                          sizedBoxH40,
                           const ContentTitleWidget(
                             title: '2. Parent Details :',
                           ),
-                          kHeight20,
+                          sizedBoxH20,
                           const ParentDetailsWidget(),
-                          kHeight50,
+                          sizedBoxH40,
                           const ContentTitleWidget(
                             title: '3. Address Details :',
                           ),
                           const AddressDetailWidget(),
-                          kHeight50,
+                          sizedBoxH40,
                           const ContentTitleWidget(
                             title: '4. Previous Details :',
                           ),
-                          kHeight20,
+                          sizedBoxH20,
                           const SchoolPreviouslyAttendedWidget(),
-                          kHeight50,
+                          sizedBoxH40,
                           const ContentTitleWidget(
                             title: '5. Admission Details :',
                           ),
                           const AdmissionDetailWidget(),
-                          kHeight50,
+                          sizedBoxH40,
                           const ContentTitleWidget(
                             title: '6. Class of Admission :',
                           ),
-                          kHeight20,
+                          sizedBoxH20,
                           const ClassOfAdmissionWidget(),
-                          kHeight50,
+                          sizedBoxH40,
                           const ContentTitleWidget(
                             title: '7. Previous Class Details :',
                           ),
-                          kHeight20,
+                          sizedBoxH20,
                           const PreviuosClassAndDivisionWidget(),
-                          kHeight50,
+                          sizedBoxH40,
                           const ContentTitleWidget(
                             title: '8. Current Details :',
                           ),
                           CurrentDetailWidget(),
-                          kHeight50,
+                          sizedBoxH40,
 
                           VaccinationDetailWidget(size: size),
-                          kHeight50,
+                          sizedBoxH40,
                           const ContentTitleWidget(
                             title:
                                 '10. Two Identifiaction Marks (In English Only) :',
                           ),
-                          kHeight20,
+                          sizedBoxH20,
                           TextFormFieldTextWidget(
                             title: 'Identification Mark 1',
                             controller: sampoornaController
                                 .identificationMark1Controller,
                             validator: checkFieldEmpty,
                           ),
-                          kHeight20,
+                          sizedBoxH20,
                           TextFormFieldTextWidget(
                             title: 'Identification Mark 2',
                             controller: sampoornaController
                                 .identificationMark2Controller,
                             validator: checkFieldEmpty,
                           ),
-                          kHeight50,
+                          sizedBoxH40,
                           MemberShipWidget(
                             size: size,
                           ),
-                          kHeight50,
+                          sizedBoxH40,
                           TeachersOpinionWidget(
                             size: size,
                           ),
-                          kHeight50,
+                          sizedBoxH40,
                           const ContentTitleWidget(
                             title: '13. Clubs :',
                           ),
-                          kHeight30,
+                          sizedBoxH30,
                           ClubWidget(),
                           Center(
                             child: SizedBox(
@@ -146,7 +145,7 @@ class SampoornaHomeScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          kHeight50,
+                          sizedBoxH40,
                         ],
                       ),
               )),
@@ -370,7 +369,7 @@ class StdAdmissionWidget extends StatelessWidget {
             validator: checkFieldEmpty,
           ),
         ),
-        kHeight20,
+        sizedBoxH20,
         Flexible(
           child: TextFormFieldTextWidget(
             title: 'Admission Number',
@@ -401,7 +400,7 @@ class TitleWidget extends StatelessWidget {
         children: const <Widget>[
           TitleTextWidget(title: 'KPM HIGHER SECONDARY SCHOOL'),
           TitleTextWidget(title: 'ROADVILA, C.V.NALLOOR P.O'),
-          kHeight40,
+          sizedBoxH40,
           TitleTextWidget(title: 'APPLICATION CUM DATA COLLECTION FORM'),
         ],
       ),

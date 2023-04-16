@@ -1,8 +1,8 @@
+import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../controller/Getx/admin/sampoorna/sampoorna_controller.dart';
-import 'const.dart';
+import '../../../../../../../controller/Getx/admin/sampoorna/sampoorna_controller.dart';
 
 class RadioButtonWidget extends StatelessWidget {
   const RadioButtonWidget({
@@ -100,7 +100,7 @@ class TextFormFieldTextWidget extends StatelessWidget {
             child: TextWidgetField(title: title),
           ),
         ),
-        kWidth20,
+        sizedBoxH20,
         Flexible(
           child: SizedBox(
             width: size.width * .3,

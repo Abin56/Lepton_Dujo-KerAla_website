@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../controller/Getx/admin/sampoorna/sampoorna_controller.dart';
-import '../../../constant/constant.dart';
-import 'const.dart';
+import '../../../../../../../controller/Getx/admin/sampoorna/sampoorna_controller.dart';
+import '../../../../../../constant/constant.dart';
 import 'widgets.dart';
 
 class CurrentDetailWidget extends StatelessWidget {
@@ -45,7 +44,7 @@ class CurrentDetailWidget extends StatelessWidget {
             ),
           ],
         ),
-        kHeight20,
+        sizedBoxH20,
         Obx(
           () => Row(
             children: <Widget>[
@@ -77,7 +76,7 @@ class CurrentDetailWidget extends StatelessWidget {
             ],
           ),
         ),
-        kHeight20,
+        sizedBoxH20,
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
@@ -293,7 +292,7 @@ class CurrentDetailWidget extends StatelessWidget {
             ],
           ),
         ),
-        kHeight20,
+        sizedBoxH20,
         Obx(
           () => Row(
             children: <Widget>[
@@ -356,7 +355,7 @@ class CurrentDetailWidget extends StatelessWidget {
             ],
           ),
         ),
-        kHeight20,
+        sizedBoxH20,
         Obx(
           () => Column(
             children: [
@@ -514,7 +513,7 @@ class CurrentDetailWidget extends StatelessWidget {
             ],
           ),
         ),
-        kHeight20,
+        sizedBoxH20,
         Obx(
           () => Column(
             children: [
@@ -677,7 +676,7 @@ class CurrentDetailWidget extends StatelessWidget {
             ],
           ),
         ),
-        kHeight20,
+        sizedBoxH20,
         Obx(
           () => Row(
             children: <Widget>[

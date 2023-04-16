@@ -1,5 +1,9 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 
 const sizedBoxH10 = SizedBox(
   height: 10,
@@ -142,4 +146,23 @@ String? checkFieldPhoneNumberIsValid(String? fieldContent) {
   } else {
     return 'Please enter 10 digit number';
   }
+}
+
+//image picket
+
+Future<Uint8List?> pickImage(ImageSource source) async {
+  try {
+    final pickedFile = await ImagePicker().pickImage(
+      source: source,
+    );
+    if (pickedFile != null) {
+      return await pickedFile.readAsBytes();
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print(e);
+    }
+    return null;
+  }
+  return null;
 }

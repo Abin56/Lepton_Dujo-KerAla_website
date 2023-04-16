@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../controller/Getx/admin/sampoorna/sampoorna_controller.dart';
-import '../../../constant/constant.dart';
-import 'const.dart';
+import '../../../../../../../controller/Getx/admin/sampoorna/sampoorna_controller.dart';
+import '../../../../../../constant/constant.dart';
 import 'widgets.dart';
 
 class AdmissionDetailWidget extends StatelessWidget {
@@ -51,7 +50,7 @@ class AdmissionDetailWidget extends StatelessWidget {
             ),
           ],
         ),
-        kHeight20,
+        sizedBoxH20,
         Row(
           children: <Widget>[
             SizedBox(
@@ -231,7 +230,7 @@ class AdmissionDetailWidget extends StatelessWidget {
             )
           ],
         ),
-        kHeight20,
+        sizedBoxH20,
         Row(
           children: <Widget>[
             SizedBox(
@@ -301,7 +300,7 @@ class AdmissionDetailWidget extends StatelessWidget {
             )
           ],
         ),
-        kHeight20,
+        sizedBoxH20,
         Row(
           children: <Widget>[
             SizedBox(
@@ -338,7 +337,7 @@ class AdmissionDetailWidget extends StatelessWidget {
             )
           ],
         ),
-        kHeight20,
+        sizedBoxH20,
         TextFormFieldTextWidget(
           title: 'Caste',
           controller: Get.find<SampoornaController>().casteController,

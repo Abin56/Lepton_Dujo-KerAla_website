@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../controller/Getx/admin/sampoorna/sampoorna_controller.dart';
-import '../../../constant/constant.dart';
+import '../../../../../../../controller/Getx/admin/sampoorna/sampoorna_controller.dart';
+import '../../../../../../constant/constant.dart';
 import 'widgets.dart';
 
 class SchoolPreviouslyAttendedWidget extends StatelessWidget {

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../controller/Getx/admin/sampoorna/sampoorna_controller.dart';
-import '../../../constant/constant.dart';
-import 'const.dart';
+import '../../../../../../../controller/Getx/admin/sampoorna/sampoorna_controller.dart';
+import '../../../../../../constant/constant.dart';
 import 'widgets.dart';
 
 class AddressDetailWidget extends StatelessWidget {
@@ -48,7 +47,7 @@ class AddressDetailWidget extends StatelessWidget {
             ),
           ],
         ),
-        kHeight20,
+        sizedBoxH20,
         Obx(
           () => Row(
             children: <Widget>[
@@ -103,11 +102,11 @@ class AddressDetailWidget extends StatelessWidget {
             ],
           ),
         ),
-        kHeight20,
+        sizedBoxH20,
         const ContentTitleWidget(
             title:
                 'If Grama Panchayath Specify District Panchayath and Block Panchayath'),
-        kHeight20,
+        sizedBoxH20,
         Row(
           children: <Widget>[
             Flexible(
@@ -136,7 +135,7 @@ class AddressDetailWidget extends StatelessWidget {
             ),
           ],
         ),
-        kHeight20,
+        sizedBoxH20,
         Row(
           children: <Widget>[
             Flexible(
@@ -171,7 +170,7 @@ class AddressDetailWidget extends StatelessWidget {
             ),
           ],
         ),
-        kHeight20,
+        sizedBoxH20,
       ],
     );
   }

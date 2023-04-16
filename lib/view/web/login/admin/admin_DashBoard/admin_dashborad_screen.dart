@@ -16,7 +16,7 @@ import '../../../../../model/loginHistory_model/login_history_model.dart';
 import '../../../../colors/colors.dart';
 import '../../../../constant/constant.dart';
 import '../../../home/dujo_home.dart';
-import '../../../sampoorna/sampoorna_home.dart';
+import 'sampoorna/sampoorna_home.dart';
 import '../../../widgets/button_container_widget.dart';
 import '../../../widgets/drop_DownList/get_batchYear.dart';
 import 'Students_ScholarShip/student_scholarship.dart';
@@ -164,7 +164,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       PtaMemberAdmin(id: widget.schoolID), //9
       const MothersPta(), //10
       Achievements(schoolID: widget.schoolID), //11
-      const StudentProtectionGroup(), //12
+      StudentProtectionGroup(), //12
       AdminScholarships(schoolID: widget.schoolID), //13
       const BusRoute(), //14
       const StudentSummary(), //15

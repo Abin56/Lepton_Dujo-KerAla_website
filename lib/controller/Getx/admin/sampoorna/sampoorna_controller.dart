@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import '../../../../model/admin_models/sampoorna/checked_box_model.dart';
 import '../../../../model/admin_models/sampoorna/sampoorna_model.dart';
 import '../../../../view/constant/constant.dart';
-import '../../../../view/web/sampoorna/widgets/widgets.dart';
+import '../../../../view/web/login/admin/admin_DashBoard/sampoorna/widgets/widgets.dart';
 
 class SampoornaController extends GetxController {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;

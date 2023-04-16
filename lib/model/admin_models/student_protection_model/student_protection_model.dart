@@ -10,7 +10,7 @@ class StudentProtectionGroupModel {
     StudentProtectionGroupModel({
         required this.name,
         required this.position,
-        required this.category,
+        required this.designation,
         required this.id,
         required this.imageUrl,
         required this.imageId,
@@ -18,7 +18,7 @@ class StudentProtectionGroupModel {
 
     String name;
     String position;
-    String category;
+    String designation;
     String id;
     String imageUrl;
     String imageId;
@@ -26,7 +26,7 @@ class StudentProtectionGroupModel {
     factory StudentProtectionGroupModel.fromJson(Map<String, dynamic> json) => StudentProtectionGroupModel(
         name: json["name"],
         position: json["position"],
-        category: json["category"],
+        designation: json["designation"],
         id: json["id"],
         imageUrl: json["imageUrl"],
         imageId: json["imageId"],
@@ -35,7 +35,7 @@ class StudentProtectionGroupModel {
     Map<String, dynamic> toJson() => {
         "name": name,
         "position": position,
-        "category": category,
+        "designation": designation,
         "id": id,
         "imageUrl": imageUrl,
         "imageId": imageId,

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../controller/Getx/admin/sampoorna/sampoorna_controller.dart';
-import '../../../constant/constant.dart';
-import 'const.dart';
+import '../../../../../../../controller/Getx/admin/sampoorna/sampoorna_controller.dart';
+import '../../../../../../constant/constant.dart';
 import 'widgets.dart';
 
 class PersonalDetailWidget extends StatelessWidget {
@@ -17,7 +16,7 @@ class PersonalDetailWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          kHeight30,
+          sizedBoxH30,
           Row(
             children: <Widget>[
               Flexible(
@@ -31,7 +30,7 @@ class PersonalDetailWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              kHeight20,
+              sizedBoxH20,
               Obx(() {
                 return Row(
                   children: <Widget>[
@@ -77,7 +76,7 @@ class PersonalDetailWidget extends StatelessWidget {
               })
             ],
           ),
-          kHeight30,
+          sizedBoxH30,
           Obx(
             () => Row(
               children: <Widget>[
@@ -116,12 +115,12 @@ class PersonalDetailWidget extends StatelessWidget {
               ],
             ),
           ),
-          kHeight20,
+          sizedBoxH20,
           //academics
           const ContentTitleWidget(
             title: 'Academics',
           ),
-          kHeight30,
+          sizedBoxH30,
           Row(
             children: <Widget>[
               Flexible(
@@ -132,7 +131,7 @@ class PersonalDetailWidget extends StatelessWidget {
                   validator: checkFieldEmpty,
                 ),
               ),
-              kHeight20,
+              sizedBoxH20,
               Flexible(
                 child: TextFormFieldTextWidget(
                   title: 'Year',
@@ -141,7 +140,7 @@ class PersonalDetailWidget extends StatelessWidget {
                   validator: checkFieldEmpty,
                 ),
               ),
-              kHeight20,
+              sizedBoxH20,
               Flexible(
                 child: TextFormFieldTextWidget(
                   title: 'Result',
@@ -152,12 +151,12 @@ class PersonalDetailWidget extends StatelessWidget {
               ),
             ],
           ),
-          kHeight20,
+          sizedBoxH20,
           //Extra Curricular Activities
           const ContentTitleWidget(
             title: 'Extra Curricular Activities',
           ),
-          kHeight30,
+          sizedBoxH30,
           Row(
             children: <Widget>[
               Flexible(
@@ -167,7 +166,7 @@ class PersonalDetailWidget extends StatelessWidget {
                   validator: checkFieldEmpty,
                 ),
               ),
-              kHeight20,
+              sizedBoxH20,
               Flexible(
                 child: TextFormFieldTextWidget(
                   title: 'Sports',
@@ -175,7 +174,7 @@ class PersonalDetailWidget extends StatelessWidget {
                   validator: checkFieldEmpty,
                 ),
               ),
-              kHeight20,
+              sizedBoxH20,
               Flexible(
                 child: TextFormFieldTextWidget(
                   title: 'Technology',
@@ -186,12 +185,12 @@ class PersonalDetailWidget extends StatelessWidget {
               ),
             ],
           ),
-          kHeight20,
+          sizedBoxH20,
           //Achievements
           const ContentTitleWidget(
             title: 'Achievements',
           ),
-          kHeight30,
+          sizedBoxH30,
           Row(
             children: <Widget>[
               Flexible(
@@ -202,7 +201,7 @@ class PersonalDetailWidget extends StatelessWidget {
                   validator: checkFieldEmpty,
                 ),
               ),
-              kHeight20,
+              sizedBoxH20,
               Flexible(
                 child: TextFormFieldTextWidget(
                   title: 'District Level',
@@ -211,7 +210,7 @@ class PersonalDetailWidget extends StatelessWidget {
                   validator: checkFieldEmpty,
                 ),
               ),
-              kHeight20,
+              sizedBoxH20,
               Flexible(
                 child: TextFormFieldTextWidget(
                   title: 'State Level',
@@ -222,7 +221,7 @@ class PersonalDetailWidget extends StatelessWidget {
               ),
             ],
           ),
-          kHeight30,
+          sizedBoxH30,
           Row(
             children: <Widget>[
               Flexible(
@@ -233,7 +232,7 @@ class PersonalDetailWidget extends StatelessWidget {
                   validator: checkFieldEmpty,
                 ),
               ),
-              kHeight20,
+              sizedBoxH20,
               Flexible(
                 child: TextFormFieldTextWidget(
                   title: 'Skills',
@@ -241,7 +240,7 @@ class PersonalDetailWidget extends StatelessWidget {
                   validator: checkFieldEmpty,
                 ),
               ),
-              kHeight20,
+              sizedBoxH20,
             ],
           ),
         ],
