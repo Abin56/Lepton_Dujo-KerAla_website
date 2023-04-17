@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
+import 'package:dujo_kerala_website/controller/class_teacher_login_screen/class_teacher_login.dart';
 import 'package:dujo_kerala_website/view/web/widgets/responsive.dart';
 
 import 'package:flutter/material.dart';
@@ -16,11 +17,12 @@ import '../../../icons/icons.dart';
 import 'classteacher_dash_board/teachers_panel_screen.dart';
 
 class ClassTeacherLoginScreen extends StatelessWidget {
-  AdminLoginScreenController adminLoginScreenController = Get.put(AdminLoginScreenController());
-  
+  AdminLoginScreenController adminLoginScreenController =
+      Get.put(AdminLoginScreenController());
+  ClassTeacherLoginController classTeacherLoginController =
+      Get.put(ClassTeacherLoginController());
   String schoolID;
-  TextEditingController idController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+
   ClassTeacherLoginScreen({required this.schoolID, Key? key}) : super(key: key);
 
   final TextEditingController _facultyController = TextEditingController();
@@ -135,7 +137,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                           color: AppColors.whiteColor,
                         ),
                         child: TextFormField(
-                          controller: idController,
+                          controller: classTeacherLoginController.idController,
                           style: ralewayStyle.copyWith(
                             fontWeight: FontWeight.w400,
                             color: AppColors.blueDarkColor,
@@ -178,7 +180,8 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                           color: AppColors.whiteColor,
                         ),
                         child: TextFormField(
-                          controller: passwordController,
+                          controller:
+                              classTeacherLoginController.passwordController,
                           style: ralewayStyle.copyWith(
                             fontWeight: FontWeight.w400,
                             color: AppColors.blueDarkColor,
@@ -225,87 +228,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                         color: Colors.transparent,
                         child: InkWell(
                           onTap: () async {
-                            //>>>>>>>>>>>>>>>>>Checking ID<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-                            CollectionReference cat = FirebaseFirestore.instance
-                                .collection("SchoolListCollection")
-                                .doc(schoolID)
-                                .collection("Teachers");
-                            Query query = cat.where("teacherEmail",
-                                isEqualTo: idController.text.trim());
-                            QuerySnapshot querySnapshot = await query.get();
-                            final docData = querySnapshot.docs
-                                .map((doc) => doc.data())
-                                .toList();
-
-                            // log('asfdddddd${querySnapshot.docs.map((doc) => doc.data()).toString().toString()}');
-
-                            // log(query.toString());
-                            // log(cat.get().toString());
-                            // log(docData.toString());
-                            // //
-                            //>>>>>>>>>>>>>>>>>>>Checking password<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-                            CollectionReference pass = FirebaseFirestore
-                                .instance
-                                .collection("SchoolListCollection")
-                                .doc(schoolID)
-                                .collection("Teachers");
-                            Query queries = pass.where("employeeID",
-                                isEqualTo: passwordController.text.trim());
-                            QuerySnapshot querySnapshott = await queries.get();
-                            final docDataa = querySnapshott.docs
-                                .map((doc) => doc.data())
-                                .toList();
-                            log(query.toString());
-                            log(docDataa.toString());
-
-                            if (docDataa.isNotEmpty && docData.isNotEmpty) {
-                              print("object");
-                              Navigator.push(context, MaterialPageRoute(
-                                builder: (context) {
-                                  return ClassTeacherAdmin(
-                                    schoolID: schoolID,
-                                    teacherID: idController.text.trim(),
-                                    teacherEmail: idController.text.trim(),
-                                  );
-                                },
-                              ));
-                              log('Correct password');
-                            } else {
-                              log('Wrong passwordsadfsdf');
-                            }
-
-                            // //>>>>>>>>>>>>>>>>>Checking ID<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-                            // CollectionReference cat = FirebaseFirestore.instance
-                            //     .collection("FacultyProfiles");
-                            // Query query = cat.where("facultyid",
-                            //     isEqualTo: _facultyController.text.trim());
-                            // QuerySnapshot querySnapshot = await query.get();
-                            // final docData = querySnapshot.docs
-                            //     .map((doc) => doc.data())
-                            //     .toList();
-
-                            // //
-                            // //>>>>>>>>>>>>>>>>>>>Checking password<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-                            // CollectionReference pass = FirebaseFirestore
-                            //     .instance
-                            //     .collection("FacultyProfiles");
-                            // Query queries = pass.where("facultyPassword",
-                            //     isEqualTo: _passwordController.text.trim());
-                            // QuerySnapshot querySnapshott = await queries.get();
-                            // final docDataa = querySnapshott.docs
-                            //     .map((doc) => doc.data())
-                            //     .toList();
-
-                            // if (docDataa.isNotEmpty && docData.isNotEmpty) {
-                            //   // Navigator.push(context, MaterialPageRoute(
-                            //   //   builder: (context) {
-                            //   //     return FacultyLiveCourseList();
-                            //   //   },
-                            //   // ));
-                            //   log('Correct password');
-                            // } else {
-                            //   log('Wrong password');
-                            // }
+                            classTeacherLoginController.classTeacherLogin(context);
                           },
                           borderRadius: BorderRadius.circular(16.0),
                           child: Ink(
