@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/all_Students/info_student.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/all_Students/search_students.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
@@ -26,6 +27,10 @@ class AllStudentList extends StatefulWidget {
 }
 
 class _AllStudentListState extends State<AllStudentList> {
+  Future<void> _showSearch() async {
+    await showSearch(context: context, delegate: SearchStuents());
+  }
+
   final getxController = Get.put(ClassProfileList());
 
   @override
@@ -52,12 +57,22 @@ class _AllStudentListState extends State<AllStudentList> {
                 sizedBoxH10,
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "A L L S T U D E N T S",
-                    style: GoogleFonts.montserrat(
-                        color: const Color.fromRGBO(158, 158, 158, 1),
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold),
+                  child: Row(
+                    children: [
+                      Text(
+                        "A L L S T U D E N T S",
+                        style: GoogleFonts.montserrat(
+                            color: const Color.fromRGBO(158, 158, 158, 1),
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Spacer(),
+                      IconButton(
+                          onPressed: () {
+                            _showSearch();
+                          },
+                          icon: Icon(Icons.search))
+                    ],
                   ),
                 ),
                 sizedBoxH20,

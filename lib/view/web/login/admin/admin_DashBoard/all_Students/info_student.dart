@@ -19,9 +19,11 @@ getInfoofStudent(BuildContext context) {
           TextButton(
             child: const Text('Genrate Tc'),
             onPressed: () {
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return   GenrateTC();
-      },));
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return GenrateTC();
+                },
+              ));
             },
           ),
         ],
@@ -29,3 +31,14 @@ getInfoofStudent(BuildContext context) {
     },
   );
 }
+
+// class StudentsInfo extends StatelessWidget {
+//   const StudentsInfo({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Center(
+//       child: ,
+//     );
+//   }
+// }
