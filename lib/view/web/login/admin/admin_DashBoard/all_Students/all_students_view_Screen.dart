@@ -39,6 +39,7 @@ class _AllStudentListState extends State<AllStudentList> {
     int columnCount = 4;
     double _w = MediaQuery.of(context).size.width;
     double _h = MediaQuery.of(context).size.height;
+   var screenSize =MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
           child: StreamBuilder(
@@ -51,12 +52,12 @@ class _AllStudentListState extends State<AllStudentList> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 sizedBoxH10,
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0),
                   child: Row(
                     children: [
                       Text(
@@ -66,7 +67,7 @@ class _AllStudentListState extends State<AllStudentList> {
                             fontSize: 30,
                             fontWeight: FontWeight.bold),
                       ),
-                      Spacer(),
+                      
                       IconButton(
                           onPressed: () {
                             _showSearch();
@@ -78,6 +79,7 @@ class _AllStudentListState extends State<AllStudentList> {
                 sizedBoxH20,
                 Expanded(
                   child: Row(
+
                     children: [
                       ClassesDeatils(
                           width: 370,
@@ -89,14 +91,14 @@ class _AllStudentListState extends State<AllStudentList> {
                           getxController: getxController,
                           allData: allData),
                       Container(
-                        height: double.infinity - 10,
+                        height: screenSize.width*6 ,
                         width: 2,
                         color: Colors.black.withOpacity(0.3),
                       ),
                       Expanded(
                         child: AnimationLimiter(
                           child: GridView.count(
-                            physics: const BouncingScrollPhysics(
+                            physics:  BouncingScrollPhysics(
                                 parent: AlwaysScrollableScrollPhysics()),
                             padding: EdgeInsets.all(_w / 60),
                             crossAxisCount: columnCount,
@@ -108,14 +110,14 @@ class _AllStudentListState extends State<AllStudentList> {
 
                                 return AnimationConfiguration.staggeredGrid(
                                   position: index,
-                                  duration: const Duration(milliseconds: 300),
+                                  duration:  Duration(milliseconds: 300),
                                   columnCount: columnCount,
                                   child: ScaleAnimation(
-                                    duration: const Duration(milliseconds: 900),
+                                    duration:  Duration(milliseconds: 900),
                                     curve: Curves.fastLinearToSlowEaseIn,
                                     child: FadeInAnimation(
                                       child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
+                                        padding:  EdgeInsets.all(8.0),
                                         child: GestureDetector(
                                           onTap: () async {
                                             getxController.indexValue.value =
@@ -126,29 +128,30 @@ class _AllStudentListState extends State<AllStudentList> {
                                               getInfoofStudent(context);
                                             },
                                             child: Container(
-                                              height: 600,
-                                              width: 400,
+                                             
+                                              height: screenSize.width*6,
+                                              width:  screenSize.width/10,
                                               child: Padding(
                                                 padding:
-                                                    const EdgeInsets.all(5),
+                                                     EdgeInsets.all( screenSize.width/100),
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.center,
                                                   children: [
-                                                    const CircleAvatar(
-                                                      radius: 60,
+                                                     CircleAvatar(
+                                                      radius:  screenSize.width/40,
                                                       backgroundColor:
                                                           Color.fromARGB(255,
                                                               210, 235, 255),
                                                       child: CircleAvatar(
-                                                        radius: 50,
+                                                        radius:  screenSize.width/50,
                                                         backgroundColor:
                                                             Colors.transparent,
                                                         backgroundImage: AssetImage(
                                                             'assets/images/classes.png'),
                                                       ),
                                                     ),
-                                                    sizedBoxH10,
+                                                  // sizedBoxH10,
                                                     Text(
                                                       data.studentName,
                                                       style: GoogleFonts
@@ -156,22 +159,22 @@ class _AllStudentListState extends State<AllStudentList> {
                                                               letterSpacing: 1,
                                                               color:
                                                                   Colors.grey,
-                                                              fontSize: 18,
+                                                              fontSize: screenSize.width/120,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold),
                                                     ),
-                                                    sizedBoxH10,
+                                                    
                                                     Text(
                                                       'Create Date : ${stringTimeToDateConvert(data.joinDate)}',
                                                       style:
                                                           GoogleFonts.poppins(
                                                         color: Colors.black
                                                             .withOpacity(0.4),
-                                                        fontSize: 14,
+                                                        fontSize:  screenSize.width/120,
                                                       ),
                                                     ),
-                                                    sizedBoxH10,
+                                                    
                                                     FutureBuilder(
                                                         future: FirebaseFirestore
                                                             .instance
@@ -206,25 +209,25 @@ class _AllStudentListState extends State<AllStudentList> {
                                                               style: GoogleFonts.poppins(
                                                                   color: Colors
                                                                       .black,
-                                                                  fontSize: 13,
+                                                                  fontSize:  screenSize.width/120,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w600),
                                                             );
                                                           } else {
-                                                            return const Center(
+                                                            return  Center(
                                                               child:
                                                                   CircularProgressIndicator(),
                                                             );
                                                           }
                                                         }),
-                                                    sizedBoxH10,
+                                                    //sizedBoxH10,
                                                     Text(
                                                       "Phone No ${data.parentPhNo}",
                                                       style:
                                                           GoogleFonts.poppins(
                                                         color: Colors.black,
-                                                        fontSize: 12,
+                                                        fontSize:  screenSize.width/130,
                                                       ),
                                                     ),
                                                     Text(
@@ -232,7 +235,7 @@ class _AllStudentListState extends State<AllStudentList> {
                                                       style:
                                                           GoogleFonts.poppins(
                                                         color: Colors.black,
-                                                        fontSize: 12,
+                                                        fontSize:  screenSize.width/130,
                                                       ),
                                                     ),
                                                   ],

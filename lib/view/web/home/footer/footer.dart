@@ -1,3 +1,4 @@
+import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../colors/colors.dart';
@@ -34,7 +35,7 @@ class FooterSection extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    height: 200,
+                    height: 300,
                     width: double.infinity,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -305,7 +306,7 @@ class FooterSection extends StatelessWidget {
                             ),
                             Row(
                               children: [
-                                 Icon(Icons.map_outlined,color: Color.fromARGB(255, 4, 124, 4),size: screenSize.width/50),
+                                 Icon(Icons.location_on,color: Color.fromARGB(255, 4, 124, 4),size: screenSize.width/50),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -316,14 +317,28 @@ class FooterSection extends StatelessWidget {
                              ),
                              ],
                             ),
-                            
-                          
+                            sizedBoxW20,
+                             Row(
+                              children: [
+                                 Icon(Icons.location_on,color: Color.fromARGB(255, 4, 124, 4),size: screenSize.width/50),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Lepton plus communications(opc) pvt. Ltd Dotspace Business center,',style: TextStyle(fontSize:  screenSize.width/110)),
+                                    Text('TC 24/3088,Ushasandya Building,Kowdiar - Devasom Board Road,',style: TextStyle(fontSize:  screenSize.width/110)),
+                                    Text('Kowdiar, Trivandrum - 695003. Kerala , India',style: TextStyle(fontSize:  screenSize.width/110)),
+                             ],
+                             ),
+                             ],
+                            ),
+                            sizedBoxW20,
                              Row(
                               children: [
                                 Icon(Icons.phone,color: Colors.blue,size: screenSize.width/50),
                                 Text('	+91 471 4053483	',style: TextStyle(fontSize:  screenSize.width/110)),
                               ],
                             ),
+                            sizedBoxW20,
                            
                             Row(
                               children: [
@@ -331,6 +346,7 @@ class FooterSection extends StatelessWidget {
                                 Text('	+91 97469 66651 | +91 97463 66651',style: TextStyle(fontSize:  screenSize.width/110)),
                               ],
                             ),
+                            sizedBoxW20,
                              Row(
                               children: [
                                 Icon(Icons.mail_outline_sharp,color: Colors.red,size: screenSize.width/50),
