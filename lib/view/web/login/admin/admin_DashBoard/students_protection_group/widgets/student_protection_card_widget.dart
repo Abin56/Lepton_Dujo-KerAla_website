@@ -1,33 +1,33 @@
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_protection_group/widgets/student_protection_dialogue_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../../controller/Getx/admin/student_protection_controller/student_protection_controller.dart';
-import '../../../../../../../model/admin_models/student_protection_model/student_protection_model.dart';
 import '../../../../../../constant/constant.dart';
-import 'student_protection_dialogue_widget.dart';
 
 class CardWidget extends StatelessWidget {
-  const CardWidget({
+  CardWidget({
     super.key,
-    required this.firstName,
-    required this.secondName,
-    required this.thirdName,
+    required this.name,
+    required this.designation,
+    required this.position,
     required this.imageUrl,
     required this.iconData,
-    required this.memberid,
+    required this.memberId,
     required this.imageId,
   });
 
-  final String firstName;
-  final String secondName;
-  final String thirdName;
+  final String name;
+  final String designation;
+  final String position;
 
   final String? imageUrl;
   final IconData iconData;
-  final String memberid;
+  final String memberId;
   final String imageId;
-
+  StudentProtectionController controller =
+      Get.find<StudentProtectionController>();
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
@@ -50,21 +50,21 @@ class CardWidget extends StatelessWidget {
             ),
             FittedBox(
               child: Text(
-                firstName,
+                name,
                 style: GoogleFonts.almendra(fontSize: 18),
               ),
             ),
             sizedBoxH10,
             FittedBox(
               child: Text(
-                secondName,
+                designation,
                 style: GoogleFonts.almendra(fontSize: 18),
               ),
             ),
             sizedBoxH10,
             FittedBox(
               child: Text(
-                thirdName,
+                position,
                 style: GoogleFonts.almendra(fontSize: 18),
               ),
             ),
@@ -90,9 +90,8 @@ class CardWidget extends StatelessWidget {
                                 ),
                                 TextButton(
                                   onPressed: () async {
-                                    await Get.find<
-                                            StudentProtectionController>()
-                                        .removeMember(memberid, imageId);
+                                    await controller.removeMember(
+                                        memberId, imageId);
                                     if (context.mounted) {
                                       Navigator.of(context).pop();
                                     }
@@ -104,36 +103,15 @@ class CardWidget extends StatelessWidget {
                           },
                         );
                       } else {
-                        final StudentProtectionController
-                            studentProtectionController =
-                            Get.find<StudentProtectionController>();
-
-                        studentProtectionController.nameController.text =
-                            firstName;
-                        studentProtectionController.positionController.text =
-                            secondName;
-                        studentProtectionController.designationController.text =
-                            thirdName;
-                        showDialogueStudentProtection(context, 'Edit', () {
-                          Get.find<StudentProtectionController>()
-                              .updateStudentProtectionMemberDetail(
-                                  memberid,
-                                  StudentProtectionGroupModel(
-                                    name: studentProtectionController
-                                        .nameController.text,
-                                    position: studentProtectionController
-                                        .nameController.text,
-                                    designation: studentProtectionController
-                                        .nameController.text,
-                                    id: memberid,
-                                    imageUrl: studentProtectionController
-                                            .imageData["imageUrl"] ??
-                                        imageUrl ??
-                                        "",
-                                    imageId: imageId,
-                                  ),
-                                  context);
-                        }, memberid, imageId, imageUrl ?? "");
+                        controller.nameController.text = name;
+                        controller.positionController.text = position;
+                        controller.designationController.text = designation;
+                        updateStudentProtectionDialogue(
+                          context,
+                          memberId,
+                          imageId,
+                          imageUrl,
+                        );
                       }
                     },
                     icon: Icon(

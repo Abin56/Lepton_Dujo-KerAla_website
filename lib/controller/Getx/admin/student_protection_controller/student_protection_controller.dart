@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -12,7 +11,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
 class StudentProtectionController extends GetxController {
-  final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  final CollectionReference<Map<String, dynamic>> firebaseFirestore =
+      FirebaseFirestore.instance
+          .collection('SchoolListCollection')
+          .doc(Get.find<AdminLoginScreenController>().schoolID)
+          .collection('StudentProtection');
   final FirebaseStorage firebaseStorage = FirebaseStorage.instance;
   RxBool isLoading = RxBool(false);
   TextEditingController nameController = TextEditingController();
@@ -20,24 +23,37 @@ class StudentProtectionController extends GetxController {
   TextEditingController designationController = TextEditingController();
   RxBool isLoadingImage = RxBool(false);
   RxBool isLoadingDialogue = RxBool(false);
-  RxMap<String, dynamic> imageData = RxMap<String, dynamic>({});
+  Rxn<Uint8List> imageDataUin8 = Rxn<Uint8List>();
 
-  Future<void> addStudentProtectionGroupMember(
-      StudentProtectionGroupModel data, BuildContext context) async {
+  Future<void> addStudentProtectionGroupMember(BuildContext context) async {
     try {
+      final data = StudentProtectionGroupModel(
+        name: nameController.text,
+        position: positionController.text,
+        designation: designationController.text,
+        id: "",
+        imageUrl: "",
+        imageId: "",
+      );
       isLoadingDialogue.value = true;
-      DocumentReference<Map<String, dynamic>> result = await firebaseFirestore
-          .collection('SchoolListCollection')
-          .doc(Get.find<AdminLoginScreenController>().schoolID)
-          .collection('StudentProtection')
-          .add(data.toJson());
+      DocumentReference<Map<String, dynamic>> result =
+          await firebaseFirestore.add(data.toJson());
+      await firebaseFirestore.doc(result.id).update({"id": result.id});
 
-      await firebaseFirestore
-          .collection('SchoolListCollection')
-          .doc(Get.find<AdminLoginScreenController>().schoolID)
-          .collection('StudentProtection')
-          .doc(result.id)
-          .update({"id": result.id});
+      if (imageDataUin8.value != null) {
+        final String id = const Uuid().v1();
+        final filePath = await firebaseStorage
+            .ref('files/studentProtection/$id')
+            .putData(imageDataUin8.value!);
+        String imageUrlPath = await filePath.ref.getDownloadURL();
+        await firebaseFirestore.doc(result.id).update(
+          {
+            "imageId": id,
+            "imageUrl": imageUrlPath,
+          },
+        );
+        imageDataUin8.value = null;
+      }
       showToast(msg: 'Successfully Created');
       isLoadingDialogue.value = false;
       clearField();
@@ -50,18 +66,37 @@ class StudentProtectionController extends GetxController {
     }
   }
 
-  Future<void> updateStudentProtectionMemberDetail(String memberId,
-      StudentProtectionGroupModel data, BuildContext context) async {
+  Future<void> updateStudentProtectionMemberDetail(
+    String memberId,
+    BuildContext context,
+    String imageId,
+    String imageUrl,
+  ) async {
     try {
-      isLoading.value = true;
-      await firebaseFirestore
-          .collection('SchoolListCollection')
-          .doc(Get.find<AdminLoginScreenController>().schoolID)
-          .collection('StudentProtection')
-          .doc(memberId)
-          .set(
-            data.toJson(),
+      StudentProtectionGroupModel studentData = StudentProtectionGroupModel(
+        name: nameController.text,
+        position: positionController.text,
+        designation: designationController.text,
+        id: memberId,
+        imageUrl: imageUrl,
+        imageId: imageId,
+      );
+      isLoadingDialogue.value = true;
+      await firebaseFirestore.doc(memberId).set(
+            studentData.toJson(),
           );
+      if (imageDataUin8.value != null) {
+        final filePath = await firebaseStorage
+            .ref('files/studentProtection/$imageId')
+            .putData(imageDataUin8.value!);
+
+        String fileUrl = await filePath.ref.getDownloadURL();
+        await firebaseFirestore.doc(memberId).update(
+          {
+            "imageUrl": fileUrl,
+          },
+        );
+      }
       if (context.mounted) {
         Navigator.of(context).pop();
       }
@@ -70,22 +105,17 @@ class StudentProtectionController extends GetxController {
       showToast(
         msg: 'Updated Successfully',
       );
-      isLoading.value = false;
+      isLoadingDialogue.value = false;
     } catch (e) {
-      isLoading.value = false;
-      showToast(msg: 'Not updated');
+      isLoadingDialogue.value = false;
+      showToast(msg: e.toString());
     }
   }
 
   Future<void> removeMember(String memberId, String imageId) async {
     try {
       isLoading.value = true;
-      await firebaseFirestore
-          .collection('SchoolListCollection')
-          .doc(Get.find<AdminLoginScreenController>().schoolID)
-          .collection('StudentProtection')
-          .doc(memberId)
-          .delete();
+      await firebaseFirestore.doc(memberId).delete();
       if (imageId.isNotEmpty) {
         await firebaseStorage.ref('files/studentProtection/$imageId').delete();
       }
@@ -100,55 +130,10 @@ class StudentProtectionController extends GetxController {
     }
   }
 
-  Future<void> updateImage(String memberId, String imageId) async {
+  Future<void> selectImageFromStorage() async {
     final Uint8List? result = await pickImage(ImageSource.gallery);
-
     if (result != null) {
-      isLoadingImage.value = true;
-
-      final filePath = await firebaseStorage
-          .ref('files/studentProtection/$imageId')
-          .putData(result);
-
-      String fileUrl = await filePath.ref.getDownloadURL();
-      await firebaseFirestore
-          .collection('SchoolListCollection')
-          .doc(Get.find<AdminLoginScreenController>().schoolID)
-          .collection('StudentProtection')
-          .doc(memberId)
-          .set({
-        "imageUrl": fileUrl,
-      }, SetOptions(merge: true));
-      imageData.value = {
-        "imageId": imageId,
-        "imageUrl": fileUrl,
-      };
-      isLoadingImage.value = false;
-    }
-  }
-
-  Future<void> upLoadImage() async {
-    try {
-      isLoadingImage.value = true;
-      final Uint8List? result = await pickImage(ImageSource.gallery);
-
-      if (result != null) {
-        final String id = const Uuid().v1();
-
-        final filePath = await firebaseStorage
-            .ref('files/studentProtection/$id')
-            .putData(result);
-
-        String imageUrlPath = await filePath.ref.getDownloadURL();
-        imageData.value = {
-          "imageId": id,
-          "imageUrl": imageUrlPath,
-        };
-        isLoadingImage.value = false;
-      }
-    } catch (e) {
-      isLoadingImage.value = false;
-      log(e.toString());
+      imageDataUin8.value = result;
     }
   }
 
@@ -156,6 +141,6 @@ class StudentProtectionController extends GetxController {
     nameController.clear();
     positionController.clear();
     designationController.clear();
-    imageData.value = {};
+    imageDataUin8.value = null;
   }
 }
