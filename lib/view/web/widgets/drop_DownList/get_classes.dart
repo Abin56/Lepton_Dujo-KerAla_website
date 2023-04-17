@@ -4,6 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
+import '../../../../controller/get_firebase-data/get_firebase_data.dart';
+
 var classesListValue;
 
 class GetClassesListDropDownButton extends StatefulWidget {
@@ -29,9 +32,12 @@ class _GeClasseslListDropDownButtonState
     return FutureBuilder(
         future: FirebaseFirestore.instance
             .collection("SchoolListCollection")
-            .doc(widget.schoolID)
+            .doc(Get.find<AdminLoginScreenController>().schoolID)
+            .collection(Get.find<GetFireBaseData>().bYear.value)
+            .doc(Get.find<GetFireBaseData>().bYear.value)
             .collection("Classes")
-            .where('classIncharge',isEqualTo: widget.teacherID).get(),
+            .where('classIncharge', isEqualTo: widget.teacherID)
+            .get(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return DropdownButtonFormField(

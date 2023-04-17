@@ -76,6 +76,7 @@ class _ListOfClassesScreenState extends State<ListOfClassesScreen> {
                   child: Row(
                     children: [
                       ClassesDeatils(
+                        width: 500,
                           noofFemale: widget.NoofFemaleStudents,
                           noofMale: widget.NoofMaleStundets,
                           totalStudents: widget.NoofStundents,
