@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_protection_group/widgets/student_protection_dialogue_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -106,6 +108,7 @@ class CardWidget extends StatelessWidget {
                         controller.nameController.text = name;
                         controller.positionController.text = position;
                         controller.designationController.text = designation;
+                        
                         updateStudentProtectionDialogue(
                           context,
                           memberId,

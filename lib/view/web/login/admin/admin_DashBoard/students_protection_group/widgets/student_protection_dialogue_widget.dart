@@ -43,7 +43,7 @@ Future<void> updateStudentProtectionDialogue(
                                   child: CircularProgressIndicator(),
                                 )
                               : CircleAvatar(
-                                  backgroundImage: imageUrl == null ||
+                                  backgroundImage: imageUrl == null &&
                                           protectionController
                                                   .imageDataUin8.value ==
                                               null
@@ -52,7 +52,7 @@ Future<void> updateStudentProtectionDialogue(
                                       : protectionController
                                                   .imageDataUin8.value ==
                                               null
-                                          ? NetworkImage(imageUrl)
+                                          ? NetworkImage(imageUrl!)
                                           : MemoryImage(
                                               protectionController
                                                   .imageDataUin8.value!,

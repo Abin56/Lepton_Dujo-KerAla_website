@@ -26,43 +26,49 @@ class StudentProtectionController extends GetxController {
   Rxn<Uint8List> imageDataUin8 = Rxn<Uint8List>();
 
   Future<void> addStudentProtectionGroupMember(BuildContext context) async {
-    try {
-      final data = StudentProtectionGroupModel(
-        name: nameController.text,
-        position: positionController.text,
-        designation: designationController.text,
-        id: "",
-        imageUrl: "",
-        imageId: "",
-      );
-      isLoadingDialogue.value = true;
-      DocumentReference<Map<String, dynamic>> result =
-          await firebaseFirestore.add(data.toJson());
-      await firebaseFirestore.doc(result.id).update({"id": result.id});
-
-      if (imageDataUin8.value != null) {
-        final String id = const Uuid().v1();
-        final filePath = await firebaseStorage
-            .ref('files/studentProtection/$id')
-            .putData(imageDataUin8.value!);
-        String imageUrlPath = await filePath.ref.getDownloadURL();
-        await firebaseFirestore.doc(result.id).update(
-          {
-            "imageId": id,
-            "imageUrl": imageUrlPath,
-          },
+    if (nameController.text.isNotEmpty &&
+        positionController.text.isNotEmpty &&
+        designationController.text.isNotEmpty) {
+      try {
+        final data = StudentProtectionGroupModel(
+          name: nameController.text,
+          position: positionController.text,
+          designation: designationController.text,
+          id: "",
+          imageUrl: "",
+          imageId: "",
         );
-        imageDataUin8.value = null;
+        isLoadingDialogue.value = true;
+        DocumentReference<Map<String, dynamic>> result =
+            await firebaseFirestore.add(data.toJson());
+        await firebaseFirestore.doc(result.id).update({"id": result.id});
+
+        if (imageDataUin8.value != null) {
+          final String id = const Uuid().v1();
+          final filePath = await firebaseStorage
+              .ref('files/studentProtection/$id')
+              .putData(imageDataUin8.value!);
+          String imageUrlPath = await filePath.ref.getDownloadURL();
+          await firebaseFirestore.doc(result.id).update(
+            {
+              "imageId": id,
+              "imageUrl": imageUrlPath,
+            },
+          );
+          imageDataUin8.value = null;
+        }
+        showToast(msg: 'Successfully Created');
+        isLoadingDialogue.value = false;
+        clearField();
+        if (context.mounted) {
+          Navigator.of(context).pop();
+        }
+      } catch (e) {
+        showToast(msg: 'Creation Failed');
+        isLoadingDialogue.value = false;
       }
-      showToast(msg: 'Successfully Created');
-      isLoadingDialogue.value = false;
-      clearField();
-      if (context.mounted) {
-        Navigator.of(context).pop();
-      }
-    } catch (e) {
-      showToast(msg: 'Creation Failed');
-      isLoadingDialogue.value = false;
+    } else {
+      showToast(msg: 'All Fields Are Mandatory');
     }
   }
 
@@ -72,43 +78,49 @@ class StudentProtectionController extends GetxController {
     String imageId,
     String imageUrl,
   ) async {
-    try {
-      StudentProtectionGroupModel studentData = StudentProtectionGroupModel(
-        name: nameController.text,
-        position: positionController.text,
-        designation: designationController.text,
-        id: memberId,
-        imageUrl: imageUrl,
-        imageId: imageId,
-      );
-      isLoadingDialogue.value = true;
-      await firebaseFirestore.doc(memberId).set(
-            studentData.toJson(),
-          );
-      if (imageDataUin8.value != null) {
-        final filePath = await firebaseStorage
-            .ref('files/studentProtection/$imageId')
-            .putData(imageDataUin8.value!);
-
-        String fileUrl = await filePath.ref.getDownloadURL();
-        await firebaseFirestore.doc(memberId).update(
-          {
-            "imageUrl": fileUrl,
-          },
+    if (nameController.text.isNotEmpty &&
+        positionController.text.isNotEmpty &&
+        designationController.text.isNotEmpty) {
+      try {
+        StudentProtectionGroupModel studentData = StudentProtectionGroupModel(
+          name: nameController.text,
+          position: positionController.text,
+          designation: designationController.text,
+          id: memberId,
+          imageUrl: imageUrl,
+          imageId: imageId,
         );
-      }
-      if (context.mounted) {
-        Navigator.of(context).pop();
-      }
-      clearField();
+        isLoadingDialogue.value = true;
+        await firebaseFirestore.doc(memberId).set(
+              studentData.toJson(),
+            );
+        if (imageDataUin8.value != null) {
+          final filePath = await firebaseStorage
+              .ref('files/studentProtection/$imageId')
+              .putData(imageDataUin8.value!);
 
-      showToast(
-        msg: 'Updated Successfully',
-      );
-      isLoadingDialogue.value = false;
-    } catch (e) {
-      isLoadingDialogue.value = false;
-      showToast(msg: e.toString());
+          String fileUrl = await filePath.ref.getDownloadURL();
+          await firebaseFirestore.doc(memberId).update(
+            {
+              "imageUrl": fileUrl,
+            },
+          );
+        }
+        if (context.mounted) {
+          Navigator.of(context).pop();
+        }
+        clearField();
+
+        showToast(
+          msg: 'Updated Successfully',
+        );
+        isLoadingDialogue.value = false;
+      } catch (e) {
+        isLoadingDialogue.value = false;
+        showToast(msg: e.toString());
+      }
+    } else {
+      showToast(msg: 'All Fields Are Mandatory');
     }
   }
 

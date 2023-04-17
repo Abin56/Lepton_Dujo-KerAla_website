@@ -280,9 +280,7 @@ class LeftSideCardWidget extends StatelessWidget {
           ? positionData[2]
           : studentProtectionModelList[index].position,
       iconData: Icons.edit,
-      imageId: querySnapshotList[index] == null
-          ? ""
-          : studentProtectionModelList[index].imageId,
+      imageId: dataList[index],
       memberId: dataList[index],
       imageUrl: querySnapshotList[index] == null
           ? null
