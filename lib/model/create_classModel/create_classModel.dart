@@ -3,9 +3,15 @@
 // ignore_for_file: file_names, non_constant_identifier_names
 
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/controller/get_firebase-data/get_firebase_data.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../controller/admin_login_screen/admin_login_screen_controller.dart';
+import '../loginHistory_model/login_history_model.dart';
 
 AddClassesModel AddClassesModelFromJson(String str) =>
     AddClassesModel.fromJson(json.decode(str));
@@ -49,21 +55,28 @@ class AddClassesModel {
 class CreateClassesAddToFireBase {
   Future createClassesController(
       AddClassesModel productModel, context, id, teacherId) async {
+    log("school id >>>>${Get.find<AdminLoginScreenController>().schoolID}");
+    log("batch id >>>>${Get.find<GetFireBaseData>().bYear.value}");
     try {
       final firebase = FirebaseFirestore.instance;
-      final doc = firebase
+      firebase
           .collection("SchoolListCollection")
-          .doc(id)
+          .doc(Get.find<AdminLoginScreenController>().schoolID)
+          .collection(Get.find<GetFireBaseData>().bYear.value)
+          .doc(Get.find<GetFireBaseData>().bYear.value)
           .collection("Classes")
           .doc(productModel.classID)
           .set(productModel.toJson())
           .then((value) => {
                 firebase
                     .collection("SchoolListCollection")
-                    .doc(id)
+                    .doc(Get.find<AdminLoginScreenController>().schoolID)
+                    .collection(Get.find<GetFireBaseData>().bYear.value)
+                    .doc(Get.find<GetFireBaseData>().bYear.value)
                     .collection("Teachers")
                     .doc(teacherId)
-                    .set({'classIncharge':productModel.classID}, SetOptions(merge: true))
+                    .set({'classIncharge': productModel.classID},
+                        SetOptions(merge: true))
               })
           .then(
         (value) {

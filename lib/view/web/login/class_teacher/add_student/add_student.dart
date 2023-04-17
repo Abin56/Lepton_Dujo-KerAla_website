@@ -3,28 +3,31 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../model/create_classModel/addStudent_model.dart';
 import '../../../widgets/drop_DownList/get_batchYear.dart';
 import '../../../widgets/drop_DownList/get_classes.dart';
-
-
 
 class AddStudentFromClassTeacher extends StatefulWidget {
   var schoolID;
   var teacherIDE;
 
-  AddStudentFromClassTeacher({this.schoolID, required this.teacherIDE, super.key});
+  AddStudentFromClassTeacher(
+      {this.schoolID, required this.teacherIDE, super.key});
 
   @override
-  State<AddStudentFromClassTeacher> createState() => _AddStudentFromClassTeacherState();
+  State<AddStudentFromClassTeacher> createState() =>
+      _AddStudentFromClassTeacherState();
 }
 
 DateTime? _selectedDateForApplyDate;
 DateTime? _selectedToDate;
 
-class _AddStudentFromClassTeacherState extends State<AddStudentFromClassTeacher> {
+class _AddStudentFromClassTeacherState
+    extends State<AddStudentFromClassTeacher> {
   TextEditingController studentNameController = TextEditingController();
 
   TextEditingController parentPhNoController = TextEditingController();
@@ -66,7 +69,7 @@ class _AddStudentFromClassTeacherState extends State<AddStudentFromClassTeacher>
                 Padding(
                     padding: EdgeInsets.all(15),
                     child: GetClassesListDropDownButton(
-                      schoolID: widget.schoolID,
+                      schoolID: Get.find<AdminLoginScreenController>().schoolID,
                       teacherID: widget.teacherIDE,
                     )),
                 Padding(
@@ -213,13 +216,27 @@ class _AddStudentFromClassTeacherState extends State<AddStudentFromClassTeacher>
                             parentPhNo: parentPhNoController.text.trim(),
                             joinDate: DateTime.now().toString());
 
-                        await AddStudentsToFireBase().addStudentsController(
-                            studentDetails,
-                            context,
-                            widget.schoolID,
-                            classesListValue!["id"],
-                            addmissionNumberController.text.trim(),
-                            schoolBatchYearListValue['id']);
+                        await AddStudentsToFireBase()
+                            .addStudentsController(
+                                studentDetails,
+                                context,
+                                widget.schoolID,
+                                classesListValue!["id"],
+                                addmissionNumberController.text.trim(),
+                                schoolBatchYearListValue['id'])
+                            .then((value) async {
+                          studentNameController.clear();
+
+                          parentPhNoController.clear();
+
+                          parentNameController.clear();
+
+                          addmissionNumberController.clear();
+
+                          studentemailController.clear();
+                          applynewBatchYearContoller.clear();
+                          selectedToDaterContoller.clear();
+                        });
                       },
                       child: Text("Add Student"),
                     ),

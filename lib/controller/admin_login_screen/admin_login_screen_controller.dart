@@ -11,9 +11,8 @@ import '../../view/web/widgets/drop_DownList/get_batchYear.dart';
 import '../../view/web/widgets/drop_DownList/schoolDropDownList.dart';
 
 class AdminLoginScreenController extends GetxController {
-
   String schoolID = schoolListValue?['id'];
-  String batchYearID = schoolBatchYearListValue?['id']??'';
+  String batchYearID = schoolBatchYearListValue?['id'] ?? '';
 
   TextEditingController schoolIdController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -69,17 +68,18 @@ class AdminLoginScreenController extends GetxController {
       DateTime parseDate = DateTime.parse(date.toString());
       final DateFormat formatter = DateFormat('dd-MM-yyyy');
       String formatted = formatter.format(parseDate);
+      LoginTimeIDSavingClass.date = formatted;
 
       await schoolListCollectionRef
           .doc(schoolID)
           .collection("LoginHistory")
-          .doc(formatted)
-          .set({'id': formatted}).then((value) {
+          .doc(LoginTimeIDSavingClass.date)
+          .set({'id': LoginTimeIDSavingClass.date}).then((value) {
         schoolListCollectionRef
             .doc(schoolID)
             .collection("LoginHistory")
-            .doc(formatted)
-            .collection(formatted)
+            .doc(LoginTimeIDSavingClass.date)
+            .collection(LoginTimeIDSavingClass.date)
             .doc(LoginTimeIDSavingClass.id)
             .set({
           'adminuser': schoolIdController.text.trim(),
@@ -89,6 +89,7 @@ class AdminLoginScreenController extends GetxController {
                     builder: (context) {
                       return AdminDashBoardPage(
                         schoolID: schoolID,
+                        
                       );
                     },
                   ))
