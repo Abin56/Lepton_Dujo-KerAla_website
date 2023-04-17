@@ -19,11 +19,11 @@ getInfoofStudent(BuildContext context) {
           TextButton(
             child: const Text('Genrate Tc'),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(
-                builder: (context) {
-                  return GenrateTC();
-                },
-              ));
+              // Navigator.push(context, MaterialPageRoute(
+              //   builder: (context) {
+              //     return GenrateTC();
+              //   },
+              // ));
             },
           ),
         ],
