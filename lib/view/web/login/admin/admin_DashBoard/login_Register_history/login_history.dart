@@ -18,7 +18,7 @@ class AdminLoginDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Admin Login Register"),
+        title: const Text("Admin Login Register"),
         backgroundColor: adminePrimayColor,
       ),
       body: SafeArea(
@@ -40,7 +40,7 @@ class AdminLoginDetailsScreen extends StatelessWidget {
                         AdminLoginDetailHistoryModel.fromMap(
                             snapshot.data!.docs[index].data());
                     return Container(
-                      color: Color.fromARGB(255, 58, 179, 220),
+                      color: const Color.fromARGB(255, 58, 179, 220),
                       height: 60,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -53,6 +53,7 @@ class AdminLoginDetailsScreen extends StatelessWidget {
                             Text('LoginTime ${data.loginTime}'),
                             sizedBoxw120,
                             Text(
+                                // ignore: prefer_if_null_operators
                                 'LogOutTime ${data.logOutTime == null ? 'Not found' : data.logOutTime}'),
                             sizedBoxw80,
                           ],
@@ -61,7 +62,7 @@ class AdminLoginDetailsScreen extends StatelessWidget {
                     );
                   },
                   separatorBuilder: (context, index) {
-                    return Divider();
+                    return const Divider();
                   },
                   itemCount: snapshot.data!.docs.length);
             } else {
