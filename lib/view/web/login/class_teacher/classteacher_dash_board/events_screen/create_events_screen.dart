@@ -1,3 +1,4 @@
+import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -25,7 +26,7 @@ class ClassTeacherCreateEventsPage extends StatelessWidget {
     teacherEventController.clearControllers();
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Create New Events'),
+          title: const Text('Create New Events'),backgroundColor: adminePrimayColor,
         ),
         body: Obx(() {
           return teacherEventController.isLoading.value
@@ -42,89 +43,105 @@ class ClassTeacherCreateEventsPage extends StatelessWidget {
                           fit: BoxFit.fill),
                     ),
                     Container(
-                      alignment: Alignment.center,
                       width: size.width * .6,
-                      height: size.height,
-                      child: Form(
-                        child: ListView(
-                          children: <Widget>[
-                            sizedBoxH20,
-                            TextFormFieldWidget(
-                              hint: 'Event Name',
-                              controller: teacherEventController.nameController,
-                            ),
-                            sizedBoxH20,
-                            TextFormFieldWidget(
-                              hint: 'Event date',
-                              controller: teacherEventController.dateController,
-                            ),
-                            sizedBoxH20,
-                            TextFormFieldWidget(
-                              hint: 'Event Description',
-                              controller:
-                                  teacherEventController.descriptionController,
-                            ),
-                            sizedBoxH20,
-                            TextFormFieldWidget(
-                              hint: 'Venue',
-                              controller:
-                                  teacherEventController.venueController,
-                            ),
-                            sizedBoxH20,
-                            TextFormFieldWidget(
-                                hint: 'Chief Guest',
-                                controller: teacherEventController
-                                    .chiefGuestController),
-                            sizedBoxH20,
-                            TextFormFieldWidget(
-                                hint: 'Participants',
-                                controller: teacherEventController
-                                    .participantsController),
-                            sizedBoxH20,
-                            imageDataMap.isNotEmpty
-                                ? const Text('Image Uploaded Successfully')
-                                : teacherEventController.isImageUpload.value
-                                    ? const Center(
-                                        child: CircularProgressIndicator(),
-                                      )
-                                    : TextButton(
-                                        onPressed: () async {
-                                          imageDataMap =
-                                              await teacherEventController
-                                                  .eventPhotoUpload();
-                                        },
-                                        child: const Text('Upload Image'),
-                                      ),
-                            sizedBoxH20,
-                            ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  shape: const StadiumBorder(),
+                        height: size.height,
+                         alignment: Alignment.center,
+
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Container(
+                           width: size.width * .4,
+                          
+                          child: Form(
+                            child: ListView(
+                              children: <Widget>[
+                                sizedBoxH20,
+                                TextFormFieldWidget(
+                                  hint: 'Event Name',
+                                  controller: teacherEventController.nameController,
                                 ),
-                                onPressed: () async {
-                                  await teacherEventController.createEvents(
-                                    schoolId: schoolId,
-                                    classId: classId,
-                                    classTeacherEventModel: ClassTeacherEventModel(
-                                        eventId: '',
-                                        eventName: teacherEventController
-                                            .nameController.text,
-                                        eventDate: teacherEventController
-                                            .dateController.text,
-                                        description: teacherEventController
-                                            .descriptionController.text,
-                                        venue: teacherEventController
-                                            .venueController.text,
-                                        chiefGuest: teacherEventController
-                                            .chiefGuestController.text,
-                                        participants: teacherEventController
-                                            .participantsController.text,
-                                        image: imageDataMap['downloadUrl']!,
-                                        imageUid: imageDataMap['imageUid']!),
-                                  );
-                                  imageDataMap = {};
-                                },
-                                child: const Text("Submit"))
-                          ],
+                                sizedBoxH20,
+                                TextFormFieldWidget(
+                                  hint: 'Event date',
+                                  controller: teacherEventController.dateController,
+                                ),
+                                sizedBoxH20,
+                                TextFormFieldWidget(
+                                  hint: 'Event Description',
+                                  controller:
+                                      teacherEventController.descriptionController,
+                                ),
+                                sizedBoxH20,
+                                TextFormFieldWidget(
+                                  hint: 'Venue',
+                                  controller:
+                                      teacherEventController.venueController,
+                                ),
+                                sizedBoxH20,
+                                TextFormFieldWidget(
+                                    hint: 'Chief Guest',
+                                    controller: teacherEventController
+                                        .chiefGuestController),
+                                sizedBoxH20,
+                                TextFormFieldWidget(
+                                    hint: 'Participants',
+                                    controller: teacherEventController
+                                        .participantsController),
+                                sizedBoxH20,
+                                imageDataMap.isNotEmpty
+                                    ? const Text('Image Uploaded Successfully')
+                                    : teacherEventController.isImageUpload.value
+                                        ? const Center(
+                                            child: CircularProgressIndicator(),
+                                          )
+                                        : TextButton(
+                                            onPressed: () async {
+                                              imageDataMap =
+                                                  await teacherEventController
+                                                      .eventPhotoUpload();
+                                            },
+                                            child: const Text('Upload Image'),
+                                          ),
+                                sizedBoxH20,
+                                Padding(
+                                  padding:  EdgeInsets.only(left: size.width/20,right: size.width/20),
+                                  child: Container(
+                                    height: size.width/25,
+                                    width: size.width/15,
+                                    child: ElevatedButton(
+                                    
+                                        style: ElevatedButton.styleFrom(backgroundColor: adminePrimayColor,
+                                          shape: const StadiumBorder(),
+                                        ),
+                                        onPressed: () async {
+                                          await teacherEventController.createEvents(
+                                            schoolId: schoolId,
+                                            classId: classId,
+                                            classTeacherEventModel: ClassTeacherEventModel(
+                                                eventId: '',
+                                                eventName: teacherEventController
+                                                    .nameController.text,
+                                                eventDate: teacherEventController
+                                                    .dateController.text,
+                                                description: teacherEventController
+                                                    .descriptionController.text,
+                                                venue: teacherEventController
+                                                    .venueController.text,
+                                                chiefGuest: teacherEventController
+                                                    .chiefGuestController.text,
+                                                participants: teacherEventController
+                                                    .participantsController.text,
+                                                image: imageDataMap['downloadUrl']!,
+                                                imageUid: imageDataMap['imageUid']!),
+                                          );
+                                          imageDataMap = {};
+                                        },
+                                        child: const Text("Submit")),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
                         ),
                       ),
                     ),
