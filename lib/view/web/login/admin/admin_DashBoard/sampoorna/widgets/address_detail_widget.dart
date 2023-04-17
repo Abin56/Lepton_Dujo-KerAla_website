@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../controller/Getx/admin/sampoorna/sampoorna_controller.dart';
-import 'const.dart';
+import '../../../../../../../controller/Getx/admin/sampoorna/sampoorna_controller.dart';
+import '../../../../../../constant/constant.dart';
 import 'widgets.dart';
 
 class AddressDetailWidget extends StatelessWidget {
@@ -18,38 +18,45 @@ class AddressDetailWidget extends StatelessWidget {
           children: <Widget>[
             Flexible(
               child: TextFormFieldTextWidget(
-                  title: 'House Name',
-                  controller:
-                      Get.find<SampoornaController>().houseNameController),
+                title: 'House Name',
+                controller: Get.find<SampoornaController>().houseNameController,
+                validator: checkFieldEmpty,
+              ),
             ),
             Flexible(
               child: TextFormFieldTextWidget(
-                  title: 'Place/Street',
-                  controller:
-                      Get.find<SampoornaController>().placeStreetController),
+                title: 'Place/Street',
+                controller:
+                    Get.find<SampoornaController>().placeStreetController,
+                validator: checkFieldEmpty,
+              ),
             ),
             Flexible(
               child: TextFormFieldTextWidget(
-                  title: 'Dist',
-                  controller:
-                      Get.find<SampoornaController>().districtController),
+                title: 'Dist',
+                controller: Get.find<SampoornaController>().districtController,
+                validator: checkFieldEmpty,
+              ),
             ),
             Flexible(
               child: TextFormFieldTextWidget(
-                  title: 'State',
-                  controller: Get.find<SampoornaController>().stateController),
+                title: 'State',
+                controller: Get.find<SampoornaController>().stateController,
+                validator: checkFieldEmpty,
+              ),
             ),
           ],
         ),
-        kHeight20,
+        sizedBoxH20,
         Obx(
           () => Row(
             children: <Widget>[
               Flexible(
                 child: TextFormFieldTextWidget(
-                    title: 'Taluk',
-                    controller:
-                        Get.find<SampoornaController>().talukcontroller),
+                  title: 'Taluk',
+                  controller: Get.find<SampoornaController>().talukcontroller,
+                  validator: checkFieldEmpty,
+                ),
               ),
               Row(
                 children: <Widget>[
@@ -95,62 +102,75 @@ class AddressDetailWidget extends StatelessWidget {
             ],
           ),
         ),
-        kHeight20,
+        sizedBoxH20,
         const ContentTitleWidget(
             title:
                 'If Grama Panchayath Specify District Panchayath and Block Panchayath'),
-        kHeight20,
+        sizedBoxH20,
         Row(
           children: <Widget>[
             Flexible(
               child: TextFormFieldTextWidget(
-                  title: 'District Panchayath',
-                  controller: Get.find<SampoornaController>()
-                      .districtPanchayathController),
+                title: 'District Panchayath',
+                controller: Get.find<SampoornaController>()
+                    .districtPanchayathController,
+                validator: checkFieldEmpty,
+              ),
             ),
             Flexible(
               child: TextFormFieldTextWidget(
-                  title: 'Block Panchayath',
-                  controller: Get.find<SampoornaController>()
-                      .blockPanchayathController),
+                title: 'Block Panchayath',
+                controller:
+                    Get.find<SampoornaController>().blockPanchayathController,
+                validator: checkFieldEmpty,
+              ),
             ),
             Flexible(
               child: TextFormFieldTextWidget(
-                  title: 'Name of Local Body',
-                  controller: Get.find<SampoornaController>()
-                      .nameOfLocalBodyController),
+                title: 'Name of Local Body',
+                controller:
+                    Get.find<SampoornaController>().nameOfLocalBodyController,
+                validator: checkFieldEmpty,
+              ),
             ),
           ],
         ),
-        kHeight20,
+        sizedBoxH20,
         Row(
           children: <Widget>[
             Flexible(
               child: TextFormFieldTextWidget(
-                  title: 'Post Office',
-                  controller:
-                      Get.find<SampoornaController>().postOfficeController),
+                title: 'Post Office',
+                controller:
+                    Get.find<SampoornaController>().postOfficeController,
+                validator: checkFieldEmpty,
+              ),
             ),
             Flexible(
               child: TextFormFieldTextWidget(
-                  title: 'Pin Code',
-                  controller:
-                      Get.find<SampoornaController>().pincodeController),
+                title: 'Pin Code',
+                controller: Get.find<SampoornaController>().pincodeController,
+                validator: checkFieldEmpty,
+              ),
             ),
             Flexible(
               child: TextFormFieldTextWidget(
-                  title: 'Phone Number',
-                  controller:
-                      Get.find<SampoornaController>().phoneNumberController),
+                title: 'Phone Number',
+                controller:
+                    Get.find<SampoornaController>().phoneNumberController,
+                validator: checkFieldPhoneNumberIsValid,
+              ),
             ),
             Flexible(
               child: TextFormFieldTextWidget(
-                  title: 'Student Email',
-                  controller: Get.find<SampoornaController>().emailController),
+                title: 'Student Email',
+                controller: Get.find<SampoornaController>().emailController,
+                validator: checkFieldEmailIsValid,
+              ),
             ),
           ],
         ),
-        kHeight20,
+        sizedBoxH20,
       ],
     );
   }

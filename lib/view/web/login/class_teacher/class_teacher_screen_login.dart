@@ -1,10 +1,12 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
 import 'package:dujo_kerala_website/view/web/widgets/responsive.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../colors/colors.dart';
@@ -14,6 +16,8 @@ import '../../../icons/icons.dart';
 import 'classteacher_dash_board/teachers_panel_screen.dart';
 
 class ClassTeacherLoginScreen extends StatelessWidget {
+  AdminLoginScreenController adminLoginScreenController = Get.put(AdminLoginScreenController());
+  
   String schoolID;
   TextEditingController idController = TextEditingController();
   TextEditingController passwordController = TextEditingController();

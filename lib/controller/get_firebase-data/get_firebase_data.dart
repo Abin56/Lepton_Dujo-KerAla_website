@@ -16,6 +16,8 @@ class GetFireBaseData extends GetxController {
      log('getx data >>>>>>>>>>>>>>>>>${bYear}');
   }
 
+
+
   @override
   void onInit() async{
     await getBatchYearId();

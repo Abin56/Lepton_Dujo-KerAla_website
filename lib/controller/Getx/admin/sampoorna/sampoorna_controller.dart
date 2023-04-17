@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -7,11 +7,15 @@ import 'package:get/get.dart';
 import '../../../../model/admin_models/sampoorna/checked_box_model.dart';
 import '../../../../model/admin_models/sampoorna/sampoorna_model.dart';
 import '../../../../view/constant/constant.dart';
-import '../../../../view/web/sampoorna/widgets/widgets.dart';
+import '../../../../view/web/login/admin/admin_DashBoard/sampoorna/widgets/widgets.dart';
 
 class SampoornaController extends GetxController {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   RxBool isLoading = RxBool(false);
+  final GlobalKey<FormState> sampoornaFormKey = GlobalKey<FormState>();
+
+  ///this varible is creted for sampoorna [TextFormFieldTextWidget] validator function is only work this variable is true
+  bool autoValidationIsOn = false;
 
   final schoolCodecontroller = TextEditingController();
   final identificationMark1Controller = TextEditingController();
@@ -180,94 +184,124 @@ class SampoornaController extends GetxController {
   }
 
   Future<void> addSampoornaToFirebase(String schoolId) async {
-    isLoading.value = true;
-    final sampoornaData = SampoornaModel(
-        schoolCode: schoolCodecontroller.text,
-        admissionNumber: admissionNumberController.text,
-        stdDiv: stdAndDivController.text,
-        nameOfStudent: nameOfStudentController.text,
-        gender: genderRadio.value,
-        nationality: nationalityController.text,
-        academicClass: academicClassController.text,
-        academicYear: academicyearController.text,
-        academicResult: academicresultController.text,
-        arts: artsController.text,
-        sports: sportsController.text,
-        technology: technologyController.text,
-        schoolLevelAchievements: schoolLevelController.text,
-        districtLevelAchievements: districtLevelController.text,
-        stateLevelAchievements: stateLevelController.text,
-        scholarShip: scholarShipController.text,
-        skills: skillsController.text,
-        nameOfStudentFather: nameOfStudentFatherController.text,
-        nameOfStudentMother: nameOfStudentMotherController.text,
-        otherSpecifyRelation: specifyRelationController.text,
-        nameOfGuardian: nameOfGuardianController.text,
-        occupationOfParent: occupationOfParentController.text,
-        annualIncome: annulaIncomeController.text,
-        aplOrBpl: aplOrBplRadio.value,
-        houseName: houseNameController.text,
-        placeOrStreet: placeStreetController.text,
-        district: districtController.text,
-        state: stateController.text,
-        taluk: talukcontroller.text,
-        panchayathOrOther: addressRadio.value,
-        districtPanchayath: districtPanchayathController.text,
-        blockPanchayath: blockPanchayathController.text,
-        nameOfLocalBody: nameOfLocalBodyController.text,
-        postOffice: postOfficeController.text,
-        pinCode: pincodeController.text,
-        phoneNumber: phoneNumberController.text,
-        studentEmail: emailController.text,
-        tcNumber: tcNumberController.text,
-        tcDate: previousSchoolDateController.text,
-        schoolPreviouslyAttended: schoolPreviouslyAttendedController.text,
-        dateOfAdmission: dateOfAdmissionController.text,
-        placeOfBirth: placeOfBirthController.text,
-        dateOfBirth: dateOfBirhtController.text,
-        bloodGroup: bloodGroupController.text,
-        relegion: religionRadio.value,
-        category: categoryRadio.value,
-        belongScOrSt: scOrStRadio.value,
-        caste: casteController.text,
-        stdOnAdmission: stdOnAdmissionController.text,
-        divisionOnAdmission: divisionOnAdmissionController.text,
-        previousClassAndDivision: previousClassAndDivisionController.text,
-        currentClass: currentClassController.text,
-        currentDivision: currentDivisionController.text,
-        totalNumberOfWorkingDays: totalControllerNoOfDays.text,
-        cswnchildren: cswnRadio.value,
-        disability:
-            disabilityCheckedBoxList.map((element) => element.title).toList(),
-        instructionMedium: instructionMediumRadio.value,
-        firstLanguagePaper1: firstLanguagePaper1Radio.value,
-        firstLanguagePaper2: firstLanguagePaper2Radio.value,
-        thirdLanguage: thirdLanguage.value,
-        vaccination: vaccinationRadio.value,
-        identificationMark1: identificationMark1Controller.text,
-        identificationMark2: identificationMark2Controller.text,
-        memberShip: memberShipRadio.value,
-        extraCurriculamActivity: gameOfExtraCurricularActivtyController.text,
-        teachersOpinion: teacherOpinionController.text,
-        clubs: clubCheckedBoxList.map((element) => element.title).toList(),
-        id: '');
+    if (genderRadio.isEmpty ||
+        nationalityRadio.isEmpty ||
+        aplOrBplRadio.isEmpty ||
+        addressRadio.isEmpty ||
+        religionRadio.isEmpty ||
+        categoryRadio.isEmpty ||
+        scOrStRadio.isEmpty ||
+        cswnRadio.isEmpty ||
+        instructionMediumRadio.isEmpty ||
+        firstLanguagePaper1Radio.isEmpty ||
+        firstLanguagePaper2Radio.isEmpty ||
+        thirdLanguage.isEmpty ||
+        vaccinationRadio.isEmpty ||
+        memberShipRadio.isEmpty) {
+      showToast(msg: 'Please select radio Button');
+      return;
+    }
 
     try {
-      final result = await firebaseFirestore
-          .collection('SchoolListCollection')
-          .doc(schoolId)
-          .collection('sampoorna')
-          .add(sampoornaData.toJson());
+      if (sampoornaFormKey.currentState == null) {
+        return;
+      }
+      final validated = sampoornaFormKey.currentState!.validate();
+      autoValidationIsOn = true;
+      if (validated) {
+        isLoading.value = true;
+        final sampoornaData = SampoornaModel(
+            schoolCode: schoolCodecontroller.text,
+            admissionNumber: admissionNumberController.text,
+            stdDiv: stdAndDivController.text,
+            nameOfStudent: nameOfStudentController.text,
+            gender: genderRadio.value,
+            nationality: nationalityController.text,
+            academicClass: academicClassController.text,
+            academicYear: academicyearController.text,
+            academicResult: academicresultController.text,
+            arts: artsController.text,
+            sports: sportsController.text,
+            technology: technologyController.text,
+            schoolLevelAchievements: schoolLevelController.text,
+            districtLevelAchievements: districtLevelController.text,
+            stateLevelAchievements: stateLevelController.text,
+            scholarShip: scholarShipController.text,
+            skills: skillsController.text,
+            nameOfStudentFather: nameOfStudentFatherController.text,
+            nameOfStudentMother: nameOfStudentMotherController.text,
+            otherSpecifyRelation: specifyRelationController.text,
+            nameOfGuardian: nameOfGuardianController.text,
+            occupationOfParent: occupationOfParentController.text,
+            annualIncome: annulaIncomeController.text,
+            aplOrBpl: aplOrBplRadio.value,
+            houseName: houseNameController.text,
+            placeOrStreet: placeStreetController.text,
+            district: districtController.text,
+            state: stateController.text,
+            taluk: talukcontroller.text,
+            panchayathOrOther: addressRadio.value,
+            districtPanchayath: districtPanchayathController.text,
+            blockPanchayath: blockPanchayathController.text,
+            nameOfLocalBody: nameOfLocalBodyController.text,
+            postOffice: postOfficeController.text,
+            pinCode: pincodeController.text,
+            phoneNumber: phoneNumberController.text,
+            studentEmail: emailController.text,
+            tcNumber: tcNumberController.text,
+            tcDate: previousSchoolDateController.text,
+            schoolPreviouslyAttended: schoolPreviouslyAttendedController.text,
+            dateOfAdmission: dateOfAdmissionController.text,
+            placeOfBirth: placeOfBirthController.text,
+            dateOfBirth: dateOfBirhtController.text,
+            bloodGroup: bloodGroupController.text,
+            relegion: religionRadio.value,
+            category: categoryRadio.value,
+            belongScOrSt: scOrStRadio.value,
+            caste: casteController.text,
+            stdOnAdmission: stdOnAdmissionController.text,
+            divisionOnAdmission: divisionOnAdmissionController.text,
+            previousClassAndDivision: previousClassAndDivisionController.text,
+            currentClass: currentClassController.text,
+            currentDivision: currentDivisionController.text,
+            totalNumberOfWorkingDays: totalControllerNoOfDays.text,
+            cswnchildren: cswnRadio.value,
+            disability: disabilityCheckedBoxList.map((element) {
+              return {element.title: element.value};
+            }).toList(),
+            instructionMedium: instructionMediumRadio.value,
+            firstLanguagePaper1: firstLanguagePaper1Radio.value,
+            firstLanguagePaper2: firstLanguagePaper2Radio.value,
+            thirdLanguage: thirdLanguage.value,
+            vaccination: vaccinationRadio.value,
+            identificationMark1: identificationMark1Controller.text,
+            identificationMark2: identificationMark2Controller.text,
+            memberShip: memberShipRadio.value,
+            extraCurriculamActivity:
+                gameOfExtraCurricularActivtyController.text,
+            teachersOpinion: teacherOpinionController.text,
+            clubs: clubCheckedBoxList
+                .map((element) => {element.title: element.value})
+                .toList(),
+            id: '');
 
-      await firebaseFirestore
-          .collection('SchoolListCollection')
-          .doc(schoolId)
-          .collection('sampoorna')
-          .doc(result.id)
-          .update({"id": result.id});
-      clearData();
-      showToast(msg: 'Sampoorna created successfully');
-      isLoading.value = false;
+        final result = await firebaseFirestore
+            .collection('SchoolListCollection')
+            .doc(schoolId)
+            .collection('sampoorna')
+            .add(sampoornaData.toJson());
+
+        await firebaseFirestore
+            .collection('SchoolListCollection')
+            .doc(schoolId)
+            .collection('sampoorna')
+            .doc(result.id)
+            .update({"id": result.id});
+        clearData();
+        showToast(msg: 'Sampoorna created successfully');
+        isLoading.value = false;
+        autoValidationIsOn = false;
+      }
     } catch (e) {
       isLoading.value = false;
       showToast(msg: 'Sampoorna not created');

@@ -135,7 +135,7 @@ class SampoornaModel {
   String currentDivision;
   String totalNumberOfWorkingDays;
   String cswnchildren;
-  List<String> disability;
+  List<Map<String, dynamic>> disability;
   String instructionMedium;
   String firstLanguagePaper1;
   String firstLanguagePaper2;
@@ -146,7 +146,7 @@ class SampoornaModel {
   String memberShip;
   String extraCurriculamActivity;
   String teachersOpinion;
-  List<String> clubs;
+  List<Map<String, dynamic>> clubs;
   String id;
 
   factory SampoornaModel.fromJson(Map<String, dynamic> json) => SampoornaModel(
@@ -205,7 +205,8 @@ class SampoornaModel {
         currentDivision: json["currentDivision"],
         totalNumberOfWorkingDays: json["totalNumberOfWorkingDays"],
         cswnchildren: json["cswnchildren"],
-        disability: List<String>.from(json["disability"].map((x) => x)),
+        disability:
+            List<Map<String, dynamic>>.from(json["disability"].map((x) => x)),
         instructionMedium: json["instructionMedium"],
         firstLanguagePaper1: json["firstLanguagePaper1"],
         firstLanguagePaper2: json["firstLanguagePaper2"],
@@ -216,7 +217,7 @@ class SampoornaModel {
         memberShip: json["memberShip"],
         extraCurriculamActivity: json["extraCurriculamActivity"],
         teachersOpinion: json["teachersOpinion"],
-        clubs: List<String>.from(json["clubs"].map((x) => x)),
+        clubs: List<Map<String, dynamic>>.from(json["clubs"].map((x) => x)),
         id: json['id'],
       );
 

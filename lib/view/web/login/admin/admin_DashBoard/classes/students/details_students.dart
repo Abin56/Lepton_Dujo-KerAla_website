@@ -3,16 +3,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/students/parents&guardian.dart';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
+import '../../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../../controller/students_list/students_list.dart';
 import '../../../../../../../model/profileextraDetails/students_extra_profile.dart';
 import '../../../../../../colors/colors.dart';
 import '../../../../../../constant/constant.dart';
 import '../../../../../widgets/button_container_widget.dart';
-
 
 class StudentsDetails extends StatelessWidget {
   String totalstudents;
@@ -40,8 +42,10 @@ class StudentsDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final _firebase = FirebaseFirestore.instance
         .collection("SchoolListCollection")
-        .doc(schooilID)
-        .collection('Classes')
+        .doc(Get.find<AdminLoginScreenController>().schoolID)
+        .collection(Get.find<GetFireBaseData>().bYear.value)
+        .doc(Get.find<GetFireBaseData>().bYear.value)
+        .collection("Classes")
         .doc(classID);
     return Container(
       height: double.infinity,

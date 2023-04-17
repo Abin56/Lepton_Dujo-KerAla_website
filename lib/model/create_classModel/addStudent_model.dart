@@ -6,6 +6,10 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../controller/admin_login_screen/admin_login_screen_controller.dart';
+import '../../controller/get_firebase-data/get_firebase_data.dart';
 
 AddStudentsModel AddStudentsModelFromJson(String str) =>
     AddStudentsModel.fromJson(json.decode(str));
@@ -67,11 +71,11 @@ class AddStudentsToFireBase {
       final firebase = FirebaseFirestore.instance;
       final doc = firebase
           .collection("SchoolListCollection")
-          .doc(schoolid)
+          .doc(Get.find<AdminLoginScreenController>().schoolID)
+          .collection(Get.find<GetFireBaseData>().bYear.value)
+          .doc(Get.find<GetFireBaseData>().bYear.value)
           .collection("Classes")
           .doc(classId)
-          .collection('BatchYear')
-          .doc(batchYear)
           .collection('Students')
           .doc(productModel.studentemailController)
           .set(productModel.toJson())

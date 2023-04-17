@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../controller/Getx/admin/sampoorna/sampoorna_controller.dart';
-import 'const.dart';
+import '../../../../../../../controller/Getx/admin/sampoorna/sampoorna_controller.dart';
+import '../../../../../../constant/constant.dart';
 import 'widgets.dart';
 
 class ParentDetailsWidget extends StatelessWidget {
@@ -18,36 +18,44 @@ class ParentDetailsWidget extends StatelessWidget {
           children: <Widget>[
             Flexible(
               child: TextFormFieldTextWidget(
-                  title: 'Name of Student Father',
-                  controller: Get.find<SampoornaController>()
-                      .nameOfStudentFatherController),
+                title: 'Name of Student Father',
+                controller: Get.find<SampoornaController>()
+                    .nameOfStudentFatherController,
+                validator: checkFieldEmpty,
+              ),
             ),
             Flexible(
               child: TextFormFieldTextWidget(
-                  title: 'Name of Student Mother',
-                  controller: Get.find<SampoornaController>()
-                      .nameOfStudentMotherController),
+                title: 'Name of Student Mother',
+                controller: Get.find<SampoornaController>()
+                    .nameOfStudentMotherController,
+                validator: checkFieldEmpty,
+              ),
             ),
           ],
         ),
-        kHeight20,
+        sizedBoxH20,
         Row(
           children: <Widget>[
             Flexible(
               child: TextFormFieldTextWidget(
-                  title: 'If other (Specify Relation)',
-                  controller: Get.find<SampoornaController>()
-                      .specifyRelationController),
+                title: 'If other (Specify Relation)',
+                controller:
+                    Get.find<SampoornaController>().specifyRelationController,
+                validator: checkFieldEmpty,
+              ),
             ),
             Flexible(
               child: TextFormFieldTextWidget(
-                  title: 'Name of Guardian',
-                  controller:
-                      Get.find<SampoornaController>().nameOfGuardianController),
+                title: 'Name of Guardian',
+                controller:
+                    Get.find<SampoornaController>().nameOfGuardianController,
+                validator: checkFieldEmpty,
+              ),
             ),
           ],
         ),
-        kHeight20,
+        sizedBoxH20,
         Row(
           children: <Widget>[
             Flexible(
@@ -55,6 +63,7 @@ class ParentDetailsWidget extends StatelessWidget {
                 title: 'Occupation of Parent/Guardina',
                 controller: Get.find<SampoornaController>()
                     .occupationOfParentController,
+                validator: checkFieldEmpty,
               ),
             ),
             Flexible(
@@ -62,11 +71,12 @@ class ParentDetailsWidget extends StatelessWidget {
                 title: 'Annual Income',
                 controller:
                     Get.find<SampoornaController>().annulaIncomeController,
+                validator: checkFieldEmpty,
               ),
             ),
           ],
         ),
-        kHeight20,
+        sizedBoxH20,
         Obx(
           () => Row(
             children: <Widget>[
