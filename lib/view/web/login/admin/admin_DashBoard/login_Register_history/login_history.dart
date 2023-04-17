@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
+import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../model/loginHistory_model/login_history_model.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
-
 
 class AdminLoginDetailsScreen extends StatelessWidget {
   String schoolID;
@@ -23,7 +25,9 @@ class AdminLoginDetailsScreen extends StatelessWidget {
         child: StreamBuilder(
           stream: FirebaseFirestore.instance
               .collection("SchoolListCollection")
-              .doc(schoolID)
+              .doc(Get.find<AdminLoginScreenController>().schoolID)
+              .collection(Get.find<GetFireBaseData>().bYear.value)
+              .doc(Get.find<GetFireBaseData>().bYear.value)
               .collection("LoginHistory")
               .doc(dateId)
               .collection(dateId)

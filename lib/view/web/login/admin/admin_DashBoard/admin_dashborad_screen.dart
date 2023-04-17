@@ -549,11 +549,18 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                                 .find<
                                                                     AdminLoginScreenController>()
                                                             .schoolID)
+                                                        .collection(Get
+                                                                .find<
+                                                                    AdminLoginScreenController>()
+                                                            .batchYearID)
+                                                        .doc(Get
+                                                                .find<
+                                                                    AdminLoginScreenController>()
+                                                            .batchYearID)
                                                         .collection(
                                                             "LoginHistory")
-                                                        .doc(
-                                                            LoginTimeIDSavingClass
-                                                                .date)
+                                                        .doc(LoginTimeIDSavingClass
+                                                            .date)
                                                         .collection(
                                                             LoginTimeIDSavingClass
                                                                 .date)

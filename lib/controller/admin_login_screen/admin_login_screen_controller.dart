@@ -9,6 +9,7 @@ import '../../model/loginHistory_model/login_history_model.dart';
 import '../../view/web/login/admin/admin_DashBoard/admin_dashborad_screen.dart';
 import '../../view/web/widgets/drop_DownList/get_batchYear.dart';
 import '../../view/web/widgets/drop_DownList/schoolDropDownList.dart';
+import '../get_firebase-data/get_firebase_data.dart';
 
 class AdminLoginScreenController extends GetxController {
   String schoolID = schoolListValue?['id'];
@@ -72,11 +73,15 @@ class AdminLoginScreenController extends GetxController {
 
       await schoolListCollectionRef
           .doc(schoolID)
+          .collection(Get.find<GetFireBaseData>().bYear.value)
+          .doc(Get.find<GetFireBaseData>().bYear.value)
           .collection("LoginHistory")
           .doc(LoginTimeIDSavingClass.date)
           .set({'id': LoginTimeIDSavingClass.date}).then((value) {
         schoolListCollectionRef
             .doc(schoolID)
+            .collection(Get.find<GetFireBaseData>().bYear.value)
+            .doc(Get.find<GetFireBaseData>().bYear.value)
             .collection("LoginHistory")
             .doc(LoginTimeIDSavingClass.date)
             .collection(LoginTimeIDSavingClass.date)
@@ -89,7 +94,6 @@ class AdminLoginScreenController extends GetxController {
                     builder: (context) {
                       return AdminDashBoardPage(
                         schoolID: schoolID,
-                        
                       );
                     },
                   ))
