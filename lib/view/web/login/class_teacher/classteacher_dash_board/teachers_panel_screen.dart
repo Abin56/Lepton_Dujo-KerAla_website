@@ -21,6 +21,7 @@ import 'events_screen/create_events_screen.dart';
 import 'events_screen/update_event_screens/list_classwise_event.dart';
 import 'guardian-section/add_guardian.dart';
 import 'manage_teachers/all_class_teachers.dart';
+import 'my_stuents/my_students_list.dart';
 import 'notice_screen/class_notices.dart';
 import 'notice_screen/create_notice_screen.dart';
 
@@ -82,11 +83,13 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
   List<String> viewListNames = [
     'Events', //1
     'Notice', //2
-    'Students List' //3
+    'Students List',
+    'My Students' ,//3
   ];
   List<String> viewListImages = [
     'assets/images/events.png', //1
     'assets/images/notices.png', //2
+    'assets/images/students.png', //3
     'assets/images/students.png', //3
   ];
 
@@ -140,6 +143,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
         classId: teacherClassId,
       ), //2
       ListOfClassesScreen(schoolID: widget.schoolID),
+      MyStudentsListViewScreen()
     ];
     var screenSize = MediaQuery.of(context).size;
 

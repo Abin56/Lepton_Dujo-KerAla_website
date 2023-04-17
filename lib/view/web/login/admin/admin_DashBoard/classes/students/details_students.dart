@@ -1,6 +1,8 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/students/parents&guardian.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/students/student_summery/student_summery.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/sampoorna/sampoorna_home.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -210,7 +212,7 @@ class StudentsDetails extends StatelessWidget {
                               },
                             );
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.edit_outlined,
                             color: Colors.green,
                           ),
@@ -291,7 +293,7 @@ class StudentsDetails extends StatelessWidget {
                               },
                             );
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.edit_outlined,
                             color: Colors.green,
                           ),
@@ -366,7 +368,7 @@ class StudentsDetails extends StatelessWidget {
                               },
                             );
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.edit_outlined,
                             color: Colors.green,
                           ),
@@ -438,7 +440,91 @@ class StudentsDetails extends StatelessWidget {
                         ),
                       ],
                     ),
-                    sizedBoxH20,
+                    sizedBoxH10,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () async {
+                            final sampoorna = await FirebaseFirestore.instance
+                                .collection("SchoolListCollection")
+                                .doc(Get.find<AdminLoginScreenController>()
+                                    .schoolID)
+                                .collection(
+                                    Get.find<GetFireBaseData>().bYear.value)
+                                .doc(Get.find<GetFireBaseData>().bYear.value)
+                                .collection("Classes")
+                                .doc(classID)
+                                .collection("Students")
+                                .doc(allData[getxController.indexValue.value!]
+                                    .id)
+                                .collection("sampoorna")
+                                .get();
+                            sampoorna.docs.isEmpty
+                                ?
+                                // ignore: use_build_context_synchronously
+                                Navigator.push(context, MaterialPageRoute(
+                                    builder: (context) {
+                                      return SampoornaHomeScreen(
+                                          schoolId: Get.find<
+                                                  AdminLoginScreenController>()
+                                              .schoolID);
+                                    },
+                                  ))
+                                // ignore: use_build_context_synchronously
+                                : Navigator.push(context, MaterialPageRoute(
+                                    builder: (context) {
+                                      return const StudetnSummery();
+                                    },
+                                  ));
+                          },
+                          child: Container(
+                            height: 40,
+                            width: 40,
+                            decoration: const BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage(
+                                        'assets/images/folders.png'))),
+                          ),
+                        ),
+                        sizedBoxW20,
+                        const Text("Sampoorna",
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        const Icon(Icons.info_outlined),
+                        sizedBoxw10,
+                        StreamBuilder(
+                            stream: FirebaseFirestore.instance
+                                .collection("SchoolListCollection")
+                                .doc(Get.find<AdminLoginScreenController>()
+                                    .schoolID)
+                                .collection(
+                                    Get.find<GetFireBaseData>().bYear.value)
+                                .doc(Get.find<GetFireBaseData>().bYear.value)
+                                .collection("Classes")
+                                .doc(classID)
+                                .collection("Students")
+                                .doc(allData[getxController.indexValue.value!]
+                                    .id)
+                                .collection("sampoorna")
+                                .where('id', isEqualTo: 'id')
+                                .snapshots(),
+                            builder: (context, snap) {
+
+                              if(snap.hasData){
+                                if (snap.data!.docs.isEmpty) {
+                                return const Center();
+                              }
+                               else {
+                                return const Icon(Icons.attach_file_rounded);
+                              }
+                              }else{
+                                return const Center(child:  CircularProgressIndicator(),);
+                              }
+                              
+                            })
+                      ],
+                    ),
+                    sizedBoxH10,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -553,7 +639,7 @@ class StudentsDetails extends StatelessWidget {
                                                         SingleChildScrollView(
                                                       child: ListBody(
                                                         children: <Widget>[
-                                                          Text(
+                                                          const Text(
                                                               "Are you shure remove the student \n when press ok all data will be lost")
                                                         ],
                                                       ),
@@ -567,7 +653,7 @@ class StudentsDetails extends StatelessWidget {
                                               colorindex: 6,
                                               height: 50,
                                               width: 110,
-                                              child: Center(
+                                              child: const Center(
                                                 child: Text(
                                                   'Remove',
                                                   style:
