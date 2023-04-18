@@ -77,7 +77,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                 margin: EdgeInsets.symmetric(
                     horizontal: ResponsiveWidget.isSmallScreen(context)
                         ? height * 0.032
-                        : height * 0.12),
+                        : height * 0.15),
                 color: AppColors.backColor,
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.only(bottom: 40.0),
@@ -122,7 +122,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                         child: Text(
                           'Teacher ID',
                           style: ralewayStyle.copyWith(
-                            fontSize: 12.0,
+                            fontSize: 15.0,
                             color: AppColors.blueDarkColor,
                             fontWeight: FontWeight.w700,
                           ),
@@ -141,7 +141,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                           style: ralewayStyle.copyWith(
                             fontWeight: FontWeight.w400,
                             color: AppColors.blueDarkColor,
-                            fontSize: 12.0,
+                            fontSize: 15.0,
                           ),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -154,7 +154,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                             hintStyle: ralewayStyle.copyWith(
                               fontWeight: FontWeight.w400,
                               color: AppColors.blueDarkColor.withOpacity(0.5),
-                              fontSize: 12.0,
+                              fontSize: 15.0,
                             ),
                           ),
                         ),
@@ -165,7 +165,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                         child: Text(
                           'Password',
                           style: ralewayStyle.copyWith(
-                            fontSize: 12.0,
+                            fontSize: 15.0,
                             color: AppColors.blueDarkColor,
                             fontWeight: FontWeight.w700,
                           ),
@@ -185,7 +185,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                           style: ralewayStyle.copyWith(
                             fontWeight: FontWeight.w400,
                             color: AppColors.blueDarkColor,
-                            fontSize: 12.0,
+                            fontSize: 15.0,
                           ),
                           obscureText: true,
                           decoration: InputDecoration(
@@ -203,7 +203,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                             hintStyle: ralewayStyle.copyWith(
                               fontWeight: FontWeight.w400,
                               color: AppColors.blueDarkColor.withOpacity(0.5),
-                              fontSize: 12.0,
+                              fontSize: 15.0,
                             ),
                           ),
                         ),
@@ -216,7 +216,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                           child: Text(
                             'Forgot Password?',
                             style: ralewayStyle.copyWith(
-                              fontSize: 12.0,
+                              fontSize: 15.0,
                               color: const Color(0xFF26A69A),
                               fontWeight: FontWeight.w600,
                             ),
