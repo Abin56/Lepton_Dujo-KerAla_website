@@ -1,9 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/fonts/fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:lottie/lottie.dart';
 
-import '../../../view/colors/colors.dart';
+import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
+import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
+import '../../../../../colors/colors.dart';
 
 
 
@@ -15,6 +19,13 @@ class CreateAlumni extends StatefulWidget {
 }
 
 class _CreateAlumniState extends State<CreateAlumni> {
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getData(){
+    return FirebaseFirestore.instance.collection('SchoolListCollection').doc(Get.find<AdminLoginScreenController>().schoolID).collection('BatchYear').doc(Get.find<GetFireBaseData>().bYear.value).collection('AlumniAssociations').snapshots();
+  } 
+
+  
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
