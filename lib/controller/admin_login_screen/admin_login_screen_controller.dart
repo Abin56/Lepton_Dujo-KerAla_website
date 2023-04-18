@@ -5,33 +5,49 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+
+
+import 'dart:html' as html;
+
 import '../../model/loginHistory_model/login_history_model.dart';
 import '../../view/web/login/admin/admin_DashBoard/admin_dashborad_screen.dart';
 import '../../view/web/widgets/drop_DownList/get_batchYear.dart';
 import '../../view/web/widgets/drop_DownList/schoolDropDownList.dart';
 import '../get_firebase-data/get_firebase_data.dart';
 
+  var schoolListValue;
+
 class AdminLoginScreenController extends GetxController {
   String schoolID = schoolListValue?['id'];
   String schoolName = schoolListValue?['schoolName'];
   String batchYearID = schoolBatchYearListValue?['id'] ?? '';
 
+
   TextEditingController schoolIdController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   CollectionReference schoolListCollectionRef =
-      FirebaseFirestore.instance.collection("SchoolListCollection");
-
+      FirebaseFirestore.instance.collection("SchoolListCollection"); 
+      DocumentReference<Map<String, dynamic>> schoolListCollectionRefDoc = FirebaseFirestore.instance.collection("SchoolListCollection").doc(schoolListValue?['id']); 
+     
   ///
   ///
   ///
-  void loginFunction(BuildContext context) async {
+    Future<void> loginFunction(BuildContext context) async {
     //>>>>>>>>>>>>>>>>>Checking ID<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     Query query = schoolListCollectionRef.where("schoolID",
         isEqualTo: schoolIdController.text.trim());
     QuerySnapshot querySnapshot = await query.get();
     final docData = querySnapshot.docs.map((doc) => doc.data()).toList();
     log(query.toString());
-    log(docData.toString());
+    log(docData.toString()); 
+    if(schoolListCollectionRefDoc.id != schoolIdController.text.trim()){
+      print('failed, failed'); 
+      
+    }
+
+    if(schoolListCollectionRefDoc.id == schoolIdController.text.trim()){
+      print('success, success');
+    }
     //
     //>>>>>>>>>>>>>>>>>>>Checking password<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -62,45 +78,117 @@ class AdminLoginScreenController extends GetxController {
     log(query.toString());
     log(docDataa.toString());
 
-    if (docDataa.isNotEmpty && docData.isNotEmpty ||
-        adminPassdocDataa.isNotEmpty && adminIDdocData.isNotEmpty) {
-      final date = DateTime.now();
-      DateTime parseDate = DateTime.parse(date.toString());
-      final DateFormat formatter = DateFormat('dd-MM-yyyy');
-      String formatted = formatter.format(parseDate);
-      LoginTimeIDSavingClass.date = formatted;
-      final time = DateTime.now().toString();
-      LoginTimeIDSavingClass.id = time;
+    if ((schoolListCollectionRefDoc.id != schoolIdController.text.trim())&&docDataa.isNotEmpty && docData.isNotEmpty ||
+        adminPassdocDataa.isNotEmpty && adminIDdocData.isNotEmpty) { 
+      if (Get.find<GetFireBaseData>().bYear.value.isNotEmpty) {
+        final date = DateTime.now();
+        DateTime parseDate = DateTime.parse(date.toString());
+        final DateFormat formatter = DateFormat('dd-MM-yyyy');
+        String formatted = formatter.format(parseDate);
+        LoginTimeIDSavingClass.date = formatted;
+        final time = DateTime.now().toString();
+        LoginTimeIDSavingClass.id = time;
 
-      await schoolListCollectionRef
-          .doc(schoolID)
-          .collection(Get.find<GetFireBaseData>().bYear.value)
-          .doc(Get.find<GetFireBaseData>().bYear.value)
-          .collection("LoginHistory")
-          .doc(LoginTimeIDSavingClass.date)
-          .set({'id': LoginTimeIDSavingClass.date}).then((value) {
-        schoolListCollectionRef
+        await schoolListCollectionRef
             .doc(schoolID)
             .collection(Get.find<GetFireBaseData>().bYear.value)
             .doc(Get.find<GetFireBaseData>().bYear.value)
             .collection("LoginHistory")
             .doc(LoginTimeIDSavingClass.date)
-            .collection(LoginTimeIDSavingClass.date)
-            .doc(LoginTimeIDSavingClass.id)
-            .set({
-          'adminuser': schoolIdController.text.trim(),
-          'loginTime': LoginTimeIDSavingClass.id
-        }).then((value) => {
-          log("idddddddd${LoginTimeIDSavingClass.id.toString()}"),
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return AdminDashBoardPage(
-                        schoolID: schoolID,
-                      );
-                    },
-                  ))
-                });
-      });
+            .set({'id': LoginTimeIDSavingClass.date}).then((value) {
+          schoolListCollectionRef
+              .doc(schoolID)
+              .collection(Get.find<GetFireBaseData>().bYear.value)
+              .doc(Get.find<GetFireBaseData>().bYear.value)
+              .collection("LoginHistory")
+              .doc(LoginTimeIDSavingClass.date)
+              .collection(LoginTimeIDSavingClass.date)
+              .doc(LoginTimeIDSavingClass.id)
+              .set({
+            'adminuser': schoolIdController.text.trim(),
+            'loginTime': LoginTimeIDSavingClass.id
+          }).then((value) => {
+                    log("idddddddd${LoginTimeIDSavingClass.id.toString()}"),
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return AdminDashBoardPage(
+                          schoolID: schoolID,
+                        );
+                      },
+                    ))
+                  });
+        });
+      } else {
+        // ignore: use_build_context_synchronously
+        showDialog(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Add BatchYear'),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    Expanded(
+                      child: TextFormField(
+                        controller: applynewBatchYearContoller,
+                        readOnly: true,
+                        onTap: () => _selectDate(context),
+                        decoration: const InputDecoration(
+                          labelText: 'DD-MM-YYYY',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                    const Icon(Icons.arrow_downward_outlined),
+                    Expanded(
+                      child: TextFormField(
+                        controller: selectedToDaterContoller,
+                        readOnly: true,
+                        onTap: () => _selectToDate(context),
+                        decoration: const InputDecoration(
+                          labelText: 'To',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('create'),
+                  onPressed: () async {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                TextButton(
+                  child: const Text('create'),
+                  onPressed: () async {
+                    await FirebaseFirestore.instance
+                        .collection("SchoolListCollection")
+                        .doc(schoolID)
+                        .collection("BatchYear")
+                        .doc(
+                            '${applynewBatchYearContoller.text.trim()}-${selectedToDaterContoller.text.trim()}')
+                        .set({
+                      'id':
+                          '${applynewBatchYearContoller.text.trim()}-${selectedToDaterContoller.text.trim()}'
+                    }).then((value) async {
+                      await FirebaseFirestore.instance
+                          .collection("SchoolListCollection")
+                          .doc(schoolID)
+                          .set({
+                        'batchYear':"${applynewBatchYearContoller.text.trim()}-${selectedToDaterContoller.text.trim()}"
+                      }, SetOptions(merge: true)).then((value) =>html.window.location.reload() );
+                    });
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
     } else {
       return
           // ignore: use_build_context_synchronously
@@ -126,6 +214,47 @@ class AdminLoginScreenController extends GetxController {
           );
         },
       );
+    }
+  }
+
+  TextEditingController applynewBatchYearContoller = TextEditingController();
+  TextEditingController selectedToDaterContoller = TextEditingController();
+  Rxn<DateTime> _selectedDateForApplyDate = Rxn<DateTime>();
+  Rxn<DateTime> _selectedToDate = Rxn<DateTime>();
+  _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _selectedDateForApplyDate.value ?? DateTime.now(),
+      firstDate: DateTime(2023),
+      lastDate: DateTime(2100),
+    );
+    if (picked != null && picked != _selectedDateForApplyDate.value) {
+      _selectedDateForApplyDate.value = picked;
+      DateTime parseDate =
+          DateTime.parse(_selectedDateForApplyDate.value.toString());
+      final DateFormat formatter = DateFormat('yyyy-MMMM');
+      String formatted = formatter.format(parseDate);
+
+      applynewBatchYearContoller.text = formatted.toString();
+      log(formatted.toString());
+    }
+  }
+
+  _selectToDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _selectedToDate.value ?? DateTime.now(),
+      firstDate: DateTime(2023),
+      lastDate: DateTime(2100),
+    );
+    if (picked != null && picked != _selectedToDate.value) {
+      _selectedToDate.value = picked;
+      DateTime parseDate = DateTime.parse(_selectedToDate.value.toString());
+      final DateFormat formatter = DateFormat('yyyy-MMMM');
+      String formatted = formatter.format(parseDate);
+
+      selectedToDaterContoller.text = formatted.toString();
+      log(formatted.toString());
     }
   }
 }
