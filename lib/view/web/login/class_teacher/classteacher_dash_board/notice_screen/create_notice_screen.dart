@@ -1,3 +1,4 @@
+import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -24,7 +25,7 @@ class ClassTeacherCreateNoticePage extends StatelessWidget {
     teacherNoticeController.clearControllers();
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Create New Notice'),
+          title: const Text('Create New Notice'),backgroundColor: adminePrimayColor,
         ),
         body: Obx(() {
           return teacherNoticeController.isLoading.value
@@ -41,68 +42,78 @@ class ClassTeacherCreateNoticePage extends StatelessWidget {
                           fit: BoxFit.fill),
                     ),
                     Container(
-                      alignment: Alignment.center,
-                      width: size.width * .6,
-                      height: size.height,
-                      child: Form(
-                        child: ListView(
-                          children: <Widget>[
-                            const SizedBox(
-                              height: 80,
-                            ),
-                            TextFormFieldWidget(
-                                hint: 'Heading',
-                                controller:
-                                    teacherNoticeController.headingController),
-                            sizedBoxH20,
-                            TextFormFieldWidget(
-                                hint: 'Topic',
-                                controller:
-                                    teacherNoticeController.topicController),
-                            sizedBoxH20,
-                            TextFormFieldWidget(
-                                hint: 'Content',
-                                controller:
-                                    teacherNoticeController.contentController),
-                            sizedBoxH20,
-                            TextFormFieldWidget(
-                                hint: 'Signed By',
-                                controller:
-                                    teacherNoticeController.signedByController),
-                            sizedBoxH20,
-                            TextFormFieldWidget(
-                                hint: 'Date',
-                                controller:
-                                    teacherNoticeController.dateController),
-                            sizedBoxH20,
-                            SizedBox(
-                              height: 40,
-                              child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    shape: const StadiumBorder(),
-                                  ),
-                                  onPressed: () async {
-                                    await teacherNoticeController.createNotice(
-                                        schoolId: schoolId,
-                                        classId: classId,
-                                        classTeacherNoticeModel:
-                                            ClassTeacherNoticeModel(
-                                          heading: teacherNoticeController
-                                              .headingController.text,
-                                          topic: teacherNoticeController
-                                              .topicController.text,
-                                          content: teacherNoticeController
-                                              .contentController.text,
-                                          signedBy: teacherNoticeController
-                                              .signedByController.text,
-                                          date: teacherNoticeController
-                                              .dateController.text,
-                                          noticeId: '',
-                                        ));
-                                  },
-                                  child: const Text("Submit")),
-                            )
-                          ],
+                       alignment: Alignment.center,
+                        width: size.width * .6,
+                        height: size.height,
+
+                      child: Container(
+                        alignment: Alignment.center,
+                        width: size.width * .4,
+                        height: size.height,
+                        child: Form(
+                          child: ListView(
+                            children: <Widget>[
+                              const SizedBox(
+                                height: 80,
+                              ),
+                              TextFormFieldWidget(
+                                  hint: 'Heading',
+                                  controller:
+                                      teacherNoticeController.headingController),
+                              sizedBoxH20,
+                              TextFormFieldWidget(
+                                  hint: 'Topic',
+                                  controller:
+                                      teacherNoticeController.topicController),
+                              sizedBoxH20,
+                              TextFormFieldWidget(
+                                  hint: 'Content',
+                                  controller:
+                                      teacherNoticeController.contentController),
+                              sizedBoxH20,
+                              TextFormFieldWidget(
+                                  hint: 'Signed By',
+                                  controller:
+                                      teacherNoticeController.signedByController),
+                              sizedBoxH20,
+                              TextFormFieldWidget(
+                                  hint: 'Date',
+                                  controller:
+                                      teacherNoticeController.dateController),
+                              sizedBoxH20,
+                              Padding(
+                                padding:  EdgeInsets.only(left: size.width/20,right: size.width/20),
+                                child: Container(
+                                  height: size.width/25,
+                                  width: size.width/10,
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(backgroundColor: adminePrimayColor,
+                                        shape: const StadiumBorder(),
+                                      ),
+                                      onPressed: () async {
+                                        await teacherNoticeController.createNotice(
+                                            schoolId: schoolId,
+                                            classId: classId,
+                                            classTeacherNoticeModel:
+                                                ClassTeacherNoticeModel(
+                                              heading: teacherNoticeController
+                                                  .headingController.text,
+                                              topic: teacherNoticeController
+                                                  .topicController.text,
+                                              content: teacherNoticeController
+                                                  .contentController.text,
+                                              signedBy: teacherNoticeController
+                                                  .signedByController.text,
+                                              date: teacherNoticeController
+                                                  .dateController.text,
+                                              noticeId: '',
+                                            ));
+                                      },
+                                      child: const Text("Submit")),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),

@@ -166,3 +166,7 @@ Future<Uint8List?> pickImage(ImageSource source) async {
   }
   return null;
 }
+class TeacherLoginIDSaver {
+  static String id = '';
+
+}

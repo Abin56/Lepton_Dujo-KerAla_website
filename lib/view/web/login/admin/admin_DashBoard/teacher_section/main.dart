@@ -1,7 +1,5 @@
 import 'package:dujo_kerala_website/ui%20team/abin/alumini_accocation/alumni_assocation.dart';
-import 'package:dujo_kerala_website/ui%20team/abin/food_and_beverages/sample.dart';
 import 'package:dujo_kerala_website/view/web/home/dujo_home.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/admin_dashborad_screen.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/all_Students/all_students_view_Screen.dart';
 import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/teachers_panel_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -48,10 +46,8 @@ class MyApp extends StatelessWidget {
               home: 
              // AlumniAssocation()
              //ClassTeacherAdmin(schoolID: '',teacherEmail:'' ,teacherID: '',)
-            // AllStudentList()
-           // AdminDashBoardPage(schoolID: '',date: '',loginTime: '',wadmin: '',key: null,)
-          // AllStdf()
-              DujoHomePage()
+             AllStudentList()
+             // DujoHomePage()
               );
         });
   }

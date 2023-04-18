@@ -1,5 +1,3 @@
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -287,16 +285,17 @@ class SampoornaController extends GetxController {
 
         final result = await firebaseFirestore
             .collection('SchoolListCollection')
-            .doc(schoolId)
+            .doc(schoolId).collection("AllStudents").doc(admissionNumberController.text.trim())
             .collection('sampoorna')
-            .add(sampoornaData.toJson());
+            .doc(admissionNumberController.text.trim())
+            .set(sampoornaData.toJson());
 
-        await firebaseFirestore
-            .collection('SchoolListCollection')
-            .doc(schoolId)
-            .collection('sampoorna')
-            .doc(result.id)
-            .update({"id": result.id});
+        // await firebaseFirestore
+        //     .collection('SchoolListCollection')
+        //     .doc(schoolId)
+        //     .collection('sampoorna')
+        //     .doc(result.id)
+        //     .update({"id": result.id});
         clearData();
         showToast(msg: 'Sampoorna created successfully');
         isLoading.value = false;

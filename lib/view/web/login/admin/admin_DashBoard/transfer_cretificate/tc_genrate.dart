@@ -8,17 +8,31 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
-class GenrateTC extends StatefulWidget {
-  const GenrateTC({super.key});
+class GenrateTC extends StatelessWidget {
+  String sno;
+  String regNo;
+  String parentName;
+  String studentName;
+  String schoolName;
+  String schoolPlace;
 
-  @override
-  State<GenrateTC> createState() => _GenrateTCState();
-}
+  GenrateTC(
+      {required this.sno,
+      required this.regNo,
+      required this.parentName,
+      required this.studentName,
+      required this.schoolName,
+      required this.schoolPlace,
+      super.key});
 
-class _GenrateTCState extends State<GenrateTC> {
   @override
   Widget build(BuildContext context) {
-    nextpage();
+    nextpage(           sno,
+   regNo,
+   parentName,
+   studentName,
+   schoolName,
+   schoolPlace,);
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: Center(
@@ -28,18 +42,38 @@ class _GenrateTCState extends State<GenrateTC> {
   }
 }
 
-nextpage() async {
+nextpage(
+    String sno,
+  String regNo,
+  String parentName,
+  String studentName,
+  String schoolName,
+  String schoolPlace,
+) async {
   await Future.delayed(Duration(seconds: 1));
   Printing.layoutPdf(
     onLayout: (PdfPageFormat format) {
-      return buildPdf(format);
+      return buildPdf(format,
+           sno,
+   regNo,
+   parentName,
+   studentName,
+   schoolName,
+   schoolPlace,
+      );
     },
   );
 }
 
-Future<Uint8List> buildPdf(PdfPageFormat format) async {
+Future<Uint8List> buildPdf(PdfPageFormat format,
+  String sno,
+  String regNo,
+  String parentName,
+  String studentName,
+  String schoolName,
+  String schoolPlace,
+ ) async {
   final pw.Document doc = pw.Document();
- 
 
   doc.addPage(
     pw.Page(
@@ -56,7 +90,6 @@ Future<Uint8List> buildPdf(PdfPageFormat format) async {
                           color: PdfColors.white),
                       width: 700,
                       height: 700,
-                     
                       child: pw.Column(
                           mainAxisAlignment: pw.MainAxisAlignment.center,
                           crossAxisAlignment: pw.CrossAxisAlignment.center,
@@ -74,22 +107,25 @@ Future<Uint8List> buildPdf(PdfPageFormat format) async {
                                           mainAxisAlignment:
                                               pw.MainAxisAlignment.center,
                                           children: [
-                                            pw.Padding(padding: pw.EdgeInsets.only(top: 10),
-                                          child: pw.Text(
-                                              'KESHO ANIRUDHABATI SECONDARY SCHOOL',
-                                              style: pw.TextStyle(
-                                                  fontSize: 19,
-                                                  fontWeight:
-                                                      pw.FontWeight.bold),
-                                            ),),
+                                            pw.Padding(
+                                              padding:
+                                                  pw.EdgeInsets.only(top: 10),
+                                              child: pw.Text(
+                                               schoolName ,
+                                                style: pw.TextStyle(
+                                                    fontSize: 19,
+                                                    fontWeight:
+                                                        pw.FontWeight.bold),
+                                              ),
+                                            ),
                                           ]),
-                                         pw.SizedBox(height: 10),
-                                          pw.Row(
+                                      pw.SizedBox(height: 10),
+                                      pw.Row(
                                           mainAxisAlignment:
                                               pw.MainAxisAlignment.center,
                                           children: [
                                             pw.Text(
-                                              'RAJBIRAJ-4, SAPTARI(NEPAL)',
+                                              schoolPlace,
                                               style: pw.TextStyle(fontSize: 15),
                                             ),
                                           ]),
@@ -108,7 +144,6 @@ Future<Uint8List> buildPdf(PdfPageFormat format) async {
                                                       pw.BorderRadius.circular(
                                                           10),
                                                   color: PdfColors.blue,
-                                               
                                                 ),
                                                 child: pw.Center(
                                                   child: pw.Text(
@@ -137,7 +172,7 @@ Future<Uint8List> buildPdf(PdfPageFormat format) async {
                                               ),
                                               pw.Container(
                                                   width: 50,
-                                                  child: pw.Divider()),
+                                                  child: pw.Text(sno)),
                                             ]),
                                       ),
                                       pw.SizedBox(
@@ -159,7 +194,7 @@ Future<Uint8List> buildPdf(PdfPageFormat format) async {
                                               ),
                                               pw.Container(
                                                   width: 50,
-                                                  child: pw.Divider()),
+                                                  child:pw.Text(regNo)),
                                             ]),
                                       ),
                                       pw.SizedBox(
@@ -171,106 +206,129 @@ Future<Uint8List> buildPdf(PdfPageFormat format) async {
                                           child: pw.Column(
                                               // mainAxisAlignment: pw.MainAxisAlignment.start,
                                               children: [
-                                                pw.Padding(padding:pw.EdgeInsets.only(right:10,left:10),
-                                                child:pw.Row(children: [
-                                                  pw.Text(
-                                                      "THIS IS TO CERTIFY THAT MR./MISS"),
-                                                  pw.SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  pw.Container(
-                                                      width: 180,
-                                                      child: pw.Divider()),
-                                                  
-                                                ]),),
+                                                pw.Padding(
+                                                  padding: pw.EdgeInsets.only(
+                                                      right: 10, left: 10),
+                                                  child: pw.Row(children: [
+                                                    pw.Text(
+                                                        "THIS IS TO CERTIFY THAT MR./MISS"),
+                                                    pw.SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    pw.Container(
+                                                        width: 180,
+                                                        child: pw.Text(studentName)),
+                                                  ]),
+                                                ),
                                                 pw.SizedBox(
                                                   height: 10,
                                                 ),
-                                                 pw.Padding(padding:pw.EdgeInsets.only(right:10,left:10),
-                                               child: pw.Row(children: [
-                                                  pw.Text("SON/DAUGHTER OF MR"),
-                                                  pw.SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  pw.Container(
-                                                      width: 170,
-                                                      child: pw.Divider()),
-                                                  pw.SizedBox(width: 10),
-                                                  pw.Text("RESIDING IN"),
-                                                  pw.SizedBox(
-                                                    width: 10,),
-                                                  
-                                                ]),),
+                                                pw.Padding(
+                                                  padding: pw.EdgeInsets.only(
+                                                      right: 10, left: 10),
+                                                  child: pw.Row(children: [
+                                                    pw.Text(
+                                                        "SON/DAUGHTER OF MR"),
+                                                    pw.SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    pw.Container(
+                                                        width: 170,
+                                                        child: pw.Text(parentName)),
+                                                    pw.SizedBox(width: 10),
+                                                    pw.Text("RESIDING IN"),
+                                                    pw.SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                  ]),
+                                                ),
                                                 pw.SizedBox(height: 10),
-  pw.Padding(padding:pw.EdgeInsets.only(right:10,left:10),
-                                             child:  pw.Row(children: [
-                                                  
-                                                  pw.Container(
-                                                  
-                                                      width: 80,
-                                                      child: pw.Divider()),pw.SizedBox(width: 10),
-                                                  pw.Text(
-                                                      "WAS A BONAFIDE STUDENT OF THIS SCHOOL.HE/SHE"),
-                                                  pw.SizedBox(height: 10),
-                                                ]),),
+                                                pw.Padding(
+                                                  padding: pw.EdgeInsets.only(
+                                                      right: 10, left: 10),
+                                                  child: pw.Row(children: [
+                                                    pw.Container(
+                                                        width: 80,
+                                                        child: pw.Divider()),
+                                                    pw.SizedBox(width: 10),
+                                                    pw.Text(
+                                                        "WAS A BONAFIDE STUDENT OF THIS SCHOOL.HE/SHE"),
+                                                    pw.SizedBox(height: 10),
+                                                  ]),
+                                                ),
                                                 pw.SizedBox(height: 10),
-pw.Padding(padding:pw.EdgeInsets.only(right:10,left:10),
-                                                child:pw.Row(
-                                                    mainAxisAlignment: pw
-                                                        .MainAxisAlignment
-                                                        .start,
-                                                    children: [
-                                              pw.Text(
-                                                          "PASSED THE SSLC EXAMINATION HELD IN THE YEAR"),
-                                                      pw.Container(
-                                                          width: 90,
-                                                          child: pw.Divider()),
-                                                    ]),),
+                                                pw.Padding(
+                                                  padding: pw.EdgeInsets.only(
+                                                      right: 10, left: 10),
+                                                  child: pw.Row(
+                                                      mainAxisAlignment: pw
+                                                          .MainAxisAlignment
+                                                          .start,
+                                                      children: [
+                                                        pw.Text(
+                                                            "PASSED THE SSLC EXAMINATION HELD IN THE YEAR"),
+                                                        pw.Container(
+                                                            width: 90,
+                                                            child:
+                                                                pw.Divider()),
+                                                      ]),
+                                                ),
                                                 pw.SizedBox(height: 10),
-                                                pw.Padding(padding:pw.EdgeInsets.only(right:10,left:10),
-                                                child:pw.Row(children: [
-                                                  pw.Text(
-                                                      "AND WAS PLACED IN THE"),
-                                                      pw.SizedBox(width: 10),
-                                                  pw.Container(
-                                                      width: 80,
-                                                      child: pw.Divider()),
-                                                  pw.SizedBox(width: 10),
-                                                  pw.Text(
-                                                      "DIVISION. HE/SHE BEARS A"),
-                                                ]),),
+                                                pw.Padding(
+                                                  padding: pw.EdgeInsets.only(
+                                                      right: 10, left: 10),
+                                                  child: pw.Row(children: [
+                                                    pw.Text(
+                                                        "AND WAS PLACED IN THE"),
+                                                    pw.SizedBox(width: 10),
+                                                    pw.Container(
+                                                        width: 80,
+                                                        child: pw.Divider()),
+                                                    pw.SizedBox(width: 10),
+                                                    pw.Text(
+                                                        "DIVISION. HE/SHE BEARS A"),
+                                                  ]),
+                                                ),
                                                 pw.SizedBox(height: 10),
-                                                pw.Padding(padding:pw.EdgeInsets.only(right:10,left:10),
-                                                child:pw.Row(children: [
-                                                  pw.Container(
-                                                      width: 100,
-                                                      child: pw.Divider()),
-                                                  pw.SizedBox(width: 10),
-                                                  pw.Text(
-                                                      "MORAL CHARACTER.I WISH HIM/HER ALL SUCCESS. "),
-                                                ]),),
+                                                pw.Padding(
+                                                  padding: pw.EdgeInsets.only(
+                                                      right: 10, left: 10),
+                                                  child: pw.Row(children: [
+                                                    pw.Container(
+                                                        width: 100,
+                                                        child: pw.Divider()),
+                                                    pw.SizedBox(width: 10),
+                                                    pw.Text(
+                                                        "MORAL CHARACTER.I WISH HIM/HER ALL SUCCESS. "),
+                                                  ]),
+                                                ),
                                                 pw.SizedBox(height: 10),
-                                                                                                pw.Padding(padding:pw.EdgeInsets.only(right:10,left:10),
-
-                                                child:pw.Row(children: [
-                                                  pw.Text(
-                                                      "HIS/HER DATE OF BIRTH ACCORDING TO OUR SCHOOL RECORD IS "),
-                                                ]),),
+                                                pw.Padding(
+                                                  padding: pw.EdgeInsets.only(
+                                                      right: 10, left: 10),
+                                                  child: pw.Row(children: [
+                                                    pw.Text(
+                                                        "HIS/HER DATE OF BIRTH ACCORDING TO OUR SCHOOL RECORD IS "),
+                                                  ]),
+                                                ),
                                                 pw.SizedBox(height: 10),
-                                                                                                pw.Padding(padding:pw.EdgeInsets.only(right:10,left:10),
-
-                                                child:pw.Row(
-                                                    mainAxisAlignment: pw
-                                                        .MainAxisAlignment
-                                                        .start,
-                                                    children: [
-                                                      pw.Text("B.S"),
-                                                      pw.SizedBox(width: 10),
-                                                      pw.Container(
-                                                          width: 80,
-                                                          child: pw.Divider()),
-                                                      pw.SizedBox(width: 10),
-                                                    ]),),
+                                                pw.Padding(
+                                                  padding: pw.EdgeInsets.only(
+                                                      right: 10, left: 10),
+                                                  child: pw.Row(
+                                                      mainAxisAlignment: pw
+                                                          .MainAxisAlignment
+                                                          .start,
+                                                      children: [
+                                                        pw.Text("B.S"),
+                                                        pw.SizedBox(width: 10),
+                                                        pw.Container(
+                                                            width: 80,
+                                                            child:
+                                                                pw.Divider()),
+                                                        pw.SizedBox(width: 10),
+                                                      ]),
+                                                ),
                                                 pw.SizedBox(height: 70),
                                                 pw.Row(
                                                     mainAxisAlignment: pw
@@ -319,7 +377,6 @@ pw.Padding(padding:pw.EdgeInsets.only(right:10,left:10),
                                     ])))
                           ])))
             ]);
-        
       },
     ),
   );

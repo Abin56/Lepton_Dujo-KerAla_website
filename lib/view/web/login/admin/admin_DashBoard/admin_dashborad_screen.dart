@@ -1,6 +1,4 @@
 import 'dart:developer';
-import 'dart:html' as html;
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_protection_group/students_proctection_group.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +28,7 @@ import 'admin_notice copy/admin_notice_new_ui/admin_notice_show_new.dart';
 import 'admin_notice/add_new_notices.dart';
 import 'admin_pta/admin_pta_screen.dart';
 import 'all_Students/all_students_view_Screen.dart';
-import 'alumini_accocation/alumni_assocation.dart';
+import '../../../../../ui team/abin/alumini_accocation/alumni_assocation.dart';
 import 'bus_Route/bus_route.dart';
 import 'classes/add_class.dart';
 import 'create_Admin/add_new_admin.dart';
@@ -133,7 +131,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
   List<String> viewListNames = [
     'All Students',
     'School'
-        'Teachers',
+    'Teachers',
     'Classes',
     'Notices',
     'Meetings',
@@ -189,6 +187,14 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       SampoornaHomeScreen(schoolId: widget.schoolID), //28-Generate Tc
       SampoornaHomeScreen(schoolId: widget.schoolID), //28-Generate summary
       SampoornaHomeScreen(schoolId: widget.schoolID), //28-sampoorna
+      FoodBeverages(), //AddNewNotices(schoolId: widget.schoolID), //20
+      SelectType(schoolID: widget.schoolID), //21
+      const AlumniAssocation(), //22
+       const FeesUpdates(),//23
+      const FeesUpdates(), //24
+      NonTeachingLogin(schoolID: widget.schoolID), //25t6yg
+      AdminScholarships(schoolID: widget.schoolID), //26
+      SampoornaHomeScreen(schoolId: widget.schoolID), //28
     ];
     List<Widget> drawerPages = [
       AllStudentList(),
@@ -558,11 +564,18 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                                 .find<
                                                                     AdminLoginScreenController>()
                                                             .schoolID)
+                                                        .collection(Get
+                                                                .find<
+                                                                    AdminLoginScreenController>()
+                                                            .batchYearID)
+                                                        .doc(Get
+                                                                .find<
+                                                                    AdminLoginScreenController>()
+                                                            .batchYearID)
                                                         .collection(
                                                             "LoginHistory")
-                                                        .doc(
-                                                            LoginTimeIDSavingClass
-                                                                .date)
+                                                        .doc(LoginTimeIDSavingClass
+                                                            .date)
                                                         .collection(
                                                             LoginTimeIDSavingClass
                                                                 .date)
