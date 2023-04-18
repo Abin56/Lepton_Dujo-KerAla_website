@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,12 +27,12 @@ class MothersPtaCardWidget extends StatelessWidget {
   final IconData iconData;
   final String memberId;
   final String imageId;
-  MothersPtaController controller = Get.find<MothersPtaController>();
+  final MothersPtaController controller = Get.find<MothersPtaController>();
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFE5E4E2),
         borderRadius: BorderRadius.circular(16),
       ),
       child: SizedBox(
@@ -41,6 +42,11 @@ class MothersPtaCardWidget extends StatelessWidget {
             sizedBoxH10,
             FittedBox(
               child: CircleAvatar(
+                onBackgroundImageError: (exception, stackTrace) {
+                  if (kDebugMode) {
+                    print(exception);
+                  }
+                },
                 maxRadius: MediaQuery.of(context).size.width * .03,
                 backgroundImage: imageUrl == null || imageUrl!.isEmpty
                     ? const AssetImage('assets/images/user.png')
