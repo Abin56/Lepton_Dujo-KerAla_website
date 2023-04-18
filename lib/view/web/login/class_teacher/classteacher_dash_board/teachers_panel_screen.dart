@@ -306,6 +306,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                 )
               : Row(
                   children: [
+                    
                     Container(
                         width: screenSize.width / 6,
                         color: Colors.black,
@@ -379,6 +380,9 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                  IconButton(onPressed: () {
+                                  Navigator.pop(context);
+                                }, icon:  Icon(Icons.arrow_back),),
                                 Text(
                                   'Teacher Dashboard',
                                   style: GoogleFonts.poppins(

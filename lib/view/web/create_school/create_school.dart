@@ -4,14 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import '../../../../model/schools_to_be_verified/schools_to_be_verified_create_list.dart';
 import '../../colors/colors.dart';
+import '../../constant/constant.dart';
 import '../../fonts/fonts.dart';
 
 class SchoolProfile extends StatefulWidget {
   SchoolProfile({super.key});
+  
 
   @override
   State<SchoolProfile> createState() => _SchoolProfileState();
 }
+
 
 class _SchoolProfileState extends State<SchoolProfile> {
   TextEditingController schoolNameController = TextEditingController();
@@ -40,6 +43,9 @@ class _SchoolProfileState extends State<SchoolProfile> {
     // _jitsiMeetMethods.createMeeting(roomName: roomName, isAudioMuted: true, isVideoMuted: true);
     schoolID = roomName;
   }
+  
+  final formKey = GlobalKey<FormState>();
+  
 
   @override
   void initState() {
@@ -48,6 +54,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
 
   @override
   Widget build(BuildContext context) {
+    
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       //backgroundColor: Color.fromARGB(255, 27, 95, 88),
@@ -114,175 +121,192 @@ class _SchoolProfileState extends State<SchoolProfile> {
                   color: const Color.fromARGB(255, 255, 255, 255),
                   //height: size.width * 1 / 2.5,
                   //  width: size.width * 1 / 4,
-                  child: ListView(children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 15, left: 15),
-                      child: TextField(
-                        controller: schoolNameController,
-                        decoration: InputDecoration(
-                            // border: OutlineInputBorder(),
-                            labelText: 'School Name',
-                            icon: const Icon(Icons.school_sharp,
-                                color: Color.fromARGB(255, 9, 11, 161)),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20))),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: SelectState(
-                        onCountryChanged: (value) {
-                          setState(() {
-                            countryValue = value;
-                          });
-                        },
-                        onStateChanged: (value) {
-                          setState(() {
-                            stateValue = value;
-                          });
-                        },
-                        onCityChanged: (value) {
-                          setState(() {
-                            cityValue = value;
-                          });
-                        },
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 15, left: 15, top: 15),
-                      child: TextField(
-                        controller: placeController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          labelText: 'Place',
-                          icon: const Icon(Icons.place_outlined,
-                              color: Color.fromARGB(255, 9, 11, 161)),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 15, left: 15, top: 15),
-                      child: TextField(
-                        controller: adminUserNameController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          labelText: 'Admin Username',
-                          icon: const Icon(Icons.admin_panel_settings_outlined,
-                              color: Color.fromARGB(255, 9, 11, 161)),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 15, left: 15, top: 15),
-                      child: TextField(
-                        controller: adminPasswordController,
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          labelText: 'Password',
-                          icon: const Icon(Icons.lock_outline_sharp,
-                              color: Color.fromARGB(255, 9, 11, 161)),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 15, left: 15, top: 15),
-                      child: TextField(
-                        controller: emailController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          labelText: 'Email',
-                          icon: const Icon(Icons.mail_outline,
-                              color: Color.fromARGB(255, 9, 11, 161)),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 15, left: 15, top: 15),
-                      child: TextField(
-                        controller: phoneNumberController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          labelText: 'Phone Number',
-                          icon: const Icon(Icons.phone,
-                              color: Color.fromARGB(255, 9, 11, 161)),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          right: 15, left: 15, top: 15, bottom: 15),
-                      child: TextField(
-                        controller: designationController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          labelText: 'Designation',
-                          icon: const Icon(Icons.person_pin_rounded,
-                              color: Color.fromARGB(255, 9, 11, 161)),
-                        ),
-                      ),
-                    ),
-                    const CircleAvatar(
-                      radius: 60,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Container(
-                        height: size.width * 1 / 25,
-                        width: size.width * 1 / 25,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color.fromARGB(255, 3, 39, 68),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                          onPressed: () {
-                            final schoolDetails = SchoolsToBeVerified(
-                                schoolName: schoolNameController.text,
-                                schoolID:
-                                    schoolNameController.text.substring(0, 5) +
-                                        cityValue.substring(0, 5) +
-                                        schoolID,
-                                id: schoolNameController.text.substring(0, 5) +
-                                        cityValue.substring(0, 5) +
-                                        schoolID,
-                                district: cityValue.toString(),
-                                place: placeController.text.trim(),
-                                adminUserName:
-                                    adminUserNameController.text.trim(),
-                                password: adminPasswordController.text.trim(),
-                                phoneNumber: phoneNumberController.text,
-                                email: emailController.text,
-                                postedDate: DateTime.now().toString(),
-                                verified: false);
-
-                            AddRequestedSchoolsToFirebase()
-                                .addRequestedSchools(schoolDetails, context);
-                            // final schoolDetails1 = CreatedSchoolAddModel(
-                            //     id: adminUserNameController.text.trim() + schoolID,
-                            //     schoolName: schoolNameController.text.trim(),
-                            //     schoolID: adminUserNameController.text.trim() + schoolID,
-                            //     district: cityValue.toString(),
-                            //     place: placeController.text.trim(),
-                            //     adminUserName: adminUserNameController.text.trim(),
-                            //     password: adminPasswordController.text.trim(),
-                            //     postedDate: DateTime.now().toString());
-
-                            // CreateSchoolAddToFireBase()
-                            //     .createSchoolController(schoolDetails1, context);
+                  child: Form(key: formKey,
+                    child: ListView(
+                      children: [
+                      
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: SelectState(
+                          onCountryChanged: (value) {
+                            setState(() {
+                              countryValue = value;
+                            });
                           },
-                          child: const Text("Create"),
+                          onStateChanged: (value) {
+                            setState(() {
+                              stateValue = value;
+                            });
+                          },
+                          onCityChanged: (value) {
+                            setState(() {
+                              cityValue = value;
+                            });
+                          },
                         ),
                       ),
-                    ),
-                  ]),
+                       Padding(
+                        padding:  EdgeInsets.only(right: 15, left: 15,top: 15),
+                        child: TextFormField(
+                           validator:  checkFieldEmpty,
+                          controller: schoolNameController,
+                          decoration: InputDecoration(
+                              // border: OutlineInputBorder(),
+                              labelText: 'School Name',
+                              icon: const Icon(Icons.school_sharp,
+                                  color: Color.fromARGB(255, 9, 11, 161)),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20))),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 15, left: 15, top: 15),
+                        child: TextFormField(
+                          validator:  checkFieldEmpty,
+                          controller: placeController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            labelText: 'Place',
+                            icon: const Icon(Icons.place_outlined,
+                                color: Color.fromARGB(255, 9, 11, 161)),
+                          ),
+                        ),
+                      ),
+                     
+                      Padding(
+                        padding: const EdgeInsets.only(right: 15, left: 15, top: 15),
+                        child: TextFormField(
+                           validator: checkFieldEmpty,
+                          controller: adminUserNameController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            labelText: 'Admin Username',
+                            icon: const Icon(Icons.admin_panel_settings_outlined,
+                                color: Color.fromARGB(255, 9, 11, 161)),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 15, left: 15, top: 15),
+                        child: TextFormField(
+                           validator: checkFieldPasswordIsValid,
+                          controller: adminPasswordController,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            labelText: 'Password',
+                            icon: const Icon(Icons.lock_outline_sharp,
+                                color: Color.fromARGB(255, 9, 11, 161)),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 15, left: 15, top: 15),
+                        child: TextFormField(
+                          validator: checkFieldEmailIsValid,
+                          controller: emailController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            labelText: 'Email',
+                            icon: const Icon(Icons.mail_outline,
+                                color: Color.fromARGB(255, 9, 11, 161)),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 15, left: 15, top: 15),
+                        child: TextFormField(
+                           validator:  checkFieldPhoneNumberIsValid,
+                          controller: phoneNumberController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            labelText: 'Phone Number',
+                            icon: const Icon(Icons.phone,
+                                color: Color.fromARGB(255, 9, 11, 161)),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            right: 15, left: 15, top: 15, bottom: 15),
+                        child: TextFormField(
+                           validator:  checkFieldEmpty,
+                          controller: designationController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            labelText: 'Designation',
+                            icon: const Icon(Icons.person_pin_rounded,
+                                color: Color.fromARGB(255, 9, 11, 161)),
+                          ),
+                        ),
+                      ),
+                      const CircleAvatar(
+                        radius: 60,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Container(
+                          height: size.width * 1 / 25,
+                          width: size.width * 1 / 25,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color.fromARGB(255, 3, 39, 68),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                            onPressed: () {
+                              
+                                bool? result= formKey.currentState?.validate();
+                              
+                                
+                              
+                              final schoolDetails = SchoolsToBeVerified(
+                                  schoolName: schoolNameController.text,
+                                  schoolID:
+                                      schoolNameController.text.substring(0, 5) +
+                                          cityValue.substring(0, 5) +
+                                          schoolID,
+                                  id: schoolNameController.text.substring(0, 5) +
+                                          cityValue.substring(0, 5) +
+                                          schoolID,
+                                  district: cityValue.toString(),
+                                  place: placeController.text.trim(),
+                                  adminUserName:
+                                      adminUserNameController.text.trim(),
+                                  password: adminPasswordController.text.trim(),
+                                  phoneNumber: phoneNumberController.text,
+                                  email: emailController.text,
+                                  postedDate: DateTime.now().toString(),
+                                  verified: false);
+                  
+                              AddRequestedSchoolsToFirebase()
+                                  .addRequestedSchools(schoolDetails, context);
+                              // final schoolDetails1 = CreatedSchoolAddModel(
+                              //     id: adminUserNameController.text.trim() + schoolID,
+                              //     schoolName: schoolNameController.text.trim(),
+                              //     schoolID: adminUserNameController.text.trim() + schoolID,
+                              //     district: cityValue.toString(),
+                              //     place: placeController.text.trim(),
+                              //     adminUserName: adminUserNameController.text.trim(),
+                              //     password: adminPasswordController.text.trim(),
+                              //     postedDate: DateTime.now().toString());
+                  
+                              // CreateSchoolAddToFireBase()
+                              //     .createSchoolController(schoolDetails1, context);
+                            },
+                            child: const Text("Create"),
+                          ),
+                        ),
+                      ),
+                    ]),
+                  ),
                 ),
               ),
             ),

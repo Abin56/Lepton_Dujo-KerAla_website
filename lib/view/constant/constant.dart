@@ -148,6 +148,17 @@ String? checkFieldPhoneNumberIsValid(String? fieldContent) {
   }
 }
 
+String? checkFieldPasswordIsValid(String? fieldContent) {
+  if (fieldContent == null) {
+    return 'null';
+  }
+  if (fieldContent.length >= 6) {
+    return null;
+  } else {
+    return 'Minimum 6 Charaters is required';
+  }
+}
+
 //image picket
 
 Future<Uint8List?> pickImage(ImageSource source) async {
