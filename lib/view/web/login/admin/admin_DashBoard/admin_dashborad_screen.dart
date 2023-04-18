@@ -1,6 +1,8 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/list_of_classes.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/non_Teaching_staff/non_teaching_staff_view.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/research_and_development/research_and_development.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_protection_group/students_proctection_group.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_summary/students_summary.dart';
@@ -132,6 +134,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'Notices',
     'Meetings',
     'PTA',
+    'Non-Teaching Staffs',
     'Login History',
     // 'Parents',
   ];
@@ -142,7 +145,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'assets/images/classes.png',
     'assets/images/notices.png',
     'assets/images/meetings.png',
-    'assets/images/interview.png',
+    'assets/images/interview.png', 
+    'assets/images/steward.png',
     'assets/images/admin.png',
   ];
 
@@ -172,7 +176,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       const ResearchDevelopment(), //17
       const LiveClasses(), //18
       AddNewNotices(schoolId: widget.schoolID), //19
-      FoodBeverages(), //AddNewNotices(schoolId: widget.schoolID), //20
+      FoodBeverages(schoolID: widget.schoolID), //AddNewNotices(schoolId: widget.schoolID), //20
       SelectType(schoolID: widget.schoolID), //21
       //const FoodBeverages(), //22
       const AlumniAssocation(), //23
@@ -189,7 +193,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
         schoolId: widget.schoolID,
       ),
       PtaMemberAdmin(id: widget.schoolID),
-      PtaMemberAdmin(id: widget.schoolID),
+      PtaMemberAdmin(id: widget.schoolID), 
+      NonTeachingStaffView(schoolID: widget.schoolID,),
       DateWiseLoginScreen(schoolID: widget.schoolID),
     ];
     var screenSize = MediaQuery.of(context).size;
@@ -350,43 +355,63 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                     Container(
                         width: screenSize.width / 6,
                         color: const Color.fromRGBO(0, 0, 0, 1),
-                        child: ListView.builder(
-                            itemCount: 7,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(20.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Image.asset(
-                                      viewListImages[index],
-                                      width: 15,
-                                      height: 15,
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) {
-                                              return drawerPages[index];
-                                            },
+                        child: ListView(
+
+
+                          children: [ 
+
+                            Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Icon(Icons.home, color: Colors.white,),sizedBoxW20,
+                                  Text('Home', style: GoogleFonts.poppins(
+                                                      color: Colors.white, fontWeight: FontWeight.w600),),
+                                ],
+                              ),
+                            ),
+                            ListView.builder(
+                              shrinkWrap: true, 
+                              physics: NeverScrollableScrollPhysics(),
+                                itemCount: viewListNames.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Image.asset(
+                                          viewListImages[index],
+                                          width: 15,
+                                          height: 15,
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) {
+                                                  return drawerPages[index];
+                                                },
+                                              ),
+                                            );
+                                          },
+                                          child: Text(
+                                            viewListNames[index],
+                                            style: GoogleFonts.poppins(
+                                                color: Colors.white),
                                           ),
-                                        );
-                                      },
-                                      child: Text(
-                                        viewListNames[index],
-                                        style: GoogleFonts.poppins(
-                                            color: Colors.white),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              );
-                            })),
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                }),
+                          ],
+                        )),
                     Container(
                       color: Colors.white54,
                       width: screenSize.width * 5 / 6,
@@ -409,16 +434,87 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                 Row(
                                   children: [
                                     Text(
-                                      'Administrator',
-                                      style: GoogleFonts.poppins(),
+                                      Get.find<AdminLoginScreenController>().schoolName,
+                                      style: GoogleFonts.poppins(fontWeight: FontWeight.w500),
                                     ),
                                     SizedBox(
                                       width: screenSize.height / 12,
                                     ),
-                                    Text('Batch Year ${getFireBaseData.bYear}'),
+                                    Text('Batch Year ${getFireBaseData.bYear}',  style: GoogleFonts.poppins(),),
                                     IconButton(
                                         onPressed: () async {
-                                          showDialog(
+                                          // showDialog(
+                                          //   context: context,
+                                          //   barrierDismissible:
+                                          //       false, // user must tap button!
+                                          //   builder: (BuildContext context) {
+                                          //     return AlertDialog(
+                                          //       title: const Text(
+                                          //           'Change Batch Year'),
+                                          //       content: SingleChildScrollView(
+                                          //         child: ListBody(
+                                          //           children: <Widget>[
+                                          //             GetBatchYearListDropDownButton(
+                                          //               schoolID:
+                                          //                   widget.schoolID,
+                                          //             ),
+                                          //           ],
+                                          //         ),
+                                          //       ),
+                                          //       actions: <Widget>[
+                                          //         GestureDetector(
+                                          //             onTap: () {
+                                          //               Navigator.pop(context);
+                                          //             },
+                                          //             child: Text(
+                                          //               'Cancel',
+                                          //               style: GoogleFonts
+                                          //                   .poppins(),
+                                          //             )),
+                                          //         SizedBox(
+                                          //           width:
+                                          //               screenSize.width / 15,
+                                          //         ),
+                                          //         GestureDetector(
+                                          //             onTap: () {
+                                          //               FirebaseFirestore
+                                          //                   .instance
+                                          //                   .collection(
+                                          //                       "SchoolListCollection")
+                                          //                   .doc(
+                                          //                       widget.schoolID)
+                                          //                   .set(
+                                          //                       {
+                                          //                     'batchYear':
+                                          //                         schoolBatchYearListValue![
+                                          //                             'id']
+                                          //                   },
+                                          //                       SetOptions(
+                                          //                           merge:
+                                          //                               true)).then(
+                                          //                       (value) =>
+                                          //                           Navigator.pushReplacement(
+                                          //                               context,
+                                          //                               MaterialPageRoute(
+                                          //                             builder:
+                                          //                                 (context) {
+                                          //                               return AdminDashBoardPage(
+                                          //                                   loginTime:
+                                          //                                       LoginTimeIDSavingClass.id,
+                                          //                                   schoolID: widget.schoolID);
+                                          //                             },
+                                          //                           )));
+                                          //             },
+                                          //             child: Text(
+                                          //               'Set BatchYear',
+                                          //               style: GoogleFonts
+                                          //                   .poppins(),
+                                          //             ))
+                                          //       ],
+                                          //     );
+                                          //   },
+                                          // ); 
+                                             showDialog(
                                             context: context,
                                             barrierDismissible:
                                                 false, // user must tap button!
@@ -437,58 +533,72 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                   ),
                                                 ),
                                                 actions: <Widget>[
-                                                  GestureDetector(
-                                                      onTap: () {
-                                                        Navigator.pop(context);
-                                                      },
-                                                      child: Text(
-                                                        'Cancel',
-                                                        style: GoogleFonts
-                                                            .poppins(),
-                                                      )),
-                                                  SizedBox(
-                                                    width:
-                                                        screenSize.width / 15,
+                                                  Padding(
+                                                    padding: const EdgeInsets.all(20.0),
+                                                    child: MaterialButton( 
+                                                      color: Colors.red,
+                                                        onPressed: () {
+                                                          Navigator.pop(context);
+                                                        },
+                                                        child: Text(
+                                                          'Cancel',
+                                                          style: GoogleFonts
+                                                              .poppins(color: Colors.white),
+                                                        )),
                                                   ),
-                                                  GestureDetector(
-                                                      onTap: () {
-                                                        FirebaseFirestore
-                                                            .instance
-                                                            .collection(
-                                                                "SchoolListCollection")
-                                                            .doc(
-                                                                widget.schoolID)
-                                                            .set(
-                                                                {
-                                                              'batchYear':
-                                                                  schoolBatchYearListValue![
-                                                                      'id']
-                                                            },
-                                                                SetOptions(
-                                                                    merge:
-                                                                        true)).then(
-                                                                (value) =>
-                                                                    Navigator.pushReplacement(
-                                                                        context,
-                                                                        MaterialPageRoute(
-                                                                      builder:
-                                                                          (context) {
-                                                                        return AdminDashBoardPage(
-                                                                            loginTime:
-                                                                                LoginTimeIDSavingClass.id,
-                                                                            schoolID: widget.schoolID);
-                                                                      },
-                                                                    )));
-                                                      },
-                                                      child: Text(
-                                                        'Set BatchYear',
-                                                        style: GoogleFonts
-                                                            .poppins(),
-                                                      ))
+                                                 
+                                                  Padding(
+                                                    padding: const EdgeInsets.all(20.0),
+                                                    child: MaterialButton(
+                                                      color: Colors.blue,
+                                                        onPressed: () {
+                                                          FirebaseFirestore
+                                                              .instance
+                                                              .collection(
+                                                                  "SchoolListCollection")
+                                                              .doc(
+                                                                  widget.schoolID)
+                                                              .set(
+                                                                  {
+                                                                'batchYear':
+                                                                    schoolBatchYearListValue![
+                                                                        'id']
+                                                              },
+                                                                  SetOptions(
+                                                                      merge:
+                                                                          true)).then(
+                                                                  (value) async {
+                                                            await getFireBaseData
+                                                                .getBatchYearId();
+                                                            // ignore: use_build_context_synchronously
+                                                            Navigator
+                                                                .pushReplacement(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                builder:
+                                                                    (context) {
+                                                                  return AdminDashBoardPage(
+                                                                      loginTime:
+                                                                          LoginTimeIDSavingClass
+                                                                              .id,
+                                                                      schoolID: widget
+                                                                          .schoolID);
+                                                                },
+                                                              ),
+                                                            );
+                                                          });
+                                                        },
+                                                        child: Text(
+                                                          'Set BatchYear',
+                                                          style: GoogleFonts
+                                                              .poppins(color: Colors.white),
+                                                        )),
+                                                  )
                                                 ],
                                               );
                                             },
                                           );
+                                        
                                         },
                                         icon: Icon(Icons.replay_outlined)),
                                     const CircleAvatar(

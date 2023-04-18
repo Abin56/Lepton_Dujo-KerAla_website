@@ -13,6 +13,7 @@ import '../../view/web/widgets/drop_DownList/schoolDropDownList.dart';
 class AdminLoginScreenController extends GetxController {
 
   String schoolID = schoolListValue?['id'];
+  String schoolName = schoolListValue?['schoolName'];
   String batchYearID = schoolBatchYearListValue?['id']??'';
 
   TextEditingController schoolIdController = TextEditingController();

@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import 'view/web/login/admin/admin_DashBoard/food_and_beverages/cf.dart';
+import 'view/web/login/admin/admin_DashBoard/non_Teaching_staff/non_teaching_staff_view.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -40,7 +43,9 @@ class MyApp extends StatelessWidget {
                 // ignore: deprecated_member_use
                 accentColor: const Color(0xFF02BB9F),
               ),
-              home: DujoHomePage());
+              home:
+              //NonTeachingStaffView(schoolID: 'MarthCheng13283',));
+             DujoHomePage());
         });
   }
 }

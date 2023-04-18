@@ -1,4 +1,5 @@
 
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/alumini_accocation/create_category_alumni.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../widgets/custom_button.dart';
@@ -91,14 +92,12 @@ class _AlumniAssocationState extends State<AlumniAssocation> {
                             width: screenSize.width * 1 / 3.7,
                             child: InkWell(
                               onTap: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //       builder: (BuildContext context) =>
-                                //           AddPTACategoryAcreen(
-                                //             id: widget.id,
-                                //           )),
-                                // );
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                       CreatecategoryAlumni())
+                                );
                               },
                               child: Container(
                                 height: screenSize.width * 1 / 10,
