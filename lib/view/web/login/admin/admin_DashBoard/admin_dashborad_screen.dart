@@ -24,6 +24,8 @@ import '../../../widgets/button_container_widget.dart';
 import '../../../widgets/drop_DownList/get_batchYear.dart';
 import 'Students_ScholarShip/student_scholarship.dart';
 import 'achievements/achievements.dart';
+import 'admin_meeting/admin_meeting_update/adminMeetingNew/admin_meeting_show.dart';
+import 'admin_meeting/admin_meeting_update/admin_meeting_show.dart';
 import 'admin_notice copy/admin_notice_new_ui/admin_notice_show_new.dart';
 import 'admin_notice/add_new_notices.dart';
 import 'admin_pta/admin_pta_screen.dart';
@@ -195,7 +197,9 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       NoticeDisplay(
         schoolId: widget.schoolID,
       ),
-      AllStudentList(),
+      MeetingDisplay(
+        schoolId: widget.schoolID,
+      ),
       AllStudentList(),
       DateWiseLoginScreen(schoolID: widget.schoolID),
     ];
