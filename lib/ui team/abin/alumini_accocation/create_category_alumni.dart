@@ -2,14 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
 import 'package:dujo_kerala_website/controller/get_firebase-data/get_firebase_data.dart';
 import 'package:dujo_kerala_website/model/alumni_association_model/alumni_category_model.dart';
+import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/pTA_section/dropDownListofPTA_section.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../../model/pTA_section/add_PTAMemberModel.dart';
-import '../../../../../colors/colors.dart';
-import '../../../../../fonts/fonts.dart';
+import '../../../view/fonts/fonts.dart';
+
 
 
 // ignore: must_be_immutable

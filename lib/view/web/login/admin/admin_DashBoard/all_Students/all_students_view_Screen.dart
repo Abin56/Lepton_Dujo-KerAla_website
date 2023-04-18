@@ -67,7 +67,7 @@ class _AllStudentListState extends State<AllStudentList> {
                             fontSize: 30,
                             fontWeight: FontWeight.bold),
                       ),
-                      
+                      Spacer(),
                       IconButton(
                           onPressed: () {
                             _showSearch();

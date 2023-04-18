@@ -7,7 +7,7 @@ import 'package:lottie/lottie.dart';
 
 import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
-import '../../../../../colors/colors.dart';
+import '../../../view/colors/colors.dart';
 
 
 

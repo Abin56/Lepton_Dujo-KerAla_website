@@ -7,17 +7,16 @@ import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/researc
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_protection_group/students_proctection_group.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'dart:html' as html;
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/list_of_classes.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/research_and_development/research_and_development.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_summary/students_summary.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/teacher_section/add_teacher.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/teacher_section/list_of_teachers.dart';
 
-import '../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../model/loginHistory_model/login_history_model.dart';
 import '../../../../colors/colors.dart';
@@ -27,7 +26,6 @@ import '../../../widgets/drop_DownList/get_batchYear.dart';
 import 'Students_ScholarShip/student_scholarship.dart';
 import 'achievements/achievements.dart';
 import 'admin_meeting/admin_meeting_update/adminMeetingNew/admin_meeting_show.dart';
-import 'admin_meeting/admin_meeting_update/admin_meeting_show.dart';
 import 'admin_notice copy/admin_notice_new_ui/admin_notice_show_new.dart';
 import 'admin_notice/add_new_notices.dart';
 import 'admin_pta/admin_pta_screen.dart';
@@ -181,11 +179,11 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       const StudentSummary(), //15-Student Summary
       const StudentSummary(), //16-Research and development
       const ResearchDevelopment(), //17-School Calendar
-      ), //8
-      PtaMemberAdmin(id: widget.schoolID), //9
-      const MothersPta(), //10
+      MeetingCreates(schoolId:  widget.schoolID), //8
+      AdminPtaScreen(), //9
+       MothersPtaScreen(), //10
       Achievements(schoolID: widget.schoolID), //11
-      const StudentProtectionGroup(), //12
+       StudentProtectionGroup(), //12
       AdminScholarships(schoolID: widget.schoolID), //13
       const BusRoute(), //14
       const StudentSummary(), //15
@@ -193,9 +191,9 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       const ResearchDevelopment(), //17
       const LiveClasses(), //18
       AddNewNotices(schoolId: widget.schoolID), //19
-      FoodBeverages(), //AddNewNotices(schoolId: widget.schoolID), //20-Online Classes
+      FoodBeverages(schoolID:widget.schoolID ), //AddNewNotices(schoolId: widget.schoolID), //20-Online Classes
       SelectType(schoolID: widget.schoolID), //21-Recorded Classes
-      const FoodBeverages(), //22-Food and Beverages
+       FoodBeverages(schoolID: widget.schoolID), //22-Food and Beverages
       const AlumniAssocation(), //23-Exam Notification
       const FeesUpdates(), //24-Alumni
       NonTeachingLogin(schoolID: widget.schoolID), //25-fees
@@ -203,7 +201,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       SampoornaHomeScreen(schoolId: widget.schoolID), //28-Generate Tc
       SampoornaHomeScreen(schoolId: widget.schoolID), //28-Generate summary
       SampoornaHomeScreen(schoolId: widget.schoolID), //28-sampoorna
-      FoodBeverages(), //AddNewNotices(schoolId: widget.schoolID), //20
+      FoodBeverages(schoolID: widget.schoolID), //AddNewNotices(schoolId: widget.schoolID), //20
       FoodBeverages(schoolID: widget.schoolID), //AddNewNotices(schoolId: widget.schoolID), //20
       SelectType(schoolID: widget.schoolID), //21
       const AlumniAssocation(), //22
@@ -224,8 +222,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
         schoolId: widget.schoolID,
       ),
       AllStudentList(),
-      PtaMemberAdmin(id: widget.schoolID),
-      PtaMemberAdmin(id: widget.schoolID),
+
       NonTeachingStaffView(schoolID: widget.schoolID,),
       DateWiseLoginScreen(schoolID: widget.schoolID),
     ];
@@ -629,7 +626,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                           style: GoogleFonts
                                                               .poppins(color: Colors.white),
                                                         )),
-                                                  )
+                                                  ),
                                                   GestureDetector(
                                                       onTap: () {
                                                         FirebaseFirestore

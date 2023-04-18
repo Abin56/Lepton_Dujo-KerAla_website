@@ -12,7 +12,9 @@ import '../../view/web/widgets/drop_DownList/schoolDropDownList.dart';
 import '../get_firebase-data/get_firebase_data.dart';
 
 class AdminLoginScreenController extends GetxController {
+  
   String schoolID = schoolListValue?['id'];
+   String schoolName = schoolListValue?['schoolName'];
   String batchYearID = schoolBatchYearListValue?['id'] ?? '';
 
   TextEditingController schoolIdController = TextEditingController();

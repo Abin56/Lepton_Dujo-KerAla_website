@@ -1,9 +1,9 @@
 
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/alumini_accocation/create_category_alumni.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../../ui team/abin/alumini_accocation/create_alumni.dart';
+import '../../../../../../ui team/abin/alumini_accocation/create_category_alumni.dart';
 import '../../../../widgets/custom_button.dart';
-import 'create_alumni.dart';
 
 class AlumniAssocation extends StatefulWidget {
   const AlumniAssocation({super.key});
