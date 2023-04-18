@@ -2,7 +2,6 @@ import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
-import 'package:dujo_kerala_website/model/admin_models/student_protection_model/student_protection_model.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -10,16 +9,18 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../../model/admin_models/mothers_pta_model/mothers_pta_model.dart';
 import '../../../get_firebase-data/get_firebase_data.dart';
 
-class StudentProtectionController extends GetxController {
+class MothersPtaController
+ extends GetxController {
   final CollectionReference<Map<String, dynamic>> firebaseFirestore =
       FirebaseFirestore.instance
           .collection('SchoolListCollection')
           .doc(Get.find<AdminLoginScreenController>().schoolID)
           .collection(Get.find<GetFireBaseData>().bYear.value)
           .doc(Get.find<GetFireBaseData>().bYear.value)
-          .collection('StudentProtection');
+          .collection('mothers_pta');
   final FirebaseStorage firebaseStorage = FirebaseStorage.instance;
   RxBool isLoading = RxBool(false);
   TextEditingController nameController = TextEditingController();
@@ -29,12 +30,12 @@ class StudentProtectionController extends GetxController {
   RxBool isLoadingDialogue = RxBool(false);
   Rxn<Uint8List> imageDataUin8 = Rxn<Uint8List>();
 
-  Future<void> addStudentProtectionGroupMember(BuildContext context) async {
+  Future<void> addMothersPtaMember(BuildContext context) async {
     if (nameController.text.isNotEmpty &&
         positionController.text.isNotEmpty &&
         designationController.text.isNotEmpty) {
       try {
-        final data = StudentProtectionGroupModel(
+        final data = MothersPtaModel(
           name: nameController.text,
           position: positionController.text,
           designation: designationController.text,
@@ -50,7 +51,7 @@ class StudentProtectionController extends GetxController {
         if (imageDataUin8.value != null) {
           final String id = const Uuid().v1();
           final filePath = await firebaseStorage
-              .ref('files/studentProtection/$id')
+              .ref('files/mothers_pta/$id')
               .putData(imageDataUin8.value!);
           String imageUrlPath = await filePath.ref.getDownloadURL();
           await firebaseFirestore.doc(result.id).update(
@@ -76,7 +77,7 @@ class StudentProtectionController extends GetxController {
     }
   }
 
-  Future<void> updateStudentProtectionMemberDetail(
+  Future<void> updateMothersPtaMemberDetails(
     String memberId,
     BuildContext context,
     String imageId,
@@ -86,7 +87,7 @@ class StudentProtectionController extends GetxController {
         positionController.text.isNotEmpty &&
         designationController.text.isNotEmpty) {
       try {
-        StudentProtectionGroupModel studentData = StudentProtectionGroupModel(
+        MothersPtaModel studentData = MothersPtaModel(
           name: nameController.text,
           position: positionController.text,
           designation: designationController.text,
@@ -100,7 +101,7 @@ class StudentProtectionController extends GetxController {
             );
         if (imageDataUin8.value != null) {
           final filePath = await firebaseStorage
-              .ref('files/studentProtection/$imageId')
+              .ref('files/mothers_pta/$imageId')
               .putData(imageDataUin8.value!);
 
           String fileUrl = await filePath.ref.getDownloadURL();
@@ -133,7 +134,7 @@ class StudentProtectionController extends GetxController {
       isLoading.value = true;
       await firebaseFirestore.doc(memberId).delete();
       if (imageId.isNotEmpty) {
-        await firebaseStorage.ref('files/studentProtection/$imageId').delete();
+        await firebaseStorage.ref('files/mothers_pta/$imageId').delete();
       }
 
       showToast(

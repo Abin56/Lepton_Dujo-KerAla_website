@@ -1,15 +1,14 @@
-import 'dart:developer';
-
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_protection_group/widgets/student_protection_dialogue_widget.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../../../../controller/Getx/admin/student_protection_controller/student_protection_controller.dart';
+import '../../../../../../../controller/Getx/admin/mothers_pta_controller/mothers_pta_controller.dart';
 import '../../../../../../constant/constant.dart';
+import 'mothers_pta_dialogue_widget.dart';
 
-class CardWidget extends StatelessWidget {
-  CardWidget({
+class MothersPtaCardWidget extends StatelessWidget {
+  MothersPtaCardWidget({
     super.key,
     required this.name,
     required this.designation,
@@ -28,13 +27,12 @@ class CardWidget extends StatelessWidget {
   final IconData iconData;
   final String memberId;
   final String imageId;
-  StudentProtectionController controller =
-      Get.find<StudentProtectionController>();
+  final MothersPtaController controller = Get.find<MothersPtaController>();
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFE5E4E2),
         borderRadius: BorderRadius.circular(16),
       ),
       child: SizedBox(
@@ -44,6 +42,11 @@ class CardWidget extends StatelessWidget {
             sizedBoxH10,
             FittedBox(
               child: CircleAvatar(
+                onBackgroundImageError: (exception, stackTrace) {
+                  if (kDebugMode) {
+                    print(exception);
+                  }
+                },
                 maxRadius: MediaQuery.of(context).size.width * .03,
                 backgroundImage: imageUrl == null || imageUrl!.isEmpty
                     ? const AssetImage('assets/images/user.png')
@@ -82,7 +85,7 @@ class CardWidget extends StatelessWidget {
                             return AlertDialog(
                               title: const Text('Confirm Remove'),
                               content: const Text(
-                                  'Are you sure you want to remove this Notice'),
+                                  'Are you sure you want to remove This'),
                               actions: [
                                 TextButton(
                                   onPressed: () {
@@ -108,8 +111,8 @@ class CardWidget extends StatelessWidget {
                         controller.nameController.text = name;
                         controller.positionController.text = position;
                         controller.designationController.text = designation;
-                        
-                        updateStudentProtectionDialogue(
+
+                        updateMothersPtaDialogue(
                           context,
                           memberId,
                           imageId,

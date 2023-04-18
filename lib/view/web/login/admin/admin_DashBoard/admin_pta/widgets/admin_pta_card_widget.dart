@@ -1,15 +1,13 @@
-import 'dart:developer';
-
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_protection_group/widgets/student_protection_dialogue_widget.dart';
+import 'package:dujo_kerala_website/controller/Getx/admin/pta/pta_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../../../../controller/Getx/admin/student_protection_controller/student_protection_controller.dart';
 import '../../../../../../constant/constant.dart';
+import 'admin_pta_dialogue_widget.dart';
 
-class CardWidget extends StatelessWidget {
-  CardWidget({
+class PtaCardWidget extends StatelessWidget {
+  PtaCardWidget({
     super.key,
     required this.name,
     required this.designation,
@@ -28,8 +26,7 @@ class CardWidget extends StatelessWidget {
   final IconData iconData;
   final String memberId;
   final String imageId;
-  StudentProtectionController controller =
-      Get.find<StudentProtectionController>();
+  PtaController controller = Get.find<PtaController>();
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
@@ -82,7 +79,7 @@ class CardWidget extends StatelessWidget {
                             return AlertDialog(
                               title: const Text('Confirm Remove'),
                               content: const Text(
-                                  'Are you sure you want to remove this Notice'),
+                                  'Are you sure you want to remove This'),
                               actions: [
                                 TextButton(
                                   onPressed: () {
@@ -92,7 +89,7 @@ class CardWidget extends StatelessWidget {
                                 ),
                                 TextButton(
                                   onPressed: () async {
-                                    await controller.removeMember(
+                                    await controller.removePtaMember(
                                         memberId, imageId);
                                     if (context.mounted) {
                                       Navigator.of(context).pop();
@@ -108,8 +105,8 @@ class CardWidget extends StatelessWidget {
                         controller.nameController.text = name;
                         controller.positionController.text = position;
                         controller.designationController.text = designation;
-                        
-                        updateStudentProtectionDialogue(
+
+                        updateAdminPtaDialogue(
                           context,
                           memberId,
                           imageId,

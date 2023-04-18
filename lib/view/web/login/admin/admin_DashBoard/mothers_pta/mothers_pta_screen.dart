@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dujo_kerala_website/controller/Getx/admin/student_protection_controller/student_protection_controller.dart';
-import 'package:dujo_kerala_website/model/admin_models/student_protection_model/student_protection_model.dart';
+import 'package:dujo_kerala_website/controller/Getx/admin/mothers_pta_controller/mothers_pta_controller.dart';
+import 'package:dujo_kerala_website/model/admin_models/admin_pta_model/admin_pta_model.dart';
 import 'package:dujo_kerala_website/view/colors/colors.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_protection_group/widgets/student_protection_dialogue_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,13 +9,14 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../constant/constant.dart';
-import 'widgets/student_protection_card_widget.dart';
+import 'widgets/mothers_pta_card_widget.dart';
+import 'widgets/mothers_pta_dialogue_widget.dart';
 
-class StudentProtectionGroup extends StatelessWidget {
-  StudentProtectionGroup({super.key});
+class MothersPtaScreen extends StatelessWidget {
+  MothersPtaScreen({super.key});
 
-  final StudentProtectionController studentProtectionController = Get.put(
-    StudentProtectionController(),
+  final MothersPtaController mothersPtaController = Get.put(
+    MothersPtaController(),
   );
 
   @override
@@ -26,14 +26,14 @@ class StudentProtectionGroup extends StatelessWidget {
     return Scaffold(
       backgroundColor: adminePrimayColor,
       appBar: AppBar(
-        title: const Text('Student ProtectionGroup'),
+        title: const Text('Mothers PTA'),
         backgroundColor: adminePrimayColor,
         elevation: 0,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          Get.find<StudentProtectionController>().clearField();
-          await createDialogue(context);
+          Get.find<MothersPtaController>().clearField();
+          await createMothersPtaDialogue(context);
         },
         child: const Icon(
           Icons.add,
@@ -45,7 +45,7 @@ class StudentProtectionGroup extends StatelessWidget {
               .doc(Get.find<AdminLoginScreenController>().schoolID)
               .collection(Get.find<GetFireBaseData>().bYear.value)
               .doc(Get.find<GetFireBaseData>().bYear.value)
-              .collection('StudentProtection')
+              .collection('mothers_pta')
               .snapshots(),
           builder: (context, snapshot) {
             List<String> fields = const <String>[
@@ -57,8 +57,7 @@ class StudentProtectionGroup extends StatelessWidget {
             ];
             List<QueryDocumentSnapshot<Map<String, dynamic>>?>
                 querySnapshotList = [];
-            RxList<StudentProtectionGroupModel> studentProtectionModelList =
-                RxList<StudentProtectionGroupModel>([]);
+            RxList<AdminPtaModel> adminPtaModelList = RxList<AdminPtaModel>([]);
 
             for (String data in fields) {
               querySnapshotList.add(
@@ -68,8 +67,8 @@ class StudentProtectionGroup extends StatelessWidget {
             }
             for (var data in querySnapshotList) {
               if (data != null) {
-                studentProtectionModelList.add(
-                  StudentProtectionGroupModel.fromJson(
+                adminPtaModelList.add(
+                  AdminPtaModel.fromJson(
                     data.data(),
                   ),
                 );
@@ -90,7 +89,7 @@ class StudentProtectionGroup extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(15),
                               child: Text(
-                                "Student Protection Group",
+                                "Mothers PTA",
                                 style: GoogleFonts.oswald(
                                     fontSize: 25,
                                     fontWeight: FontWeight.bold,
@@ -99,8 +98,7 @@ class StudentProtectionGroup extends StatelessWidget {
                             ),
                             LeftSideCardWidget(
                               querySnapshotList: querySnapshotList,
-                              studentProtectionModelList:
-                                  studentProtectionModelList,
+                              adminPtaModelList: adminPtaModelList,
                               index: 0,
                               dataList: fields,
                               positionData: const [
@@ -116,8 +114,7 @@ class StudentProtectionGroup extends StatelessWidget {
                                 Flexible(
                                   child: LeftSideCardWidget(
                                     querySnapshotList: querySnapshotList,
-                                    studentProtectionModelList:
-                                        studentProtectionModelList,
+                                    adminPtaModelList: adminPtaModelList,
                                     index: 1,
                                     dataList: fields,
                                     positionData: const [
@@ -130,8 +127,7 @@ class StudentProtectionGroup extends StatelessWidget {
                                 Flexible(
                                   child: LeftSideCardWidget(
                                     querySnapshotList: querySnapshotList,
-                                    studentProtectionModelList:
-                                        studentProtectionModelList,
+                                    adminPtaModelList: adminPtaModelList,
                                     index: 2,
                                     dataList: fields,
                                     positionData: const [
@@ -150,8 +146,7 @@ class StudentProtectionGroup extends StatelessWidget {
                                 Flexible(
                                   child: LeftSideCardWidget(
                                     querySnapshotList: querySnapshotList,
-                                    studentProtectionModelList:
-                                        studentProtectionModelList,
+                                    adminPtaModelList: adminPtaModelList,
                                     index: 3,
                                     dataList: fields,
                                     positionData: const [
@@ -164,8 +159,7 @@ class StudentProtectionGroup extends StatelessWidget {
                                 Flexible(
                                   child: LeftSideCardWidget(
                                     querySnapshotList: querySnapshotList,
-                                    studentProtectionModelList:
-                                        studentProtectionModelList,
+                                    adminPtaModelList: adminPtaModelList,
                                     index: 4,
                                     dataList: fields,
                                     positionData: const [
@@ -194,7 +188,7 @@ class StudentProtectionGroup extends StatelessWidget {
                           .doc(Get.find<AdminLoginScreenController>().schoolID)
                           .collection(Get.find<GetFireBaseData>().bYear.value)
                           .doc(Get.find<GetFireBaseData>().bYear.value)
-                          .collection('StudentProtection')
+                          .collection('mothers_pta')
                           .where(
                         "id",
                         whereNotIn: <String>[
@@ -215,7 +209,7 @@ class StudentProtectionGroup extends StatelessWidget {
                             crossAxisCount: _getCrossAxisCount(context),
                             children: List.generate(
                               snapshot.data!.docs.length,
-                              (index) => CardWidget(
+                              (index) => MothersPtaCardWidget(
                                 name: snapshot.data!.docs[index].data()['name'],
                                 designation: snapshot.data!.docs[index]
                                     .data()['designation'],
@@ -260,36 +254,36 @@ class LeftSideCardWidget extends StatelessWidget {
   const LeftSideCardWidget({
     super.key,
     required this.querySnapshotList,
-    required this.studentProtectionModelList,
+    required this.adminPtaModelList,
     required this.index,
     required this.dataList,
     required this.positionData,
   });
 
   final List<QueryDocumentSnapshot<Map<String, dynamic>>?> querySnapshotList;
-  final RxList<StudentProtectionGroupModel> studentProtectionModelList;
+  final RxList<AdminPtaModel> adminPtaModelList;
   final List<String> dataList;
   final List<String> positionData;
   final int index;
 
   @override
   Widget build(BuildContext context) {
-    return CardWidget(
+    return MothersPtaCardWidget(
       name: querySnapshotList[index] == null
           ? positionData[0]
-          : studentProtectionModelList[index].name,
+          : adminPtaModelList[index].name,
       designation: querySnapshotList[index] == null
           ? positionData[1]
-          : studentProtectionModelList[index].designation,
+          : adminPtaModelList[index].designation,
       position: querySnapshotList[index] == null
           ? positionData[2]
-          : studentProtectionModelList[index].position,
+          : adminPtaModelList[index].position,
       iconData: Icons.edit,
       imageId: dataList[index],
       memberId: dataList[index],
       imageUrl: querySnapshotList[index] == null
           ? null
-          : studentProtectionModelList[index].imageUrl,
+          : adminPtaModelList[index].imageUrl,
     );
   }
 }
@@ -304,9 +298,13 @@ class StudentProtectionTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FittedBox(
-      child: Text("MEMBER IN SPG",
-          style: GoogleFonts.alumniSans(
-              fontSize: 18, fontWeight: FontWeight.bold)),
+      child: Text(
+        "MEMBER IN PTA",
+        style: GoogleFonts.alumniSans(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
     );
   }
 }
