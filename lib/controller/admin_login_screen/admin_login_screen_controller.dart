@@ -12,9 +12,8 @@ import '../../view/web/widgets/drop_DownList/schoolDropDownList.dart';
 import '../get_firebase-data/get_firebase_data.dart';
 
 class AdminLoginScreenController extends GetxController {
-  
   String schoolID = schoolListValue?['id'];
-   String schoolName = schoolListValue?['schoolName'];
+  String schoolName = schoolListValue?['schoolName'];
   String batchYearID = schoolBatchYearListValue?['id'] ?? '';
 
   TextEditingController schoolIdController = TextEditingController();
@@ -26,8 +25,6 @@ class AdminLoginScreenController extends GetxController {
   ///
   ///
   void loginFunction(BuildContext context) async {
-    final _time = DateTime.now().toString();
-    LoginTimeIDSavingClass.id = _time;
     //>>>>>>>>>>>>>>>>>Checking ID<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     Query query = schoolListCollectionRef.where("schoolID",
         isEqualTo: schoolIdController.text.trim());
@@ -72,6 +69,8 @@ class AdminLoginScreenController extends GetxController {
       final DateFormat formatter = DateFormat('dd-MM-yyyy');
       String formatted = formatter.format(parseDate);
       LoginTimeIDSavingClass.date = formatted;
+      final time = DateTime.now().toString();
+      LoginTimeIDSavingClass.id = time;
 
       await schoolListCollectionRef
           .doc(schoolID)
@@ -92,6 +91,7 @@ class AdminLoginScreenController extends GetxController {
           'adminuser': schoolIdController.text.trim(),
           'loginTime': LoginTimeIDSavingClass.id
         }).then((value) => {
+          log("idddddddd${LoginTimeIDSavingClass.id.toString()}"),
                   Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
                       return AdminDashBoardPage(
