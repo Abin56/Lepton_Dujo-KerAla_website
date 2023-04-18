@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-
-
 import 'dart:html' as html;
 
 import '../../model/loginHistory_model/login_history_model.dart';
@@ -15,48 +13,29 @@ import '../../view/web/widgets/drop_DownList/get_batchYear.dart';
 import '../../view/web/widgets/drop_DownList/schoolDropDownList.dart';
 import '../get_firebase-data/get_firebase_data.dart';
 
-  var schoolListValue;
-
 class AdminLoginScreenController extends GetxController {
   String schoolID = schoolListValue?['id'];
   String schoolName = schoolListValue?['schoolName'];
   String batchYearID = schoolBatchYearListValue?['id'] ?? '';
 
-
   TextEditingController schoolIdController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   CollectionReference schoolListCollectionRef =
-      FirebaseFirestore.instance.collection("SchoolListCollection"); 
-      DocumentReference<Map<String, dynamic>> schoolListCollectionRefDoc = FirebaseFirestore.instance.collection("SchoolListCollection").doc(schoolListValue?['id']); 
-     
-  ///
-  ///
-  ///
-    Future<void> loginFunction(BuildContext context) async {
-    //>>>>>>>>>>>>>>>>>Checking ID<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    Query query = schoolListCollectionRef.where("schoolID",
-        isEqualTo: schoolIdController.text.trim());
-    QuerySnapshot querySnapshot = await query.get();
-    final docData = querySnapshot.docs.map((doc) => doc.data()).toList();
-    log(query.toString());
-    log(docData.toString()); 
-    if(schoolListCollectionRefDoc.id != schoolIdController.text.trim()){
-      print('failed, failed'); 
-      
-    }
+      FirebaseFirestore.instance.collection("SchoolListCollection");
+  DocumentReference<Map<String, dynamic>> schoolListCollectionRefDoc =
+      FirebaseFirestore.instance
+          .collection("SchoolListCollection")
+          .doc(schoolListValue!['id']);
 
-    if(schoolListCollectionRefDoc.id == schoolIdController.text.trim()){
-      print('success, success');
-    }
-    //
-    //>>>>>>>>>>>>>>>>>>>Checking password<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-    Query queries = schoolListCollectionRef.where("password",
-        isEqualTo: passwordController.text.trim());
-    QuerySnapshot querySnapshott = await queries.get();
-    final docDataa = querySnapshott.docs.map((doc) => doc.data()).toList();
-    log(query.toString());
-    log(docDataa.toString());
+  ///
+  ///
+  ///
+  Future<void> loginFunction(BuildContext context, String adminSchooID) async {
+//Get school id and password>>>>>>>>>>
+    final getidpass = await FirebaseFirestore.instance
+        .collection("SchoolListCollection")
+        .doc(schoolID)
+        .get();
 
     // for Other Admins//////
 
@@ -75,11 +54,11 @@ class AdminLoginScreenController extends GetxController {
     QuerySnapshot adminPassquerySnapshott = await adminPassquries.get();
     final adminPassdocDataa =
         adminPassquerySnapshott.docs.map((doc) => doc.data()).toList();
-    log(query.toString());
-    log(docDataa.toString());
 
-    if ((schoolListCollectionRefDoc.id != schoolIdController.text.trim())&&docDataa.isNotEmpty && docData.isNotEmpty ||
-        adminPassdocDataa.isNotEmpty && adminIDdocData.isNotEmpty) { 
+    if (getidpass.data()!['id'] == schoolIdController.text.trim() &&
+            getidpass.data()!['password'] == passwordController.text.trim() &&
+            adminSchooID == schoolIdController.text.trim() ||
+        adminPassdocDataa.isNotEmpty && adminIDdocData.isNotEmpty) {
       if (Get.find<GetFireBaseData>().bYear.value.isNotEmpty) {
         final date = DateTime.now();
         DateTime parseDate = DateTime.parse(date.toString());
@@ -179,8 +158,10 @@ class AdminLoginScreenController extends GetxController {
                           .collection("SchoolListCollection")
                           .doc(schoolID)
                           .set({
-                        'batchYear':"${applynewBatchYearContoller.text.trim()}-${selectedToDaterContoller.text.trim()}"
-                      }, SetOptions(merge: true)).then((value) =>html.window.location.reload() );
+                        'batchYear':
+                            "${applynewBatchYearContoller.text.trim()}-${selectedToDaterContoller.text.trim()}"
+                      }, SetOptions(merge: true)).then(
+                              (value) => html.window.location.reload());
                     });
                   },
                 ),

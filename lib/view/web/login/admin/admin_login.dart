@@ -14,13 +14,17 @@ import '../../widgets/responsive.dart';
 
 // ignore: must_be_immutable
 class AdminLoginScreen extends StatelessWidget {
+  String? adminSchoolId;
   //
   AdminLoginScreenController adminLoginScreenController =
       Get.put(AdminLoginScreenController());
     GetFireBaseData getFireBaseData = Get.put(GetFireBaseData());
 
   //
-  AdminLoginScreen({ Key? key}) : super(key: key);
+  AdminLoginScreen({
+    this.adminSchoolId,
+  
+     Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +107,7 @@ class AdminLoginScreen extends StatelessWidget {
                       Text(
                         'Hey, Enter your details to get sign in \nto your account.',
                         style: ralewayStyle.copyWith(
-                          fontSize: 12.0,
+                          fontSize: 15.0,
                           fontWeight: FontWeight.w400,
                           color: AppColors.textColor,
                         ),
@@ -221,9 +225,11 @@ class AdminLoginScreen extends StatelessWidget {
                         color: Colors.transparent,
                         child: InkWell(
                           onTap: () async {
-                            adminLoginScreenController.loginFunction(
-                                 context);
-                          },
+                           await  adminLoginScreenController.loginFunction(
+                                 context,adminSchoolId!); 
+
+                                 adminLoginScreenController.schoolIdController.clear(); 
+                                 adminLoginScreenController.passwordController.clear();                          },
                           borderRadius: BorderRadius.circular(16.0),
                           child: Ink(
                             padding: const EdgeInsets.symmetric(
