@@ -4,6 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+
+import 'ui team/add_student.dart';
+import 'ui team/manage_teachers.dart';
+import 'ui team/new_profile.dart';
+
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -40,7 +46,13 @@ class MyApp extends StatelessWidget {
                 // ignore: deprecated_member_use
                 accentColor: const Color(0xFF02BB9F),
               ),
-              home: DujoHomePage());
+              home: 
+            // DujoHomePage()
+              //  ManageTeachers()
+              // NewProfile()
+              AddStudentTea(teacherIDE: null,)
+              
+              );
         });
   }
 }

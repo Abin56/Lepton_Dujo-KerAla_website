@@ -41,6 +41,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.10.0"
+  avatar_glow:
+    dependency: transitive
+    description:
+      name: avatar_glow
+      sha256: "3627f6f97d1f10d3c1996ae108d3488eabaf68c0cf0c3eac7e7c746a3812881d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.2"
   barcode:
     dependency: transitive
     description:
@@ -209,6 +217,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.6"
+  dotted_border:
+    dependency: transitive
+    description:
+      name: dotted_border
+      sha256: "07a5c5e8d4e6e992279e190e0352be8faa5b8f96d81c77a78b2d42f060279840"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0+3"
   download:
     dependency: "direct main"
     description:
@@ -760,6 +776,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.2"
+  path_drawing:
+    dependency: transitive
+    description:
+      name: path_drawing
+      sha256: bbb1934c0cbb03091af082a6389ca2080345291ef07a5fa6d6e078ba8682f977
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   path_parsing:
     dependency: transitive
     description:
@@ -920,6 +944,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.2.4"
+  profile:
+    dependency: "direct main"
+    description:
+      name: profile
+      sha256: "124fbbcced24affca3c5f30502893cae920f7b3d10f8ba615ea094a50819a7ef"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.1"
   provider:
     dependency: "direct main"
     description:
