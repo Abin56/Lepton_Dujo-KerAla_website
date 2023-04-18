@@ -1,18 +1,17 @@
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_protection_group/widgets/student_protection_text_filed.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../../../controller/Getx/admin/student_protection_controller/student_protection_controller.dart';
+import '../../../../../../../controller/Getx/admin/mothers_pta_controller/mothers_pta_controller.dart';
 import '../../../../../../constant/constant.dart';
+import 'mothers_pta_textfield.dart';
 
-Future<void> updateStudentProtectionDialogue(
+Future<void> updateMothersPtaDialogue(
   BuildContext context,
   String memberId,
   String imageid,
   String? imageUrl,
 ) {
-  StudentProtectionController protectionController =
-      Get.find<StudentProtectionController>();
+  MothersPtaController mothersPtaController = Get.find<MothersPtaController>();
   return showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -21,11 +20,11 @@ Future<void> updateStudentProtectionDialogue(
             padding: EdgeInsets.zero,
             onPressed: () {
               Navigator.of(context).pop();
-              protectionController.clearField();
+              mothersPtaController.clearField();
             },
             icon: const Icon(Icons.close)),
         content: Obx(
-          () => protectionController.isLoadingDialogue.value
+          () => mothersPtaController.isLoadingDialogue.value
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
@@ -36,50 +35,49 @@ Future<void> updateStudentProtectionDialogue(
                     children: <Widget>[
                       GestureDetector(
                           onTap: () async {
-                            protectionController.selectImageFromStorage();
+                            mothersPtaController.selectImageFromStorage();
                           },
-                          child: protectionController.isLoadingImage.value
+                          child: mothersPtaController.isLoadingImage.value
                               ? const Center(
                                   child: CircularProgressIndicator(),
                                 )
                               : CircleAvatar(
                                   backgroundImage: imageUrl == null &&
-                                          protectionController
+                                          mothersPtaController
                                                   .imageDataUin8.value ==
                                               null
                                       ? const AssetImage(
                                           "assets/images/user.png")
-                                      : protectionController
+                                      : mothersPtaController
                                                   .imageDataUin8.value ==
                                               null
                                           ? NetworkImage(imageUrl!)
                                           : MemoryImage(
-                                              protectionController
+                                              mothersPtaController
                                                   .imageDataUin8.value!,
                                             ) as ImageProvider,
                                   radius: 30,
                                 )),
                       sizedBoxH20,
-                      StudentProtectionTextField(
+                      MothersPtaTextfield(
                         hintText: 'Name',
-                        controller: protectionController.nameController,
+                        controller: mothersPtaController.nameController,
                       ),
                       sizedBoxH20,
-                      StudentProtectionTextField(
+                      MothersPtaTextfield(
                         hintText: 'Designation',
-                        controller: protectionController.designationController,
+                        controller: mothersPtaController.designationController,
                       ),
                       sizedBoxH20,
-                      StudentProtectionTextField(
+                      MothersPtaTextfield(
                         hintText: 'Position',
-                        controller: protectionController.positionController,
+                        controller: mothersPtaController.positionController,
                       ),
                       sizedBoxH20,
                       ElevatedButton(
                         onPressed: () {
-                          protectionController
-                              .updateStudentProtectionMemberDetail(
-                                  memberId, context, imageid, imageUrl ?? "");
+                          mothersPtaController.updateMothersPtaMemberDetails(
+                              memberId, context, imageid, imageUrl ?? "");
                         },
                         child: const Text('Edit'),
                       )
@@ -92,11 +90,10 @@ Future<void> updateStudentProtectionDialogue(
   );
 }
 
-Future<void> createDialogue(
+Future<void> createMothersPtaDialogue(
   BuildContext context,
 ) {
-  StudentProtectionController protectionController =
-      Get.find<StudentProtectionController>();
+  MothersPtaController mothersPtaController = Get.find<MothersPtaController>();
   return showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -105,14 +102,14 @@ Future<void> createDialogue(
             padding: EdgeInsets.zero,
             onPressed: () {
               Navigator.of(context).pop();
-              protectionController.clearField();
+              mothersPtaController.clearField();
             },
             icon: const Icon(Icons.close)),
         content: Obx(
           () => SizedBox(
             height: 350,
             width: 250,
-            child: protectionController.isLoadingDialogue.value
+            child: mothersPtaController.isLoadingDialogue.value
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
@@ -120,44 +117,43 @@ Future<void> createDialogue(
                     children: <Widget>[
                       GestureDetector(
                           onTap: () async {
-                            protectionController.selectImageFromStorage();
+                            mothersPtaController.selectImageFromStorage();
                           },
-                          child: protectionController.isLoadingImage.value
+                          child: mothersPtaController.isLoadingImage.value
                               ? const Center(
                                   child: CircularProgressIndicator(),
                                 )
                               : CircleAvatar(
-                                  backgroundImage: protectionController
+                                  backgroundImage: mothersPtaController
                                               .imageDataUin8.value ==
                                           null
                                       ? const AssetImage(
                                           'assets/images/user.png')
                                       : MemoryImage(
-                                          protectionController
+                                          mothersPtaController
                                               .imageDataUin8.value!,
                                         ) as ImageProvider,
                                   radius: 30,
                                 )),
                       sizedBoxH20,
-                      StudentProtectionTextField(
+                      MothersPtaTextfield(
                         hintText: 'Name',
-                        controller: protectionController.nameController,
+                        controller: mothersPtaController.nameController,
                       ),
                       sizedBoxH20,
-                      StudentProtectionTextField(
+                      MothersPtaTextfield(
                         hintText: 'Designation',
-                        controller: protectionController.designationController,
+                        controller: mothersPtaController.designationController,
                       ),
                       sizedBoxH20,
-                      StudentProtectionTextField(
+                      MothersPtaTextfield(
                         hintText: 'Position',
-                        controller: protectionController.positionController,
+                        controller: mothersPtaController.positionController,
                       ),
                       sizedBoxH20,
                       ElevatedButton(
                         onPressed: () {
-                          protectionController
-                              .addStudentProtectionGroupMember(context);
+                          mothersPtaController.addMothersPtaMember(context);
                         },
                         child: const Text('Create'),
                       )

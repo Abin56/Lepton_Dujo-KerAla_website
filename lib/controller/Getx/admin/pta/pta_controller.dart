@@ -12,14 +12,14 @@ import 'package:uuid/uuid.dart';
 
 import '../../../get_firebase-data/get_firebase_data.dart';
 
-class StudentProtectionController extends GetxController {
+class PtaController extends GetxController {
   final CollectionReference<Map<String, dynamic>> firebaseFirestore =
       FirebaseFirestore.instance
           .collection('SchoolListCollection')
           .doc(Get.find<AdminLoginScreenController>().schoolID)
           .collection(Get.find<GetFireBaseData>().bYear.value)
           .doc(Get.find<GetFireBaseData>().bYear.value)
-          .collection('StudentProtection');
+          .collection('pta');
   final FirebaseStorage firebaseStorage = FirebaseStorage.instance;
   RxBool isLoading = RxBool(false);
   TextEditingController nameController = TextEditingController();
@@ -29,7 +29,7 @@ class StudentProtectionController extends GetxController {
   RxBool isLoadingDialogue = RxBool(false);
   Rxn<Uint8List> imageDataUin8 = Rxn<Uint8List>();
 
-  Future<void> addStudentProtectionGroupMember(BuildContext context) async {
+  Future<void> addStudentToPta(BuildContext context) async {
     if (nameController.text.isNotEmpty &&
         positionController.text.isNotEmpty &&
         designationController.text.isNotEmpty) {
@@ -50,7 +50,7 @@ class StudentProtectionController extends GetxController {
         if (imageDataUin8.value != null) {
           final String id = const Uuid().v1();
           final filePath = await firebaseStorage
-              .ref('files/studentProtection/$id')
+              .ref('files/pta/$id')
               .putData(imageDataUin8.value!);
           String imageUrlPath = await filePath.ref.getDownloadURL();
           await firebaseFirestore.doc(result.id).update(
@@ -76,7 +76,8 @@ class StudentProtectionController extends GetxController {
     }
   }
 
-  Future<void> updateStudentProtectionMemberDetail(
+  Future<void> updatePta
+  (
     String memberId,
     BuildContext context,
     String imageId,
@@ -100,7 +101,7 @@ class StudentProtectionController extends GetxController {
             );
         if (imageDataUin8.value != null) {
           final filePath = await firebaseStorage
-              .ref('files/studentProtection/$imageId')
+              .ref('files/pta/$imageId')
               .putData(imageDataUin8.value!);
 
           String fileUrl = await filePath.ref.getDownloadURL();
@@ -128,12 +129,12 @@ class StudentProtectionController extends GetxController {
     }
   }
 
-  Future<void> removeMember(String memberId, String imageId) async {
+  Future<void> removePtaMember(String memberId, String imageId) async {
     try {
       isLoading.value = true;
       await firebaseFirestore.doc(memberId).delete();
       if (imageId.isNotEmpty) {
-        await firebaseStorage.ref('files/studentProtection/$imageId').delete();
+        await firebaseStorage.ref('files/pta/$imageId').delete();
       }
 
       showToast(
