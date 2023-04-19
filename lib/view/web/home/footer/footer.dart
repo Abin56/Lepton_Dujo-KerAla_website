@@ -262,7 +262,7 @@ class FooterSection extends StatelessWidget {
                                       child: Text(
                                         'Family Policy',
                                         style:
-                                            TextStyle(fontSize:  screenSize.width/110, color: color),
+                                            TextStyle(fontSize:  screenSize.width/110, color: color,fontWeight: FontWeight.bold),
                                       ));
                                 },
                               ),
