@@ -5,8 +5,14 @@ import 'package:get/get.dart';
 import '../../../../../../../controller/Getx/admin/student_protection_controller/student_protection_controller.dart';
 import '../../../../../../constant/constant.dart';
 
-showDialogueStudentProtection(BuildContext context, String editOrCreate,
-    VoidCallback function, String memberId, String imageid, String imageUrl) {
+Future<void> updateStudentProtectionDialogue(
+  BuildContext context,
+  String memberId,
+  String imageid,
+  String? imageUrl,
+) {
+  StudentProtectionController protectionController =
+      Get.find<StudentProtectionController>();
   return showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -15,10 +21,11 @@ showDialogueStudentProtection(BuildContext context, String editOrCreate,
             padding: EdgeInsets.zero,
             onPressed: () {
               Navigator.of(context).pop();
+              protectionController.clearField();
             },
             icon: const Icon(Icons.close)),
         content: Obx(
-          () => Get.find<StudentProtectionController>().isLoadingDialogue.value
+          () => protectionController.isLoadingDialogue.value
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
@@ -29,61 +36,134 @@ showDialogueStudentProtection(BuildContext context, String editOrCreate,
                     children: <Widget>[
                       GestureDetector(
                           onTap: () async {
-                            if (editOrCreate == "Create") {
-                              await Get.find<StudentProtectionController>()
-                                  .upLoadImage();
-                            } else {
-                              await Get.find<StudentProtectionController>()
-                                  .updateImage(memberId, imageid);
-                            }
+                            protectionController.selectImageFromStorage();
                           },
-                          //application run first time image will be null so added these three conditions
-                          child: Get.find<StudentProtectionController>()
-                                  .isLoadingImage
-                                  .value
+                          child: protectionController.isLoadingImage.value
                               ? const Center(
                                   child: CircularProgressIndicator(),
                                 )
                               : CircleAvatar(
-                                  backgroundImage:
-                                      Get.find<StudentProtectionController>()
-                                                      .imageData['imageUrl'] ==
-                                                  null &&
-                                              imageUrl.isEmpty
-                                          ? const AssetImage(
-                                              'assets/images/user.png')
-                                          : NetworkImage(Get.find<
-                                                      StudentProtectionController>()
-                                                  .imageData['imageUrl'] ??
-                                              imageUrl) as ImageProvider,
+                                  backgroundImage: imageUrl == null &&
+                                          protectionController
+                                                  .imageDataUin8.value ==
+                                              null
+                                      ? const AssetImage(
+                                          "assets/images/user.png")
+                                      : protectionController
+                                                  .imageDataUin8.value ==
+                                              null
+                                          ? NetworkImage(imageUrl!)
+                                          : MemoryImage(
+                                              protectionController
+                                                  .imageDataUin8.value!,
+                                            ) as ImageProvider,
                                   radius: 30,
                                 )),
                       sizedBoxH20,
                       StudentProtectionTextField(
                         hintText: 'Name',
-                        controller: Get.find<StudentProtectionController>()
-                            .nameController,
-                      ),
-                      sizedBoxH20,
-                      StudentProtectionTextField(
-                        hintText: 'Position',
-                        controller: Get.find<StudentProtectionController>()
-                            .positionController,
+                        controller: protectionController.nameController,
                       ),
                       sizedBoxH20,
                       StudentProtectionTextField(
                         hintText: 'Designation',
-                        controller: Get.find<StudentProtectionController>()
-                            .designationController,
+                        controller: protectionController.designationController,
+                      ),
+                      sizedBoxH20,
+                      StudentProtectionTextField(
+                        hintText: 'Position',
+                        controller: protectionController.positionController,
                       ),
                       sizedBoxH20,
                       ElevatedButton(
-                        onPressed: function,
-                        child: Text(editOrCreate),
+                        onPressed: () {
+                          protectionController
+                              .updateStudentProtectionMemberDetail(
+                                  memberId, context, imageid, imageUrl ?? "");
+                        },
+                        child: const Text('Edit'),
                       )
                     ],
                   ),
                 ),
+        ),
+      );
+    },
+  );
+}
+
+Future<void> createDialogue(
+  BuildContext context,
+) {
+  StudentProtectionController protectionController =
+      Get.find<StudentProtectionController>();
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        icon: IconButton(
+            padding: EdgeInsets.zero,
+            onPressed: () {
+              Navigator.of(context).pop();
+              protectionController.clearField();
+            },
+            icon: const Icon(Icons.close)),
+        content: Obx(
+          () => SizedBox(
+            height: 350,
+            width: 250,
+            child: protectionController.isLoadingDialogue.value
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Column(
+                    children: <Widget>[
+                      GestureDetector(
+                          onTap: () async {
+                            protectionController.selectImageFromStorage();
+                          },
+                          child: protectionController.isLoadingImage.value
+                              ? const Center(
+                                  child: CircularProgressIndicator(),
+                                )
+                              : CircleAvatar(
+                                  backgroundImage: protectionController
+                                              .imageDataUin8.value ==
+                                          null
+                                      ? const AssetImage(
+                                          'assets/images/user.png')
+                                      : MemoryImage(
+                                          protectionController
+                                              .imageDataUin8.value!,
+                                        ) as ImageProvider,
+                                  radius: 30,
+                                )),
+                      sizedBoxH20,
+                      StudentProtectionTextField(
+                        hintText: 'Name',
+                        controller: protectionController.nameController,
+                      ),
+                      sizedBoxH20,
+                      StudentProtectionTextField(
+                        hintText: 'Designation',
+                        controller: protectionController.designationController,
+                      ),
+                      sizedBoxH20,
+                      StudentProtectionTextField(
+                        hintText: 'Position',
+                        controller: protectionController.positionController,
+                      ),
+                      sizedBoxH20,
+                      ElevatedButton(
+                        onPressed: () {
+                          protectionController
+                              .addStudentProtectionGroupMember(context);
+                        },
+                        child: const Text('Create'),
+                      )
+                    ],
+                  ),
+          ),
         ),
       );
     },

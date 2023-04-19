@@ -88,7 +88,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                 Padding(
                     padding: EdgeInsets.all(20),
                     child: GetClassInchargeListDropDownButton(
-                      schoolID: schoolID,
+                      schoolID:  Get.find<AdminLoginScreenController>().schoolID,
                     )),
                 SizedBox(
                   height: screenSize.width * 1 / 25,

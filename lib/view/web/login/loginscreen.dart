@@ -2,6 +2,7 @@
 
 import 'dart:developer';
 import 'package:dujo_kerala_website/view/web/login/teacher/teacher_login_screen.dart';
+import 'package:dujo_kerala_website/view/web/widgets/drop_DownList/schoolDropDownList.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../colors/colors.dart';
@@ -109,6 +110,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         builder: (context) {
                           log("Admin Login>>>>>>>>>>${widget.schoolID}");
                           return AdminLoginScreen(
+                            adminSchoolId: schoolListValue!['id'],
+
                            
                           );
                         },

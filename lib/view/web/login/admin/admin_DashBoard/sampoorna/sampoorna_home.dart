@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../controller/Getx/admin/sampoorna/sampoorna_controller.dart';
+import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../constant/constant.dart';
 import 'widgets/address_detail_widget.dart';
 import 'widgets/admission_detail_widget.dart';
@@ -397,11 +399,51 @@ class TitleWidget extends StatelessWidget {
       width: size.width,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: const <Widget>[
-          TitleTextWidget(title: 'KPM HIGHER SECONDARY SCHOOL'),
-          TitleTextWidget(title: 'ROADVILA, C.V.NALLOOR P.O'),
+        children: <Widget>[
+          StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection("SchoolListCollection")
+                  .where('id',
+                      isEqualTo:
+                          Get.find<AdminLoginScreenController>().schoolID)
+                  .snapshots(),
+              builder: (context, snap) {
+                if (snap.hasData) {
+                  if (snap.data!.docs.isEmpty) {
+                    return const TitleTextWidget(
+                        title: 'Lepton HIGHER SECONDARY SCHOOL');
+                  } else {
+                    return TitleTextWidget(
+                        title: snap.data!.docs[0]['schoolName']);
+                  }
+                } else {
+                  return const TitleTextWidget(
+                      title: 'Lepton HIGHER SECONDARY SCHOOL');
+                }
+              }),
+         StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection("SchoolListCollection")
+                  .where('id',
+                      isEqualTo:
+                          Get.find<AdminLoginScreenController>().schoolID)
+                  .snapshots(),
+              builder: (context, snap) {
+                if (snap.hasData) {
+                  if (snap.data!.docs.isEmpty) {
+                    return const TitleTextWidget(
+                        title: 'ROADVILA, C.V.NALLOOR P.O');
+                  } else {
+                    return TitleTextWidget(
+                        title: snap.data!.docs[0]['place']);
+                  }
+                } else {
+                  return const TitleTextWidget(
+                      title: 'ROADVILA, C.V.NALLOOR P.O');
+                }
+              }),
           sizedBoxH40,
-          TitleTextWidget(title: 'APPLICATION CUM DATA COLLECTION FORM'),
+         const  TitleTextWidget(title: 'APPLICATION CUM DATA COLLECTION FORM'),
         ],
       ),
     );

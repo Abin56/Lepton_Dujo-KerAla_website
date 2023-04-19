@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
+import 'package:dujo_kerala_website/controller/class_teacher_login_screen/class_teacher_login.dart';
 import 'package:dujo_kerala_website/view/web/widgets/responsive.dart';
 
 import 'package:flutter/material.dart';
@@ -19,8 +20,11 @@ import 'classteacher_dash_board/teachers_panel_screen.dart';
 class ClassTeacherLoginScreen extends StatelessWidget {
   final _hideGetxController = Get.put(PasswordField());
   String adminpassword = '';
-  AdminLoginScreenController adminLoginScreenController = Get.put(AdminLoginScreenController());
-  
+  AdminLoginScreenController adminLoginScreenController =
+      Get.put(AdminLoginScreenController());
+  ClassTeacherLoginController classTeacherLoginController =
+      Get.put(ClassTeacherLoginController());
+
   String schoolID;
   TextEditingController idController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -36,7 +40,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-            appBar: AppBar(backgroundColor: const Color(0xFF26A69A)),
+      appBar: AppBar(backgroundColor: const Color(0xFF26A69A)),
       backgroundColor: AppColors.backColor,
       body: SizedBox(
         height: height,
@@ -181,47 +185,42 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(16.0),
                           color: AppColors.whiteColor,
                         ),
-                        child: Obx(() =>  TextFormField(
-                           controller: passwordController,
-                                                  obscureText:
-                                                      _hideGetxController
-                                                          .isObscurefirst.value,
-                              
-                          
-                          style: ralewayStyle.copyWith(
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.blueDarkColor,
-                            fontSize: 12.0,
-                          ),
-                          //obscureText: true,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            suffixIcon: IconButton(
-                            
-                                                      icon: Icon(_hideGetxController
-                                                              .isObscurefirst
-                                                              .value
-                                                          ? Icons.visibility
-                                                          : Icons
-                                                              .visibility_off),
-                                                      onPressed: () {
-                                                        _hideGetxController
-                                                            .toggleObscureFirst();
-                                                      },
-                                                    ),
-                            prefixIcon: IconButton(
-                              onPressed: () {},
-                              icon: Image.asset(AppIcons.lockIcon),
-                            ),
-                            contentPadding: const EdgeInsets.only(top: 16.0),
-                            hintText: 'Enter Password',
-                            hintStyle: ralewayStyle.copyWith(
+                        child: Obx(
+                          () => TextFormField(
+                            controller: passwordController,
+                            obscureText:
+                                _hideGetxController.isObscurefirst.value,
+
+                            style: ralewayStyle.copyWith(
                               fontWeight: FontWeight.w400,
-                              color: AppColors.blueDarkColor.withOpacity(0.5),
+                              color: AppColors.blueDarkColor,
                               fontSize: 12.0,
                             ),
+                            //obscureText: true,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                    _hideGetxController.isObscurefirst.value
+                                        ? Icons.visibility
+                                        : Icons.visibility_off),
+                                onPressed: () {
+                                  _hideGetxController.toggleObscureFirst();
+                                },
+                              ),
+                              prefixIcon: IconButton(
+                                onPressed: () {},
+                                icon: Image.asset(AppIcons.lockIcon),
+                              ),
+                              contentPadding: const EdgeInsets.only(top: 16.0),
+                              hintText: 'Enter Password',
+                              hintStyle: ralewayStyle.copyWith(
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.blueDarkColor.withOpacity(0.5),
+                                fontSize: 12.0,
+                              ),
+                            ),
                           ),
-                        ),
                         ),
                       ),
                       SizedBox(height: height * 0.03),
@@ -244,87 +243,8 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                         color: Colors.transparent,
                         child: InkWell(
                           onTap: () async {
-                            //>>>>>>>>>>>>>>>>>Checking ID<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-                            CollectionReference cat = FirebaseFirestore.instance
-                                .collection("SchoolListCollection")
-                                .doc(schoolID)
-                                .collection("Teachers");
-                            Query query = cat.where("teacherEmail",
-                                isEqualTo: idController.text.trim());
-                            QuerySnapshot querySnapshot = await query.get();
-                            final docData = querySnapshot.docs
-                                .map((doc) => doc.data())
-                                .toList();
-
-                            // log('asfdddddd${querySnapshot.docs.map((doc) => doc.data()).toString().toString()}');
-
-                            // log(query.toString());
-                            // log(cat.get().toString());
-                            // log(docData.toString());
-                            // //
-                            //>>>>>>>>>>>>>>>>>>>Checking password<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-                            CollectionReference pass = FirebaseFirestore
-                                .instance
-                                .collection("SchoolListCollection")
-                                .doc(schoolID)
-                                .collection("Teachers");
-                            Query queries = pass.where("employeeID",
-                                isEqualTo: passwordController.text.trim());
-                            QuerySnapshot querySnapshott = await queries.get();
-                            final docDataa = querySnapshott.docs
-                                .map((doc) => doc.data())
-                                .toList();
-                            log(query.toString());
-                            log(docDataa.toString());
-
-                            if (docDataa.isNotEmpty && docData.isNotEmpty) {
-                              print("object");
-                              Navigator.push(context, MaterialPageRoute(
-                                builder: (context) {
-                                  return ClassTeacherAdmin(
-                                    schoolID: schoolID,
-                                    teacherID: idController.text.trim(),
-                                    teacherEmail: idController.text.trim(),
-                                  );
-                                },
-                              ));
-                              log('Correct password');
-                            } else {
-                              log('Wrong passwordsadfsdf');
-                            }
-
-                            // //>>>>>>>>>>>>>>>>>Checking ID<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-                            // CollectionReference cat = FirebaseFirestore.instance
-                            //     .collection("FacultyProfiles");
-                            // Query query = cat.where("facultyid",
-                            //     isEqualTo: _facultyController.text.trim());
-                            // QuerySnapshot querySnapshot = await query.get();
-                            // final docData = querySnapshot.docs
-                            //     .map((doc) => doc.data())
-                            //     .toList();
-
-                            // //
-                            // //>>>>>>>>>>>>>>>>>>>Checking password<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-                            // CollectionReference pass = FirebaseFirestore
-                            //     .instance
-                            //     .collection("FacultyProfiles");
-                            // Query queries = pass.where("facultyPassword",
-                            //     isEqualTo: _passwordController.text.trim());
-                            // QuerySnapshot querySnapshott = await queries.get();
-                            // final docDataa = querySnapshott.docs
-                            //     .map((doc) => doc.data())
-                            //     .toList();
-
-                            // if (docDataa.isNotEmpty && docData.isNotEmpty) {
-                            //   // Navigator.push(context, MaterialPageRoute(
-                            //   //   builder: (context) {
-                            //   //     return FacultyLiveCourseList();
-                            //   //   },
-                            //   // ));
-                            //   log('Correct password');
-                            // } else {
-                            //   log('Wrong password');
-                            // }
+                            ///////////////////////////
+                            classTeacherLoginController.classTeacherLogin(context);
                           },
                           borderRadius: BorderRadius.circular(16.0),
                           child: Ink(

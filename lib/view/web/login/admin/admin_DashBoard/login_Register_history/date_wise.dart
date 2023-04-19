@@ -3,7 +3,10 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/login_Register_history/login_history.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
+import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../constant/constant.dart';
 
 class DateWiseLoginScreen extends StatefulWidget {
@@ -32,7 +35,10 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
           child: StreamBuilder(
               stream: FirebaseFirestore.instance
                   .collection("SchoolListCollection")
-                  .doc(widget.schoolID)
+                  .doc(Get.find<AdminLoginScreenController>().schoolID)
+                  .collection(
+                      Get.find<GetFireBaseData>().bYear.value)
+                  .doc(Get.find<GetFireBaseData>().bYear.value)
                   .collection("LoginHistory")
                   .snapshots(),
               builder: (context, snapshot) {
@@ -196,8 +202,12 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
                                                                       .instance
                                                                       .collection(
                                                                           "SchoolListCollection")
-                                                                      .doc(widget
+                                                                      .doc(Get.find<
+                                                                              AdminLoginScreenController>()
                                                                           .schoolID)
+                                                                      .collection(
+                                                                       Get.find<GetFireBaseData>().bYear.value)
+                                                                      .doc(Get.find<GetFireBaseData>().bYear.value)
                                                                       .collection(
                                                                           "LoginHistory")
                                                                       .doc(snapshot

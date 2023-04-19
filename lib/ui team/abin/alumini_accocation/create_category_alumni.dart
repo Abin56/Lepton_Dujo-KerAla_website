@@ -1,28 +1,52 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
+import 'package:dujo_kerala_website/controller/get_firebase-data/get_firebase_data.dart';
+import 'package:dujo_kerala_website/model/alumni_association_model/alumni_category_model.dart';
+import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../../model/pTA_section/add_PTAMemberModel.dart';
-import '../../../../../colors/colors.dart';
-import '../../../../../fonts/fonts.dart';
-import 'dropDownListofPTA_section.dart';
+import '../../../view/fonts/fonts.dart';
+
 
 
 // ignore: must_be_immutable
-class AddPtaMembersScreen extends StatelessWidget {
+class CreatecategoryAlumni extends StatelessWidget {
   var id;
 
-  AddPtaMembersScreen({this.id, super.key});
+  CreatecategoryAlumni({this.id, super.key});
 
-  TextEditingController ptaMemberNameController = TextEditingController();
+  TextEditingController categoryNameController = TextEditingController();
 
-  TextEditingController ptaMemberIDController = TextEditingController();
+  TextEditingController categoryIDController = TextEditingController(); 
+
+  addCategoryToFirebase(AlumniCategory model, BuildContext context){
+    FirebaseFirestore.instance.collection('SchoolListCollection').doc(Get.find<AdminLoginScreenController>().schoolID).collection('BatchYear').doc(Get.find<GetFireBaseData>().bYear.value).collection('AlumniAssociations').doc(model.categoryID).set(model.toJson()).then((value) {
+      return showDialog(context: context, builder: (context){
+        return AlertDialog(
+          title: Text('Alumni Category'), 
+          content: Text('Category succesfully added!'), 
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: MaterialButton(onPressed: (){
+                Navigator.pop(context);
+              }, color: Colors.blue, child: Text('OK'),),
+            )
+          ],
+        );
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       
-      appBar: AppBar(title: const Text('Add PTA Members'),
+      appBar: AppBar(title: const Text('Create Alumni Category'),
       backgroundColor: adminePrimayColor,),
       body:
        ListView(
@@ -85,54 +109,48 @@ class AddPtaMembersScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(15),
                   child: TextField(
-                    controller: ptaMemberNameController,
+                    controller: categoryNameController,
                     decoration: InputDecoration(
                       border:  OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20)
                       ),
                       icon: const Icon(Icons.person_3,color: Color.fromARGB(255, 13, 5, 122)),
-                      labelText: 'Name ',
+                      labelText: 'Category Name ',
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(15),
                   child: TextField(
-                    controller: ptaMemberIDController,
+                   controller: categoryIDController,
                     decoration: InputDecoration(
                       border:  OutlineInputBorder(
                         borderRadius:BorderRadius.circular(20) 
                       ),
                        icon: const Icon(Icons.people_outline_sharp,color: Color.fromARGB(255, 13, 5, 122)),
-                      labelText: 'Member ID',
+                      labelText: 'Category ID',
                     ),
                   ),
                 ),
+              
                 Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: PTASectionDropDownButton(schooilID: id,)),
-                SizedBox(
-                  height: size.width * 1 / 25,
-                  width: size.width * 1 / 10,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 3, 39, 68),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
+                  padding: const EdgeInsets.all(20.0),
+                  child: SizedBox(
+                    height: size.width * 1 / 25,
+                    width: size.width * 1 / 10,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(255, 3, 39, 68),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
                       ),
+                      onPressed: () async {
+                        AlumniCategory modell = await AlumniCategory(categoryName: categoryNameController.text, categoryID: categoryIDController.text); 
+                        addCategoryToFirebase(modell, context);
+                      },
+                      child: const Text("Add Category"),
                     ),
-                    onPressed: () async {
-                      final ptaMemberDetails = AddPTAMemberModel(
-                          id: ptaMemberIDController.text.trim(),
-                          ptaCategory: pTAPowerDownValue!["id"],
-                          active: false,
-                          PtaMemberID: ptaMemberIDController.text.trim(),
-                          userName: ptaMemberNameController.text.trim(),
-                          joinDate: DateTime.now().toString());
-                      await PTAMembersAddToFireBase().pTAMembersAddController(
-                          ptaMemberDetails, context, id);
-                    },
-                    child: const Text("Add Category"),
                   ),
                 )
                ]),

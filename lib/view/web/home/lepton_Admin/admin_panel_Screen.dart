@@ -101,7 +101,7 @@ class _LeptonAdminLoginScreenState extends State<LeptonAdminLoginScreen> {
                       Text(
                         'Hey, Enter your details to get sign in \nto your account.',
                         style: ralewayStyle.copyWith(
-                          fontSize: 12.0,
+                          fontSize: 15.0,
                           fontWeight: FontWeight.w400,
                           color: AppColors.textColor,
                         ),
