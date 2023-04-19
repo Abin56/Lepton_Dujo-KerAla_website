@@ -1,15 +1,12 @@
-
+import 'package:dujo_kerala_website/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../../controller/Getx/admin/notice_controller.dart';
-import '../../../../../../model/admin_models/admin_notice_model/admin_notice_model.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
 import '../../../../../fonts/fonts.dart';
-
-
 
 class AddNewNotices extends StatelessWidget {
   AddNewNotices({super.key, required this.schoolId});
@@ -22,8 +19,9 @@ class AddNewNotices extends StatelessWidget {
     adminNoticeController.clearControllers();
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-     // backgroundColor: const Color.fromARGB(255, 27, 95, 88),
-      appBar: AppBar(title: Text('Add New Notice'.tr),backgroundColor: adminePrimayColor),
+      // backgroundColor: const Color.fromARGB(255, 27, 95, 88),
+      appBar: AppBar(
+          title: Text('Add New Notice'.tr), backgroundColor: adminePrimayColor),
       body: Center(
         child: SingleChildScrollView(
           child: Row(
@@ -66,13 +64,17 @@ class AddNewNotices extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(25.0),
                             child: Column(children: [
-                              TextField(
-                                controller: adminNoticeController
+                              DateTimeTextField(
+                                labelText: "Published Date",
+                                textEditingController: adminNoticeController
                                     .publishedDateController,
-                                decoration: InputDecoration(
-                                  border: const OutlineInputBorder(),
-                                  labelText: 'Published Date'.tr,
-                                ),
+                                function: () async {
+                                  String result = await dateTimePicker(context);
+                                  if (result.isNotEmpty) {
+                                    adminNoticeController
+                                        .publishedDateController.text = result;
+                                  }
+                                },
                               ),
                               sizedBoxH20,
                               TextField(
@@ -84,13 +86,17 @@ class AddNewNotices extends StatelessWidget {
                                 ),
                               ),
                               sizedBoxH20,
-                              TextField(
-                                controller: adminNoticeController
+                              DateTimeTextField(
+                                labelText: "Date of occation",
+                                textEditingController: adminNoticeController
                                     .dateOfOccasionController,
-                                decoration: InputDecoration(
-                                  border: const OutlineInputBorder(),
-                                  labelText: 'Date of occation'.tr,
-                                ),
+                                function: () async {
+                                  String result = await dateTimePicker(context);
+                                  if (result.isNotEmpty) {
+                                    adminNoticeController
+                                        .dateOfOccasionController.text = result;
+                                  }
+                                },
                               ),
                               sizedBoxH20,
                               TextField(
@@ -111,13 +117,18 @@ class AddNewNotices extends StatelessWidget {
                                 ),
                               ),
                               sizedBoxH20,
-                              TextField(
-                                controller: adminNoticeController
+                              DateTimeTextField(
+                                labelText: "Date of Submission",
+                                textEditingController: adminNoticeController
                                     .dateOfSubmissionController,
-                                decoration: InputDecoration(
-                                  border: const OutlineInputBorder(),
-                                  labelText: 'Date of Submission'.tr,
-                                ),
+                                function: () async {
+                                  String result = await dateTimePicker(context);
+                                  if (result.isNotEmpty) {
+                                    adminNoticeController
+                                        .dateOfSubmissionController
+                                        .text = result;
+                                  }
+                                },
                               ),
                               sizedBoxH20,
                               TextField(
@@ -261,41 +272,7 @@ class AddNewNotices extends StatelessWidget {
                                     textStyle: const TextStyle(fontSize: 17),
                                   ),
                                   onPressed: () async {
-                                    adminNoticeController.addAdminNotice(
-                                      schoolId,
-                                      AdminNoticeModel(
-                                        publishedDate: adminNoticeController
-                                            .publishedDateController.text,
-                                        heading: adminNoticeController
-                                            .headingController.text,
-                                        dateofoccation: adminNoticeController
-                                            .dateOfOccasionController.text,
-                                        venue: adminNoticeController
-                                            .venueController.text,
-                                        chiefGuest: adminNoticeController
-                                            .chiefGuestController.text,
-                                        dateOfSubmission: adminNoticeController
-                                            .dateOfSubmissionController.text,
-                                        signedBy: adminNoticeController
-                                            .signedByController.text,
-                                        noticeId: '',
-                                        imageUrl: adminNoticeController
-                                            .imageUrl.value,
-                                        signedImageUrl: adminNoticeController
-                                            .signedImageUrl.value,
-                                        imageId: adminNoticeController.imageId,
-                                        signedImageId:
-                                            adminNoticeController.signedImageId,
-                                        customContent: adminNoticeController
-                                            .customContentController.text,
-                                        visibleGuardian: adminNoticeController
-                                            .guardianCheckBox.value,
-                                        visibleStudent: adminNoticeController
-                                            .studentCheckBox.value,
-                                        visibleTeacher: adminNoticeController
-                                            .teacherCheckBox.value,
-                                      ),
-                                    );
+                                    adminNoticeController.addAdminNotice();
                                   },
                                   child: Text('Create'.tr),
                                 ),
@@ -310,6 +287,34 @@ class AddNewNotices extends StatelessWidget {
               })
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class DateTimeTextField extends StatelessWidget {
+  const DateTimeTextField({
+    super.key,
+    required this.textEditingController,
+    required this.labelText,
+    required this.function,
+  });
+
+  final TextEditingController textEditingController;
+  final String labelText;
+  final VoidCallback function;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: function,
+      child: TextField(
+        enabled: false,
+        controller: textEditingController,
+        decoration: InputDecoration(
+          border: const OutlineInputBorder(),
+          labelText: labelText.tr,
         ),
       ),
     );
