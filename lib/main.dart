@@ -54,9 +54,9 @@ class MyApp extends StatelessWidget {
             // AllStudentList()
            // AdminDashBoardPage(schoolID: '',date: '',loginTime: '',wadmin: '',key: null,)
           // AllStdf()
-         BusRoute()
+        // BusRoute()
         // NonTeachingLogin(schoolID: '',)
-          //   DujoHomePage()
+        DujoHomePage()
               );
         });
   }
