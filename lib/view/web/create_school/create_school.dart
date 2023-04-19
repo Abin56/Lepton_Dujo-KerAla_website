@@ -47,6 +47,8 @@ class _SchoolProfileState extends State<SchoolProfile> {
     creatSchoollID();
   }
 
+    final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -95,220 +97,211 @@ class _SchoolProfileState extends State<SchoolProfile> {
                   //       'https://lottiefiles.com/22462-campus-library-school-building-maison-mocca-animation'),
                   // ).
                   SizedBox(
-                      height: 500,
-                      width: 1000,
+                      height: size.width/3,
+                      width: 800,
                       child: LottieBuilder.asset(
                           "assets/images/22462-campus-library-school-building-maison-mocca-animation.json")),
                 ],
               ),
             ),
-            Container(
-              color: Colors.white,
-              height: size.height * 1 / 1,
-              width: size.width * 1 / 2,
-              child: Padding(
-                padding: EdgeInsets.only(
-                    left: size.width / 20,
-                    right: size.width / 50,
-                    top: size.width / 50),
-                child: Container(
-                  color: const Color.fromARGB(255, 255, 255, 255),
-                  //height: size.width * 1 / 2.5,
-                  //  width: size.width * 1 / 4,
-                  child: ListView(children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 15, left: 15),
-                      child: TextField(
-                        controller: schoolNameController,
-                        decoration: InputDecoration(
-                            // border: OutlineInputBorder(),
-                            labelText: 'School Name',
-                            icon: const Icon(Icons.school_sharp,
-                                color: Color.fromARGB(255, 9, 11, 161)),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20))),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: SelectState(
-                        onCountryChanged: (value) {
-                          setState(() {
-                            countryValue = value;
-                          });
-                        },
-                        onStateChanged: (value) {
-                          setState(() {
-                            stateValue = value;
-                          });
-                        },
-                        onCityChanged: (value) {
-                          setState(() {
-                            cityValue = value;
-                          });
-                        },
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(right: 15, left: 15, top: 15),
-                      child: TextField(
-                        controller: placeController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          labelText: 'Place',
-                          icon: const Icon(Icons.place_outlined,
-                              color: Color.fromARGB(255, 9, 11, 161)),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(right: 15, left: 15, top: 15),
-                      child: TextField(
-                        controller: adminUserNameController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          labelText: 'Admin Username',
-                          icon: const Icon(Icons.admin_panel_settings_outlined,
-                              color: Color.fromARGB(255, 9, 11, 161)),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(right: 15, left: 15, top: 15),
-                      child: TextField(
-                        controller: adminPasswordController,
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          labelText: 'Password',
-                          icon: const Icon(Icons.lock_outline_sharp,
-                              color: Color.fromARGB(255, 9, 11, 161)),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(right: 15, left: 15, top: 15),
-                      child: TextField(
-                        controller: emailController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          labelText: 'Email',
-                          icon: const Icon(Icons.mail_outline,
-                              color: Color.fromARGB(255, 9, 11, 161)),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(right: 15, left: 15, top: 15),
-                      child: TextField(
-                        controller: phoneNumberController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          labelText: 'Phone Number',
-                          icon: const Icon(Icons.phone,
-                              color: Color.fromARGB(255, 9, 11, 161)),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          right: 15, left: 15, top: 15, bottom: 15),
-                      child: TextField(
-                        controller: designationController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          labelText: 'Designation',
-                          icon: const Icon(Icons.person_pin_rounded,
-                              color: Color.fromARGB(255, 9, 11, 161)),
-                        ),
-                      ),
-                    ),
-                    const CircleAvatar(
-                      radius: 60,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Container(
-                        height: size.width * 1 / 25,
-                        width: size.width * 1 / 25,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                const Color.fromARGB(255, 3, 39, 68),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                          onPressed: () async {
-                            final schoolDetails = SchoolsToBeVerified(
-                                schoolName: schoolNameController.text,
-                                schoolID:
-                                    schoolNameController.text.substring(0, 5) +
-                                        cityValue.substring(0, 5) +
-                                        schoolID,
-                                id: schoolNameController.text.substring(0, 5) +
-                                    cityValue.substring(0, 5) +
-                                    schoolID,
-                                district: cityValue.toString(),
-                                place: placeController.text.trim(),
-                                adminUserName:
-                                    adminUserNameController.text.trim(),
-                                password: adminPasswordController.text.trim(),
-                                phoneNumber: phoneNumberController.text,
-                                email: emailController.text,
-                                postedDate: DateTime.now().toString(),
-                                verified: false);
-
-                            print(await AddRequestedSchoolsToFirebase()
-                                .checkSchoolIsCreated(schoolNameController.text,
-                                    placeController.text)
-                                .toString());
-
-                            if (await AddRequestedSchoolsToFirebase()
-                                .checkSchoolIsCreated(schoolNameController.text,
-                                    placeController.text)) {
-                              showToast(msg: 'School Is Already Created');
-                            } else {
-                              if (context.mounted) {}
-                              AddRequestedSchoolsToFirebase()
-                                  .addRequestedSchools(schoolDetails, context);
-                            }
-
-                            // final schoolDetails1 = CreatedSchoolAddModel(
-                            //     id: adminUserNameController.text.trim() + schoolID,
-                            //     schoolName: schoolNameController.text.trim(),
-                            //     schoolID: adminUserNameController.text.trim() + schoolID,
-                            //     district: cityValue.toString(),
-                            //     place: placeController.text.trim(),
-                            //     adminUserName: adminUserNameController.text.trim(),
-                            //     password: adminPasswordController.text.trim(),
-                            //     postedDate: DateTime.now().toString());
-
-                            // CreateSchoolAddToFireBase()
-                            //     .createSchoolController(schoolDetails1, context);
+             SizedBox(
+            width:size.width*1/2 ,
+            height: size.height,
+              child: SingleChildScrollView(
+                  child: Form
+                  ( key: formKey,
+                    child: Padding(
+                    padding:  EdgeInsets.only(left: size.width/10,right:  size.width/10),
+                    child: Column(children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: SelectState(
+                          onCountryChanged: (value) {
+                            setState(() {
+                              countryValue = value;
+                            });
                           },
-                          child: const Text("Create"),
+                          onStateChanged: (value) {
+                            setState(() {
+                              stateValue = value;
+                            });
+                          },
+                          onCityChanged: (value) {
+                            setState(() {
+                              cityValue = value;
+                            });
+                          },
                         ),
                       ),
-                    ),
-                  ]),
+                      
+                      SchoolTextFormFieldWidget(textEditingController: schoolNameController,
+                      function: checkFieldEmpty,
+                      labelText: 'School Name',
+                       icon: Icons.phone,),
+                  
+                  
+                      
+                      SchoolTextFormFieldWidget(textEditingController: placeController,
+                      function: checkFieldEmpty,
+                      labelText: 'Place',
+                       icon: Icons.place_outlined,),
+                  
+                  
+                                  
+                      
+                      SchoolTextFormFieldWidget(textEditingController: adminUserNameController,
+                      function: checkFieldEmpty,
+                      labelText: 'Admin Username',
+                       icon: Icons.admin_panel_settings_outlined,),
+                  
+                  
+                  
+                                  
+                      
+                      SchoolTextFormFieldWidget(textEditingController: adminPasswordController,
+                      function: checkFieldPasswordIsValid,
+                      labelText: 'Password',
+                       icon: Icons.lock_outline_sharp,),
+                  
+                  
+                  
+                      
+                  
+                      
+                      SchoolTextFormFieldWidget(textEditingController: emailController,
+                      function: checkFieldEmailIsValid,
+                      labelText: 'Email',
+                       icon: Icons.mail_outline,),
+                  
+                  
+                  
+                                   
+                      
+                      SchoolTextFormFieldWidget(textEditingController: phoneNumberController,
+                      function: checkFieldPhoneNumberIsValid,
+                      labelText: 'Phone Number',
+                       icon: Icons.phone,),
+                  
+                  
+                  
+                  
+                  
+                      SchoolTextFormFieldWidget(textEditingController: designationController,
+                      function: checkFieldEmpty,
+                      labelText: 'Designation',
+                       icon: Icons.person_4,),
+                  
+                  
+                      const CircleAvatar(
+                        radius: 60,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Container(
+                          height: size.width * 1 / 25,
+                          width: size.width * 1 / 6,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  const Color.fromARGB(255, 3, 39, 68),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                            onPressed: () async {
+                               bool? result = formKey.currentState?.validate();
+                              final schoolDetails = SchoolsToBeVerified(
+                                  schoolName: schoolNameController.text,
+                                  schoolID:
+                                      schoolNameController.text.substring(0, 5) +
+                                          cityValue.substring(0, 5) +
+                                          schoolID,
+                                  id: schoolNameController.text.substring(0, 5) +
+                                      cityValue.substring(0, 5) +
+                                      schoolID,
+                                  district: cityValue.toString(),
+                                  place: placeController.text.trim(),
+                                  adminUserName:
+                                      adminUserNameController.text.trim(),
+                                  password: adminPasswordController.text.trim(),
+                                  phoneNumber: phoneNumberController.text,
+                                  email: emailController.text,
+                                  postedDate: DateTime.now().toString(),
+                                  verified: false);
+                  
+                              print(await AddRequestedSchoolsToFirebase()
+                                  .checkSchoolIsCreated(schoolNameController.text,
+                                      placeController.text)
+                                  .toString());
+                  
+                              if (await AddRequestedSchoolsToFirebase()
+                                  .checkSchoolIsCreated(schoolNameController.text,
+                                      placeController.text)) {
+                                showToast(msg: 'School Is Already Created');
+                              } else {
+                                if (context.mounted) {}
+                                AddRequestedSchoolsToFirebase()
+                                    .addRequestedSchools(schoolDetails, context);
+                              }
+                  
+                              // final schoolDetails1 = CreatedSchoolAddModel(
+                              //     id: adminUserNameController.text.trim() + schoolID,
+                              //     schoolName: schoolNameController.text.trim(),
+                              //     schoolID: adminUserNameController.text.trim() + schoolID,
+                              //     district: cityValue.toString(),
+                              //     place: placeController.text.trim(),
+                              //     adminUserName: adminUserNameController.text.trim(),
+                              //     password: adminPasswordController.text.trim(),
+                              //     postedDate: DateTime.now().toString());
+                  
+                              // CreateSchoolAddToFireBase()
+                              //     .createSchoolController(schoolDetails1, context);
+                            },
+                            child: const Text("Create"),
+                          ),
+                        ),
+                      ),
+                    ]),
+                  ),
                 ),
               ),
-            ),
+        ),
           ],
         ),
-      ]),
+    ]  ),
+    );
+  }
+}
+
+class SchoolTextFormFieldWidget extends StatelessWidget {
+   SchoolTextFormFieldWidget({
+    super.key,
+     required this.textEditingController,
+    required this.labelText,
+    required this.function,
+     required this.icon,
+  });
+
+  final TextEditingController textEditingController;
+  final String labelText;
+  final String? Function(String? fieldContent) function;
+    IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: TextFormField(
+        validator: function,
+        controller: textEditingController,
+        decoration: InputDecoration(
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+          icon:  Icon(icon,
+            color: Color.fromARGB(221, 28, 9, 110),
+          ),
+          labelText: labelText,
+        ),
+      ),
     );
   }
 }

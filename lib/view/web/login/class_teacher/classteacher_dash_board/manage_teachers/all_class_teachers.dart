@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import '../../../../../../model/create_classModel/create_classModel.dart';
 import '../../../../../../model/teacher/add_student.dart';
 import '../../../../../../model/teacher/add_teacher_model.dart';
+import '../../../../../colors/colors.dart';
 import 'class_subjects.dart';
 
 class AllClassesListViewForTeacher extends StatefulWidget {
@@ -31,7 +32,7 @@ class _AllClassesListViewForTeacherState
     log(widget.classID);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add teachers for the subject"),
+        title: Text("Add teachers for the subject"), backgroundColor: adminePrimayColor
       ),
       body: SafeArea(
         child: StreamBuilder(

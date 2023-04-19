@@ -7,6 +7,7 @@ import 'package:dujo_kerala_website/view/web/widgets/custom_container.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../model/guardian/guardian_model.dart';
+import '../../../../../colors/colors.dart';
 import 'edit_guardian_details.dart';
 
 class AdminGuardiansPanelScreen extends StatelessWidget {
@@ -17,7 +18,7 @@ class AdminGuardiansPanelScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
  var screenSize = MediaQuery.of(context).size;
-    return Scaffold(
+    return Scaffold( appBar: AppBar(backgroundColor: adminePrimayColor),
       body: SafeArea(
         child: Column(
           children: [

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../model/parent/parent_model.dart';
+import '../../../../colors/colors.dart';
 import '../../../../constant/constant.dart';
 
 
@@ -20,7 +21,7 @@ class _MyHomePageState extends State<AddParent> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    return Scaffold(
+    return Scaffold( appBar: AppBar(backgroundColor: adminePrimayColor),
       body: Row(
         children: <Widget>[
           //left section

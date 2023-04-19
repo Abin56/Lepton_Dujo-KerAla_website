@@ -1,0 +1,261 @@
+[33mcommit 8ae46b5795b0b6c00edaf975f4585e1ffe52bb29[m[33m ([m[1;36mHEAD -> [m[1;32mabin76[m[33m)[m
+Merge: 3c70149 819c8ad
+Author: Abin76 <abinraj730@gmail.com>
+Date:   Wed Apr 19 16:11:25 2023 +0530
+
+    Merge branch 'edwin' of https://github.com/Abin56/Lepton_Dujo-KerAla_website into abin76
+
+[33mcommit 819c8add97800268dc2440726281d35f5545388a[m
+Author: Abin56 <abinjohn8089@gmail.com>
+Date:   Wed Apr 19 16:09:20 2023 +0530
+
+    teacher login problem solved
+
+[33mcommit eb32b86231516d29c921d7545a6f03b5cdfc78f7[m
+Merge: 3cf9293 7dbcece
+Author: Abin56 <abinjohn8089@gmail.com>
+Date:   Wed Apr 19 15:19:24 2023 +0530
+
+    Merge remote-tracking branch 'origin/praveen' into edwin
+    
+    # Conflicts:
+    #       lib/ui team/abin/PTA/mothers pta/mothers_pta.dart
+    #       lib/view/web/create_school/create_school.dart
+
+[33mcommit 3cf9293b7e11c2601c5dbd6c6a5af04a73c0cf06[m
+Author: Abin56 <abinjohn8089@gmail.com>
+Date:   Wed Apr 19 15:18:20 2023 +0530
+
+    COMMIT
+
+[33mcommit 3c70149e349bdf6b97c1b00374cfae4f0750527a[m[33m ([m[1;31morigin/abin76[m[33m)[m
+Author: Abin76 <abinraj730@gmail.com>
+Date:   Wed Apr 19 15:13:59 2023 +0530
+
+    updated
+
+[33mcommit 7dffbff6fc97c78e6e45362637d55e00496fcbed[m
+Author: Abin76 <abinraj730@gmail.com>
+Date:   Wed Apr 19 15:09:09 2023 +0530
+
+    bus route validation
+
+[33mcommit eeb8e5fb4c2aa2d45de1adf6d856ea1b8a8a2be8[m
+Merge: f083d9b 4de9978
+Author: Abin76 <abinraj730@gmail.com>
+Date:   Wed Apr 19 14:51:49 2023 +0530
+
+    Merge branch 'edwin' of https://github.com/Abin56/Lepton_Dujo-KerAla_website into abin76
+    
+     Conflicts:
+    	lib/view/web/login/admin/admin_DashBoard/admin_dashborad_screen.dart
+
+[33mcommit 4de997852c548188efd2331b6780cafa8162681a[m
+Author: Abin56 <abinjohn8089@gmail.com>
+Date:   Wed Apr 19 14:50:43 2023 +0530
+
+    abinraj plus family policy
+
+[33mcommit 2740ba886245604c53c25f84762d03b51f3192a0[m
+Merge: 200147f 7063f49
+Author: Abin56 <abinjohn8089@gmail.com>
+Date:   Wed Apr 19 14:41:50 2023 +0530
+
+    Merge remote-tracking branch 'origin/abin76' into edwin
+    
+    # Conflicts:
+    #       lib/view/web/login/class_teacher/class_teacher_screen_login.dart
+
+[33mcommit f083d9b28aca00ece5e8334c3f0a6eab43016c7e[m
+Author: Abin76 <abinraj730@gmail.com>
+Date:   Wed Apr 19 14:37:01 2023 +0530
+
+    web 19.03.23
+
+[33mcommit 200147fb21ca3e90b2b6aa218f108ee55860d91a[m
+Author: Abin56 <abinjohn8089@gmail.com>
+Date:   Wed Apr 19 14:34:09 2023 +0530
+
+    family policty added
+
+[33mcommit 7dbcece1ea9f27b879a4b0343f93a808412d70ba[m[33m ([m[1;31morigin/praveen[m[33m)[m
+Author: Praveen <praveenpathmakaran@gmail.com>
+Date:   Wed Apr 19 10:57:12 2023 +0530
+
+    duplicate school creation fixed
+
+[33mcommit 7063f498b06dbe2d12d6a2e6a44c4ea6b6dccc55[m
+Author: Abin76 <abinraj730@gmail.com>
+Date:   Tue Apr 18 19:06:58 2023 +0530
+
+    create school validation etc
+
+[33mcommit ced32c8e7d8762a17632e73e2d96e9d6317ec319[m
+Author: Abin56 <abinjohn8089@gmail.com>
+Date:   Tue Apr 18 18:54:42 2023 +0530
+
+    final code ui desgin ceo 15
+
+[33mcommit 51b3cea93fc6916c9dab66493f560cc15be69691[m
+Author: Abin56 <abinjohn8089@gmail.com>
+Date:   Tue Apr 18 18:46:27 2023 +0530
+
+    final code ui desgin ceo
+
+[33mcommit 49aa8f37c7782c0e5c8b4803077d249973b8ef76[m
+Author: Abin56 <abinjohn8089@gmail.com>
+Date:   Tue Apr 18 16:42:00 2023 +0530
+
+    final codeee
+
+[33mcommit a926914b0edabfb41ad258bcc6a0d8676fefacf2[m
+Author: Abin56 <abinjohn8089@gmail.com>
+Date:   Tue Apr 18 13:52:00 2023 +0530
+
+    final code completed
+
+[33mcommit 8f0b1568f4d2c6bd2bc52605b2305c6b61eefe45[m
+Author: Abin56 <abinjohn8089@gmail.com>
+Date:   Tue Apr 18 13:12:45 2023 +0530
+
+    undert maintance page upload
+
+[33mcommit ade3452c9fb79f5f3d570e7decb4cee4d5061229[m
+Author: Abin56 <abinjohn8089@gmail.com>
+Date:   Tue Apr 18 13:08:32 2023 +0530
+
+    praveen
+
+[33mcommit 3068256ed793ca890b67acc442cb9f3358a4738d[m
+Merge: c6c645c 99a8b55
+Author: Abin56 <abinjohn8089@gmail.com>
+Date:   Tue Apr 18 13:03:41 2023 +0530
+
+    Merge branch 'praveen' of https://github.com/Abin56/Lepton_Dujo-KerAla_website into edwin
+    
+     Conflicts:
+    	lib/view/web/login/admin/admin_DashBoard/admin_dashborad_screen.dart
+
+[33mcommit 99a8b55e8b85dbdb38b3058c8ebcee0aa594c895[m
+Merge: 1b7d7a3 ef1f48e
+Author: Praveen <praveenpathmakaran@gmail.com>
+Date:   Tue Apr 18 12:57:48 2023 +0530
+
+    Merge remote-tracking branch 'origin/edwin' into praveen
+    
+    # Conflicts:
+    #       lib/view/web/login/admin/admin_DashBoard/admin_dashborad_screen.dart
+
+[33mcommit 1b7d7a3ac589be2100593dfd3686c9f6c459e473[m
+Author: Praveen <praveenpathmakaran@gmail.com>
+Date:   Tue Apr 18 12:53:31 2023 +0530
+
+    new
+
+[33mcommit 0e8a8de9bc663ca6e9842779b3e9220a9c9af0e7[m
+Author: Praveen <praveenpathmakaran@gmail.com>
+Date:   Tue Apr 18 12:42:13 2023 +0530
+
+    commit
+
+[33mcommit eaf8d91aa918e0027c2551bffab6dbc76d459190[m
+Author: Praveen <praveenpathmakaran@gmail.com>
+Date:   Tue Apr 18 11:39:38 2023 +0530
+
+    pta complete
+
+[33mcommit c6c645c1c1b2a83b0fb087a572114e10cc633548[m
+Merge: ef1f48e e89f6bc
+Author: Abin56 <abinjohn8089@gmail.com>
+Date:   Tue Apr 18 11:19:44 2023 +0530
+
+    Merge branch 'hrithik' of https://github.com/Abin56/Lepton_Dujo-KerAla_website into edwin
+    
+     Conflicts:
+    	lib/controller/admin_login_screen/admin_login_screen_controller.dart
+    	lib/main.dart
+    	lib/ui team/abin/alumini_accocation/create_alumni.dart
+    	lib/ui team/abin/alumini_accocation/create_category_alumni.dart
+    	lib/view/web/login/admin/admin_DashBoard/admin_dashborad_screen.dart
+    	lib/view/web/login/admin/admin_DashBoard/alumini_accocation/alumni_assocation.dart
+
+[33mcommit e89f6bc1589f23f1c241aecf8579027caf61836f[m[33m ([m[1;31morigin/hrithik[m[33m)[m
+Author: Hrithik Menon <hrithikmenon1998@gmail.com>
+Date:   Tue Apr 18 11:07:32 2023 +0530
+
+    food and beverages, timetable ui etc. 17 april
+
+[33mcommit ef1f48e5789aafa95a768a71fef5fdd35680386f[m
+Author: Abin56 <abinjohn8089@gmail.com>
+Date:   Mon Apr 17 21:41:17 2023 +0530
+
+    genrate tc completed
+
+[33mcommit 1933cee109bde39026a8ee1381e2ea994c3de9b2[m
+Merge: 72a75d2 905a4ea
+Author: Abin56 <abinjohn8089@gmail.com>
+Date:   Mon Apr 17 20:12:51 2023 +0530
+
+    Merge branch 'sruthi' of https://github.com/Abin56/Lepton_Dujo-KerAla_website into edwin
+
+[33mcommit 72a75d2a402ff44deb511186c39636a3300f26df[m
+Merge: 1c6aa63 05ea57f
+Author: Abin56 <abinjohn8089@gmail.com>
+Date:   Mon Apr 17 20:12:40 2023 +0530
+
+    Merge branch 'abin76' of https://github.com/Abin56/Lepton_Dujo-KerAla_website into edwin
+
+[33mcommit 1c6aa63731ca8abc80b3f83a1a7f36d026d2dd58[m
+Author: Abin56 <abinjohn8089@gmail.com>
+Date:   Mon Apr 17 20:12:09 2023 +0530
+
+    sampoorna initilized
+
+[33mcommit 905a4eabc4d6e34699bb9ad006c824e72291c3ec[m[33m ([m[1;31morigin/sruthi[m[33m)[m
+Author: SruthiSadanandan <sruthipariyapuram@gmail.com>
+Date:   Mon Apr 17 19:33:07 2023 +0530
+
+    Student Summary
+
+[33mcommit 1ed1f96173646cbdd78c941751ccfab4493bc84a[m
+Author: Praveen <praveenpathmakaran@gmail.com>
+Date:   Mon Apr 17 19:26:43 2023 +0530
+
+    circle avatar image not showing bug fixed
+
+[33mcommit 05ea57faf8a61e98e58debb60d7b94b062fe45ef[m
+Author: Abin76 <abinraj730@gmail.com>
+Date:   Mon Apr 17 18:53:36 2023 +0530
+
+    search student
+
+[33mcommit e1090c685fe6ae94e7cf62846373b2cd7a6d18f8[m
+Author: Praveen <praveenpathmakaran@gmail.com>
+Date:   Mon Apr 17 18:46:02 2023 +0530
+
+    student protection complete
+
+[33mcommit a7841f4098989fc1b04cea8376a22834aba40617[m
+Author: Abin56 <abinjohn8089@gmail.com>
+Date:   Mon Apr 17 17:16:12 2023 +0530
+
+    login Register converted into getx and batch wise completed
+
+[33mcommit 56f3f0023b2232a914ee4db78f78b2937e61011d[m
+Author: Abin56 <abinjohn8089@gmail.com>
+Date:   Mon Apr 17 17:14:19 2023 +0530
+
+    class teacher login converted into getx
+
+[33mcommit 8e3022cf77cb18271529c13f9ad9fc926e270039[m
+Author: Abin56 <abinjohn8089@gmail.com>
+Date:   Mon Apr 17 16:40:10 2023 +0530
+
+    class teacher login converted into getx
+
+[33mcommit 412242aa8a8fb19854911493c9c110a6ef22ceb0[m
+Merge: 54c9dc3 7a8fa52
+Author: Abin76 <abinraj730@gmail.com>
+Date:   Mon Apr 17 16:04:51 2023 +0530
+
+    Me

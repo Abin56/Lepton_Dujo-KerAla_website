@@ -1,3 +1,4 @@
+import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../model/guardian/guardian_model.dart';
@@ -17,6 +18,7 @@ class EditGuardianDetails extends StatelessWidget {
      guardianNameController.text = model.guardianName; 
      joinDateController.text = model.joinDate;
     return Scaffold(
+       appBar: AppBar(backgroundColor: adminePrimayColor),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(top: screenSize.width * 1 / 9),

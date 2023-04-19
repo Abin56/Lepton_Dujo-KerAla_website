@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
 import '../../../../../model/parent/parent_model.dart';
+import '../../../../colors/colors.dart';
 import '../../../widgets/custom_container.dart';
 import 'add_parent.dart';
 
@@ -16,7 +17,7 @@ class AdminParentPanelSCreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    return Scaffold(
+    return Scaffold( appBar: AppBar(backgroundColor: adminePrimayColor),
       body: SafeArea(
         child: Column(
           children: [

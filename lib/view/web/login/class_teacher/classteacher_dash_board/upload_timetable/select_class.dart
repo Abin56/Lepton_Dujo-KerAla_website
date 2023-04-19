@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
 
 class SelectClassForTimeTable extends StatefulWidget {
@@ -31,7 +32,7 @@ class _SelectClassForTimeTableState extends State<SelectClassForTimeTable> {
           Color.fromRGBO(99, 164, 255, 1)
         ]),
       ),
-      child: Scaffold(
+      child: Scaffold( appBar: AppBar(backgroundColor: adminePrimayColor),
         backgroundColor: Colors.transparent,
         body: Center(
           child: Column( 

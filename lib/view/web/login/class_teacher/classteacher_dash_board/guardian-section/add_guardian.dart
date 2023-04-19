@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../model/guardian/guardian_model.dart';
+import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
 
 
@@ -21,6 +22,7 @@ class _MyHomePageState extends State<AddGuardian> {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
+        appBar: AppBar(backgroundColor: adminePrimayColor),
       body: Row(
         children: <Widget>[
           //left section

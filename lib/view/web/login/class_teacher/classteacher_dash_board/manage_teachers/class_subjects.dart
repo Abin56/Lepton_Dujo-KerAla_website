@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../model/get_classwise_subject.dart';
+import '../../../../../colors/colors.dart';
 
 
 class ClassWiseSubject extends StatefulWidget {
@@ -41,7 +42,7 @@ class _ClassWiseSubjectState extends State<ClassWiseSubject> {
     firebaseFirestore.set({'className': fetchingClass, 'id': widget.classID});
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Class subjects'),
+        title: const Text('Class subjects'),backgroundColor: adminePrimayColor,
       ),
       body: SafeArea(
         child: StreamBuilder(
