@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:country_state_city_picker/country_state_city_picker.dart';
+import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import '../../../../model/schools_to_be_verified/schools_to_be_verified_create_list.dart';
@@ -149,7 +150,8 @@ class _SchoolProfileState extends State<SchoolProfile> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 15, left: 15, top: 15),
+                      padding:
+                          const EdgeInsets.only(right: 15, left: 15, top: 15),
                       child: TextField(
                         controller: placeController,
                         decoration: InputDecoration(
@@ -162,7 +164,8 @@ class _SchoolProfileState extends State<SchoolProfile> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 15, left: 15, top: 15),
+                      padding:
+                          const EdgeInsets.only(right: 15, left: 15, top: 15),
                       child: TextField(
                         controller: adminUserNameController,
                         decoration: InputDecoration(
@@ -175,7 +178,8 @@ class _SchoolProfileState extends State<SchoolProfile> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 15, left: 15, top: 15),
+                      padding:
+                          const EdgeInsets.only(right: 15, left: 15, top: 15),
                       child: TextField(
                         controller: adminPasswordController,
                         obscureText: true,
@@ -189,7 +193,8 @@ class _SchoolProfileState extends State<SchoolProfile> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 15, left: 15, top: 15),
+                      padding:
+                          const EdgeInsets.only(right: 15, left: 15, top: 15),
                       child: TextField(
                         controller: emailController,
                         decoration: InputDecoration(
@@ -202,7 +207,8 @@ class _SchoolProfileState extends State<SchoolProfile> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 15, left: 15, top: 15),
+                      padding:
+                          const EdgeInsets.only(right: 15, left: 15, top: 15),
                       child: TextField(
                         controller: phoneNumberController,
                         decoration: InputDecoration(
@@ -238,12 +244,13 @@ class _SchoolProfileState extends State<SchoolProfile> {
                         width: size.width * 1 / 25,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color.fromARGB(255, 3, 39, 68),
+                            backgroundColor:
+                                const Color.fromARGB(255, 3, 39, 68),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
                           ),
-                          onPressed: () {
+                          onPressed: () async {
                             final schoolDetails = SchoolsToBeVerified(
                                 schoolName: schoolNameController.text,
                                 schoolID:
@@ -251,8 +258,8 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                         cityValue.substring(0, 5) +
                                         schoolID,
                                 id: schoolNameController.text.substring(0, 5) +
-                                        cityValue.substring(0, 5) +
-                                        schoolID,
+                                    cityValue.substring(0, 5) +
+                                    schoolID,
                                 district: cityValue.toString(),
                                 place: placeController.text.trim(),
                                 adminUserName:
@@ -263,8 +270,21 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                 postedDate: DateTime.now().toString(),
                                 verified: false);
 
-                            AddRequestedSchoolsToFirebase()
-                                .addRequestedSchools(schoolDetails, context);
+                            print(await AddRequestedSchoolsToFirebase()
+                                .checkSchoolIsCreated(schoolNameController.text,
+                                    placeController.text)
+                                .toString());
+
+                            if (await AddRequestedSchoolsToFirebase()
+                                .checkSchoolIsCreated(schoolNameController.text,
+                                    placeController.text)) {
+                              showToast(msg: 'School Is Already Created');
+                            } else {
+                              if (context.mounted) {}
+                              AddRequestedSchoolsToFirebase()
+                                  .addRequestedSchools(schoolDetails, context);
+                            }
+
                             // final schoolDetails1 = CreatedSchoolAddModel(
                             //     id: adminUserNameController.text.trim() + schoolID,
                             //     schoolName: schoolNameController.text.trim(),

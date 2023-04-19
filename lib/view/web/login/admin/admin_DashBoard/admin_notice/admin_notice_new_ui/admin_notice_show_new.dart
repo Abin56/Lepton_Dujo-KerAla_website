@@ -34,6 +34,9 @@ class NoticeDisplay extends StatelessWidget {
       )),
       child: Scaffold(
           backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+          ),
           body: SafeArea(
             child: Row(
               children: [
@@ -78,6 +81,12 @@ class NoticeDisplay extends StatelessWidget {
                                                 .adminNoticeModelData
                                                 .value!
                                                 .imageUrl,
+                                            errorBuilder:
+                                                (context, error, stackTrace) {
+                                              return const Text(
+                                                'Image Not Found',
+                                              );
+                                            },
                                             fit: BoxFit.fill,
                                           )),
                                     ),

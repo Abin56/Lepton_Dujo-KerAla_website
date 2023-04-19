@@ -3,7 +3,6 @@ import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_sc
 import 'package:dujo_kerala_website/controller/get_firebase-data/get_firebase_data.dart';
 import 'package:dujo_kerala_website/model/alumni_association_model/alumni_category_model.dart';
 import 'package:dujo_kerala_website/view/colors/colors.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/pTA_section/dropDownListofPTA_section.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
