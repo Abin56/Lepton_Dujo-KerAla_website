@@ -1,13 +1,11 @@
+import 'package:dujo_kerala_website/ui%20team/manage_teachers.dart';
+import 'package:dujo_kerala_website/ui%20team/new.dart';
 import 'package:dujo_kerala_website/view/web/home/dujo_home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
-
-import 'ui team/add_student.dart';
-import 'ui team/manage_teachers.dart';
-import 'ui team/new_profile.dart';
+import 'ui team/manage_teacher_create.dart';
 
 
 void main() async {
@@ -46,11 +44,16 @@ class MyApp extends StatelessWidget {
                 // ignore: deprecated_member_use
                 accentColor: const Color(0xFF02BB9F),
               ),
-              home: 
+              home:
+              
             // DujoHomePage()
-              //  ManageTeachers()
-              // NewProfile()
-              AddStudentTea(teacherIDE: null,)
+              ManageTeachers()
+           
+              // AddStudentTea(teacherIDE: null,)
+            // AddTeachersSubjects()
+           
+         
+            
               
               );
         });

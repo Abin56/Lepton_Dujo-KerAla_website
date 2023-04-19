@@ -94,6 +94,10 @@ dependencies:
   country_state_city_picker: ^1.2.8
   uuid: ^3.0.7
   profile: ^0.0.1
+  multiselect: ^0.0.7
+
+ 
+
 
 dev_dependencies:
   flutter_test: 
