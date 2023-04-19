@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
-import 'package:dujo_kerala_website/controller/class_teacher_login_screen/class_teacher_login.dart';
 import 'package:dujo_kerala_website/view/web/widgets/responsive.dart';
 
 import 'package:flutter/material.dart';
@@ -10,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../../../controller/text_form_hide/password_filed.dart';
 import '../../../colors/colors.dart';
 import '../../../constant/constant.dart';
 import '../../../fonts/fonts.dart';
@@ -35,6 +35,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
+            appBar: AppBar(backgroundColor: const Color(0xFF26A69A)),
       backgroundColor: AppColors.backColor,
       body: SizedBox(
         height: height,
@@ -77,7 +78,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                 margin: EdgeInsets.symmetric(
                     horizontal: ResponsiveWidget.isSmallScreen(context)
                         ? height * 0.032
-                        : height * 0.15),
+                        : height * 0.12),
                 color: AppColors.backColor,
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.only(bottom: 40.0),
@@ -179,6 +180,13 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(16.0),
                           color: AppColors.whiteColor,
                         ),
+                        child: Obx(() =>  TextFormField(
+                           controller: passwordController,
+                                                  obscureText:
+                                                      _hideGetxController
+                                                          .isObscurefirst.value,
+
+
                         child: TextFormField(
                           controller:
                               classTeacherLoginController.passwordController,
@@ -187,13 +195,22 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                             color: AppColors.blueDarkColor,
                             fontSize: 15.0,
                           ),
-                          obscureText: true,
+                          //obscureText: true,
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             suffixIcon: IconButton(
-                              onPressed: () {},
-                              icon: Image.asset(AppIcons.eyeIcon),
-                            ),
+
+                                                      icon: Icon(_hideGetxController
+                                                              .isObscurefirst
+                                                              .value
+                                                          ? Icons.visibility
+                                                          : Icons
+                                                              .visibility_off),
+                                                      onPressed: () {
+                                                        _hideGetxController
+                                                            .toggleObscureFirst();
+                                                      },
+                                                    ),
                             prefixIcon: IconButton(
                               onPressed: () {},
                               icon: Image.asset(AppIcons.lockIcon),
@@ -206,6 +223,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                               fontSize: 15.0,
                             ),
                           ),
+                        ),
                         ),
                       ),
                       SizedBox(height: height * 0.03),

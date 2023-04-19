@@ -445,6 +445,9 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                IconButton(onPressed: () {
+                                  Navigator.pop(context);
+                                }, icon:  Icon(Icons.arrow_back),),
                                 Text(
                                   'Admin Dashboard',
                                   style: GoogleFonts.poppins(

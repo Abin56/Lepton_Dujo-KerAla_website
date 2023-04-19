@@ -195,7 +195,7 @@ class _DujoHomePageState extends State<DujoHomePage> {
                       height: screenSize.width * 0.35,
                       margin: EdgeInsets.only(
                           left: screenSize.width * .7,
-                          top: screenSize.width * .0),
+                          top: screenSize.width * .02),
                       child: Image.asset(
                         "assets/images/ann.png",
                         height: 600,

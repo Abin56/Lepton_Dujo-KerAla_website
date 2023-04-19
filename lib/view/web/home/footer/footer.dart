@@ -47,7 +47,7 @@ class FooterSection extends StatelessWidget {
                           children: [
                             Text(
                               'Lepton DuJo',
-                              style: GoogleFonts.poppins(fontSize: screenSize.width/50 )
+                              style: GoogleFonts.poppins(fontSize: screenSize.width/50,fontWeight: FontWeight.bold )
                             ),
                             OnHoverText(
                               builder: (isHoverd) {
@@ -58,7 +58,7 @@ class FooterSection extends StatelessWidget {
                                     child: Text(
                                       'Who We Are',
                                       style:
-                                          TextStyle(fontSize: screenSize.width/110, color: color),
+                                          TextStyle(fontSize: screenSize.width/110, color: color,fontWeight: FontWeight.bold),
                                     ));
                               },
                             ),
@@ -71,7 +71,7 @@ class FooterSection extends StatelessWidget {
                                     child: Text(
                                       'Why choose us',
                                       style:
-                                          TextStyle(fontSize: screenSize.width/110, color: color),
+                                          TextStyle(fontSize: screenSize.width/110, color: color,fontWeight: FontWeight.bold),
                                     ));
                               },
                             ),
@@ -85,7 +85,7 @@ class FooterSection extends StatelessWidget {
                                       child: Text(
                                         'Lepton DuJo For Business',
                                         style:
-                                            TextStyle(fontSize: screenSize.width/115, color: color),
+                                            TextStyle(fontSize: screenSize.width/115, color: color,fontWeight: FontWeight.bold),
                                       ));
                                 },
                               ),
@@ -99,7 +99,7 @@ class FooterSection extends StatelessWidget {
                                     child: Text(
                                       'Affiliates',
                                       style:
-                                          TextStyle(fontSize: screenSize.width/110, color: color),
+                                          TextStyle(fontSize: screenSize.width/110, color: color,fontWeight: FontWeight.bold),
                                     ));
                               },
                             ),
@@ -112,7 +112,7 @@ class FooterSection extends StatelessWidget {
                                     child: Text(
                                       'Carrers',
                                       style:
-                                          TextStyle(fontSize: screenSize.width/110, color: color),
+                                          TextStyle(fontSize: screenSize.width/110, color: color,fontWeight: FontWeight.bold),
                                     ));
                               },
                             ),
@@ -125,7 +125,7 @@ class FooterSection extends StatelessWidget {
                                     child: Text(
                                       'News',
                                       style:
-                                          TextStyle(fontSize: screenSize.width/110, color: color),
+                                          TextStyle(fontSize: screenSize.width/110, color: color,fontWeight: FontWeight.bold),
                                     ));
                               },
                             ),
@@ -147,7 +147,7 @@ class FooterSection extends StatelessWidget {
                                       child: Text(
                                         'Super Admin',
                                         style:
-                                            TextStyle(fontSize: screenSize.width/100, color: color),
+                                            TextStyle(fontSize: screenSize.width/100, color: color,fontWeight: FontWeight.bold),
                                       ));
                                 },
                                                          ),
@@ -160,7 +160,7 @@ class FooterSection extends StatelessWidget {
                           children: [
                             Text(
                               'Connect',
-                              style: GoogleFonts.poppins(fontSize: screenSize.width/50 )
+                              style: GoogleFonts.poppins(fontSize: screenSize.width/50,fontWeight: FontWeight.bold )
                             ),
                             OnHoverText(
                               builder: (isHoverd) {
@@ -171,7 +171,7 @@ class FooterSection extends StatelessWidget {
                                     child: Text(
                                       'Blog',
                                       style:
-                                          TextStyle(fontSize: screenSize.width/110, color: color),
+                                          TextStyle(fontSize: screenSize.width/110, color: color,fontWeight: FontWeight.bold),
                                     ));
                               },
                             ),
@@ -190,7 +190,7 @@ class FooterSection extends StatelessWidget {
                                       child: Text(
                                         'Contact US',
                                         style:
-                                            TextStyle(fontSize: screenSize.width/110, color: color),
+                                            TextStyle(fontSize: screenSize.width/110, color: color,fontWeight: FontWeight.bold),
                                       )),
                                 );
                               },
@@ -204,7 +204,7 @@ class FooterSection extends StatelessWidget {
                                     child: Text(
                                       'Help Center',
                                       style:
-                                          TextStyle(fontSize: screenSize.width/110, color: color),
+                                          TextStyle(fontSize: screenSize.width/110, color: color,fontWeight: FontWeight.bold),
                                     ));
                               },
                             ),
@@ -217,7 +217,7 @@ class FooterSection extends StatelessWidget {
                                     child: Text(
                                       'Security',
                                       style:
-                                          TextStyle(fontSize: screenSize.width/110, color: color),
+                                          TextStyle(fontSize: screenSize.width/110, color: color,fontWeight: FontWeight.bold),
                                     ));
                               },
                             ),
@@ -229,7 +229,7 @@ class FooterSection extends StatelessWidget {
                           children: [
                             Text(
                               'Legal',
-                              style: GoogleFonts.poppins(fontSize: screenSize.width/50 )
+                              style: GoogleFonts.poppins(fontSize: screenSize.width/50,fontWeight: FontWeight.bold )
                             ),
                             GestureDetector(
                               onTap: () {
@@ -244,7 +244,7 @@ class FooterSection extends StatelessWidget {
                                       child: Text(
                                         'Terms & Conditions',
                                         style:
-                                            TextStyle(fontSize: screenSize.width/110, color: color),
+                                            TextStyle(fontSize: screenSize.width/110, color: color,fontWeight: FontWeight.bold),
                                       ));
                                 },
                               ),
@@ -280,7 +280,7 @@ class FooterSection extends StatelessWidget {
                                       child: Text(
                                         'Privacy Policy',
                                         style:
-                                            TextStyle(fontSize:  screenSize.width/110, color: color),
+                                            TextStyle(fontSize:  screenSize.width/110, color: color,fontWeight: FontWeight.bold),
                                       ));
                                 },
                               ),
@@ -294,7 +294,7 @@ class FooterSection extends StatelessWidget {
                                     child: Text(
                                       'Trademark Policy',
                                       style:
-                                          TextStyle(fontSize:  screenSize.width/110, color: color),
+                                          TextStyle(fontSize:  screenSize.width/110, color: color,fontWeight: FontWeight.bold),
                                     ));
                               },
                             ),
@@ -307,7 +307,7 @@ class FooterSection extends StatelessWidget {
                                     child: Text(
                                       'Cancellation Policy',
                                       style:
-                                          TextStyle(fontSize:  screenSize.width/115, color: color),
+                                          TextStyle(fontSize:  screenSize.width/115, color: color,fontWeight: FontWeight.bold),
                                     ));
                               },
                             ),
@@ -321,7 +321,7 @@ class FooterSection extends StatelessWidget {
                             Text(
                               "Address", 
                               style:
-                                  GoogleFonts.poppins(fontSize: screenSize.width/50)
+                                  GoogleFonts.poppins(fontSize: screenSize.width/50,fontWeight: FontWeight.bold)
                             ),
                             Row(
                               children: [
@@ -329,9 +329,9 @@ class FooterSection extends StatelessWidget {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('Lepton Plus Communications(OPC) Pvt.Ltd.5th Floor',style: TextStyle(fontSize:  screenSize.width/110)),
-                                    Text('Karimpanal Statue Avenue,G.H. Road, Statue',style: TextStyle(fontSize:  screenSize.width/110)),
-                                    Text('Thiruvananthapuram-695001. Kerala , India',style: TextStyle(fontSize:  screenSize.width/110)),
+                                    Text('Lepton Plus Communications(OPC) Pvt.Ltd.5th Floor',style: TextStyle(fontSize:  screenSize.width/110,fontWeight: FontWeight.bold)),
+                                    Text('Karimpanal Statue Avenue,G.H. Road, Statue',style: TextStyle(fontSize:  screenSize.width/110,fontWeight: FontWeight.bold)),
+                                    Text('Thiruvananthapuram-695001. Kerala , India',style: TextStyle(fontSize:  screenSize.width/110,fontWeight: FontWeight.bold)),
                              ],
                              ),
                              ],
@@ -343,9 +343,9 @@ class FooterSection extends StatelessWidget {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('Lepton plus communications(opc) pvt. Ltd Dotspace Business center,',style: TextStyle(fontSize:  screenSize.width/110)),
-                                    Text('TC 24/3088,Ushasandya Building,Kowdiar - Devasom Board Road,',style: TextStyle(fontSize:  screenSize.width/110)),
-                                    Text('Kowdiar, Trivandrum - 695003. Kerala , India',style: TextStyle(fontSize:  screenSize.width/110)),
+                                    Text('Lepton plus communications(opc) pvt. Ltd Dotspace Business center,',style: TextStyle(fontSize:  screenSize.width/110,fontWeight: FontWeight.bold)),
+                                    Text('TC 24/3088,Ushasandya Building,Kowdiar - Devasom Board Road,',style: TextStyle(fontSize:  screenSize.width/110,fontWeight: FontWeight.bold)),
+                                    Text('Kowdiar, Trivandrum - 695003. Kerala , India',style: TextStyle(fontSize:  screenSize.width/110,fontWeight: FontWeight.bold)),
                              ],
                              ),
                              ],
@@ -354,7 +354,7 @@ class FooterSection extends StatelessWidget {
                              Row(
                               children: [
                                 Icon(Icons.phone,color: Colors.blue,size: screenSize.width/50),
-                                Text('	+91 471 4053483	',style: TextStyle(fontSize:  screenSize.width/110)),
+                                Text('	+91 471 4053483	',style: TextStyle(fontSize:  screenSize.width/110,fontWeight: FontWeight.bold)),
                               ],
                             ),
                             sizedBoxW20,
@@ -362,14 +362,14 @@ class FooterSection extends StatelessWidget {
                             Row(
                               children: [
                                 Icon(Icons.phone_android,size: screenSize.width/50),
-                                Text('	+91 97469 66651 | +91 97463 66651',style: TextStyle(fontSize:  screenSize.width/110)),
+                                Text('	+91 97469 66651 | +91 97463 66651',style: TextStyle(fontSize:  screenSize.width/110,fontWeight: FontWeight.bold)),
                               ],
                             ),
                             sizedBoxW20,
                              Row(
                               children: [
                                 Icon(Icons.mail_outline_sharp,color: Colors.red,size: screenSize.width/50),
-                                Text('info@leptoncommunications.com,''\n leptoncommunications@gmail.com',style: TextStyle(fontSize:  screenSize.width/110)),
+                                Text('info@leptoncommunications.com,''\n leptoncommunications@gmail.com',style: TextStyle(fontSize:  screenSize.width/110,fontWeight: FontWeight.bold)),
                               ],
                             ),
                           ],
@@ -403,7 +403,7 @@ class FooterSection extends StatelessWidget {
                   ),
                   Text(
                     'Lepton Plus Communications is a customer oriented company offering digital solutions in Healthcare, E-Commerce Applications,\nHome Automation and Social Networking. We are committed to\n providing high end sustainable products and services that\nenhances the quality of life',
-                    style: GoogleFonts.poppins(fontSize: screenSize.width/98),
+                    style: GoogleFonts.poppins(fontSize: screenSize.width/98,),
                   )
                 ],
               ),
@@ -418,7 +418,7 @@ class FooterSection extends StatelessWidget {
               children: [
                 Text(
                   "Copyright ©️ All rights reserved | by LeptonCommunications",
-                  style: GoogleFonts.poppins(fontSize: screenSize.width/55),
+                  style: GoogleFonts.poppins(fontSize: screenSize.width/98,fontWeight: FontWeight.bold,color: Colors.white),
                 ),
               ],
             ),

@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../../../controller/text_form_hide/password_filed.dart';
 import '../../../colors/colors.dart';
 import '../../../constant/constant.dart';
 import '../../../fonts/fonts.dart';
 import '../../../icons/icons.dart';
 import '../../widgets/responsive.dart';
 
-class TeacherLoginScreen extends StatefulWidget {
-  const TeacherLoginScreen({Key? key}) : super(key: key);
+class TeacherLoginScreen extends StatelessWidget {
+  final _hideGetxController = Get.put(PasswordField());
+  String adminpassword = '';
+   TeacherLoginScreen({Key? key}) : super(key: key);
 
-  @override
-  State<TeacherLoginScreen> createState() => _TeacherLoginScreenState();
-}
-
-class _TeacherLoginScreenState extends State<TeacherLoginScreen> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
+      appBar: AppBar(backgroundColor:  AppColors.mainBlueColor),
       backgroundColor: AppColors.backColor,
       body: SizedBox(
         height: height,
@@ -165,18 +165,29 @@ class _TeacherLoginScreenState extends State<TeacherLoginScreen> {
                           color: AppColors.whiteColor,
                         ),
                         child: TextFormField(
+                           obscureText:
+                           _hideGetxController.isObscurefirst.value,
                           style: ralewayStyle.copyWith(
                             fontWeight: FontWeight.w400,
                             color: AppColors.blueDarkColor,
                             fontSize: 15.0,
                           ),
-                          obscureText: true,
+                         
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            suffixIcon: IconButton(
-                              onPressed: () {},
-                              icon: Image.asset(AppIcons.eyeIcon),
-                            ),
+                           suffixIcon:  IconButton(
+                            
+                                                      icon: Icon(_hideGetxController
+                                                              .isObscurefirst
+                                                              .value
+                                                          ? Icons.visibility
+                                                          : Icons
+                                                              .visibility_off),
+                                                      onPressed: () {
+                                                        _hideGetxController
+                                                            .toggleObscureFirst();
+                                                      },
+                                                    ),
                             prefixIcon: IconButton(
                               onPressed: () {},
                               icon: Image.asset(AppIcons.lockIcon),
