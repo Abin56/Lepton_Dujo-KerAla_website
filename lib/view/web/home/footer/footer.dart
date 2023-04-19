@@ -2,6 +2,7 @@ import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../colors/colors.dart';
+import '../family_policy.dart';
 import '../lepton_Admin/admin_panel_Screen.dart';
 import '../privacypolicy.dart';
 import '../terms _and_condition.dart';
@@ -244,6 +245,24 @@ class FooterSection extends StatelessWidget {
                                         'Terms & Conditions',
                                         style:
                                             TextStyle(fontSize: screenSize.width/110, color: color),
+                                      ));
+                                },
+                              ),
+                            ),
+                                GestureDetector(
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder:((context) => const FamilyPolicyScreen())));
+                              },
+                              child: OnHoverText(
+                                builder: (isHoverd) {
+                                  final color =
+                                      isHoverd ? Colors.orange : Colors.black;
+                                  return SizedBox(
+                                      width: screenSize.width/20,
+                                      child: Text(
+                                        'Family Policy',
+                                        style:
+                                            TextStyle(fontSize:  screenSize.width/110, color: color),
                                       ));
                                 },
                               ),
