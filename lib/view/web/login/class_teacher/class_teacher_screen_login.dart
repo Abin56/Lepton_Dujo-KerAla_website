@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
 import 'package:dujo_kerala_website/controller/class_teacher_login_screen/class_teacher_login.dart';
 import 'package:dujo_kerala_website/view/web/widgets/responsive.dart';
@@ -117,7 +116,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                       Text(
                         'Hey, Enter your details to get sign in \nto your account.',
                         style: ralewayStyle.copyWith(
-                          fontSize: 12.0,
+                          fontSize: 15.0,
                           fontWeight: FontWeight.w400,
                           color: AppColors.textColor,
                         ),
@@ -128,7 +127,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                         child: Text(
                           'Teacher ID',
                           style: ralewayStyle.copyWith(
-                            fontSize: 12.0,
+                            fontSize: 15.0,
                             color: AppColors.blueDarkColor,
                             fontWeight: FontWeight.w700,
                           ),
@@ -147,7 +146,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                           style: ralewayStyle.copyWith(
                             fontWeight: FontWeight.w400,
                             color: AppColors.blueDarkColor,
-                            fontSize: 12.0,
+                            fontSize: 15.0,
                           ),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -160,7 +159,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                             hintStyle: ralewayStyle.copyWith(
                               fontWeight: FontWeight.w400,
                               color: AppColors.blueDarkColor.withOpacity(0.5),
-                              fontSize: 12.0,
+                              fontSize: 15.0,
                             ),
                           ),
                         ),
@@ -171,7 +170,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                         child: Text(
                           'Password',
                           style: ralewayStyle.copyWith(
-                            fontSize: 12.0,
+                            fontSize: 15.0,
                             color: AppColors.blueDarkColor,
                             fontWeight: FontWeight.w700,
                           ),
@@ -244,7 +243,8 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                         child: InkWell(
                           onTap: () async {
                             ///////////////////////////
-                            classTeacherLoginController.classTeacherLogin(context);
+                            await classTeacherLoginController
+                                .classTeacherLogin(context);
                           },
                           borderRadius: BorderRadius.circular(16.0),
                           child: Ink(

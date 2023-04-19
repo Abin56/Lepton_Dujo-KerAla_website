@@ -21,7 +21,7 @@ class ClassTeacherLoginController extends GetxController {
       .doc(Get.find<AdminLoginScreenController>().schoolID)
       .collection("Teachers");
 
-  void classTeacherLogin(BuildContext context) async {
+  Future<void> classTeacherLogin(BuildContext context) async {
     //>>>>>>>>>>>>>>>>>Checking ID<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     Query query =
