@@ -23,6 +23,7 @@ class MeetingDisplay extends StatelessWidget {
     Size screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
+      appBar: AppBar(backgroundColor: const Color(0xFFF7D8BA),),
         backgroundColor: const Color(0xFFF7D8BA),
         body: SafeArea(
           child: Row(

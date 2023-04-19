@@ -34,7 +34,8 @@ class AdminLoginScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(backgroundColor: const Color.fromARGB(255, 74, 3, 107),),
+      appBar: AppBar(backgroundColor:  Colors.transparent,elevation: 0,
+      iconTheme: IconThemeData(color: Colors.black),),
       backgroundColor: AppColors.backColor,
       body: SizedBox(
         height: height,
@@ -136,26 +137,41 @@ class AdminLoginScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(16.0),
                           color: AppColors.whiteColor,
                         ),
-                        child: TextFormField(
-                          controller:
-                              adminLoginScreenController.schoolIdController,
-                          style: ralewayStyle.copyWith(
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.blueDarkColor,
-                            fontSize: 15.0,
-                          ),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            prefixIcon: IconButton(
-                              onPressed: () {},
-                              icon: Image.asset(AppIcons.emailIcon),
-                            ),
-                            contentPadding: const EdgeInsets.only(top: 16.0),
-                            hintText: 'Enter your ID',
-                            hintStyle: ralewayStyle.copyWith(
+                        child: Obx(() =>TextFormField(
+                            controller:
+                                adminLoginScreenController.schoolIdController,
+                                obscureText:_hideGetxController.isObscurefirst.value,
+                            style: ralewayStyle.copyWith(
                               fontWeight: FontWeight.w400,
-                              color: AppColors.blueDarkColor.withOpacity(0.5),
+                              color: AppColors.blueDarkColor,
                               fontSize: 15.0,
+                            ),
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              prefixIcon: IconButton(
+                                onPressed: () {},
+                                icon: Image.asset(AppIcons.emailIcon),
+                              ),
+                               suffixIcon:  IconButton(
+                            
+                                                      icon: Icon(_hideGetxController
+                                                              .isObscurefirst
+                                                              .value
+                                                          ? Icons.visibility
+                                                          : Icons
+                                                              .visibility_off),
+                                                      onPressed: () {
+                                                        _hideGetxController
+                                                            .toggleObscureFirst();
+                                                      },
+                                                    ),
+                              contentPadding: const EdgeInsets.only(top: 16.0),
+                              hintText: 'Enter your ID',
+                              hintStyle: ralewayStyle.copyWith(
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.blueDarkColor.withOpacity(0.5),
+                                fontSize: 15.0,
+                              ),
                             ),
                           ),
                         ),
@@ -184,7 +200,7 @@ class AdminLoginScreen extends StatelessWidget {
                         child:Obx(() =>  TextFormField(
 
                            controller: adminLoginScreenController.passwordController,
-                                                  obscureText:_hideGetxController.isObscurefirst.value,
+                                                  obscureText:_hideGetxController.isObscureSecond.value,
                                                   style: ralewayStyle.copyWith(
                             fontWeight: FontWeight.w400,
                             color: AppColors.blueDarkColor,
@@ -200,14 +216,14 @@ class AdminLoginScreen extends StatelessWidget {
                             suffixIcon:  IconButton(
                             
                                                       icon: Icon(_hideGetxController
-                                                              .isObscurefirst
+                                                              .isObscureSecond
                                                               .value
                                                           ? Icons.visibility
                                                           : Icons
                                                               .visibility_off),
                                                       onPressed: () {
                                                         _hideGetxController
-                                                            .toggleObscureFirst();
+                                                            .toggleObscureSecond();
                                                       },
                                                     ),
                             

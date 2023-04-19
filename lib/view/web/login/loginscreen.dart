@@ -28,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-       appBar: AppBar(backgroundColor: adminePrimayColor),
+       appBar: AppBar(backgroundColor: Colors.transparent,elevation: 0,iconTheme: IconThemeData(color: Colors.black),),
       backgroundColor: AppColors.backColor,
       body: SizedBox(
         height: height,
@@ -81,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         colorindex: 0,
-                        height: 200,
+                        height: screenSize.width/8,
                         width: 400),
                   ),
                   GestureDetector(
@@ -102,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               style: GoogleFont.subHeadTextStyle),
                         ),
                         colorindex: 1,
-                        height: 200,
+                        height: screenSize.width/8,
                         width: 400),
                   ),
                   GestureDetector(
@@ -126,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               style: GoogleFont.subHeadTextStyle),
                         ),
                         colorindex: 7,
-                        height: 200,
+                        height: screenSize.width/8,
                         width: 400),
                   )
                 ],

@@ -39,7 +39,8 @@ class ClassTeacherLoginScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(backgroundColor: const Color(0xFF26A69A)),
+      appBar: AppBar(backgroundColor:Color(0xFF26A69A)
+      ),
       backgroundColor: AppColors.backColor,
       body: SizedBox(
         height: height,
@@ -141,8 +142,10 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(16.0),
                           color: AppColors.whiteColor,
                         ),
-                        child: TextFormField(
+                        child: Obx(() => TextFormField(
                           controller: classTeacherLoginController.idController,
+                            obscureText:
+                                _hideGetxController.isObscurefirst.value,
                           style: ralewayStyle.copyWith(
                             fontWeight: FontWeight.w400,
                             color: AppColors.blueDarkColor,
@@ -154,6 +157,15 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                               onPressed: () {},
                               icon: Image.asset(AppIcons.emailIcon),
                             ),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                    _hideGetxController.isObscurefirst.value
+                                        ? Icons.visibility
+                                        : Icons.visibility_off),
+                                onPressed: () {
+                                  _hideGetxController.toggleObscureFirst();
+                                },
+                              ),
                             contentPadding: const EdgeInsets.only(top: 16.0),
                             hintText: 'Enter ID',
                             hintStyle: ralewayStyle.copyWith(
@@ -162,6 +174,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                               fontSize: 15.0,
                             ),
                           ),
+                        ),
                         ),
                       ),
                       SizedBox(height: height * 0.014),
@@ -188,7 +201,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                           () => TextFormField(
                             controller: classTeacherLoginController.passwordController,
                             obscureText:
-                                _hideGetxController.isObscurefirst.value,
+                                _hideGetxController.isObscureSecond.value,
 
                             style: ralewayStyle.copyWith(
                               fontWeight: FontWeight.w400,
@@ -200,11 +213,11 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                               border: InputBorder.none,
                               suffixIcon: IconButton(
                                 icon: Icon(
-                                    _hideGetxController.isObscurefirst.value
+                                    _hideGetxController.isObscureSecond.value
                                         ? Icons.visibility
                                         : Icons.visibility_off),
                                 onPressed: () {
-                                  _hideGetxController.toggleObscureFirst();
+                                  _hideGetxController.toggleObscureSecond();
                                 },
                               ),
                               prefixIcon: IconButton(
