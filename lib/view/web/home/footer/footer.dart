@@ -251,7 +251,7 @@ class FooterSection extends StatelessWidget {
                             ),
                                 GestureDetector(
                               onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder:((context) => const FamilyPolicyScreen())));
+                                Navigator.push(context, MaterialPageRoute(builder:((context) => FamilyPolicyScreen())));
                               },
                               child: OnHoverText(
                                 builder: (isHoverd) {

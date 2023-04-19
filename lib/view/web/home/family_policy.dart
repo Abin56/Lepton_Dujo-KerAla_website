@@ -18,11 +18,15 @@ class _FamilyPolicyScreenState extends State<FamilyPolicyScreen> {
             width: screenSize.width * 1 / 2,
             child: Column(
               children: [
-                Image.asset(
-                  "assets/images/child policy_1.jpg",
+                Container(
+                  child: Image.asset(
+                    "assets/images/child policy_1.jpg",
+                  ),
                 ),
-                Image.asset(
-                  "assets/images/child policy_2.jpg",
+                Container(
+                  child: Image.asset(
+                    "assets/images/child policy_2.jpg",
+                  ),
                 ),
               ],
             ),
