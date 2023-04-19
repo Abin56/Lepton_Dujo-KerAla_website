@@ -178,12 +178,10 @@ class AdminLoginScreen extends StatelessWidget {
                           color: AppColors.whiteColor,
                         ),
                         child:Obx(() =>  TextFormField(
+
                            controller: adminLoginScreenController.passwordController,
-                                                  obscureText:
-                                                      _hideGetxController
-                                                          .isObscurefirst.value,
-                              
-                          style: ralewayStyle.copyWith(
+                                                  obscureText:_hideGetxController.isObscurefirst.value,
+                                                  style: ralewayStyle.copyWith(
                             fontWeight: FontWeight.w400,
                             color: AppColors.blueDarkColor,
                             fontSize: 12.0,

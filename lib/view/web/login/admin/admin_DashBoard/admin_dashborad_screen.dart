@@ -170,16 +170,17 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       AdminScholarships(schoolID: widget.schoolID), //13
       const BusRoute(), //14
       const StudentSummary(), //15
-      const StudentSummary(), //16
-      const ResearchDevelopment(), //17
+      const ResearchDevelopment(),//16
+      const StudentSummary(),  //17
       const LiveClasses(), //18
       AddNewNotices(schoolId: widget.schoolID), //19
       FoodBeverages(), //AddNewNotices(schoolId: widget.schoolID), //20
       SelectType(schoolID: widget.schoolID), //21
       const AlumniAssocation(), //22
        const FeesUpdates(),//23
-      const FeesUpdates(), //24
-      NonTeachingLogin(schoolID: widget.schoolID), //25t6yg
+      NonTeachingLogin(schoolID: widget.schoolID),//24
+      // FeesUpdates(), 
+       //25t6yg
       AdminScholarships(schoolID: widget.schoolID), //26
       SampoornaHomeScreen(schoolId: widget.schoolID), //28
     ];

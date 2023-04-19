@@ -6,6 +6,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../../colors/colors.dart';
+
 class SelectType extends StatefulWidget {
    SelectType({super.key, required this.schoolID}); 
 
@@ -20,6 +22,7 @@ class _SelectTypeState extends State<SelectType> {
   Widget build(BuildContext context) {
   var screenSize = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: AppBar(backgroundColor: adminePrimayColor),
       body: Center(
         child: Column( 
           mainAxisAlignment: MainAxisAlignment.center,
