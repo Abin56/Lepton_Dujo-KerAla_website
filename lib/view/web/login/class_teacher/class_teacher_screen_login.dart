@@ -25,13 +25,13 @@ class ClassTeacherLoginScreen extends StatelessWidget {
       Get.put(ClassTeacherLoginController());
 
   String schoolID;
-  TextEditingController idController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  // TextEditingController idController = TextEditingController();
+  // TextEditingController passwordController = TextEditingController();
   ClassTeacherLoginScreen({required this.schoolID, Key? key}) : super(key: key);
 
-  final TextEditingController _facultyController = TextEditingController();
+  // final TextEditingController _facultyController = TextEditingController();
 
-  final TextEditingController _passwordController = TextEditingController();
+  // final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +142,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                           color: AppColors.whiteColor,
                         ),
                         child: TextFormField(
-                          controller: idController,
+                          controller: classTeacherLoginController.idController,
                           style: ralewayStyle.copyWith(
                             fontWeight: FontWeight.w400,
                             color: AppColors.blueDarkColor,
@@ -186,7 +186,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                         ),
                         child: Obx(
                           () => TextFormField(
-                            controller: passwordController,
+                            controller: classTeacherLoginController.passwordController,
                             obscureText:
                                 _hideGetxController.isObscurefirst.value,
 
