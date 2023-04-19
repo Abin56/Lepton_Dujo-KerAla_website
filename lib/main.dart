@@ -46,8 +46,8 @@ class MyApp extends StatelessWidget {
               ),
               home:
               
-            // DujoHomePage()
-              ManageTeachers()
+             DujoHomePage()
+              // ManageTeachers()
            
               // AddStudentTea(teacherIDE: null,)
             // AddTeachersSubjects()

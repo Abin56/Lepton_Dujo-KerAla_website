@@ -1,11 +1,13 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/ui%20team/manage_teachers.dart';
 import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/upload_timetable/select_class.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import '../../../../../model/create_classModel/create_classModel.dart';
+import '../../../../../ui team/manage_teacher_create.dart';
 import '../../../../colors/colors.dart';
 import '../../../../fonts/fonts.dart';
 import '../../../home/dujo_home.dart';
@@ -98,11 +100,12 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
         teacherIDE: widget.teacherEmail,
       ), //2
       AddParent(schoolID: widget.schoolID), //3
-      AllClassesListViewForTeacher(
-        schoolID: widget.schoolID,
-        classID: teacherClassId,
-        teacherID: '',
-      ), //4
+      // AllClassesListViewForTeacher(
+      //   schoolID: widget.schoolID,
+      //   classID: teacherClassId,
+      //   teacherID: '',
+      // ),
+      ManageTeachers(), //4
       AddGuardian(schoolId: widget.schoolID), //5
       AddGuardian(schoolId: widget.schoolID), //6
       SelectClassForTimeTable(schoolID: widget.schoolID), //7
