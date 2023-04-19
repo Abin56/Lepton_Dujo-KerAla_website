@@ -81,57 +81,29 @@ class _CreateBusRouteState extends State<CreateBusRoute> {
                   child: Padding(
                     padding:  EdgeInsets.only(left: size.width/10,right:  size.width/10),
                     child: Column(children: [
-                       Padding(
-                                                        padding: EdgeInsets.all(15),
-                                                        child: TextFormField(
-                                                          
-                                                          decoration: InputDecoration(
-                                                            border: OutlineInputBorder( borderRadius: BorderRadius.circular(20)),
-                                                            icon: Icon(Icons.route_outlined,color: Color.fromARGB(255, 19, 7, 134)),
-                                                            labelText: 'Route Number',
-                                                          ),
-                                                        ),
-                                                      ),
+
+
+                        BusRouteTextFormWidget(
+                           function: checkFieldEmpty,
+                           labelText:'Route Number' ,  icon: Icons.route_outlined,),
                                                       
-                                                      Padding(
-                                                        padding: EdgeInsets.all(15),
-                                                        child: TextFormField(
-                                                         
-                                                          decoration: InputDecoration(
-                                                            border: OutlineInputBorder(
-                                                               borderRadius: BorderRadius.circular(20)
-                                                            ),
-                                                             icon: Icon(Icons.bus_alert,color: Color.fromARGB(255, 19, 7, 134)),
-                                                            labelText: 'Bus Number',
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding: EdgeInsets.all(15),
-                                                        child: TextFormField(
-                                                          
-                                                          decoration: InputDecoration(
-                                                            border: OutlineInputBorder(
-                                                               borderRadius: BorderRadius.circular(20)
-                                                            ),
-                                                             icon: Icon(Icons.phone_android_sharp,color: Color.fromARGB(255, 19, 7, 134)),
-                                                            labelText: 'Driver Mobile Number',
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding: EdgeInsets.all(15),
-                                                        child: TextFormField(
-                                                          decoration: InputDecoration(
-                                                            border: OutlineInputBorder(
-                                                               borderRadius: BorderRadius.circular(20)
-                                                            ),
-                                                             icon: Icon(Icons.phone_android,color: Color.fromARGB(255, 19, 7, 134)),
-                                                            labelText: 'Assistnce Mobile Number',
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      BusRouteTextFormWidget(labelText:'' , ),
+
+                                                        BusRouteTextFormWidget(
+                                                        function: checkFieldEmpty,
+                                                      labelText:'Bus Number' ,  icon: Icons.bus_alert,),
+
+                                                       BusRouteTextFormWidget(
+                                                        function: checkFieldPhoneNumberIsValid,
+                                                      labelText:'Driver Mobile Number' ,  icon: Icons.phone_android_sharp,),
+
+                                                       BusRouteTextFormWidget(
+                                                        function: checkFieldPhoneNumberIsValid,
+                                                      labelText:'Assistance Mobile Number' ,   icon: Icons.phone_android, ),
+
+
+                                                      BusRouteTextFormWidget(
+                                                        function: checkFieldEmpty,
+                                                      labelText:'Staff inCharge' ,   icon: Icons.person_2, ),
                                                      
                                                       
                                               
@@ -179,11 +151,18 @@ class _CreateBusRouteState extends State<CreateBusRoute> {
 }
 
 class BusRouteTextFormWidget extends StatelessWidget {
-  const BusRouteTextFormWidget({
-    super.key, required this.labelText,
+   BusRouteTextFormWidget({
+    super.key, 
+    required this.labelText,
+    // required this.textEditingController,
+      required this.function,
+      required this.icon,
   });
-  //final TextEditingController textEditingController;
+// final TextEditingController textEditingController;
   final String labelText;
+  final String? Function(String? fieldContent) function;
+    IconData icon;
+
   
 
   @override
@@ -191,13 +170,16 @@ class BusRouteTextFormWidget extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(15),
       child: TextFormField(
-        validator:checkFieldEmpty,
+        validator: function ,
+        // controller: textEditingController,
         decoration: InputDecoration(
           border: OutlineInputBorder(
              borderRadius: BorderRadius.circular(20)
           ),
-           icon: Icon(Icons.person_2,color: Color.fromARGB(255, 19, 7, 134)),
-          labelText: 'Staff in Charge',
+            icon:  Icon(icon,
+            color: Color.fromARGB(221, 28, 9, 110),
+          ),
+          labelText: labelText,
         ),
       ),
     );
