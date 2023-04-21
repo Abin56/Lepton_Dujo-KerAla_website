@@ -77,7 +77,7 @@ Future<void> updateAdminPtaDialogue(
                           ptaController.updatePta(
                               memberId, context, imageid, imageUrl ?? "");
                         },
-                        child: const Text('Edit'),
+                        child: const Text('Update'),
                       )
                     ],
                   ),

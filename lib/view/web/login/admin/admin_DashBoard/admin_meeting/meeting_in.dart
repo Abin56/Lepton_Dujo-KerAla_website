@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -5,19 +7,19 @@ import 'package:lottie/lottie.dart';
 
 import '../../../../../../controller/Getx/admin/meeting_controller.dart';
 import '../../../../../../model/admin_models/admin_meeting_model/admin_meeting_model.dart';
+import '../../../../../../utils/utils.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
 import '../../../../../fonts/fonts.dart';
 
-
-AdminMeetingController adminMeetingController =
-    Get.put(AdminMeetingController());
-
 class MeetingCreates extends StatelessWidget {
-  const MeetingCreates({super.key, required this.schoolId});
+  MeetingCreates({super.key, required this.schoolId});
   final String schoolId;
+  final AdminMeetingController adminMeetingController =
+      Get.put(AdminMeetingController());
   @override
   Widget build(BuildContext context) {
+    adminMeetingController.clearControllers();
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
@@ -58,24 +60,12 @@ class MeetingCreates extends StatelessWidget {
                                         borderRadius:
                                             BorderRadius.circular(20)),
                                     icon: const Icon(Icons.calendar_today,
-                                        color:
-                                           adminePrimayColor),
+                                        color: adminePrimayColor),
                                     labelText: "Enter Date"),
                                 readOnly: true,
                                 onTap: () async {
-                                  DateTime? pickedDate = await showDatePicker(
-                                      context: context,
-                                      initialDate: DateTime.now(),
-                                      firstDate: DateTime(2000),
-                                      lastDate: DateTime(2101));
-
-                                  if (pickedDate != null) {
-                                    String formattedDate =
-                                        DateFormat('dd-MM-yyy')
-                                            .format(pickedDate);
-                                    adminMeetingController.dateController.text =
-                                        formattedDate;
-                                  }
+                                  adminMeetingController.dateController.text =
+                                      await dateTimePicker(context);
                                 },
                               ),
                             ),
@@ -99,10 +89,24 @@ class MeetingCreates extends StatelessWidget {
                                   adminMeetingController.specialGuestController,
                               labelText: 'Special Guest',
                             ),
-                            TextFieldMettingWidget(
-                              textEditingController:
-                                  adminMeetingController.timeController,
-                              labelText: 'Time',
+                            Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: TextField(
+                                controller:
+                                    adminMeetingController.timeController,
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    icon: const Icon(Icons.calendar_today,
+                                        color: adminePrimayColor),
+                                    labelText: "Time"),
+                                readOnly: true,
+                                onTap: () async {
+                                  adminMeetingController.timeController.text =
+                                      await timePicker(context);
+                                },
+                              ),
                             ),
                             TextFieldMettingWidget(
                               textEditingController:
@@ -295,8 +299,7 @@ class TextFieldMettingWidget extends StatelessWidget {
         controller: textEditingController,
         decoration: InputDecoration(
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
-            icon: const Icon(Icons.topic,
-                color:adminePrimayColor),
+            icon: const Icon(Icons.topic, color: adminePrimayColor),
             labelText: labelText,
             labelStyle: const TextStyle(color: Colors.black, fontSize: 16)),
       ),

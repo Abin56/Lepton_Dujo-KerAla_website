@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../../../controller/Getx/admin/notice_controller.dart';
+import '../../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
+import '../../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../../model/admin_models/admin_notice_model/admin_notice_model.dart';
 import '../../../../../../colors/colors.dart';
 import '../../../../../../constant/constant.dart';
@@ -36,6 +38,7 @@ class NoticeDisplay extends StatelessWidget {
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
+            elevation: 0,
           ),
           body: SafeArea(
             child: Row(
@@ -83,8 +86,13 @@ class NoticeDisplay extends StatelessWidget {
                                                 .imageUrl,
                                             errorBuilder:
                                                 (context, error, stackTrace) {
-                                              return const Text(
-                                                'Image Not Found',
+                                              return const Center(
+                                                child: Text(
+                                                  'Image Not Found',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
                                               );
                                             },
                                             fit: BoxFit.fill,
@@ -216,7 +224,9 @@ class NoticeDisplay extends StatelessWidget {
                   child: StreamBuilder(
                     stream: FirebaseFirestore.instance
                         .collection('SchoolListCollection')
-                        .doc(schoolId)
+                        .doc(Get.find<AdminLoginScreenController>().schoolID)
+                        .collection(Get.find<GetFireBaseData>().bYear.value)
+                        .doc(Get.find<GetFireBaseData>().bYear.value)
                         .collection('adminNotice')
                         .snapshots(),
                     builder: (context, snapshot) {

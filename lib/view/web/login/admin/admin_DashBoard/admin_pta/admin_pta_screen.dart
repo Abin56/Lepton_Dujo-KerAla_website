@@ -31,6 +31,7 @@ class AdminPtaScreen extends StatelessWidget {
         elevation: 0,
       ),
       floatingActionButton: FloatingActionButton(
+        tooltip: 'Add',
         onPressed: () async {
           Get.find<PtaController>().clearField();
           await createAdminPtaDialogue(context);

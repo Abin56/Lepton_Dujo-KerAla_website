@@ -5,8 +5,9 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
-
 import '../../../../../../../../controller/Getx/admin/meeting_controller.dart';
+import '../../../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
+import '../../../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../../../model/admin_models/admin_meeting_model/admin_meeting_model.dart';
 import '../../../../../../../constant/constant.dart';
 import '../admin_meeting_show.dart';
@@ -20,10 +21,13 @@ class MeetingDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     Size screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: AppBar(backgroundColor: const Color(0xFFF7D8BA),),
+        appBar: AppBar(
+          backgroundColor: const Color(0xFFF7D8BA),
+        ),
         backgroundColor: const Color(0xFFF7D8BA),
         body: SafeArea(
           child: Row(
@@ -171,7 +175,9 @@ class MeetingDisplay extends StatelessWidget {
                 child: StreamBuilder(
                   stream: FirebaseFirestore.instance
                       .collection('SchoolListCollection')
-                      .doc(schoolId)
+                      .doc(Get.find<AdminLoginScreenController>().schoolID)
+                      .collection(Get.find<GetFireBaseData>().bYear.value)
+                      .doc(Get.find<GetFireBaseData>().bYear.value)
                       .collection('AdminMeeting')
                       .snapshots(),
                   builder: (context, snapshot) {

@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 
 import '../../../model/admin_models/admin_meeting_model/admin_meeting_model.dart';
 import '../../../view/constant/constant.dart';
+import '../../admin_login_screen/admin_login_screen_controller.dart';
+import '../../get_firebase-data/get_firebase_data.dart';
 
 class AdminMeetingController extends GetxController {
   TextEditingController dateController = TextEditingController();
@@ -15,7 +17,13 @@ class AdminMeetingController extends GetxController {
   TextEditingController specialGuestController = TextEditingController();
   TextEditingController timeController = TextEditingController();
   TextEditingController venueController = TextEditingController();
-  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  CollectionReference<Map<String, dynamic>> firebaseFirestore =
+      FirebaseFirestore.instance
+          .collection('SchoolListCollection')
+          .doc(Get.find<AdminLoginScreenController>().schoolID)
+          .collection(Get.find<GetFireBaseData>().bYear.value)
+          .doc(Get.find<GetFireBaseData>().bYear.value)
+          .collection('AdminMeeting');
   RxBool isLoading = false.obs;
   RxBool teacherCheckBox = false.obs;
   RxBool studentCheckBox = false.obs;
@@ -25,25 +33,31 @@ class AdminMeetingController extends GetxController {
 
   Future<void> addAdminMeeting(
       String schoolId, AdminMeetingModel adminMeeting) async {
+    if (dateController.text.isEmpty ||
+        headingController.text.isEmpty ||
+        categoryOfMeetingController.text.isEmpty ||
+        membersTobeExpectedController.text.isEmpty ||
+        specialGuestController.text.isEmpty ||
+        timeController.text.isEmpty ||
+        venueController.text.isEmpty) {
+      return showToast(msg: 'All Fields are madatory');
+    } else if (!teacherCheckBox.value &&
+        !studentCheckBox.value &&
+        !guardianCheckBox.value) {
+      return showToast(msg: "Please tick atleast one box");
+    }
+
     try {
       isLoading.value = true;
-      final data = await firebaseFirestore
-          .collection('SchoolListCollection')
-          .doc(schoolId)
-          .collection('AdminMeeting')
-          .add(
-            adminMeeting.toJson(),
-          );
-      await firebaseFirestore
-          .collection('SchoolListCollection')
-          .doc(schoolId)
-          .collection('AdminMeeting')
-          .doc(data.id)
-          .update({"meetingId": data.id});
+      final data = await firebaseFirestore.add(
+        adminMeeting.toJson(),
+      );
+      await firebaseFirestore.doc(data.id).update({"meetingId": data.id});
       clearControllers();
       isLoading.value = false;
+      showToast(msg: 'Meeting Created Successfully');
     } catch (e) {
-      log(e.toString());
+      showToast(msg: 'Failed');
     }
   }
 
@@ -53,14 +67,22 @@ class AdminMeetingController extends GetxController {
       required AdminMeetingModel adminMeetingModel,
       required String documentId,
       required BuildContext context}) async {
+    if (dateController.text.isEmpty ||
+        headingController.text.isEmpty ||
+        categoryOfMeetingController.text.isEmpty ||
+        membersTobeExpectedController.text.isEmpty ||
+        specialGuestController.text.isEmpty ||
+        timeController.text.isEmpty ||
+        venueController.text.isEmpty) {
+      return showToast(msg: 'All Fields are madatory');
+    } else if (!teacherCheckBox.value &&
+        !studentCheckBox.value &&
+        !guardianCheckBox.value) {
+      return showToast(msg: "Please tick atleast one box");
+    }
     try {
       isLoadingUpdate.value = true;
-      await firebaseFirestore
-          .collection('SchoolListCollection')
-          .doc(schoolId)
-          .collection('AdminMeeting')
-          .doc(documentId)
-          .update(
+      await firebaseFirestore.doc(documentId).update(
             adminMeetingModel.toJson(),
           );
       clearControllers();
@@ -72,11 +94,9 @@ class AdminMeetingController extends GetxController {
       }
     } catch (e) {
       showToast(
-        msg: e.toString(),
+        msg: "Failed",
       );
       isLoadingUpdate.value = false;
-
-      print(e.toString());
     }
   }
 
@@ -86,12 +106,7 @@ class AdminMeetingController extends GetxController {
       required BuildContext context}) async {
     try {
       isLoading.value = true;
-      await firebaseFirestore
-          .collection("SchoolListCollection")
-          .doc(schoolId)
-          .collection('AdminMeeting')
-          .doc(meetingId)
-          .delete();
+      await firebaseFirestore.doc(meetingId).delete();
       showToast(msg: 'Successfully deleted');
       adminMeetingModelData.value = null;
       isLoading.value = false;
@@ -100,6 +115,7 @@ class AdminMeetingController extends GetxController {
       }
     } catch (e) {
       showToast(msg: e.toString());
+      isLoading.value = false;
     }
   }
 

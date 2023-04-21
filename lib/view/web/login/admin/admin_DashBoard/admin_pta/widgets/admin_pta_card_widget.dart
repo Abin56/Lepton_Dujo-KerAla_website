@@ -79,7 +79,7 @@ class PtaCardWidget extends StatelessWidget {
                             return AlertDialog(
                               title: const Text('Confirm Remove'),
                               content: const Text(
-                                  'Are you sure you want to remove This'),
+                                  'Are you sure you want to delete this member?'),
                               actions: [
                                 TextButton(
                                   onPressed: () {

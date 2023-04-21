@@ -27,6 +27,7 @@ import '../../../widgets/sample/under_maintance.dart';
 import 'Students_ScholarShip/student_scholarship.dart';
 import 'achievements/achievements.dart';
 import 'admin_meeting/admin_meeting_update/adminMeetingNew/admin_meeting_show.dart';
+import 'admin_meeting/meeting_in.dart';
 import 'admin_notice/add_new_notices.dart';
 import 'admin_notice/admin_notice_new_ui/admin_notice_show_new.dart';
 import 'admin_pta/admin_pta_screen.dart';
@@ -40,9 +41,7 @@ import 'exam_notifications/select_type.dart';
 import 'feesandupdates/fees_and_update.dart';
 import 'food_and_beverages/food_and_bev.dart';
 import 'general_instructions/creation_general_instruction_.dart';
-import 'live_classes/live_classes.dart';
 import 'login_Register_history/date_wise.dart';
-import 'meetings_section/meeting_section.dart';
 import 'mothers_pta/mothers_pta_screen.dart';
 import 'non_Teaching_staff/non_teaching_staff.dart';
 import 'sampoorna/sampoorna_home.dart';
@@ -445,9 +444,12 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                IconButton(onPressed: () {
-                                  Navigator.pop(context);
-                                }, icon:  Icon(Icons.arrow_back),),
+                                IconButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  icon: Icon(Icons.arrow_back),
+                                ),
                                 Text(
                                   'Admin Dashboard',
                                   style: GoogleFonts.poppins(
@@ -634,27 +636,30 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                 TextButton(
                                                   child: const Text('ok'),
                                                   onPressed: () async {
-                                                        log("school id${Get
-                                                                .find<
-                                                                    AdminLoginScreenController>()
-                                                            .schoolID}");
-                                                            log("batch year${Get.find<GetFireBaseData>().bYear.value}");
+                                                    log("school id${Get.find<AdminLoginScreenController>().schoolID}");
+                                                    log("batch year${Get.find<GetFireBaseData>().bYear.value}");
                                                     log("dateee${LoginTimeIDSavingClass.date}");
                                                     log("idddddddd${LoginTimeIDSavingClass.id.toString()}");
                                                     await FirebaseFirestore
                                                         .instance
                                                         .collection(
                                                             "SchoolListCollection")
-                                                        .doc(Get
-                                                                .find<
-                                                                    AdminLoginScreenController>()
-                                                            .schoolID)
-                                                        .collection(Get.find<GetFireBaseData>().bYear.value)
-                                                        .doc(Get.find<GetFireBaseData>().bYear.value)
+                                                        .doc(
+                                                            Get.find<AdminLoginScreenController>()
+                                                                .schoolID)
+                                                        .collection(
+                                                            Get.find<GetFireBaseData>()
+                                                                .bYear
+                                                                .value)
+                                                        .doc(
+                                                            Get.find<GetFireBaseData>()
+                                                                .bYear
+                                                                .value)
                                                         .collection(
                                                             "LoginHistory")
-                                                        .doc(LoginTimeIDSavingClass
-                                                            .date)
+                                                        .doc(
+                                                            LoginTimeIDSavingClass
+                                                                .date)
                                                         .collection(
                                                             LoginTimeIDSavingClass
                                                                 .date)
@@ -669,7 +674,10 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                         },
                                                             SetOptions(
                                                                 merge:
-                                                                    true)).then((value) =>html.window.location.reload());
+                                                                    true)).then(
+                                                            (value) => html
+                                                                .window.location
+                                                                .reload());
                                                   },
                                                 ),
                                               ],

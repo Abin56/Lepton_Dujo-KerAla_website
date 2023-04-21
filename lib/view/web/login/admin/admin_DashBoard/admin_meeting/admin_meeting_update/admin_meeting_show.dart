@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 
 import '../../../../../../../controller/Getx/admin/meeting_controller.dart';
 import '../../../../../../../model/admin_models/admin_meeting_model/admin_meeting_model.dart';
+import '../../../../../../../utils/utils.dart';
+import '../../../../../../colors/colors.dart';
 import '../../../../../../constant/constant.dart';
 
 class AdminMeetingShowPage extends StatelessWidget {
@@ -35,15 +37,24 @@ class AdminMeetingShowPage extends StatelessWidget {
                         IconButton(
                             onPressed: () {
                               Navigator.of(context).pop();
+                              adminMeetingController.clearControllers();
                             },
                             icon: const Icon(Icons.close)),
                         TextField(
                           controller: adminMeetingController.dateController,
                           decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Date',
-                              labelStyle:
-                                  TextStyle(color: Colors.black, fontSize: 16)),
+                            border: OutlineInputBorder(),
+                            labelText: 'Date',
+                            labelStyle: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                            ),
+                          ),
+                          readOnly: true,
+                          onTap: () async {
+                            adminMeetingController.dateController.text =
+                                await dateTimePicker(context);
+                          },
                         ),
                         sizedBoxH20,
                         TextField(
@@ -79,19 +90,26 @@ class AdminMeetingShowPage extends StatelessWidget {
                           controller:
                               adminMeetingController.specialGuestController,
                           decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Special Guest',
-                              labelStyle:
-                                  TextStyle(color: Colors.black, fontSize: 16)),
+                            border: OutlineInputBorder(),
+                            labelText: 'Special Guest',
+                            labelStyle:
+                                TextStyle(color: Colors.black, fontSize: 16),
+                          ),
                         ),
                         sizedBoxH20,
                         TextField(
                           controller: adminMeetingController.timeController,
                           decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Time',
-                              labelStyle:
-                                  TextStyle(color: Colors.black, fontSize: 16)),
+                            border: OutlineInputBorder(),
+                            labelText: 'Time',
+                            labelStyle:
+                                TextStyle(color: Colors.black, fontSize: 16),
+                          ),
+                          readOnly: true,
+                          onTap: () async {
+                            adminMeetingController.timeController.text =
+                                await timePicker(context);
+                          },
                         ),
                         sizedBoxH20,
                         TextField(

@@ -76,8 +76,7 @@ class PtaController extends GetxController {
     }
   }
 
-  Future<void> updatePta
-  (
+  Future<void> updatePta(
     String memberId,
     BuildContext context,
     String imageId,
@@ -96,9 +95,9 @@ class PtaController extends GetxController {
           imageId: imageId,
         );
         isLoadingDialogue.value = true;
-        await firebaseFirestore.doc(memberId).set(
-              studentData.toJson(),
-            );
+        await firebaseFirestore
+            .doc(memberId)
+            .set(studentData.toJson(), SetOptions(merge: true));
         if (imageDataUin8.value != null) {
           final filePath = await firebaseStorage
               .ref('files/pta/$imageId')
