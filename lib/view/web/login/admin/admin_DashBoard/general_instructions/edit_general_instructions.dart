@@ -1,12 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../controller/Getx/web_controllers/generainstructions/general_instructions_controller.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
-
-
 
 class EditGeneralInstructions extends StatelessWidget {
   EditGeneralInstructions({super.key, required this.schoolId});
@@ -81,9 +78,9 @@ class GInstructionListTileWidget extends StatelessWidget {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: const Text('Confirm Remove'),
+                      title: const Text('Confirm Delete'),
                       content: const Text(
-                          'Are you sure you want to remove this Notice'),
+                          'Are you sure you want to delete this instruction'),
                       actions: [
                         TextButton(
                           onPressed: () {

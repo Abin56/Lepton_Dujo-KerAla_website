@@ -16,13 +16,14 @@ Future<void> updateAdminPtaDialogue(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        icon: IconButton(
-            padding: EdgeInsets.zero,
-            onPressed: () {
-              Navigator.of(context).pop();
-              ptaController.clearField();
-            },
-            icon: const Icon(Icons.close)),
+        icon: Align(
+            alignment: Alignment.topRight,
+            child: CloseButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                ptaController.clearField();
+              },
+            )),
         content: Obx(
           () => ptaController.isLoadingDialogue.value
               ? const Center(
@@ -30,7 +31,6 @@ Future<void> updateAdminPtaDialogue(
                 )
               : SizedBox(
                   height: 350,
-                  width: 250,
                   child: Column(
                     children: <Widget>[
                       GestureDetector(

@@ -181,7 +181,9 @@ class AdminLoginScreenController extends GetxController {
             title: const Text('Message'),
             content: SingleChildScrollView(
               child: ListBody(
-                children: const <Widget>[Text('Wrong Password')],
+                children: const <Widget>[
+                  Text('Please enter a valid username and password')
+                ],
               ),
             ),
             actions: <Widget>[

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../login/admin/admin_DashBoard/create_Admin/add_new_admin.dart';
 import '../login/loginscreen.dart';
-import '../widgets/drop_DownList/schoolDropDownList.dart'; 
+import '../widgets/drop_DownList/schoolDropDownList.dart';
 
 class NavigationBarWidget extends StatelessWidget {
   TextEditingController schoolIdController = TextEditingController();
@@ -13,10 +13,12 @@ class NavigationBarWidget extends StatelessWidget {
   });
 
   final Size screenSize;
-    final Uri _faceBookUrl = Uri.parse('https://www.facebook.com/profile.php?id=100091062978371');
+  final Uri _faceBookUrl =
+      Uri.parse('https://www.facebook.com/profile.php?id=100091062978371');
   final Uri _twitterUrl = Uri.parse('https://twitter.com/LeptonDujo');
   final Uri _instaUrl = Uri.parse('https://www.instagram.com/leptondujo/');
-  final Uri _utubeUrl = Uri.parse('https://www.youtube.com/@LEPTONDUJO/featured');
+  final Uri _utubeUrl =
+      Uri.parse('https://www.youtube.com/@LEPTONDUJO/featured');
   final Uri _leptonUrl = Uri.parse('http://www.leptoncommunications.com');
 
   Future<void> _launchFacebookUrl() async {
@@ -53,42 +55,56 @@ class NavigationBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
         width: double.infinity,
-      height: screenSize.width/10,
+        height: screenSize.width / 10,
         child: Row(
           children: [
-            Icon(Icons.phone,color: Color.fromARGB(255, 4, 157, 228),size: screenSize.width/50),
+            Icon(Icons.phone,
+                color: Color.fromARGB(255, 4, 157, 228),
+                size: screenSize.width / 50),
 
             GestureDetector(
-              onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return AddNewAdmin(
-                  schoolID: 'MarthCheng13283',
-                );
-              },));
-              },
-              child: Text('+04714053483',style: TextStyle(color: Colors.black,fontSize: screenSize.width/98))),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return AddNewAdmin(
+                        schoolID: 'MarthCheng13283',
+                      );
+                    },
+                  ));
+                },
+                child: Text('+04714053483',
+                    style: TextStyle(
+                        color: Colors.black, fontSize: screenSize.width / 98))),
             SizedBox(
-              width: screenSize.width/55,
+              width: screenSize.width / 55,
             ),
-           
-            Icon(Icons.phone_android,color: Colors.black,size: screenSize.width/50),
 
-              Text('9746366651',style: TextStyle(color: Colors.black,fontSize: screenSize.width/98)),
-              SizedBox(
-              width: screenSize.width/55,
+            Icon(Icons.phone_android,
+                color: Colors.black, size: screenSize.width / 50),
+
+            Text('9746366651',
+                style: TextStyle(
+                    color: Colors.black, fontSize: screenSize.width / 98)),
+            SizedBox(
+              width: screenSize.width / 55,
             ),
-           
-              Icon(Icons.mail_outline,color: Color.fromARGB(255, 255, 0, 0),size: screenSize.width/50),
 
-                Text('info@leptondujo.com',style: TextStyle(color: Color.fromARGB(255, 0, 0, 0),fontSize: screenSize.width/98)),
+            Icon(Icons.mail_outline,
+                color: Color.fromARGB(255, 255, 0, 0),
+                size: screenSize.width / 50),
+
+            Text('info@leptondujo.com',
+                style: TextStyle(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    fontSize: screenSize.width / 98)),
             SizedBox(
               width: screenSize.width * 0.3,
-            ), 
-            // GestureDetector( 
+            ),
+            // GestureDetector(
             //   onTap: (){
             //     Navigator.push(context, MaterialPageRoute(builder: ((context) =>RequestedSchoolsApproval())));
-            //   }, 
-              
+            //   },
+
             //   child: Text(
             //     'Super Admin', style: TextStyle(color: Colors.black),
             //   ),
@@ -114,7 +130,7 @@ class NavigationBarWidget extends StatelessWidget {
                       ),
                       actions: <Widget>[
                         TextButton(
-                          child: const Text('ok'),
+                          child: const Text('Ok'),
                           onPressed: () async {
                             await Navigator.push(context, MaterialPageRoute(
                               builder: (context) {
@@ -126,7 +142,7 @@ class NavigationBarWidget extends StatelessWidget {
                           },
                         ),
                         TextButton(
-                          child: const Text('cancel'),
+                          child: const Text('Cancel'),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
@@ -137,23 +153,25 @@ class NavigationBarWidget extends StatelessWidget {
                 );
               },
               child: SizedBox(
-                height: screenSize.width/50,
-                width: screenSize.width/20,
+                height: screenSize.width / 50,
+                width: screenSize.width / 20,
                 child: Center(
                   child: Text(
                     "Login",
                     style: TextStyle(
-                        color: Colors.red, fontWeight: FontWeight.bold,fontSize: screenSize.width/80),
+                        color: Colors.red,
+                        fontWeight: FontWeight.bold,
+                        fontSize: screenSize.width / 80),
                   ),
                 ),
               ),
             ),
             SizedBox(
-                width: screenSize.width * 1 /30 ,
-              ),
+              width: screenSize.width * 1 / 30,
+            ),
             InkWell(
               onTap: () {
-                 _launchFacebookUrl();
+                _launchFacebookUrl();
               },
               child: CircleAvatar(
                 radius: screenSize.width * 1 / 55,
@@ -187,7 +205,7 @@ class NavigationBarWidget extends StatelessWidget {
             // ),
             InkWell(
               onTap: () {
-                 _launchTwitterUrl();
+                _launchTwitterUrl();
               },
               child: CircleAvatar(
                 radius: screenSize.width * 1 / 60,

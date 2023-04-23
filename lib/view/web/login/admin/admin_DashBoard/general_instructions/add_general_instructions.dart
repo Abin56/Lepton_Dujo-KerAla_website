@@ -7,7 +7,6 @@ import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
 import '../../../../../fonts/fonts.dart';
 
-
 class AddGeneralInstruction extends StatelessWidget {
   AddGeneralInstruction({super.key, required this.schoolId});
   final GeneralInstructionsController generalInstructionsController =
@@ -18,7 +17,8 @@ class AddGeneralInstruction extends StatelessWidget {
     generalInstructionsController.textEditingController.clear();
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(title: Text('Create Instructions'),
+      appBar: AppBar(
+        title: Text('Create Instructions'),
         backgroundColor: adminePrimayColor,
         elevation: 0,
       ),
@@ -75,7 +75,7 @@ class AddGeneralInstruction extends StatelessWidget {
                           vertical: 30,
                         ),
                         child: Container(
-                          margin: EdgeInsets.only(top: screenSize.width/10),
+                          margin: EdgeInsets.only(top: screenSize.width / 10),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -90,15 +90,27 @@ class AddGeneralInstruction extends StatelessWidget {
                               ),
                               sizedBoxH20,
                               SizedBox(
-                                width: screenSize.width /6.5,
-                                height:screenSize.width /22 ,
+                                width: screenSize.width / 6.5,
+                                height: screenSize.width / 22,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                     shape: const StadiumBorder(),
                                   ),
                                   onPressed: () {
                                     if (generalInstructionsController
-                                        .textEditingController.text.isNotEmpty) {
+                                        .textEditingController.text
+                                        .trim()
+                                        .isEmpty) {
+                                      showToast(
+                                          msg: 'Error:Field is Empty',
+                                          color:
+                                              "linear-gradient(to right, #FF3131, #FF3131");
+                                      return;
+                                    }
+                                    if (generalInstructionsController
+                                        .textEditingController
+                                        .text
+                                        .isNotEmpty) {
                                       generalInstructionsController
                                           .instructionList
                                           .add(generalInstructionsController
@@ -113,8 +125,8 @@ class AddGeneralInstruction extends StatelessWidget {
                               ),
                               sizedBoxH20,
                               SizedBox(
-                                width: screenSize.width/6.5,
-                                height: screenSize.width /22,
+                                width: screenSize.width / 6.5,
+                                height: screenSize.width / 22,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                     shape: const StadiumBorder(),
@@ -123,7 +135,7 @@ class AddGeneralInstruction extends StatelessWidget {
                                     await generalInstructionsController
                                         .addListOfInstructions(schoolId);
                                   },
-                                  child: const Text("Create"),
+                                  child: const Text("Upload"),
                                 ),
                               ),
                               sizedBoxH20,

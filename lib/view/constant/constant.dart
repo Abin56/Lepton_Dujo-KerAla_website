@@ -76,8 +76,11 @@ const sizedBoxw570 = SizedBox(
   width: 570,
 );
 
-void showToast({required String msg}) {
+void showToast(
+    {required String msg,
+    String color = 'linear-gradient(to right, #00b09b, #96c93d'}) {
   Fluttertoast.showToast(
+    webBgColor: color,
     msg: msg,
     toastLength: Toast.LENGTH_LONG,
     gravity: ToastGravity.CENTER,
@@ -177,7 +180,7 @@ Future<Uint8List?> pickImage(ImageSource source) async {
   }
   return null;
 }
+
 class TeacherLoginIDSaver {
   static String id = '';
-
 }

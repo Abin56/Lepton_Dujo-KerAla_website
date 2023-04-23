@@ -10,6 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../../../controller/Getx/admin/pta/pta_controller.dart';
 import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
+import '../../../../../../utils/screen_size.dart';
 import '../../../../../constant/constant.dart';
 
 class AdminPtaScreen extends StatelessWidget {
@@ -21,17 +22,14 @@ class AdminPtaScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
-
     return Scaffold(
-      backgroundColor: adminePrimayColor,
       appBar: AppBar(
         title: const Text('School PTA'),
         backgroundColor: adminePrimayColor,
         elevation: 0,
       ),
       floatingActionButton: FloatingActionButton(
-        tooltip: 'Add',
+        tooltip: 'Add New Member',
         onPressed: () async {
           Get.find<PtaController>().clearField();
           await createAdminPtaDialogue(context);
@@ -82,21 +80,20 @@ class AdminPtaScreen extends StatelessWidget {
                     child: Column(
                   children: [
                     SizedBox(
-                      width: screenSize.width * 0.4,
+                      width: ScreenSize.width * 0.4,
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Column(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.all(15),
-                              child: Text(
-                                "School PTA",
-                                style: GoogleFonts.oswald(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold,
-                                    color: cWhite),
+                            Text(
+                              "School PTA",
+                              style: GoogleFonts.oswald(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                                color: cBlack,
                               ),
                             ),
+                            sizedBoxH10,
                             LeftSideCardWidget(
                               querySnapshotList: querySnapshotList,
                               adminPtaModelList: adminPtaModelList,

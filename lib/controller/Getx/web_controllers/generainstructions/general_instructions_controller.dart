@@ -4,29 +4,40 @@ import 'package:get/get.dart';
 
 import '../../../../model/admin_models/general_instructions/general_instructions_model.dart';
 import '../../../../view/constant/constant.dart';
+import '../../../admin_login_screen/admin_login_screen_controller.dart';
+import '../../../get_firebase-data/get_firebase_data.dart';
 
 class GeneralInstructionsController extends GetxController {
   TextEditingController textEditingController = TextEditingController();
   RxBool isLoading = false.obs;
   RxString schoolName = 'School Name'.obs;
-  FirebaseFirestore firebase = FirebaseFirestore.instance;
+  CollectionReference<Map<String, dynamic>> firebase = FirebaseFirestore
+      .instance
+      .collection('SchoolListCollection')
+      .doc(Get.find<AdminLoginScreenController>().schoolID)
+      .collection(Get.find<GetFireBaseData>().bYear.value)
+      .doc(Get.find<GetFireBaseData>().bYear.value)
+      .collection('general_instructions');
   RxList<GeneralInstructionModel> listOfGeneralIModel =
       RxList<GeneralInstructionModel>([]);
   RxList<String> instructionList = <String>[].obs;
 
   Future<void> addListOfInstructions(String schoolId) async {
-    isLoading.value = true;
     if (instructionList.isNotEmpty) {
+      isLoading.value = true;
       for (int i = 0; i < instructionList.length; i++) {
         addGeneralInstructions(
           instructionList[i],
           schoolId,
         );
       }
-    }
+      isLoading.value = false;
 
-    isLoading.value = false;
-    showToast(msg: 'Successfully Added');
+      showToast(msg: 'Successfully Added');
+    } else {
+      isLoading.value = false;
+      showToast(msg: 'Failed :Empty instruction');
+    }
   }
 
   Future<void> addGeneralInstructions(
@@ -40,18 +51,10 @@ class GeneralInstructionsController extends GetxController {
         time: DateTime.now().toString(),
       );
       //add new instruction
-      final DocumentReference<Map<String, dynamic>> response = await firebase
-          .collection('SchoolListCollection')
-          .doc(schoolId)
-          .collection('general_instructions')
-          .add(generalInstructionModelData.toJson());
+      final DocumentReference<Map<String, dynamic>> response =
+          await firebase.add(generalInstructionModelData.toJson());
       //update instrcution id
-      await firebase
-          .collection('SchoolListCollection')
-          .doc(schoolId)
-          .collection('general_instructions')
-          .doc(response.id)
-          .update({"instructionId": response.id});
+      await firebase.doc(response.id).update({"instructionId": response.id});
       // isLoading.value = false;
       //showToast(msg: 'Instruction Created Successfully');
       instructionList.clear();
@@ -64,12 +67,7 @@ class GeneralInstructionsController extends GetxController {
   Future<void> removeInstruction(String instructionId, String schoolId) async {
     try {
       isLoading.value = true;
-      firebase
-          .collection('SchoolListCollection')
-          .doc(schoolId)
-          .collection('general_instructions')
-          .doc(instructionId)
-          .delete();
+      firebase.doc(instructionId).delete();
       await getInstruction(schoolId);
       isLoading.value = false;
       showToast(msg: 'Deleted Successfully');
@@ -82,22 +80,23 @@ class GeneralInstructionsController extends GetxController {
   Future<void> updateInstructions(
       String instructionId, String schoolId, String instructions) async {
     try {
-      isLoading.value = true;
-      firebase
-          .collection('SchoolListCollection')
-          .doc(schoolId)
-          .collection("general_instructions")
-          .doc(instructionId)
-          .update(
-        {
-          "instruction": instructions,
-          "time": DateTime.now().toString(),
-        },
-      );
-      isLoading.value = false;
-      textEditingController.clear();
-      getInstruction(schoolId);
-      showToast(msg: 'Updated Succesfully');
+      if (instructions.isNotEmpty) {
+        isLoading.value = true;
+        firebase.doc(instructionId).update(
+          {
+            "instruction": instructions,
+            "time": DateTime.now().toString(),
+          },
+        );
+        isLoading.value = false;
+        textEditingController.clear();
+        getInstruction(schoolId);
+        showToast(msg: 'Updated Succesfully');
+      } else {
+        showToast(
+            msg: 'Failed : Empty Instruction',
+            color: "linear-gradient(to right, #FF3131, #FF3131");
+      }
     } catch (e) {
       showToast(msg: 'Updation Failed');
       isLoading.value = false;
@@ -108,12 +107,8 @@ class GeneralInstructionsController extends GetxController {
     try {
       isLoading.value = true;
       await getSchoolName(schoolId);
-      QuerySnapshot<Map<String, dynamic>> result = await firebase
-          .collection('SchoolListCollection')
-          .doc(schoolId)
-          .collection("general_instructions")
-          .orderBy('time')
-          .get();
+      QuerySnapshot<Map<String, dynamic>> result =
+          await firebase.orderBy('time').get();
       listOfGeneralIModel.value = result.docs
           .map(
             (e) => GeneralInstructionModel.fromJson(
@@ -130,8 +125,10 @@ class GeneralInstructionsController extends GetxController {
 
   Future<void> getSchoolName(String schoolId) async {
     try {
-      final schoolData =
-          await firebase.collection('SchoolListCollection').doc(schoolId).get();
+      final schoolData = await FirebaseFirestore.instance
+          .collection('SchoolListCollection')
+          .doc(schoolId)
+          .get();
       schoolName.value = schoolData.data()!['schoolName'];
     } catch (e) {
       showToast(msg: 'School Name error');

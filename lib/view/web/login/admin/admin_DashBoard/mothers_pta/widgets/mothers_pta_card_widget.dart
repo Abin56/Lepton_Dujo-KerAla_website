@@ -1,3 +1,4 @@
+import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -32,9 +33,16 @@ class MothersPtaCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: const Color(0xFFE5E4E2),
-        borderRadius: BorderRadius.circular(16),
-      ),
+          color: cWhite,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: const Offset(0, 3),
+            ),
+          ]),
       child: SizedBox(
         width: 200,
         child: Column(

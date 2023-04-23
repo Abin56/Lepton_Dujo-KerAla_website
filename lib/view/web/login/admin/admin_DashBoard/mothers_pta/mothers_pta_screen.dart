@@ -24,10 +24,13 @@ class MothersPtaScreen extends StatelessWidget {
     var screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: adminePrimayColor,
       appBar: AppBar(
-        title: const Text('Mothers PTA'),
-        backgroundColor: adminePrimayColor,
+        title: const Text(
+          'Mothers PTA',
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
         elevation: 0,
       ),
       floatingActionButton: FloatingActionButton(
@@ -35,6 +38,7 @@ class MothersPtaScreen extends StatelessWidget {
           Get.find<MothersPtaController>().clearField();
           await createMothersPtaDialogue(context);
         },
+        tooltip: "Create New Member",
         child: const Icon(
           Icons.add,
         ),

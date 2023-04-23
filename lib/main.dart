@@ -1,5 +1,6 @@
 import 'package:dujo_kerala_website/ui%20team/abin/alumini_accocation/alumni_assocation.dart';
 import 'package:dujo_kerala_website/ui%20team/abin/food_and_beverages/sample.dart';
+import 'package:dujo_kerala_website/utils/screen_size.dart';
 import 'package:dujo_kerala_website/view/web/home/dujo_home.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/admin_dashborad_screen.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/all_Students/all_students_view_Screen.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    
     return ScreenUtilInit(
         minTextAdapt: true,
         splitScreenMode: true,
@@ -48,16 +50,15 @@ class MyApp extends StatelessWidget {
                 // ignore: deprecated_member_use
                 accentColor: const Color(0xFF02BB9F),
               ),
-              home: 
-             // AlumniAssocation()
-             //ClassTeacherAdmin(schoolID: '',teacherEmail:'' ,teacherID: '',)
-            // AllStudentList()
-           // AdminDashBoardPage(schoolID: '',date: '',loginTime: '',wadmin: '',key: null,)
-          // AllStdf()
-        // BusRoute()
-        // NonTeachingLogin(schoolID: '',)
-        DujoHomePage()
-              );
+              home:
+                  // AlumniAssocation()
+                  //ClassTeacherAdmin(schoolID: '',teacherEmail:'' ,teacherID: '',)
+                  // AllStudentList()
+                  // AdminDashBoardPage(schoolID: '',date: '',loginTime: '',wadmin: '',key: null,)
+                  // AllStdf()
+                  // BusRoute()
+                  // NonTeachingLogin(schoolID: '',)
+                  DujoHomePage());
         });
   }
 }
