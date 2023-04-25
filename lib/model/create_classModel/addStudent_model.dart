@@ -25,6 +25,7 @@ class AddStudentModel {
   String? createDate;
   String? bloodgroup;
   String? dateofBirth;
+  String? docid;
   AddStudentModel({
     this.uid,
     this.studentName,
@@ -42,6 +43,7 @@ class AddStudentModel {
     this.createDate,
     this.bloodgroup,
     this.dateofBirth,
+    this.docid,
   });
 
   AddStudentModel copyWith({
@@ -61,6 +63,7 @@ class AddStudentModel {
     String? createDate,
     String? bloodgroup,
     String? dateofBirth,
+    String? docid,
   }) {
     return AddStudentModel(
       uid: uid ?? this.uid,
@@ -79,6 +82,7 @@ class AddStudentModel {
       createDate: createDate ?? this.createDate,
       bloodgroup: bloodgroup ?? this.bloodgroup,
       dateofBirth: dateofBirth ?? this.dateofBirth,
+      docid: docid ?? this.docid,
     );
   }
 
@@ -100,6 +104,7 @@ class AddStudentModel {
       'createDate': createDate,
       'bloodgroup': bloodgroup,
       'dateofBirth': dateofBirth,
+      'docid': docid,
     };
   }
 
@@ -136,6 +141,7 @@ class AddStudentModel {
           map['bloodgroup'] != null ? map['bloodgroup'] as String : null,
       dateofBirth:
           map['dateofBirth'] != null ? map['dateofBirth'] as String : null,
+      docid: map['docid'] != null ? map['docid'] as String : null,
     );
   }
 
@@ -146,7 +152,7 @@ class AddStudentModel {
 
   @override
   String toString() {
-    return 'AddStudentModel(uid: $uid, studentName: $studentName, gender: $gender, admissionNumber: $admissionNumber, studentemail: $studentemail, parentPhoneNumber: $parentPhoneNumber, whichClass: $whichClass, houseName: $houseName, place: $place, district: $district, alPhoneNumber: $alPhoneNumber, profileImageId: $profileImageId, profileImageUrl: $profileImageUrl, createDate: $createDate, bloodgroup: $bloodgroup, dateofBirth: $dateofBirth)';
+    return 'AddStudentModel(uid: $uid, studentName: $studentName, gender: $gender, admissionNumber: $admissionNumber, studentemail: $studentemail, parentPhoneNumber: $parentPhoneNumber, whichClass: $whichClass, houseName: $houseName, place: $place, district: $district, alPhoneNumber: $alPhoneNumber, profileImageId: $profileImageId, profileImageUrl: $profileImageUrl, createDate: $createDate, bloodgroup: $bloodgroup, dateofBirth: $dateofBirth, docid: $docid)';
   }
 
   @override
@@ -168,7 +174,8 @@ class AddStudentModel {
         other.profileImageUrl == profileImageUrl &&
         other.createDate == createDate &&
         other.bloodgroup == bloodgroup &&
-        other.dateofBirth == dateofBirth;
+        other.dateofBirth == dateofBirth &&
+        other.docid == docid;
   }
 
   @override
@@ -188,7 +195,8 @@ class AddStudentModel {
         profileImageUrl.hashCode ^
         createDate.hashCode ^
         bloodgroup.hashCode ^
-        dateofBirth.hashCode;
+        dateofBirth.hashCode ^
+        docid.hashCode;
   }
 }
 
@@ -198,7 +206,7 @@ class AddStudentsToFireBase {
     try {
       final firebase = FirebaseFirestore.instance;
 
-      String studentId="";
+      String studentId = "";
       firebase
           .collection("SchoolListCollection")
           .doc(Get.find<AdminLoginScreenController>().schoolID)
@@ -209,7 +217,7 @@ class AddStudentsToFireBase {
           .collection('Students')
           .add(productModel.toMap())
           .then((value) {
-            studentId=value.id;
+        studentId = value.id;
         firebase
             .collection("SchoolListCollection")
             .doc(Get.find<AdminLoginScreenController>().schoolID)
@@ -218,7 +226,8 @@ class AddStudentsToFireBase {
             .collection("Classes")
             .doc(classId)
             .collection('Students')
-            .doc(value.id).update({"uid":value.id});
+            .doc(value.id)
+            .update({"docid": value.id});
       }).then((value) {
         firebase
             .collection("SchoolListCollection")

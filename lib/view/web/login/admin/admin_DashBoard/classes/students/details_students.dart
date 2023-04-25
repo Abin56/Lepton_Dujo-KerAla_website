@@ -258,7 +258,7 @@ class StudentsDetails extends StatelessWidget {
                                                           .indexValue.value!]
                                                       .uid)
                                                   .set({
-                                                'parentPhNo':
+                                                'parentPhoneNumber':
                                                     _newPhoneNoController.text
                                                         .trim()
                                               }, SetOptions(merge: true)).then(
