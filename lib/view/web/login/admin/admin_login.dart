@@ -10,6 +10,7 @@ import '../../../colors/colors.dart';
 import '../../../constant/constant.dart';
 import '../../../fonts/fonts.dart';
 import '../../../icons/icons.dart';
+import '../../widgets/icon_back.dart';
 import '../../widgets/responsive.dart';
 
 // ignore: must_be_immutable
@@ -17,10 +18,10 @@ class AdminLoginScreen extends StatelessWidget {
   //
   AdminLoginScreenController adminLoginScreenController =
       Get.put(AdminLoginScreenController());
-    GetFireBaseData getFireBaseData = Get.put(GetFireBaseData());
+  GetFireBaseData getFireBaseData = Get.put(GetFireBaseData());
 
   //
-  AdminLoginScreen({ Key? key}) : super(key: key);
+  AdminLoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,22 +43,38 @@ class AdminLoginScreen extends StatelessWidget {
                       height: height,
                       color: const Color.fromARGB(255, 74, 3, 107),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'Hi ! \n Admin',
-                            style: ralewayStyle.copyWith(
-                              fontSize: 48.0,
-                              color: AppColors.whiteColor,
-                              fontWeight: FontWeight.w800,
-                            ),
+                          IconButtonBackWidget(
+                            color: cWhite,
                           ),
-                          sizedBoxH30,
-                          SizedBox(
-                            height: 400.h,
-                            child: LottieBuilder.network(
-                                'https://assets10.lottiefiles.com/packages/lf20_q0vtqaxf.json'),
+                          Expanded(
+                            child: SizedBox(
+                              height: 500,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Center(
+                                    child: Text(
+                                      'Hi ! \n Admin',
+                                      style: ralewayStyle.copyWith(
+                                        fontSize: 48.0,
+                                        color: AppColors.whiteColor,
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                    ),
+                                  ),
+                                  sizedBoxH30,
+                                  Center(
+                                    child: SizedBox(
+                                      height: 400.h,
+                                      child: LottieBuilder.network(
+                                          'https://assets10.lottiefiles.com/packages/lf20_q0vtqaxf.json'),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           )
                         ],
                       ),
@@ -221,8 +238,7 @@ class AdminLoginScreen extends StatelessWidget {
                         color: Colors.transparent,
                         child: InkWell(
                           onTap: () async {
-                            adminLoginScreenController.loginFunction(
-                                 context);
+                            adminLoginScreenController.loginFunction(context);
                           },
                           borderRadius: BorderRadius.circular(16.0),
                           child: Ink(
