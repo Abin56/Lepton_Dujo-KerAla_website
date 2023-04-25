@@ -1,8 +1,9 @@
 
 import 'package:flutter/material.dart';
 
+import '../../../../../../ui team/abin/alumini_accocation/create_alumni.dart';
+import '../../../../../../ui team/abin/alumini_accocation/create_category_alumni.dart';
 import '../../../../widgets/custom_button.dart';
-import 'create_alumni.dart';
 
 class AlumniAssocation extends StatefulWidget {
   const AlumniAssocation({super.key});
@@ -91,14 +92,12 @@ class _AlumniAssocationState extends State<AlumniAssocation> {
                             width: screenSize.width * 1 / 3.7,
                             child: InkWell(
                               onTap: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //       builder: (BuildContext context) =>
-                                //           AddPTACategoryAcreen(
-                                //             id: widget.id,
-                                //           )),
-                                // );
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                       CreatecategoryAlumni())
+                                );
                               },
                               child: Container(
                                 height: screenSize.width * 1 / 10,

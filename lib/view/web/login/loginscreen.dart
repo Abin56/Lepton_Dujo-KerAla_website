@@ -2,6 +2,7 @@
 
 import 'dart:developer';
 import 'package:dujo_kerala_website/view/web/login/teacher/teacher_login_screen.dart';
+import 'package:dujo_kerala_website/view/web/widgets/drop_DownList/schoolDropDownList.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../colors/colors.dart';
@@ -27,6 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
+       appBar: AppBar(backgroundColor: Colors.transparent,elevation: 0,iconTheme: IconThemeData(color: Colors.black),),
       backgroundColor: AppColors.backColor,
       body: SizedBox(
         height: height,
@@ -65,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     onTap: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
-                          return const TeacherLoginScreen();
+                          return TeacherLoginScreen();
                         },
                       ));
                     },
@@ -79,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         colorindex: 0,
-                        height: 200,
+                        height: screenSize.width/8,
                         width: 400),
                   ),
                   GestureDetector(
@@ -100,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               style: GoogleFont.subHeadTextStyle),
                         ),
                         colorindex: 1,
-                        height: 200,
+                        height: screenSize.width/8,
                         width: 400),
                   ),
                   GestureDetector(
@@ -109,6 +111,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         builder: (context) {
                           log("Admin Login>>>>>>>>>>${widget.schoolID}");
                           return AdminLoginScreen(
+                            adminSchoolId: schoolListValue!['id'],
+
                            
                           );
                         },
@@ -122,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               style: GoogleFont.subHeadTextStyle),
                         ),
                         colorindex: 7,
-                        height: 200,
+                        height: screenSize.width/8,
                         width: 400),
                   )
                 ],

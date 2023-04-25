@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../colors/colors.dart';
+import '../../../../../constant/constant.dart';
 import '../../../../../fonts/fonts.dart';
 
 
@@ -12,6 +13,8 @@ class CreateBusRoute extends StatefulWidget {
   @override
   State<CreateBusRoute> createState() => _CreateBusRouteState();
 }
+final formKey = GlobalKey<FormState>();
+
 
 class _CreateBusRouteState extends State<CreateBusRoute> {
   @override
@@ -69,125 +72,116 @@ class _CreateBusRouteState extends State<CreateBusRoute> {
                         ),
                 ),
                         
-                      Padding(
-                        padding:  EdgeInsets.only(left: size.width/8),
-                        child: Container(
-                          height: size.height * 1 /1 ,
-                           width: size.width * 1 / 4,
-                          
-                          child: Column(
-                           // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                    children: [
+                       SizedBox(
+            width:size.width*1/2 ,
+            height: size.height,
+              child: SingleChildScrollView(
+                child: Form(
+                  key: formKey,
+                  child: Padding(
+                    padding:  EdgeInsets.only(left: size.width/10,right:  size.width/10),
+                    child: Column(children: [
 
-                                      Padding(
-                                        padding:  EdgeInsets.only(top: size.width/22),
-                                        child: Container(
-                                                    color: Colors.white,
-                                                   // height: size.width * 1 / 2,
-                                                    width: size.width * 1 / 4,
-                                                    child: Column(children: [
-                                                      Padding(
-                                                        padding: EdgeInsets.all(15),
-                                                        child: TextField(
-                                                          
-                                                          decoration: InputDecoration(
-                                                            border: OutlineInputBorder( borderRadius: BorderRadius.circular(20)),
-                                                            icon: Icon(Icons.route_outlined,color: Color.fromARGB(255, 19, 7, 134)),
-                                                            labelText: 'Route Number',
-                                                          ),
-                                                        ),
-                                                      ),
+
+                        BusRouteTextFormWidget(
+                           function: checkFieldEmpty,
+                           labelText:'Route Number' ,  icon: Icons.route_outlined,),
                                                       
-                                                      Padding(
-                                                        padding: EdgeInsets.all(15),
-                                                        child: TextField(
-                                                         
-                                                          decoration: InputDecoration(
-                                                            border: OutlineInputBorder(
-                                                               borderRadius: BorderRadius.circular(20)
-                                                            ),
-                                                             icon: Icon(Icons.bus_alert,color: Color.fromARGB(255, 19, 7, 134)),
-                                                            labelText: 'Bus Number',
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding: EdgeInsets.all(15),
-                                                        child: TextField(
-                                                          
-                                                          decoration: InputDecoration(
-                                                            border: OutlineInputBorder(
-                                                               borderRadius: BorderRadius.circular(20)
-                                                            ),
-                                                             icon: Icon(Icons.phone_android_sharp,color: Color.fromARGB(255, 19, 7, 134)),
-                                                            labelText: 'Driver Mobile Number',
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding: EdgeInsets.all(15),
-                                                        child: TextField(
-                                                          decoration: InputDecoration(
-                                                            border: OutlineInputBorder(
-                                                               borderRadius: BorderRadius.circular(20)
-                                                            ),
-                                                             icon: Icon(Icons.phone_android,color: Color.fromARGB(255, 19, 7, 134)),
-                                                            labelText: 'Assistnce Mobile Number',
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding: EdgeInsets.all(15),
-                                                        child: TextField(
-                                                          decoration: InputDecoration(
-                                                            border: OutlineInputBorder(
-                                                               borderRadius: BorderRadius.circular(20)
-                                                            ),
-                                                             icon: Icon(Icons.person_2,color: Color.fromARGB(255, 19, 7, 134)),
-                                                            labelText: 'Staff in Charge',
-                                                          ),
-                                                        ),
-                                                      ),
+
+                                                        BusRouteTextFormWidget(
+                                                        function: checkFieldEmpty,
+                                                      labelText:'Bus Number' ,  icon: Icons.bus_alert,),
+
+                                                       BusRouteTextFormWidget(
+                                                        function: checkFieldPhoneNumberIsValid,
+                                                      labelText:'Driver Mobile Number' ,  icon: Icons.phone_android_sharp,),
+
+                                                       BusRouteTextFormWidget(
+                                                        function: checkFieldPhoneNumberIsValid,
+                                                      labelText:'Assistance Mobile Number' ,   icon: Icons.phone_android, ),
+
+
+                                                      BusRouteTextFormWidget(
+                                                        function: checkFieldEmpty,
+                                                      labelText:'Staff inCharge' ,   icon: Icons.person_2, ),
                                                      
                                                       
-                                                      SizedBox(
-                                                        height: 30,),
-                                                      InkWell(
-                                                        onTap: () {
-                                                        //  Navigator.push
-                                                        //                 (context, MaterialPageRoute
-                                                        //                 (builder: 
-                                                        //                 ((context) =>  )));
-                                                      },
-                                                        child: Container(
-                                                              height: size.width * 1 / 30,
-                                                              width: size.width * 1 / 5,
-                                                              decoration: BoxDecoration(
-                                                                  color: Colors.blue,
-                                                                  borderRadius: BorderRadius.circular(14)),
-                                                              child: TextButton(
-                                                                style: TextButton.styleFrom(
-                                                                  foregroundColor: Color.fromARGB(255, 255, 255, 255),
-                                                                  padding: const EdgeInsets.all(9.0),
-                                                                  textStyle: const TextStyle(fontSize: 17),
-                                                                ),
-                                                                onPressed: () {},
-                                                                child: const Text('Create'),
-                                                              ),
-                                                            ),
-                                                      ),
-                                                      
-                                                    ]),
-                                                  ),
-                                      ),
-                                    ],
+                                              
+                      SizedBox(
+                        height: 30,
                       ),
-                   ),
-                 ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: size.width * 1 / 20, right: size.width * 1 / 20),
+                        child: 
+                            Container(
+                                height: size.width * 1 / 30,
+                                width: size.width * 1 / 9,
+                                decoration: BoxDecoration(
+                                    color: Colors.blue,
+                                    borderRadius: BorderRadius.circular(14)),
+                                child: TextButton(
+                                  style: TextButton.styleFrom(
+                                    foregroundColor:
+                                        Color.fromARGB(255, 255, 255, 255),
+                                    padding: const EdgeInsets.all(9.0),
+                                    textStyle: const TextStyle(fontSize: 17),
+                                  ),
+                                  onPressed: () async {
+                                    bool? result = formKey.currentState?.validate();
+                                
+                                  
+                                  },
+                                  child: const Text('Create'),
+                                ),
+                              )
+                           
+                              ),
+                      
+                    ]),
+                  ),
+                ),
+              ))
                ],
              ),
            ]
          ),                
+    );
+  }
+}
+
+class BusRouteTextFormWidget extends StatelessWidget {
+   BusRouteTextFormWidget({
+    super.key, 
+    required this.labelText,
+    // required this.textEditingController,
+      required this.function,
+      required this.icon,
+  });
+// final TextEditingController textEditingController;
+  final String labelText;
+  final String? Function(String? fieldContent) function;
+    IconData icon;
+
+  
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(15),
+      child: TextFormField(
+        validator: function ,
+        // controller: textEditingController,
+        decoration: InputDecoration(
+          border: OutlineInputBorder(
+             borderRadius: BorderRadius.circular(20)
+          ),
+            icon:  Icon(icon,
+            color: Color.fromARGB(221, 28, 9, 110),
+          ),
+          labelText: labelText,
+        ),
+      ),
     );
   }
 }
@@ -206,117 +200,115 @@ class _CreateBusRouteState extends State<CreateBusRoute> {
 
 
 
-    // var screenSize = MediaQuery.of(context).size;
-    // return Scaffold(
-    //   backgroundColor: Color.fromARGB(255, 27, 95, 88),
-    //   appBar: AppBar(title: Text('Bus Route dashboard')),
-    //   body: SingleChildScrollView(
-    //     child: Padding(
-    //       padding: EdgeInsets.only(top: screenSize.width * 1 / 13, bottom: 50),
-    //       child: Center(
-    //         child: Container(
-    //           color: Colors.white,
-    //           height: screenSize.width * 1 / 2,
-    //           width: screenSize.width * 1 / 4,
-    //           child: Column(children: [
-    //             Padding(
-    //               padding: EdgeInsets.all(15),
-    //               child: TextField(
-                    
-    //                 decoration: InputDecoration(
-    //                   border: OutlineInputBorder(),
-    //                   labelText: 'Route Number',
-    //                 ),
-    //               ),
-    //             ),
-                
-    //             Padding(
-    //               padding: EdgeInsets.all(15),
-    //               child: TextField(
-                   
-    //                 decoration: InputDecoration(
-    //                   border: OutlineInputBorder(),
-    //                   labelText: 'Bus Number',
-    //                 ),
-    //               ),
-    //             ),
-    //             Padding(
-    //               padding: EdgeInsets.all(15),
-    //               child: TextField(
-                    
-    //                 decoration: InputDecoration(
-    //                   border: OutlineInputBorder(),
-    //                   labelText: 'Driver Mobile Number',
-    //                 ),
-    //               ),
-    //             ),
-    //             Padding(
-    //               padding: EdgeInsets.all(15),
-    //               child: TextField(
-    //                 decoration: InputDecoration(
-    //                   border: OutlineInputBorder(),
-    //                   labelText: 'Assistnce Mobile Number',
-    //                 ),
-    //               ),
-    //             ),
-    //             Padding(
-    //               padding: EdgeInsets.all(15),
-    //               child: TextField(
-    //                 decoration: InputDecoration(
-    //                   border: OutlineInputBorder(),
-    //                   labelText: 'Staff in Charge',
-    //                 ),
-    //               ),
-    //             ),
-    //             //  Padding(
-    //             //   padding: EdgeInsets.all(15),
-    //             //   child: TextField(
-    //             //     decoration: InputDecoration(
-    //             //       border: OutlineInputBorder(),
-    //             //       labelText: '',
-    //             //     ),
-    //             //   ),
-    //             // ),
-    //             //  Padding(
-    //             //   padding: EdgeInsets.all(15),
-    //             //   child: TextField(
-    //             //     decoration: InputDecoration(
-    //             //       border: OutlineInputBorder(),
-    //             //       labelText: '',
-    //             //     ),
-    //             //   ),
-    //             // ),
-                
-    //             SizedBox(height: 30,),
-    //             InkWell(onTap: () {
-    //               //  Navigator.push
-    //               //                 (context, MaterialPageRoute
-    //               //                 (builder: 
-    //               //                 ((context) =>  )));
-    //             },
-    //               child: Container(
-    //                     height: screenSize.width * 1 / 30,
-    //                     width: screenSize.width * 1 / 5,
-    //                     decoration: BoxDecoration(
-    //                         color: Colors.blue,
-    //                         borderRadius: BorderRadius.circular(14)),
-    //                     child: TextButton(
-    //                       style: TextButton.styleFrom(
-    //                         foregroundColor: Color.fromARGB(255, 255, 255, 255),
-    //                         padding: const EdgeInsets.all(9.0),
-    //                         textStyle: const TextStyle(fontSize: 17),
-//                           ),
-//                           onPressed: () {},
-//                           child: const Text('Create'),
-//                         ),
-//                       ),
-//                 ),
-                
-//               ]),
-//             ),
-//           ),
-//         ),
-//      ),
-// );
-// }
-// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Column(
+//                                                       children: [
+//                                                       Padding(
+//                                                         padding: EdgeInsets.all(15),
+//                                                         child: TextFormField(
+                                                          
+//                                                           decoration: InputDecoration(
+//                                                             border: OutlineInputBorder( borderRadius: BorderRadius.circular(20)),
+//                                                             icon: Icon(Icons.route_outlined,color: Color.fromARGB(255, 19, 7, 134)),
+//                                                             labelText: 'Route Number',
+//                                                           ),
+//                                                         ),
+//                                                       ),
+                                                      
+//                                                       Padding(
+//                                                         padding: EdgeInsets.all(15),
+//                                                         child: TextFormField(
+                                                         
+//                                                           decoration: InputDecoration(
+//                                                             border: OutlineInputBorder(
+//                                                                borderRadius: BorderRadius.circular(20)
+//                                                             ),
+//                                                              icon: Icon(Icons.bus_alert,color: Color.fromARGB(255, 19, 7, 134)),
+//                                                             labelText: 'Bus Number',
+//                                                           ),
+//                                                         ),
+//                                                       ),
+//                                                       Padding(
+//                                                         padding: EdgeInsets.all(15),
+//                                                         child: TextFormField(
+                                                          
+//                                                           decoration: InputDecoration(
+//                                                             border: OutlineInputBorder(
+//                                                                borderRadius: BorderRadius.circular(20)
+//                                                             ),
+//                                                              icon: Icon(Icons.phone_android_sharp,color: Color.fromARGB(255, 19, 7, 134)),
+//                                                             labelText: 'Driver Mobile Number',
+//                                                           ),
+//                                                         ),
+//                                                       ),
+//                                                       Padding(
+//                                                         padding: EdgeInsets.all(15),
+//                                                         child: TextFormField(
+//                                                           decoration: InputDecoration(
+//                                                             border: OutlineInputBorder(
+//                                                                borderRadius: BorderRadius.circular(20)
+//                                                             ),
+//                                                              icon: Icon(Icons.phone_android,color: Color.fromARGB(255, 19, 7, 134)),
+//                                                             labelText: 'Assistnce Mobile Number',
+//                                                           ),
+//                                                         ),
+//                                                       ),
+//                                                       Padding(
+//                                                         padding: EdgeInsets.all(15),
+//                                                         child: TextFormField(
+//                                                           decoration: InputDecoration(
+//                                                             border: OutlineInputBorder(
+//                                                                borderRadius: BorderRadius.circular(20)
+//                                                             ),
+//                                                              icon: Icon(Icons.person_2,color: Color.fromARGB(255, 19, 7, 134)),
+//                                                             labelText: 'Staff in Charge',
+//                                                           ),
+//                                                         ),
+//                                                       ),
+                                                     
+                                                      
+//                                                       SizedBox(
+//                                                         height: 30,),
+//                                                       InkWell(
+//                                                         onTap: () {
+//                                                         //  Navigator.push
+//                                                         //                 (context, MaterialPageRoute
+//                                                         //                 (builder: 
+//                                                         //                 ((context) =>  )));
+//                                                       },
+//                                                         child: Container(
+//                                                               height: size.width * 1 / 30,
+//                                                               width: size.width * 1 / 5,
+//                                                               decoration: BoxDecoration(
+//                                                                   color: Colors.blue,
+//                                                                   borderRadius: BorderRadius.circular(14)),
+//                                                               child: TextButton(
+//                                                                 style: TextButton.styleFrom(
+//                                                                   foregroundColor: Color.fromARGB(255, 255, 255, 255),
+//                                                                   padding: const EdgeInsets.all(9.0),
+//                                                                   textStyle: const TextStyle(fontSize: 17),
+//                                                                 ),
+//                                                                 onPressed: () {},
+//                                                                 child: const Text('Create'),
+//                                                               ),
+//                                                             ),
+//                                                       ),
+                                                      
+//                                                     ]),

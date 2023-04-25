@@ -2,6 +2,8 @@ import 'dart:developer';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
+import 'package:dujo_kerala_website/controller/get_firebase-data/get_firebase_data.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -30,45 +32,73 @@ class AdminNoticeController extends GetxController {
   RxBool studentCheckBox = false.obs;
   RxBool guardianCheckBox = false.obs;
   Rxn<AdminNoticeModel> adminNoticeModelData = Rxn<AdminNoticeModel>(null);
-  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  CollectionReference<Map<String, dynamic>> firebaseFirestore =
+      FirebaseFirestore.instance
+          .collection('SchoolListCollection')
+          .doc(Get.find<AdminLoginScreenController>().schoolID)
+          .collection(Get.find<GetFireBaseData>().bYear.value)
+          .doc(Get.find<GetFireBaseData>().bYear.value)
+          .collection('adminNotice');
+
   //add admin notice to firebase
 
-  void addAdminNotice(String schoolId, AdminNoticeModel adminNotice) async {
-    try {
-      isLoading.value = true;
+  void addAdminNotice() async {
+    if (publishedDateController.text.isNotEmpty &&
+        headingController.text.isNotEmpty &&
+        dateOfOccasionController.text.isNotEmpty &&
+        venueController.text.isNotEmpty &&
+        chiefGuestController.text.isNotEmpty &&
+        signedByController.text.isNotEmpty) {
+      try {
+        if (!teacherCheckBox.value &&
+            !studentCheckBox.value &&
+            !guardianCheckBox.value) {
+          showToast(msg: "Please Tick atleast one box");
+          return;
+        }
+        AdminNoticeModel dataModel = AdminNoticeModel(
+          publishedDate: publishedDateController.text,
+          heading: headingController.text,
+          dateofoccation: dateOfOccasionController.text,
+          venue: venueController.text,
+          chiefGuest: chiefGuestController.text,
+          dateOfSubmission: dateOfSubmissionController.text,
+          signedBy: signedByController.text,
+          noticeId: '',
+          imageUrl: imageUrl.value,
+          signedImageUrl: signedImageUrl.value,
+          imageId: imageId,
+          signedImageId: signedImageId,
+          customContent: customContentController.text,
+          visibleGuardian: guardianCheckBox.value,
+          visibleStudent: studentCheckBox.value,
+          visibleTeacher: teacherCheckBox.value,
+        );
+        isLoading.value = true;
 
-      final data = await firebaseFirestore
-          .collection('SchoolListCollection')
-          .doc(schoolId)
-          .collection('adminNotice')
-          .add(
-            adminNotice.toJson(),
-          );
-      await firebaseFirestore
-          .collection('SchoolListCollection')
-          .doc(schoolId)
-          .collection('adminNotice')
-          .doc(data.id)
-          .update({"noticeId": data.id});
-      clearControllers();
+        final data = await firebaseFirestore.add(
+          dataModel.toJson(),
+        );
+        await firebaseFirestore.doc(data.id).update({"noticeId": data.id});
+        clearControllers();
 
-      isLoading.value = false;
-    } catch (e) {
-      log(e.toString());
-      isLoading.value = false;
+        isLoading.value = false;
+        showToast(msg: 'Successfully Created');
+      } catch (e) {
+        log(e.toString());
+        isLoading.value = false;
+      }
+    } else {
+      showToast(msg: 'All fields are mandatory');
     }
   }
 
   //update notice data on firebase
   Future<void> updateAdminNotice(AdminNoticeModel adminNoticeModel,
       String schoolId, BuildContext context) async {
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     try {
       isLoadingShowNotice.value = true;
       await firebaseFirestore
-          .collection('SchoolListCollection')
-          .doc(schoolId)
-          .collection('adminNotice')
           .doc(adminNoticeModel.noticeId)
           .update(adminNoticeModel.toJson());
       isLoadingShowNotice.value = false;
@@ -158,12 +188,7 @@ class AdminNoticeController extends GetxController {
       required BuildContext context}) async {
     try {
       isLoading.value = true;
-      await firebaseFirestore
-          .collection("SchoolListCollection")
-          .doc(schoolId)
-          .collection('adminNotice')
-          .doc(noticeId)
-          .delete();
+      await firebaseFirestore.doc(noticeId).delete();
       showToast(msg: 'Successfully deleted');
 
 //delete notice image from firebase storage

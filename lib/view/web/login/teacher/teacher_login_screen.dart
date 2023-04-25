@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../../../controller/text_form_hide/password_filed.dart';
 import '../../../colors/colors.dart';
 import '../../../constant/constant.dart';
 import '../../../fonts/fonts.dart';
 import '../../../icons/icons.dart';
 import '../../widgets/responsive.dart';
 
-class TeacherLoginScreen extends StatefulWidget {
-  const TeacherLoginScreen({Key? key}) : super(key: key);
+class TeacherLoginScreen extends StatelessWidget {
+  final _hideGetxController = Get.put(PasswordField());
+  String adminpassword = '';
+   TeacherLoginScreen({Key? key}) : super(key: key);
 
-  @override
-  State<TeacherLoginScreen> createState() => _TeacherLoginScreenState();
-}
-
-class _TeacherLoginScreenState extends State<TeacherLoginScreen> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
+      appBar: AppBar(backgroundColor:  AppColors.mainBlueColor),
       backgroundColor: AppColors.backColor,
       body: SizedBox(
         height: height,
@@ -63,7 +63,7 @@ class _TeacherLoginScreenState extends State<TeacherLoginScreen> {
                 margin: EdgeInsets.symmetric(
                     horizontal: ResponsiveWidget.isSmallScreen(context)
                         ? height * 0.032
-                        : height * 0.12),
+                        : height * 0.15),
                 color: AppColors.backColor,
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.only(bottom: 40.0),
@@ -97,7 +97,7 @@ class _TeacherLoginScreenState extends State<TeacherLoginScreen> {
                       Text(
                         'Hey, Enter your details to get sign in \nto your account.',
                         style: ralewayStyle.copyWith(
-                          fontSize: 12.0,
+                          fontSize: 15.0,
                           fontWeight: FontWeight.w400,
                           color: AppColors.textColor,
                         ),
@@ -108,7 +108,7 @@ class _TeacherLoginScreenState extends State<TeacherLoginScreen> {
                         child: Text(
                           'Email',
                           style: ralewayStyle.copyWith(
-                            fontSize: 12.0,
+                            fontSize: 13.0,
                             color: AppColors.blueDarkColor,
                             fontWeight: FontWeight.w700,
                           ),
@@ -126,7 +126,7 @@ class _TeacherLoginScreenState extends State<TeacherLoginScreen> {
                           style: ralewayStyle.copyWith(
                             fontWeight: FontWeight.w400,
                             color: AppColors.blueDarkColor,
-                            fontSize: 12.0,
+                            fontSize: 15.0,
                           ),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -139,7 +139,7 @@ class _TeacherLoginScreenState extends State<TeacherLoginScreen> {
                             hintStyle: ralewayStyle.copyWith(
                               fontWeight: FontWeight.w400,
                               color: AppColors.blueDarkColor.withOpacity(0.5),
-                              fontSize: 12.0,
+                              fontSize: 15.0,
                             ),
                           ),
                         ),
@@ -150,7 +150,7 @@ class _TeacherLoginScreenState extends State<TeacherLoginScreen> {
                         child: Text(
                           'Password',
                           style: ralewayStyle.copyWith(
-                            fontSize: 12.0,
+                            fontSize: 15.0,
                             color: AppColors.blueDarkColor,
                             fontWeight: FontWeight.w700,
                           ),
@@ -165,18 +165,29 @@ class _TeacherLoginScreenState extends State<TeacherLoginScreen> {
                           color: AppColors.whiteColor,
                         ),
                         child: TextFormField(
+                           obscureText:
+                           _hideGetxController.isObscurefirst.value,
                           style: ralewayStyle.copyWith(
                             fontWeight: FontWeight.w400,
                             color: AppColors.blueDarkColor,
-                            fontSize: 12.0,
+                            fontSize: 15.0,
                           ),
-                          obscureText: true,
+                         
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            suffixIcon: IconButton(
-                              onPressed: () {},
-                              icon: Image.asset(AppIcons.eyeIcon),
-                            ),
+                           suffixIcon:  IconButton(
+                            
+                                                      icon: Icon(_hideGetxController
+                                                              .isObscurefirst
+                                                              .value
+                                                          ? Icons.visibility
+                                                          : Icons
+                                                              .visibility_off),
+                                                      onPressed: () {
+                                                        _hideGetxController
+                                                            .toggleObscureFirst();
+                                                      },
+                                                    ),
                             prefixIcon: IconButton(
                               onPressed: () {},
                               icon: Image.asset(AppIcons.lockIcon),
@@ -186,7 +197,7 @@ class _TeacherLoginScreenState extends State<TeacherLoginScreen> {
                             hintStyle: ralewayStyle.copyWith(
                               fontWeight: FontWeight.w400,
                               color: AppColors.blueDarkColor.withOpacity(0.5),
-                              fontSize: 12.0,
+                              fontSize: 15.0,
                             ),
                           ),
                         ),
@@ -199,7 +210,7 @@ class _TeacherLoginScreenState extends State<TeacherLoginScreen> {
                           child: Text(
                             'Forgot Password?',
                             style: ralewayStyle.copyWith(
-                              fontSize: 12.0,
+                              fontSize: 15.0,
                               color: AppColors.mainBlueColor,
                               fontWeight: FontWeight.w600,
                             ),

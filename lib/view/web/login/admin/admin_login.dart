@@ -6,28 +6,36 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import '../../../../controller/get_firebase-data/get_firebase_data.dart';
+import '../../../../controller/text_form_hide/password_filed.dart';
 import '../../../colors/colors.dart';
 import '../../../constant/constant.dart';
 import '../../../fonts/fonts.dart';
 import '../../../icons/icons.dart';
-import '../../widgets/icon_back.dart';
 import '../../widgets/responsive.dart';
 
 // ignore: must_be_immutable
 class AdminLoginScreen extends StatelessWidget {
+  String? adminSchoolId;
   //
+  final _hideGetxController = Get.put(PasswordField());
+  String adminpassword = '';
   AdminLoginScreenController adminLoginScreenController =
       Get.put(AdminLoginScreenController());
-  GetFireBaseData getFireBaseData = Get.put(GetFireBaseData());
+    GetFireBaseData getFireBaseData = Get.put(GetFireBaseData());
 
   //
-  AdminLoginScreen({Key? key}) : super(key: key);
+  AdminLoginScreen({
+    this.adminSchoolId,
+  
+     Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
+      appBar: AppBar(backgroundColor:  Colors.transparent,elevation: 0,
+      iconTheme: IconThemeData(color: Colors.black),),
       backgroundColor: AppColors.backColor,
       body: SizedBox(
         height: height,
@@ -43,38 +51,22 @@ class AdminLoginScreen extends StatelessWidget {
                       height: height,
                       color: const Color.fromARGB(255, 74, 3, 107),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          IconButtonBackWidget(
-                            color: cWhite,
-                          ),
-                          Expanded(
-                            child: SizedBox(
-                              height: 500,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Center(
-                                    child: Text(
-                                      'Hi ! \n Admin',
-                                      style: ralewayStyle.copyWith(
-                                        fontSize: 48.0,
-                                        color: AppColors.whiteColor,
-                                        fontWeight: FontWeight.w800,
-                                      ),
-                                    ),
-                                  ),
-                                  sizedBoxH30,
-                                  Center(
-                                    child: SizedBox(
-                                      height: 400.h,
-                                      child: LottieBuilder.network(
-                                          'https://assets10.lottiefiles.com/packages/lf20_q0vtqaxf.json'),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                          Text(
+                            'Hi ! \n Admin',
+                            style: ralewayStyle.copyWith(
+                              fontSize: 48.0,
+                              color: AppColors.whiteColor,
+                              fontWeight: FontWeight.w800,
                             ),
+                          ),
+                          sizedBoxH30,
+                          SizedBox(
+                            height: 400.h,
+                            child: LottieBuilder.network(
+                                'https://assets10.lottiefiles.com/packages/lf20_q0vtqaxf.json'),
                           )
                         ],
                       ),
@@ -86,7 +78,7 @@ class AdminLoginScreen extends StatelessWidget {
                 margin: EdgeInsets.symmetric(
                     horizontal: ResponsiveWidget.isSmallScreen(context)
                         ? height * 0.032
-                        : height * 0.12),
+                        : height * 0.15),
                 color: AppColors.backColor,
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.only(bottom: 40.0),
@@ -120,7 +112,7 @@ class AdminLoginScreen extends StatelessWidget {
                       Text(
                         'Hey, Enter your details to get sign in \nto your account.',
                         style: ralewayStyle.copyWith(
-                          fontSize: 12.0,
+                          fontSize: 15.0,
                           fontWeight: FontWeight.w400,
                           color: AppColors.textColor,
                         ),
@@ -131,7 +123,7 @@ class AdminLoginScreen extends StatelessWidget {
                         child: Text(
                           'Admin ID',
                           style: ralewayStyle.copyWith(
-                            fontSize: 12.0,
+                            fontSize: 15.0,
                             color: AppColors.blueDarkColor,
                             fontWeight: FontWeight.w700,
                           ),
@@ -145,26 +137,41 @@ class AdminLoginScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(16.0),
                           color: AppColors.whiteColor,
                         ),
-                        child: TextFormField(
-                          controller:
-                              adminLoginScreenController.schoolIdController,
-                          style: ralewayStyle.copyWith(
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.blueDarkColor,
-                            fontSize: 12.0,
-                          ),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            prefixIcon: IconButton(
-                              onPressed: () {},
-                              icon: Image.asset(AppIcons.emailIcon),
-                            ),
-                            contentPadding: const EdgeInsets.only(top: 16.0),
-                            hintText: 'Enter your ID',
-                            hintStyle: ralewayStyle.copyWith(
+                        child: Obx(() =>TextFormField(
+                            controller:
+                                adminLoginScreenController.schoolIdController,
+                                obscureText:_hideGetxController.isObscurefirst.value,
+                            style: ralewayStyle.copyWith(
                               fontWeight: FontWeight.w400,
-                              color: AppColors.blueDarkColor.withOpacity(0.5),
-                              fontSize: 12.0,
+                              color: AppColors.blueDarkColor,
+                              fontSize: 15.0,
+                            ),
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              prefixIcon: IconButton(
+                                onPressed: () {},
+                                icon: Image.asset(AppIcons.emailIcon),
+                              ),
+                               suffixIcon:  IconButton(
+                            
+                                                      icon: Icon(_hideGetxController
+                                                              .isObscurefirst
+                                                              .value
+                                                          ? Icons.visibility
+                                                          : Icons
+                                                              .visibility_off),
+                                                      onPressed: () {
+                                                        _hideGetxController
+                                                            .toggleObscureFirst();
+                                                      },
+                                                    ),
+                              contentPadding: const EdgeInsets.only(top: 16.0),
+                              hintText: 'Enter your ID',
+                              hintStyle: ralewayStyle.copyWith(
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.blueDarkColor.withOpacity(0.5),
+                                fontSize: 15.0,
+                              ),
                             ),
                           ),
                         ),
@@ -173,9 +180,10 @@ class AdminLoginScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 16.0),
                         child: Text(
+                          
                           'Password',
                           style: ralewayStyle.copyWith(
-                            fontSize: 12.0,
+                            fontSize: 15.0,
                             color: AppColors.blueDarkColor,
                             fontWeight: FontWeight.w700,
                           ),
@@ -189,33 +197,45 @@ class AdminLoginScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(16.0),
                           color: AppColors.whiteColor,
                         ),
-                        child: TextFormField(
-                          controller:
-                              adminLoginScreenController.passwordController,
-                          style: ralewayStyle.copyWith(
+                        child:Obx(() =>  TextFormField(
+
+                           controller: adminLoginScreenController.passwordController,
+                                                  obscureText:_hideGetxController.isObscureSecond.value,
+                                                  style: ralewayStyle.copyWith(
                             fontWeight: FontWeight.w400,
                             color: AppColors.blueDarkColor,
-                            fontSize: 12.0,
+                            fontSize: 15.0,
                           ),
-                          obscureText: true,
+                         // obscureText: true,
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            suffixIcon: IconButton(
-                              onPressed: () {},
-                              icon: Image.asset(AppIcons.eyeIcon),
-                            ),
-                            prefixIcon: IconButton(
+                             prefixIcon: IconButton(
                               onPressed: () {},
                               icon: Image.asset(AppIcons.lockIcon),
                             ),
+                            suffixIcon:  IconButton(
+                            
+                                                      icon: Icon(_hideGetxController
+                                                              .isObscureSecond
+                                                              .value
+                                                          ? Icons.visibility
+                                                          : Icons
+                                                              .visibility_off),
+                                                      onPressed: () {
+                                                        _hideGetxController
+                                                            .toggleObscureSecond();
+                                                      },
+                                                    ),
+                            
                             contentPadding: const EdgeInsets.only(top: 16.0),
                             hintText: 'Enter Password',
                             hintStyle: ralewayStyle.copyWith(
                               fontWeight: FontWeight.w400,
                               color: AppColors.blueDarkColor.withOpacity(0.5),
-                              fontSize: 12.0,
+                              fontSize: 15.0,
                             ),
                           ),
+                        ),
                         ),
                       ),
                       SizedBox(height: height * 0.03),
@@ -226,7 +246,7 @@ class AdminLoginScreen extends StatelessWidget {
                           child: Text(
                             'Forgot Password?',
                             style: ralewayStyle.copyWith(
-                              fontSize: 12.0,
+                              fontSize: 15.0,
                               color: AppColors.mainBlueColor,
                               fontWeight: FontWeight.w600,
                             ),
@@ -238,8 +258,11 @@ class AdminLoginScreen extends StatelessWidget {
                         color: Colors.transparent,
                         child: InkWell(
                           onTap: () async {
-                            adminLoginScreenController.loginFunction(context);
-                          },
+                           await  adminLoginScreenController.loginFunction(
+                                 context,adminSchoolId!); 
+
+                                 adminLoginScreenController.schoolIdController.clear(); 
+                                 adminLoginScreenController.passwordController.clear();                          },
                           borderRadius: BorderRadius.circular(16.0),
                           child: Ink(
                             padding: const EdgeInsets.symmetric(

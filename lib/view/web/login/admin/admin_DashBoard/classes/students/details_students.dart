@@ -1,18 +1,23 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/students/parents&guardian.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/students/student_summery.dart/student_summery.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/sampoorna/sampoorna_home.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/transfer_cretificate/tc_genrate.dart';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
+import '../../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../../controller/students_list/students_list.dart';
 import '../../../../../../../model/profileextraDetails/students_extra_profile.dart';
 import '../../../../../../colors/colors.dart';
 import '../../../../../../constant/constant.dart';
 import '../../../../../widgets/button_container_widget.dart';
-
 
 class StudentsDetails extends StatelessWidget {
   String totalstudents;
@@ -37,11 +42,14 @@ class StudentsDetails extends StatelessWidget {
   final List<AddExtraDetailsofStudentsModel> allData;
 
   @override
+  
   Widget build(BuildContext context) {
     final _firebase = FirebaseFirestore.instance
         .collection("SchoolListCollection")
-        .doc(schooilID)
-        .collection('Classes')
+        .doc(Get.find<AdminLoginScreenController>().schoolID)
+        .collection(Get.find<GetFireBaseData>().bYear.value)
+        .doc(Get.find<GetFireBaseData>().bYear.value)
+        .collection("Classes")
         .doc(classID);
     return Container(
       height: double.infinity,
@@ -206,7 +214,7 @@ class StudentsDetails extends StatelessWidget {
                               },
                             );
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.edit_outlined,
                             color: Colors.green,
                           ),
@@ -287,7 +295,7 @@ class StudentsDetails extends StatelessWidget {
                               },
                             );
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.edit_outlined,
                             color: Colors.green,
                           ),
@@ -362,7 +370,7 @@ class StudentsDetails extends StatelessWidget {
                               },
                             );
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.edit_outlined,
                             color: Colors.green,
                           ),
@@ -434,7 +442,88 @@ class StudentsDetails extends StatelessWidget {
                         ),
                       ],
                     ),
-                    sizedBoxH20,
+                    sizedBoxH10,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () async {
+                            final sampoorna = await FirebaseFirestore.instance
+                                .collection("SchoolListCollection")
+                                .doc(Get.find<AdminLoginScreenController>()
+                                    .schoolID)
+                                .collection("AllStudents")
+                                .doc(allData[getxController.indexValue.value!]
+                                    .admissionNumber)
+                                .collection("sampoorna")
+                                .get();
+                            sampoorna.docs.isEmpty
+                                ?
+                                // ignore: use_build_context_synchronously
+                                Navigator.push(context, MaterialPageRoute(
+                                    builder: (context) {
+                                      return SampoornaHomeScreen(
+                                          schoolId: Get.find<
+                                                  AdminLoginScreenController>()
+                                              .schoolID);
+                                    },
+                                  ))
+                                // ignore: use_build_context_synchronously
+                                : Navigator.push(context, MaterialPageRoute(
+                                    builder: (context) {
+                                      return StundentSummery(
+                                        stundetAdmissionId: allData[
+                                                getxController
+                                                    .indexValue.value!]
+                                            .admissionNumber,
+                                      );
+                                    },
+                                  ));
+                          },
+                          child: Container(
+                            height: 40,
+                            width: 40,
+                            decoration: const BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage(
+                                        'assets/images/folders.png'))),
+                          ),
+                        ),
+                        sizedBoxW20,
+                        const Text("Sampoorna",
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        const Icon(Icons.info_outlined),
+                        sizedBoxw10,
+                        StreamBuilder(
+                            stream: FirebaseFirestore.instance
+                                .collection("SchoolListCollection")
+                                .doc(Get.find<AdminLoginScreenController>()
+                                    .schoolID)
+                                .collection("AllStudents")
+                                .doc(allData[getxController.indexValue.value!]
+                                    .admissionNumber)
+                                .collection("sampoorna")
+                                .where('admissionNumber',
+                                    isEqualTo: allData[
+                                            getxController.indexValue.value!]
+                                        .admissionNumber)
+                                .snapshots(),
+                            builder: (context, snap) {
+                              if (snap.hasData) {
+                                if (snap.data!.docs.isEmpty) {
+                                  return const Center();
+                                } else {
+                                  return const Icon(Icons.attach_file_rounded);
+                                }
+                              } else {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
+                            })
+                      ],
+                    ),
+                    sizedBoxH10,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -481,24 +570,7 @@ class StudentsDetails extends StatelessWidget {
                                             ],
                                           ),
                                           sizedBoxH20,
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Container(
-                                                height: 40,
-                                                width: 40,
-                                                decoration: const BoxDecoration(
-                                                    image: DecorationImage(
-                                                        image: AssetImage(
-                                                            'assets/images/work.png'))),
-                                              ),
-                                              const Text("TC Genrate ",
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold)),
-                                            ],
-                                          ),
+                                          GenrateTc(allData: allData, getxController: getxController),
                                           sizedBoxH20,
                                           GestureDetector(
                                             onTap: () async {
@@ -549,7 +621,7 @@ class StudentsDetails extends StatelessWidget {
                                                         SingleChildScrollView(
                                                       child: ListBody(
                                                         children: <Widget>[
-                                                          Text(
+                                                          const Text(
                                                               "Are you shure remove the student \n when press ok all data will be lost")
                                                         ],
                                                       ),
@@ -563,7 +635,7 @@ class StudentsDetails extends StatelessWidget {
                                               colorindex: 6,
                                               height: 50,
                                               width: 110,
-                                              child: Center(
+                                              child: const Center(
                                                 child: Text(
                                                   'Remove',
                                                   style:
@@ -593,6 +665,171 @@ class StudentsDetails extends StatelessWidget {
       }),
     );
   }
+}
+
+class GenrateTc extends StatefulWidget {
+  const GenrateTc({
+    super.key,
+    required this.allData,
+    required this.getxController,
+  });
+
+  final List<AddExtraDetailsofStudentsModel> allData;
+  final StudentsProfileList getxController;
+
+  @override
+  State<GenrateTc> createState() => _GenrateTcState();
+}
+
+class _GenrateTcState extends State<GenrateTc> {
+  String schoolName ='';
+  String schoolplace='';
+  @override
+  void initState() {
+getSchoolDetails();
+    super.initState();
+  }
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection(
+                "SchoolListCollection")
+            .doc(Get.find<
+                    AdminLoginScreenController>()
+                .schoolID)
+            .collection("AllStudents")
+            .doc(widget.allData[widget.getxController
+                    .indexValue.value!]
+                .admissionNumber)
+            .collection("sampoorna")
+            .where('admissionNumber',
+                isEqualTo: widget.allData[
+                        widget.getxController
+                            .indexValue
+                            .value!]
+                    .admissionNumber)
+            .snapshots(),
+        builder: (context, snappp) {
+          return GestureDetector(
+            onTap: () {
+              TextEditingController sNo =
+                  TextEditingController();
+              TextEditingController
+                  regNo =
+                  TextEditingController();
+
+              showDialog(
+                context: context,
+                barrierDismissible:
+                    false, // user must tap button!
+                builder: (BuildContext
+                    context) {
+                  return AlertDialog(
+                    title: const Text(
+                        'Genrating.. TC'),
+                    content:
+                        SingleChildScrollView(
+                      child: ListBody(
+                        children: <
+                            Widget>[
+                        const Text(
+                              'Enter Details'),
+                        
+                          TextFormField(
+                            controller:
+                                sNo,
+                                decoration: const InputDecoration(
+                                  hintText: "S.NO"
+                                ),
+                          ),
+               
+                          TextFormField(
+                            controller:
+                                regNo,
+                                decoration: const InputDecoration(
+                                  hintText: "Reg No"
+                                ),
+                          )
+                        ],
+                      ),
+                    ),
+                    actions: <Widget>[
+                      TextButton(
+                        child: const Text(
+                            'cancel'),
+                        onPressed: () {
+                          Navigator.of(
+                                  context)
+                              .pop();
+                        },
+                      ),
+                      TextButton(
+                        child: const Text(
+                            'ok'),
+                        onPressed:
+                            () async {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                            builder:
+                                (context) {
+                              return GenrateTC(
+                                  sno: sNo
+                                      .text
+                                      .trim(),
+                                  regNo: regNo
+                                      .text
+                                      .trim(),
+                                  parentName: snappp.data!.docs[0]
+                                      [
+                                      'nameOfStudentFather'],
+                                  studentName:
+                                      snappp.data!.docs[0][
+                                          'nameOfStudent'],
+                                  schoolName: schoolName,
+                                  schoolPlace: schoolplace);
+                            },
+                          ));
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            child: Row(
+              mainAxisAlignment:
+                  MainAxisAlignment
+                      .spaceEvenly,
+              children: [
+                Container(
+                  height: 40,
+                  width: 40,
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(
+                              'assets/images/work.png'))),
+                ),
+                const Text("TC Genrate ",
+                    style: TextStyle(
+                        fontWeight:
+                            FontWeight
+                                .bold)),
+              ],
+            ),
+          );
+        });
+  }
+  void getSchoolDetails() async {
+    var vari = await FirebaseFirestore.instance
+        .collection("SchoolListCollection")
+        .doc(Get.find<AdminLoginScreenController>().schoolID)
+        .get();
+    setState(() {
+      schoolName = vari.data()!['schoolName'];
+      schoolplace = vari.data()!['place'];
+});
+}
 }
 
 final tea_style = GoogleFonts.poppins(

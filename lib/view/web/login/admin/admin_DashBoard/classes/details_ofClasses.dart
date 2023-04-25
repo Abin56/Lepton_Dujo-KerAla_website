@@ -6,21 +6,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/students/list_students.dart';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
+import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../model/create_classModel/create_classModel.dart';
 import '../../../../../constant/constant.dart';
 import '../../../../widgets/button_container_widget.dart';
 import '../teacher_section/class_listing_drop_down.dart';
-
 
 class ClassesDeatils extends StatelessWidget {
   String schooilID;
   String totalStudents;
   String noofMale;
   String noofFemale;
+  double width;
   ClassesDeatils({
     super.key,
     required this.schooilID,
@@ -29,6 +32,7 @@ class ClassesDeatils extends StatelessWidget {
     required this.totalStudents,
     required this.noofMale,
     required this.noofFemale,
+    required this.width
   });
 
   final getxController;
@@ -38,7 +42,7 @@ class ClassesDeatils extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: double.infinity,
-      width: 500,
+      width: width,
       child: Obx(() {
         return getxController.indexValue.value == null || allData.isEmpty
             ? Column(
@@ -191,7 +195,16 @@ class ClassesDeatils extends StatelessWidget {
                                       onPressed: () async {
                                         FirebaseFirestore.instance
                                             .collection("SchoolListCollection")
-                                            .doc(schooilID)
+                                            .doc(Get.find<
+                                                    AdminLoginScreenController>()
+                                                .schoolID)
+                                            .collection(Get
+                                                    .find<GetFireBaseData>()
+                                                .bYear
+                                                .value)
+                                            .doc(Get.find<GetFireBaseData>()
+                                                .bYear
+                                                .value)
                                             .collection("Classes")
                                             .doc(allData[getxController
                                                     .indexValue.value!]
@@ -357,7 +370,17 @@ class ClassesDeatils extends StatelessWidget {
                                                       FirebaseFirestore.instance
                                                           .collection(
                                                               "SchoolListCollection")
-                                                          .doc(schooilID)
+                                                          .doc(
+                                                              Get.find<AdminLoginScreenController>()
+                                                                  .schoolID)
+                                                          .collection(
+                                                              Get.find<GetFireBaseData>()
+                                                                  .bYear
+                                                                  .value)
+                                                          .doc(Get.find<
+                                                                  GetFireBaseData>()
+                                                              .bYear
+                                                              .value)
                                                           .collection("Classes")
                                                           .doc(allData[
                                                                   getxController
@@ -371,8 +394,7 @@ class ClassesDeatils extends StatelessWidget {
                                                                     'id'],
                                                           },
                                                               SetOptions(
-                                                                  merge:
-                                                                      true)).then(
+                                                                  merge: true)).then(
                                                               (value) {
                                                         FirebaseFirestore
                                                             .instance
@@ -492,7 +514,15 @@ class ClassesDeatils extends StatelessWidget {
                                   try {
                                     final data = FirebaseFirestore.instance
                                         .collection("SchoolListCollection")
-                                        .doc(schooilID)
+                                        .doc(Get.find<
+                                                AdminLoginScreenController>()
+                                            .schoolID)
+                                        .collection(Get.find<GetFireBaseData>()
+                                            .bYear
+                                            .value)
+                                        .doc(Get.find<GetFireBaseData>()
+                                            .bYear
+                                            .value)
                                         .collection("Classes")
                                         .doc(allData[getxController
                                                 .indexValue.value!]

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
+import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
 
 class ShowTimeTable extends StatefulWidget {
@@ -37,7 +38,7 @@ class _ShowTimeTableState extends State<ShowTimeTable> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold( appBar: AppBar(backgroundColor: adminePrimayColor),
         body: Center(
           child: ListView.separated( 
             shrinkWrap: true, 

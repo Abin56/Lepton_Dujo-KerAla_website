@@ -12,7 +12,9 @@ import 'create_food_menu.dart';
 import 'food_time_table_menu.dart';
 
 class FoodBeverages extends StatefulWidget {
-  const FoodBeverages({super.key});
+   FoodBeverages({super.key, required this.schoolID});
+
+  String schoolID;
 
   @override
   State<FoodBeverages> createState() => _FoodBeveragesState();
@@ -85,7 +87,7 @@ class _FoodBeveragesState extends State<FoodBeverages> {
                                                  Navigator.push(
                                                      context,
                                                      MaterialPageRoute(
-                                                       builder: (context) => CreateFoodMenu(),
+                                                       builder: (context) => CreateFoodMenu(schoolID: widget.schoolID),
                                                      ));
                                                },
                                                child: Container(

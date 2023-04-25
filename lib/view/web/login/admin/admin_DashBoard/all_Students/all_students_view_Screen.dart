@@ -1,10 +1,15 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/all_Students/info_student.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/all_Students/search_students.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../../controller/class_list/class_list_model.dart';
+import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../model/create_classModel/create_classModel.dart';
 import '../../../../../../model/student/student_list_model.dart';
 import '../../../../../constant/constant.dart';
@@ -22,16 +27,19 @@ class AllStudentList extends StatefulWidget {
 }
 
 class _AllStudentListState extends State<AllStudentList> {
+  Future<void> _showSearch() async {
+    await showSearch(context: context, delegate: SearchStuents());
+  }
+
   final getxController = Get.put(ClassProfileList());
 
   @override
-
-
   Widget build(BuildContext context) {
     List<AddClassesModel> allData = [];
-    int columnCount = 3;
+    int columnCount = 4;
     double _w = MediaQuery.of(context).size.width;
     double _h = MediaQuery.of(context).size.height;
+   var screenSize =MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
           child: StreamBuilder(
@@ -39,45 +47,58 @@ class _AllStudentListState extends State<AllStudentList> {
             .collection("SchoolListCollection")
             .doc(Get.find<AdminLoginScreenController>().schoolID)
             .collection('AllStudents')
+            .orderBy('studentName', descending: false)
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 sizedBoxH10,
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "A L L S T U D E N T S",
-                    style: GoogleFonts.montserrat(
-                        color: const Color.fromRGBO(158, 158, 158, 1),
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold),
+                  padding: EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        "A L L S T U D E N T S",
+                        style: GoogleFonts.montserrat(
+                            color: const Color.fromRGBO(158, 158, 158, 1),
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Spacer(),
+                      IconButton(
+                          onPressed: () {
+                            _showSearch();
+                          },
+                          icon: Icon(Icons.search))
+                    ],
                   ),
                 ),
                 sizedBoxH20,
                 Expanded(
                   child: Row(
+
                     children: [
                       ClassesDeatils(
+                          width: 370,
                           noofFemale: widget.NoofFemaleStudents,
                           noofMale: widget.NoofMaleStundets,
-                          totalStudents: widget.NoofStundents,
+                          totalStudents: snapshot.data!.docs.length.toString(),
                           schooilID:
                               Get.find<AdminLoginScreenController>().schoolID,
                           getxController: getxController,
                           allData: allData),
                       Container(
-                        height: double.infinity - 10,
+                        height: screenSize.width*6 ,
                         width: 2,
                         color: Colors.black.withOpacity(0.3),
                       ),
                       Expanded(
                         child: AnimationLimiter(
                           child: GridView.count(
-                            physics: const BouncingScrollPhysics(
+                            physics:  BouncingScrollPhysics(
                                 parent: AlwaysScrollableScrollPhysics()),
                             padding: EdgeInsets.all(_w / 60),
                             crossAxisCount: columnCount,
@@ -86,90 +107,139 @@ class _AllStudentListState extends State<AllStudentList> {
                               (int index) {
                                 StudentData data = StudentData.fromJson(
                                     snapshot.data!.docs[index].data());
-                              
+
                                 return AnimationConfiguration.staggeredGrid(
                                   position: index,
-                                  duration: const Duration(milliseconds: 300),
+                                  duration:  Duration(milliseconds: 300),
                                   columnCount: columnCount,
                                   child: ScaleAnimation(
-                                    duration: const Duration(milliseconds: 900),
+                                    duration:  Duration(milliseconds: 900),
                                     curve: Curves.fastLinearToSlowEaseIn,
                                     child: FadeInAnimation(
                                       child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
+                                        padding:  EdgeInsets.all(8.0),
                                         child: GestureDetector(
                                           onTap: () async {
                                             getxController.indexValue.value =
                                                 index;
                                           },
-                                          child: Container(
-                                            height: 400,
-                                            width: 400,
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(10),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  const CircleAvatar(
-                                                    radius: 60,
-                                                    backgroundColor:
-                                                        Color.fromARGB(
-                                                            255, 210, 235, 255),
-                                                    child: CircleAvatar(
-                                                      radius: 50,
+                                          child: GestureDetector(
+                                            onTap: () async {
+                                              getInfoofStudent(context);
+                                            },
+                                            child: Container(
+                                             
+                                              height: screenSize.width*6,
+                                              width:  screenSize.width/10,
+                                              child: Padding(
+                                                padding:
+                                                     EdgeInsets.all( screenSize.width/100),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                     CircleAvatar(
+                                                      radius:  screenSize.width/40,
                                                       backgroundColor:
-                                                          Colors.transparent,
-                                                      backgroundImage: AssetImage(
-                                                          'assets/images/classes.png'),
+                                                          Color.fromARGB(255,
+                                                              210, 235, 255),
+                                                      child: CircleAvatar(
+                                                        radius:  screenSize.width/50,
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        backgroundImage: AssetImage(
+                                                            'assets/images/classes.png'),
+                                                      ),
                                                     ),
-                                                  ),
-                                                  sizedBoxH10,
-                                                  Text(
-                                                    data.studentName,
-                                                    style:
-                                                        GoogleFonts.montserrat(
-                                                           letterSpacing: 1,
-                                                            color: Colors.grey,
-                                                            fontSize: 18,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                  ),
-                                                  sizedBoxH10,
-                                                  Text(
-                                                    'Create Date : ${stringTimeToDateConvert(data.joinDate)}',
-                                                    style: GoogleFonts.poppins(
-                                                      color: Colors.black
-                                                          .withOpacity(0.4),
-                                                      fontSize: 14,
+                                                  // sizedBoxH10,
+                                                    Text(
+                                                      data.studentName,
+                                                      style: GoogleFonts
+                                                          .montserrat(
+                                                              letterSpacing: 1,
+                                                              color:
+                                                                  Colors.grey,
+                                                              fontSize: screenSize.width/120,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
                                                     ),
-                                                  ),
-                                                  sizedBoxH10,
-                                                  Text(
-                                                    "Class : ${data.wclass}",
-                                                    style: GoogleFonts.poppins(
+                                                    
+                                                    Text(
+                                                      'Create Date : ${stringTimeToDateConvert(data.joinDate)}',
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        color: Colors.black
+                                                            .withOpacity(0.4),
+                                                        fontSize:  screenSize.width/120,
+                                                      ),
+                                                    ),
+                                                    
+                                                    FutureBuilder(
+                                                        future: FirebaseFirestore
+                                                            .instance
+                                                            .collection(
+                                                                "SchoolListCollection")
+                                                            .doc(Get
+                                                                    .find<
+                                                                        AdminLoginScreenController>()
+                                                                .schoolID)
+                                                            .collection(Get
+                                                                    .find<
+                                                                        GetFireBaseData>()
+                                                                .bYear
+                                                                .value)
+                                                            .doc(Get.find<
+                                                                    GetFireBaseData>()
+                                                                .bYear
+                                                                .value)
+                                                            .collection(
+                                                                "Classes")
+                                                            .doc(data.wclass)
+                                                            .get(),
+                                                        builder: (context,
+                                                            snapshot) {
+                                                          if (snapshot
+                                                              .hasData) {
+                                                            log(data.wclass);
+                                                            log('>>>>>>>>>${snapshot.data!.data()?['className'].toString()}??'
+                                                                '');
+                                                            return Text(
+                                                              "${snapshot.data!.data()?['className'] ?? ''}",
+                                                              style: GoogleFonts.poppins(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:  screenSize.width/120,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600),
+                                                            );
+                                                          } else {
+                                                            return  Center(
+                                                              child:
+                                                                  CircularProgressIndicator(),
+                                                            );
+                                                          }
+                                                        }),
+                                                    //sizedBoxH10,
+                                                    Text(
+                                                      "Phone No ${data.parentPhNo}",
+                                                      style:
+                                                          GoogleFonts.poppins(
                                                         color: Colors.black,
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w700),
-                                                  ),
-                                                  sizedBoxH10,
-                                                  Text(
-                                                    "Phone No ${data.parentPhNo}",
-                                                    style: GoogleFonts.poppins(
-                                                      color: Colors.black,
-                                                      fontSize: 12,
+                                                        fontSize:  screenSize.width/130,
+                                                      ),
                                                     ),
-                                                  ),
-                                                  Text(
-                                                    "Admission ID : ${data.admissionNumber}",
-                                                    style: GoogleFonts.poppins(
-                                                      color: Colors.black,
-                                                      fontSize: 12,
+                                                    Text(
+                                                      "Admission ID : ${data.admissionNumber}",
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        color: Colors.black,
+                                                        fontSize:  screenSize.width/130,
+                                                      ),
                                                     ),
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),

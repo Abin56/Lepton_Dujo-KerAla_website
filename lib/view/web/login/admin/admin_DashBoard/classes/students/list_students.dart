@@ -4,6 +4,8 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import '../../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
+import '../../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../../controller/students_list/students_list.dart';
 import '../../../../../../../model/profileextraDetails/students_extra_profile.dart';
 import '../../../../../../constant/constant.dart';
@@ -32,7 +34,7 @@ class _ListOfStudentsState extends State<ListOfStudents> {
 
   @override
   void initState() {
-   getGenderCount();
+    getGenderCount();
     // TODO: implement initState
     super.initState();
   }
@@ -47,8 +49,10 @@ class _ListOfStudentsState extends State<ListOfStudents> {
           child: StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection("SchoolListCollection")
-            .doc(widget.schoolID)
-            .collection('Classes')
+            .doc(Get.find<AdminLoginScreenController>().schoolID)
+            .collection(Get.find<GetFireBaseData>().bYear.value)
+            .doc(Get.find<GetFireBaseData>().bYear.value)
+            .collection("Classes")
             .doc(widget.classID)
             .collection("Students")
             .orderBy('studentName', descending: false)
@@ -75,9 +79,9 @@ class _ListOfStudentsState extends State<ListOfStudents> {
                   child: Row(
                     children: [
                       StudentsDetails(
-                        totaFemale:widget.NoofFemaleStudents.toString() ,
-                        totalMale: widget.NoofMaleStundets.toString(),
-                        totalstudents: snapshot.data!.docs.length.toString(),
+                          totaFemale: widget.NoofFemaleStudents.toString(),
+                          totalMale: widget.NoofMaleStundets.toString(),
+                          totalstudents: snapshot.data!.docs.length.toString(),
                           className: widget.className,
                           classID: widget.classID,
                           schooilID: widget.schoolID,
@@ -195,6 +199,7 @@ class _ListOfStudentsState extends State<ListOfStudents> {
                                                       fontSize: 12,
                                                     ),
                                                   ),
+                                                 
                                                 ],
                                               ),
                                             ),
@@ -229,8 +234,10 @@ class _ListOfStudentsState extends State<ListOfStudents> {
     int femaleCount = 0;
     var a = await FirebaseFirestore.instance
         .collection("SchoolListCollection")
-        .doc(widget.schoolID)
-        .collection('Classes')
+        .doc(Get.find<AdminLoginScreenController>().schoolID)
+        .collection(Get.find<GetFireBaseData>().bYear.value)
+        .doc(Get.find<GetFireBaseData>().bYear.value)
+        .collection("Classes")
         .doc(widget.classID)
         .collection("Students")
         .get();
@@ -248,6 +255,4 @@ class _ListOfStudentsState extends State<ListOfStudents> {
       widget.NoofFemaleStudents = femaleCount.toString();
     });
   }
-
-
 }

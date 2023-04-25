@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../../../controller/Getx/admin/notice_controller.dart';
+import '../../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
+import '../../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../../model/admin_models/admin_notice_model/admin_notice_model.dart';
 import '../../../../../../colors/colors.dart';
 import '../../../../../../constant/constant.dart';
@@ -22,228 +24,235 @@ class NoticeDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
 
-    return Container(
-      decoration: const BoxDecoration(
-          gradient: LinearGradient(
-        begin: Alignment.topRight,
-        end: Alignment.bottomLeft,
-        colors: [
-          Color(0xFF4b6cb7),
-          Color(0xFF182848),
-        ],
-      )),
-      child: Scaffold(
+    return Scaffold(
+        appBar: AppBar(
           backgroundColor: Colors.transparent,
-          body: SafeArea(
-            child: Row(
-              children: [
-                Obx(() {
-                  return adminNoticeController.adminNoticeModelData.value ==
-                          null
-                      ? SizedBox(
-                          width: screenSize.width * 0.4,
-                          height: screenSize.width,
-                          child: Lottie.network(
-                            'https://assets6.lottiefiles.com/packages/lf20_K7aZUG.json',
-                            fit: BoxFit.fill,
-                          ),
-                        )
-                      : adminNoticeController.isLoading.value
-                          ? SizedBox(
-                              width: screenSize.width * 0.4,
-                              height: screenSize.width,
-                              child: const Center(
-                                child: CircularProgressIndicator(),
-                              ),
-                            )
-                          : Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(),
-                                // color: const Color(0xFFE1F8DC),
-                              ),
-                              width: screenSize.width * 0.4,
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: ListView(
-                                  shrinkWrap: true,
-                                  children: <Widget>[
-                                    SizedBox(
-                                      width: screenSize.width * 0.3,
-                                      height: screenSize.width * .20,
-                                      child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          child: Image.network(
-                                            adminNoticeController
-                                                .adminNoticeModelData
-                                                .value!
-                                                .imageUrl,
-                                            fit: BoxFit.fill,
-                                          )),
-                                    ),
-                                    DataTableWidget(
-                                      heading: adminNoticeController
-                                          .adminNoticeModelData.value!.heading,
-                                      chiefGuest: adminNoticeController
-                                          .adminNoticeModelData
-                                          .value!
-                                          .chiefGuest,
-                                      dateOfSubmission: adminNoticeController
-                                          .adminNoticeModelData
-                                          .value!
-                                          .dateOfSubmission,
-                                      dateOfOccassion: adminNoticeController
-                                          .adminNoticeModelData
-                                          .value!
-                                          .dateofoccation,
-                                      publishedDate: adminNoticeController
-                                          .adminNoticeModelData
-                                          .value!
-                                          .publishedDate,
-                                      signedBy: adminNoticeController
-                                          .adminNoticeModelData.value!.signedBy,
-                                      venue: adminNoticeController
-                                          .adminNoticeModelData.value!.venue,
-                                    ),
-                                    if (adminNoticeController
-                                            .adminNoticeModelData.value ==
-                                        null)
-                                      const SizedBox()
-                                    else
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: <Widget>[
-                                          Expanded(
-                                            child:
-                                                NoticePageElevatedButtonWidget(
-                                                    title: 'Edit',
-                                                    function: () {
-                                                      showDialog(
-                                                        context: context,
-                                                        builder: (BuildContext
-                                                            context) {
-                                                          return AlertDialog(
-                                                            content: AdminNoticeShow(
-                                                                schoolId:
-                                                                    schoolId,
-                                                                adminNoticeModel:
-                                                                    adminNoticeController
-                                                                        .adminNoticeModelData
-                                                                        .value!),
-                                                          );
-                                                        },
-                                                      );
-                                                    }),
-                                          ),
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
-                                          Expanded(
-                                            child:
-                                                NoticePageElevatedButtonWidget(
-                                              title: 'Remove',
+          elevation: 0,
+          iconTheme: const IconThemeData(color: cBlack),
+        ),
+        body: SafeArea(
+          child: Row(
+            children: [
+              Obx(() {
+                return adminNoticeController.adminNoticeModelData.value == null
+                    ? SizedBox(
+                        width: screenSize.width * 0.4,
+                        height: screenSize.width,
+                        child: Lottie.network(
+                          'https://assets6.lottiefiles.com/packages/lf20_K7aZUG.json',
+                          fit: BoxFit.fill,
+                        ),
+                      )
+                    : adminNoticeController.isLoading.value
+                        ? SizedBox(
+                            width: screenSize.width * 0.4,
+                            height: screenSize.width,
+                            child: const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          )
+                        : Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(),
+                              // color: const Color(0xFFE1F8DC),
+                            ),
+                            width: screenSize.width * 0.4,
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: ListView(
+                                shrinkWrap: true,
+                                children: <Widget>[
+                                  SizedBox(
+                                    width: screenSize.width * 0.3,
+                                    height: screenSize.width * .20,
+                                    child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(20),
+                                        child: Image.network(
+                                          adminNoticeController
+                                              .adminNoticeModelData
+                                              .value!
+                                              .imageUrl,
+                                          errorBuilder:
+                                              (context, error, stackTrace) {
+                                            return const Center(
+                                              child: Text(
+                                                'Image Not Found',
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          fit: BoxFit.fill,
+                                        )),
+                                  ),
+                                  DataTableWidget(
+                                    heading: adminNoticeController
+                                        .adminNoticeModelData.value!.heading,
+                                    chiefGuest: adminNoticeController
+                                        .adminNoticeModelData.value!.chiefGuest,
+                                    dateOfSubmission: adminNoticeController
+                                        .adminNoticeModelData
+                                        .value!
+                                        .dateOfSubmission,
+                                    dateOfOccassion: adminNoticeController
+                                        .adminNoticeModelData
+                                        .value!
+                                        .dateofoccation,
+                                    publishedDate: adminNoticeController
+                                        .adminNoticeModelData
+                                        .value!
+                                        .publishedDate,
+                                    signedBy: adminNoticeController
+                                        .adminNoticeModelData.value!.signedBy,
+                                    venue: adminNoticeController
+                                        .adminNoticeModelData.value!.venue,
+                                  ),
+                                  if (adminNoticeController
+                                          .adminNoticeModelData.value ==
+                                      null)
+                                    const SizedBox()
+                                  else
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Expanded(
+                                          child: NoticePageElevatedButtonWidget(
+                                              title: 'Edit',
                                               function: () {
                                                 showDialog(
                                                   context: context,
                                                   builder:
                                                       (BuildContext context) {
                                                     return AlertDialog(
-                                                      title: const Text(
-                                                          'Confirm Remove'),
-                                                      content: const Text(
-                                                          'Are you sure you want to remove this Notice'),
-                                                      actions: [
-                                                        TextButton(
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                          child: const Text(
-                                                              'Cancel'),
-                                                        ),
-                                                        TextButton(
-                                                          onPressed: () async {
-                                                            await adminNoticeController.removeNotice(
-                                                                schoolId:
-                                                                    schoolId,
-                                                                noticeId: adminNoticeController
-                                                                    .adminNoticeModelData
-                                                                    .value!
-                                                                    .noticeId,
-                                                                context:
-                                                                    context,
-                                                                noticeImageId:
-                                                                    adminNoticeController
-                                                                        .adminNoticeModelData
-                                                                        .value!
-                                                                        .imageId,
-                                                                signImageId:
-                                                                    adminNoticeController
-                                                                        .adminNoticeModelData
-                                                                        .value!
-                                                                        .signedImageId);
-                                                          },
-                                                          child: const Text(
-                                                              'Remove'),
-                                                        )
-                                                      ],
+                                                      icon: Align(
+                                                          alignment: Alignment
+                                                              .topRight,
+                                                          child: CloseButton(
+                                                            onPressed: () =>
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop(),
+                                                          )),
+                                                      content: AdminNoticeShow(
+                                                          schoolId: schoolId,
+                                                          adminNoticeModel:
+                                                              adminNoticeController
+                                                                  .adminNoticeModelData
+                                                                  .value!),
                                                     );
                                                   },
                                                 );
-                                              },
-                                            ),
+                                              }),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Expanded(
+                                          child: NoticePageElevatedButtonWidget(
+                                            title: 'Remove',
+                                            function: () {
+                                              showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return AlertDialog(
+                                                    title: const Text(
+                                                        'Confirm Remove'),
+                                                    content: const Text(
+                                                        'Are you sure you want to remove this Notice'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: const Text(
+                                                            'Cancel'),
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () async {
+                                                          await adminNoticeController.removeNotice(
+                                                              schoolId:
+                                                                  schoolId,
+                                                              noticeId:
+                                                                  adminNoticeController
+                                                                      .adminNoticeModelData
+                                                                      .value!
+                                                                      .noticeId,
+                                                              context: context,
+                                                              noticeImageId:
+                                                                  adminNoticeController
+                                                                      .adminNoticeModelData
+                                                                      .value!
+                                                                      .imageId,
+                                                              signImageId:
+                                                                  adminNoticeController
+                                                                      .adminNoticeModelData
+                                                                      .value!
+                                                                      .signedImageId);
+                                                        },
+                                                        child: const Text(
+                                                            'Remove'),
+                                                      )
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                            },
                                           ),
-                                        ],
-                                      )
-                                  ],
-                                ),
+                                        ),
+                                      ],
+                                    )
+                                ],
                               ),
-                            );
-                }),
-                SizedBox(
-                  width: screenSize.width * 0.6,
-                  child: StreamBuilder(
-                    stream: FirebaseFirestore.instance
-                        .collection('SchoolListCollection')
-                        .doc(schoolId)
-                        .collection('adminNotice')
-                        .snapshots(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return GridView.builder(
-                          itemCount: snapshot.data!.docs.length,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 3),
-                          itemBuilder: (context, index) {
-                            AdminNoticeModel data = AdminNoticeModel.fromJson(
-                                snapshot.data!.docs[index].data());
-                            return GestureDetector(
-                              onTap: () {
-                                adminNoticeController
-                                    .adminNoticeModelData.value = data;
-                              },
-                              child: NoticeCardWidget(
-                                date: data.dateofoccation,
-                                heading: data.heading,
-                                uploadedDate: data.publishedDate,
-                                venue: data.venue,
-                              ),
-                            );
-                          },
-                        );
-                      } else {
-                        return const Center(child: Text('No Data Found'));
-                      }
-                    },
-                  ),
+                            ),
+                          );
+              }),
+              SizedBox(
+                width: screenSize.width * 0.6,
+                child: StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection('SchoolListCollection')
+                      .doc(Get.find<AdminLoginScreenController>().schoolID)
+                      .collection(Get.find<GetFireBaseData>().bYear.value)
+                      .doc(Get.find<GetFireBaseData>().bYear.value)
+                      .collection('adminNotice')
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return GridView.builder(
+                        itemCount: snapshot.data!.docs.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3),
+                        itemBuilder: (context, index) {
+                          AdminNoticeModel data = AdminNoticeModel.fromJson(
+                              snapshot.data!.docs[index].data());
+                          return GestureDetector(
+                            onTap: () {
+                              adminNoticeController.adminNoticeModelData.value =
+                                  data;
+                            },
+                            child: NoticeCardWidget(
+                              date: data.dateofoccation,
+                              heading: data.heading,
+                              uploadedDate: data.publishedDate,
+                              venue: data.venue,
+                            ),
+                          );
+                        },
+                      );
+                    } else {
+                      return const Center(child: Text('No Data Found'));
+                    }
+                  },
                 ),
-              ],
-            ),
-          )),
-    );
+              ),
+            ],
+          ),
+        ));
   }
 }
 
@@ -295,69 +304,69 @@ class DataTableWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return DataTable(columns: <DataColumn>[
       const DataColumn(
-        label: NoticeTextWidget(title: 'Heading', color: cWhite),
+        label: NoticeTextWidget(title: 'Heading'),
       ),
       DataColumn(
-        label: NoticeTextWidget(title: heading, color: cWhite),
+        label: NoticeTextWidget(title: heading),
       ),
     ], rows: <DataRow>[
       DataRow(
         cells: <DataCell>[
           const DataCell(
-            NoticeTextWidget(title: 'Chief Guest', color: cWhite),
+            NoticeTextWidget(title: 'Chief Guest'),
           ),
           DataCell(
-            NoticeTextWidget(title: chiefGuest, color: cWhite),
+            NoticeTextWidget(title: chiefGuest),
           ),
         ],
       ),
       DataRow(
         cells: <DataCell>[
           const DataCell(
-            NoticeTextWidget(title: 'Date Of Submission', color: cWhite),
+            NoticeTextWidget(title: 'Date Of Submission'),
           ),
           DataCell(
-            NoticeTextWidget(title: dateOfSubmission, color: cWhite),
+            NoticeTextWidget(title: dateOfSubmission),
           ),
         ],
       ),
       DataRow(
         cells: <DataCell>[
           const DataCell(
-            NoticeTextWidget(title: 'Date Of Ocassion', color: cWhite),
+            NoticeTextWidget(title: 'Date Of Ocassion'),
           ),
           DataCell(
-            NoticeTextWidget(title: dateOfOccassion, color: cWhite),
+            NoticeTextWidget(title: dateOfOccassion),
           ),
         ],
       ),
       DataRow(
         cells: <DataCell>[
           const DataCell(
-            NoticeTextWidget(title: 'Published Date', color: cWhite),
+            NoticeTextWidget(title: 'Published Date'),
           ),
           DataCell(
-            NoticeTextWidget(title: publishedDate, color: cWhite),
+            NoticeTextWidget(title: publishedDate),
           ),
         ],
       ),
       DataRow(
         cells: <DataCell>[
           const DataCell(
-            NoticeTextWidget(title: 'Signed By', color: cWhite),
+            NoticeTextWidget(title: 'Signed By'),
           ),
           DataCell(
-            NoticeTextWidget(title: signedBy, color: cWhite),
+            NoticeTextWidget(title: signedBy),
           ),
         ],
       ),
       DataRow(
         cells: <DataCell>[
           const DataCell(
-            NoticeTextWidget(title: 'Venue', color: cWhite),
+            NoticeTextWidget(title: 'Venue'),
           ),
           DataCell(
-            NoticeTextWidget(title: venue, color: cWhite),
+            NoticeTextWidget(title: venue),
           ),
         ],
       ),
@@ -388,7 +397,15 @@ class NoticeCardWidget extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             border: Border.all(),
-            color: Colors.white),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: const Offset(0, 3),
+              ),
+            ]),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: SingleChildScrollView(

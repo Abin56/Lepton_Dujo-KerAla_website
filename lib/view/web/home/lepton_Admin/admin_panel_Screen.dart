@@ -2,7 +2,10 @@ import 'package:dujo_kerala_website/view/web/widgets/icon_back.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:lottie/lottie.dart';
+import '../../../../controller/text_form_hide/password_filed.dart';
 import '../../../colors/colors.dart';
 import '../../../constant/constant.dart';
 import '../../../fonts/fonts.dart';
@@ -10,15 +13,15 @@ import '../../../icons/icons.dart';
 import '../../widgets/responsive.dart';
 import 'admin_home_screen.dart';
 
-class LeptonAdminLoginScreen extends StatefulWidget {
+class LeptonAdminLoginScreen extends StatelessWidget {
   LeptonAdminLoginScreen({Key? key}) : super(key: key);
 
-  @override
-  State<LeptonAdminLoginScreen> createState() => _LeptonAdminLoginScreenState();
-}
+  final _hideGetxController = Get.put(PasswordField());
+  String adminpassword = '';
+  
 
-class _LeptonAdminLoginScreenState extends State<LeptonAdminLoginScreen> {
   TextEditingController _leptonIdController = TextEditingController();
+
   TextEditingController passwordController = TextEditingController();
 
   @override
@@ -102,7 +105,7 @@ class _LeptonAdminLoginScreenState extends State<LeptonAdminLoginScreen> {
                       Text(
                         'Hey, Enter your details to get sign in \nto your account.',
                         style: ralewayStyle.copyWith(
-                          fontSize: 12.0,
+                          fontSize: 15.0,
                           fontWeight: FontWeight.w400,
                           color: AppColors.textColor,
                         ),
@@ -127,8 +130,10 @@ class _LeptonAdminLoginScreenState extends State<LeptonAdminLoginScreen> {
                           borderRadius: BorderRadius.circular(16.0),
                           color: AppColors.whiteColor,
                         ),
-                        child: TextFormField(
+                        child: Obx(() =>
+                        TextFormField(
                           controller: _leptonIdController,
+                          obscureText:_hideGetxController.isObscurefirst.value,
                           style: ralewayStyle.copyWith(
                             fontWeight: FontWeight.w400,
                             color: AppColors.blueDarkColor,
@@ -140,6 +145,19 @@ class _LeptonAdminLoginScreenState extends State<LeptonAdminLoginScreen> {
                               onPressed: () {},
                               icon: Image.asset(AppIcons.emailIcon),
                             ),
+                             suffixIcon:  IconButton(
+                            
+                                                      icon: Icon(_hideGetxController
+                                                              .isObscurefirst
+                                                              .value
+                                                          ? Icons.visibility
+                                                          : Icons
+                                                              .visibility_off),
+                                                      onPressed: () {
+                                                        _hideGetxController
+                                                            .toggleObscureFirst();
+                                                      },
+                                                    ),
                             contentPadding: const EdgeInsets.only(top: 16.0),
                             hintText: 'Enter your ID',
                             hintStyle: ralewayStyle.copyWith(
@@ -148,6 +166,7 @@ class _LeptonAdminLoginScreenState extends State<LeptonAdminLoginScreen> {
                               fontSize: 12.0,
                             ),
                           ),
+                        ),
                         ),
                       ),
                       SizedBox(height: height * 0.014),
@@ -170,20 +189,31 @@ class _LeptonAdminLoginScreenState extends State<LeptonAdminLoginScreen> {
                           borderRadius: BorderRadius.circular(16.0),
                           color: AppColors.whiteColor,
                         ),
-                        child: TextFormField(
+                        child: Obx(() => 
+                        TextFormField(
                           controller: passwordController,
+                          obscureText:_hideGetxController.isObscurefirst.value,
                           style: ralewayStyle.copyWith(
                             fontWeight: FontWeight.w400,
                             color: AppColors.blueDarkColor,
                             fontSize: 12.0,
                           ),
-                          obscureText: true,
+                         // obscureText: true,
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            suffixIcon: IconButton(
-                              onPressed: () {},
-                              icon: Image.asset(AppIcons.eyeIcon),
-                            ),
+                             suffixIcon:  IconButton(
+                            
+                                                      icon: Icon(_hideGetxController
+                                                              .isObscurefirst
+                                                              .value
+                                                          ? Icons.visibility
+                                                          : Icons
+                                                              .visibility_off),
+                                                      onPressed: () {
+                                                        _hideGetxController
+                                                            .toggleObscureFirst();
+                                                      },
+                                                    ),
                             prefixIcon: IconButton(
                               onPressed: () {},
                               icon: Image.asset(AppIcons.lockIcon),
@@ -197,6 +227,7 @@ class _LeptonAdminLoginScreenState extends State<LeptonAdminLoginScreen> {
                             ),
                           ),
                         ),
+                        )
                       ),
                       SizedBox(height: height * 0.03),
                       Align(

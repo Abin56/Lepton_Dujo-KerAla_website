@@ -23,235 +23,238 @@ class ClassEventsPageList extends StatelessWidget {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
 
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-          colors: <Color>[
-            Color(0xFF314755),
-            Color(0xFF26a0da),
-          ],
+    return Scaffold(
+      appBar: AppBar(backgroundColor: adminePrimayColor),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: <Color>[
+              Color(0xFF314755),
+              Color(0xFF26a0da),
+            ],
+          ),
         ),
-      ),
-      child: Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-              title: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return ClassTeacherCreateEventsPage(
-                        classId: classId,
-                        schoolId: schoolId,
-                      );
-                    }));
-                  },
-                  child: const Text('Create'))),
-          body: SafeArea(
-            child: Row(
-              children: [
-                Obx(() {
-                  return teacherEventController
-                              .classTeacherEventModelData.value ==
-                          null
-                      ? SizedBox(
-                          width: screenSize.width * 0.4,
-                          height: screenSize.height,
-                          child: Lottie.network(
-                            'https://assets10.lottiefiles.com/packages/lf20_7p6kyzmg.json',
-                            fit: BoxFit.contain,
-                          ),
-                        )
-                      : teacherEventController.isLoading.value
-                          ? SizedBox(
-                              width: screenSize.width * 0.4,
-                              height: screenSize.height,
-                              child: const Center(
-                                child: CircularProgressIndicator(),
-                              ),
-                            )
-                          : Container(
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                border: Border.all(),
-                                // color: const Color(0xFFE1F8DC),
-                              ),
-                              width: screenSize.width * 0.4,
-                              height: screenSize.height,
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: ListView(
-                                  shrinkWrap: true,
-                                  children: <Widget>[
-                                    DataTableWidget(
-                                      eventName: teacherEventController
-                                          .classTeacherEventModelData
-                                          .value!
-                                          .eventName,
-                                      eventsDate: teacherEventController
-                                          .classTeacherEventModelData
-                                          .value!
-                                          .eventDate,
-                                      description: teacherEventController
-                                          .classTeacherEventModelData
-                                          .value!
-                                          .description,
-                                      chiefGuest: teacherEventController
-                                          .classTeacherEventModelData
-                                          .value!
-                                          .chiefGuest,
-                                      participants: teacherEventController
-                                          .classTeacherEventModelData
-                                          .value!
-                                          .participants,
-                                      venue: teacherEventController
-                                          .classTeacherEventModelData
-                                          .value!
-                                          .venue,
-                                    ),
-                                    if (teacherEventController
-                                            .classTeacherEventModelData.value ==
-                                        null)
-                                      const SizedBox()
-                                    else
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: <Widget>[
-                                          Expanded(
-                                            child:
-                                                NoticePageElevatedButtonWidget(
-                                                    title: 'Edit',
-                                                    function: () {
-                                                      showDialog(
-                                                        context: context,
-                                                        builder: (BuildContext
-                                                            context) {
-                                                          return AlertDialog(
-                                                            content: ClassTeacherEventShow(
-                                                                schoolId:
-                                                                    schoolId,
-                                                                classTeacherEventModel:
-                                                                    teacherEventController
-                                                                        .classTeacherEventModelData
-                                                                        .value!,
-                                                                classId:
-                                                                    classId),
-                                                          );
-                                                        },
-                                                      );
-                                                    }),
-                                          ),
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
-                                          Expanded(
-                                            child:
-                                                NoticePageElevatedButtonWidget(
-                                              title: 'Remove',
-                                              function: () {
-                                                showDialog(
-                                                  context: context,
-                                                  builder:
-                                                      (BuildContext context) {
-                                                    return AlertDialog(
-                                                      title: const Text(
-                                                          'Confirm Remove'),
-                                                      content: const Text(
-                                                          'Are you sure you want to remove this Notice'),
-                                                      actions: [
-                                                        TextButton(
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                          child: const Text(
-                                                              'Cancel'),
-                                                        ),
-                                                        TextButton(
-                                                          onPressed: () async {
-                                                            teacherEventController.deleteEvent(
-                                                                schoolId:
-                                                                    schoolId,
-                                                                classId:
-                                                                    classId,
-                                                                documentId:
-                                                                    teacherEventController
-                                                                        .classTeacherEventModelData
-                                                                        .value!
-                                                                        .eventId,
-                                                                context:
-                                                                    context,
-                                                                imageId: teacherEventController
-                                                                    .classTeacherEventModelData
-                                                                    .value!
-                                                                    .imageUid);
-                                                          },
-                                                          child: const Text(
-                                                              'Remove'),
-                                                        )
-                                                      ],
-                                                    );
-                                                  },
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                  ],
-                                ),
-                              ),
-                            );
-                }),
-                Container(
-                  // color: const Color(0xFFE1F8DC),
-                  width: screenSize.width * 0.6,
-                  child: StreamBuilder(
-                    stream: FirebaseFirestore.instance
-                        .collection('SchoolListCollection')
-                        .doc(schoolId)
-                        .collection('Classes')
-                        .doc(classId)
-                        .collection('Events')
-                        .snapshots(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return GridView.builder(
-                          itemCount: snapshot.data!.docs.length,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 3),
-                          itemBuilder: (context, index) {
-                            ClassTeacherEventModel data =
-                                ClassTeacherEventModel.fromJson(
-                                    snapshot.data!.docs[index].data());
-
-                            return GestureDetector(
-                              onTap: () {
-                                teacherEventController
-                                    .classTeacherEventModelData.value = data;
-                              },
-                              child: ClassTeacherEventsCardWidget(
-                                date: data.eventDate,
-                                heading: data.eventName,
-                                description: data.description,
-                                venue: data.venue,
-                              ),
-                            );
-                          },
+        child: Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: AppBar(
+                title: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) {
+                        return ClassTeacherCreateEventsPage(
+                          classId: classId,
+                          schoolId: schoolId,
                         );
-                      } else {
-                        return const Center(child: Text('No Data Found'));
-                      }
+                      }));
                     },
+                    child: const Text('Create'))),
+            body: SafeArea(
+              child: Row(
+                children: [
+                  Obx(() {
+                    return teacherEventController
+                                .classTeacherEventModelData.value ==
+                            null
+                        ? SizedBox(
+                            width: screenSize.width * 0.4,
+                            height: screenSize.height,
+                            child: Lottie.network(
+                              'https://assets10.lottiefiles.com/packages/lf20_7p6kyzmg.json',
+                              fit: BoxFit.contain,
+                            ),
+                          )
+                        : teacherEventController.isLoading.value
+                            ? SizedBox(
+                                width: screenSize.width * 0.4,
+                                height: screenSize.height,
+                                child: const Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              )
+                            : Container(
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  border: Border.all(),
+                                  // color: const Color(0xFFE1F8DC),
+                                ),
+                                width: screenSize.width * 0.4,
+                                height: screenSize.height,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: ListView(
+                                    shrinkWrap: true,
+                                    children: <Widget>[
+                                      DataTableWidget(
+                                        eventName: teacherEventController
+                                            .classTeacherEventModelData
+                                            .value!
+                                            .eventName,
+                                        eventsDate: teacherEventController
+                                            .classTeacherEventModelData
+                                            .value!
+                                            .eventDate,
+                                        description: teacherEventController
+                                            .classTeacherEventModelData
+                                            .value!
+                                            .description,
+                                        chiefGuest: teacherEventController
+                                            .classTeacherEventModelData
+                                            .value!
+                                            .chiefGuest,
+                                        participants: teacherEventController
+                                            .classTeacherEventModelData
+                                            .value!
+                                            .participants,
+                                        venue: teacherEventController
+                                            .classTeacherEventModelData
+                                            .value!
+                                            .venue,
+                                      ),
+                                      if (teacherEventController
+                                              .classTeacherEventModelData.value ==
+                                          null)
+                                        const SizedBox()
+                                      else
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: <Widget>[
+                                            Expanded(
+                                              child:
+                                                  NoticePageElevatedButtonWidget(
+                                                      title: 'Edit',
+                                                      function: () {
+                                                        showDialog(
+                                                          context: context,
+                                                          builder: (BuildContext
+                                                              context) {
+                                                            return AlertDialog(
+                                                              content: ClassTeacherEventShow(
+                                                                  schoolId:
+                                                                      schoolId,
+                                                                  classTeacherEventModel:
+                                                                      teacherEventController
+                                                                          .classTeacherEventModelData
+                                                                          .value!,
+                                                                  classId:
+                                                                      classId),
+                                                            );
+                                                          },
+                                                        );
+                                                      }),
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Expanded(
+                                              child:
+                                                  NoticePageElevatedButtonWidget(
+                                                title: 'Remove',
+                                                function: () {
+                                                  showDialog(
+                                                    context: context,
+                                                    builder:
+                                                        (BuildContext context) {
+                                                      return AlertDialog(
+                                                        title: const Text(
+                                                            'Confirm Remove'),
+                                                        content: const Text(
+                                                            'Are you sure you want to remove this Notice'),
+                                                        actions: [
+                                                          TextButton(
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                            child: const Text(
+                                                                'Cancel'),
+                                                          ),
+                                                          TextButton(
+                                                            onPressed: () async {
+                                                              teacherEventController.deleteEvent(
+                                                                  schoolId:
+                                                                      schoolId,
+                                                                  classId:
+                                                                      classId,
+                                                                  documentId:
+                                                                      teacherEventController
+                                                                          .classTeacherEventModelData
+                                                                          .value!
+                                                                          .eventId,
+                                                                  context:
+                                                                      context,
+                                                                  imageId: teacherEventController
+                                                                      .classTeacherEventModelData
+                                                                      .value!
+                                                                      .imageUid);
+                                                            },
+                                                            child: const Text(
+                                                                'Remove'),
+                                                          )
+                                                        ],
+                                                      );
+                                                    },
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                    ],
+                                  ),
+                                ),
+                              );
+                  }),
+                  Container(
+                    // color: const Color(0xFFE1F8DC),
+                    width: screenSize.width * 0.6,
+                    child: StreamBuilder(
+                      stream: FirebaseFirestore.instance
+                          .collection('SchoolListCollection')
+                          .doc(schoolId)
+                          .collection('Classes')
+                          .doc(classId)
+                          .collection('Events')
+                          .snapshots(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return GridView.builder(
+                            itemCount: snapshot.data!.docs.length,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 3),
+                            itemBuilder: (context, index) {
+                              ClassTeacherEventModel data =
+                                  ClassTeacherEventModel.fromJson(
+                                      snapshot.data!.docs[index].data());
+    
+                              return GestureDetector(
+                                onTap: () {
+                                  teacherEventController
+                                      .classTeacherEventModelData.value = data;
+                                },
+                                child: ClassTeacherEventsCardWidget(
+                                  date: data.eventDate,
+                                  heading: data.eventName,
+                                  description: data.description,
+                                  venue: data.venue,
+                                ),
+                              );
+                            },
+                          );
+                        } else {
+                          return const Center(child: Text('No Data Found'));
+                        }
+                      },
+                    ),
                   ),
-                ),
-              ],
-            ),
-          )),
+                ],
+              ),
+            )),
+      ),
     );
   }
 }

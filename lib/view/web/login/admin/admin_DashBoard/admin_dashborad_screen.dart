@@ -1,30 +1,38 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/list_of_classes.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/non_Teaching_staff/non_teaching_staff_view.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/research_and_development/research_and_development.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_protection_group/students_proctection_group.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_summary/students_summary.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/teacher_section/add_teacher.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/teacher_section/list_of_teachers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'dart:html' as html;
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
+
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_summary/students_summary.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/teacher_section/add_teacher.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/teacher_section/list_of_teachers.dart';
+
 import '../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../model/loginHistory_model/login_history_model.dart';
 import '../../../../colors/colors.dart';
 import '../../../../constant/constant.dart';
-import '../../../home/dujo_home.dart';
-import '../../../sampoorna/sampoorna_home.dart';
 import '../../../widgets/button_container_widget.dart';
 import '../../../widgets/drop_DownList/get_batchYear.dart';
+import '../../../widgets/sample/under_maintance.dart';
 import 'Students_ScholarShip/student_scholarship.dart';
 import 'achievements/achievements.dart';
-import 'admin_notice copy/admin_notice_new_ui/admin_notice_show_new.dart';
+import 'admin_meeting/admin_meeting_update/adminMeetingNew/admin_meeting_show.dart';
+import 'admin_meeting/meeting_in.dart';
 import 'admin_notice/add_new_notices.dart';
+import 'admin_notice/admin_notice_new_ui/admin_notice_show_new.dart';
+import 'admin_pta/admin_pta_screen.dart';
 import 'all_Students/all_students_view_Screen.dart';
-import 'alumini_accocation/alumni_assocation.dart';
+import '../../../../../ui team/abin/alumini_accocation/alumni_assocation.dart';
 import 'bus_Route/bus_route.dart';
 import 'classes/add_class.dart';
 import 'create_Admin/add_new_admin.dart';
@@ -33,12 +41,10 @@ import 'exam_notifications/select_type.dart';
 import 'feesandupdates/fees_and_update.dart';
 import 'food_and_beverages/food_and_bev.dart';
 import 'general_instructions/creation_general_instruction_.dart';
-import 'live_classes/live_classes.dart';
 import 'login_Register_history/date_wise.dart';
-import 'meetings_section/meeting_section.dart';
-import 'mothers pta/mothers_pta.dart';
+import 'mothers_pta/mothers_pta_screen.dart';
 import 'non_Teaching_staff/non_teaching_staff.dart';
-import 'pTA_section/pta_admin_panel.dart';
+import 'sampoorna/sampoorna_home.dart';
 
 class AdminDashBoardPage extends StatefulWidget {
   AdminDashBoardPage(
@@ -132,54 +138,57 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'Notices',
     'Meetings',
     'PTA',
+    'Non-Teaching Staffs',
     'Login History',
     // 'Parents',
   ];
   List<String> viewListImages = [
     'assets/images/students.png',
-    // 'assets/images/admin.png'
+    //'assets/images/admin.png'
     'assets/images/teacherr.png',
     'assets/images/classes.png',
     'assets/images/notices.png',
     'assets/images/meetings.png',
     'assets/images/interview.png',
+    'assets/images/steward.png',
     'assets/images/admin.png',
   ];
 
   @override
   Widget build(BuildContext context) {
     List<Widget> pages = [
-      AddNewAdmin(schoolID: widget.schoolID), //1
-      AddTeacherSectionScreen(schoolID: widget.schoolID), //2
+      AddNewAdmin(schoolID: widget.schoolID), //1-create admin
+      AddTeacherSectionScreen(schoolID: widget.schoolID), //2-Teachers
       AddClassesSectionScreen(
         schoolID: widget.schoolID,
-      ), //3
-      CreationGeneralInstruction(schoolId: widget.schoolID), //4
-      AddNewNotices(schoolId: widget.schoolID), //5
-      EventsUpdates(schoolID: widget.schoolID), //6
-      const FeesUpdates(), // MeetingCreates(schoolId: widget.schoolID), //7
+      ), //3-classes
+      CreationGeneralInstruction(
+          schoolId: widget.schoolID), //4-general instructions
+      AddNewNotices(schoolId: widget.schoolID), //5-notices
+      EventsUpdates(schoolID: widget.schoolID), //6-events
+      const FeesUpdates(), // MeetingCreates(schoolId: widget.schoolID), //7-fees and bills
       MeetingCreates(
         schoolId: widget.schoolID,
-      ), //8
-      PtaMemberAdmin(id: widget.schoolID), //9
-      const MothersPta(), //10
-      Achievements(schoolID: widget.schoolID), //11
-      const StudentProtectionGroup(), //12
-      AdminScholarships(schoolID: widget.schoolID), //13
-      const BusRoute(), //14
-      const StudentSummary(), //15
-      const StudentSummary(), //16
-      const ResearchDevelopment(), //17
-      const LiveClasses(), //18
-      AddNewNotices(schoolId: widget.schoolID), //19
-      FoodBeverages(), //AddNewNotices(schoolId: widget.schoolID), //20
-      SelectType(schoolID: widget.schoolID), //21
-      //const FoodBeverages(), //22
-      const AlumniAssocation(), //23
-      const FeesUpdates(), //24
-      NonTeachingLogin(schoolID: widget.schoolID), //25t6yg
-      AdminScholarships(schoolID: widget.schoolID), //26
-      SampoornaHomeScreen(schoolId: widget.schoolID), //28
+      ), //8-Meetings
+      AdminPtaScreen(), //9-PTA
+      MothersPtaScreen(), //10-Mothers PTA
+      Achievements(schoolID: widget.schoolID), //11-Achievements
+      StudentProtectionGroup(), //12-Students Protection Group
+      AdminScholarships(schoolID: widget.schoolID), //13-ScholarShip
+      const BusRoute(), //14-Bus Route
+      const StudentSummary(), //15-Student Summary
+      const UnderMaintanceScreen(), //16-Research and development
+      const UnderMaintanceScreen(), //17-School Calendar
+      const UnderMaintanceScreen(), //8
+      const UnderMaintanceScreen(), //9
+      FoodBeverages(schoolID: widget.schoolID),
+      SelectType(schoolID: widget.schoolID),
+      const AlumniAssocation(), //10
+      const UnderMaintanceScreen(),
+      NonTeachingLogin(schoolID: widget.schoolID),
+      const UnderMaintanceScreen(), //11
+      const UnderMaintanceScreen(),
+      SampoornaHomeScreen(schoolId: widget.schoolID), //13
     ];
     List<Widget> drawerPages = [
       AllStudentList(),
@@ -188,8 +197,13 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       NoticeDisplay(
         schoolId: widget.schoolID,
       ),
-      PtaMemberAdmin(id: widget.schoolID),
-      PtaMemberAdmin(id: widget.schoolID),
+      MeetingDisplay(
+        schoolId: widget.schoolID,
+      ),
+      AdminPtaScreen(),
+      NonTeachingStaffView(
+        schoolID: widget.schoolID,
+      ),
       DateWiseLoginScreen(schoolID: widget.schoolID),
     ];
     var screenSize = MediaQuery.of(context).size;
@@ -232,16 +246,20 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                     .doc(widget.schoolID)
                                     .set({
                                   'batchYear': schoolBatchYearListValue!['id']
-                                }, SetOptions(merge: true)).then((value) =>
-                                        Navigator.pushReplacement(context,
-                                            MaterialPageRoute(
-                                          builder: (context) {
-                                            return AdminDashBoardPage(
-                                                loginTime:
-                                                    LoginTimeIDSavingClass.id,
-                                                schoolID: widget.schoolID);
-                                          },
-                                        )));
+                                }, SetOptions(merge: true)).then((value) async {
+                                  await getFireBaseData.getBatchYearId();
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return AdminDashBoardPage(
+                                            loginTime:
+                                                LoginTimeIDSavingClass.id,
+                                            schoolID: widget.schoolID);
+                                      },
+                                    ),
+                                  );
+                                });
                               },
                               child: ButtonContainerWidget(
                                 curving: 20,
@@ -350,43 +368,69 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                     Container(
                         width: screenSize.width / 6,
                         color: const Color.fromRGBO(0, 0, 0, 1),
-                        child: ListView.builder(
-                            itemCount: 7,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(20.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Image.asset(
-                                      viewListImages[index],
-                                      width: 15,
-                                      height: 15,
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) {
-                                              return drawerPages[index];
-                                            },
+                        child: ListView(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Icon(
+                                    Icons.home,
+                                    color: Colors.white,
+                                  ),
+                                  sizedBoxW20,
+                                  Text(
+                                    'Home',
+                                    style: GoogleFonts.poppins(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            ListView.builder(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: viewListNames.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Image.asset(
+                                          viewListImages[index],
+                                          width: 15,
+                                          height: 15,
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) {
+                                                  return drawerPages[index];
+                                                },
+                                              ),
+                                            );
+                                          },
+                                          child: Text(
+                                            viewListNames[index],
+                                            style: GoogleFonts.poppins(
+                                                color: Colors.white),
                                           ),
-                                        );
-                                      },
-                                      child: Text(
-                                        viewListNames[index],
-                                        style: GoogleFonts.poppins(
-                                            color: Colors.white),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              );
-                            })),
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                }),
+                          ],
+                        )),
                     Container(
                       color: Colors.white54,
                       width: screenSize.width * 5 / 6,
@@ -400,6 +444,12 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                IconButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  icon: Icon(Icons.arrow_back),
+                                ),
                                 Text(
                                   'Admin Dashboard',
                                   style: GoogleFonts.poppins(
@@ -409,8 +459,10 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                 Row(
                                   children: [
                                     Text(
-                                      'Administrator',
-                                      style: GoogleFonts.poppins(),
+                                      Get.find<AdminLoginScreenController>()
+                                          .schoolName,
+                                      style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w500),
                                     ),
                                     SizedBox(
                                       width: screenSize.height / 12,
@@ -437,18 +489,75 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                   ),
                                                 ),
                                                 actions: <Widget>[
-                                                  GestureDetector(
-                                                      onTap: () {
-                                                        Navigator.pop(context);
-                                                      },
-                                                      child: Text(
-                                                        'Cancel',
-                                                        style: GoogleFonts
-                                                            .poppins(),
-                                                      )),
-                                                  SizedBox(
-                                                    width:
-                                                        screenSize.width / 15,
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            20.0),
+                                                    child: MaterialButton(
+                                                        color: Colors.red,
+                                                        onPressed: () {
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                        child: Text(
+                                                          'Cancel',
+                                                          style: GoogleFonts
+                                                              .poppins(
+                                                                  color: Colors
+                                                                      .white),
+                                                        )),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            20.0),
+                                                    child: MaterialButton(
+                                                        color: Colors.blue,
+                                                        onPressed: () {
+                                                          FirebaseFirestore
+                                                              .instance
+                                                              .collection(
+                                                                  "SchoolListCollection")
+                                                              .doc(widget
+                                                                  .schoolID)
+                                                              .set(
+                                                                  {
+                                                                'batchYear':
+                                                                    schoolBatchYearListValue![
+                                                                        'id']
+                                                              },
+                                                                  SetOptions(
+                                                                      merge:
+                                                                          true)).then(
+                                                                  (value) async {
+                                                            await getFireBaseData
+                                                                .getBatchYearId();
+                                                            // ignore: use_build_context_synchronously
+                                                            Navigator
+                                                                .pushReplacement(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                builder:
+                                                                    (context) {
+                                                                  return AdminDashBoardPage(
+                                                                      loginTime:
+                                                                          LoginTimeIDSavingClass
+                                                                              .id,
+                                                                      schoolID:
+                                                                          widget
+                                                                              .schoolID);
+                                                                },
+                                                              ),
+                                                            );
+                                                          });
+                                                        },
+                                                        child: Text(
+                                                          'Set BatchYear',
+                                                          style: GoogleFonts
+                                                              .poppins(
+                                                                  color: Colors
+                                                                      .white),
+                                                        )),
                                                   ),
                                                   GestureDetector(
                                                       onTap: () {
@@ -467,18 +576,26 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                                 SetOptions(
                                                                     merge:
                                                                         true)).then(
-                                                                (value) =>
-                                                                    Navigator.pushReplacement(
-                                                                        context,
-                                                                        MaterialPageRoute(
-                                                                      builder:
-                                                                          (context) {
-                                                                        return AdminDashBoardPage(
-                                                                            loginTime:
-                                                                                LoginTimeIDSavingClass.id,
-                                                                            schoolID: widget.schoolID);
-                                                                      },
-                                                                    )));
+                                                                (value) async {
+                                                          await getFireBaseData
+                                                              .getBatchYearId();
+                                                          // ignore: use_build_context_synchronously
+                                                          Navigator
+                                                              .pushReplacement(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder:
+                                                                  (context) {
+                                                                return AdminDashBoardPage(
+                                                                    loginTime:
+                                                                        LoginTimeIDSavingClass
+                                                                            .id,
+                                                                    schoolID: widget
+                                                                        .schoolID);
+                                                              },
+                                                            ),
+                                                          );
+                                                        });
                                                       },
                                                       child: Text(
                                                         'Set BatchYear',
@@ -510,7 +627,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                               content: SingleChildScrollView(
                                                 child: ListBody(
                                                   children: const <Widget>[
-                                                    Text('Are You Sure ?')
+                                                    Text(
+                                                        'Are You Sure want to logout?')
                                                   ],
                                                 ),
                                               ),
@@ -518,16 +636,33 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                 TextButton(
                                                   child: const Text('ok'),
                                                   onPressed: () async {
+                                                    log("school id${Get.find<AdminLoginScreenController>().schoolID}");
+                                                    log("batch year${Get.find<GetFireBaseData>().bYear.value}");
+                                                    log("dateee${LoginTimeIDSavingClass.date}");
+                                                    log("idddddddd${LoginTimeIDSavingClass.id.toString()}");
                                                     await FirebaseFirestore
                                                         .instance
                                                         .collection(
                                                             "SchoolListCollection")
-                                                        .doc(widget.schoolID)
+                                                        .doc(
+                                                            Get.find<AdminLoginScreenController>()
+                                                                .schoolID)
+                                                        .collection(
+                                                            Get.find<GetFireBaseData>()
+                                                                .bYear
+                                                                .value)
+                                                        .doc(
+                                                            Get.find<GetFireBaseData>()
+                                                                .bYear
+                                                                .value)
                                                         .collection(
                                                             "LoginHistory")
-                                                        .doc(widget.date)
+                                                        .doc(
+                                                            LoginTimeIDSavingClass
+                                                                .date)
                                                         .collection(
-                                                            widget.date!)
+                                                            LoginTimeIDSavingClass
+                                                                .date)
                                                         .doc(
                                                             LoginTimeIDSavingClass
                                                                 .id)
@@ -540,15 +675,9 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                             SetOptions(
                                                                 merge:
                                                                     true)).then(
-                                                            (value) => Navigator
-                                                                    .pushReplacement(
-                                                                        context,
-                                                                        MaterialPageRoute(
-                                                                  builder:
-                                                                      (context) {
-                                                                    return DujoHomePage();
-                                                                  },
-                                                                )));
+                                                            (value) => html
+                                                                .window.location
+                                                                .reload());
                                                   },
                                                 ),
                                               ],
