@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/login_Register_history/login_history.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -30,7 +31,7 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
   Widget build(BuildContext context) {
     log(widget.schoolID);
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(backgroundColor: adminePrimayColor,title: const Text("Admin Login Register (Date-Wise)"),),
       body: SafeArea(
           child: StreamBuilder(
               stream: FirebaseFirestore.instance
@@ -57,7 +58,7 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
                             ));
                           },
                           child: Container(
-                            color: const Color.fromARGB(255, 214, 162, 7),
+                            color: Color.fromARGB(255, 117, 182, 212),
                             height: 60,
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -81,11 +82,14 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
                                                 child: ListBody(
                                                   children: <Widget>[
                                                     Text(
-                                                        "Are you shure clear data \n${snapshot.data!.docs[index]['id']}Register ? ")
+                                                        "Are you sure to clear the data \n  registered on ${snapshot.data!.docs[index]['id']} ? ")
                                                   ],
                                                 ),
                                               ),
                                               actions: <Widget>[
+                                                TextButton(onPressed: (){Navigator.of(
+                                                                          context)
+                                                                      .pop();}, child: Text("Cancel")),
                                                 TextButton(
                                                   child: const Text('ok'),
                                                   onPressed: () async {

@@ -152,19 +152,22 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                       Padding(
                         padding: EdgeInsets.all(10),
                         child: TextFormField(
-                          validator: (value) {
-                            if (passwordController.text.trim() !=
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: ( value) {
+                            if (passwordController.text.trim()!=
                                 confirmPasswordController.text.trim()) {
-                              return 'Password are Incorrect!!';
+                              return 'Password are Incorrect!';
                             } else {
                               return null;
                             }
                           },
+                          
                           obscureText:true,
                           controller: confirmPasswordController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: 'Confirm Password',
+                            
                           ),
                         ),
                       ),
@@ -186,6 +189,7 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                       Padding(
                         padding: EdgeInsets.all(10),
                         child: TextFormField(
+                          validator: checkFieldPhoneNumberIsValid,
                           //validator: (input) => input!.isValidPhoneNumber()
                             //  ? null
                               //: "Please Enter a vaild Phone Number",

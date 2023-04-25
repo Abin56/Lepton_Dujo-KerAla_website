@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../../../../controller/Getx/admin/sampoorna/sampoorna_controller.dart';
 import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
+import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
 import 'widgets/address_detail_widget.dart';
 import 'widgets/admission_detail_widget.dart';
@@ -24,6 +25,9 @@ class SampoornaHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+       appBar: AppBar(title: Text('Sampoorna'),
+        backgroundColor: adminePrimayColor,
+        elevation: 0,),
       body: Form(
         key: sampoornaController.sampoornaFormKey,
         autovalidateMode: AutovalidateMode.disabled,

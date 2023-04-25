@@ -26,7 +26,7 @@ class StudentProtectionGroup extends StatelessWidget {
     return Scaffold(
       backgroundColor: adminePrimayColor,
       appBar: AppBar(
-        title: const Text('Student ProtectionGroup'),
+        title: const Text('Student Protection Group'),
         backgroundColor: adminePrimayColor,
         elevation: 0,
       ),
