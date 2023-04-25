@@ -10,6 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../../controller/class_list/class_list_model.dart';
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
+import '../../../../../../model/create_classModel/addStudent_model.dart';
 import '../../../../../../model/create_classModel/create_classModel.dart';
 import '../../../../../../model/student/student_list_model.dart';
 import '../../../../../constant/constant.dart';
@@ -110,7 +111,7 @@ class _AllStudentListState extends State<AllStudentList> {
                             children: List.generate(
                               snapshot.data!.docs.length,
                               (int index) {
-                                StudentData data = StudentData.fromJson(
+                                AddStudentModel data = AddStudentModel.fromMap(
                                     snapshot.data!.docs[index].data());
 
                                 return AnimationConfiguration.staggeredGrid(
@@ -158,7 +159,7 @@ class _AllStudentListState extends State<AllStudentList> {
                                                     ),
                                                   // sizedBoxH10,
                                                     Text(
-                                                      data.studentName,
+                                                      data.studentName??"",
                                                       style: GoogleFonts
                                                           .montserrat(
                                                               letterSpacing: 1,
@@ -171,7 +172,7 @@ class _AllStudentListState extends State<AllStudentList> {
                                                     ),
                                                     
                                                     Text(
-                                                      'Create Date : ${stringTimeToDateConvert(data.joinDate)}',
+                                                      'Create Date : ${stringTimeToDateConvert(data.createDate??"")}',
                                                       style:
                                                           GoogleFonts.poppins(
                                                         color: Colors.black
@@ -200,13 +201,13 @@ class _AllStudentListState extends State<AllStudentList> {
                                                                 .value)
                                                             .collection(
                                                                 "Classes")
-                                                            .doc(data.wclass)
+                                                            .doc(data.whichClass)
                                                             .get(),
                                                         builder: (context,
                                                             snapshot) {
                                                           if (snapshot
                                                               .hasData) {
-                                                            log(data.wclass);
+                                                            log(data.whichClass??"");
                                                             log('>>>>>>>>>${snapshot.data!.data()?['className'].toString()}??'
                                                                 '');
                                                             return Text(
@@ -228,7 +229,7 @@ class _AllStudentListState extends State<AllStudentList> {
                                                         }),
                                                     //sizedBoxH10,
                                                     Text(
-                                                      "Phone No ${data.parentPhNo}",
+                                                      "Phone No ${data.parentPhoneNumber}",
                                                       style:
                                                           GoogleFonts.poppins(
                                                         color: Colors.black,

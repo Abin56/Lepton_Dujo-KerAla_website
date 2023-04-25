@@ -144,11 +144,11 @@ class _ListOfStudentsState extends State<ListOfStudents> {
                                                                 shape: BoxShape
                                                                     .circle),
                                                         child: data.gender ==
-                                                                'male'
+                                                                'Male'
                                                             ? LottieBuilder.network(
                                                                 'https://assets7.lottiefiles.com/packages/lf20_gslpxfoi.json')
                                                             : data.gender ==
-                                                                    'female'
+                                                                    'Female'
                                                                 ? LottieBuilder
                                                                     .network(
                                                                         'https://assets7.lottiefiles.com/packages/lf20_pmdvl45r.json')
