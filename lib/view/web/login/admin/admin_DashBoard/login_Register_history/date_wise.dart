@@ -128,8 +128,8 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
                                                                       suffixIcon:
                                                                           IconButton(
                                                                         icon: Icon(passwordVisible
-                                                                            ? Icons.visibility
-                                                                            : Icons.visibility_off),
+                                                                            ? Icons.visibility_off
+                                                                            : Icons.visibility),
                                                                         onPressed:
                                                                             () {
                                                                           setState(
@@ -162,8 +162,8 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
                                                                       suffixIcon:
                                                                           IconButton(
                                                                         icon: Icon(passwordVisible
-                                                                            ? Icons.visibility
-                                                                            : Icons.visibility_off),
+                                                                            ? Icons.visibility_off
+                                                                            : Icons.visibility),
                                                                         onPressed:
                                                                             () {
                                                                           setState(

@@ -6,6 +6,7 @@ import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/all_Stu
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/bus_Route/bus_route.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/bus_Route/create_bus_route.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/non_Teaching_staff/non_teaching_staff.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_login.dart';
 import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/teachers_panel_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +57,8 @@ class MyApp extends StatelessWidget {
           // AllStdf()
         // BusRoute()
         // NonTeachingLogin(schoolID: '',)
-        DujoHomePage()
+      DujoHomePage()
+       
               );
         });
   }

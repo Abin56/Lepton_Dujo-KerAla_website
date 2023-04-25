@@ -39,9 +39,10 @@ class ClassTeacherLoginScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
+
       appBar: AppBar(backgroundColor:Color(0xFF26A69A)
       ),
-      backgroundColor: AppColors.backColor,
+      backgroundColor: const Color(0xFF26A69A),
       body: SizedBox(
         height: height,
         width: width,
@@ -84,7 +85,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                     horizontal: ResponsiveWidget.isSmallScreen(context)
                         ? height * 0.032
                         : height * 0.12),
-                color: AppColors.backColor,
+                color: Color(0xFF26A69A),
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.only(bottom: 40.0),
                   child: Column(
@@ -99,14 +100,14 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                                 text: 'Let’s',
                                 style: ralewayStyle.copyWith(
                                   fontSize: 25.0,
-                                  color: AppColors.blueDarkColor,
+                                  color: cWhite,
                                   fontWeight: FontWeight.normal,
                                 )),
                             TextSpan(
                               text: ' Sign In 👇',
                               style: ralewayStyle.copyWith(
                                 fontWeight: FontWeight.w800,
-                                color: AppColors.blueDarkColor,
+                                color: cWhite,
                                 fontSize: 25.0,
                               ),
                             ),
@@ -119,7 +120,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                         style: ralewayStyle.copyWith(
                           fontSize: 15.0,
                           fontWeight: FontWeight.w400,
-                          color: AppColors.textColor,
+                          color: cWhite,
                         ),
                       ),
                       SizedBox(height: height * 0.064),
@@ -129,7 +130,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                           'Teacher ID',
                           style: ralewayStyle.copyWith(
                             fontSize: 15.0,
-                            color: AppColors.blueDarkColor,
+                            color: AppColors.whiteColor,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -148,7 +149,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                                 _hideGetxController.isObscurefirst.value,
                           style: ralewayStyle.copyWith(
                             fontWeight: FontWeight.w400,
-                            color: AppColors.blueDarkColor,
+                            color: cBlack,
                             fontSize: 15.0,
                           ),
                           decoration: InputDecoration(
@@ -160,8 +161,8 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                               suffixIcon: IconButton(
                                 icon: Icon(
                                     _hideGetxController.isObscurefirst.value
-                                        ? Icons.visibility
-                                        : Icons.visibility_off),
+                                        ? Icons.visibility_off
+                                        : Icons.visibility),
                                 onPressed: () {
                                   _hideGetxController.toggleObscureFirst();
                                 },
@@ -184,7 +185,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                           'Password',
                           style: ralewayStyle.copyWith(
                             fontSize: 15.0,
-                            color: AppColors.blueDarkColor,
+                            color: AppColors.whiteColor,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -205,7 +206,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
 
                             style: ralewayStyle.copyWith(
                               fontWeight: FontWeight.w400,
-                              color: AppColors.blueDarkColor,
+                              color: cBlack,
                               fontSize: 12.0,
                             ),
                             //obscureText: true,
@@ -214,8 +215,8 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                               suffixIcon: IconButton(
                                 icon: Icon(
                                     _hideGetxController.isObscureSecond.value
-                                        ? Icons.visibility
-                                        : Icons.visibility_off),
+                                        ? Icons.visibility_off
+                                        : Icons.visibility),
                                 onPressed: () {
                                   _hideGetxController.toggleObscureSecond();
                                 },
@@ -244,7 +245,8 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                             'Forgot Password?',
                             style: ralewayStyle.copyWith(
                               fontSize: 12.0,
-                              color: const Color(0xFF26A69A),
+                              color: AppColors.whiteColor,
+                              //,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -265,13 +267,13 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                                 horizontal: 70.0, vertical: 18.0),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(16.0),
-                              color: const Color(0xFF26A69A),
+                              color: AppColors.whiteColor,
                             ),
                             child: Text(
                               'Sign In',
                               style: ralewayStyle.copyWith(
                                 fontWeight: FontWeight.w700,
-                                color: AppColors.whiteColor,
+                                color: const Color(0xFF26A69A),
                                 fontSize: 16.0,
                               ),
                             ),
