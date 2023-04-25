@@ -711,11 +711,14 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                 child: ListBody(
                                                   children: const <Widget>[
                                                     Text(
-                                                        'Are You Sure want to logout?')
+                                                        'Are you sure you want to logout?')
                                                   ],
                                                 ),
                                               ),
                                               actions: <Widget>[
+                                                TextButton(onPressed: (){
+                                                   Navigator.of(context).pop();
+                                                }, child: Text("Cancel")),
                                                 TextButton(
                                                   child: const Text('ok'),
                                                   onPressed: () async {

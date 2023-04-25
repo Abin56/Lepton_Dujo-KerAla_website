@@ -180,12 +180,12 @@ class ClassesDeatils extends StatelessWidget {
                                   false, // user must tap button!
                               builder: (BuildContext context) {
                                 return AlertDialog(
-                                  title: const Text('Alert'),
+                                  title: const Text('Remove All the data'),
                                   content: SingleChildScrollView(
                                     child: ListBody(
                                       children: const <Widget>[
                                         Text(
-                                            'Are are shure to Remove? \n All data will be lost'),
+                                            ' All data will be lost'),
                                       ],
                                     ),
                                   ),
@@ -478,7 +478,7 @@ class ClassesDeatils extends StatelessWidget {
                                                   children: [
                                                     TextButton(
                                                       child:
-                                                          const Text('cancel'),
+                                                          const Text('Cancel'),
                                                       onPressed: () {
                                                         Navigator.of(context)
                                                             .pop();

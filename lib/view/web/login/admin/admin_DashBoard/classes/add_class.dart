@@ -109,7 +109,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                         ),
                       ),
                       onPressed: () async {
-                        if (_formKey.currentState!.validate())
+                        if (_formKey.currentState!.validate()){
                         print('adf');
                         final classDetails = AddClassesModel(
                             id: classIDController.text.trim(),
@@ -123,7 +123,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                             Get.find<AdminLoginScreenController>().schoolID,
                             classesInchargeListValue!["id"]
                             );
-                      },
+                      }},
                       child: const Text("Add Class"),
                     ),
                   )

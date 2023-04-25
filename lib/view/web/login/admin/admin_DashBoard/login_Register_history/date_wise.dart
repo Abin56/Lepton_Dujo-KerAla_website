@@ -77,12 +77,12 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
                                               false, // user must tap button!
                                           builder: (BuildContext context) {
                                             return AlertDialog(
-                                              title: const Text('Alert'),
+                                              title: const Text('Clear all the data?'),
                                               content: SingleChildScrollView(
                                                 child: ListBody(
                                                   children: <Widget>[
                                                     Text(
-                                                        "Are you sure to clear the data \n  registered on ${snapshot.data!.docs[index]['id']} ? ")
+                                                        "Clear all the data registered on ${snapshot.data!.docs[index]['id']}. ")
                                                   ],
                                                 ),
                                               ),
