@@ -7,6 +7,7 @@ import 'package:lottie/lottie.dart';
 import '../../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../../controller/students_list/students_list.dart';
+import '../../../../../../../model/create_classModel/addStudent_model.dart';
 import '../../../../../../../model/profileextraDetails/students_extra_profile.dart';
 import '../../../../../../constant/constant.dart';
 import 'details_students.dart';
@@ -40,7 +41,7 @@ class _ListOfStudentsState extends State<ListOfStudents> {
   }
 
   Widget build(BuildContext context) {
-    List<AddExtraDetailsofStudentsModel> allData = [];
+    List<AddStudentModel> allData = [];
     int columnCount = 3;
     double _w = MediaQuery.of(context).size.width;
     double _h = MediaQuery.of(context).size.height;
@@ -102,8 +103,8 @@ class _ListOfStudentsState extends State<ListOfStudents> {
                             children: List.generate(
                               snapshot.data!.docs.length,
                               (int index) {
-                                AddExtraDetailsofStudentsModel data =
-                                    AddExtraDetailsofStudentsModel.fromJson(
+                                AddStudentModel data =
+                                    AddStudentModel.fromMap(
                                         snapshot.data!.docs[index].data());
                                 allData.add(data);
                                 return AnimationConfiguration.staggeredGrid(
@@ -168,7 +169,7 @@ class _ListOfStudentsState extends State<ListOfStudents> {
                                                   ),
                                                   sizedBoxH10,
                                                   Text(
-                                                    'Create Date : ${stringTimeToDateConvert(data.joinDate)}',
+                                                    'Create Date : ${stringTimeToDateConvert(data.createDate!)}',
                                                     style: GoogleFonts.poppins(
                                                       color: Colors.black
                                                           .withOpacity(0.4),
