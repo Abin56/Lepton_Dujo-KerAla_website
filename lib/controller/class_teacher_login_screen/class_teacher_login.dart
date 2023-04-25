@@ -12,7 +12,6 @@ import '../admin_login_screen/admin_login_screen_controller.dart';
 import '../get_firebase-data/get_firebase_data.dart';
 
 class ClassTeacherLoginController extends GetxController {
-  
   TextEditingController idController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -21,7 +20,7 @@ class ClassTeacherLoginController extends GetxController {
       .doc(Get.find<AdminLoginScreenController>().schoolID)
       .collection("Teachers");
 
-   classTeacherLogin(BuildContext context) async {
+  classTeacherLogin(BuildContext context) async {
     //>>>>>>>>>>>>>>>>>Checking ID<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     Query query =
@@ -37,6 +36,8 @@ class ClassTeacherLoginController extends GetxController {
     log(docDataa.toString());
 
     if (docDataa.isNotEmpty && docData.isNotEmpty) {
+      log('<<<<<<<<<<<<<<<<<<<<${idController.text}');
+      log('################${passwordController.text}');
       Navigator.push(context, MaterialPageRoute(
         builder: (context) {
           TeacherLoginIDSaver.id = idController.text.trim();
@@ -57,7 +58,9 @@ class ClassTeacherLoginController extends GetxController {
             title: const Text('Message'),
             content: SingleChildScrollView(
               child: ListBody(
-                children: const <Widget>[Text('Wrong Password')],
+                children: const <Widget>[
+                  Text('Please enter a valid username and password')
+                ],
               ),
             ),
             actions: <Widget>[
@@ -74,9 +77,10 @@ class ClassTeacherLoginController extends GetxController {
     }
   }
 
- Future<QuerySnapshot<Map<String, dynamic>>> checkSampoorna(String classID, String studentID) async {
-    Future<QuerySnapshot<Map<String, dynamic>>> docs = 
-     FirebaseFirestore.instance
+  Future<QuerySnapshot<Map<String, dynamic>>> checkSampoorna(
+      String classID, String studentID) async {
+    Future<QuerySnapshot<Map<String, dynamic>>> docs = FirebaseFirestore
+        .instance
         .collection("SchoolListCollection")
         .doc(Get.find<AdminLoginScreenController>().schoolID)
         .collection(Get.find<GetFireBaseData>().bYear.value)
@@ -87,8 +91,6 @@ class ClassTeacherLoginController extends GetxController {
         .doc(studentID)
         .collection("sampoorna")
         .get();
-        return docs;
+    return docs;
   }
-  
-  
 }
