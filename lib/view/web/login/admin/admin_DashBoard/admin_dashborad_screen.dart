@@ -177,7 +177,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       Achievements(schoolID: widget.schoolID), //11-Achievements
       StudentProtectionGroup(), //12-Students Protection Group
       AdminScholarships(schoolID: widget.schoolID), //13-ScholarShip
-      const BusRoute(), //14-Bus Route
+       BusRoute(), //14-Bus Route
       const StudentSummary(), //15-Student Summary
       const UnderMaintanceScreen(), //16-Research and development
       const UnderMaintanceScreen(), //17-School Calendar
@@ -599,11 +599,94 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                           );
                                                         });
                                                       },
-                                                      child: Text(
-                                                        'Set BatchYear',
-                                                        style: GoogleFonts
-                                                            .poppins(),
-                                                      ))
+                                                      child:  MaterialButton(
+                                                        color: Colors.green,
+                                                        onPressed: () {
+                                                             showDialog(
+                                    context: context,
+                                    barrierDismissible:
+                                        false, // user must tap button!
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: const Text('Add BatchYear'),
+                                        content: SingleChildScrollView(
+                                          child: ListBody(
+                                            children: <Widget>[
+                                              Expanded(
+                                                child: TextFormField(
+                                                  controller:
+                                                      applynewBatchYearContoller,
+                                                  readOnly: true,
+                                                  onTap: () =>
+                                                      _selectDate(context),
+                                                  decoration:
+                                                      const InputDecoration(
+                                                    labelText: 'DD-MM-YYYY',
+                                                    border:
+                                                        OutlineInputBorder(),
+                                                  ),
+                                                ),
+                                              ),
+                                              const Icon(Icons
+                                                  .arrow_downward_outlined),
+                                              Expanded(
+                                                child: TextFormField(
+                                                  controller:
+                                                      selectedToDaterContoller,
+                                                  readOnly: true,
+                                                  onTap: () =>
+                                                      _selectToDate(context),
+                                                  decoration:
+                                                      const InputDecoration(
+                                                    labelText: 'To',
+                                                    border:
+                                                        OutlineInputBorder(),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            child: const Text('Cancel'),
+                                            onPressed: () async {
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                          TextButton(
+                                            child: const Text('Create'),
+                                            onPressed: () async {
+                                              await FirebaseFirestore.instance
+                                                  .collection(
+                                                      "SchoolListCollection")
+                                                  .doc(Get.find<
+                                                          AdminLoginScreenController>()
+                                                      .schoolID)
+                                                  .collection("BatchYear")
+                                                  .doc(
+                                                      '${applynewBatchYearContoller.text.trim()}-${selectedToDaterContoller.text.trim()}')
+                                                  .set({
+                                                'id':
+                                                    '${applynewBatchYearContoller.text.trim()}-${selectedToDaterContoller.text.trim()}'
+                                              }).then((value) {
+                                                Navigator.of(context).pop();
+                                                Navigator.of(context).pop();
+                                              });
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                                        },
+                                                        child: Text(
+                                                          'Add Batch Year',
+                                                          style: GoogleFonts
+                                                              .poppins(
+                                                                  color: Colors
+                                                                      .white),
+                                                        )),),
                                                 ],
                                               );
                                             },

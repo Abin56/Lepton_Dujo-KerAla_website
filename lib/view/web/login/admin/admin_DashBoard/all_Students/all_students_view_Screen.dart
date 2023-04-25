@@ -60,6 +60,11 @@ class _AllStudentListState extends State<AllStudentList> {
                   padding: EdgeInsets.all(8.0),
                   child: Row(
                     children: [
+                      IconButton(onPressed: () {
+                        Navigator.pop(context);
+                        
+                      }, icon: Icon(Icons.arrow_back)),
+                      sizedBoxW20,
                       Text(
                         "A L L S T U D E N T S",
                         style: GoogleFonts.montserrat(

@@ -34,49 +34,48 @@ class _GeClasseslListDropDownButtonState
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return DropdownButtonFormField(
-              hint: classesInchargeListValue == null
-                  ? const Text(
-                      "Class Incharge",
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 0, 0, 0), fontSize: 18),
-                    )
-                  : Text(classesInchargeListValue!["teacherName"]),
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Colors.transparent, width: 0.5),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                border: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Colors.transparent, width: 0.5),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                filled: true,
-              ),
-              items: snapshot.data!.docs.map(
-                (val) {
-                  return DropdownMenuItem(
-                    value: val["teacherName"],
-                    child: Text(val["teacherName"]),
-                  );
-                },
-              ).toList(),
-              onChanged: (val) {
-                var categoryIDObject = snapshot.data!.docs
-                    .where((element) => element["teacherName"] == val)
-                    .toList()
-                    .first;
-                log(categoryIDObject["teacherName"]);
+          return DropdownButtonFormField(
+  value: classesInchargeListValue != null
+      ? classesInchargeListValue["teacherName"]
+      : null,
+  hint: const Text(
+    "Class Incharge",
+    style: TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 18),
+  ),
+  decoration: InputDecoration(
+    enabledBorder: OutlineInputBorder(
+      borderSide: const BorderSide(color: Colors.transparent, width: 0.5),
+      borderRadius: BorderRadius.circular(20),
+    ),
+    border: OutlineInputBorder(
+      borderSide: const BorderSide(color: Colors.transparent, width: 0.5),
+      borderRadius: BorderRadius.circular(20),
+    ),
+    filled: true,
+  ),
+  items: snapshot.data!.docs.map(
+    (val) {
+      return DropdownMenuItem(
+        value: val["teacherName"],
+        child: Text(val["teacherName"]),
+      );
+    },
+  ).toList(),
+  onChanged: (val) {
+    var categoryIDObject = snapshot.data!.docs
+        .where((element) => element["teacherName"] == val)
+        .toList()
+        .first;
+    log(categoryIDObject["teacherName"]);
 
-                setState(
-                  () {
-                    classesInchargeListValue = categoryIDObject;
-                  },
-                );
-              },
-            );
+    setState(
+      () {
+        classesInchargeListValue = categoryIDObject;
+      },
+    );
+  },
+);
+
           }
           return const SizedBox(
             child: Center(
