@@ -4,7 +4,6 @@ import '../../../../../model/parent/parent_model.dart';
 import '../../../../colors/colors.dart';
 import '../../../../constant/constant.dart';
 
-
 class AddParent extends StatefulWidget {
   AddParent({super.key, required this.schoolID});
   String schoolID;
@@ -21,7 +20,8 @@ class _MyHomePageState extends State<AddParent> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    return Scaffold( appBar: AppBar(backgroundColor: adminePrimayColor),
+    return Scaffold(
+      appBar: AppBar(backgroundColor: adminePrimayColor),
       body: Row(
         children: <Widget>[
           //left section
@@ -62,16 +62,6 @@ class _MyHomePageState extends State<AddParent> {
                         ),
                       ),
                       sizedBoxH30,
-                      TextField(
-                        controller: parentemailController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15))),
-                          labelText: 'Parent email',
-                        ),
-                      ),
-                      sizedBoxH30,
                       SizedBox(
                         width: size.width / 2,
                         height: 50,
@@ -84,11 +74,10 @@ class _MyHomePageState extends State<AddParent> {
                           ),
                           onPressed: () async {
                             final parentDetails = ParentModel(
-                                parentEmail: parentemailController.text.trim(),
                                 parentPhoneNumber:
                                     parentPhoneNumberController.text.trim(),
                                 parentName: parentNameController.text,
-                                joinDate: DateTime.now().toString());
+                                createdate: DateTime.now().toString());
 
                             CreateParentsAddToFireBase().createSchoolController(
                                 parentDetails, context, widget.schoolID);
