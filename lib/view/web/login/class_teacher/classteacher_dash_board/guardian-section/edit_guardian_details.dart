@@ -6,7 +6,7 @@ import '../../../../../../model/guardian/guardian_model.dart';
 class EditGuardianDetails extends StatelessWidget {
    EditGuardianDetails({super.key, required this.model, required this.id}); 
   
-  GuardianModel model; 
+  GuardianAddModel model; 
   String id;
   TextEditingController guardianNameController = TextEditingController(); 
   TextEditingController classInChargeController = TextEditingController(); 
@@ -15,8 +15,8 @@ class EditGuardianDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
      var screenSize = MediaQuery.of(context).size;  
-     guardianNameController.text = model.guardianName; 
-     joinDateController.text = model.joinDate;
+     guardianNameController.text = model.guardianName??""; 
+     joinDateController.text = model.createdate??"";
     return Scaffold(
        appBar: AppBar(backgroundColor: adminePrimayColor),
       body: SingleChildScrollView(
@@ -49,7 +49,7 @@ class EditGuardianDetails extends StatelessWidget {
                   controller: joinDateController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    hintText: model.joinDate,
+                    hintText: model.createdate,
                   ),
                 ),
               ),

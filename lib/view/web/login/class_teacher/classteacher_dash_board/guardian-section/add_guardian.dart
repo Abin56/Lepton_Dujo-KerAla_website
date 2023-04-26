@@ -4,7 +4,6 @@ import '../../../../../../model/guardian/guardian_model.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
 
-
 class AddGuardian extends StatefulWidget {
   AddGuardian({super.key, required this.schoolId});
   String schoolId;
@@ -22,7 +21,7 @@ class _MyHomePageState extends State<AddGuardian> {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
-        appBar: AppBar(backgroundColor: adminePrimayColor),
+      appBar: AppBar(backgroundColor: adminePrimayColor),
       body: Row(
         children: <Widget>[
           //left section
@@ -63,16 +62,6 @@ class _MyHomePageState extends State<AddGuardian> {
                         ),
                       ),
                       sizedBoxH30,
-                      TextField(
-                        controller: guardianEmailController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15))),
-                          labelText: 'Guardian email',
-                        ),
-                      ),
-                      sizedBoxH30,
                       SizedBox(
                         width: size.width / 2,
                         height: 50,
@@ -85,13 +74,10 @@ class _MyHomePageState extends State<AddGuardian> {
                             ),
                           ),
                           onPressed: () async {
-                            final guardianDetails = GuardianModel(
-                              joinDate: DateTime.now().toString(),
-                              guardianEmail:
-                                  guardianEmailController.text.trim(),
+                            final guardianDetails = GuardianAddModel(
+                              createdate: DateTime.now().toString(),
                               guardianPhoneNumber:
                                   guardianPhoneNoController.text.trim(),
-                              id: guardianEmailController.text,
                               guardianName: guardianNameController.text.trim(),
                             );
                             if (context.mounted) {

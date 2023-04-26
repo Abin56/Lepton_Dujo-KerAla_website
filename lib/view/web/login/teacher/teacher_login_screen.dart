@@ -14,14 +14,16 @@ class TeacherLoginScreen extends StatelessWidget {
   final _hideGetxController = Get.put(PasswordField());
   String adminpassword = '';
    TeacherLoginScreen({Key? key}) : super(key: key);
+   TextEditingController teacheridController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
+    
       appBar: AppBar(backgroundColor:  AppColors.mainBlueColor),
-      backgroundColor: AppColors.backColor,
+      backgroundColor: AppColors.mainBlueColor,
       body: SizedBox(
         height: height,
         width: width,
@@ -64,7 +66,7 @@ class TeacherLoginScreen extends StatelessWidget {
                     horizontal: ResponsiveWidget.isSmallScreen(context)
                         ? height * 0.032
                         : height * 0.15),
-                color: AppColors.backColor,
+                color: AppColors.mainBlueColor,
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.only(bottom: 40.0),
                   child: Column(
@@ -79,14 +81,14 @@ class TeacherLoginScreen extends StatelessWidget {
                                 text: 'Let’s',
                                 style: ralewayStyle.copyWith(
                                   fontSize: 25.0,
-                                  color: AppColors.blueDarkColor,
+                                  color: cWhite,
                                   fontWeight: FontWeight.normal,
                                 )),
                             TextSpan(
                               text: ' Sign In 👇',
                               style: ralewayStyle.copyWith(
                                 fontWeight: FontWeight.w800,
-                                color: AppColors.blueDarkColor,
+                                color: cWhite,
                                 fontSize: 25.0,
                               ),
                             ),
@@ -99,17 +101,17 @@ class TeacherLoginScreen extends StatelessWidget {
                         style: ralewayStyle.copyWith(
                           fontSize: 15.0,
                           fontWeight: FontWeight.w400,
-                          color: AppColors.textColor,
+                          color: cWhite,
                         ),
                       ),
                       SizedBox(height: height * 0.064),
                       Padding(
                         padding: const EdgeInsets.only(left: 16.0),
                         child: Text(
-                          'Email',
+                          'Teacher ID',
                           style: ralewayStyle.copyWith(
-                            fontSize: 13.0,
-                            color: AppColors.blueDarkColor,
+                            fontSize: 15.0,
+                            color: AppColors.whiteColor,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -122,10 +124,13 @@ class TeacherLoginScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(16.0),
                           color: AppColors.whiteColor,
                         ),
-                        child: TextFormField(
+                        child: Obx(() => TextFormField(
+                        //  controller: TextEditingController. teacheridController,
+                            obscureText:
+                                _hideGetxController.isObscurefirst.value,
                           style: ralewayStyle.copyWith(
                             fontWeight: FontWeight.w400,
-                            color: AppColors.blueDarkColor,
+                            color: cBlack,
                             fontSize: 15.0,
                           ),
                           decoration: InputDecoration(
@@ -134,14 +139,24 @@ class TeacherLoginScreen extends StatelessWidget {
                               onPressed: () {},
                               icon: Image.asset(AppIcons.emailIcon),
                             ),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                    _hideGetxController.isObscurefirst.value
+                                        ? Icons.visibility_off
+                                        : Icons.visibility),
+                                onPressed: () {
+                                  _hideGetxController.toggleObscureFirst();
+                                },
+                              ),
                             contentPadding: const EdgeInsets.only(top: 16.0),
-                            hintText: 'Enter Email',
+                            hintText: 'Enter ID',
                             hintStyle: ralewayStyle.copyWith(
                               fontWeight: FontWeight.w400,
                               color: AppColors.blueDarkColor.withOpacity(0.5),
                               fontSize: 15.0,
                             ),
                           ),
+                        ),
                         ),
                       ),
                       SizedBox(height: height * 0.014),
@@ -151,7 +166,7 @@ class TeacherLoginScreen extends StatelessWidget {
                           'Password',
                           style: ralewayStyle.copyWith(
                             fontSize: 15.0,
-                            color: AppColors.blueDarkColor,
+                            color: cWhite,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -166,10 +181,10 @@ class TeacherLoginScreen extends StatelessWidget {
                         ),
                         child: TextFormField(
                            obscureText:
-                           _hideGetxController.isObscurefirst.value,
+                           _hideGetxController.isObscureSecond.value,
                           style: ralewayStyle.copyWith(
                             fontWeight: FontWeight.w400,
-                            color: AppColors.blueDarkColor,
+                            color: cBlack,
                             fontSize: 15.0,
                           ),
                          
@@ -178,14 +193,14 @@ class TeacherLoginScreen extends StatelessWidget {
                            suffixIcon:  IconButton(
                             
                                                       icon: Icon(_hideGetxController
-                                                              .isObscurefirst
+                                                              .isObscureSecond
                                                               .value
-                                                          ? Icons.visibility
+                                                          ? Icons.visibility_off
                                                           : Icons
-                                                              .visibility_off),
+                                                              .visibility),
                                                       onPressed: () {
                                                         _hideGetxController
-                                                            .toggleObscureFirst();
+                                                            .toggleObscureSecond();
                                                       },
                                                     ),
                             prefixIcon: IconButton(
@@ -211,7 +226,7 @@ class TeacherLoginScreen extends StatelessWidget {
                             'Forgot Password?',
                             style: ralewayStyle.copyWith(
                               fontSize: 15.0,
-                              color: AppColors.mainBlueColor,
+                              color: cWhite,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -234,13 +249,13 @@ class TeacherLoginScreen extends StatelessWidget {
                                 horizontal: 70.0, vertical: 18.0),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(16.0),
-                              color: AppColors.mainBlueColor,
+                              color: cWhite,
                             ),
                             child: Text(
                               'Sign In',
                               style: ralewayStyle.copyWith(
                                 fontWeight: FontWeight.w700,
-                                color: AppColors.whiteColor,
+                                color:AppColors.mainBlueColor,
                                 fontSize: 16.0,
                               ),
                             ),

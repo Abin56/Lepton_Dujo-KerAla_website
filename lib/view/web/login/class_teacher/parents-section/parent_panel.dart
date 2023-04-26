@@ -62,7 +62,7 @@ class AdminParentPanelSCreen extends StatelessWidget {
                               if (snapshot.hasData) {
                                 return ListView.separated(
                                     itemBuilder: (context, index) {
-                                      final data = ParentModel.fromJson(
+                                      final data = ParentModel.fromMap(
                                           snapshot.data!.docs[index].data());
 
                                       return InkWell(
@@ -86,7 +86,7 @@ class AdminParentPanelSCreen extends StatelessWidget {
                                           color:
                                               Color.fromARGB(255, 1, 238, 255),
                                           child: Center(
-                                              child: Text(data.parentName)),
+                                              child: Text(data.parentName??"")),
                                         ),
                                       );
                                     },
@@ -229,7 +229,7 @@ showParentDetails(
               Row(
                 children: [
                   Text('Name :'),
-                  Text(parentmodel.parentName),
+                  Text(parentmodel.parentName??""),
                 ],
               ),
               Row(
@@ -245,7 +245,7 @@ showParentDetails(
               Row(
                 children: [
                   Text('Date :'),
-                  Text(parentmodel.joinDate),
+                  Text(parentmodel.createdate??""),
                 ],
               )
             ])));

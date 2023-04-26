@@ -64,7 +64,7 @@ class AdminGuardiansPanelScreen extends StatelessWidget {
                                 return ListView.separated(
                                     itemBuilder: (context, index) {
                                     
-                                      final data = GuardianModel.fromJson(
+                                      final data = GuardianAddModel.fromMap(
                                           snapshot.data!.docs[index].data());
                                           
                                       return InkWell(
@@ -84,7 +84,7 @@ class AdminGuardiansPanelScreen extends StatelessWidget {
                                           color:
                                               Color.fromARGB(255, 1, 238, 255),
                                           child: Center(
-                                              child: Text(data.guardianName)),
+                                              child: Text(data.guardianName??"")),
                                         ),
                                       );
                                     },
@@ -184,7 +184,7 @@ class AdminGuardiansPanelScreen extends StatelessWidget {
 }
 showGuardianDetails(
     {required context,
-    required GuardianModel guardianModel, required id}) async {
+    required GuardianAddModel guardianModel, required id}) async {
   return showDialog(
     context: context,
     barrierDismissible: false, // user must tap button!
@@ -209,7 +209,7 @@ showGuardianDetails(
               Row(
                 children: [
                   Text('Name :'),
-                  Text(guardianModel.guardianName),
+                  Text(guardianModel.guardianName??""),
                 ],
               ),
               Row(
@@ -225,5 +225,5 @@ showGuardianDetails(
               Row(
                 children: [
                   Text('Date :'),
-                  Text(guardianModel.joinDate),
+                  Text(guardianModel.createdate??""),
                 ],)])));});}

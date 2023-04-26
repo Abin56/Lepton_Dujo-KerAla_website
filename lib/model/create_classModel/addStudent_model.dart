@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,7 +9,7 @@ import '../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../controller/get_firebase-data/get_firebase_data.dart';
 
 class AddStudentModel {
-  String? id;
+  String? uid;
   String? studentName;
   String? gender;
   String? admissionNumber;
@@ -22,8 +23,11 @@ class AddStudentModel {
   String? profileImageId;
   String? profileImageUrl;
   String? createDate;
+  String? bloodgroup;
+  String? dateofBirth;
+  String? docid;
   AddStudentModel({
-    this.id,
+    this.uid,
     this.studentName,
     this.gender,
     this.admissionNumber,
@@ -37,10 +41,13 @@ class AddStudentModel {
     this.profileImageId,
     this.profileImageUrl,
     this.createDate,
+    this.bloodgroup,
+    this.dateofBirth,
+    this.docid,
   });
 
   AddStudentModel copyWith({
-    String? id,
+    String? uid,
     String? studentName,
     String? gender,
     String? admissionNumber,
@@ -54,9 +61,12 @@ class AddStudentModel {
     String? profileImageId,
     String? profileImageUrl,
     String? createDate,
+    String? bloodgroup,
+    String? dateofBirth,
+    String? docid,
   }) {
     return AddStudentModel(
-      id: id ?? this.id,
+      uid: uid ?? this.uid,
       studentName: studentName ?? this.studentName,
       gender: gender ?? this.gender,
       admissionNumber: admissionNumber ?? this.admissionNumber,
@@ -70,12 +80,15 @@ class AddStudentModel {
       profileImageId: profileImageId ?? this.profileImageId,
       profileImageUrl: profileImageUrl ?? this.profileImageUrl,
       createDate: createDate ?? this.createDate,
+      bloodgroup: bloodgroup ?? this.bloodgroup,
+      dateofBirth: dateofBirth ?? this.dateofBirth,
+      docid: docid ?? this.docid,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
+      'uid': uid,
       'studentName': studentName,
       'gender': gender,
       'admissionNumber': admissionNumber,
@@ -89,12 +102,15 @@ class AddStudentModel {
       'profileImageId': profileImageId,
       'profileImageUrl': profileImageUrl,
       'createDate': createDate,
+      'bloodgroup': bloodgroup,
+      'dateofBirth': dateofBirth,
+      'docid': docid,
     };
   }
 
   factory AddStudentModel.fromMap(Map<String, dynamic> map) {
     return AddStudentModel(
-      id: map['id'] != null ? map['id'] as String : null,
+      uid: map['uid'] != null ? map['uid'] as String : null,
       studentName:
           map['studentName'] != null ? map['studentName'] as String : null,
       gender: map['gender'] != null ? map['gender'] as String : null,
@@ -121,6 +137,11 @@ class AddStudentModel {
           : null,
       createDate:
           map['createDate'] != null ? map['createDate'] as String : null,
+      bloodgroup:
+          map['bloodgroup'] != null ? map['bloodgroup'] as String : null,
+      dateofBirth:
+          map['dateofBirth'] != null ? map['dateofBirth'] as String : null,
+      docid: map['docid'] != null ? map['docid'] as String : null,
     );
   }
 
@@ -131,14 +152,14 @@ class AddStudentModel {
 
   @override
   String toString() {
-    return 'AddStudentModel(id: $id, studentName: $studentName, gender: $gender, admissionNumber: $admissionNumber, studentemail: $studentemail, parentPhoneNumber: $parentPhoneNumber, whichClass: $whichClass, houseName: $houseName, place: $place, district: $district, alPhoneNumber: $alPhoneNumber, profileImageId: $profileImageId, profileImageUrl: $profileImageUrl, createDate: $createDate)';
+    return 'AddStudentModel(uid: $uid, studentName: $studentName, gender: $gender, admissionNumber: $admissionNumber, studentemail: $studentemail, parentPhoneNumber: $parentPhoneNumber, whichClass: $whichClass, houseName: $houseName, place: $place, district: $district, alPhoneNumber: $alPhoneNumber, profileImageId: $profileImageId, profileImageUrl: $profileImageUrl, createDate: $createDate, bloodgroup: $bloodgroup, dateofBirth: $dateofBirth, docid: $docid)';
   }
 
   @override
   bool operator ==(covariant AddStudentModel other) {
     if (identical(this, other)) return true;
 
-    return other.id == id &&
+    return other.uid == uid &&
         other.studentName == studentName &&
         other.gender == gender &&
         other.admissionNumber == admissionNumber &&
@@ -151,12 +172,15 @@ class AddStudentModel {
         other.alPhoneNumber == alPhoneNumber &&
         other.profileImageId == profileImageId &&
         other.profileImageUrl == profileImageUrl &&
-        other.createDate == createDate;
+        other.createDate == createDate &&
+        other.bloodgroup == bloodgroup &&
+        other.dateofBirth == dateofBirth &&
+        other.docid == docid;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^
+    return uid.hashCode ^
         studentName.hashCode ^
         gender.hashCode ^
         admissionNumber.hashCode ^
@@ -169,7 +193,10 @@ class AddStudentModel {
         alPhoneNumber.hashCode ^
         profileImageId.hashCode ^
         profileImageUrl.hashCode ^
-        createDate.hashCode;
+        createDate.hashCode ^
+        bloodgroup.hashCode ^
+        dateofBirth.hashCode ^
+        docid.hashCode;
   }
 }
 
@@ -178,7 +205,9 @@ class AddStudentsToFireBase {
       classId, batchYear) async {
     try {
       final firebase = FirebaseFirestore.instance;
-     firebase
+
+      String studentId = "";
+      firebase
           .collection("SchoolListCollection")
           .doc(Get.find<AdminLoginScreenController>().schoolID)
           .collection(Get.find<GetFireBaseData>().bYear.value)
@@ -186,14 +215,25 @@ class AddStudentsToFireBase {
           .collection("Classes")
           .doc(classId)
           .collection('Students')
-          .doc(productModel.admissionNumber)
-          .set(productModel.toMap())
+          .add(productModel.toMap())
           .then((value) {
+        studentId = value.id;
+        firebase
+            .collection("SchoolListCollection")
+            .doc(Get.find<AdminLoginScreenController>().schoolID)
+            .collection(Get.find<GetFireBaseData>().bYear.value)
+            .doc(Get.find<GetFireBaseData>().bYear.value)
+            .collection("Classes")
+            .doc(classId)
+            .collection('Students')
+            .doc(value.id)
+            .update({"docid": value.id});
+      }).then((value) {
         firebase
             .collection("SchoolListCollection")
             .doc(schoolid)
             .collection("AllStudents")
-            .doc(productModel.studentemail)
+            .doc(studentId)
             .set(productModel.toMap())
             .then(
           (value) {
@@ -205,7 +245,7 @@ class AddStudentsToFireBase {
                   title: const Text('Message'),
                   content: SingleChildScrollView(
                     child: ListBody(
-                      children:const  <Widget>[
+                      children: const <Widget>[
                         Text('Successfully created'),
                       ],
                     ),

@@ -266,16 +266,16 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                                                   controller: _password,
                                                   obscureText:
                                                       _hideGetxController
-                                                          .isObscureSecond
+                                                          .isObscurefirst
                                                           .value,
                                                   decoration: InputDecoration(
                                                     suffixIcon: IconButton(
                                                       icon: Icon(_hideGetxController
-                                                              .isObscureSecond
+                                                              .isObscurefirst 
                                                               .value
                                                           ? Icons
-                                                              .visibility
-                                                          :Icons.visibility_off ),
+                                                              .visibility_off
+                                                          :Icons.visibility ),
                                                       onPressed: () {
                                                         _hideGetxController
                                                             .toggleObscureSecond();

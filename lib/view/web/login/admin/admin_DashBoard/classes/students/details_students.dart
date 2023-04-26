@@ -14,6 +14,7 @@ import 'package:lottie/lottie.dart';
 import '../../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../../controller/students_list/students_list.dart';
+import '../../../../../../../model/create_classModel/addStudent_model.dart';
 import '../../../../../../../model/profileextraDetails/students_extra_profile.dart';
 import '../../../../../../colors/colors.dart';
 import '../../../../../../constant/constant.dart';
@@ -39,7 +40,7 @@ class StudentsDetails extends StatelessWidget {
   });
 
   final StudentsProfileList getxController;
-  final List<AddExtraDetailsofStudentsModel> allData;
+  final List<AddStudentModel> allData;
 
   @override
   
@@ -142,7 +143,7 @@ class StudentsDetails extends StatelessWidget {
                       radius: 90,
                       backgroundImage: NetworkImage(
                           allData[getxController.indexValue.value!]
-                              .studentImage),
+                              .profileImageUrl!),
                     ),
                     sizedBoxH10,
                     sizedBoxH20,
@@ -174,7 +175,7 @@ class StudentsDetails extends StatelessWidget {
                                                   .collection("Students")
                                                   .doc(allData[getxController
                                                           .indexValue.value!]
-                                                      .id)
+                                                      .uid)
                                                   .set({
                                                 'studentName':
                                                     _newStNameController.text
@@ -223,14 +224,14 @@ class StudentsDetails extends StatelessWidget {
                     ),
                     sizedBoxH10,
                     Text(
-                      'E mail : ${allData[getxController.indexValue.value!].id}',
+                      'E mail : ${allData[getxController.indexValue.value!].studentemail}',
                       style: tea_style,
                     ),
                     sizedBoxH10,
                     Row(
                       children: [
                         Text(
-                          'Phone No : ${allData[getxController.indexValue.value!].parentPhNo}',
+                          'Phone No : ${allData[getxController.indexValue.value!].parentPhoneNumber}',
                           style: tea_style,
                         ),
                         sizedBoxw10,
@@ -255,9 +256,9 @@ class StudentsDetails extends StatelessWidget {
                                                   .collection("Students")
                                                   .doc(allData[getxController
                                                           .indexValue.value!]
-                                                      .id)
+                                                      .uid)
                                                   .set({
-                                                'parentPhNo':
+                                                'parentPhoneNumber':
                                                     _newPhoneNoController.text
                                                         .trim()
                                               }, SetOptions(merge: true)).then(
@@ -285,7 +286,7 @@ class StudentsDetails extends StatelessWidget {
                                           decoration: InputDecoration(
                                               hintText: allData[getxController
                                                       .indexValue.value!]
-                                                  .parentPhNo),
+                                                  .parentPhoneNumber),
                                           controller: _newPhoneNoController,
                                         )
                                       ],
@@ -330,7 +331,7 @@ class StudentsDetails extends StatelessWidget {
                                                   .collection("Students")
                                                   .doc(allData[getxController
                                                           .indexValue.value!]
-                                                      .id)
+                                                      .uid)
                                                   .set({
                                                 'admissionNumber':
                                                     _newAdIDController.text
@@ -379,7 +380,7 @@ class StudentsDetails extends StatelessWidget {
                     ),
                     sizedBoxH10,
                     Text(
-                      'Blood Group : ${allData[getxController.indexValue.value!].bloodGroup}',
+                      'Blood Group : ${allData[getxController.indexValue.value!].bloodgroup}',
                       style: tea_style,
                     ),
                     sizedBoxH20,
@@ -395,7 +396,7 @@ class StudentsDetails extends StatelessWidget {
                                     schooilID: schooilID,
                                     studentID: allData[
                                             getxController.indexValue.value!]
-                                        .id);
+                                        .uid!);
                               },
                               child: Container(
                                 height: 40,
@@ -423,7 +424,7 @@ class StudentsDetails extends StatelessWidget {
                                     schooilID: schooilID,
                                     studentID: allData[
                                             getxController.indexValue.value!]
-                                        .id);
+                                        .uid!);
                               },
                               child: Container(
                                 height: 40,
@@ -454,7 +455,7 @@ class StudentsDetails extends StatelessWidget {
                                     .schoolID)
                                 .collection("AllStudents")
                                 .doc(allData[getxController.indexValue.value!]
-                                    .admissionNumber)
+                                    .docid)
                                 .collection("sampoorna")
                                 .get();
                             sampoorna.docs.isEmpty
@@ -594,7 +595,7 @@ class StudentsDetails extends StatelessWidget {
                                                                   .doc(allData[getxController
                                                                           .indexValue
                                                                           .value!]
-                                                                      .id)
+                                                                      .uid)
                                                                   .delete()
                                                                   .then((value) =>
                                                                       Navigator.pop(
@@ -674,7 +675,7 @@ class GenrateTc extends StatefulWidget {
     required this.getxController,
   });
 
-  final List<AddExtraDetailsofStudentsModel> allData;
+  final List<AddStudentModel> allData;
   final StudentsProfileList getxController;
 
   @override
@@ -700,14 +701,14 @@ getSchoolDetails();
             .collection("AllStudents")
             .doc(widget.allData[widget.getxController
                     .indexValue.value!]
-                .admissionNumber)
+                .docid)
             .collection("sampoorna")
-            .where('admissionNumber',
+            .where('docid',
                 isEqualTo: widget.allData[
                         widget.getxController
                             .indexValue
                             .value!]
-                    .admissionNumber)
+                    .docid)
             .snapshots(),
         builder: (context, snappp) {
           return GestureDetector(
