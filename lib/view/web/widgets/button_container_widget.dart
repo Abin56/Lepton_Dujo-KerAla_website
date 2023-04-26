@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable, file_names
 
+import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 
 class ButtonContainerWidget extends StatelessWidget {
@@ -55,9 +56,13 @@ const containerColor = [
   [Color.fromARGB(255, 116, 130, 255), Color.fromARGB(255, 86, 74, 117)],
   [Color.fromARGB(255, 205, 215, 15), Color.fromARGB(255, 224, 173, 22)],
   [Color.fromARGB(255, 208, 104, 105), Color.fromARGB(255, 241, 66, 66)],
+  [Color.fromARGB(255, 6, 71, 157),Color.fromARGB(255, 6, 71, 157)],
+  
+ 
   [
     Color.fromARGB(248, 54, 0, 79),
     Color.fromARGB(255, 58, 0, 84),
   ],
+ 
   [Color(0xFF26A69A), Color(0xFF26A69A)]
 ];

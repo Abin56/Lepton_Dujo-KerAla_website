@@ -1,10 +1,15 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/view/colors/colors.dart';
+import 'package:dujo_kerala_website/view/constant/constant.dart';
+import 'package:dujo_kerala_website/view/fonts/fonts.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../model/create_classModel/addStudent_model.dart';
@@ -36,43 +41,98 @@ class _AddStudentFromClassTeacherState
 
   TextEditingController addmissionNumberController = TextEditingController();
 
+  TextEditingController studentemailController = TextEditingController();
   TextEditingController applynewBatchYearContoller = TextEditingController();
   TextEditingController selectedToDaterContoller = TextEditingController();
-
+ final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     log("teacherEmail ID??????${widget.teacherIDE}");
-    var screenSize = MediaQuery.of(context).size;
+    final Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 27, 95, 88),
-      appBar: AppBar(title: const Text('ADD STUDENT')),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.only(top: screenSize.width * 1 / 13),
-          child: Center(
-            child: Container(
-              color: Colors.white,
-              height: screenSize.width * 1 / 2.5,
-              width: screenSize.width * 1 / 4,
-              child: ListView(children: [
-                Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: TextField(
-                    controller: studentNameController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Name',
+     // backgroundColor: Color.fromARGB(255, 27, 95, 88),
+      
+       body: ListView(children: [
+        Row(
+          children: [
+           
+            Container(
+              color: adminePrimayColor,
+              height: size.height,
+              width: size.width * 1 / 2,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  IconButton(onPressed: (){
+                    Navigator.pop(context);
+                  }, icon: Icon(Icons.arrow_back, color: Colors.white,)),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                      
+                        Text(
+                          'Hi Admin ',
+                          style: ralewayStyle.copyWith(
+                            fontSize: 48.0,
+                            color: AppColors.whiteColor,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        SizedBox(
+                          height: size.width / 20,
+                        ),
+                        Text(
+                          'Add Your Student',
+                          style: ralewayStyle.copyWith(
+                            fontSize: 25.0,
+                            color: AppColors.whiteColor,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                  
+                        SizedBox(
+                          height: size.width / 5,
+                          width: size.width / 2,
+                          child: LottieBuilder.network(
+                              'https://assets8.lottiefiles.com/packages/lf20_ehs7xawx.json'),
+                        )
+                        //       SizedBox(
+                        // height: 400,
+                        // width: 600,
+                        // child: LottieBuilder.asset(
+                        //     "assets/images/")),
+                      ],
                     ),
                   ),
-                ),
+                ],
+              ),
+            ),
+            SizedBox(
+
+                width: size.width * 1 / 2,
+                height: size.height,
+                child: SingleChildScrollView(
+        child: Center(
+          child: Container(
+            margin: EdgeInsets.only(top: 30.h),
+            color: Colors.white,
+            height: size.width * 1 / 2.5,
+            width: size.width * 1 / 4,
+            child: Form(
+                 key: formKey,
+              child: ListView(children: [
+               
                 Padding(
-                    padding: const EdgeInsets.all(15),
+                    padding: EdgeInsets.all(15),
                     child: GetClassesListDropDownButton(
                       schoolID: Get.find<AdminLoginScreenController>().schoolID,
                       teacherID: widget.teacherIDE,
                     )),
                 Padding(
-                    padding: const EdgeInsets.all(15),
+                    padding: EdgeInsets.all(15),
                     child: Container(
                       height: 110,
                       child: Column(
@@ -130,6 +190,8 @@ class _AddStudentFromClassTeacherState
                                         TextButton(
                                           child: const Text('create'),
                                           onPressed: () async {
+                                             bool? result =
+                                      formKey.currentState?.validate();
                                             Navigator.of(context).pop();
                                           },
                                         ),
@@ -157,73 +219,109 @@ class _AddStudentFromClassTeacherState
                                   },
                                 );
                               },
-                              child: const Text("Add New Batch Year"))
+                              child: Text("Add New Batch Year"))
                         ],
                       ),
                     )),
-            
-                Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: TextField(
-                    controller: parentPhNoController,
-                    decoration: const InputDecoration(
+
+                     Padding(
+                  padding: EdgeInsets.all(15),
+                  child: TextFormField(
+                    validator: checkFieldEmpty,
+                    controller: studentNameController,
+                    decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Parent Phone Number',
+                      labelText: 'Name',
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: TextField(
+                  padding: EdgeInsets.all(15),
+                  child: TextFormField(
+                    validator: checkFieldEmailIsValid,
+                    controller: studentemailController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Student email',
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(15),
+                  child: TextFormField(
+                    validator: checkFieldPhoneNumberIsValid,
+                    controller: parentPhNoController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Guardian Phone Number',
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(15),
+                  child: TextFormField(
+                    validator: checkFieldEmpty,
                     controller: addmissionNumberController,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'AdmissionNumber',
                     ),
                   ),
                 ),
+                
                 Expanded(
-                  child: SizedBox(
-                    height: 60,
-                    width: 400,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 3, 39, 68),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+                  child: 
+                  Padding(
+                    padding:  EdgeInsets.only(left:30.w,right: 30.w ),
+                    child: Container(
+                      height: 60 .h,
+                      width: 300.w,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 3, 39, 68),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
                         ),
+                        onPressed: () async {
+                           bool? result =
+                                        formKey.currentState?.validate();
+                          final studentDetails = AddStudentsModel(
+                              studentemailController:
+                                  studentemailController.text.trim(),
+                              id: studentemailController.text.trim(),
+                              studentName: studentNameController.text.trim(),
+                              wclass: classesListValue!["id"],
+                              admissionNumber:
+                                  addmissionNumberController.text.trim(),
+                              parentName: '',
+                              parentPhNo: parentPhNoController.text.trim(),
+                              joinDate: DateTime.now().toString());
+                              
+                          await AddStudentsToFireBase()
+                              .addStudentsController(
+                                  studentDetails,
+                                  context,
+                                  widget.schoolID,
+                                  classesListValue!["id"],
+                                  addmissionNumberController.text.trim(),
+                                  schoolBatchYearListValue['id'])
+                              .then((value) async {
+                            studentNameController.clear();
+                              
+                            parentPhNoController.clear();
+                              
+                            parentNameController.clear();
+                              
+                            addmissionNumberController.clear();
+                              
+                            studentemailController.clear();
+                            applynewBatchYearContoller.clear();
+                            selectedToDaterContoller.clear();
+                          });
+                        },
+                        child: Text("Add Student"),
                       ),
-                      onPressed: () async {
-                        final studentDetails = AddStudentModel(
-                            studentName: studentNameController.text.trim(),
-                            whichClass: classesListValue!["id"],
-                            admissionNumber:
-                                addmissionNumberController.text.trim(),
-                            parentPhoneNumber: parentPhNoController.text.trim(),
-                            createDate: DateTime.now().toString());
-
-                        await AddStudentsToFireBase()
-                            .addStudentsController(
-                          studentDetails,
-                          context,
-                          widget.schoolID,
-                          classesListValue!["id"],
-                          addmissionNumberController.text.trim(),
-                        )
-                            .then((value) async {
-                          studentNameController.clear();
-
-                          parentPhNoController.clear();
-
-                          parentNameController.clear();
-
-                          addmissionNumberController.clear();
-
-                          applynewBatchYearContoller.clear();
-                          selectedToDaterContoller.clear();
-                        });
-                      },
-                      child: const Text("Add Student"),
                     ),
                   ),
                 ),
@@ -231,7 +329,30 @@ class _AddStudentFromClassTeacherState
             ),
           ),
         ),
-      ),
+      ),)
+          ],
+        ),
+      ]),
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+
+
+
+
+
+
+
     );
   }
 
