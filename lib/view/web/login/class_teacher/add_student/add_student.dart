@@ -195,7 +195,6 @@ class _AddStudentFromClassTeacherState
                       ),
                       onPressed: () async {
                         final studentDetails = AddStudentModel(
-                            uid: addmissionNumberController.text.trim(),
                             studentName: studentNameController.text.trim(),
                             whichClass: classesListValue!["id"],
                             admissionNumber:

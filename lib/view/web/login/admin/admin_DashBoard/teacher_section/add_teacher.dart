@@ -152,7 +152,10 @@ class AddTeacherSectionScreen extends StatelessWidget {
                                 employeeID: employeeID.text.trim(),
                                 joinDate: DateTime.now().toString());
                             CreateTeachersAddToFireBase().createSchoolController(
-                                teacherDetails, context, schoolID);
+                                teacherDetails, context, schoolID).then((value) {
+                                  emailIDController.clear();
+                                  phoneNumber.clear();
+                                });
                             }    
                           },
                           child: Text('Add Teacher'),

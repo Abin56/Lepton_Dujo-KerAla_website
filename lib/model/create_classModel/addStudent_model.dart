@@ -26,6 +26,7 @@ class AddStudentModel {
   String? bloodgroup;
   String? dateofBirth;
   String? docid;
+  String userRole;
   AddStudentModel({
     this.uid,
     this.studentName,
@@ -44,6 +45,7 @@ class AddStudentModel {
     this.bloodgroup,
     this.dateofBirth,
     this.docid,
+    this.userRole = 'student',
   });
 
   AddStudentModel copyWith({
@@ -64,6 +66,7 @@ class AddStudentModel {
     String? bloodgroup,
     String? dateofBirth,
     String? docid,
+    String? userRole,
   }) {
     return AddStudentModel(
       uid: uid ?? this.uid,
@@ -83,28 +86,30 @@ class AddStudentModel {
       bloodgroup: bloodgroup ?? this.bloodgroup,
       dateofBirth: dateofBirth ?? this.dateofBirth,
       docid: docid ?? this.docid,
+      userRole: userRole ?? this.userRole,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'uid': uid,
-      'studentName': studentName,
-      'gender': gender,
-      'admissionNumber': admissionNumber,
-      'studentemail': studentemail,
-      'parentPhoneNumber': parentPhoneNumber,
-      'whichClass': whichClass,
-      'houseName': houseName,
-      'place': place,
-      'district': district,
-      'alPhoneNumber': alPhoneNumber,
-      'profileImageId': profileImageId,
-      'profileImageUrl': profileImageUrl,
-      'createDate': createDate,
-      'bloodgroup': bloodgroup,
-      'dateofBirth': dateofBirth,
-      'docid': docid,
+      'uid': uid??"",
+      'studentName': studentName??"",
+      'gender': gender??"",
+      'admissionNumber': admissionNumber??"",
+      'studentemail': studentemail??"",
+      'parentPhoneNumber': parentPhoneNumber??"",
+      'whichClass': whichClass??"",
+      'houseName': houseName??"",
+      'place': place??"",
+      'district': district??"",
+      'alPhoneNumber': alPhoneNumber??"",
+      'profileImageId': profileImageId??"",
+      'profileImageUrl': profileImageUrl??"",
+      'createDate': createDate??"",
+      'bloodgroup': bloodgroup??"",
+      'dateofBirth': dateofBirth??"",
+      'docid': docid??"",
+      'userRole': userRole,
     };
   }
 
@@ -142,6 +147,7 @@ class AddStudentModel {
       dateofBirth:
           map['dateofBirth'] != null ? map['dateofBirth'] as String : null,
       docid: map['docid'] != null ? map['docid'] as String : null,
+      userRole: map['userRole'] as String,
     );
   }
 
@@ -152,7 +158,7 @@ class AddStudentModel {
 
   @override
   String toString() {
-    return 'AddStudentModel(uid: $uid, studentName: $studentName, gender: $gender, admissionNumber: $admissionNumber, studentemail: $studentemail, parentPhoneNumber: $parentPhoneNumber, whichClass: $whichClass, houseName: $houseName, place: $place, district: $district, alPhoneNumber: $alPhoneNumber, profileImageId: $profileImageId, profileImageUrl: $profileImageUrl, createDate: $createDate, bloodgroup: $bloodgroup, dateofBirth: $dateofBirth, docid: $docid)';
+    return 'AddStudentModel(uid: $uid, studentName: $studentName, gender: $gender, admissionNumber: $admissionNumber, studentemail: $studentemail, parentPhoneNumber: $parentPhoneNumber, whichClass: $whichClass, houseName: $houseName, place: $place, district: $district, alPhoneNumber: $alPhoneNumber, profileImageId: $profileImageId, profileImageUrl: $profileImageUrl, createDate: $createDate, bloodgroup: $bloodgroup, dateofBirth: $dateofBirth, docid: $docid, userRole: $userRole)';
   }
 
   @override
@@ -175,7 +181,8 @@ class AddStudentModel {
         other.createDate == createDate &&
         other.bloodgroup == bloodgroup &&
         other.dateofBirth == dateofBirth &&
-        other.docid == docid;
+        other.docid == docid &&
+        other.userRole == userRole;
   }
 
   @override
@@ -196,7 +203,8 @@ class AddStudentModel {
         createDate.hashCode ^
         bloodgroup.hashCode ^
         dateofBirth.hashCode ^
-        docid.hashCode;
+        docid.hashCode ^
+        userRole.hashCode;
   }
 }
 
@@ -235,7 +243,14 @@ class AddStudentsToFireBase {
             .collection("AllStudents")
             .doc(studentId)
             .set(productModel.toMap())
-            .then(
+            .then((value) {
+          firebase
+              .collection("SchoolListCollection")
+              .doc(schoolid)
+              .collection("AllStudents")
+              .doc(studentId)
+              .update({"docid": schoolid});
+        }).then(
           (value) {
             return showDialog(
               context: context,
