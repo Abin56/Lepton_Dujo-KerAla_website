@@ -103,8 +103,7 @@ class AddGeneralInstruction extends StatelessWidget {
                                         .isEmpty) {
                                       showToast(
                                           msg: 'Error:Field is Empty',
-                                          color:
-                                              "linear-gradient(to right, #FF3131, #FF3131");
+                                        );
                                       return;
                                     }
                                     if (generalInstructionsController

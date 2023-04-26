@@ -77,7 +77,7 @@ class AddParent extends StatelessWidget {
                                   parentPhoneNumber:
                                       parentPhoneNumberController.text.trim(),
                                   parentName: parentNameController.text,
-                                  joinDate: DateTime.now().toString());
+                                  createdate: DateTime.now().toString());
                 
                               CreateParentsAddToFireBase().createSchoolController(
                                   parentDetails, context, schoolID);

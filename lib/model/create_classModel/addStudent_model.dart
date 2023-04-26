@@ -249,7 +249,7 @@ class AddStudentsToFireBase {
               .doc(schoolid)
               .collection("AllStudents")
               .doc(studentId)
-              .update({"docid": schoolid});
+              .update({"docid": studentId});
         }).then(
           (value) {
             return showDialog(

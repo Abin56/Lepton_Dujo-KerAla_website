@@ -73,13 +73,12 @@ class AddGuardian extends StatelessWidget {
                             onPressed: () async {
                               bool? result =
                                           formKey.currentState?.validate();
-                              final guardianDetails = GuardianModel(
-                                joinDate: DateTime.now().toString(),
+                              final guardianDetails = GuardianAddModel(
+                                createdate: DateTime.now().toString(),
                                 guardianEmail:
                                     guardianEmailController.text.trim(),
                                 guardianPhoneNumber:
                                     guardianPhoneNoController.text.trim(),
-                                id: guardianEmailController.text,
                                 guardianName: guardianNameController.text.trim(),
                               );
                               if (context.mounted) {

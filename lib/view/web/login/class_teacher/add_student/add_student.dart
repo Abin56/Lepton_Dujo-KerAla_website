@@ -286,17 +286,16 @@ class _AddStudentFromClassTeacherState
                         onPressed: () async {
                            bool? result =
                                         formKey.currentState?.validate();
-                          final studentDetails = AddStudentsModel(
-                              studentemailController:
-                                  studentemailController.text.trim(),
-                              id: studentemailController.text.trim(),
+                          final studentDetails = AddStudentModel(
+                    
+                        
                               studentName: studentNameController.text.trim(),
-                              wclass: classesListValue!["id"],
+                              whichClass: classesListValue!["id"],
                               admissionNumber:
                                   addmissionNumberController.text.trim(),
-                              parentName: '',
-                              parentPhNo: parentPhNoController.text.trim(),
-                              joinDate: DateTime.now().toString());
+                        
+                              parentPhoneNumber: parentPhNoController.text.trim(),
+                              createDate: DateTime.now().toString());
                               
                           await AddStudentsToFireBase()
                               .addStudentsController(
@@ -304,7 +303,7 @@ class _AddStudentFromClassTeacherState
                                   context,
                                   widget.schoolID,
                                   classesListValue!["id"],
-                                  addmissionNumberController.text.trim(),
+                             
                                   schoolBatchYearListValue['id'])
                               .then((value) async {
                             studentNameController.clear();
