@@ -76,6 +76,10 @@ const sizedBoxw570 = SizedBox(
   width: 570,
 );
 
+const kwidth20 = SizedBox(
+  width: 20,
+);
+
 void showToast({required String msg}) {
   Fluttertoast.showToast(
     msg: msg,

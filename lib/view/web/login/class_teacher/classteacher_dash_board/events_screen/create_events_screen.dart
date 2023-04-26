@@ -10,10 +10,13 @@ import '../../../../../constant/constant.dart';
 
 class ClassTeacherCreateEventsPage extends StatelessWidget {
   ClassTeacherCreateEventsPage({
+    
     super.key,
     required this.schoolId,
     required this.classId,
   });
+
+   final formKey = GlobalKey<FormState>();
   final String schoolId;
   final String classId;
   final TeacherEventController teacherEventController =
@@ -26,7 +29,7 @@ class ClassTeacherCreateEventsPage extends StatelessWidget {
     teacherEventController.clearControllers();
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Create New Events'),backgroundColor: adminePrimayColor,
+          title: const Text('Create New Events'),iconTheme: IconThemeData(color:  cBlack),
         ),
         body: Obx(() {
           return teacherEventController.isLoading.value
@@ -52,38 +55,38 @@ class ClassTeacherCreateEventsPage extends StatelessWidget {
                         child: Container(
                            width: size.width * .4,
                           
-                          child: Form(
+                          child: Form(  key: formKey,
                             child: ListView(
                               children: <Widget>[
                                 sizedBoxH20,
-                                TextFormFieldWidget(
+                                TextFormFieldWidget(function: checkFieldEmpty,
                                   hint: 'Event Name',
                                   controller: teacherEventController.nameController,
                                 ),
                                 sizedBoxH20,
-                                TextFormFieldWidget(
+                                TextFormFieldWidget(function: checkFieldEmpty,
                                   hint: 'Event date',
                                   controller: teacherEventController.dateController,
                                 ),
                                 sizedBoxH20,
-                                TextFormFieldWidget(
+                                TextFormFieldWidget(function: checkFieldEmpty,
                                   hint: 'Event Description',
                                   controller:
                                       teacherEventController.descriptionController,
                                 ),
                                 sizedBoxH20,
-                                TextFormFieldWidget(
+                                TextFormFieldWidget(function: checkFieldEmpty,
                                   hint: 'Venue',
                                   controller:
                                       teacherEventController.venueController,
                                 ),
                                 sizedBoxH20,
-                                TextFormFieldWidget(
+                                TextFormFieldWidget(function: checkFieldEmpty,
                                     hint: 'Chief Guest',
                                     controller: teacherEventController
                                         .chiefGuestController),
                                 sizedBoxH20,
-                                TextFormFieldWidget(
+                                TextFormFieldWidget(function:checkFieldEmpty,
                                     hint: 'Participants',
                                     controller: teacherEventController
                                         .participantsController),
@@ -114,6 +117,8 @@ class ClassTeacherCreateEventsPage extends StatelessWidget {
                                           shape: const StadiumBorder(),
                                         ),
                                         onPressed: () async {
+                                           bool? result =
+                                        formKey.currentState?.validate();
                                           await teacherEventController.createEvents(
                                             schoolId: schoolId,
                                             classId: classId,
@@ -153,13 +158,16 @@ class ClassTeacherCreateEventsPage extends StatelessWidget {
 
 class TextFormFieldWidget extends StatelessWidget {
   const TextFormFieldWidget(
-      {super.key, this.hint = '', required this.controller});
+      {super.key, this.hint = '', required this.
+      controller, required this.function});
   final String hint;
+  final String? Function(String? fieldContent) function;
   final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+     validator : function,
       decoration: InputDecoration(
         hintText: hint,
         border: OutlineInputBorder(

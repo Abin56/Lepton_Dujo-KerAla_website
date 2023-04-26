@@ -4,9 +4,11 @@ import 'dart:developer';
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/fonts/fonts.dart';
+import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:uuid/uuid.dart';
 import 'package:intl/intl.dart';
@@ -96,10 +98,7 @@ class _AddAchievementsState extends State<AddAchievements> {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       //backgroundColor: Color.fromARGB(255, 27, 95, 88),
-      appBar: AppBar(
-        title: Text('Add Achievements'),
-        backgroundColor: adminePrimayColor,
-      ),
+      
       body: SingleChildScrollView(
         child: Row(
           children: [
@@ -108,34 +107,40 @@ class _AddAchievementsState extends State<AddAchievements> {
               height: size.height * 1.4,
               width: size.width * 1 / 2,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    'Hi Admin ',
-                    style: ralewayStyle.copyWith(
-                      fontSize: 48.0,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w800,
-                    ),
+                  IconButtonBackWidget(color: cWhite),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Hi Admin ',
+                        style: ralewayStyle.copyWith(
+                          fontSize: 48.0,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      SizedBox(
+                        height: size.width / 20,
+                      ),
+                      Text(
+                        'Add Achievements',
+                        style: ralewayStyle.copyWith(
+                          fontSize: 25.0,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 400,
+                        width: size.width / 2,
+                        child: LottieBuilder.network(
+                            'https://assets10.lottiefiles.com/packages/lf20_akRaH1h1KF.json'),
+                      )
+                    ],
                   ),
-                  SizedBox(
-                    height: size.width / 20,
-                  ),
-                  Text(
-                    'Add Achievements',
-                    style: ralewayStyle.copyWith(
-                      fontSize: 25.0,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 400,
-                    width: size.width / 2,
-                    child: LottieBuilder.network(
-                        'https://assets10.lottiefiles.com/packages/lf20_akRaH1h1KF.json'),
-                  )
                 ],
               ),
             ),
@@ -302,15 +307,15 @@ class _AddAchievementsState extends State<AddAchievements> {
                             NetworkImage('https://via.placeholder.com/150'),
                         backgroundColor: Color.fromARGB(241, 54, 225, 248),
                       ): CircleAvatar(
-                        radius: 100,
+                        radius: 80.w,
                         backgroundImage: MemoryImage(_file!)
                             
                       ) ,
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                        left: size.width * 1 / 12,
-                        top: size.width * 1 / 9.5,
+                        left: 170.w,
+                        top: 210.h,
                       ),
                       child: InkWell(
                         onTap: () async {

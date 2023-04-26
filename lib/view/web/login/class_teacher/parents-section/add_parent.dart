@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../model/parent/parent_model.dart';
 import '../../../../colors/colors.dart';
 import '../../../../constant/constant.dart';
 
 
-class AddParent extends StatefulWidget {
+class AddParent extends StatelessWidget {
   AddParent({super.key, required this.schoolID});
   String schoolID;
 
-  @override
-  State<AddParent> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<AddParent> {
   TextEditingController parentNameController = TextEditingController();
-  TextEditingController parentemailController = TextEditingController();
-  TextEditingController parentPhoneNumberController = TextEditingController();
 
+  TextEditingController parentemailController = TextEditingController();
+
+  TextEditingController parentPhoneNumberController = TextEditingController();
+ final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    return Scaffold( appBar: AppBar(backgroundColor: adminePrimayColor),
+    return Scaffold( appBar: AppBar(backgroundColor: cWhite,iconTheme: IconThemeData(color: cBlack)),
       body: Row(
         children: <Widget>[
           //left section
@@ -31,72 +29,64 @@ class _MyHomePageState extends State<AddParent> {
             child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 50),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'ADD NEW PARENT',
-                        style: TextStyle(
-                          fontSize: 35,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      sizedBoxH30,
-                      TextField(
-                        controller: parentNameController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15))),
-                          labelText: 'Parent Name',
-                        ),
-                      ),
-                      sizedBoxH30,
-                      TextField(
-                        controller: parentPhoneNumberController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15))),
-                          labelText: 'Parent Phone Number',
-                        ),
-                      ),
-                      sizedBoxH30,
-                      TextField(
-                        controller: parentemailController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15))),
-                          labelText: 'Parent email',
-                        ),
-                      ),
-                      sizedBoxH30,
-                      SizedBox(
-                        width: size.width / 2,
-                        height: 50,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromARGB(255, 217, 102, 1),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
+                child: Form( key: formKey,
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'ADD NEW PARENT',
+                          style: TextStyle(
+                            fontSize: 35,
+                            fontWeight: FontWeight.bold,
                           ),
-                          onPressed: () async {
-                            final parentDetails = ParentModel(
-                                parentEmail: parentemailController.text.trim(),
-                                parentPhoneNumber:
-                                    parentPhoneNumberController.text.trim(),
-                                parentName: parentNameController.text,
-                                joinDate: DateTime.now().toString());
-
-                            CreateParentsAddToFireBase().createSchoolController(
-                                parentDetails, context, widget.schoolID);
-                          },
-                          child: const Text("Add Parent"),
                         ),
-                      )
-                    ]),
+                        sizedBoxH30,
+                        AddParentWidget(
+                          function: checkFieldEmpty ,
+                        labelText:'Parent Name' ,
+                         textEditingController: parentNameController),
+                        sizedBoxH30,
+                
+                         AddParentWidget(
+                          function: checkFieldPhoneNumberIsValid ,
+                        labelText:'Parent Phone Number' ,
+                         textEditingController: parentPhoneNumberController),
+                        sizedBoxH30,
+                
+                
+                         AddParentWidget(
+                          function:  checkFieldEmailIsValid,
+                        labelText:'Parent email' ,
+                         textEditingController: parentemailController),
+                        sizedBoxH30,
+                        SizedBox(
+                          width: 350.w,
+                          height: 50.h,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: adminePrimayColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                            onPressed: () async {
+                               bool? result =
+                                        formKey.currentState?.validate();
+                              final parentDetails = ParentModel(
+                                  parentEmail: parentemailController.text.trim(),
+                                  parentPhoneNumber:
+                                      parentPhoneNumberController.text.trim(),
+                                  parentName: parentNameController.text,
+                                  joinDate: DateTime.now().toString());
+                
+                              CreateParentsAddToFireBase().createSchoolController(
+                                  parentDetails, context, schoolID);
+                            },
+                            child: const Text("Add Parent"),
+                          ),
+                        )
+                      ]),
+                ),
               ),
             ),
           ),
@@ -111,6 +101,33 @@ class _MyHomePageState extends State<AddParent> {
           ),
           //right section
         ],
+      ),
+    );
+  }
+}
+
+class AddParentWidget extends StatelessWidget {
+   AddParentWidget({
+    super.key,
+    required this.textEditingController, 
+    required this.function,
+   required this.labelText,
+  });
+
+  final TextEditingController textEditingController;
+  final String? Function(String? fieldContent) function;
+  final String labelText;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+       validator: function,
+      controller: textEditingController,
+      decoration: InputDecoration(
+        border: const OutlineInputBorder(
+            borderRadius:
+                BorderRadius.all(Radius.circular(15))),
+       labelText: labelText,
       ),
     );
   }

@@ -13,6 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import 'ui team/abin/alumini_accocation/create_alumni.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -55,10 +57,10 @@ class MyApp extends StatelessWidget {
             // AllStudentList()
            // AdminDashBoardPage(schoolID: '',date: '',loginTime: '',wadmin: '',key: null,)
           // AllStdf()
-        // BusRoute()
+         //BusRoute()
         // NonTeachingLogin(schoolID: '',)
-      DujoHomePage()
-       
+         DujoHomePage()
+       //CreateBusRoute()
               );
         });
   }

@@ -184,7 +184,7 @@ class AdminLoginScreen extends StatelessWidget {
                           'Password',
                           style: ralewayStyle.copyWith(
                             fontSize: 15.0,
-                            color: AppColors.blueDarkColor,
+                            color: cWhite,
                             fontWeight: FontWeight.w700,
                           ),
                         ),

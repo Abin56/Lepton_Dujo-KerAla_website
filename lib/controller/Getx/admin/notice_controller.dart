@@ -45,7 +45,7 @@ class AdminNoticeController extends GetxController {
         if (!teacherCheckBox.value &&
             !studentCheckBox.value &&
             !guardianCheckBox.value) {
-          showToast(msg: "Please Tick atleast one box");
+          showToast(msg: "please enter details");
           return;
         }
         AdminNoticeModel dataModel = AdminNoticeModel(
