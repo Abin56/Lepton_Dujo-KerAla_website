@@ -95,7 +95,7 @@ class GeneralInstructionsController extends GetxController {
       } else {
         showToast(
             msg: 'Failed : Empty Instruction',
-            color: "linear-gradient(to right, #FF3131, #FF3131");
+          );
       }
     } catch (e) {
       showToast(msg: 'Updation Failed');

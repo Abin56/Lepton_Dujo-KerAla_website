@@ -15,7 +15,7 @@ class AddStudentModel {
   String? admissionNumber;
   String? studentemail;
   String? parentPhoneNumber;
-  String? whichClass;
+  String? classID;
   String? houseName;
   String? place;
   String? district;
@@ -26,6 +26,9 @@ class AddStudentModel {
   String? bloodgroup;
   String? dateofBirth;
   String? docid;
+  String? parentID;
+  String? guardianID;
+  String userRole;
   AddStudentModel({
     this.uid,
     this.studentName,
@@ -33,7 +36,7 @@ class AddStudentModel {
     this.admissionNumber,
     this.studentemail,
     this.parentPhoneNumber,
-    this.whichClass,
+    this.classID,
     this.houseName,
     this.place,
     this.district,
@@ -44,6 +47,9 @@ class AddStudentModel {
     this.bloodgroup,
     this.dateofBirth,
     this.docid,
+    this.parentID,
+    this.guardianID,
+     this.userRole='student',
   });
 
   AddStudentModel copyWith({
@@ -53,7 +59,7 @@ class AddStudentModel {
     String? admissionNumber,
     String? studentemail,
     String? parentPhoneNumber,
-    String? whichClass,
+    String? classID,
     String? houseName,
     String? place,
     String? district,
@@ -64,6 +70,9 @@ class AddStudentModel {
     String? bloodgroup,
     String? dateofBirth,
     String? docid,
+    String? parentID,
+    String? guardianID,
+    String? userRole,
   }) {
     return AddStudentModel(
       uid: uid ?? this.uid,
@@ -72,7 +81,7 @@ class AddStudentModel {
       admissionNumber: admissionNumber ?? this.admissionNumber,
       studentemail: studentemail ?? this.studentemail,
       parentPhoneNumber: parentPhoneNumber ?? this.parentPhoneNumber,
-      whichClass: whichClass ?? this.whichClass,
+      classID: classID ?? this.classID,
       houseName: houseName ?? this.houseName,
       place: place ?? this.place,
       district: district ?? this.district,
@@ -83,28 +92,34 @@ class AddStudentModel {
       bloodgroup: bloodgroup ?? this.bloodgroup,
       dateofBirth: dateofBirth ?? this.dateofBirth,
       docid: docid ?? this.docid,
+      parentID: parentID ?? this.parentID,
+      guardianID: guardianID ?? this.guardianID,
+      userRole: userRole ?? this.userRole,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'uid': uid,
-      'studentName': studentName,
-      'gender': gender,
-      'admissionNumber': admissionNumber,
-      'studentemail': studentemail,
-      'parentPhoneNumber': parentPhoneNumber,
-      'whichClass': whichClass,
-      'houseName': houseName,
-      'place': place,
-      'district': district,
-      'alPhoneNumber': alPhoneNumber,
-      'profileImageId': profileImageId,
-      'profileImageUrl': profileImageUrl,
-      'createDate': createDate,
-      'bloodgroup': bloodgroup,
-      'dateofBirth': dateofBirth,
-      'docid': docid,
+      'uid': uid ?? "",
+      'studentName': studentName ?? "",
+      'gender': gender ?? "",
+      'admissionNumber': admissionNumber ?? "",
+      'studentemail': studentemail ?? "",
+      'parentPhoneNumber': parentPhoneNumber ?? "",
+      'classID': classID ?? "",
+      'houseName': houseName ?? "",
+      'place': place ?? "",
+      'district': district ?? "",
+      'alPhoneNumber': alPhoneNumber ?? "",
+      'profileImageId': profileImageId ?? "",
+      'profileImageUrl': profileImageUrl ?? "",
+      'createDate': createDate ?? "",
+      'bloodgroup': bloodgroup ?? "",
+      'dateofBirth': dateofBirth ?? "",
+      'docid': docid ?? "",
+      'parentID': parentID ?? "",
+      'guardianID': guardianID ?? "",
+      'userRole': userRole,
     };
   }
 
@@ -122,8 +137,7 @@ class AddStudentModel {
       parentPhoneNumber: map['parentPhoneNumber'] != null
           ? map['parentPhoneNumber'] as String
           : null,
-      whichClass:
-          map['whichClass'] != null ? map['whichClass'] as String : null,
+      classID: map['classID'] != null ? map['classID'] as String : null,
       houseName: map['houseName'] != null ? map['houseName'] as String : null,
       place: map['place'] != null ? map['place'] as String : null,
       district: map['district'] != null ? map['district'] as String : null,
@@ -142,6 +156,10 @@ class AddStudentModel {
       dateofBirth:
           map['dateofBirth'] != null ? map['dateofBirth'] as String : null,
       docid: map['docid'] != null ? map['docid'] as String : null,
+      parentID: map['parentID'] != null ? map['parentID'] as String : null,
+      guardianID:
+          map['guardianID'] != null ? map['guardianID'] as String : null,
+      userRole: map['userRole'] as String,
     );
   }
 
@@ -152,7 +170,7 @@ class AddStudentModel {
 
   @override
   String toString() {
-    return 'AddStudentModel(uid: $uid, studentName: $studentName, gender: $gender, admissionNumber: $admissionNumber, studentemail: $studentemail, parentPhoneNumber: $parentPhoneNumber, whichClass: $whichClass, houseName: $houseName, place: $place, district: $district, alPhoneNumber: $alPhoneNumber, profileImageId: $profileImageId, profileImageUrl: $profileImageUrl, createDate: $createDate, bloodgroup: $bloodgroup, dateofBirth: $dateofBirth, docid: $docid)';
+    return 'AddStudentModel(uid: $uid, studentName: $studentName, gender: $gender, admissionNumber: $admissionNumber, studentemail: $studentemail, parentPhoneNumber: $parentPhoneNumber, classID: $classID, houseName: $houseName, place: $place, district: $district, alPhoneNumber: $alPhoneNumber, profileImageId: $profileImageId, profileImageUrl: $profileImageUrl, createDate: $createDate, bloodgroup: $bloodgroup, dateofBirth: $dateofBirth, docid: $docid, parentID: $parentID, guardianID: $guardianID, userRole: $userRole)';
   }
 
   @override
@@ -165,7 +183,7 @@ class AddStudentModel {
         other.admissionNumber == admissionNumber &&
         other.studentemail == studentemail &&
         other.parentPhoneNumber == parentPhoneNumber &&
-        other.whichClass == whichClass &&
+        other.classID == classID &&
         other.houseName == houseName &&
         other.place == place &&
         other.district == district &&
@@ -175,7 +193,10 @@ class AddStudentModel {
         other.createDate == createDate &&
         other.bloodgroup == bloodgroup &&
         other.dateofBirth == dateofBirth &&
-        other.docid == docid;
+        other.docid == docid &&
+        other.parentID == parentID &&
+        other.guardianID == guardianID &&
+        other.userRole == userRole;
   }
 
   @override
@@ -186,7 +207,7 @@ class AddStudentModel {
         admissionNumber.hashCode ^
         studentemail.hashCode ^
         parentPhoneNumber.hashCode ^
-        whichClass.hashCode ^
+        classID.hashCode ^
         houseName.hashCode ^
         place.hashCode ^
         district.hashCode ^
@@ -196,7 +217,10 @@ class AddStudentModel {
         createDate.hashCode ^
         bloodgroup.hashCode ^
         dateofBirth.hashCode ^
-        docid.hashCode;
+        docid.hashCode ^
+        parentID.hashCode ^
+        guardianID.hashCode ^
+        userRole.hashCode;
   }
 }
 
@@ -235,7 +259,14 @@ class AddStudentsToFireBase {
             .collection("AllStudents")
             .doc(studentId)
             .set(productModel.toMap())
-            .then(
+            .then((value) {
+          firebase
+              .collection("SchoolListCollection")
+              .doc(schoolid)
+              .collection("AllStudents")
+              .doc(studentId)
+              .update({"docid": studentId});
+        }).then(
           (value) {
             return showDialog(
               context: context,

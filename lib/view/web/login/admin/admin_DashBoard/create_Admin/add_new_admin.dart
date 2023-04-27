@@ -1,7 +1,10 @@
+// ignore_for_file: sort_child_properties_last
+
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/fonts/fonts.dart';
+import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -53,16 +56,16 @@ class _AddNewAdminState extends State<AddNewAdmin> {
       key: _formKey,
       child: Scaffold(
         backgroundColor: const Color.fromARGB(255, 6, 71, 157),
-        appBar: AppBar(
-            backgroundColor: const Color.fromARGB(255, 6, 71, 157),
-            title: Text(
-              'ADD NEW ADMIN ',
-              style: GoogleFonts.montserrat(
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-                color: cWhite,
-              ),
-            )),
+        // appBar: AppBar(
+        //     backgroundColor: const Color.fromARGB(255, 6, 71, 157),
+        //     title: Text(
+        //       'ADD NEW ADMIN ',
+        //       style: GoogleFonts.montserrat(
+        //         fontSize: 18,
+        //         fontWeight: FontWeight.w700,
+        //         color: cWhite,
+        //       ),
+        //     )),
         body: SingleChildScrollView(
           child: Row(
             children: [
@@ -70,18 +73,27 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                 height: screenSize.height,
                 width: screenSize.width * 1 / 2,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text('Create New Admin',
-                        style: GoogleFont.headTextStyleBold),
-                    sizedBoxH20,
-                    SizedBox(
-                      height: 300,
-                      width: screenSize.width / 2,
-                      child: LottieBuilder.network(
-                          'https://assets10.lottiefiles.com/packages/lf20_SPA6bgo7nO.json'),
-                    )
+                    IconButtonBackWidget(color: cWhite),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text('Create New Admin',
+                              style: GoogleFont.headTextStyleBold),
+                          sizedBoxH20,
+                          SizedBox(
+                            height: 300,
+                            width: screenSize.width / 2,
+                            child: LottieBuilder.network(
+                                'https://assets10.lottiefiles.com/packages/lf20_SPA6bgo7nO.json'),
+                          )
+                        ],
+                      ),
+                    ),
                   ],
                 ),
                 color: const Color.fromARGB(255, 6, 71, 157),
@@ -152,22 +164,19 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                       Padding(
                         padding: EdgeInsets.all(10),
                         child: TextFormField(
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: ( value) {
-                            if (passwordController.text.trim()!=
+                          validator: (value) {
+                            if (passwordController.text.trim() !=
                                 confirmPasswordController.text.trim()) {
-                              return 'Password are Incorrect!';
+                              return 'Password are Incorrect!!';
                             } else {
                               return null;
                             }
                           },
-                          
                           obscureText:true,
                           controller: confirmPasswordController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: 'Confirm Password',
-                            
                           ),
                         ),
                       ),
@@ -190,12 +199,6 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                         padding: EdgeInsets.all(10),
                         child: TextFormField(
                           validator: checkFieldPhoneNumberIsValid,
-                          //validator: (input) => input!.isValidPhoneNumber()
-                            //  ? null
-                              //: "Please Enter a vaild Phone Number",
-                          // validator: (input) => input!.isValidPhoneNumber()
-                          //     ? null
-                          //     : "Please Enter a vaild Phone Number",
                           controller: phoneNumberController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
@@ -397,3 +400,4 @@ class _AddNewAdminState extends State<AddNewAdmin> {
     });
   }
 }
+

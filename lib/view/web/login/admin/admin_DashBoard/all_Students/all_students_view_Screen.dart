@@ -41,7 +41,7 @@ class _AllStudentListState extends State<AllStudentList> {
     int columnCount = 4;
     double _w = MediaQuery.of(context).size.width;
     double _h = MediaQuery.of(context).size.height;
-   var screenSize =MediaQuery.of(context).size;
+    var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
           child: StreamBuilder(
@@ -62,10 +62,11 @@ class _AllStudentListState extends State<AllStudentList> {
                   padding: EdgeInsets.all(8.0),
                   child: Row(
                     children: [
-                      IconButton(onPressed: () {
-                        Navigator.pop(context);
-                        
-                      }, icon: Icon(Icons.arrow_back)),
+                      IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(Icons.arrow_back)),
                       sizedBoxW20,
                       Text(
                         "A L L S T U D E N T S",
@@ -109,7 +110,6 @@ width: screenSize.width*0.2,
                 sizedBoxH20,
                 Expanded(
                   child: Row(
-
                     children: [
                       ClassesDeatils(
                           width: 370,
@@ -121,14 +121,14 @@ width: screenSize.width*0.2,
                           getxController: getxController,
                           allData: allData),
                       Container(
-                        height: screenSize.width*6 ,
+                        height: screenSize.width * 6,
                         width: 2,
                         color: Colors.black.withOpacity(0.3),
                       ),
                       Expanded(
                         child: AnimationLimiter(
                           child: GridView.count(
-                            physics:  BouncingScrollPhysics(
+                            physics: BouncingScrollPhysics(
                                 parent: AlwaysScrollableScrollPhysics()),
                             padding: EdgeInsets.all(_w / 60),
                             crossAxisCount: columnCount,
@@ -140,14 +140,14 @@ width: screenSize.width*0.2,
 
                                 return AnimationConfiguration.staggeredGrid(
                                   position: index,
-                                  duration:  Duration(milliseconds: 300),
+                                  duration: Duration(milliseconds: 300),
                                   columnCount: columnCount,
                                   child: ScaleAnimation(
-                                    duration:  Duration(milliseconds: 900),
+                                    duration: Duration(milliseconds: 900),
                                     curve: Curves.fastLinearToSlowEaseIn,
                                     child: FadeInAnimation(
                                       child: Padding(
-                                        padding:  EdgeInsets.all(8.0),
+                                        padding: EdgeInsets.all(8.0),
                                         child: GestureDetector(
                                           onTap: () async {
                                             getxController.indexValue.value =
@@ -158,53 +158,59 @@ width: screenSize.width*0.2,
                                           _showlert(context);
                                             },
                                             child: Container(
-                                             
-                                              height: screenSize.width*6,
-                                              width:  screenSize.width/10,
+                                              height: screenSize.width * 6,
+                                              width: screenSize.width / 10,
                                               child: Padding(
-                                                padding:
-                                                     EdgeInsets.all( screenSize.width/100),
+                                                padding: EdgeInsets.all(
+                                                    screenSize.width / 100),
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.center,
                                                   children: [
-                                                     CircleAvatar(
-                                                      radius:  screenSize.width/40,
+                                                    CircleAvatar(
+                                                      radius:
+                                                          screenSize.width / 40,
                                                       backgroundColor:
                                                           Color.fromARGB(255,
                                                               210, 235, 255),
                                                       child: CircleAvatar(
-                                                        radius:  screenSize.width/50,
+                                                        radius:
+                                                            screenSize.width /
+                                                                50,
                                                         backgroundColor:
                                                             Colors.transparent,
                                                         backgroundImage: AssetImage(
                                                             'assets/images/classes.png'),
                                                       ),
                                                     ),
-                                                  // sizedBoxH10,
+                                                    // sizedBoxH10,
                                                     Text(
-                                                      data.studentName??"",
+                                                      data.studentName ?? "",
                                                       style: GoogleFonts
                                                           .montserrat(
                                                               letterSpacing: 1,
                                                               color:
                                                                   Colors.grey,
-                                                              fontSize: screenSize.width/120,
+                                                              fontSize: screenSize
+                                                                      .width /
+                                                                  120,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold),
                                                     ),
-                                                    
+
                                                     Text(
-                                                      'Create Date : ${stringTimeToDateConvert(data.createDate??"")}',
+                                                      'Create Date : ${stringTimeToDateConvert(data.createDate ?? "")}',
                                                       style:
                                                           GoogleFonts.poppins(
                                                         color: Colors.black
                                                             .withOpacity(0.4),
-                                                        fontSize:  screenSize.width/120,
+                                                        fontSize:
+                                                            screenSize.width /
+                                                                120,
                                                       ),
                                                     ),
-                                                    
+
                                                     FutureBuilder(
                                                         future: FirebaseFirestore
                                                             .instance
@@ -225,13 +231,14 @@ width: screenSize.width*0.2,
                                                                 .value)
                                                             .collection(
                                                                 "Classes")
-                                                            .doc(data.whichClass)
+                                                            .doc(data.classID)
                                                             .get(),
                                                         builder: (context,
                                                             snapshot) {
                                                           if (snapshot
                                                               .hasData) {
-                                                            log(data.whichClass??"");
+                                                            log(data.classID ??
+                                                                "");
                                                             log('>>>>>>>>>${snapshot.data!.data()?['className'].toString()}??'
                                                                 '');
                                                             return Text(
@@ -239,13 +246,16 @@ width: screenSize.width*0.2,
                                                               style: GoogleFonts.poppins(
                                                                   color: Colors
                                                                       .black,
-                                                                  fontSize:  screenSize.width/120,
+                                                                  fontSize:
+                                                                      screenSize
+                                                                              .width /
+                                                                          120,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w600),
                                                             );
                                                           } else {
-                                                            return  Center(
+                                                            return Center(
                                                               child:
                                                                   CircularProgressIndicator(),
                                                             );
@@ -257,7 +267,9 @@ width: screenSize.width*0.2,
                                                       style:
                                                           GoogleFonts.poppins(
                                                         color: Colors.black,
-                                                        fontSize:  screenSize.width/130,
+                                                        fontSize:
+                                                            screenSize.width /
+                                                                130,
                                                       ),
                                                     ),
                                                     Text(
@@ -265,7 +277,9 @@ width: screenSize.width*0.2,
                                                       style:
                                                           GoogleFonts.poppins(
                                                         color: Colors.black,
-                                                        fontSize:  screenSize.width/130,
+                                                        fontSize:
+                                                            screenSize.width /
+                                                                130,
                                                       ),
                                                     ),
                                                   ],

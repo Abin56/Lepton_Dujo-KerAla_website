@@ -1,5 +1,6 @@
 
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/achievements/add_achievements.dart';
+import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -27,10 +28,7 @@ class _AchievementsState extends State<Achievements> {
    Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Achievements'),
-        backgroundColor: adminePrimayColor,
-      ),
+
       body: SingleChildScrollView(
         child: Column(
             children:[
@@ -42,32 +40,41 @@ class _AchievementsState extends State<Achievements> {
                            height: screenSize.height,
                           width: screenSize.width * 1 / 2,
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,mainAxisAlignment: MainAxisAlignment.start,
+
                               children: [
-                                Text(
-                                  'Hi Admin ',
-                                  style: ralewayStyle.copyWith(
-                                    fontSize: 48.0,
-                                    color: AppColors.whiteColor,
-                                    fontWeight: FontWeight.w800,
+                                IconButtonBackWidget(color: cWhite),
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Hi Admin ',
+                                        style: ralewayStyle.copyWith(
+                                          fontSize: 48.0,
+                                          color: AppColors.whiteColor,
+                                          fontWeight: FontWeight.w800,
+                                        ),
+                                      ),
+                                      SizedBox(height: screenSize.width/20,),
+                                       Text(
+                                        'Welcome',
+                                        style: GoogleFonts.aclonica(
+                                          fontSize: 25.0,
+                                          color: AppColors.whiteColor,
+                                          fontWeight: FontWeight.w800,
+                                        ),
+                                      ),                            
+                                      SizedBox(
+                                        height: screenSize.width/3.5,
+                                        width:screenSize.width/1,
+                                        child: LottieBuilder.network(
+                                            "https://assets5.lottiefiles.com/packages/lf20_6qeidctp.json"),
+                                      )                        
+                                    ],
                                   ),
                                 ),
-                                SizedBox(height: screenSize.width/20,),
-                                 Text(
-                                  'Welcome',
-                                  style: GoogleFonts.aclonica(
-                                    fontSize: 25.0,
-                                    color: AppColors.whiteColor,
-                                    fontWeight: FontWeight.w800,
-                                  ),
-                                ),                            
-                                SizedBox(
-                                  height: screenSize.width/3.5,
-                                  width:screenSize.width/1,
-                                  child: LottieBuilder.network(
-                                      "https://assets5.lottiefiles.com/packages/lf20_6qeidctp.json"),
-                                )                        
                               ],
                             ),
                     ),
@@ -153,81 +160,3 @@ class _AchievementsState extends State<Achievements> {
 
 
 
-
-
-
-
-//   Widget build(BuildContext context) {
-//     var screenSize = MediaQuery.of(context).size;
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Achievements'),
-//       ),
-//       body: Padding(
-//         padding: EdgeInsets.only(
-//             left: screenSize.width * 1 / 3, top: screenSize.width * 1 / 20),
-//         child: Column(
-//           children: [
-//             Padding(
-//                 padding: const EdgeInsets.all(10),
-//                 child: (InkWell(
-//                   onTap: () {
-//                     Navigator.push(
-//                         context,
-//                         MaterialPageRoute(
-//                           builder: (context) => AddAchievements(
-//                             schoolID: widget.schoolID,
-//                           ),
-//                         ));
-//                   },
-//                   child: SizedBox(
-//                       height: screenSize.width * 1 / 10,
-//                       width: screenSize.width * 1 / 3,
-//                       child: CustomContainer(
-//                         text: 'Add Achievements',
-//                         onTap: () {},
-//                       )),
-//                 ))),
-//             Padding(
-//                 padding: const EdgeInsets.all(10),
-//                 child: (InkWell(
-//                   onTap: () {
-//                     Navigator.push(
-//                         context,
-//                         MaterialPageRoute(
-//                           builder: (context) => AchievementsViewAndEdit(
-//                               schoolID: widget.schoolID),
-//                         ));
-//                   },
-//                   child: SizedBox(
-//                       height: screenSize.width * 1 / 10,
-//                       width: screenSize.width * 1 / 3,
-//                       child: CustomContainer(
-//                         text: 'Edit  Achievements',
-//                         onTap: () {},
-//                       )),
-//                 ))),
-//             Padding(
-//                 padding: const EdgeInsets.all(10),
-//                 child: (InkWell(
-//                   // onTap: () {
-//                   //   Navigator.push(
-//                   //       context,
-//                   //       MaterialPageRoute(
-//                   //         builder: (context) => AdminTeacherList(),
-//                   //       ));
-//                   // },
-//                   child: SizedBox(
-//                       height: screenSize.width * 1 / 10,
-//                       width: screenSize.width * 1 / 3,
-//                       child: CustomContainer(
-//                         text: 'Remove Acheivements',
-//                         onTap: () {},
-//                       )),
-//                 ))),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../colors/colors.dart';
@@ -16,58 +16,68 @@ class CreateBusRoute extends StatefulWidget {
 final formKey = GlobalKey<FormState>();
 
 class _CreateBusRouteState extends State<CreateBusRoute> {
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
-      //backgroundColor: Color.fromARGB(255, 27, 95, 88),
-      appBar: AppBar(
-        title: Text('Create Bus Route'),
-        backgroundColor: adminePrimayColor,
-      ),
-
+      //backgroundColor: adminePrimayColor,
+     
       body: ListView(children: [
         Row(
           children: [
+           
             Container(
               color: adminePrimayColor,
               height: size.height,
               width: size.width * 1 / 2,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Hi Admin ',
-                    style: ralewayStyle.copyWith(
-                      fontSize: 48.0,
-                      color: AppColors.whiteColor,
-                      fontWeight: FontWeight.w800,
+                  IconButton(onPressed: (){
+                    Navigator.pop(context);
+                  }, icon: Icon(Icons.arrow_back, color: Colors.white,)),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                      
+                        Text(
+                          'Hi Admin ',
+                          style: ralewayStyle.copyWith(
+                            fontSize: 48.0,
+                            color: AppColors.whiteColor,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        SizedBox(
+                          height: size.width / 20,
+                        ),
+                        Text(
+                          'Create Your Bus Route',
+                          style: ralewayStyle.copyWith(
+                            fontSize: 25.0,
+                            color: AppColors.whiteColor,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                  
+                        SizedBox(
+                          height: size.width / 5,
+                          width: size.width / 2,
+                          child: LottieBuilder.network(
+                              'https://assets3.lottiefiles.com/private_files/lf30_aav3tdzz.json'),
+                        )
+                        //       SizedBox(
+                        // height: 400,
+                        // width: 600,
+                        // child: LottieBuilder.asset(
+                        //     "assets/images/")),
+                      ],
                     ),
                   ),
-                  SizedBox(
-                    height: size.width / 20,
-                  ),
-                  Text(
-                    'Create Your Bus Route',
-                    style: ralewayStyle.copyWith(
-                      fontSize: 25.0,
-                      color: AppColors.whiteColor,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-
-                  SizedBox(
-                    height: size.width / 5,
-                    width: size.width / 2,
-                    child: LottieBuilder.network(
-                        'https://assets3.lottiefiles.com/private_files/lf30_aav3tdzz.json'),
-                  )
-                  //       SizedBox(
-                  // height: 400,
-                  // width: 600,
-                  // child: LottieBuilder.asset(
-                  //     "assets/images/")),
                 ],
               ),
             ),
@@ -81,33 +91,39 @@ class _CreateBusRouteState extends State<CreateBusRoute> {
                       padding: EdgeInsets.only(
                           left: size.width / 10, right: size.width / 10),
                       child: Column(children: [
+
                         BusRouteTextFormWidget(
                           function: checkFieldEmpty,
                           labelText: 'Route Number',
                           icon: Icons.route_outlined,
                         ),
+
                         BusRouteTextFormWidget(
                           function: checkFieldEmpty,
                           labelText: 'Bus Number',
                           icon: Icons.bus_alert,
                         ),
+
                         BusRouteTextFormWidget(
                           function: checkFieldPhoneNumberIsValid,
                           labelText: 'Driver Mobile Number',
                           icon: Icons.phone_android_sharp,
                         ),
+
                         BusRouteTextFormWidget(
                           function: checkFieldPhoneNumberIsValid,
                           labelText: 'Assistance Mobile Number',
                           icon: Icons.phone_android,
                         ),
+
                         BusRouteTextFormWidget(
                           function: checkFieldEmpty,
                           labelText: 'Staff inCharge',
                           icon: Icons.person_2,
                         ),
+
                         SizedBox(
-                          height: 30,
+                          height: 30.h,
                         ),
                         Padding(
                             padding: EdgeInsets.only(
@@ -129,10 +145,6 @@ class _CreateBusRouteState extends State<CreateBusRoute> {
                                 onPressed: () async {
                                   bool? result =
                                       formKey.currentState?.validate();
-                                  if (result == true) {
-                                    // check if form validation passed
-                                    showToast(msg: 'Bus route successfully created ');
-                                  }
                                 },
                                 child: const Text('Create'),
                               ),
@@ -168,11 +180,12 @@ class BusRouteTextFormWidget extends StatelessWidget {
       child: TextFormField(
         validator: function,
         // controller: textEditingController,
-        decoration: InputDecoration(
+        decoration: InputDecoration(fillColor: cWhite,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
           icon: Icon(
             icon,
-            color: Color.fromARGB(221, 28, 9, 110),
+            color: cBlack
+            //Color.fromARGB(221, 28, 9, 110),
           ),
           labelText: labelText,
         ),
