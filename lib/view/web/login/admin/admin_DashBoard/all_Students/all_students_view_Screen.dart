@@ -10,6 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../../controller/class_list/class_list_model.dart';
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
+import '../../../../../../model/create_classModel/addStudent_model.dart';
 import '../../../../../../model/create_classModel/create_classModel.dart';
 import '../../../../../../model/student/student_list_model.dart';
 import '../../../../../constant/constant.dart';
@@ -39,7 +40,7 @@ class _AllStudentListState extends State<AllStudentList> {
     int columnCount = 4;
     double _w = MediaQuery.of(context).size.width;
     double _h = MediaQuery.of(context).size.height;
-   var screenSize =MediaQuery.of(context).size;
+    var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
           child: StreamBuilder(
@@ -60,6 +61,12 @@ class _AllStudentListState extends State<AllStudentList> {
                   padding: EdgeInsets.all(8.0),
                   child: Row(
                     children: [
+                      IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(Icons.arrow_back)),
+                      sizedBoxW20,
                       Text(
                         "A L L S T U D E N T S",
                         style: GoogleFonts.montserrat(
@@ -79,7 +86,6 @@ class _AllStudentListState extends State<AllStudentList> {
                 sizedBoxH20,
                 Expanded(
                   child: Row(
-
                     children: [
                       ClassesDeatils(
                           width: 370,
@@ -91,33 +97,33 @@ class _AllStudentListState extends State<AllStudentList> {
                           getxController: getxController,
                           allData: allData),
                       Container(
-                        height: screenSize.width*6 ,
+                        height: screenSize.width * 6,
                         width: 2,
                         color: Colors.black.withOpacity(0.3),
                       ),
                       Expanded(
                         child: AnimationLimiter(
                           child: GridView.count(
-                            physics:  BouncingScrollPhysics(
+                            physics: BouncingScrollPhysics(
                                 parent: AlwaysScrollableScrollPhysics()),
                             padding: EdgeInsets.all(_w / 60),
                             crossAxisCount: columnCount,
                             children: List.generate(
                               snapshot.data!.docs.length,
                               (int index) {
-                                StudentData data = StudentData.fromJson(
+                                AddStudentModel data = AddStudentModel.fromMap(
                                     snapshot.data!.docs[index].data());
 
                                 return AnimationConfiguration.staggeredGrid(
                                   position: index,
-                                  duration:  Duration(milliseconds: 300),
+                                  duration: Duration(milliseconds: 300),
                                   columnCount: columnCount,
                                   child: ScaleAnimation(
-                                    duration:  Duration(milliseconds: 900),
+                                    duration: Duration(milliseconds: 900),
                                     curve: Curves.fastLinearToSlowEaseIn,
                                     child: FadeInAnimation(
                                       child: Padding(
-                                        padding:  EdgeInsets.all(8.0),
+                                        padding: EdgeInsets.all(8.0),
                                         child: GestureDetector(
                                           onTap: () async {
                                             getxController.indexValue.value =
@@ -128,53 +134,59 @@ class _AllStudentListState extends State<AllStudentList> {
                                               getInfoofStudent(context);
                                             },
                                             child: Container(
-                                             
-                                              height: screenSize.width*6,
-                                              width:  screenSize.width/10,
+                                              height: screenSize.width * 6,
+                                              width: screenSize.width / 10,
                                               child: Padding(
-                                                padding:
-                                                     EdgeInsets.all( screenSize.width/100),
+                                                padding: EdgeInsets.all(
+                                                    screenSize.width / 100),
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.center,
                                                   children: [
-                                                     CircleAvatar(
-                                                      radius:  screenSize.width/40,
+                                                    CircleAvatar(
+                                                      radius:
+                                                          screenSize.width / 40,
                                                       backgroundColor:
                                                           Color.fromARGB(255,
                                                               210, 235, 255),
                                                       child: CircleAvatar(
-                                                        radius:  screenSize.width/50,
+                                                        radius:
+                                                            screenSize.width /
+                                                                50,
                                                         backgroundColor:
                                                             Colors.transparent,
                                                         backgroundImage: AssetImage(
                                                             'assets/images/classes.png'),
                                                       ),
                                                     ),
-                                                  // sizedBoxH10,
+                                                    // sizedBoxH10,
                                                     Text(
-                                                      data.studentName,
+                                                      data.studentName ?? "",
                                                       style: GoogleFonts
                                                           .montserrat(
                                                               letterSpacing: 1,
                                                               color:
                                                                   Colors.grey,
-                                                              fontSize: screenSize.width/120,
+                                                              fontSize: screenSize
+                                                                      .width /
+                                                                  120,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold),
                                                     ),
-                                                    
+
                                                     Text(
-                                                      'Create Date : ${stringTimeToDateConvert(data.joinDate)}',
+                                                      'Create Date : ${stringTimeToDateConvert(data.createDate ?? "")}',
                                                       style:
                                                           GoogleFonts.poppins(
                                                         color: Colors.black
                                                             .withOpacity(0.4),
-                                                        fontSize:  screenSize.width/120,
+                                                        fontSize:
+                                                            screenSize.width /
+                                                                120,
                                                       ),
                                                     ),
-                                                    
+
                                                     FutureBuilder(
                                                         future: FirebaseFirestore
                                                             .instance
@@ -195,13 +207,14 @@ class _AllStudentListState extends State<AllStudentList> {
                                                                 .value)
                                                             .collection(
                                                                 "Classes")
-                                                            .doc(data.wclass)
+                                                            .doc(data.classID)
                                                             .get(),
                                                         builder: (context,
                                                             snapshot) {
                                                           if (snapshot
                                                               .hasData) {
-                                                            log(data.wclass);
+                                                            log(data.classID ??
+                                                                "");
                                                             log('>>>>>>>>>${snapshot.data!.data()?['className'].toString()}??'
                                                                 '');
                                                             return Text(
@@ -209,13 +222,16 @@ class _AllStudentListState extends State<AllStudentList> {
                                                               style: GoogleFonts.poppins(
                                                                   color: Colors
                                                                       .black,
-                                                                  fontSize:  screenSize.width/120,
+                                                                  fontSize:
+                                                                      screenSize
+                                                                              .width /
+                                                                          120,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w600),
                                                             );
                                                           } else {
-                                                            return  Center(
+                                                            return Center(
                                                               child:
                                                                   CircularProgressIndicator(),
                                                             );
@@ -223,11 +239,13 @@ class _AllStudentListState extends State<AllStudentList> {
                                                         }),
                                                     //sizedBoxH10,
                                                     Text(
-                                                      "Phone No ${data.parentPhNo}",
+                                                      "Phone No ${data.parentPhoneNumber}",
                                                       style:
                                                           GoogleFonts.poppins(
                                                         color: Colors.black,
-                                                        fontSize:  screenSize.width/130,
+                                                        fontSize:
+                                                            screenSize.width /
+                                                                130,
                                                       ),
                                                     ),
                                                     Text(
@@ -235,7 +253,9 @@ class _AllStudentListState extends State<AllStudentList> {
                                                       style:
                                                           GoogleFonts.poppins(
                                                         color: Colors.black,
-                                                        fontSize:  screenSize.width/130,
+                                                        fontSize:
+                                                            screenSize.width /
+                                                                130,
                                                       ),
                                                     ),
                                                   ],

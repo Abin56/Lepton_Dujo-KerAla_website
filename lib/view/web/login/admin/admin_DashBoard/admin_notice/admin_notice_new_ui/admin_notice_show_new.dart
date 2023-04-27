@@ -26,9 +26,10 @@ class NoticeDisplay extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
+          title: Text("Notice List"),
+          backgroundColor: adminePrimayColor,
           elevation: 0,
-          iconTheme: const IconThemeData(color: cBlack),
+          iconTheme: const IconThemeData(color: cWhite),
         ),
         body: SafeArea(
           child: Row(
@@ -270,7 +271,7 @@ class NoticePageElevatedButtonWidget extends StatelessWidget {
       child: ElevatedButton(
         onPressed: function,
         style: ElevatedButton.styleFrom(
-          backgroundColor: cWhite,
+          backgroundColor: adminePrimayColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12), // <-- Radius
           ),

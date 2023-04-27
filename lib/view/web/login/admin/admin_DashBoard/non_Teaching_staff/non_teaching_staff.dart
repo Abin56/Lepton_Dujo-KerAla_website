@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
+import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -50,10 +51,7 @@ class _NonTeachingLoginState extends State<NonTeachingLogin> {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       //  backgroundColor: Color.fromARGB(255, 27, 95, 88),
-      appBar: AppBar(
-        title: Text('Non Teaching Staffs '),
-        backgroundColor: adminePrimayColor,
-      ),
+    
       body: Row(
         children: [
           Container(
@@ -61,40 +59,49 @@ class _NonTeachingLoginState extends State<NonTeachingLogin> {
             height: size.height,
             width: size.width * 1 / 2,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                  'Hi Admin ',
-                  style: ralewayStyle.copyWith(
-                    fontSize: 48.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w800,
+                IconButtonBackWidget(color: cWhite),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Hi Admin ',
+                        style: ralewayStyle.copyWith(
+                          fontSize: 48.0,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      SizedBox(
+                        height: size.width / 20,
+                      ),
+                      Text(
+                        'Welcome ',
+                        style: ralewayStyle.copyWith(
+                          fontSize: 25.0,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                
+                      SizedBox(
+                        height: size.width / 5,
+                        width: size.width / 2,
+                        child: LottieBuilder.network(
+                            'https://assets1.lottiefiles.com/packages/lf20_m2aybuxx.json'),
+                      )
+                      //       SizedBox(
+                      // height: 400,
+                      // width: 600,
+                      // child: LottieBuilder.asset(
+                      //     "assets/images/")),
+                    ],
                   ),
                 ),
-                SizedBox(
-                  height: size.width / 20,
-                ),
-                Text(
-                  'Welcome ',
-                  style: ralewayStyle.copyWith(
-                    fontSize: 25.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-
-                SizedBox(
-                  height: size.width / 5,
-                  width: size.width / 2,
-                  child: LottieBuilder.network(
-                      'https://assets1.lottiefiles.com/packages/lf20_m2aybuxx.json'),
-                )
-                //       SizedBox(
-                // height: 400,
-                // width: 600,
-                // child: LottieBuilder.asset(
-                //     "assets/images/")),
               ],
             ),
           ),

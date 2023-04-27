@@ -5,6 +5,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:flutter/material.dart';
 
 AddTeachersModel AddTeachersModelFromJson(String str) =>
@@ -14,14 +15,14 @@ String AddTeachersModelToJson(AddTeachersModel data) =>
     json.encode(data.toJson());
 
 class AddTeachersModel {
-  AddTeachersModel({
-    required this.id,
-    required this.teacherName,
-    required this.employeeID,
-    required this.joinDate,
-    required this.teacherPhNo,
-    required this.teacherEmail,
-  });
+  AddTeachersModel(
+      {required this.id,
+      required this.teacherName,
+      required this.employeeID,
+      required this.joinDate,
+      required this.teacherPhNo,
+      required this.teacherEmail,
+      this.userRole = 'teacher'});
 
   String teacherName;
   String id;
@@ -29,6 +30,7 @@ class AddTeachersModel {
   String joinDate;
   String teacherPhNo;
   String teacherEmail;
+  String userRole;
 
   factory AddTeachersModel.fromJson(Map<String, dynamic> json) =>
       AddTeachersModel(
@@ -38,6 +40,7 @@ class AddTeachersModel {
         employeeID: json["employeeID"] ?? '',
         teacherPhNo: json["teacherPhNo"] ?? '',
         teacherEmail: json["teacherEmail"] ?? '',
+        userRole: json["userRole"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
@@ -47,6 +50,7 @@ class AddTeachersModel {
         "teacherPhNo": teacherPhNo,
         "employeeID": employeeID,
         "teacherEmail": teacherEmail,
+        "userRole": userRole,
       };
 }
 

@@ -1,5 +1,3 @@
-
-
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -9,13 +7,11 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
-
 import '../../../../../../../model/profileextraDetails/teacher_extra_profile.dart';
 import '../../../../../../controller/teachersList/teachers_list.dart';
 import '../../../../../constant/constant.dart';
 import '../../../../widgets/button_container_widget.dart';
 import '../../../../widgets/drop_DownList/get_classList.dart';
-
 
 class TeacherDeatils extends StatelessWidget {
   String schooilID;
@@ -165,12 +161,11 @@ class TeacherDeatils extends StatelessWidget {
                                     false, // user must tap button!
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                    title: const Text('Alert'),
+                                    title: const Text('Remove all the data?'),
                                     content: SingleChildScrollView(
                                       child: ListBody(
                                         children: const <Widget>[
-                                          Text(
-                                              'Are are shure to Remove? \n All data will be lost'),
+                                          Text(' All data will be lost'),
                                         ],
                                       ),
                                     ),
@@ -370,7 +365,7 @@ class TeacherDeatils extends StatelessWidget {
                                                                             Widget>[
                                                                           TextButton(
                                                                             child:
-                                                                                const Text('ok'),
+                                                                                const Text('Ok'),
                                                                             onPressed:
                                                                                 () {
                                                                               Navigator.of(context).pop();
@@ -378,6 +373,7 @@ class TeacherDeatils extends StatelessWidget {
                                                                               Navigator.of(context).pop();
                                                                             },
                                                                           ),
+                                                                      
                                                                         ],
                                                                       );
                                                                     },
@@ -397,7 +393,23 @@ class TeacherDeatils extends StatelessWidget {
                                                       ),
                                                     ),
                                                   ),
-                                                )
+                                                ),sizedBoxH10,
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    TextButton(
+                                                      child:
+                                                          const Text('Cancel'),
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                    ),
+                                                  ],
+                                                ),
                                               ],
                                             ),
                                           ),

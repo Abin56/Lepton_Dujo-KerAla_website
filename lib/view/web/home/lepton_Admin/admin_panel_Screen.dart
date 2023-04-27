@@ -150,16 +150,16 @@ class LeptonAdminLoginScreen extends StatelessWidget {
                                                       icon: Icon(_hideGetxController
                                                               .isObscurefirst
                                                               .value
-                                                          ? Icons.visibility
+                                                          ? Icons.visibility_off
                                                           : Icons
-                                                              .visibility_off),
+                                                              .visibility),
                                                       onPressed: () {
                                                         _hideGetxController
                                                             .toggleObscureFirst();
                                                       },
                                                     ),
                             contentPadding: const EdgeInsets.only(top: 16.0),
-                            hintText: 'Enter your ID',
+                            hintText: 'Enter your IDad',
                             hintStyle: ralewayStyle.copyWith(
                               fontWeight: FontWeight.w400,
                               color: AppColors.blueDarkColor.withOpacity(0.5),
@@ -192,7 +192,7 @@ class LeptonAdminLoginScreen extends StatelessWidget {
                         child: Obx(() => 
                         TextFormField(
                           controller: passwordController,
-                          obscureText:_hideGetxController.isObscurefirst.value,
+                          obscureText:_hideGetxController.isObscureSecond.value,
                           style: ralewayStyle.copyWith(
                             fontWeight: FontWeight.w400,
                             color: AppColors.blueDarkColor,
@@ -204,14 +204,14 @@ class LeptonAdminLoginScreen extends StatelessWidget {
                              suffixIcon:  IconButton(
                             
                                                       icon: Icon(_hideGetxController
-                                                              .isObscurefirst
+                                                              .isObscureSecond
                                                               .value
-                                                          ? Icons.visibility
+                                                          ? Icons.visibility_off
                                                           : Icons
                                                               .visibility_off),
                                                       onPressed: () {
                                                         _hideGetxController
-                                                            .toggleObscureFirst();
+                                                            .toggleObscureSecond();
                                                       },
                                                     ),
                             prefixIcon: IconButton(

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/view/colors/colors.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,9 +27,11 @@ class MeetingDisplay extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color(0xFFF7D8BA),
+          // backgroundColor: const Color(0xFFF7D8BA),
+          backgroundColor: adminePrimayColor,
+          title: Text("Meetings List"),
         ),
-        backgroundColor: const Color(0xFFF7D8BA),
+        // backgroundColor: const Color(0xFFF7D8BA),
         body: SafeArea(
           child: Row(
             children: [
@@ -228,7 +231,7 @@ class NoticePageElevatedButtonWidget extends StatelessWidget {
       child: ElevatedButton(
         onPressed: function,
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFFFEF8DD),
+          backgroundColor: adminePrimayColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12), // <-- Radius
           ),
@@ -355,7 +358,7 @@ class MeetingCardWidget extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           border: Border.all(),
-          color: const Color(0xFFFEF8DD),
+          // color: const Color(0xFFFEF8DD),
         ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),

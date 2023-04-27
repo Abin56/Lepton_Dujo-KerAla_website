@@ -1,8 +1,10 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/upload_timetable/select_class.dart';
+import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,7 +17,7 @@ import '../../../../fonts/fonts.dart';
 import '../../../widgets/button_container_widget.dart';
 import '../../../widgets/drop_DownList/get_batchYear.dart';
 import '../../admin/admin_DashBoard/classes/list_of_classes.dart';
-import '../add_student/add_student.dart';
+import 'add_student/add_student.dart';
 import '../parents-section/add_parent.dart';
 import 'events_screen/create_events_screen.dart';
 import 'events_screen/update_event_screens/list_classwise_event.dart';
@@ -84,7 +86,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
     'Events', //1
     'Notice', //2
     'Students List',
-    'My Students' ,//3
+    'My Students', //3
   ];
   List<String> viewListImages = [
     'assets/images/events.png', //1
@@ -110,20 +112,23 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
         schoolID: Get.find<AdminLoginScreenController>().schoolID,
         teacherIDE: widget.teacherEmail,
       ), //2
-      AddParent(schoolID: Get.find<AdminLoginScreenController>().schoolID), //3
+      AddParent(
+          teacherIDE: widget.teacherEmail,
+          schoolID: Get.find<AdminLoginScreenController>().schoolID), //3
       AllClassesListViewForTeacher(
         schoolID: Get.find<AdminLoginScreenController>().schoolID,
         classID: teacherClassId,
         teacherID: '',
       ), //4
       AddGuardian(
+        teacherIDE: widget.teacherEmail,
           schoolId: Get.find<AdminLoginScreenController>().schoolID), //5
-      AddGuardian(
-          schoolId: Get.find<AdminLoginScreenController>().schoolID), //6
-      SelectClassForTimeTable(
-          schoolID: Get.find<AdminLoginScreenController>().schoolID), //7
-      AddGuardian(
-          schoolId: Get.find<AdminLoginScreenController>().schoolID), //8
+      // AddGuardian(
+      //     schoolId: Get.find<AdminLoginScreenController>().schoolID), //6
+      // SelectClassForTimeTable(
+      //     schoolID: Get.find<AdminLoginScreenController>().schoolID), //7
+      // AddGuardian(
+      //     schoolId: Get.find<AdminLoginScreenController>().schoolID), //8
       ClassTeacherCreateEventsPage(
         schoolId: Get.find<AdminLoginScreenController>().schoolID,
         classId: teacherClassId,
@@ -310,23 +315,27 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                 )
               : Row(
                   children: [
-                    
                     Container(
                         width: screenSize.width / 6,
                         color: Colors.black,
                         child: Column(
                           children: [
-                            const FittedBox(
-                                child: Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                'Teacher Admin Panel',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: cWhite),
-                              ),
-                            )),
+                            Row(
+                              children: [
+                                IconButtonBackWidget(color: cWhite),
+                                const FittedBox(
+                                    child: Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Text(
+                                    'Teacher Admin Panel',
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: cWhite),
+                                  ),
+                                )),
+                              ],
+                            ),
                             // sizedBoxH30,
                             Expanded(
                               child: ListView.builder(
@@ -384,13 +393,10 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                  IconButton(onPressed: () {
-                                  Navigator.pop(context);
-                                }, icon:  Icon(Icons.arrow_back),),
                                 Text(
                                   'Teacher Dashboard',
                                   style: GoogleFonts.poppins(
-                                      fontSize: 17,
+                                      fontSize: 17.w,
                                       fontWeight: FontWeight.w500),
                                 ),
                                 Row(
@@ -399,6 +405,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                       'Teacher',
                                       style: GoogleFonts.poppins(),
                                     ),
+                                    kwidth20,
                                     Text('Batch Year ${getFireBaseData.bYear}'),
                                     IconButton(
                                         onPressed: () async {
@@ -719,34 +726,47 @@ class SubmitSubjectClassTeacher extends StatelessWidget {
               height: screenSize.height,
               width: screenSize.width * 1 / 2,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Hi Admin ',
-                    style: ralewayStyle.copyWith(
-                      fontSize: 48.0,
-                      color: AppColors.whiteColor,
-                      fontWeight: FontWeight.w800,
+                  IconButtonBackWidget(color: cWhite),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Hi Admin ',
+                              style: ralewayStyle.copyWith(
+                                fontSize: 48.0,
+                                color: AppColors.whiteColor,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                            SizedBox(
+                              height: screenSize.width / 20,
+                            ),
+                            Text(
+                              'Welcome',
+                              style: GoogleFonts.aclonica(
+                                fontSize: 25.0,
+                                color: AppColors.whiteColor,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                            SizedBox(
+                              height: screenSize.width / 3.5,
+                              width: screenSize.width / 1,
+                              child: LottieBuilder.network(
+                                  "https://assets6.lottiefiles.com/packages/lf20_KWUxUaGUE7.json"),
+                            )
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(
-                    height: screenSize.width / 20,
-                  ),
-                  Text(
-                    'Welcome',
-                    style: GoogleFonts.aclonica(
-                      fontSize: 25.0,
-                      color: AppColors.whiteColor,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                  SizedBox(
-                    height: screenSize.width / 3.5,
-                    width: screenSize.width / 1,
-                    child: LottieBuilder.network(
-                        "https://assets6.lottiefiles.com/packages/lf20_KWUxUaGUE7.json"),
-                  )
                 ],
               ),
             ),
@@ -758,11 +778,9 @@ class SubmitSubjectClassTeacher extends StatelessWidget {
                     child: SingleChildScrollView(
                         child: Column(children: [
                       Container(
-                        // padding: const EdgeInsets.symmetric(
-                        //   horizontal: 500,
-                        // ),
                         child: Container(
-                          width: screenSize.width / 6,
+                          margin: EdgeInsets.only(top: 50.h),
+                          width: 500.h,
                           //height: screenSize.width/30,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -773,7 +791,7 @@ class SubmitSubjectClassTeacher extends StatelessWidget {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),
                                     border: Border()),
-                                child: TextField(
+                                child: TextFormField(
                                     controller: subjecController,
                                     decoration: InputDecoration(
                                         filled: true,
@@ -797,8 +815,8 @@ class SubmitSubjectClassTeacher extends StatelessWidget {
                                 height: screenSize.width / 30,
                               ),
                               Container(
-                                width: screenSize.width / 8,
-                                height: screenSize.width / 30,
+                                width: 280.w,
+                                height: 70.h,
                                 decoration: BoxDecoration(
                                     gradient: LinearGradient(
                                         colors: containerColor[8]),
@@ -859,8 +877,8 @@ class SubmitSubjectClassTeacher extends StatelessWidget {
                                 height: screenSize.width / 38,
                               ),
                               Container(
-                                width: screenSize.width / 8,
-                                height: screenSize.width / 30,
+                                width: 230.w,
+                                height: 68.h,
                                 decoration: BoxDecoration(
                                     gradient: LinearGradient(
                                         colors: containerColor[8]),

@@ -1,5 +1,8 @@
+// ignore_for_file: sort_child_properties_last
+
 import 'dart:developer';
 
+import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -22,16 +25,7 @@ class AddTeacherSectionScreen extends StatelessWidget {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       //backgroundColor: const Color.fromARGB(255, 27, 95, 88),
-      appBar: AppBar(
-          backgroundColor: adminePrimayColor,
-          title: Text(
-            'ADD NEW TEACHER',
-            style: GoogleFonts.montserrat(
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-              color: cWhite,
-            ),
-          )),
+     
       body: SingleChildScrollView(
         child: Row(
           children: [
@@ -39,23 +33,31 @@ class AddTeacherSectionScreen extends StatelessWidget {
               height: screenSize.height,
               width: screenSize.width * 1 / 2,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    'Hi ! Admin \n   Create Teacher  Profile',
-                    style: ralewayStyle.copyWith(
-                      fontSize: 40.0,
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      fontWeight: FontWeight.w800,
+                  IconButtonBackWidget(color: cWhite,),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Hi ! Admin \n   Create Teacher  Profile',
+                          style: ralewayStyle.copyWith(
+                            fontSize: 40.0,
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 300,
+                          width: screenSize.width / 2,
+                          child: LottieBuilder.network(
+                              'https://assets5.lottiefiles.com/packages/lf20_ikvz7qhc.json'),
+                        )
+                      ],
                     ),
                   ),
-                  SizedBox(
-                    height: 300,
-                    width: screenSize.width / 2,
-                    child: LottieBuilder.network(
-                        'https://assets5.lottiefiles.com/packages/lf20_ikvz7qhc.json'),
-                  )
                 ],
               ),
               color: adminePrimayColor,

@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/students/parents&guardian.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/students/student_summery.dart/student_summery.dart';
@@ -258,7 +258,7 @@ class StudentsDetails extends StatelessWidget {
                                                           .indexValue.value!]
                                                       .uid)
                                                   .set({
-                                                'parentPhNo':
+                                                'parentPhoneNumber':
                                                     _newPhoneNoController.text
                                                         .trim()
                                               }, SetOptions(merge: true)).then(
@@ -455,7 +455,7 @@ class StudentsDetails extends StatelessWidget {
                                     .schoolID)
                                 .collection("AllStudents")
                                 .doc(allData[getxController.indexValue.value!]
-                                    .admissionNumber)
+                                    .docid)
                                 .collection("sampoorna")
                                 .get();
                             sampoorna.docs.isEmpty
@@ -701,14 +701,14 @@ getSchoolDetails();
             .collection("AllStudents")
             .doc(widget.allData[widget.getxController
                     .indexValue.value!]
-                .admissionNumber)
+                .docid)
             .collection("sampoorna")
-            .where('admissionNumber',
+            .where('docid',
                 isEqualTo: widget.allData[
                         widget.getxController
                             .indexValue
                             .value!]
-                    .admissionNumber)
+                    .docid)
             .snapshots(),
         builder: (context, snappp) {
           return GestureDetector(
