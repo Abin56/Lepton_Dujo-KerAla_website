@@ -15,6 +15,6 @@ class IconButtonBackWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(onPressed: () {
       Get.back();
-    }, icon: Icon(Icons.arrow_back,color:color ,size: 30.w,weight: 900),);
+    }, icon: Icon(Icons.arrow_back,color:color ,size: 25.w,weight: 900),);
   }
 }

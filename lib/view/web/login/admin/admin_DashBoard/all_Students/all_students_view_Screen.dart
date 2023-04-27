@@ -13,6 +13,7 @@ import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../model/create_classModel/addStudent_model.dart';
 import '../../../../../../model/create_classModel/create_classModel.dart';
 import '../../../../../../model/student/student_list_model.dart';
+import '../../../../../../ui team/sruthi/student_details_alert_box_widget.dart';
 import '../../../../../constant/constant.dart';
 import '../classes/details_ofClasses.dart';
 
@@ -74,11 +75,34 @@ class _AllStudentListState extends State<AllStudentList> {
                             fontWeight: FontWeight.bold),
                       ),
                       Spacer(),
-                      IconButton(
-                          onPressed: () {
-                            _showSearch();
-                          },
-                          icon: Icon(Icons.search))
+                      InkWell(
+                        child: Container(
+width: screenSize.width*0.2,
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),
+                         border: Border.all(color: Colors.grey)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                 IconButton(
+                                    onPressed: () {
+                                      _showSearch();
+                                    },
+                                    icon: Icon(Icons.search,size: 19,)),
+                                    sizedBoxw10,
+                                Text("Search",style: GoogleFonts.poppins(fontSize: 16),),
+                              
+                                
+                                    
+                              ],
+                            ),
+                          ),
+                        ),
+                        onTap: (){
+                                    _showSearch();
+
+                        },
+                      )
                     ],
                   ),
                 ),
@@ -131,7 +155,7 @@ class _AllStudentListState extends State<AllStudentList> {
                                           },
                                           child: GestureDetector(
                                             onTap: () async {
-                                              getInfoofStudent(context);
+                                          _showlert(context);
                                             },
                                             child: Container(
                                              
@@ -338,4 +362,12 @@ class _AllStudentListState extends State<AllStudentList> {
       widget.NoofFemaleStudents = femaleCount.toString();
     });
   }
+}
+
+
+void _showlert(BuildContext context) {
+  showDialog(
+    context: context,
+   builder: (context) => Student_Details_AlertBox_Widget()
+  );
 }
