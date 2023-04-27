@@ -17,7 +17,7 @@ import '../../../../fonts/fonts.dart';
 import '../../../widgets/button_container_widget.dart';
 import '../../../widgets/drop_DownList/get_batchYear.dart';
 import '../../admin/admin_DashBoard/classes/list_of_classes.dart';
-import '../add_student/add_student.dart';
+import 'add_student/add_student.dart';
 import '../parents-section/add_parent.dart';
 import 'events_screen/create_events_screen.dart';
 import 'events_screen/update_event_screens/list_classwise_event.dart';
@@ -112,20 +112,23 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
         schoolID: Get.find<AdminLoginScreenController>().schoolID,
         teacherIDE: widget.teacherEmail,
       ), //2
-      AddParent(schoolID: Get.find<AdminLoginScreenController>().schoolID), //3
+      AddParent(
+          teacherIDE: widget.teacherEmail,
+          schoolID: Get.find<AdminLoginScreenController>().schoolID), //3
       AllClassesListViewForTeacher(
         schoolID: Get.find<AdminLoginScreenController>().schoolID,
         classID: teacherClassId,
         teacherID: '',
       ), //4
       AddGuardian(
+        teacherIDE: widget.teacherEmail,
           schoolId: Get.find<AdminLoginScreenController>().schoolID), //5
-      AddGuardian(
-          schoolId: Get.find<AdminLoginScreenController>().schoolID), //6
-      SelectClassForTimeTable(
-          schoolID: Get.find<AdminLoginScreenController>().schoolID), //7
-      AddGuardian(
-          schoolId: Get.find<AdminLoginScreenController>().schoolID), //8
+      // AddGuardian(
+      //     schoolId: Get.find<AdminLoginScreenController>().schoolID), //6
+      // SelectClassForTimeTable(
+      //     schoolID: Get.find<AdminLoginScreenController>().schoolID), //7
+      // AddGuardian(
+      //     schoolId: Get.find<AdminLoginScreenController>().schoolID), //8
       ClassTeacherCreateEventsPage(
         schoolId: Get.find<AdminLoginScreenController>().schoolID,
         classId: teacherClassId,
@@ -390,7 +393,6 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                
                                 Text(
                                   'Teacher Dashboard',
                                   style: GoogleFonts.poppins(
@@ -725,7 +727,7 @@ class SubmitSubjectClassTeacher extends StatelessWidget {
               width: screenSize.width * 1 / 2,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   IconButtonBackWidget(color: cWhite),
                   Expanded(
@@ -777,7 +779,7 @@ class SubmitSubjectClassTeacher extends StatelessWidget {
                         child: Column(children: [
                       Container(
                         child: Container(
-                          margin: EdgeInsets.only(top:50.h ),
+                          margin: EdgeInsets.only(top: 50.h),
                           width: 500.h,
                           //height: screenSize.width/30,
                           child: Column(
@@ -875,7 +877,7 @@ class SubmitSubjectClassTeacher extends StatelessWidget {
                                 height: screenSize.width / 38,
                               ),
                               Container(
-                               width: 230.w,
+                                width: 230.w,
                                 height: 68.h,
                                 decoration: BoxDecoration(
                                     gradient: LinearGradient(

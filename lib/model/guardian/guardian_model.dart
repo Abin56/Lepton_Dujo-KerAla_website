@@ -3,6 +3,9 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../controller/get_firebase-data/get_firebase_data.dart';
 
 class GuardianAddModel {
   String? guardianName;
@@ -11,12 +14,11 @@ class GuardianAddModel {
   String? createdate;
   String? guardianPhoneNumber;
   String? guardianEmail;
-  String? wStudent;
+  String studentID;
   String? houseName;
   String? place;
   String? state;
   String? pincode;
-  String? guardianImage;
   String? gender;
   String? profileImageID;
   String? profileImageURL;
@@ -28,18 +30,16 @@ class GuardianAddModel {
     this.createdate,
     this.guardianPhoneNumber,
     this.guardianEmail,
-    this.wStudent,
+    required this.studentID,
     this.houseName,
     this.place,
     this.state,
     this.pincode,
-    this.guardianImage,
     this.gender,
     this.profileImageID,
     this.profileImageURL,
-     this.userRole = 'guardian',
+     this.userRole='guardian',
   });
- 
 
   GuardianAddModel copyWith({
     String? guardianName,
@@ -48,12 +48,11 @@ class GuardianAddModel {
     String? createdate,
     String? guardianPhoneNumber,
     String? guardianEmail,
-    String? wStudent,
+    String? studentID,
     String? houseName,
     String? place,
     String? state,
     String? pincode,
-    String? guardianImage,
     String? gender,
     String? profileImageID,
     String? profileImageURL,
@@ -66,12 +65,11 @@ class GuardianAddModel {
       createdate: createdate ?? this.createdate,
       guardianPhoneNumber: guardianPhoneNumber ?? this.guardianPhoneNumber,
       guardianEmail: guardianEmail ?? this.guardianEmail,
-      wStudent: wStudent ?? this.wStudent,
+      studentID: studentID ?? this.studentID,
       houseName: houseName ?? this.houseName,
       place: place ?? this.place,
       state: state ?? this.state,
       pincode: pincode ?? this.pincode,
-      guardianImage: guardianImage ?? this.guardianImage,
       gender: gender ?? this.gender,
       profileImageID: profileImageID ?? this.profileImageID,
       profileImageURL: profileImageURL ?? this.profileImageURL,
@@ -87,12 +85,11 @@ class GuardianAddModel {
       'createdate': createdate??"",
       'guardianPhoneNumber': guardianPhoneNumber??"",
       'guardianEmail': guardianEmail??"",
-      'wStudent': wStudent??"",
+      'studentID': studentID,
       'houseName': houseName??"",
       'place': place??"",
       'state': state??"",
       'pincode': pincode??"",
-      'guardianImage': guardianImage??"",
       'gender': gender??"",
       'profileImageID': profileImageID??"",
       'profileImageURL': profileImageURL??"",
@@ -108,12 +105,11 @@ class GuardianAddModel {
       createdate: map['createdate'] != null ? map['createdate'] as String : null,
       guardianPhoneNumber: map['guardianPhoneNumber'] != null ? map['guardianPhoneNumber'] as String : null,
       guardianEmail: map['guardianEmail'] != null ? map['guardianEmail'] as String : null,
-      wStudent: map['wStudent'] != null ? map['wStudent'] as String : null,
+      studentID: map['studentID'] as String,
       houseName: map['houseName'] != null ? map['houseName'] as String : null,
       place: map['place'] != null ? map['place'] as String : null,
       state: map['state'] != null ? map['state'] as String : null,
       pincode: map['pincode'] != null ? map['pincode'] as String : null,
-      guardianImage: map['guardianImage'] != null ? map['guardianImage'] as String : null,
       gender: map['gender'] != null ? map['gender'] as String : null,
       profileImageID: map['profileImageID'] != null ? map['profileImageID'] as String : null,
       profileImageURL: map['profileImageURL'] != null ? map['profileImageURL'] as String : null,
@@ -127,7 +123,7 @@ class GuardianAddModel {
 
   @override
   String toString() {
-    return 'GuardianAddModel(guardianName: $guardianName, docid: $docid, uid: $uid, createdate: $createdate, guardianPhoneNumber: $guardianPhoneNumber, guardianEmail: $guardianEmail, wStudent: $wStudent, houseName: $houseName, place: $place, state: $state, pincode: $pincode, guardianImage: $guardianImage, gender: $gender, profileImageID: $profileImageID, profileImageURL: $profileImageURL, userRole: $userRole)';
+    return 'GuardianAddModel(guardianName: $guardianName, docid: $docid, uid: $uid, createdate: $createdate, guardianPhoneNumber: $guardianPhoneNumber, guardianEmail: $guardianEmail, studentID: $studentID, houseName: $houseName, place: $place, state: $state, pincode: $pincode, gender: $gender, profileImageID: $profileImageID, profileImageURL: $profileImageURL, userRole: $userRole)';
   }
 
   @override
@@ -141,12 +137,11 @@ class GuardianAddModel {
       other.createdate == createdate &&
       other.guardianPhoneNumber == guardianPhoneNumber &&
       other.guardianEmail == guardianEmail &&
-      other.wStudent == wStudent &&
+      other.studentID == studentID &&
       other.houseName == houseName &&
       other.place == place &&
       other.state == state &&
       other.pincode == pincode &&
-      other.guardianImage == guardianImage &&
       other.gender == gender &&
       other.profileImageID == profileImageID &&
       other.profileImageURL == profileImageURL &&
@@ -161,12 +156,11 @@ class GuardianAddModel {
       createdate.hashCode ^
       guardianPhoneNumber.hashCode ^
       guardianEmail.hashCode ^
-      wStudent.hashCode ^
+      studentID.hashCode ^
       houseName.hashCode ^
       place.hashCode ^
       state.hashCode ^
       pincode.hashCode ^
-      guardianImage.hashCode ^
       gender.hashCode ^
       profileImageID.hashCode ^
       profileImageURL.hashCode ^
@@ -176,21 +170,43 @@ class GuardianAddModel {
 
 class CreateGuardiansAddToFireBase {
   Future createSchoolController(
-      GuardianAddModel productModel, context, id) async {
-    try {
+      GuardianAddModel productModel, context, id,  classID,) async {
+       try {
       final firebase = FirebaseFirestore.instance;
+
+      String guardianID = "";
       firebase
           .collection("SchoolListCollection")
           .doc(id)
           .collection("Student_Guardian")
           .add(productModel.toMap())
           .then((value) {
+        guardianID = value.id;
+
         firebase
             .collection("SchoolListCollection")
             .doc(id)
             .collection("Student_Guardian")
             .doc(value.id)
-            .update({"docid": value.id});
+            .update({"docid": value.id, 'studentID': productModel.studentID});
+      }).then((value) {
+        firebase
+            .collection("SchoolListCollection")
+            .doc(id)
+            .collection(Get.find<GetFireBaseData>().bYear.value)
+            .doc(Get.find<GetFireBaseData>().bYear.value)
+            .collection("Classes")
+            .doc(classID)
+            .collection("Students")
+            .doc(productModel.studentID)
+            .update({'guardianID': guardianID}).then((value) {
+          firebase
+              .collection("SchoolListCollection")
+              .doc(id)
+              .collection("AllStudents")
+              .doc(productModel.studentID)
+              .update({"guardianID": guardianID});
+        });
       }).then(
         (value) {
           return showDialog(
