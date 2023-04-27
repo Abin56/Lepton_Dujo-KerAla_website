@@ -1,11 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/colors/colors.dart';
+import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../../controller/search_student/search_student.dart';
+import '../../../../../../ui team/sruthi/parent_guardian_alert_box_widget.dart';
+import '../../../../../../ui team/sruthi/student_details_alert_box_widget.dart';
 
 class SearchStuents extends SearchDelegate {
   @override
@@ -42,37 +46,64 @@ class SearchStuents extends SearchDelegate {
                 .snapshots(),
             builder: (context, snapshots) {
               if (snapshots.hasData) {
-                var screenSize =MediaQuery.of(context).size;
+                var screenSize = MediaQuery.of(context).size;
                 return Scaffold(
-                  backgroundColor: Colors.transparent,
+                  // backgroundColor: Colors.transparent,
                   body: ListView.separated(
                       itemBuilder: (context, index) {
                         return Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              // border: Border.all(color: Colors.grey,width: 0.5),
+                            ),
+                            height: screenSize.width / 8,
+                            width: double.infinity,
+                            child: Row(
+                              children: [
+                                GestureDetector(
+                                    onTap: () {
+                                      _showlert(context);
+                                    },
+                                    child: CircleAvatar(
+                                      radius: 60,
+                                    )),
+                                sizedBoxw40,
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      // Text(snapshots.data!.docs[index]['id']),
+                                      Text(
+                                        'Abin ',
+                                        style:
+                                            GoogleFonts.poppins(fontSize: 16),
+                                      ),
+                                      sizedBoxH10,
+                                      Text(
+                                        'Admission No. :7539',
+                                        style:
+                                            GoogleFonts.poppins(fontSize: 12),
+                                      ),
+                                      sizedBoxH10,
 
-                          color: adminePrimayColor,
-                          height: screenSize.width/15,
-                          width: double.infinity,
-                          child: Row(
-                            children: [
-                            GestureDetector(onTap: () {
-                             
-                            },
-                              child:
-                               CircleAvatar(radius: 60,)),
-                               Padding(
-                                 padding:  EdgeInsets.only(top: screenSize.width/60),
-                                 child: Column(children: [
-                                 // Text(snapshots.data!.docs[index]['id']),
-                                 Text('Abin :', style: GoogleFonts.poppins(color: Colors.white),),
-                                  Text('9562730350 :', style: GoogleFonts.poppins(color: Colors.white),),
-                                   Text('123554 :', style: GoogleFonts.poppins(color: Colors.white),),
-                                 
-                                 ],),
-                               )
-
-                          ],)
-                          
-                        );
+                                      Text(
+                                        'Class & Division : 10 B',
+                                        style:
+                                            GoogleFonts.poppins(fontSize: 12),
+                                      ),
+                                      sizedBoxH10,
+                                      Text(
+                                        'Phone No :7539857469',
+                                        style:
+                                            GoogleFonts.poppins(fontSize: 12),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ));
                       },
                       separatorBuilder: (context, index) {
                         return const Divider();
@@ -116,4 +147,14 @@ class SearchStuents extends SearchDelegate {
               }
             });
   }
+}
+
+
+
+void _showlert(BuildContext context) {
+
+  showDialog(
+    barrierDismissible: false,
+      context: context,
+      builder: (context) => Student_Details_AlertBox_Widget());
 }
