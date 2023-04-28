@@ -78,30 +78,33 @@ class _AllStudentListState extends State<AllStudentList> {
                       Spacer(),
                       InkWell(
                         child: Container(
-width: screenSize.width*0.2,
-                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),
-                         border: Border.all(color: Colors.grey)),
+                          width: screenSize.width * 0.2,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              border: Border.all(color: Colors.grey)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
                               children: [
-                                 IconButton(
+                                IconButton(
                                     onPressed: () {
                                       _showSearch();
                                     },
-                                    icon: Icon(Icons.search,size: 19,)),
-                                    sizedBoxw10,
-                                Text("Search",style: GoogleFonts.poppins(fontSize: 16),),
-                              
-                                
-                                    
+                                    icon: Icon(
+                                      Icons.search,
+                                      size: 19,
+                                    )),
+                                sizedBoxw10,
+                                Text(
+                                  "Search",
+                                  style: GoogleFonts.poppins(fontSize: 16),
+                                ),
                               ],
                             ),
                           ),
                         ),
-                        onTap: (){
-                                    _showSearch();
-
+                        onTap: () {
+                          _showSearch();
                         },
                       )
                     ],
@@ -155,7 +158,7 @@ width: screenSize.width*0.2,
                                           },
                                           child: GestureDetector(
                                             onTap: () async {
-                                          _showlert(context);
+                                              _showlert(context, data);
                                             },
                                             child: Container(
                                               height: screenSize.width * 6,
@@ -378,10 +381,21 @@ width: screenSize.width*0.2,
   }
 }
 
-
-void _showlert(BuildContext context) {
+void _showlert(BuildContext context, AddStudentModel data) {
   showDialog(
-    context: context,
-   builder: (context) => Student_Details_AlertBox_Widget()
-  );
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => Student_Details_AlertBox_Widget(
+            studentID: data.docid ?? "",
+            studentImage: data.profileImageUrl,
+            studentName: data.studentName ?? "",
+            studentClass: data.classID ?? "",
+            admissionNumber: data.admissionNumber ?? "",
+            studentGender: data.gender ?? "",
+            bloodGroup: data.bloodgroup ?? "",
+            studentEmail: data.studentemail ?? "",
+            houseName: data.houseName ?? "",
+            place: data.place ?? "",
+            district: data.district ?? "",
+          ));
 }
