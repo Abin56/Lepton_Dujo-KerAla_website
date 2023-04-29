@@ -249,9 +249,9 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                                                       icon: Icon(_hideGetxController
                                                               .isObscurefirst
                                                               .value
-                                                          ? Icons.visibility
+                                                          ? Icons.visibility_off
                                                           : Icons
-                                                              .visibility_off),
+                                                              .visibility),
                                                       onPressed: () {
                                                         _hideGetxController
                                                             .toggleObscureFirst();
@@ -269,12 +269,12 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                                                   controller: _password,
                                                   obscureText:
                                                       _hideGetxController
-                                                          .isObscurefirst
+                                                          .isObscureSecond
                                                           .value,
                                                   decoration: InputDecoration(
                                                     suffixIcon: IconButton(
                                                       icon: Icon(_hideGetxController
-                                                              .isObscurefirst 
+                                                              .isObscureSecond 
                                                               .value
                                                           ? Icons
                                                               .visibility_off

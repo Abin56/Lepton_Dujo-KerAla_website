@@ -24,9 +24,9 @@ class AdminPtaScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('School PTA'),
-        backgroundColor: adminePrimayColor,
-        elevation: 0,
+        title: const Text('School PTA',style: TextStyle(color: cBlack),),
+        backgroundColor: cWhite,
+        elevation: 0,iconTheme: IconThemeData(color: cBlack),
       ),
       floatingActionButton: FloatingActionButton(
         tooltip: 'Add New Member',

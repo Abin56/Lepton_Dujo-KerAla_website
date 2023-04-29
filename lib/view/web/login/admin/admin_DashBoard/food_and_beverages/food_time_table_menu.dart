@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
 import 'package:dujo_kerala_website/controller/get_firebase-data/get_firebase_data.dart';
+import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -32,12 +33,12 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                         Container(
                           height: screenSize.width/6,
                          width: screenSize.width/7.3,
-                          decoration: BoxDecoration(color: Color.fromARGB(255, 194, 143, 209),
+                          decoration: BoxDecoration(color: Color.fromARGB(255, 120, 119, 121),
                               borderRadius: BorderRadius.circular(15)),
                           child: const Center(child: Text(
                                                 "DAYS",
                                                 style: TextStyle(
-                                                    color: Colors.white,
+                                                    color: cBlack,
                                                     fontSize:20,
                                                     fontWeight: FontWeight.bold),
                                               ),),
@@ -46,12 +47,12 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                         Container(
                           height: screenSize.width/6,
                            width: screenSize.width/7.3,
-                           decoration: BoxDecoration(color: Color.fromARGB(255, 131, 236, 184),
+                           decoration: BoxDecoration(color: Color.fromARGB(255, 120, 119, 121),
                               borderRadius: BorderRadius.circular(15)),
                           child: const Center(child: Text(
                                                 "MONDAY",
                                                 style: TextStyle(
-                                                    color: Colors.white,
+                                                    color: cBlack,
                                                     fontSize:20,
                                                     fontWeight: FontWeight.bold),
                                               ),),
@@ -60,12 +61,12 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                         Container(
                           height: screenSize.width/6,
                            width: screenSize.width/7.3,
-                          decoration: BoxDecoration(color: Color.fromARGB(255, 255, 102, 222),
+                          decoration: BoxDecoration(color:Color.fromARGB(255, 120, 119, 121),
                               borderRadius: BorderRadius.circular(15)),
                           child: const Center(child: Text(
                                                 "TUESDAY",
                                                 style: TextStyle(
-                                                    color: Colors.white,
+                                                    color: cBlack,
                                                     fontSize:20,
                                                     fontWeight: FontWeight.bold),
                                               ),),
@@ -74,12 +75,12 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                         Container(
                           height: screenSize.width/6,
                            width: screenSize.width/7.3,
-                         decoration: BoxDecoration(color: Color.fromARGB(255, 236, 238, 148),
+                         decoration: BoxDecoration(color:Color.fromARGB(255, 120, 119, 121),
                               borderRadius: BorderRadius.circular(15)),
                           child: const Center(child: Text(
                                                 "WEDNESDAY",
                                                 style: TextStyle(
-                                                    color: Colors.white,
+                                                    color: cBlack,
                                                     fontSize:20,
                                                     fontWeight: FontWeight.bold),
                                               ),),
@@ -88,12 +89,12 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                         Container(
                           height: screenSize.width/6,
                           width: screenSize.width/7.3,
-                           decoration: BoxDecoration(color: Color.fromARGB(255, 253, 146, 173),
+                           decoration: BoxDecoration(color: Color.fromARGB(255, 120, 119, 121),
                               borderRadius: BorderRadius.circular(15)),
                           child: const Center(child: Text(
                                                 "THURSDAY",
                                                 style: TextStyle(
-                                                    color: Colors.white,
+                                                    color: cBlack,
                                                     fontSize:20,
                                                     fontWeight: FontWeight.bold),
                                               ),),
@@ -102,12 +103,12 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                         Container(
                           height: screenSize.width/6,
                           width: screenSize.width/7.3,
-                          decoration: BoxDecoration(color: Color.fromARGB(255, 0, 255, 221),
+                          decoration: BoxDecoration(color:Color.fromARGB(255, 120, 119, 121),
                               borderRadius: BorderRadius.circular(15)),
                           child: const Center(child: Text(
                                                 "FRIDAY",
                                                 style: TextStyle(
-                                                    color: Colors.white,
+                                                    color: cBlack,
                                                     fontSize:20,
                                                     fontWeight: FontWeight.bold),
                                               ),),
@@ -116,12 +117,12 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                         Container(
                           height: screenSize.width/6,
                            width: screenSize.width/7.5,
-                            decoration: BoxDecoration(color: Color.fromARGB(255, 235, 190, 200),
+                            decoration: BoxDecoration(color:Color.fromARGB(255, 120, 119, 121),
                               borderRadius: BorderRadius.circular(15)),
                           child: const Center(child: Text(
                                                 "SATURDAY",
                                                 style: TextStyle(
-                                                    color: Colors.white,
+                                                    color: cBlack,
                                                     fontSize:20,
                                                     fontWeight: FontWeight.bold),
                                               ),),

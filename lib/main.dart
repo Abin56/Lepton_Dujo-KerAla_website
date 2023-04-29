@@ -6,6 +6,7 @@ import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/admin_d
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/all_Students/all_students_view_Screen.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/bus_Route/bus_route.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/bus_Route/create_bus_route.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/food_and_beverages/food_time_table_menu.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/non_Teaching_staff/non_teaching_staff.dart';
 import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/teachers_panel_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
                 accentColor: const Color(0xFF02BB9F),
               ),
               home:
+              //FoodTimeTableMenu()
                   // AlumniAssocation()
                   //ClassTeacherAdmin(schoolID: '',teacherEmail:'' ,teacherID: '',)
                   // AllStudentList()
@@ -58,7 +60,8 @@ class MyApp extends StatelessWidget {
                   // AllStdf()
                   // BusRoute()
                   // NonTeachingLogin(schoolID: '',)
-                  DujoHomePage());
+                  DujoHomePage()
+                  );
         });
   }
 }

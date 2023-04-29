@@ -1,3 +1,4 @@
+import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -22,11 +23,9 @@ class _FoodBeveragesState extends State<FoodBeverages> {
   Widget build(BuildContext context) {
    var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Food and Beverages'),backgroundColor:Color.fromARGB(255, 12, 34, 133) ),
-
-
- body:  SingleChildScrollView(
+      //appBar: AppBar(
+      //  title: Text('Food and Beverages'),backgroundColor:Color.fromARGB(255, 12, 34, 133) ),
+  body:  SingleChildScrollView(
         child: Column(
             children:[
                Container(
@@ -37,32 +36,39 @@ class _FoodBeveragesState extends State<FoodBeverages> {
                            height: screenSize.height,
                           width: screenSize.width * 1 / 2,
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Hi Admin ',
-                                  style: ralewayStyle.copyWith(
-                                    fontSize: 48.0,
-                                    color: AppColors.whiteColor,
-                                    fontWeight: FontWeight.w800,
-                                  ),
+                                IconButtonBackWidget(color: cWhite,),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Hi Admin ',
+                                      style: ralewayStyle.copyWith(
+                                        fontSize: 48.0,
+                                        color: AppColors.whiteColor,
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                    ),
+                                    SizedBox(height: screenSize.width/20,),
+                                     Text(
+                                      'Welcome',
+                                      style: GoogleFonts.aclonica(
+                                        fontSize: 25.0,
+                                        color: AppColors.whiteColor,
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                    ),                            
+                                    SizedBox(
+                                      height: screenSize.width/3.5,
+                                      width:screenSize.width/1,
+                                      child: LottieBuilder.network(
+                                          "https://assets4.lottiefiles.com/packages/lf20_ysas4vcp.json"),
+                                    )                        
+                                  ],
                                 ),
-                                SizedBox(height: screenSize.width/20,),
-                                 Text(
-                                  'Welcome',
-                                  style: GoogleFonts.aclonica(
-                                    fontSize: 25.0,
-                                    color: AppColors.whiteColor,
-                                    fontWeight: FontWeight.w800,
-                                  ),
-                                ),                            
-                                SizedBox(
-                                  height: screenSize.width/3.5,
-                                  width:screenSize.width/1,
-                                  child: LottieBuilder.network(
-                                      "https://assets4.lottiefiles.com/packages/lf20_ysas4vcp.json"),
-                                )                        
                               ],
                             ),
                     ),                            

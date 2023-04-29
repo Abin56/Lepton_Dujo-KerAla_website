@@ -24,13 +24,13 @@ class MothersPtaScreen extends StatelessWidget {
     var screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(backgroundColor: cWhite,
         title: const Text(
           'Mothers PTA',
           style: TextStyle(
             color: Colors.black,
           ),
-        ),
+        ),iconTheme: IconThemeData(color: cBlack),
         elevation: 0,
       ),
       floatingActionButton: FloatingActionButton(

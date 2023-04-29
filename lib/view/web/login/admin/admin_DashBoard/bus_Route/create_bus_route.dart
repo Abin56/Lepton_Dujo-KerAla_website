@@ -7,7 +7,12 @@ import '../../../../../constant/constant.dart';
 import '../../../../../fonts/fonts.dart';
 
 class CreateBusRoute extends StatefulWidget {
-  const CreateBusRoute({super.key});
+   CreateBusRoute({super.key});
+  //  TextEditingController routeController = TextEditingController();
+  //   TextEditingController busnumberController = TextEditingController();
+  //    TextEditingController driverphoneController = TextEditingController();
+  //     TextEditingController assistancephoneController = TextEditingController();
+  //      TextEditingController staffinchargeController = TextEditingController();
 
   @override
   State<CreateBusRoute> createState() => _CreateBusRouteState();
@@ -93,30 +98,35 @@ class _CreateBusRouteState extends State<CreateBusRoute> {
                       child: Column(children: [
 
                         BusRouteTextFormWidget(
+                        //  textEditingController:routeController,
                           function: checkFieldEmpty,
                           labelText: 'Route Number',
                           icon: Icons.route_outlined,
                         ),
 
                         BusRouteTextFormWidget(
+                          //textEditingController:busnumberController ,
                           function: checkFieldEmpty,
                           labelText: 'Bus Number',
                           icon: Icons.bus_alert,
                         ),
 
                         BusRouteTextFormWidget(
+                         // textEditingController:driverphoneController,
                           function: checkFieldPhoneNumberIsValid,
                           labelText: 'Driver Mobile Number',
                           icon: Icons.phone_android_sharp,
                         ),
 
                         BusRouteTextFormWidget(
+                         // textEditingController: assistancephoneController,
                           function: checkFieldPhoneNumberIsValid,
                           labelText: 'Assistance Mobile Number',
                           icon: Icons.phone_android,
                         ),
 
                         BusRouteTextFormWidget(
+                         // textEditingController:staffinchargeController ,
                           function: checkFieldEmpty,
                           labelText: 'Staff inCharge',
                           icon: Icons.person_2,
@@ -164,11 +174,11 @@ class BusRouteTextFormWidget extends StatelessWidget {
   BusRouteTextFormWidget({
     super.key,
     required this.labelText,
-    // required this.textEditingController,
+   // required this.textEditingController,
     required this.function,
     required this.icon,
   });
-// final TextEditingController textEditingController;
+ // final TextEditingController textEditingController;
   final String labelText;
   final String? Function(String? fieldContent) function;
   IconData icon;

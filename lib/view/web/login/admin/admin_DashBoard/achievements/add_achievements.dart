@@ -35,6 +35,8 @@ class _AddAchievementsState extends State<AddAchievements> {
   Uint8List? file;
   bool loadingStatus = false;
 
+
+
   TextEditingController achievementController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
@@ -443,6 +445,11 @@ class _AddAchievementsState extends State<AddAchievements> {
                   padding: const EdgeInsets.all(10),
                   child: (InkWell(
                     onTap: () {
+                      achievementController.clear();
+                      dateController.clear();
+                      descriptionController.clear();
+                      admissionNumberController.clear();
+                      
                       uploadImageToStorage(file).then((value) => showToast(msg: 'New Achievement Added!'));
                     },
                     child: Container(

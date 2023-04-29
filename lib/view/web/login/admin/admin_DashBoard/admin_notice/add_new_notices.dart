@@ -1,4 +1,5 @@
 import 'package:dujo_kerala_website/utils/utils.dart';
+import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -23,8 +24,8 @@ class AddNewNotices extends StatelessWidget {
       key: _formKey,
       child: Scaffold(
         // backgroundColor: const Color.fromARGB(255, 27, 95, 88),
-        appBar: AppBar(
-            title: Text('Add New Notice'.tr), backgroundColor: adminePrimayColor),
+        // appBar: AppBar(
+        //     title: Text('Add New Notice'.tr), backgroundColor: adminePrimayColor),
         body: Center(
           child: SingleChildScrollView(
             child: Row(
@@ -34,23 +35,32 @@ class AddNewNotices extends StatelessWidget {
                   width: screenSize.width * 1 / 2,
                   color: adminePrimayColor,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        'Hi ! Admin \n Create\n Notices',
-                        style: ralewayStyle.copyWith(
-                          fontSize: 48.0,
-                          color: AppColors.whiteColor,
-                          fontWeight: FontWeight.w800,
+                      IconButtonBackWidget(color: cWhite),
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Hi ! Admin \n Create\n Notices',
+                              style: ralewayStyle.copyWith(
+                                fontSize: 48.0,
+                                color: AppColors.whiteColor,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 300,
+                              width: screenSize.width / 2,
+                              child: LottieBuilder.network(
+                                  'https://assets7.lottiefiles.com/packages/lf20_2pckVUuMz6.json'),
+                            )
+                          ],
                         ),
                       ),
-                      SizedBox(
-                        height: 300,
-                        width: screenSize.width / 2,
-                        child: LottieBuilder.network(
-                            'https://assets7.lottiefiles.com/packages/lf20_2pckVUuMz6.json'),
-                      )
                     ],
                   ),
                 ),

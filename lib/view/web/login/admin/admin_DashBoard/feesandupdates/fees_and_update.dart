@@ -1,3 +1,4 @@
+import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -17,10 +18,10 @@ class _FeesUpdatesState extends State<FeesUpdates> {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: Text('FEES'),
-        backgroundColor: adminePrimayColor,
-      ),
+      // appBar: AppBar(
+      //   title: Text('FEES'),
+      //   backgroundColor: adminePrimayColor,
+      // ),
       backgroundColor: Colors.white,
       body: ListView(children: [
         Row(
@@ -30,40 +31,49 @@ class _FeesUpdatesState extends State<FeesUpdates> {
               height: screenSize.height,
               width: screenSize.width * 1 / 2,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    'Hi Admin ',
-                    style: ralewayStyle.copyWith(
-                      fontSize: 48.0,
-                      color: AppColors.whiteColor,
-                      fontWeight: FontWeight.w800,
+                  IconButtonBackWidget(color: cWhite),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Hi Admin ',
+                          style: ralewayStyle.copyWith(
+                            fontSize: 48.0,
+                            color: AppColors.whiteColor,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        SizedBox(
+                          height: screenSize.width / 20,
+                        ),
+                        Text(
+                          'Welcome  ',
+                          style: ralewayStyle.copyWith(
+                            fontSize: 25.0,
+                            color: AppColors.whiteColor,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                  
+                        SizedBox(
+                          height: screenSize.width / 5,
+                          width: screenSize.width / 2,
+                          child: LottieBuilder.network(
+                              'https://assets5.lottiefiles.com/packages/lf20_SyUX5x.json'),
+                        )
+                        //       SizedBox(
+                        // height: 400,
+                        // width: 600,
+                        // child: LottieBuilder.asset(
+                        //     "assets/images/")),
+                      ],
                     ),
                   ),
-                  SizedBox(
-                    height: screenSize.width / 20,
-                  ),
-                  Text(
-                    'Welcome  ',
-                    style: ralewayStyle.copyWith(
-                      fontSize: 25.0,
-                      color: AppColors.whiteColor,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-
-                  SizedBox(
-                    height: screenSize.width / 5,
-                    width: screenSize.width / 2,
-                    child: LottieBuilder.network(
-                        'https://assets5.lottiefiles.com/packages/lf20_SyUX5x.json'),
-                  )
-                  //       SizedBox(
-                  // height: 400,
-                  // width: 600,
-                  // child: LottieBuilder.asset(
-                  //     "assets/images/")),
                 ],
               ),
             ),
