@@ -113,7 +113,8 @@ class MothersPtaScreen extends StatelessWidget {
                             ),
                             sizedBoxH20,
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
                               children: [
                                 Flexible(
                                   child: LeftSideCardWidget(
@@ -145,7 +146,8 @@ class MothersPtaScreen extends StatelessWidget {
                             ),
                             sizedBoxH20,
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 Flexible(
                                   child: LeftSideCardWidget(

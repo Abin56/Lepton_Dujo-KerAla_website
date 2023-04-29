@@ -1,3 +1,4 @@
+import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -6,7 +7,8 @@ class CustomButton extends StatelessWidget {
 
   CustomButton({
     Key? key,
-    required this.text, required Null Function() onTap,
+    required this.text,
+    required Null Function() onTap,
   }) : super(key: key);
 
   @override
@@ -16,22 +18,15 @@ class CustomButton extends StatelessWidget {
       padding: EdgeInsets.all(0),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          border: Border.all(width: 1),
-          gradient: LinearGradient(
-              colors: containerColor[7],
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight),
-        ),
+            borderRadius: BorderRadius.circular(30),
+            border: Border.all(width: 1),
+            color: adminePrimayColor),
         child: Center(
-          child: Text(
-            text,
-            style: GoogleFonts.poppins(fontSize: 18,color: Colors.black
-        
-            )
-            //TextStyle(fontSize: 25, color: Color.fromARGB(0, 0, 0, 0)),
-          ),
-        ),    
+          child: Text(text,
+              style: GoogleFonts.poppins(fontSize: 18, color: Colors.white)
+              //TextStyle(fontSize: 25, color: Color.fromARGB(0, 0, 0, 0)),
+              ),
+        ),
       ),
       // )
     );

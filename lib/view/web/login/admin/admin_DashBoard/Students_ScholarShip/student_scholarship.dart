@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -123,9 +124,6 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
       key: _formKey,
       child: Scaffold(
           backgroundColor: Color.fromARGB(255, 241, 247, 246),
-          appBar: AppBar(
-              title: Text('ADD SCHOLARSHIP'),
-              backgroundColor: adminePrimayColor),
           body: SingleChildScrollView(
               child: Row(children: [
             Container(
@@ -133,31 +131,43 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
               width: screenSize.width * 1 / 2,
               color: adminePrimayColor,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    'Hi ! Admin ',
-                    style: ralewayStyle.copyWith(
-                      fontSize: 42.0,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w800,
+                  IconButtonBackWidget(
+                    color: cWhite,
+                  ),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Hi ! Admin ',
+                          style: ralewayStyle.copyWith(
+                            fontSize: 42.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        sizedBoxH20,
+                        Text(
+                          'Create Scholarship',
+                          style: ralewayStyle.copyWith(
+                            fontSize: 22.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        SizedBox(
+                          height: screenSize.width / 2.5,
+                          width: screenSize.width / 2,
+                          child: LottieBuilder.network(
+                              'https://assets3.lottiefiles.com/packages/lf20_cqnuh0al.json'),
+                        )
+                      ],
                     ),
                   ),
-                  Text(
-                    'Create Scholarship',
-                    style: ralewayStyle.copyWith(
-                      fontSize: 22.0,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                  SizedBox(
-                    height: screenSize.width / 2.5,
-                    width: screenSize.width / 2,
-                    child: LottieBuilder.network(
-                        'https://assets3.lottiefiles.com/packages/lf20_cqnuh0al.json'),
-                  )
                 ],
               ),
             ),
@@ -168,7 +178,7 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
               child: Column(children: [
                 Padding(
                   padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.05),
+                      top: MediaQuery.of(context).size.height * 0.10),
                   child: StreamBuilder(
                       stream: FirebaseFirestore.instance
                           .collection('SchoolListCollection')
@@ -191,7 +201,7 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                           ),
                           child: DropdownButton(
                               hint: Padding(
-                                  padding: const EdgeInsets.all(10.0),
+                                  padding: EdgeInsets.all(10.0),
                                   child: (classListValue == null)
                                       ? Text(
                                           "Select Class",
@@ -354,7 +364,7 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                           width: screenSize.width / 40,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: Color.fromARGB(255, 0, 0, 0),
+                            color: Color.fromARGB(255, 82, 196, 173),
                           ),
                           child: Icon(
                             Icons.camera_alt_outlined,
@@ -366,6 +376,12 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                     ),
                   ],
                 ),
+                sizedBoxH20,
+                Text(
+                  'Upload Photo',
+                  style: TextStyle(color: adminePrimayColor),
+                ),
+                sizedBoxH20,
                 Padding(
                   padding: const EdgeInsets.only(left: 80, right: 80, top: 20),
                   child: TextFormField(
@@ -522,8 +538,8 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                     },
                     child: (loadingStatus == false)
                         ? Container(
-                            height: screenSize.width * 1 / 17,
-                            width: screenSize.width * 1 / 6.5,
+                            height: screenSize.width * 1 / 20,
+                            width: screenSize.width * 1 / 4,
                             //color: Colors.red,
                             child: CustomContainer(
                               text: 'CREATE',

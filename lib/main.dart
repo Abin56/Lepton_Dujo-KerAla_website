@@ -6,6 +6,7 @@ import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/admin_d
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/all_Students/all_students_view_Screen.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/bus_Route/bus_route.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/bus_Route/create_bus_route.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/feesandupdates/fees_and_update.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/non_Teaching_staff/non_teaching_staff.dart';
 import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/teachers_panel_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -35,7 +36,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    
     return ScreenUtilInit(
         minTextAdapt: true,
         splitScreenMode: true,
@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
                   //ClassTeacherAdmin(schoolID: '',teacherEmail:'' ,teacherID: '',)
                   // AllStudentList()
                   // AdminDashBoardPage(schoolID: '',date: '',loginTime: '',wadmin: '',key: null,)
-                  // AllStdf()
+                  // FeesUpdates()
                   // BusRoute()
                   // NonTeachingLogin(schoolID: '',)
                   DujoHomePage());
