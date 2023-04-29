@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/subject/subject_screen.dart';
 import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/upload_timetable/select_class.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 
@@ -48,7 +49,6 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
   DateTime? _selectedDateForApplyDate;
   DateTime? _selectedToDate;
   GetFireBaseData getFireBaseData = Get.put(GetFireBaseData());
-  TextEditingController subjectController = TextEditingController();
   TextEditingController applynewBatchYearContoller = TextEditingController();
   TextEditingController selectedToDaterContoller = TextEditingController();
   String teacherClassId = '';
@@ -106,7 +106,6 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
     List<Widget> pages = [
       SubmitSubjectClassTeacher(
           schoolID: Get.find<AdminLoginScreenController>().schoolID,
-          subjecController: subjectController,
           teacherClassId: teacherClassId), //1
       AddStudentFromClassTeacher(
         schoolID: Get.find<AdminLoginScreenController>().schoolID,
@@ -702,204 +701,3 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
   }
 }
 
-class SubmitSubjectClassTeacher extends StatelessWidget {
-  const SubmitSubjectClassTeacher({
-    super.key,
-    required this.subjecController,
-    required this.schoolID,
-    required this.teacherClassId,
-  });
-  final TextEditingController subjecController;
-  final String schoolID;
-  final String teacherClassId;
-
-  @override
-  Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
-    return Scaffold(
-      body: SingleChildScrollView(
-          child: Column(children: [
-        Container(
-          child: Row(children: [
-            Container(
-              color: Color.fromARGB(255, 12, 34, 133),
-              height: screenSize.height,
-              width: screenSize.width * 1 / 2,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  IconButtonBackWidget(color: cWhite),
-                  Expanded(
-                    child: Column(
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Hi Admin ',
-                              style: ralewayStyle.copyWith(
-                                fontSize: 48.0,
-                                color: AppColors.whiteColor,
-                                fontWeight: FontWeight.w800,
-                              ),
-                            ),
-                            SizedBox(
-                              height: screenSize.width / 20,
-                            ),
-                            Text(
-                              'Welcome',
-                              style: GoogleFonts.aclonica(
-                                fontSize: 25.0,
-                                color: AppColors.whiteColor,
-                                fontWeight: FontWeight.w800,
-                              ),
-                            ),
-                            SizedBox(
-                              height: screenSize.width / 3.5,
-                              width: screenSize.width / 1,
-                              child: LottieBuilder.network(
-                                  "https://assets6.lottiefiles.com/packages/lf20_KWUxUaGUE7.json"),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-                padding: EdgeInsets.only(left: screenSize.width / 8),
-                child: Container(
-                    height: screenSize.height * 1 / 1,
-                    width: screenSize.width * 1 / 3,
-                    child: SingleChildScrollView(
-                        child: Column(children: [
-                      Container(
-                        child: Container(
-                          margin: EdgeInsets.only(top: 50.h),
-                          width: 500.h,
-                          //height: screenSize.width/30,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                margin:
-                                    EdgeInsets.only(top: screenSize.width / 10),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    border: Border()),
-                                child: TextFormField(
-                                    controller: subjecController,
-                                    decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor:
-                                            Color.fromARGB(255, 255, 255, 255),
-                                        hintText: 'Name of Subject',
-                                        prefixIcon: Icon(Icons.subject_rounded,
-                                            color: Color.fromARGB(
-                                                255, 14, 11, 168)),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(19),
-                                          borderSide: BorderSide(),
-                                        )),
-                                    style: const TextStyle(
-                                      color: Color.fromARGB(255, 0, 0, 0),
-                                      fontSize: 18,
-                                    )),
-                              ),
-                              SizedBox(
-                                height: screenSize.width / 30,
-                              ),
-                              Container(
-                                width: 280.w,
-                                height: 70.h,
-                                decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                        colors: containerColor[8]),
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: TextButton(
-                                  child: const Text('Add',
-                                      style: TextStyle(
-                                          fontSize: 20, color: Colors.white)),
-                                  onPressed: () async {
-                                    FirebaseFirestore.instance
-                                        .collection("SchoolListCollection")
-                                        .doc(schoolID)
-                                        .collection("Classes")
-                                        .doc(teacherClassId)
-                                        .collection("Subjects")
-                                        .doc(subjecController.text
-                                            .trim()
-                                            .toString())
-                                        .set({
-                                      'subject': subjecController.text
-                                          .trim()
-                                          .toString(),
-                                      'id': subjecController.text
-                                          .trim()
-                                          .toString()
-                                    }).then((value) => showDialog(
-                                              context: context,
-                                              barrierDismissible:
-                                                  false, // user must tap button!
-                                              builder: (BuildContext context) {
-                                                return AlertDialog(
-                                                  title: const Text('Message'),
-                                                  content:
-                                                      SingleChildScrollView(
-                                                    child: ListBody(
-                                                      children: const <Widget>[
-                                                        Text(
-                                                            'Successfully created'),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  actions: <Widget>[
-                                                    TextButton(
-                                                      child: const Text('ok'),
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            ));
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                height: screenSize.width / 38,
-                              ),
-                              Container(
-                                width: 230.w,
-                                height: 68.h,
-                                decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                        colors: containerColor[8]),
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: TextButton(
-                                  child: const Text('Cancel',
-                                      style: TextStyle(
-                                          fontSize: 20, color: Colors.white)),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ]))))
-          ]),
-        ),
-      ])),
-    );
-  }
-}

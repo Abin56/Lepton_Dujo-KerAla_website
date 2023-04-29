@@ -14,6 +14,7 @@ class GetFireBaseData extends GetxController {
   RxString schoolName = ''.obs;
   RxString placeNameofSchool = ''.obs;
   RxString parentNAme = ''.obs;
+  RxString classIDForaddSubject = ''.obs;
 
   Future<void> getBatchYearId() async {
     var vari = await FirebaseFirestore.instance
@@ -64,6 +65,20 @@ class GetFireBaseData extends GetxController {
         .where('studentID', isEqualTo: studentID)
         .get();
     parentNAme.value = vari.docs[0].data()['parentName'];
+  }
+
+  Future<void> addSubjectforGetClassID(String teacherdocid) async {
+    var vari = await FirebaseFirestore.instance
+        .collection("SchoolListCollection")
+        .doc(Get.find<AdminLoginScreenController>().schoolID)
+        .collection(Get.find<GetFireBaseData>().bYear.value)
+        .doc(Get.find<GetFireBaseData>().bYear.value)
+        .collection("Classes")
+        .where('classIncharge', isEqualTo: teacherdocid)
+        .get();
+    classIDForaddSubject.value = vari.docs[0].data()['classID'];
+        log('GetxPage4>>>>Teacher iD>>>$teacherdocid');
+    log('GetxPage4>>>>>>ClassID>$classIDForaddSubject');
   }
 
   @override
