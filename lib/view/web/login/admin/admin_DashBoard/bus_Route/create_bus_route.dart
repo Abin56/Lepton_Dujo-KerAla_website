@@ -89,77 +89,81 @@ class _CreateBusRouteState extends State<CreateBusRoute> {
             SizedBox(
                 width: size.width * 1 / 2,
                 height: size.height,
-                child: SingleChildScrollView(
-                  child: Form(
-                    key: formKey,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          left: size.width / 10, right: size.width / 10),
-                      child: Column(children: [
-
-                        BusRouteTextFormWidget(
-                        //  textEditingController:routeController,
-                          function: checkFieldEmpty,
-                          labelText: 'Route Number',
-                          icon: Icons.route_outlined,
-                        ),
-
-                        BusRouteTextFormWidget(
-                          //textEditingController:busnumberController ,
-                          function: checkFieldEmpty,
-                          labelText: 'Bus Number',
-                          icon: Icons.bus_alert,
-                        ),
-
-                        BusRouteTextFormWidget(
-                         // textEditingController:driverphoneController,
-                          function: checkFieldPhoneNumberIsValid,
-                          labelText: 'Driver Mobile Number',
-                          icon: Icons.phone_android_sharp,
-                        ),
-
-                        BusRouteTextFormWidget(
-                         // textEditingController: assistancephoneController,
-                          function: checkFieldPhoneNumberIsValid,
-                          labelText: 'Assistance Mobile Number',
-                          icon: Icons.phone_android,
-                        ),
-
-                        BusRouteTextFormWidget(
-                         // textEditingController:staffinchargeController ,
-                          function: checkFieldEmpty,
-                          labelText: 'Staff inCharge',
-                          icon: Icons.person_2,
-                        ),
-
-                        SizedBox(
-                          height: 30.h,
-                        ),
-                        Padding(
-                            padding: EdgeInsets.only(
-                                left: size.width * 1 / 20,
-                                right: size.width * 1 / 20),
-                            child: Container(
-                              height: size.width * 1 / 30,
-                              width: size.width * 1 / 9,
-                              decoration: BoxDecoration(
-                                  color: Colors.blue,
-                                  borderRadius: BorderRadius.circular(14)),
-                              child: TextButton(
-                                style: TextButton.styleFrom(
-                                  foregroundColor:
-                                      Color.fromARGB(255, 255, 255, 255),
-                                  padding: const EdgeInsets.all(9.0),
-                                  textStyle: const TextStyle(fontSize: 17),
+                child: Container(
+                  margin: EdgeInsets.only(top: 120.w),
+                  child: SingleChildScrollView(
+                    child: Form(
+                      key: formKey,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: size.width / 10, right: size.width / 10),
+                        child: Column(children: [
+                
+                          BusRouteTextFormWidget(
+                          //  textEditingController:routeController,
+                            function: checkFieldEmpty,
+                            labelText: 'Route Number',
+                            icon: Icons.route_outlined,
+                          ),
+                
+                          BusRouteTextFormWidget(
+                            //textEditingController:busnumberController ,
+                            function: checkFieldEmpty,
+                            labelText: 'Bus Number',
+                            icon: Icons.bus_alert,
+                          ),
+                
+                          BusRouteTextFormWidget(
+                           // textEditingController:driverphoneController,
+                            function: checkFieldPhoneNumberIsValid,
+                            labelText: 'Driver Mobile Number',
+                            icon: Icons.phone_android_sharp,
+                          ),
+                
+                          BusRouteTextFormWidget(
+                           // textEditingController: assistancephoneController,
+                            function: checkFieldPhoneNumberIsValid,
+                            labelText: 'Assistance Mobile Number',
+                            icon: Icons.phone_android,
+                          ),
+                
+                          BusRouteTextFormWidget(
+                           // textEditingController:staffinchargeController ,
+                            function: checkFieldEmpty,
+                            labelText: 'Staff inCharge',
+                            icon: Icons.person_2,
+                          ),
+                
+                          SizedBox(
+                            height: 30.h,
+                          ),
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  left: size.width * 1 / 20,
+                                  right: size.width * 1 / 20),
+                              child: Container(
+                                height: size.width * 1 / 30,
+                                width: size.width * 1 / 9,
+                                decoration: BoxDecoration(
+                                    color: adminePrimayColor,
+                                    borderRadius: BorderRadius.circular(14)),
+                                child: TextButton(
+                                  style: TextButton.styleFrom(
+                                    foregroundColor:
+                                        Color.fromARGB(255, 255, 255, 255),
+                                    padding: const EdgeInsets.all(9.0),
+                                    textStyle: const TextStyle(fontSize: 17),
+                                  ),
+                                  onPressed: () async {
+                                    bool? result =
+                                        formKey.currentState?.validate();
+                                  },
+                                  child: 
+                                   Text('Create'),
                                 ),
-                                onPressed: () async {
-                                  bool? result =
-                                      formKey.currentState?.validate();
-                                },
-                                child: const Text('Create'),
-                              ),
-                            )),
-                      ]),
+                              )),
+                        ]),
+                      ),
                     ),
                   ),
                 ))

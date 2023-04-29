@@ -41,15 +41,7 @@ class MyApp extends StatelessWidget {
                 accentColor: const Color(0xFF02BB9F),
               ),
               home:
-              //FoodTimeTableMenu()
-                  // AlumniAssocation()
-                  //ClassTeacherAdmin(schoolID: '',teacherEmail:'' ,teacherID: '',)
-                  // AllStudentList()
-                  // AdminDashBoardPage(schoolID: '',date: '',loginTime: '',wadmin: '',key: null,)
-                  // AllStdf()
-                  // BusRoute()
-                  // NonTeachingLogin(schoolID: '',)
-                  DujoHomePage()
+               DujoHomePage()
                   );
         });
   }

@@ -80,7 +80,7 @@ class _NonTeachingLoginState extends State<NonTeachingLogin> {
                         height: size.width / 20,
                       ),
                       Text(
-                        'Welcome ',
+                        'Non-Teaching Staff ',
                         style: ralewayStyle.copyWith(
                           fontSize: 25.0,
                           color: Colors.white,
@@ -201,7 +201,7 @@ class _NonTeachingLoginState extends State<NonTeachingLogin> {
                                 height: size.width * 1 / 30,
                                 width: size.width * 1 / 9,
                                 decoration: BoxDecoration(
-                                    color: Colors.blue,
+                                    color: adminePrimayColor,
                                     borderRadius: BorderRadius.circular(14)),
                                 child: TextButton(
                                   style: TextButton.styleFrom(

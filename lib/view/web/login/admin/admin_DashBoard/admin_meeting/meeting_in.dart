@@ -203,7 +203,7 @@ class SubmitButtonMeetinWidget extends StatelessWidget {
       height: size.width * 1 / 30,
       width: size.width * 1 / 5,
       decoration: BoxDecoration(
-          color: Colors.blue, borderRadius: BorderRadius.circular(14)),
+          color:adminePrimayColor, borderRadius: BorderRadius.circular(14)),
       child: TextButton(
         style: TextButton.styleFrom(
           foregroundColor: const Color.fromARGB(255, 255, 255, 255),

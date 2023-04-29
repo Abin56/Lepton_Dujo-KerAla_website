@@ -26,8 +26,7 @@ class _FoodBeveragesState extends State<FoodBeverages> {
   Widget build(BuildContext context) {
    var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Food and Beverages'),backgroundColor:Color.fromARGB(255, 12, 34, 133) ),
+    
 
 
  body:  SingleChildScrollView(
@@ -61,7 +60,7 @@ class _FoodBeveragesState extends State<FoodBeverages> {
                                       ),
                                       SizedBox(height: screenSize.width/20,),
                                        Text(
-                                        'Welcome',
+                                        'Food and Beverages',
                                         style: GoogleFonts.aclonica(
                                           fontSize: 25.0,
                                           color: AppColors.whiteColor,
