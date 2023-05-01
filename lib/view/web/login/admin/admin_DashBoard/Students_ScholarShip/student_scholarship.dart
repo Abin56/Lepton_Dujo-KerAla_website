@@ -489,7 +489,7 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                         height: screenSize.width * 1 / 20,
                         width: screenSize.width * 1 / 4,
                         //color: Colors.red,
-                        child: CustomContainer(
+                        child: CustomContainer2(
                           text: 'Upload Document',
                           onTap: () {},
                         )),
@@ -541,7 +541,7 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                             height: screenSize.width * 1 / 20,
                             width: screenSize.width * 1 / 4,
                             //color: Colors.red,
-                            child: CustomContainer(
+                            child: CustomContainer1(
                               text: 'CREATE',
                               onTap: () {},
                             ))
@@ -556,3 +556,94 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
     );
   }
 }
+
+class CustomContainer1 extends StatelessWidget {
+  final String text;
+  final VoidCallback onTap;
+  const CustomContainer1({Key? key, required this.text, required this.onTap})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
+    return Padding(
+        padding: EdgeInsets.all(8.0),
+        child: InkWell(
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+              border: Border.all(width: 1),
+              gradient: LinearGradient(
+                  colors: containerColor[8],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter),
+            ),
+            child: Center(
+              child: Text(
+                text,
+                style: TextStyle(
+                    fontSize: 25, color: Color.fromARGB(255, 251, 250, 250)),
+              ),
+            ),
+          ),
+        ));
+  }
+}
+
+const containerColor = [
+  [Color(0xff6448fe), Color(0xff5fc6ff)],
+  [Color.fromARGB(255, 212, 150, 145), Color.fromARGB(255, 212, 150, 145)],
+  [Color(0xfffe6197), Color(0xffffb463)],
+  [Color.fromARGB(255, 30, 196, 30), Color.fromARGB(255, 79, 163, 30)],
+  [Color.fromARGB(255, 116, 130, 255), Color.fromARGB(255, 86, 74, 117)],
+  [Color.fromARGB(255, 205, 215, 15), Color.fromARGB(255, 224, 173, 22)],
+  [Color.fromARGB(255, 208, 104, 105), Color.fromARGB(255, 241, 66, 66)],
+  [Color.fromARGB(255, 255, 255, 255), Color.fromARGB(255, 205, 216, 228)],
+  [adminePrimayColor, adminePrimayColor]
+];
+
+class CustomContainer2 extends StatelessWidget {
+  final String text;
+  final VoidCallback onTap;
+  const CustomContainer2({Key? key, required this.text, required this.onTap})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
+    return Padding(
+        padding: EdgeInsets.all(8.0),
+        child: InkWell(
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+              //border: Border.all(width: 1),
+              gradient: LinearGradient(
+                  colors: containerColor1[9],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter),
+            ),
+            child: Center(
+              child: Text(
+                text,
+                style: TextStyle(
+                    fontSize: 25, color: Color.fromARGB(255, 251, 250, 250)),
+              ),
+            ),
+          ),
+        ));
+  }
+}
+
+const containerColor1 = [
+  [Color(0xff6448fe), Color(0xff5fc6ff)],
+  [Color.fromARGB(255, 212, 150, 145), Color.fromARGB(255, 212, 150, 145)],
+  [Color(0xfffe6197), Color(0xffffb463)],
+  [Color.fromARGB(255, 30, 196, 30), Color.fromARGB(255, 79, 163, 30)],
+  [Color.fromARGB(255, 116, 130, 255), Color.fromARGB(255, 86, 74, 117)],
+  [Color.fromARGB(255, 205, 215, 15), Color.fromARGB(255, 224, 173, 22)],
+  [Color.fromARGB(255, 208, 104, 105), Color.fromARGB(255, 241, 66, 66)],
+  [Color.fromARGB(255, 255, 255, 255), Color.fromARGB(255, 205, 216, 228)],
+  [adminePrimayColor, adminePrimayColor],
+  [cBlue, cBlue],
+];

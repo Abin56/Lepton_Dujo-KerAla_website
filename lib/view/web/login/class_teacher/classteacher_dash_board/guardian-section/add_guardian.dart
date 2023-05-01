@@ -1,9 +1,12 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/view/fonts/fonts.dart';
+import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
@@ -34,60 +37,98 @@ class _AddGuardianState extends State<AddGuardian> {
 
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-          backgroundColor: cWhite, iconTheme: IconThemeData(color: cBlack)),
       body: Row(
-        children: <Widget>[
-          //left section
-
-          SizedBox(
-            width: size.width / 2,
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 50),
-                child: Form(
-                  key: formKey,
+        children: [
+          Container(
+            height: screenSize.height * 1.4,
+            width: screenSize.width * 1 / 2,
+            color: adminePrimayColor,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                IconButtonBackWidget(
+                  color: cWhite,
+                ),
+                Expanded(
                   child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'ADD NEW GUARDIAN',
-                          style: TextStyle(
-                            fontSize: 35,
-                            fontWeight: FontWeight.bold,
-                          ),
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Hi ! Admin ',
+                        style: ralewayStyle.copyWith(
+                          fontSize: 42.0,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w800,
                         ),
-                        sizedBoxH30,
-                        AddGuardianWidget(
-                          function: checkFieldEmpty,
-                          labelText: 'Guardian Name',
-                          textEditingController: guardianNameController,
+                      ),
+                      sizedBoxH20,
+                      Text(
+                        'Add New Guardians',
+                        style: ralewayStyle.copyWith(
+                          fontSize: 22.0,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w800,
                         ),
-                        sizedBoxH30,
-                        dropDownButtonsec(),
-                        classesListValue == null
-                            ? const SizedBox()
-                            : dropDownButton(),
-                        AddGuardianWidget(
-                          function: checkFieldPhoneNumberIsValid,
-                          labelText: 'Guardian PhoneNumber',
-                          textEditingController: guardianPhoneNoController,
-                        ),
-                        sizedBoxH30,
-                        SizedBox(
-                          width: 350.w,
-                          height: 70.h,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: adminePrimayColor,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
+                      ),
+                      SizedBox(
+                        height: screenSize.width / 3,
+                        width: screenSize.width / 2,
+                        child: LottieBuilder.network(
+                            'https://assets7.lottiefiles.com/packages/lf20_uwh9uhdt.json'),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          //right section
+
+          Container(
+            width: size.width / 2,
+            height: size.height * 1.4,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50),
+              child: Form(
+                key: formKey,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      sizedBoxH30,
+                      dropDownButtonsec(),
+                      classesListValue == null
+                          ? const SizedBox()
+                          : dropDownButton(),
+                      sizedBoxH30,
+                      AddGuardianWidget(
+                        function: checkFieldEmpty,
+                        labelText: 'Guardian Name',
+                        textEditingController: guardianNameController,
+                      ),
+                      sizedBoxH30,
+                      AddGuardianWidget(
+                        function: checkFieldPhoneNumberIsValid,
+                        labelText: 'Guardian PhoneNumber',
+                        textEditingController: guardianPhoneNoController,
+                      ),
+                      sizedBoxH30,
+                      SizedBox(
+                        width: 350.w,
+                        height: 70.h,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: adminePrimayColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                            onPressed: () async {
-                           if (formKey.currentState!.validate()) {
+                          ),
+                          onPressed: () async {
+                            if (formKey.currentState!.validate()) {
                               final guardianDetails = GuardianAddModel(
                                 studentID: studentID,
                                 createdate: DateTime.now().toString(),
@@ -97,32 +138,20 @@ class _AddGuardianState extends State<AddGuardian> {
                                     guardianNameController.text.trim(),
                               );
                               CreateGuardiansAddToFireBase()
-                                    .createSchoolController(
-                                        guardianDetails,
-                                        context,
-                                        widget.schoolId,
-                                        classesListValue['id']);
-                             
-                           }
-                            },
-                            child: const Text("Add Guardian"),
-                          ),
-                        )
-                      ]),
-                ),
+                                  .createSchoolController(
+                                      guardianDetails,
+                                      context,
+                                      widget.schoolId,
+                                      classesListValue['id']);
+                            }
+                          },
+                          child: const Text("Add Guardian"),
+                        ),
+                      )
+                    ]),
               ),
             ),
           ),
-          SizedBox(
-            width: size.width / 2,
-            height: size.height,
-            child: Image.asset(
-              'assets/images/guardian.jpg',
-              width: size.width / 2,
-              fit: BoxFit.fill,
-            ),
-          ),
-          //right section
         ],
       ),
     );

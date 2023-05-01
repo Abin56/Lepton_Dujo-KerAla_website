@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../model/create_classModel/create_classModel.dart';
@@ -32,8 +33,8 @@ class _AllClassesListViewForTeacherState
     log(widget.classID);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add teachers for the subject"), backgroundColor: adminePrimayColor
-      ),
+          title: Text("Add teachers for the subject"),
+          backgroundColor: adminePrimayColor),
       body: SafeArea(
         child: StreamBuilder(
           stream: FirebaseFirestore.instance
@@ -66,8 +67,10 @@ class _AllClassesListViewForTeacherState
                               );
                             },
                             child: Container(
-                              height: 60,
-                              width: double.infinity,
+                              height: 60.w,
+                              width: 300.w,   
+
+                              
                               color: Colors.amber,
                               child: Center(
                                 child: Text(data.teacherName),

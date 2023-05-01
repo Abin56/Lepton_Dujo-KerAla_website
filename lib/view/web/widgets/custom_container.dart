@@ -1,5 +1,5 @@
+import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:flutter/material.dart';
-
 
 class CustomContainer extends StatelessWidget {
   final String text;
@@ -18,13 +18,14 @@ class CustomContainer extends StatelessWidget {
               borderRadius: BorderRadius.circular(18),
               border: Border.all(width: 1),
               gradient: LinearGradient(
-              colors: containerColor[7],
-               begin: Alignment.bottomCenter, end: Alignment.topCenter),
+                  colors: containerColor[7],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter),
             ),
             child: Center(
               child: Text(
                 text,
-                style: TextStyle(fontSize: 25, color: Colors.black),
+                style: TextStyle(fontSize: 25, color: Color.fromARGB(255, 251, 250, 250)),
               ),
             ),
           ),
@@ -40,5 +41,6 @@ const containerColor = [
   [Color.fromARGB(255, 116, 130, 255), Color.fromARGB(255, 86, 74, 117)],
   [Color.fromARGB(255, 205, 215, 15), Color.fromARGB(255, 224, 173, 22)],
   [Color.fromARGB(255, 208, 104, 105), Color.fromARGB(255, 241, 66, 66)],
-   [Color.fromARGB(255, 255, 255, 255), Color.fromARGB(255, 205, 216, 228)]
+  [Color.fromARGB(255, 255, 255, 255), Color.fromARGB(255, 205, 216, 228)],
+  [adminePrimayColor, adminePrimayColor]
 ];
