@@ -1,5 +1,8 @@
 
+// ignore_for_file: sort_child_properties_last
+
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/events/event_edit.dart';
+import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -26,35 +29,44 @@ class _EventsUpdatesState extends State<EventsUpdates> {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Events'),backgroundColor: adminePrimayColor,
-      ),
+      // appBar: AppBar(
+      //   title: Text('Events'),backgroundColor: adminePrimayColor,
+      // ),
       body: 
         Row(
           children: [
              Container(height: screenSize.height,
                   width: screenSize.width * 1 / 2,
                   child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Hi ! Admin \n Create\n Events',
-                            style: ralewayStyle.copyWith(
-                              fontSize: 48.0,
-                              color: AppColors.whiteColor,
-                              fontWeight: FontWeight.w800,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      IconButtonBackWidget(color: cWhite),
+                      Expanded(
+                        child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Hi ! Admin \n Create\n Events',
+                                  style: ralewayStyle.copyWith(
+                                    fontSize: 48.0,
+                                    color: AppColors.whiteColor,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                            
+                                SizedBox(
+                                  height: 300,
+                                  width:screenSize.width/2,
+                                  child: LottieBuilder.network(
+                                      'https://assets1.lottiefiles.com/packages/lf20_98vgucqb.json'),
+                                )
+                              ],
                             ),
-                          ),
-                      
-                          SizedBox(
-                            height: 300,
-                            width:screenSize.width/2,
-                            child: LottieBuilder.network(
-                                'https://assets1.lottiefiles.com/packages/lf20_98vgucqb.json'),
-                          )
-                        ],
                       ),
+                    ],
+                  ),
                   color: adminePrimayColor),
             Container(
               child: Column(

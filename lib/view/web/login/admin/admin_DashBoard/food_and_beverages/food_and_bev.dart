@@ -1,4 +1,5 @@
 
+import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -25,8 +26,7 @@ class _FoodBeveragesState extends State<FoodBeverages> {
   Widget build(BuildContext context) {
    var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Food and Beverages'),backgroundColor:Color.fromARGB(255, 12, 34, 133) ),
+    
 
 
  body:  SingleChildScrollView(
@@ -40,32 +40,42 @@ class _FoodBeveragesState extends State<FoodBeverages> {
                            height: screenSize.height,
                           width: screenSize.width * 1 / 2,
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Hi Admin ',
-                                  style: ralewayStyle.copyWith(
-                                    fontSize: 48.0,
-                                    color: AppColors.whiteColor,
-                                    fontWeight: FontWeight.w800,
+                                IconButtonBackWidget(color: cWhite,),
+
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Hi Admin ',
+                                        style: ralewayStyle.copyWith(
+                                          fontSize: 48.0,
+                                          color: AppColors.whiteColor,
+                                          fontWeight: FontWeight.w800,
+                                        ),
+                                      ),
+                                      SizedBox(height: screenSize.width/20,),
+                                       Text(
+                                        'Food and Beverages',
+                                        style: GoogleFonts.aclonica(
+                                          fontSize: 25.0,
+                                          color: AppColors.whiteColor,
+                                          fontWeight: FontWeight.w800,
+                                        ),
+                                      ),                            
+                                      SizedBox(
+                                        height: screenSize.width/3.5,
+                                        width:screenSize.width/1,
+                                        child: LottieBuilder.network(
+                                            "https://assets4.lottiefiles.com/packages/lf20_ysas4vcp.json"),
+                                      )                        
+                                    ],
                                   ),
                                 ),
-                                SizedBox(height: screenSize.width/20,),
-                                 Text(
-                                  'Welcome',
-                                  style: GoogleFonts.aclonica(
-                                    fontSize: 25.0,
-                                    color: AppColors.whiteColor,
-                                    fontWeight: FontWeight.w800,
-                                  ),
-                                ),                            
-                                SizedBox(
-                                  height: screenSize.width/3.5,
-                                  width:screenSize.width/1,
-                                  child: LottieBuilder.network(
-                                      "https://assets4.lottiefiles.com/packages/lf20_ysas4vcp.json"),
-                                )                        
                               ],
                             ),
                     ),                            

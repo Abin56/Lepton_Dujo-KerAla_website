@@ -160,6 +160,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
                       
                       SchoolTextFormFieldWidget(textEditingController: adminPasswordController,
                       function: checkFieldPasswordIsValid,
+                      
                       labelText: 'Password',
                        icon: Icons.lock_outline_sharp,),
                   
@@ -209,6 +210,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
                               ),
                             ),
                             onPressed: () async {
+                              
                                bool? result = formKey.currentState?.validate();
                               final schoolDetails = SchoolsToBeVerified(
                                   schoolName: schoolNameController.text,

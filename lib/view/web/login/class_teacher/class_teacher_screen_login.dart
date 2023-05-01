@@ -260,6 +260,9 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                             ///////////////////////////
                             await classTeacherLoginController
                                 .classTeacherLogin(context);
+                                classTeacherLoginController.passwordController.clear();
+                                classTeacherLoginController.idController.clear();
+
                           },
                           borderRadius: BorderRadius.circular(16.0),
                           child: Ink(

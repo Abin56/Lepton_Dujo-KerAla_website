@@ -1,6 +1,8 @@
+import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:lottie/lottie.dart';
 
@@ -52,7 +54,7 @@ class _BusRouteState extends State<BusRoute> {
                         height: size.width / 20,
                       ),
                       Text(
-                        'Welcome  ',
+                        'Bus Route ',
                         style: ralewayStyle.copyWith(
                           fontSize: 25.0,
                           color: AppColors.whiteColor,
@@ -76,77 +78,65 @@ class _BusRouteState extends State<BusRoute> {
               ),
            ] ),
             ),
-            Padding(
-              padding: EdgeInsets.only(left: size.width / 15),
+            SizedBox(
+              height: size.height * 1 / 1,
+                width: 650.w,
               child: Container(
-                height: size.height * 1 / 1,
-                width: size.width * 1 / 3,
+                margin: EdgeInsets.only(left: 140.w,top: 120.w),
+                
                 child: 
                     Column(
                       children: [
-                        Padding(
-                            padding: EdgeInsets.only(
-                              left: size.width * 1 / 16,
-                              top: size.width * 1 / 15,
-                            ),
-                            child: (InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => CreateBusRoute(),
-                                    ));
-                              },
-                              child: Container(
-                                  height: size.width * 1 / 10,
-                                  width: size.width * 1 / 3,
-                                  child: CustomContainer(
-                                    text: 'Create bus route',
-                                    onTap: () {},
-                                  )),
-                            ))),
-                        Padding(
-                            padding: EdgeInsets.only(
-                              left: size.width * 1 / 15,
-                              top: size.width * 1 / 20,
-                            ),
-                            child: (InkWell(
-                              onTap: () {
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //       builder: (context) => AdminTeacherList(),
-                                //     ));
-                              },
-                              child: Container(
-                                  height: size.width * 1 / 10,
-                                  width: size.width * 1 / 3,
-                                  child: CustomContainer(
-                                    text: 'Update  Bus Route',
-                                    onTap: () {},
-                                  )),
-                            ))),
-                        Padding(
-                            padding: EdgeInsets.only(
-                              left: size.width * 1 / 15,
-                              top: size.width * 1 / 20,
-                            ),
-                            child: (InkWell(
-                              onTap: () {
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //       builder: (context) => AdminTeacherList(),
-                                //     ));
-                              },
-                              child: Container(
-                                  height: size.width * 1 / 10,
-                                  width: size.width * 1 / 3,
-                                  child: CustomContainer(
-                                    text: 'Remove  Bus Route',
-                                    onTap: () {},
-                                  )),
-                            ))),
+                        (InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CreateBusRoute(),
+                                ));
+                          },
+                          child: Container(
+                              height: size.width * 1 / 13,
+                              width: size.width * 1 / 4,
+                              child: CustomContainer(
+                                text: 'Create bus route',
+                                onTap: () {},
+                              )),
+                        )),
+                        sizedBoxH20,
+                        (InkWell(
+                          onTap: () {
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) => AdminTeacherList(),
+                            //     ));
+                          },
+                          child: Container(
+                              height: size.width * 1 / 13,
+                              width: size.width * 1 / 4,
+                              child: CustomContainer(
+                                text: 'Update  Bus Route',
+                                onTap: () {},
+                              )),
+                        )),
+                         sizedBoxH20,
+                        (InkWell(
+                          onTap: () {
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) => AdminTeacherList(),
+                            //     ));
+                          },
+                          child: Container(
+                              height: size.width * 1 / 13,
+                              width: size.width * 1 / 4,
+                              child: CustomContainer(
+                                text: 'Remove  Bus Route',
+                                onTap: () {},
+                              )),
+                        )),
                       
                     
                   
