@@ -1,5 +1,6 @@
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -107,10 +108,10 @@ class ClassTeacherCreateEventsPage extends StatelessWidget {
                                           ),
                                 sizedBoxH20,
                                 Padding(
-                                  padding:  EdgeInsets.only(left: size.width/20,right: size.width/20),
+                                  padding:  EdgeInsets.only(left: 50.w,right: 50.w,top: 30.h),
                                   child: Container(
-                                    height: size.width/25,
-                                    width: size.width/15,
+                                    height: 60.h,
+                                    width: 250.w,
                                     child: ElevatedButton(
                                     
                                         style: ElevatedButton.styleFrom(backgroundColor: adminePrimayColor,

@@ -177,8 +177,8 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
                         ),
                         
                          Container(
-                          height: screenSize.width/1.5,
-                      width:screenSize.width/7.5 ,
+                           height: screenSize.width/1.5,
+                           width:screenSize.width/7.5 ,
                            child: Form(
                             key: formKey3,
                              child: Column(

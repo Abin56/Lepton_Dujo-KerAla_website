@@ -85,24 +85,27 @@ class _AchievementsState extends State<Achievements> {
                           
                           child: Column(
           children: [
-            (InkWell(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AddAchievements(
-                        schoolID: widget.schoolID,
-                      ),
-                    ));
-              },
-              child: SizedBox(
-                  height: screenSize.width * 1 / 10,
-                  width: screenSize.width * 1 / 3,
-                  child: CustomContainer(
-                    text: 'Add Achievements',
-                    onTap: () {},
-                  )),
-            )),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AddAchievements(
+                          schoolID: widget.schoolID,
+                        ),
+                      ));
+                },
+                child: SizedBox(
+                    height: screenSize.width * 1 / 15,
+                    width: screenSize.width * 1 / 3,
+                    child: CustomContainer(
+                      text: 'Add Achievements',
+                      onTap: () {},
+                    )),
+              ),
+            ),
             Padding(
                 padding: const EdgeInsets.all(10),
                 child: (InkWell(
@@ -115,7 +118,7 @@ class _AchievementsState extends State<Achievements> {
                         ));
                   },
                   child: SizedBox(
-                      height: screenSize.width * 1 / 10,
+                      height: screenSize.width * 1 / 15,
                       width: screenSize.width * 1 / 3,
                       child: CustomContainer(
                         text: 'Edit  Achievements',
@@ -133,7 +136,7 @@ class _AchievementsState extends State<Achievements> {
                   //       ));
                   // },
                   child: SizedBox(
-                      height: screenSize.width * 1 / 10,
+                      height: screenSize.width * 1 / 15,
                       width: screenSize.width * 1 / 3,
                       child: CustomContainer(
                         text: 'Remove Acheivements',

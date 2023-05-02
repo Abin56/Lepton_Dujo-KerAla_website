@@ -1,5 +1,6 @@
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../model/guardian/guardian_model.dart';
 
@@ -54,11 +55,11 @@ class EditGuardianDetails extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: screenSize.width * 1 / 25,
-                width: screenSize.width * 1 / 7,
+                height: 60.h,
+                width: 250.w,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 3, 39, 68),
+                    backgroundColor: cBlue,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),

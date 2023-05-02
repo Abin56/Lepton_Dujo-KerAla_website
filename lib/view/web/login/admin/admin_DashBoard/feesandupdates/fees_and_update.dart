@@ -104,8 +104,8 @@ class _FeesUpdatesState extends State<FeesUpdates> {
                             // );
                           },
                           child: Container(
-                              height: screenSize.width * 1 / 20,
-                              width: screenSize.width * 1 / 3.7,
+                              height: screenSize.width * 1 / 15,
+                              width: screenSize.width * 1 / 3,
                               child: CustomContainer(
                                 text: "Create Invoices",
                                 onTap: () {},
@@ -128,8 +128,8 @@ class _FeesUpdatesState extends State<FeesUpdates> {
                               // );
                             },
                             child: Container(
-                              height: screenSize.width * 1 / 20,
-                              width: screenSize.width * 1 / 3.7,
+                              height: screenSize.width * 1 / 15,
+                              width: screenSize.width * 1 / 3,
                               child: CustomContainer(
                                 text: 'Edit Invoices',
                                 onTap: () {},
@@ -151,8 +151,8 @@ class _FeesUpdatesState extends State<FeesUpdates> {
                             // );
                           },
                           child: Container(
-                            height: screenSize.width * 1 / 20,
-                            width: screenSize.width * 1 / 3.7,
+                            height: screenSize.width * 1 / 15,
+                            width: screenSize.width * 1 / 3,
                             child: CustomContainer(
                               text: 'Remove Invoices',
                               onTap: () {},

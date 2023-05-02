@@ -3,6 +3,7 @@ import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../../model/admin_models/nonteaching_staffs_model/non_teaching_staff_model.dart';
@@ -198,8 +199,8 @@ class _NonTeachingLoginState extends State<NonTeachingLogin> {
                             left: size.width * 1 / 20, right: size.width * 1 / 20),
                         child: (loadingStatus == false)
                             ? Container(
-                                height: size.width * 1 / 30,
-                                width: size.width * 1 / 9,
+                                height: 60.h,
+                                width: 250.w,
                                 decoration: BoxDecoration(
                                     color: adminePrimayColor,
                                     borderRadius: BorderRadius.circular(14)),

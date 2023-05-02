@@ -1,8 +1,12 @@
 import 'package:dujo_kerala_website/view/web/home/dujo_home.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/bus_Route/create_bus_route.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/events/events_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
+import 'ui team/abin/login_dummy/main_login_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,7 +45,10 @@ class MyApp extends StatelessWidget {
                 accentColor: const Color(0xFF02BB9F),
               ),
               home:
-               DujoHomePage()
+              DummyLogin()
+             // EventsUpdates(schoolID: '',)
+             // CreateBusRoute()
+              // DujoHomePage()
                   );
         });
   }

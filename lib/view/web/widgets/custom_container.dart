@@ -25,7 +25,7 @@ class CustomContainer extends StatelessWidget {
             child: Center(
               child: Text(
                 text,
-                style: TextStyle(fontSize: 25, color: Color.fromARGB(255, 251, 250, 250)),
+                style: TextStyle(fontSize: 25, color: cBlack),
               ),
             ),
           ),

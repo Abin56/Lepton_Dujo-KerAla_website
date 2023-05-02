@@ -210,7 +210,7 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                             ),
                           ),
                         ),
-                        sizedBoxH10,
+                        sizedBoxH30,
                         Container(
                           height: screenSize.width * 1 / 30,
                           width: screenSize.width * 1 / 6,

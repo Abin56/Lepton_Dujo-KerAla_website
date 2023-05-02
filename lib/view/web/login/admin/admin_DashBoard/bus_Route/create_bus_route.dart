@@ -68,7 +68,7 @@ class _CreateBusRouteState extends State<CreateBusRoute> {
                             fontWeight: FontWeight.w800,
                           ),
                         ),
-                  
+                  sizedBoxH20,
                         SizedBox(
                           height: size.width / 5,
                           width: size.width / 2,
@@ -137,31 +137,30 @@ class _CreateBusRouteState extends State<CreateBusRoute> {
                           SizedBox(
                             height: 30.h,
                           ),
-                          Padding(
-                              padding: EdgeInsets.only(
-                                  left: size.width * 1 / 20,
-                                  right: size.width * 1 / 20),
-                              child: Container(
-                                height: size.width * 1 / 30,
-                                width: size.width * 1 / 9,
-                                decoration: BoxDecoration(
-                                    color: adminePrimayColor,
-                                    borderRadius: BorderRadius.circular(14)),
-                                child: TextButton(
-                                  style: TextButton.styleFrom(
-                                    foregroundColor:
-                                        Color.fromARGB(255, 255, 255, 255),
-                                    padding: const EdgeInsets.all(9.0),
-                                    textStyle: const TextStyle(fontSize: 17),
-                                  ),
-                                  onPressed: () async {
-                                    bool? result =
-                                        formKey.currentState?.validate();
-                                  },
-                                  child: 
-                                   Text('Create'),
+                          Center(
+                            child: Container(
+                              margin: EdgeInsets.only(left: 40.w),
+                              height: 60.w,
+                              width: 300.w,
+                              decoration: BoxDecoration(
+                                  color: adminePrimayColor,
+                                  borderRadius: BorderRadius.circular(14)),
+                              child: TextButton(
+                                style: TextButton.styleFrom(
+                                  foregroundColor:
+                                      Color.fromARGB(255, 255, 255, 255),
+                                  padding: const EdgeInsets.all(9.0),
+                                  textStyle: const TextStyle(fontSize: 17),
                                 ),
-                              )),
+                                onPressed: () async {
+                                  bool? result =
+                                      formKey.currentState?.validate();
+                                },
+                                child: 
+                                 Text('Create'),
+                              ),
+                            ),
+                          ),
                         ]),
                       ),
                     ),

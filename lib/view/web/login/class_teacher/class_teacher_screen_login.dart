@@ -230,7 +230,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                               hintStyle: ralewayStyle.copyWith(
                                 fontWeight: FontWeight.w400,
                                 color: AppColors.blueDarkColor.withOpacity(0.5),
-                                fontSize: 12.0,
+                                fontSize: 12.0.w,
                               ),
                             ),
                           ),
@@ -277,7 +277,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                               style: ralewayStyle.copyWith(
                                 fontWeight: FontWeight.w700,
                                 color: const Color(0xFF26A69A),
-                                fontSize: 16.0,
+                                fontSize: 16.0.w,
                               ),
                             ),
                           ),

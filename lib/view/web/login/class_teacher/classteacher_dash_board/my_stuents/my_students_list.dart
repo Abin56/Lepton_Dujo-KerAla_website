@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -57,10 +58,10 @@ class _MyStudentsListViewScreenState extends State<MyStudentsListViewScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "M Y S T U D E N T S",
+                    "M Y  S T U D E N T S",
                     style: GoogleFonts.montserrat(
                         color: const Color.fromRGBO(158, 158, 158, 1),
-                        fontSize: 30,
+                        fontSize: 30.w,
                         fontWeight: FontWeight.bold),
                   ),
                 ),

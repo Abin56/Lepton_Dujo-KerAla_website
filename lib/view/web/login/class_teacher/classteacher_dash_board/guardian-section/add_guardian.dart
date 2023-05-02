@@ -117,35 +117,38 @@ class _AddGuardianState extends State<AddGuardian> {
                         textEditingController: guardianPhoneNoController,
                       ),
                       sizedBoxH30,
-                      SizedBox(
-                        width: 350.w,
-                        height: 70.h,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: adminePrimayColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
+                      Padding(
+                        padding:  EdgeInsets.only(left: 50.w,bottom: 50.w,top: 30.w),
+                        child: SizedBox(
+                          width: 250.w,
+                          height: 60.h,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: adminePrimayColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
                             ),
+                            onPressed: () async {
+                              if (formKey.currentState!.validate()) {
+                                final guardianDetails = GuardianAddModel(
+                                  studentID: studentID,
+                                  createdate: DateTime.now().toString(),
+                                  guardianPhoneNumber:
+                                      guardianPhoneNoController.text.trim(),
+                                  guardianName:
+                                      guardianNameController.text.trim(),
+                                );
+                                CreateGuardiansAddToFireBase()
+                                    .createSchoolController(
+                                        guardianDetails,
+                                        context,
+                                        widget.schoolId,
+                                        classesListValue['id']);
+                              }
+                            },
+                            child: const Text("Add Guardian"),
                           ),
-                          onPressed: () async {
-                            if (formKey.currentState!.validate()) {
-                              final guardianDetails = GuardianAddModel(
-                                studentID: studentID,
-                                createdate: DateTime.now().toString(),
-                                guardianPhoneNumber:
-                                    guardianPhoneNoController.text.trim(),
-                                guardianName:
-                                    guardianNameController.text.trim(),
-                              );
-                              CreateGuardiansAddToFireBase()
-                                  .createSchoolController(
-                                      guardianDetails,
-                                      context,
-                                      widget.schoolId,
-                                      classesListValue['id']);
-                            }
-                          },
-                          child: const Text("Add Guardian"),
                         ),
                       )
                     ]),
