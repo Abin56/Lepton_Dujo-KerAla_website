@@ -1,41 +1,36 @@
-// ignore_for_file: sort_child_properties_last
-
-import 'dart:developer';
-
+import 'package:dujo_kerala_website/controller/teacher_controller/teacher_controller.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-
-import '../../../../../../../model/teacher/add_teacher_model.dart';
+import '../../../../../../model/teacher/add_teacher_model.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../fonts/fonts.dart';
 
 class AddTeacherSectionScreen extends StatelessWidget {
-  String schoolID;
-  TextEditingController emailIDController = TextEditingController();
-  TextEditingController nameController = TextEditingController();
-  TextEditingController phoneNumber = TextEditingController();
-  TextEditingController employeeID = TextEditingController();
+  final String schoolID;
+  final TeacherController teacherController = Get.put(TeacherController());
+
   AddTeacherSectionScreen({super.key, required this.schoolID});
 
   @override
   Widget build(BuildContext context) {
-    log(schoolID);
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      //backgroundColor: const Color.fromARGB(255, 27, 95, 88),
-     
       body: SingleChildScrollView(
         child: Row(
           children: [
             Container(
               height: screenSize.height,
               width: screenSize.width * 1 / 2,
+              color: adminePrimayColor,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  IconButtonBackWidget(color: cWhite,),
+                  IconButtonBackWidget(
+                    color: cWhite,
+                  ),
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -60,7 +55,6 @@ class AddTeacherSectionScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              color: adminePrimayColor,
             ),
             Container(
               color: Colors.white,
@@ -68,44 +62,44 @@ class AddTeacherSectionScreen extends StatelessWidget {
               width: screenSize.width * 1 / 2,
               child: Column(children: [
                 Padding(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                       top: 80, bottom: 10, left: 100, right: 100),
                   child: TextField(
-                    controller: nameController,
-                    decoration: InputDecoration(
+                    controller: teacherController.nameController,
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Name',
                     ),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                       top: 30, bottom: 10, left: 100, right: 100),
                   child: TextField(
-                    controller: emailIDController,
-                    decoration: InputDecoration(
+                    controller: teacherController.emailIDController,
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Email',
                     ),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                       top: 30, bottom: 10, left: 100, right: 100),
                   child: TextField(
-                    controller: phoneNumber,
-                    decoration: InputDecoration(
+                    controller: teacherController.phoneNumber,
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Phone Number',
                     ),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                       top: 30, bottom: 10, left: 100, right: 100),
                   child: TextField(
-                    controller: employeeID,
-                    decoration: InputDecoration(
+                    controller: teacherController.employeeID,
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Employee ID',
                     ),
@@ -118,7 +112,7 @@ class AddTeacherSectionScreen extends StatelessWidget {
                       width: 200,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
-                        gradient: LinearGradient(
+                        gradient: const LinearGradient(
                             colors: [
                               Color(0xFF26A69A),
                               Color.fromARGB(255, 9, 49, 45),
@@ -128,24 +122,25 @@ class AddTeacherSectionScreen extends StatelessWidget {
                       ),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromARGB(255, 3, 39, 68),
+                          backgroundColor: const Color.fromARGB(255, 3, 39, 68),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),
                         onPressed: () async {
-                          log('pres');
-                          final teacherDetails = AddTeachersModel(
-                              teacherEmail: emailIDController.text.trim(),
-                              teacherPhNo: phoneNumber.text.trim(),
-                              id: emailIDController.text.trim(),
-                              teacherName: nameController.text.trim(),
-                              employeeID: employeeID.text.trim(),
-                              joinDate: DateTime.now().toString());
-                          CreateTeachersAddToFireBase().createSchoolController(
-                              teacherDetails, context, schoolID);
+                          final teacher = AddTeachersModel(
+                            docid: "",
+                            teacherName: teacherController.nameController.text,
+                            employeeID:
+                                teacherController.emailIDController.text,
+                            createdAt: DateTime.now().toString(),
+                            teacherPhNo: teacherController.phoneNumber.text,
+                            teacherEmail:
+                                teacherController.emailIDController.text,
+                          );
+                          teacherController.createNewTeacher(teacher);
                         },
-                        child: Text('Add Teacher'),
+                        child: const Text('Add Teacher'),
                       ),
                     ))
               ]),

@@ -1,42 +1,35 @@
-//     final AddTeachersModel = AddTeachersModelFromJson(jsonString);
-
-// ignore_for_file: file_names, non_constant_identifier_names
-
 import 'dart:convert';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dujo_kerala_website/view/constant/constant.dart';
-import 'package:flutter/material.dart';
-
-AddTeachersModel AddTeachersModelFromJson(String str) =>
+AddTeachersModel addTeachersModelFromJson(String str) =>
     AddTeachersModel.fromJson(json.decode(str));
 
-String AddTeachersModelToJson(AddTeachersModel data) =>
+String addTeachersModelToJson(AddTeachersModel data) =>
     json.encode(data.toJson());
 
 class AddTeachersModel {
-  AddTeachersModel(
-      {required this.id,
-      required this.teacherName,
-      required this.employeeID,
-      required this.joinDate,
-      required this.teacherPhNo,
-      required this.teacherEmail,
-      this.userRole = 'teacher'});
+  AddTeachersModel({
+    required this.docid,
+    required this.teacherName,
+    required this.employeeID,
+    required this.createdAt,
+    required this.teacherPhNo,
+    required this.teacherEmail,
+    this.userRole = 'teacher',
+  });
 
   String teacherName;
-  String id;
+  String docid;
   String employeeID;
-  String joinDate;
+  String createdAt;
   String teacherPhNo;
   String teacherEmail;
   String userRole;
 
   factory AddTeachersModel.fromJson(Map<String, dynamic> json) =>
       AddTeachersModel(
-        id: json["id"] ?? '',
+        docid: json["docid"] ?? '',
         teacherName: json["teacherName"] ?? '',
-        joinDate: json["joinDate"] ?? '',
+        createdAt: json["joinDate"] ?? '',
         employeeID: json["employeeID"] ?? '',
         teacherPhNo: json["teacherPhNo"] ?? '',
         teacherEmail: json["teacherEmail"] ?? '',
@@ -44,57 +37,12 @@ class AddTeachersModel {
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
+        "docid": docid,
         "teacherName": teacherName,
-        "joinDate": joinDate,
+        "joinDate": createdAt,
         "teacherPhNo": teacherPhNo,
         "employeeID": employeeID,
         "teacherEmail": teacherEmail,
         "userRole": userRole,
       };
-}
-
-class CreateTeachersAddToFireBase {
-  Future createSchoolController(
-      AddTeachersModel productModel, context, id) async {
-    try {
-      final firebase = FirebaseFirestore.instance;
-      final doc = await firebase
-          .collection("SchoolListCollection")
-          .doc(id)
-          .collection("Teachers")
-          .doc(productModel.teacherEmail)
-          .set(productModel.toJson())
-          .then(
-        (value) {
-          return showDialog(
-            context: context,
-            barrierDismissible: false, // user must tap button!
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: const Text('Message'),
-                content: SingleChildScrollView(
-                  child: ListBody(
-                    children: <Widget>[
-                      Text('Successfully created'),
-                    ],
-                  ),
-                ),
-                actions: <Widget>[
-                  TextButton(
-                    child: const Text('ok'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              );
-            },
-          );
-        },
-      );
-    } on FirebaseException catch (e) {
-      print('Error ${e.message.toString()}');
-    }
-  }
 }
