@@ -1,4 +1,5 @@
 import 'package:dujo_kerala_website/view/web/home/dujo_home.dart';
+import 'package:dujo_kerala_website/view/web/home/homep.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/bus_Route/create_bus_route.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/events/events_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
                 accentColor: const Color(0xFF02BB9F),
               ),
               home:
+             // HomeP()
               DummyLogin()
              // EventsUpdates(schoolID: '',)
              // CreateBusRoute()

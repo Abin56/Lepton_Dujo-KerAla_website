@@ -12,6 +12,7 @@ class AppColors {
 }
 
 const Color adminePrimayColor = Color.fromARGB(255, 6, 71, 157);
+const Color adminePrimayColor1 = Color.fromARGB(255, 67, 0, 212);
 const Color cWhite = Color(0xffFFFFFF);
 const Color cBlack = Colors.black;
 const Color cBlue = Colors.blue;
