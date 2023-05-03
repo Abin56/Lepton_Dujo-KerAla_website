@@ -27,8 +27,6 @@ class AdminLoginScreenController extends GetxController {
   TextEditingController schoolIdController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-
-
   Future<void> loginFunction(
     BuildContext context,
   ) async {
