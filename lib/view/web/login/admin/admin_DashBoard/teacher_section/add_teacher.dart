@@ -72,19 +72,15 @@ class AddTeacherSectionScreen extends StatelessWidget {
                         validator: checkFieldEmpty,
                       ),
                       CreateTeacherTextInputFieldWidget(
-                        labelText: "Email",
-                        textEditingController:
-                            teacherController.emailIDController,
-                        validator: checkFieldEmailIsValid,
-                      ),
-                      CreateTeacherTextInputFieldWidget(
                         labelText: "Phone Number",
-                        textEditingController: teacherController.phoneNumber,
+                        textEditingController:
+                            teacherController.phoneNumberController,
                         validator: checkFieldPhoneNumberIsValid,
                       ),
                       CreateTeacherTextInputFieldWidget(
                         labelText: "Employee ID",
-                        textEditingController: teacherController.employeeID,
+                        textEditingController:
+                            teacherController.employeeIDController,
                         validator: checkFieldEmpty,
                       ),
                       Padding(
@@ -113,20 +109,19 @@ class AddTeacherSectionScreen extends StatelessWidget {
                                                 teacherName: teacherController
                                                     .nameController.text,
                                                 employeeID: teacherController
-                                                    .emailIDController.text,
+                                                    .employeeIDController.text,
                                                 createdAt:
                                                     DateTime.now().toString(),
                                                 teacherPhNo: teacherController
-                                                    .phoneNumber.text,
-                                                teacherEmail: teacherController
-                                                    .emailIDController.text,
+                                                    .phoneNumberController.text,
+                                                teacherEmail: "",
                                                 altPhoneNo: '',
                                                 district: '',
                                                 gender: '',
                                                 houseName: '',
                                                 houseNumber: '',
                                                 place: '',
-                                                userRole: '',
+                                                userRole: 'teacher',
                                                 imageId: '',
                                                 imageUrl: '');
                                             teacherController

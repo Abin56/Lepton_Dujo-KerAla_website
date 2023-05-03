@@ -7,10 +7,9 @@ import 'package:dujo_kerala_website/model/teacher/teacher_model.dart';
 
 class TeacherController extends GetxController {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-  final TextEditingController emailIDController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController phoneNumber = TextEditingController();
-  final TextEditingController employeeID = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
+  final TextEditingController employeeIDController = TextEditingController();
   RxBool isLoading = RxBool(false);
 
   ///creating a temporary teacher collection. It will be shows in main collection only whenever teacher signup on mobile device.
@@ -43,9 +42,8 @@ class TeacherController extends GetxController {
   }
 
   void clearFields() {
-    emailIDController.clear();
     nameController.clear();
-    phoneNumber.clear();
-    employeeID.clear();
+    phoneNumberController.clear();
+    employeeIDController.clear();
   }
 }

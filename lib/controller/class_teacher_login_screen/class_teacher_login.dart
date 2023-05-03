@@ -1,96 +1,58 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
+import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/teachers_panel_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../view/web/login/class_teacher/classteacher_dash_board/teachers_panel_screen.dart';
 import '../admin_login_screen/admin_login_screen_controller.dart';
-import '../get_firebase-data/get_firebase_data.dart';
 
 class ClassTeacherLoginController extends GetxController {
-  TextEditingController idController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-
-  CollectionReference collectioRef = FirebaseFirestore.instance
-      .collection("SchoolListCollection")
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final firebaseFirestore = FirebaseFirestore.instance
+      .collection('SchoolListCollection')
       .doc(Get.find<AdminLoginScreenController>().schoolID)
       .collection("Teachers");
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  RxBool isLoading = RxBool(false);
 
-  classTeacherLogin(BuildContext context) async {
-    //>>>>>>>>>>>>>>>>>Checking ID<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+  //class Teacher Login
 
-    Query query =
-        collectioRef.where("teacherEmail", isEqualTo: idController.text.trim());
-    QuerySnapshot querySnapshot = await query.get();
-    final docData = querySnapshot.docs.map((doc) => doc.data()).toList();
+  Future<void> classTeacherLogin(BuildContext context) async {
+    try {
+      isLoading.value = true;
+      firebaseAuth
+          .signInWithEmailAndPassword(
+              email: emailController.text, password: passwordController.text)
+          .then((value) async {
+//fetching user collection from firebase firestore
+        final DocumentSnapshot<Map<String, dynamic>> result =
+            await firebaseFirestore.doc(value.user?.uid).get();
+//Checking if it is class teacher or not
 
-    Query queries = collectioRef.where("employeeID",
-        isEqualTo: passwordController.text.trim());
-    QuerySnapshot querySnapshott = await queries.get();
-    final docDataa = querySnapshott.docs.map((doc) => doc.data()).toList();
-    log(query.toString());
-    log(docDataa.toString());
-
-    if (docDataa.isNotEmpty && docData.isNotEmpty) {
-      log('<<<<<<<<<<<<<<<<<<<<${idController.text}');
-      log('################${passwordController.text}');
-      Navigator.push(context, MaterialPageRoute(
-        builder: (context) {
-          TeacherLoginIDSaver.id = idController.text.trim();
-          return ClassTeacherAdmin(
-            schoolID: Get.find<AdminLoginScreenController>().schoolID,
-            teacherID: idController.text.trim(),
-            teacherEmail: idController.text.trim(),
-          );
-        },
-      ));
-      log('Correct password');
-    } else {
-      showDialog(
-        context: context,
-        barrierDismissible: false, // user must tap button!
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('Message'),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: const <Widget>[
-                  Text('Please enter a valid username and password')
-                ],
-              ),
+        if (result.data()?["userRole"] == "classTeacher") {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => ClassTeacherAdmin(
+                  schoolID: Get.find<AdminLoginScreenController>().schoolID,
+                  teacherID: value.user?.uid ?? "",
+                  teacherEmail: value.user?.email ?? ""),
             ),
-            actions: <Widget>[
-              TextButton(
-                child: const Text('ok'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
           );
-        },
-      );
-    }
-  }
+        } else {
+          await firebaseAuth.signOut();
+          showToast(msg: "You are not a Class Teacher");
+        }
 
-  Future<QuerySnapshot<Map<String, dynamic>>> checkSampoorna(
-      String classID, String studentID) async {
-    Future<QuerySnapshot<Map<String, dynamic>>> docs = FirebaseFirestore
-        .instance
-        .collection("SchoolListCollection")
-        .doc(Get.find<AdminLoginScreenController>().schoolID)
-        .collection(Get.find<GetFireBaseData>().bYear.value)
-        .doc(Get.find<GetFireBaseData>().bYear.value)
-        .collection("Classes")
-        .doc(classID)
-        .collection("Students")
-        .doc(studentID)
-        .collection("sampoorna")
-        .get();
-    return docs;
+        emailController.clear();
+        passwordController.clear();
+      });
+      isLoading.value = false;
+    } catch (e) {
+      showToast(msg: "Login Failed");
+      isLoading.value = false;
+    }
   }
 }
