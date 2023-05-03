@@ -238,35 +238,36 @@ class AddStudentsToFireBase {
           .doc(Get.find<GetFireBaseData>().bYear.value)
           .collection("Classes")
           .doc(classId)
-          .collection('Students')
-          .add(productModel.toMap())
-          .then((value) {
-        studentId = value.id;
-        firebase
-            .collection("SchoolListCollection")
-            .doc(Get.find<AdminLoginScreenController>().schoolID)
-            .collection(Get.find<GetFireBaseData>().bYear.value)
-            .doc(Get.find<GetFireBaseData>().bYear.value)
-            .collection("Classes")
-            .doc(classId)
-            .collection('Students')
-            .doc(value.id)
-            .update({"docid": value.id});
-      }).then((value) {
-        firebase
-            .collection("SchoolListCollection")
-            .doc(schoolid)
-            .collection("AllStudents")
-            .doc(studentId)
-            .set(productModel.toMap())
-            .then((value) {
-          firebase
-              .collection("SchoolListCollection")
-              .doc(schoolid)
-              .collection("AllStudents")
-              .doc(studentId)
-              .update({"docid": studentId});
-        }).then(
+          .collection('TempStudentCollection')
+          .add(productModel.toMap()).
+      //     .then((value) {
+      //   studentId = value.id;
+      //   firebase
+      //       .collection("SchoolListCollection")
+      //       .doc(Get.find<AdminLoginScreenController>().schoolID)
+      //       .collection(Get.find<GetFireBaseData>().bYear.value)
+      //       .doc(Get.find<GetFireBaseData>().bYear.value)
+      //       .collection("Classes")
+      //       .doc(classId)
+      //       .collection('Students')
+      //       .doc(value.id)
+      //       .update({"docid": value.id});
+      // }).then((value) {
+      //   firebase
+      //       .collection("SchoolListCollection")
+      //       .doc(schoolid)
+      //       .collection("AllStudents")
+      //       .doc(studentId)
+      //       .set(productModel.toMap())
+      //       .then((value) {
+      //     firebase
+      //         .collection("SchoolListCollection")
+      //         .doc(schoolid)
+      //         .collection("AllStudents")
+      //         .doc(studentId)
+      //         .update({"docid": studentId});
+      //   }).
+        then(
           (value) {
             return showDialog(
               context: context,
@@ -277,7 +278,7 @@ class AddStudentsToFireBase {
                   content: SingleChildScrollView(
                     child: ListBody(
                       children: const <Widget>[
-                        Text('Successfully created'),
+                        Text('New Student Successfully created'),
                       ],
                     ),
                   ),
@@ -294,7 +295,7 @@ class AddStudentsToFireBase {
             );
           },
         );
-      });
+      
       // .collection(classId)
       // .doc(productModel.admissionNumber)
       // .set(productModel.toJson())
@@ -302,4 +303,5 @@ class AddStudentsToFireBase {
       print('Error ${e.message.toString()}');
     }
   }
+
 }

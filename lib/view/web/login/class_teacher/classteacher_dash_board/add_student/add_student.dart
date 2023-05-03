@@ -236,33 +236,33 @@ class _AddStudentFromClassTeacherState
                               ),
                             )),
                         Padding(
-                          padding: EdgeInsets.all(15),
+                          padding: const EdgeInsets.all(15),
                           child: TextFormField(
                             validator: checkFieldEmpty,
                             controller: studentNameController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'Name',
                             ),
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.all(15),
+                          padding: const EdgeInsets.all(15),
                           child: TextFormField(
                             validator: checkFieldPhoneNumberIsValid,
                             controller: parentPhNoController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'Guardian Phone Number',
                             ),
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.all(15),
+                          padding: const EdgeInsets.all(15),
                           child: TextFormField(
                             validator: checkFieldEmpty,
                             controller: addmissionNumberController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'AdmissionNumber',
                             ),
