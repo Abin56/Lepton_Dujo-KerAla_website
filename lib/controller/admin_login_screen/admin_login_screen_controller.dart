@@ -18,6 +18,7 @@ import '../get_firebase-data/get_firebase_data.dart';
 
 class AdminLoginScreenController extends GetxController {
   final GlobalKey<FormState> _secondFormkey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _forgetFormkey = GlobalKey<FormState>();
 
   String schoolID = schoolListValue?['docid'];
   String schoolName = schoolListValue?['schoolName'];
@@ -248,5 +249,94 @@ class AdminLoginScreenController extends GetxController {
       selectedToDaterContoller.text = formatted.toString();
       log(formatted.toString());
     }
+  }
+
+  Future<void> forgetPassWord(BuildContext context) async {
+    try {
+      return showDialog(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          TextEditingController emailController = TextEditingController();
+          return Form(
+            key: _forgetFormkey,
+            child: AlertDialog(
+              title: const Text('Change Password ?'),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    Center(
+                      child: TextFormField(
+                        decoration:
+                            const InputDecoration(hintText: 'Enter your email'),
+                        validator: (value) {
+                          if (emailController.text.isEmpty) {
+                            return 'Invalid';
+                          } else {
+                            return null;
+                          }
+                        },
+                        controller: emailController,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('cancel'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                TextButton(
+                  child: const Text('ok'),
+                  onPressed: () async {
+                    if (_forgetFormkey.currentState!.validate()) {
+                      FirebaseAuth.instance
+                          .sendPasswordResetEmail(
+                              email: emailController.text.trim())
+                          .then((value) {
+                        Navigator.of(context).pop();
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false, // user must tap button!
+                          builder: (BuildContext context) {
+                            TextEditingController emailController =
+                                TextEditingController();
+                            return AlertDialog(
+                              title: const Text('Reset Password ?'),
+                              content: SingleChildScrollView(
+                                child: ListBody(
+                                  children: const <Widget>[
+                                    Center(
+                                        child: Text(
+                                            "We have sent a link Please check your email"))
+                                  ],
+                                ),
+                              ),
+                              actions: <Widget>[
+                                TextButton(
+                                  child: const Text('ok'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }).catchError((e) {
+                        return showToast(msg: 'Invalid Check Email');
+                      });
+                    }
+                  },
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    } catch (e) {}
   }
 }

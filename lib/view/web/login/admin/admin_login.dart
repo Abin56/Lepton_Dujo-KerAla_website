@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -239,11 +240,13 @@ class AdminLoginScreen extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            adminLoginScreenController.forgetPassWord(context);
+                          },
                           child: Text(
-                            'Forgot Password?',
+                            'Forgot Password?/ Reset Password ?',
                             style: ralewayStyle.copyWith(
-                              fontSize: 15.0,
+                              fontSize: 14.0,
                               color: cWhite,
                               fontWeight: FontWeight.w600,
                             ),
@@ -258,8 +261,6 @@ class AdminLoginScreen extends StatelessWidget {
                             await adminLoginScreenController.loginFunction(
                               context,
                             );
-
-                
                           },
                           borderRadius: BorderRadius.circular(16.0),
                           child: Ink(

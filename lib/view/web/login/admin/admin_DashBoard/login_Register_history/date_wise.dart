@@ -100,193 +100,73 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
                                                 TextButton(
                                                   child: const Text('ok'),
                                                   onPressed: () async {
-                                                    showDialog(
-                                                      context: context,
-                                                      barrierDismissible:
-                                                          false, // user must tap button!
-                                                      builder: (BuildContext
-                                                          context) {
-                                                        TextEditingController
-                                                            _schoolId =
-                                                            TextEditingController();
-                                                        TextEditingController
-                                                            _password =
-                                                            TextEditingController();
-                                                        return AlertDialog(
-                                                          title: const Text(
-                                                              'Authorization'),
-                                                          content:
-                                                              SingleChildScrollView(
-                                                            child: ListBody(
-                                                              children: <
-                                                                  Widget>[
-                                                                const Text(
-                                                                    "Enter ID and Password"),
-                                                                sizedBoxH10,
-                                                                Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                              .all(
-                                                                          8.0),
-                                                                  child:
-                                                                      TextFormField(
-                                                                    controller:
-                                                                        _schoolId,
-                                                                    obscureText:
-                                                                        passwordVisible,
-                                                                    decoration:
-                                                                        InputDecoration(
-                                                                      suffixIcon:
-                                                                          IconButton(
-                                                                        icon: Icon(passwordVisible
-                                                                            ? Icons.visibility_off
-                                                                            : Icons.visibility),
-                                                                        onPressed:
-                                                                            () {
-                                                                          setState(
-                                                                            () {
-                                                                              passwordVisible = !passwordVisible;
-                                                                            },
-                                                                          );
-                                                                        },
-                                                                      ),
-                                                                      border:
-                                                                          OutlineInputBorder(),
-                                                                      labelText:
-                                                                          'ID',
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                              .all(
-                                                                          8.0),
-                                                                  child:
-                                                                      TextFormField(
-                                                                    controller:
-                                                                        _password,
-                                                                    obscureText:
-                                                                        passwordVisible,
-                                                                    decoration:
-                                                                        InputDecoration(
-                                                                      suffixIcon:
-                                                                          IconButton(
-                                                                        icon: Icon(passwordVisible
-                                                                            ? Icons.visibility_off
-                                                                            : Icons.visibility),
-                                                                        onPressed:
-                                                                            () {
-                                                                          setState(
-                                                                            () {
-                                                                              passwordVisible = !passwordVisible;
-                                                                            },
-                                                                          );
-                                                                        },
-                                                                      ),
-                                                                      border:
-                                                                          OutlineInputBorder(),
-                                                                      labelText:
-                                                                          'ID',
-                                                                    ),
-                                                                  ),
-                                                                )
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          actions: <Widget>[
-                                                            TextButton(
-                                                              child: const Text(
-                                                                  'ok'),
-                                                              onPressed:
-                                                                  () async {
-                                                                if (_schoolId
-                                                                            .text
-                                                                            .trim() ==
-                                                                        FirebaseAuth.instance.currentUser!.email
-                                                                             &&
-                                                                    _password
-                                                                            .text
-                                                                            .trim() ==
-                                                                        adminpassword) {
-                                                                  await FirebaseFirestore
-                                                                      .instance
-                                                                      .collection(
-                                                                          "SchoolListCollection")
-                                                                      .doc(Get.find<
-                                                                              AdminLoginScreenController>()
-                                                                          .schoolID)
-                                                                      .collection(Get.find<
-                                                                              GetFireBaseData>()
-                                                                          .bYear
-                                                                          .value)
-                                                                      .doc(Get.find<
-                                                                              GetFireBaseData>()
-                                                                          .bYear
-                                                                          .value)
-                                                                      .collection(
-                                                                          "LoginHistory")
-                                                                      .doc(snapshot
-                                                                          .data!
-                                                                          .docs[index]['id'])
-                                                                      .delete();
+                                                    if (widget.schoolID ==
+                                                        FirebaseAuth.instance
+                                                            .currentUser!.uid) {
+                                                      await FirebaseFirestore
+                                                          .instance
+                                                          .collection(
+                                                              "SchoolListCollection")
+                                                          .doc(
+                                                              Get.find<
+                                                                      AdminLoginScreenController>()
+                                                                  .schoolID)
+                                                          .collection(
+                                                              Get.find<
+                                                                      GetFireBaseData>()
+                                                                  .bYear
+                                                                  .value)
+                                                          .doc(Get.find<
+                                                                  GetFireBaseData>()
+                                                              .bYear
+                                                              .value)
+                                                          .collection(
+                                                              "LoginHistory")
+                                                          .doc(snapshot.data!
+                                                                  .docs[index]
+                                                              ['id'])
+                                                          .delete();
 
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    } else {
+                                                      showDialog(
+                                                        context: context,
+                                                        barrierDismissible:
+                                                            false, // user must tap button!
+                                                        builder: (BuildContext
+                                                            context) {
+                                                          return AlertDialog(
+                                                            title: const Text(
+                                                                'Wrong password'),
+                                                            content:
+                                                                SingleChildScrollView(
+                                                              child: ListBody(
+                                                                children: <
+                                                                    Widget>[],
+                                                              ),
+                                                            ),
+                                                            actions: <Widget>[
+                                                              TextButton(
+                                                                child:
+                                                                    const Text(
+                                                                        'ok'),
+                                                                onPressed: () {
                                                                   Navigator.of(
                                                                           context)
                                                                       .pop();
                                                                   Navigator.of(
                                                                           context)
                                                                       .pop();
-                                                                } else {
-                                                                  showDialog(
-                                                                    context:
-                                                                        context,
-                                                                    barrierDismissible:
-                                                                        false, // user must tap button!
-                                                                    builder:
-                                                                        (BuildContext
-                                                                            context) {
-                                                                      return AlertDialog(
-                                                                        title: const Text(
-                                                                            'Wrong password'),
-                                                                        content:
-                                                                            SingleChildScrollView(
-                                                                          child:
-                                                                              ListBody(
-                                                                            children: <Widget>[],
-                                                                          ),
-                                                                        ),
-                                                                        actions: <
-                                                                            Widget>[
-                                                                          TextButton(
-                                                                            child:
-                                                                                const Text('ok'),
-                                                                            onPressed:
-                                                                                () {
-                                                                              Navigator.of(context).pop();
-                                                                              Navigator.of(context).pop();
-                                                                            },
-                                                                          ),
-                                                                        ],
-                                                                      );
-                                                                    },
-                                                                  );
-                                                                }
-                                                              },
-                                                            ),
-                                                            TextButton(
-                                                              child: const Text(
-                                                                  'cancel'),
-                                                              onPressed: () {
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop();
-                                                              },
-                                                            ),
-                                                          ],
-                                                        );
-                                                      },
-                                                    );
+                                                                },
+                                                              ),
+                                                            ],
+                                                          );
+                                                        },
+                                                      );
+                                                    }
                                                   },
                                                 ),
                                               ],
