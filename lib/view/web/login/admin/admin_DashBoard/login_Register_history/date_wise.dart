@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/login_Register_history/login_history.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -31,14 +32,16 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
   Widget build(BuildContext context) {
     log(widget.schoolID);
     return Scaffold(
-      appBar: AppBar(backgroundColor: adminePrimayColor,title: const Text("Admin Login Register (Date-Wise)"),),
+      appBar: AppBar(
+        backgroundColor: adminePrimayColor,
+        title: const Text("Admin Login Register (Date-Wise)"),
+      ),
       body: SafeArea(
           child: StreamBuilder(
               stream: FirebaseFirestore.instance
                   .collection("SchoolListCollection")
                   .doc(Get.find<AdminLoginScreenController>().schoolID)
-                  .collection(
-                      Get.find<GetFireBaseData>().bYear.value)
+                  .collection(Get.find<GetFireBaseData>().bYear.value)
                   .doc(Get.find<GetFireBaseData>().bYear.value)
                   .collection("LoginHistory")
                   .snapshots(),
@@ -77,7 +80,8 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
                                               false, // user must tap button!
                                           builder: (BuildContext context) {
                                             return AlertDialog(
-                                              title: const Text('Clear all the data?'),
+                                              title: const Text(
+                                                  'Clear all the data?'),
                                               content: SingleChildScrollView(
                                                 child: ListBody(
                                                   children: <Widget>[
@@ -87,9 +91,12 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
                                                 ),
                                               ),
                                               actions: <Widget>[
-                                                TextButton(onPressed: (){Navigator.of(
-                                                                          context)
-                                                                      .pop();}, child: Text("Cancel")),
+                                                TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: Text("Cancel")),
                                                 TextButton(
                                                   child: const Text('ok'),
                                                   onPressed: () async {
@@ -196,8 +203,8 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
                                                                 if (_schoolId
                                                                             .text
                                                                             .trim() ==
-                                                                        widget
-                                                                            .schoolID &&
+                                                                        FirebaseAuth.instance.currentUser!.email
+                                                                             &&
                                                                     _password
                                                                             .text
                                                                             .trim() ==
@@ -209,9 +216,14 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
                                                                       .doc(Get.find<
                                                                               AdminLoginScreenController>()
                                                                           .schoolID)
-                                                                      .collection(
-                                                                       Get.find<GetFireBaseData>().bYear.value)
-                                                                      .doc(Get.find<GetFireBaseData>().bYear.value)
+                                                                      .collection(Get.find<
+                                                                              GetFireBaseData>()
+                                                                          .bYear
+                                                                          .value)
+                                                                      .doc(Get.find<
+                                                                              GetFireBaseData>()
+                                                                          .bYear
+                                                                          .value)
                                                                       .collection(
                                                                           "LoginHistory")
                                                                       .doc(snapshot
