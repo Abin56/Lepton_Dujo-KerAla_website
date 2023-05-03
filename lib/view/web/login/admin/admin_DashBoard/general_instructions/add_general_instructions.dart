@@ -1,3 +1,4 @@
+import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -17,11 +18,11 @@ class AddGeneralInstruction extends StatelessWidget {
     generalInstructionsController.textEditingController.clear();
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Create Instructions'),
-        backgroundColor: adminePrimayColor,
-        elevation: 0,
-      ),
+      // appBar: AppBar(
+      //   title: Text('Create Instructions'),
+      //   backgroundColor: adminePrimayColor,
+      //   elevation: 0,
+      // ),
       body: ListView(children: [
         Row(
           children: [
@@ -30,34 +31,43 @@ class AddGeneralInstruction extends StatelessWidget {
               height: screenSize.height,
               width: screenSize.width * 1 / 2,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    'Hi Admin ',
-                    style: ralewayStyle.copyWith(
-                      fontSize: 48.0,
-                      color: AppColors.whiteColor,
-                      fontWeight: FontWeight.w800,
+                  IconButtonBackWidget(color: cWhite),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Hi Admin ',
+                          style: ralewayStyle.copyWith(
+                            fontSize: 48.0,
+                            color: AppColors.whiteColor,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        SizedBox(
+                          height: screenSize.width / 20,
+                        ),
+                        Text(
+                          'Welcome To ',
+                          style: ralewayStyle.copyWith(
+                            fontSize: 25.0,
+                            color: AppColors.whiteColor,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        SizedBox(
+                          height: screenSize.width / 5,
+                          width: screenSize.width / 2,
+                          child: LottieBuilder.network(
+                              'https://assets4.lottiefiles.com/packages/lf20_HYpftP1320.json'),
+                        )
+                      ],
                     ),
                   ),
-                  SizedBox(
-                    height: screenSize.width / 20,
-                  ),
-                  Text(
-                    'Welcome To ',
-                    style: ralewayStyle.copyWith(
-                      fontSize: 25.0,
-                      color: AppColors.whiteColor,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                  SizedBox(
-                    height: screenSize.width / 5,
-                    width: screenSize.width / 2,
-                    child: LottieBuilder.network(
-                        'https://assets4.lottiefiles.com/packages/lf20_HYpftP1320.json'),
-                  )
                 ],
               ),
             ),

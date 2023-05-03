@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:uuid/uuid.dart';
 
 const sizedBoxH10 = SizedBox(
   height: 10,
@@ -40,6 +41,9 @@ const sizedBoxw60 = SizedBox(
 );
 const sizedBoxw100 = SizedBox(
   width: 100,
+);
+const sizedBoxw20 = SizedBox(
+  width: 20,
 );
 const sizedBoxw120 = SizedBox(
   width: 120,
@@ -79,6 +83,7 @@ const sizedBoxw570 = SizedBox(
 const kwidth20 = SizedBox(
   width: 20,
 );
+const uuid = Uuid();
 
 void showToast({required String msg}) {
   Fluttertoast.showToast(

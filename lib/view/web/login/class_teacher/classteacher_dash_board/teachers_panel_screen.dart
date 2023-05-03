@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/subject/subject_screen.dart';
@@ -315,20 +317,22 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
               : Row(
                   children: [
                     Container(
+                     
                         width: screenSize.width / 6,
-                        color: Colors.black,
+                        color: adminePrimayColor,
                         child: Column(
                           children: [
+                            sizedBoxH20,
                             Row(
                               children: [
                                 IconButtonBackWidget(color: cWhite),
-                                const FittedBox(
+                                 FittedBox(
                                     child: Padding(
                                   padding: EdgeInsets.all(8.0),
                                   child: Text(
                                     'Teacher Admin Panel',
                                     style: TextStyle(
-                                        fontSize: 20,
+                                        fontSize: 20.w ,
                                         fontWeight: FontWeight.bold,
                                         color: cWhite),
                                   ),
@@ -388,12 +392,12 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                           height: 60,
                           child: Padding(
                             padding:
-                                const EdgeInsets.only(right: 30.0, left: 30),
+                                 EdgeInsets.only(right: 30.0.w, left: 30.w),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Teacher Dashboard',
+                                  'Marthoma Higher Secondary School',
                                   style: GoogleFonts.poppins(
                                       fontSize: 17.w,
                                       fontWeight: FontWeight.w500),

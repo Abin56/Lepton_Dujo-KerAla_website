@@ -44,5 +44,7 @@ class EventModel {
         "venue": venue,
         "signedBy": signedBy,
         "id" : id
+
+        
       };
 }

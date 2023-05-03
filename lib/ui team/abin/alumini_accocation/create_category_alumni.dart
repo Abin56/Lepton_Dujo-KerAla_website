@@ -3,6 +3,7 @@ import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_sc
 import 'package:dujo_kerala_website/controller/get_firebase-data/get_firebase_data.dart';
 import 'package:dujo_kerala_website/model/alumni_association_model/alumni_category_model.dart';
 import 'package:dujo_kerala_website/view/colors/colors.dart';
+import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -46,8 +47,8 @@ class CreatecategoryAlumni extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       
-      appBar: AppBar(title: const Text('Create Alumni Category'),
-      backgroundColor: adminePrimayColor,),
+      // appBar: AppBar(title: const Text(''),
+      // backgroundColor: adminePrimayColor,),
       body:
        ListView(
           children:[
@@ -58,38 +59,45 @@ class CreatecategoryAlumni extends StatelessWidget {
                        height: size.height,
                       width: size.width * 1 / 2,
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text(
-                              'Hi Admin ',
-                              style: ralewayStyle.copyWith(
-                                fontSize: 48.0,
-                                color: AppColors.whiteColor,
-                                fontWeight: FontWeight.w800,
-                              ),
-                            ),
-                            SizedBox(height: size.width/20,),
-                             Text(
-                              'Welcome To ',
-                              style: ralewayStyle.copyWith(
-                                fontSize: 25.0,
-                                color: AppColors.whiteColor,
-                                fontWeight: FontWeight.w800,
-                              ),
-                            ),
-                        
-                            SizedBox(
-                              height: size.width/5,
-                              width:size.width/2,
-                              child: LottieBuilder.network(
-                                  'https://assets1.lottiefiles.com/packages/lf20_vvtkfqbo.json'),
-                            )
+                            IconButtonBackWidget(color: cWhite,),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Hi Admin ',
+                                  style: ralewayStyle.copyWith(
+                                    fontSize: 48.0,
+                                    color: AppColors.whiteColor,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                                SizedBox(height: size.width/20,),
+                                 Text(
+                                  'Create Alumni Category ',
+                                  style: ralewayStyle.copyWith(
+                                    fontSize: 25.0,
+                                    color: AppColors.whiteColor,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                            
+                                SizedBox(
+                                  height: size.width/5,
+                                  width:size.width/2,
+                                  child: LottieBuilder.network(
+                                      'https://assets1.lottiefiles.com/packages/lf20_vvtkfqbo.json'),
+                                )
                       //       SizedBox(
                       // height: 400,
                       // width: 600,
                       // child: LottieBuilder.asset(
                       //     "assets/images/")),
+                              ],
+                            ),
                           ],
                         ),
                 ),

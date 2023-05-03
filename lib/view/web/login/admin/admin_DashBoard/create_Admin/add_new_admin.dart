@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/fonts/fonts.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -99,264 +100,268 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                 color: const Color.fromARGB(255, 6, 71, 157),
               ),
               Container(
+              //  margin: EdgeInsets.only(top: 50.h),
                 color: Colors.white,
                 height: screenSize.height,
                 width: screenSize.width * 1 / 2,
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      sizedBoxH10,
-                      Padding(
-                        padding: EdgeInsets.all(10),
-                        child: TextFormField(
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please Enter a valid Name';
-                            } else {
-                              return null;
-                            }
-                          },
-                          controller: adminUserNameController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Admin UserName',
+                child: Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Column(
+                     // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        sizedBoxH30,
+                        Padding(
+                          padding: EdgeInsets.all(10),
+                          child: TextFormField(
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Please Enter a valid Name';
+                              } else {
+                                return null;
+                              }
+                            },
+                            controller: adminUserNameController,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Admin UserName',
+                            ),
                           ),
                         ),
-                      ),
-                      sizedBoxH10,
-                      Padding(
-                        padding: EdgeInsets.all(10),
-                        child: TextFormField(
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please Enter a valid Employee ID';
-                            } else {
-                              return null;
-                            }
-                          },
-                          controller: employeeIDController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Employee ID',
+                        sizedBoxH10,
+                        Padding(
+                          padding: EdgeInsets.all(10),
+                          child: TextFormField(
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Please Enter a valid Employee ID';
+                              } else {
+                                return null;
+                              }
+                            },
+                            controller: employeeIDController,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Employee ID',
+                            ),
                           ),
                         ),
-                      ),
-                      sizedBoxH10,
-                      Padding(
-                        padding: EdgeInsets.all(10),
-                        child: TextFormField(
-                          validator: (value) {
-                            if (value!.isEmpty || value.length < 4) {
-                              return 'Please enter a valid Password';
-                            } else {
-                              return null;
-                            }
-                          },
-                          obscureText:true,
-                          controller: passwordController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Password',
+                        sizedBoxH10,
+                        Padding(
+                          padding: EdgeInsets.all(10),
+                          child: TextFormField(
+                            validator: (value) {
+                              if (value!.isEmpty || value.length < 4) {
+                                return 'Please enter a valid Password';
+                              } else {
+                                return null;
+                              }
+                            },
+                            obscureText:true,
+                            controller: passwordController,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Password',
+                            ),
                           ),
                         ),
-                      ),
-                      sizedBoxH10,
-                      Padding(
-                        padding: EdgeInsets.all(10),
-                        child: TextFormField(
-                          validator: (value) {
-                            if (passwordController.text.trim() !=
-                                confirmPasswordController.text.trim()) {
-                              return 'Password are Incorrect!!';
-                            } else {
-                              return null;
-                            }
-                          },
-                          obscureText:true,
-                          controller: confirmPasswordController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Confirm Password',
+                        sizedBoxH10,
+                        Padding(
+                          padding: EdgeInsets.all(10),
+                          child: TextFormField(
+                            validator: (value) {
+                              if (passwordController.text.trim() !=
+                                  confirmPasswordController.text.trim()) {
+                                return 'Password are Incorrect!!';
+                              } else {
+                                return null;
+                              }
+                            },
+                            obscureText:true,
+                            controller: confirmPasswordController,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Confirm Password',
+                            ),
                           ),
                         ),
-                      ),
-                      sizedBoxH10,
-                      Padding(
-                        padding: EdgeInsets.all(10),
-                        child: TextFormField(
-                          validator: (input) => input!.isValidEmail()
-                              ? null
-                              : "Please Enter a vaild email id",
-                          controller: emailController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Email',
+                        sizedBoxH10,
+                        Padding(
+                          padding: EdgeInsets.all(10),
+                          child: TextFormField(
+                            validator: (input) => input!.isValidEmail()
+                                ? null
+                                : "Please Enter a vaild email id",
+                            controller: emailController,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Email',
+                            ),
                           ),
                         ),
-                      ),
-                      sizedBoxH10,
-                      Padding(
-                        padding: EdgeInsets.all(10),
-                        child: TextFormField(
-                          validator: checkFieldPhoneNumberIsValid,
-                          controller: phoneNumberController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Phone Number',
+                        sizedBoxH10,
+                        Padding(
+                          padding: EdgeInsets.all(10),
+                          child: TextFormField(
+                            validator: checkFieldPhoneNumberIsValid,
+                            controller: phoneNumberController,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Phone Number',
+                            ),
                           ),
                         ),
-                      ),
-                      sizedBoxH10,
-                      Container(
-                        height: screenSize.width * 1 / 30,
-                        width: screenSize.width * 1 / 6,
-                        decoration: BoxDecoration(
-                            color: adminePrimayColor,
-                            borderRadius: BorderRadius.circular(14)),
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            foregroundColor: Color.fromARGB(255, 255, 255, 255),
-                            padding: const EdgeInsets.all(9.0),
-                            textStyle: const TextStyle(fontSize: 17),
-                          ),
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              showDialog(
-                                context: context,
-                                barrierDismissible:
-                                    false, // user must tap button!
-                                builder: (BuildContext context) {
-                                  TextEditingController _schoolId =
-                                      TextEditingController();
-                                  TextEditingController _password =
-                                      TextEditingController();
-                                  return AlertDialog(
-                                    title: const Text('Authorization'),
-                                    content: SingleChildScrollView(
-                                      child: ListBody(
-                                        children: <Widget>[
-                                          Text("Enter ID and Password"),
-                                          sizedBoxH10,
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Obx(() => TextFormField(
-                                                  controller: _schoolId,
-                                                  obscureText:
-                                                      _hideGetxController
-                                                          .isObscurefirst.value,
-                                                  decoration: InputDecoration(
-                                                    suffixIcon: IconButton(
-                                                      icon: Icon(_hideGetxController
-                                                              .isObscurefirst
-                                                              .value
-                                                          ? Icons.visibility
-                                                          : Icons
-                                                              .visibility_off),
-                                                      onPressed: () {
+                        sizedBoxH30,
+                        Container(
+                          height: screenSize.width * 1 / 30,
+                          width: screenSize.width * 1 / 6,
+                          decoration: BoxDecoration(
+                              color: adminePrimayColor,
+                              borderRadius: BorderRadius.circular(14)),
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              foregroundColor: Color.fromARGB(255, 255, 255, 255),
+                              padding: const EdgeInsets.all(9.0),
+                              textStyle: const TextStyle(fontSize: 17),
+                            ),
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                showDialog(
+                                  context: context,
+                                  barrierDismissible:
+                                      false, // user must tap button!
+                                  builder: (BuildContext context) {
+                                    TextEditingController _schoolId =
+                                        TextEditingController();
+                                    TextEditingController _password =
+                                        TextEditingController();
+                                    return AlertDialog(
+                                      title: const Text('Authorization'),
+                                      content: SingleChildScrollView(
+                                        child: ListBody(
+                                          children: <Widget>[
+                                            Text("Enter ID and Password"),
+                                            sizedBoxH10,
+                                            Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Obx(() => TextFormField(
+                                                    controller: _schoolId,
+                                                    obscureText:
                                                         _hideGetxController
-                                                            .toggleObscureFirst();
-                                                      },
+                                                            .isObscurefirst.value,
+                                                    decoration: InputDecoration(
+                                                      suffixIcon: IconButton(
+                                                        icon: Icon(_hideGetxController
+                                                                .isObscurefirst
+                                                                .value
+                                                            ? Icons.visibility_off
+                                                            : Icons
+                                                                .visibility),
+                                                        onPressed: () {
+                                                          _hideGetxController
+                                                              .toggleObscureFirst();
+                                                        },
+                                                      ),
+                                                      border:
+                                                          OutlineInputBorder(),
+                                                      labelText: 'ID',
                                                     ),
-                                                    border:
-                                                        OutlineInputBorder(),
-                                                    labelText: 'ID',
-                                                  ),
-                                                )),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Obx(() => TextFormField(
-                                                  controller: _password,
-                                                  obscureText:
-                                                      _hideGetxController
-                                                          .isObscurefirst
-                                                          .value,
-                                                  decoration: InputDecoration(
-                                                    suffixIcon: IconButton(
-                                                      icon: Icon(_hideGetxController
-                                                              .isObscurefirst 
-                                                              .value
-                                                          ? Icons
-                                                              .visibility_off
-                                                          :Icons.visibility ),
-                                                      onPressed: () {
+                                                  )),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Obx(() => TextFormField(
+                                                    controller: _password,
+                                                    obscureText:
                                                         _hideGetxController
-                                                            .toggleObscureSecond();
-                                                      },
+                                                            .isObscureSecond
+                                                            .value,
+                                                    decoration: InputDecoration(
+                                                      suffixIcon: IconButton(
+                                                        icon: Icon(_hideGetxController
+                                                                .isObscureSecond 
+                                                                .value
+                                                            ? Icons
+                                                                .visibility_off
+                                                            :Icons.visibility ),
+                                                        onPressed: () {
+                                                          _hideGetxController
+                                                              .toggleObscureSecond();
+                                                        },
+                                                      ),
+                                                      border:
+                                                          OutlineInputBorder(),
+                                                      labelText: 'Password',
                                                     ),
-                                                    border:
-                                                        OutlineInputBorder(),
-                                                    labelText: 'Password',
-                                                  ),
-                                                )),
-                                          )
-                                        ],
+                                                  )),
+                                            )
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        child: const Text('ok'),
-                                        onPressed: () async {
-                                          if (_schoolId.text.trim() ==
-                                                  widget.schoolID &&
-                                              _password.text.trim() ==
-                                                  adminpassword) {
-                                            createNewAdmin(
-                                                adminUserNameController.text
-                                                    .trim(),
-                                                employeeIDController.text
-                                                    .trim(),
-                                                passwordController.text.trim(),
-                                                emailController.text.trim(),
-                                                phoneNumberController.text
-                                                    .trim());
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: const Text('ok'),
+                                          onPressed: () async {
+                                            if (_schoolId.text.trim() ==
+                                                    widget.schoolID &&
+                                                _password.text.trim() ==
+                                                    adminpassword) {
+                                              createNewAdmin(
+                                                  adminUserNameController.text
+                                                      .trim(),
+                                                  employeeIDController.text
+                                                      .trim(),
+                                                  passwordController.text.trim(),
+                                                  emailController.text.trim(),
+                                                  phoneNumberController.text
+                                                      .trim());
+                                              Navigator.of(context).pop();
+                                            } else {
+                                              showDialog(
+                                                context: context,
+                                                barrierDismissible:
+                                                    false, // user must tap button!
+                                                builder: (BuildContext context) {
+                                                  return AlertDialog(
+                                                    title: const Text(
+                                                        'Wrong password'),
+                                                    content:
+                                                        SingleChildScrollView(
+                                                      child: ListBody(
+                                                        children: <Widget>[],
+                                                      ),
+                                                    ),
+                                                    actions: <Widget>[
+                                                      TextButton(
+                                                        child: const Text('ok'),
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                            }
+                                          },
+                                        ),
+                                        TextButton(
+                                          child: const Text('cancel'),
+                                          onPressed: () {
                                             Navigator.of(context).pop();
-                                          } else {
-                                            showDialog(
-                                              context: context,
-                                              barrierDismissible:
-                                                  false, // user must tap button!
-                                              builder: (BuildContext context) {
-                                                return AlertDialog(
-                                                  title: const Text(
-                                                      'Wrong password'),
-                                                  content:
-                                                      SingleChildScrollView(
-                                                    child: ListBody(
-                                                      children: <Widget>[],
-                                                    ),
-                                                  ),
-                                                  actions: <Widget>[
-                                                    TextButton(
-                                                      child: const Text('ok'),
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                          }
-                                        },
-                                      ),
-                                      TextButton(
-                                        child: const Text('cancel'),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            }
-                          },
-                          child: const Text('Create'),
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              }
+                            },
+                            child: const Text('Create'),
+                          ),
                         ),
-                      ),
-                    ]),
+                      ]),
+                ),
               ),
             ],
           ),

@@ -13,8 +13,7 @@ import 'admin/admin_login.dart';
 import 'class_teacher/class_teacher_screen_login.dart';
 
 class LoginScreen extends StatefulWidget {
-  String schoolID;
-  LoginScreen({required this.schoolID, Key? key}) : super(key: key);
+  LoginScreen({ Key? key}) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -24,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    log(widget.schoolID);
+    log(schoolListValue!["docid"]);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -89,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
                           return ClassTeacherLoginScreen(
-                            schoolID: widget.schoolID,
+                            schoolID:'',
                           );
                         },
                       ));
@@ -109,9 +108,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     onTap: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
-                          log("Admin Login>>>>>>>>>>${widget.schoolID}");
+                  
                           return AdminLoginScreen(
-                            adminSchoolId: schoolListValue!['id'],
 
                            
                           );

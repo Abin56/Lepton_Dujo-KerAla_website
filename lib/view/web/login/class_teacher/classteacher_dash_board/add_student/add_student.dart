@@ -119,7 +119,7 @@ class _AddStudentFromClassTeacherState
                 child: Center(
                   child: Container(
                     margin: EdgeInsets.only(top: 30.h),
-                    color: Colors.white,
+                    color: Colors.transparent,
                     height: size.width * 1 / 2.5,
                     width: size.width * 1 / 4,
                     child: Form(
@@ -130,7 +130,7 @@ class _AddStudentFromClassTeacherState
                             child: GetClassesListDropDownButton(
                               schoolID: Get.find<AdminLoginScreenController>()
                                   .schoolID,
-                              teacherID: widget.teacherIDE,
+                              teacherID: 'abinjohn8089@gmail.com',
                             )),
                         Padding(
                             padding: EdgeInsets.all(15),
@@ -270,14 +270,14 @@ class _AddStudentFromClassTeacherState
                         ),
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsets.only(left: 30.w, right: 30.w),
+                            padding: EdgeInsets.only(
+                                left: 50.w, right: 50.w, top: 30.h),
                             child: Container(
                               height: 60.h,
-                              width: 300.w,
+                              width: 250.w,
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      Color.fromARGB(255, 3, 39, 68),
+                                  backgroundColor: adminePrimayColor,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20),
                                   ),
@@ -316,7 +316,7 @@ class _AddStudentFromClassTeacherState
                                     selectedToDaterContoller.clear();
                                   });
                                 },
-                                child: Text("Add Student"),
+                                child: Text("Create"),
                               ),
                             ),
                           ),

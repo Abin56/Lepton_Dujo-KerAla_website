@@ -1,15 +1,18 @@
-import 'dart:developer';
+// ignore_for_file: sort_child_properties_last
 
+import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
+import 'package:lottie/lottie.dart';
 import '../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../model/parent/parent_model.dart';
 import '../../../../colors/colors.dart';
 import '../../../../constant/constant.dart';
+import '../../../../fonts/fonts.dart';
+import '../../../widgets/Iconbackbutton.dart';
 import '../../../widgets/drop_DownList/get_classes.dart';
 import '../../../widgets/drop_DownList/get_students.dart';
 
@@ -38,13 +41,42 @@ class _AddParentState extends State<AddParent> {
     log("Parent screen MAin");
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-          backgroundColor: cWhite,
-          iconTheme: const IconThemeData(color: cBlack)),
-      body: Row(
-        children: <Widget>[
-          //left section
+      
+      
 
+      
+      body: SingleChildScrollView(
+          child: Row(
+            children: [
+              Container(
+                height: size.height,
+                width: size.width * 1 / 2,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    IconButtonBackWidget(color: cWhite),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text('ADD New Parent',
+                              style: GoogleFont.headTextStyleBold),
+                          sizedBoxH20,
+                          SizedBox(
+                            height: 300,
+                            width: size.width / 2,
+                            child: LottieBuilder.network(
+                                'https://assets10.lottiefiles.com/packages/lf20_SPA6bgo7nO.json'),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                color: const Color.fromARGB(255, 6, 71, 157),
+              ),
           SizedBox(
             width: size.width / 2,
             child: SingleChildScrollView(
@@ -55,32 +87,29 @@ class _AddParentState extends State<AddParent> {
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
-                          'ADD NEW PARENT',
-                          style: TextStyle(
-                            fontSize: 35,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                        
                         sizedBoxH30,
-                        AddParentWidget(
-                            function: checkFieldEmpty,
-                            labelText: 'Parent Name',
-                            textEditingController: parentNameController),
-                        sizedBoxH30,
+                      
+                       
                         dropDownButtonsec(),
                         classesListValue == null
                             ? const SizedBox()
                             : dropDownButton(),
+                            sizedBoxH30,
+                            sizedBoxH30,
                         AddParentWidget(
                             function: checkFieldPhoneNumberIsValid,
                             labelText: 'Parent Phone Number',
                             textEditingController: parentPhoneNumberController),
                         sizedBoxH30,
+                          AddParentWidget( 
+                            function: checkFieldEmpty,
+                            labelText: 'Parent Name',
+                            textEditingController: parentNameController),
                         sizedBoxH30,
                         SizedBox(
-                          width: 350.w,
-                          height: 50.h,
+                          width: 250.w,
+                          height: 60.h,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor: adminePrimayColor,
@@ -117,18 +146,9 @@ class _AddParentState extends State<AddParent> {
               ),
             ),
           ),
-          SizedBox(
-            width: size.width / 2,
-            height: size.height,
-            child: Image.asset(
-              'assets/images/parent.jpg',
-              width: size.width / 2,
-              fit: BoxFit.fill,
-            ),
+           ],
           ),
-          //right section
-        ],
-      ),
+        ), 
     );
   }
 
