@@ -1,14 +1,18 @@
-// ignore_for_file: prefer_typing_uninitialized_variables
+// ignore_for_file: prefer_typing_uninitialized_variables, deprecated_member_use
 
 import 'dart:developer';
+import 'dart:io';
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/fonts/fonts.dart';
+import 'package:dujo_kerala_website/view/web/widgets/Create_buttonWidget.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 import 'package:uuid/uuid.dart';
 import 'package:intl/intl.dart';
@@ -28,12 +32,27 @@ class AddAchievements extends StatefulWidget {
 }
 
 class _AddAchievementsState extends State<AddAchievements> {
+
+  Future getImage() async {
+    final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
+    File _image;
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
   var classListValue;
   var studentListValue;
   final FirebaseStorage _storage = FirebaseStorage.instance;
   Uint8List? _file;
   Uint8List? file;
   bool loadingStatus = false;
+
+
 
   TextEditingController achievementController = TextEditingController();
   TextEditingController dateController = TextEditingController();
@@ -107,7 +126,8 @@ class _AddAchievementsState extends State<AddAchievements> {
               height: size.height * 1.4,
               width: size.width * 1 / 2,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   IconButtonBackWidget(color: cWhite),
                   Column(
@@ -302,20 +322,20 @@ class _AddAchievementsState extends State<AddAchievements> {
                     Padding(
                       padding: EdgeInsets.only(top: size.width / 30),
                       child:(_file == null)? CircleAvatar(
-                        radius: 100,
+                        radius: 80.w,
                         backgroundImage:
                             NetworkImage('https://via.placeholder.com/150'),
                         backgroundColor: Color.fromARGB(241, 54, 225, 248),
                       ): CircleAvatar(
-                        radius: 80.w,
+                        radius: 60.w,
                         backgroundImage: MemoryImage(_file!)
                             
                       ) ,
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                        left: 170.w,
-                        top: 210.h,
+                        left: 120.w,
+                        top: 170.h,
                       ),
                       child: InkWell(
                         onTap: () async {
@@ -345,6 +365,8 @@ class _AddAchievementsState extends State<AddAchievements> {
                     ),
                   ],
                 ),
+                sizedBoxH20,
+               Text('+ Upload photo',style: TextStyle(color: adminePrimayColor),),
                 Padding(
                   padding: const EdgeInsets.only(left: 80, right: 80, top: 20),
                   child: TextField(
@@ -416,26 +438,8 @@ class _AddAchievementsState extends State<AddAchievements> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: size.width / 38,
-                ),
-                //  Padding(
-                // padding: const EdgeInsets.all(10),
-                // child: (
-                //   InkWell(
-                //   onTap: () {},
-                //  child:
-                // Container(
-                //         height: size.width * 1 /20,
-                //         width: size.width * 1 / 4,
-                //         //color: Colors.red,
-                //         child: CustomContainer(
-                //           text: 'Upload Document',
-                //           onTap: () {},
-                //         )
-                //         ),
-                //  )),
-                //),
+              
+              
                 SizedBox(
                   height: size.width / 38,
                 ),
@@ -443,16 +447,14 @@ class _AddAchievementsState extends State<AddAchievements> {
                   padding: const EdgeInsets.all(10),
                   child: (InkWell(
                     onTap: () {
+                      achievementController.clear();
+                      dateController.clear();
+                      descriptionController.clear();
+                      admissionNumberController.clear();
+                      
                       uploadImageToStorage(file).then((value) => showToast(msg: 'New Achievement Added!'));
                     },
-                    child: Container(
-                        height: size.width * 1 / 17,
-                        width: size.width * 1 / 6.5,
-                        //color: Colors.red,
-                        child: CustomContainer(
-                          text: 'CREATE',
-                          onTap: () {},
-                        )),
+                    child: CreateContainerWidget(text: 'Create',fontSize: 20.w,),
                   )),
                 ),
               ]),
@@ -463,3 +465,7 @@ class _AddAchievementsState extends State<AddAchievements> {
     );
   }
 }
+
+
+
+

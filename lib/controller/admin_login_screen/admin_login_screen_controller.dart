@@ -1,6 +1,9 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/ui%20team/abin/alumini_accocation/create_alumni.dart';
+import 'package:dujo_kerala_website/view/constant/constant.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -14,189 +17,195 @@ import '../../view/web/widgets/drop_DownList/schoolDropDownList.dart';
 import '../get_firebase-data/get_firebase_data.dart';
 
 class AdminLoginScreenController extends GetxController {
-  String schoolID = schoolListValue?['id'];
+  final GlobalKey<FormState> _secondFormkey = GlobalKey<FormState>();
+
+  String schoolID = schoolListValue?['docid'];
   String schoolName = schoolListValue?['schoolName'];
-  String batchYearID = schoolBatchYearListValue?['id'] ?? '';
+  // String batchYearID = schoolBatchYearListValue?['id'] ?? '';
 
   TextEditingController schoolIdController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  CollectionReference schoolListCollectionRef =
-      FirebaseFirestore.instance.collection("SchoolListCollection");
-  DocumentReference<Map<String, dynamic>> schoolListCollectionRefDoc =
-      FirebaseFirestore.instance
+
+  Future<void> loginFunction(
+    BuildContext context,
+  ) async {
+    try {
+      final firebaseFirestore = FirebaseFirestore.instance
           .collection("SchoolListCollection")
-          .doc(schoolListValue!['id']);
+          .doc(schoolID);
+      log("start");
+      FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: schoolIdController.text.trim(),
+              password: passwordController.text.trim())
+          .then((value) {
+//>> Checking batch Yeard
 
-  ///
-  ///
-  ///
-  Future<void> loginFunction(BuildContext context, String adminSchooID) async {
-//Get school id and password>>>>>>>>>>
-    final getidpass = await FirebaseFirestore.instance
-        .collection("SchoolListCollection")
-        .doc(schoolID)
-        .get();
+        if (schoolID == value.user!.uid) {
+          if (Get.find<GetFireBaseData>().bYear.value.isNotEmpty) {
+            // Login user
 
-    // for Other Admins//////
-
-    CollectionReference adminID =
-        schoolListCollectionRef.doc(schoolID).collection("Admins");
-    Query adminIDquery =
-        adminID.where("email", isEqualTo: schoolIdController.text.trim());
-    QuerySnapshot adminquerySnapshot = await adminIDquery.get();
-    final adminIDdocData =
-        adminquerySnapshot.docs.map((doc) => doc.data()).toList();
-    //>>>>>>>>>>>>>>>>>>>Checking password<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    CollectionReference adminpassword =
-        schoolListCollectionRef.doc(schoolID).collection("Admins");
-    Query adminPassquries = adminpassword.where("password",
-        isEqualTo: passwordController.text.trim());
-    QuerySnapshot adminPassquerySnapshott = await adminPassquries.get();
-    final adminPassdocDataa =
-        adminPassquerySnapshott.docs.map((doc) => doc.data()).toList();
-
-    if (getidpass.data()!['id'] == schoolIdController.text.trim() &&
-            getidpass.data()!['password'] == passwordController.text.trim() &&
-            adminSchooID == schoolIdController.text.trim() ||
-        adminPassdocDataa.isNotEmpty && adminIDdocData.isNotEmpty) {
-      if (Get.find<GetFireBaseData>().bYear.value.isNotEmpty) {
-        final date = DateTime.now();
-        DateTime parseDate = DateTime.parse(date.toString());
-        final DateFormat formatter = DateFormat('dd-MM-yyyy');
-        String formatted = formatter.format(parseDate);
-        LoginTimeIDSavingClass.date = formatted;
-        final time = DateTime.now().toString();
-        LoginTimeIDSavingClass.id = time;
-
-        await schoolListCollectionRef
-            .doc(schoolID)
-            .collection(Get.find<GetFireBaseData>().bYear.value)
-            .doc(Get.find<GetFireBaseData>().bYear.value)
-            .collection("LoginHistory")
-            .doc(LoginTimeIDSavingClass.date)
-            .set({'id': LoginTimeIDSavingClass.date}).then((value) {
-          schoolListCollectionRef
-              .doc(schoolID)
-              .collection(Get.find<GetFireBaseData>().bYear.value)
-              .doc(Get.find<GetFireBaseData>().bYear.value)
-              .collection("LoginHistory")
-              .doc(LoginTimeIDSavingClass.date)
-              .collection(LoginTimeIDSavingClass.date)
-              .doc(LoginTimeIDSavingClass.id)
-              .set({
-            'adminuser': schoolIdController.text.trim(),
-            'loginTime': LoginTimeIDSavingClass.id
-          }).then((value) => {
-                    log("idddddddd${LoginTimeIDSavingClass.id.toString()}"),
-                    Navigator.push(context, MaterialPageRoute(
-                      builder: (context) {
-                        return AdminDashBoardPage(
-                          schoolID: schoolID,
-                        );
-                      },
-                    ))
-                  });
-        });
-      } else {
-        // ignore: use_build_context_synchronously
-        showDialog(
-          context: context,
-          barrierDismissible: false, // user must tap button!
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text('Add BatchYear'),
-              content: SingleChildScrollView(
-                child: ListBody(
-                  children: <Widget>[
-                    Expanded(
-                      child: TextFormField(
-                        controller: applynewBatchYearContoller,
-                        readOnly: true,
-                        onTap: () => _selectDate(context),
-                        decoration: const InputDecoration(
-                          labelText: 'DD-MM-YYYY',
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                    const Icon(Icons.arrow_downward_outlined),
-                    Expanded(
-                      child: TextFormField(
-                        controller: selectedToDaterContoller,
-                        readOnly: true,
-                        onTap: () => _selectToDate(context),
-                        decoration: const InputDecoration(
-                          labelText: 'To',
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              actions: <Widget>[
-                TextButton(
-                  child: const Text('create'),
-                  onPressed: () async {
-                    Navigator.of(context).pop();
-                  },
-                ),
-                TextButton(
-                  child: const Text('create'),
-                  onPressed: () async {
-                    await FirebaseFirestore.instance
-                        .collection("SchoolListCollection")
-                        .doc(schoolID)
-                        .collection("BatchYear")
-                        .doc(
-                            '${applynewBatchYearContoller.text.trim()}-${selectedToDaterContoller.text.trim()}')
-                        .set({
-                      'id':
-                          '${applynewBatchYearContoller.text.trim()}-${selectedToDaterContoller.text.trim()}'
-                    }).then((value) async {
-                      await FirebaseFirestore.instance
-                          .collection("SchoolListCollection")
-                          .doc(schoolID)
-                          .set({
-                        'batchYear':
-                            "${applynewBatchYearContoller.text.trim()}-${selectedToDaterContoller.text.trim()}"
-                      }, SetOptions(merge: true)).then(
-                              (value) => html.window.location.reload());
-                    });
-                  },
-                ),
-              ],
-            );
-          },
-        );
-      }
-    } else {
-      return
-          // ignore: use_build_context_synchronously
-          showDialog(
-        context: context,
-        barrierDismissible: false, // user must tap button!
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('Message'),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: const <Widget>[
-                  Text('Please enter a valid username and password')
-                ],
-              ),
-            ),
-            actions: <Widget>[
-              TextButton(
-                child: const Text('ok'),
-                onPressed: () {
-                  Navigator.of(context).pop();
+            final date = DateTime.now();
+            DateTime parseDate = DateTime.parse(date.toString());
+            final DateFormat formatter = DateFormat('dd-MM-yyyy');
+            String formatted = formatter.format(parseDate);
+            LoginTimeIDSavingClass.date = formatted;
+            final time = DateTime.now().toString();
+            LoginTimeIDSavingClass.id = time;
+            firebaseFirestore
+                .collection(Get.find<GetFireBaseData>().bYear.value)
+                .doc(Get.find<GetFireBaseData>().bYear.value)
+                .collection("LoginHistory")
+                .doc(LoginTimeIDSavingClass.date)
+                .set({'id': LoginTimeIDSavingClass.date}).then((value) {
+              firebaseFirestore
+                  .collection(Get.find<GetFireBaseData>().bYear.value)
+                  .doc(Get.find<GetFireBaseData>().bYear.value)
+                  .collection("LoginHistory")
+                  .doc(LoginTimeIDSavingClass.date)
+                  .collection(LoginTimeIDSavingClass.date)
+                  .doc(LoginTimeIDSavingClass.id)
+                  .set(
+                {
+                  'adminuser': schoolIdController.text.trim(),
+                  'loginTime': LoginTimeIDSavingClass.id
                 },
-              ),
-            ],
+                SetOptions(merge: true),
+              ).then((value) {
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return AdminDashBoardPage(
+                      schoolID: schoolID,
+                    );
+                  },
+                ));
+              });
+            });
+          } else {
+            //Setting batch year
+
+            showDialog(
+              context: context,
+              barrierDismissible: false, // user must tap button!
+              builder: (BuildContext context) {
+                return Form(
+                  key: _secondFormkey,
+                  child: AlertDialog(
+                    title: const Text('Add BatchYear'),
+                    content: SingleChildScrollView(
+                      child: ListBody(
+                        children: <Widget>[
+                          Expanded(
+                            child: TextFormField(
+                              validator: (value) {
+                                if (applynewBatchYearContoller.text.isEmpty) {
+                                  return 'Invalid';
+                                } else {
+                                  return null;
+                                }
+                              },
+                              controller: applynewBatchYearContoller,
+                              readOnly: true,
+                              onTap: () => _selectDate(context),
+                              decoration: const InputDecoration(
+                                labelText: 'DD-MM-YYYY',
+                                border: OutlineInputBorder(),
+                              ),
+                            ),
+                          ),
+                          const Icon(Icons.arrow_downward_outlined),
+                          Expanded(
+                            child: TextFormField(
+                              controller: selectedToDaterContoller,
+                              validator: (value) {
+                                if (selectedToDaterContoller.text.isEmpty) {
+                                  return 'Invalid';
+                                } else {
+                                  return null;
+                                }
+                              },
+                              readOnly: true,
+                              onTap: () => _selectToDate(context),
+                              decoration: const InputDecoration(
+                                labelText: 'To',
+                                border: OutlineInputBorder(),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    actions: <Widget>[
+                      TextButton(
+                        child: const Text('cancel'),
+                        onPressed: () async {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      TextButton(
+                        child: const Text('create'),
+                        onPressed: () async {
+                          if (_secondFormkey.currentState!.validate()) {
+                            await firebaseFirestore
+                                .collection("BatchYear")
+                                .doc(
+                                    '${applynewBatchYearContoller.text.trim()}-${selectedToDaterContoller.text.trim()}')
+                                .set({
+                              'id':
+                                  '${applynewBatchYearContoller.text.trim()}-${selectedToDaterContoller.text.trim()}'
+                            }).then((value) async {
+                              await firebaseFirestore.set({
+                                'batchYear':
+                                    "${applynewBatchYearContoller.text.trim()}-${selectedToDaterContoller.text.trim()}"
+                              }, SetOptions(merge: true)).then(
+                                  (value) => html.window.location.reload());
+                            });
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                );
+              },
+            );
+          }
+        } else {
+          return
+              // ignore: use_build_context_synchronously
+              showDialog(
+            context: context,
+            barrierDismissible: false, // user must tap button!
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text('Message'),
+                content: SingleChildScrollView(
+                  child: ListBody(
+                    children: const <Widget>[
+                      Text('Please enter a valid username and password')
+                    ],
+                  ),
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: const Text('ok'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
           );
-        },
-      );
+        }
+      }).catchError((e) {
+        return showToast(msg: 'Login Failed');
+      });
+
+      log("end");
+    } on FirebaseException catch (e) {
+      log("catchout");
+
+      showToast(msg: 'Login Failed');
     }
   }
 

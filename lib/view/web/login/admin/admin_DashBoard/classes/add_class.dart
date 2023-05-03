@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -29,16 +30,16 @@ class AddClassesSectionScreen extends StatelessWidget {
       key: _formKey,
       child: Scaffold(
         backgroundColor: const Color.fromARGB(255, 6, 71, 157),
-        appBar: AppBar(
-            backgroundColor: const Color.fromARGB(255, 6, 71, 157),
-            title: Text(
-              'ADD NEW ClASS',
-              style: GoogleFonts.montserrat(
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-                color: cWhite,
-              ),
-            )),
+        // appBar: AppBar(
+        //     backgroundColor: const Color.fromARGB(255, 6, 71, 157),
+        //     title: Text(
+        //       'ADD NEW ClASS',
+        //       style: GoogleFonts.montserrat(
+        //         fontSize: 18,
+        //         fontWeight: FontWeight.w700,
+        //         color: cWhite,
+        //       ),
+        //     )),
         body: SingleChildScrollView(
           child: Row(
             children: [
@@ -47,17 +48,26 @@ class AddClassesSectionScreen extends StatelessWidget {
                 width: screenSize.width * 1 / 2,
                 // ignore: sort_child_properties_last
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Hi ! Admin \n  Create Class Profile',
-                        style: GoogleFont.headTextStyleBold),
-                    SizedBox(
-                      height: 300,
-                      width: screenSize.width / 2,
-                      child: LottieBuilder.network(
-                          'https://assets9.lottiefiles.com/packages/lf20_bjyiojos.json'),
-                    )
+                    IconButtonBackWidget(color: cWhite),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text('Hi ! Admin \n  Create Class Profile',
+                              style: GoogleFont.headTextStyleBold),
+                          SizedBox(
+                            height: 300,
+                            width: screenSize.width / 2,
+                            child: LottieBuilder.network(
+                                'https://assets9.lottiefiles.com/packages/lf20_bjyiojos.json'),
+                          )
+                        ],
+                      ),
+                    ),
                   ],
                 ),
                 color: const Color.fromARGB(255, 6, 71, 157),

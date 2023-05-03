@@ -7,7 +7,12 @@ import '../../../../../constant/constant.dart';
 import '../../../../../fonts/fonts.dart';
 
 class CreateBusRoute extends StatefulWidget {
-  const CreateBusRoute({super.key});
+   CreateBusRoute({super.key});
+  //  TextEditingController routeController = TextEditingController();
+  //   TextEditingController busnumberController = TextEditingController();
+  //    TextEditingController driverphoneController = TextEditingController();
+  //     TextEditingController assistancephoneController = TextEditingController();
+  //      TextEditingController staffinchargeController = TextEditingController();
 
   @override
   State<CreateBusRoute> createState() => _CreateBusRouteState();
@@ -63,7 +68,7 @@ class _CreateBusRouteState extends State<CreateBusRoute> {
                             fontWeight: FontWeight.w800,
                           ),
                         ),
-                  
+                  sizedBoxH20,
                         SizedBox(
                           height: size.width / 5,
                           width: size.width / 2,
@@ -84,56 +89,61 @@ class _CreateBusRouteState extends State<CreateBusRoute> {
             SizedBox(
                 width: size.width * 1 / 2,
                 height: size.height,
-                child: SingleChildScrollView(
-                  child: Form(
-                    key: formKey,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          left: size.width / 10, right: size.width / 10),
-                      child: Column(children: [
-
-                        BusRouteTextFormWidget(
-                          function: checkFieldEmpty,
-                          labelText: 'Route Number',
-                          icon: Icons.route_outlined,
-                        ),
-
-                        BusRouteTextFormWidget(
-                          function: checkFieldEmpty,
-                          labelText: 'Bus Number',
-                          icon: Icons.bus_alert,
-                        ),
-
-                        BusRouteTextFormWidget(
-                          function: checkFieldPhoneNumberIsValid,
-                          labelText: 'Driver Mobile Number',
-                          icon: Icons.phone_android_sharp,
-                        ),
-
-                        BusRouteTextFormWidget(
-                          function: checkFieldPhoneNumberIsValid,
-                          labelText: 'Assistance Mobile Number',
-                          icon: Icons.phone_android,
-                        ),
-
-                        BusRouteTextFormWidget(
-                          function: checkFieldEmpty,
-                          labelText: 'Staff inCharge',
-                          icon: Icons.person_2,
-                        ),
-
-                        SizedBox(
-                          height: 30.h,
-                        ),
-                        Padding(
-                            padding: EdgeInsets.only(
-                                left: size.width * 1 / 20,
-                                right: size.width * 1 / 20),
+                child: Container(
+                  margin: EdgeInsets.only(top: 120.w),
+                  child: SingleChildScrollView(
+                    child: Form(
+                      key: formKey,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: size.width / 10, right: size.width / 10),
+                        child: Column(children: [
+                
+                          BusRouteTextFormWidget(
+                          //  textEditingController:routeController,
+                            function: checkFieldEmpty,
+                            labelText: 'Route Number',
+                            icon: Icons.route_outlined,
+                          ),
+                
+                          BusRouteTextFormWidget(
+                            //textEditingController:busnumberController ,
+                            function: checkFieldEmpty,
+                            labelText: 'Bus Number',
+                            icon: Icons.bus_alert,
+                          ),
+                
+                          BusRouteTextFormWidget(
+                           // textEditingController:driverphoneController,
+                            function: checkFieldPhoneNumberIsValid,
+                            labelText: 'Driver Mobile Number',
+                            icon: Icons.phone_android_sharp,
+                          ),
+                
+                          BusRouteTextFormWidget(
+                           // textEditingController: assistancephoneController,
+                            function: checkFieldPhoneNumberIsValid,
+                            labelText: 'Assistance Mobile Number',
+                            icon: Icons.phone_android,
+                          ),
+                
+                          BusRouteTextFormWidget(
+                           // textEditingController:staffinchargeController ,
+                            function: checkFieldEmpty,
+                            labelText: 'Staff inCharge',
+                            icon: Icons.person_2,
+                          ),
+                
+                          SizedBox(
+                            height: 30.h,
+                          ),
+                          Center(
                             child: Container(
-                              height: size.width * 1 / 30,
-                              width: size.width * 1 / 9,
+                              margin: EdgeInsets.only(left: 40.w),
+                              height: 60.w,
+                              width: 300.w,
                               decoration: BoxDecoration(
-                                  color: Colors.blue,
+                                  color: adminePrimayColor,
                                   borderRadius: BorderRadius.circular(14)),
                               child: TextButton(
                                 style: TextButton.styleFrom(
@@ -146,10 +156,13 @@ class _CreateBusRouteState extends State<CreateBusRoute> {
                                   bool? result =
                                       formKey.currentState?.validate();
                                 },
-                                child: const Text('Create'),
+                                child: 
+                                 Text('Create'),
                               ),
-                            )),
-                      ]),
+                            ),
+                          ),
+                        ]),
+                      ),
                     ),
                   ),
                 ))
@@ -164,11 +177,11 @@ class BusRouteTextFormWidget extends StatelessWidget {
   BusRouteTextFormWidget({
     super.key,
     required this.labelText,
-    // required this.textEditingController,
+   // required this.textEditingController,
     required this.function,
     required this.icon,
   });
-// final TextEditingController textEditingController;
+ // final TextEditingController textEditingController;
   final String labelText;
   final String? Function(String? fieldContent) function;
   IconData icon;

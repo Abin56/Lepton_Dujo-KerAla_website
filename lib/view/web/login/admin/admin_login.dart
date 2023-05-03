@@ -32,7 +32,9 @@ class AdminLoginScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-     appBar: AppBar(iconTheme: IconThemeData(color: cWhite),backgroundColor: Color.fromARGB(255, 74, 3, 107)),
+      appBar: AppBar(
+          iconTheme: IconThemeData(color: cWhite),
+          backgroundColor: Color.fromARGB(255, 74, 3, 107)),
       backgroundColor: Color.fromARGB(255, 74, 3, 107),
       body: SizedBox(
         height: height,
@@ -41,7 +43,6 @@ class AdminLoginScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-           
             ResponsiveWidget.isSmallScreen(context)
                 ? const SizedBox()
                 : Expanded(
@@ -52,7 +53,6 @@ class AdminLoginScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                        
                           Text(
                             'Hi ! \n Admin',
                             style: ralewayStyle.copyWith(
@@ -101,7 +101,7 @@ class AdminLoginScreen extends StatelessWidget {
                               text: ' Sign In 👇',
                               style: ralewayStyle.copyWith(
                                 fontWeight: FontWeight.w800,
-                                color: cWhite, 
+                                color: cWhite,
                                 // AppColors.blueDarkColor,
                                 fontSize: 25.0,
                               ),
@@ -116,7 +116,7 @@ class AdminLoginScreen extends StatelessWidget {
                           fontSize: 15.0,
                           fontWeight: FontWeight.w400,
                           color: cWhite,
-                           //AppColors.textColor,
+                          //AppColors.textColor,
                         ),
                       ),
                       SizedBox(height: height * 0.064),
@@ -244,7 +244,7 @@ class AdminLoginScreen extends StatelessWidget {
                             'Forgot Password?',
                             style: ralewayStyle.copyWith(
                               fontSize: 15.0,
-                              color: AppColors.mainBlueColor,
+                              color: cWhite,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -256,12 +256,10 @@ class AdminLoginScreen extends StatelessWidget {
                         child: InkWell(
                           onTap: () async {
                             await adminLoginScreenController.loginFunction(
-                                context, adminSchoolId!);
+                              context,
+                            );
 
-                            adminLoginScreenController.schoolIdController
-                                .clear();
-                            adminLoginScreenController.passwordController
-                                .clear();
+                
                           },
                           borderRadius: BorderRadius.circular(16.0),
                           child: Ink(

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/controller/get_firebase-data/get_firebase_data.dart';
 import 'package:dujo_kerala_website/model/food_model/food_and_beverages_model.dart';
+import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -83,7 +84,8 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
         onTap: (){
          // Navigator.push(context, MaterialPageRoute(builder: ((context) => Cf()));
         },
-        child: const Text('Create Food Menu'))),
+        child: const Text('Create Food Menu')),
+        backgroundColor: adminePrimayColor),
       body:SingleChildScrollView(child:
               Column(
                 children: [
@@ -175,8 +177,8 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
                         ),
                         
                          Container(
-                          height: screenSize.width/1.5,
-                      width:screenSize.width/7.5 ,
+                           height: screenSize.width/1.5,
+                           width:screenSize.width/7.5 ,
                            child: Form(
                             key: formKey3,
                              child: Column(

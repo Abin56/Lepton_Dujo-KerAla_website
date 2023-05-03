@@ -380,8 +380,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                   Icon(
                                     Icons.home,
                                     color: Colors.white,
-                                  ),
-                                  sizedBoxW20,
+                                  ),                                
                                   Text(
                                     'Home',
                                     style: GoogleFonts.poppins(

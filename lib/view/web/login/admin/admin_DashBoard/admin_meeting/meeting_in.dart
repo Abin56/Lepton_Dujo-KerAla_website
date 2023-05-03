@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -22,10 +23,10 @@ class MeetingCreates extends StatelessWidget {
     adminMeetingController.clearControllers();
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('MEETINGS'),
-          backgroundColor: adminePrimayColor,
-        ),
+        // appBar: AppBar(
+        //   title: const Text('MEETINGS'),
+        //   backgroundColor: adminePrimayColor,
+        // ),
         body: Obx(() {
           if (adminMeetingController.isLoading.value) {
             return const Center(
@@ -149,27 +150,34 @@ class AdminMeetingCreateLeftSideWidget extends StatelessWidget {
       color: adminePrimayColor,
       child: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(
-              'Hi Admin ',
-              style: ralewayStyle.copyWith(
-                fontSize: 48.0,
-                color: AppColors.whiteColor,
-                fontWeight: FontWeight.w800,
-              ),
+            IconButtonBackWidget(color: cWhite),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Hi Admin ',
+                  style: ralewayStyle.copyWith(
+                    fontSize: 48.0,
+                    color: AppColors.whiteColor,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                Text(
+                  'Create Meetings',
+                  style: ralewayStyle.copyWith(
+                    fontSize: 25.0,
+                    color: AppColors.whiteColor,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                LottieBuilder.network(
+                    'https://assets1.lottiefiles.com/packages/lf20_q5qvqtnr.json')
+              ],
             ),
-            Text(
-              'Create Meetings',
-              style: ralewayStyle.copyWith(
-                fontSize: 25.0,
-                color: AppColors.whiteColor,
-                fontWeight: FontWeight.w800,
-              ),
-            ),
-            LottieBuilder.network(
-                'https://assets1.lottiefiles.com/packages/lf20_q5qvqtnr.json')
           ],
         ),
       ),
@@ -195,7 +203,7 @@ class SubmitButtonMeetinWidget extends StatelessWidget {
       height: size.width * 1 / 30,
       width: size.width * 1 / 5,
       decoration: BoxDecoration(
-          color: Colors.blue, borderRadius: BorderRadius.circular(14)),
+          color:adminePrimayColor, borderRadius: BorderRadius.circular(14)),
       child: TextButton(
         style: TextButton.styleFrom(
           foregroundColor: const Color.fromARGB(255, 255, 255, 255),
