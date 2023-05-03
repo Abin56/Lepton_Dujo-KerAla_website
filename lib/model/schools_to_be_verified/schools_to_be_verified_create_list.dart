@@ -1,12 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class SchoolsToBeVerified {
   String schoolName;
-  String schoolID;
-  String id;
+  String docid;
   String district;
   String place;
   String adminUserName;
@@ -14,59 +15,137 @@ class SchoolsToBeVerified {
   String phoneNumber;
   String email;
   String postedDate;
+  String schoolCode;
+
   bool verified;
+  SchoolsToBeVerified({
+    required this.schoolName,
+    required this.docid,
+    required this.district,
+    required this.place,
+    required this.adminUserName,
+    required this.password,
+    required this.phoneNumber,
+    required this.email,
+    required this.postedDate,
+    required this.schoolCode,
+    required this.verified,
+  });
 
-  SchoolsToBeVerified(
-      {required this.schoolName,
-      required this.schoolID,
-      required this.id,
-      required this.district,
-      required this.place,
-      required this.adminUserName,
-      required this.password,
-      required this.phoneNumber,
-      required this.email,
-      required this.postedDate,
-      required this.verified});
+  SchoolsToBeVerified copyWith({
+    String? schoolName,
+    String? uid,
+    String? docid,
+    String? district,
+    String? place,
+    String? adminUserName,
+    String? password,
+    String? phoneNumber,
+    String? email,
+    String? postedDate,
+    String? schoolCode,
+    bool? verified,
+  }) {
+    return SchoolsToBeVerified(
+      schoolName: schoolName ?? this.schoolName,
+      docid: docid ?? this.docid,
+      district: district ?? this.district,
+      place: place ?? this.place,
+      adminUserName: adminUserName ?? this.adminUserName,
+      password: password ?? this.password,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      email: email ?? this.email,
+      postedDate: postedDate ?? this.postedDate,
+      schoolCode: schoolCode ?? this.schoolCode,
+      verified: verified ?? this.verified,
+    );
+  }
 
-  factory SchoolsToBeVerified.fromJson(Map<String, dynamic> json) =>
-      SchoolsToBeVerified(
-          id: json["id"] ?? '',
-          schoolName: json["schoolName"] ?? '',
-          schoolID: json["schoolID"] ?? '',
-          place: json["place"] ?? '',
-          district: json["district"] ?? '',
-          adminUserName: json["adminUserName"] ?? '',
-          password: json["password"] ?? '',
-          postedDate: json["postedDate"] ?? '',
-          email: json["email"] ?? '',
-          phoneNumber: json["phoneNumber"] ?? '',
-          verified: json["verified"] ?? '');
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'schoolName': schoolName,
+      'docid': docid,
+      'district': district,
+      'place': place,
+      'adminUserName': adminUserName,
+      'password': password,
+      'phoneNumber': phoneNumber,
+      'email': email,
+      'postedDate': postedDate,
+      'schoolCode': schoolCode,
+      'verified': verified,
+    };
+  }
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "schoolName": schoolName,
-        "schoolID": schoolID,
-        "district": district,
-        "place": place,
-        "adminUserName": adminUserName,
-        "password": password,
-        "postedDate": postedDate,
-        "email": email,
-        "phoneNumber": phoneNumber,
-        "verified": verified
-      };
+  factory SchoolsToBeVerified.fromMap(Map<String, dynamic> map) {
+    return SchoolsToBeVerified(
+      schoolName: map['schoolName'] as String,
+      docid: map['docid'] as String,
+      district: map['district'] as String,
+      place: map['place'] as String,
+      adminUserName: map['adminUserName'] as String,
+      password: map['password'] as String,
+      phoneNumber: map['phoneNumber'] as String,
+      email: map['email'] as String,
+      postedDate: map['postedDate'] as String,
+      schoolCode: map['schoolCode'] as String,
+      verified: map['verified'] as bool,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory SchoolsToBeVerified.fromJson(String source) =>
+      SchoolsToBeVerified.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'SchoolsToBeVerified(schoolName: $schoolName, docid: $docid, district: $district, place: $place, adminUserName: $adminUserName, password: $password, phoneNumber: $phoneNumber, email: $email, postedDate: $postedDate, schoolCode: $schoolCode, verified: $verified)';
+  }
+
+  @override
+  bool operator ==(covariant SchoolsToBeVerified other) {
+    if (identical(this, other)) return true;
+
+    return other.schoolName == schoolName &&
+        other.docid == docid &&
+        other.district == district &&
+        other.place == place &&
+        other.adminUserName == adminUserName &&
+        other.password == password &&
+        other.phoneNumber == phoneNumber &&
+        other.email == email &&
+        other.postedDate == postedDate &&
+        other.schoolCode == schoolCode &&
+        other.verified == verified;
+  }
+
+  @override
+  int get hashCode {
+    return schoolName.hashCode ^
+        docid.hashCode ^
+        district.hashCode ^
+        place.hashCode ^
+        adminUserName.hashCode ^
+        password.hashCode ^
+        phoneNumber.hashCode ^
+        email.hashCode ^
+        postedDate.hashCode ^
+        schoolCode.hashCode ^
+        verified.hashCode;
+  }
 }
 
 class AddRequestedSchoolsToFirebase {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  addRequestedSchools(SchoolsToBeVerified schoolModel, context) {
+  Future<void> addRequestedSchools(
+      SchoolsToBeVerified schoolModel, context) async {
     try {
       _firestore
           .collection('RequestedSchools')
-          .doc(schoolModel.schoolID)
-          .set(schoolModel.toJson())
+          .doc(schoolModel.docid)
+          .set(schoolModel.toMap())
           .then((value) {
         return showDialog(
           context: context,

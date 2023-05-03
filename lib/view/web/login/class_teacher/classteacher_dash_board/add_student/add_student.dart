@@ -130,7 +130,7 @@ class _AddStudentFromClassTeacherState
                             child: GetClassesListDropDownButton(
                               schoolID: Get.find<AdminLoginScreenController>()
                                   .schoolID,
-                              teacherID: widget.teacherIDE,
+                              teacherID: 'abinjohn8089@gmail.com',
                             )),
                         Padding(
                             padding: EdgeInsets.all(15),
@@ -270,14 +270,14 @@ class _AddStudentFromClassTeacherState
                         ),
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsets.only(left: 50.w, right: 50.w,top: 30.h),
+                            padding: EdgeInsets.only(
+                                left: 50.w, right: 50.w, top: 30.h),
                             child: Container(
                               height: 60.h,
                               width: 250.w,
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      adminePrimayColor,
+                                  backgroundColor: adminePrimayColor,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20),
                                   ),

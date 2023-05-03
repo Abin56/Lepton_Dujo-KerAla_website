@@ -85,11 +85,12 @@ dependencies:
   text_scroll: ^0.1.2
   toggle_switch: any
   url_launcher: ^6.1.5
-  uuid: ^3.0.7
+  uuid:
   video_player: ^2.4.0
   video_player_web_hls: ^0.1.11
   visibility_detector: ^0.3.0
   wakelock: ^0.6.2
+
 
 dev_dependencies:
 

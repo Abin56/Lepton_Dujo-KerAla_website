@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -32,7 +33,9 @@ class AdminLoginScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-     appBar: AppBar(iconTheme: IconThemeData(color: cWhite),backgroundColor: Color.fromARGB(255, 74, 3, 107)),
+      appBar: AppBar(
+          iconTheme: IconThemeData(color: cWhite),
+          backgroundColor: Color.fromARGB(255, 74, 3, 107)),
       backgroundColor: Color.fromARGB(255, 74, 3, 107),
       body: SizedBox(
         height: height,
@@ -41,7 +44,6 @@ class AdminLoginScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-           
             ResponsiveWidget.isSmallScreen(context)
                 ? const SizedBox()
                 : Expanded(
@@ -52,7 +54,6 @@ class AdminLoginScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                        
                           Text(
                             'Hi ! \n Admin',
                             style: ralewayStyle.copyWith(
@@ -101,7 +102,7 @@ class AdminLoginScreen extends StatelessWidget {
                               text: ' Sign In 👇',
                               style: ralewayStyle.copyWith(
                                 fontWeight: FontWeight.w800,
-                                color: cWhite, 
+                                color: cWhite,
                                 // AppColors.blueDarkColor,
                                 fontSize: 25.0,
                               ),
@@ -116,7 +117,7 @@ class AdminLoginScreen extends StatelessWidget {
                           fontSize: 15.0,
                           fontWeight: FontWeight.w400,
                           color: cWhite,
-                           //AppColors.textColor,
+                          //AppColors.textColor,
                         ),
                       ),
                       SizedBox(height: height * 0.064),
@@ -239,11 +240,13 @@ class AdminLoginScreen extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            adminLoginScreenController.forgetPassWord(context);
+                          },
                           child: Text(
-                            'Forgot Password?',
+                            'Forgot Password?/ Reset Password ?',
                             style: ralewayStyle.copyWith(
-                              fontSize: 15.0,
+                              fontSize: 14.0,
                               color: cWhite,
                               fontWeight: FontWeight.w600,
                             ),
@@ -256,12 +259,8 @@ class AdminLoginScreen extends StatelessWidget {
                         child: InkWell(
                           onTap: () async {
                             await adminLoginScreenController.loginFunction(
-                                context, adminSchoolId!);
-
-                            adminLoginScreenController.schoolIdController
-                                .clear();
-                            adminLoginScreenController.passwordController
-                                .clear();
+                              context,
+                            );
                           },
                           borderRadius: BorderRadius.circular(16.0),
                           child: Ink(
