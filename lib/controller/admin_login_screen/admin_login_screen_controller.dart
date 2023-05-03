@@ -27,6 +27,8 @@ class AdminLoginScreenController extends GetxController {
   TextEditingController schoolIdController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+
+
   Future<void> loginFunction(
     BuildContext context,
   ) async {
@@ -39,10 +41,16 @@ class AdminLoginScreenController extends GetxController {
           .signInWithEmailAndPassword(
               email: schoolIdController.text.trim(),
               password: passwordController.text.trim())
-          .then((value) {
+          .then((value) async {
+        QuerySnapshot<Map<String, dynamic>> result = await firebaseFirestore
+            .collection('Admins')
+            .where('docid', isEqualTo: value.user!.uid)
+            .get();
 //>> Checking batch Yeard
 
-        if (schoolID == value.user!.uid) {
+        if (schoolID == value.user!.uid || result.docs.isNotEmpty) {
+          schoolIdController.clear();
+          passwordController.clear();
           if (Get.find<GetFireBaseData>().bYear.value.isNotEmpty) {
             // Login user
 
@@ -85,6 +93,7 @@ class AdminLoginScreenController extends GetxController {
           } else {
             //Setting batch year
 
+            // ignore: use_build_context_synchronously
             showDialog(
               context: context,
               barrierDismissible: false, // user must tap button!
@@ -199,6 +208,7 @@ class AdminLoginScreenController extends GetxController {
           );
         }
       }).catchError((e) {
+        log(e.toString());
         return showToast(msg: 'Login Failed');
       });
 
