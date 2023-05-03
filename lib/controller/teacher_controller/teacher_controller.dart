@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
-import 'package:dujo_kerala_website/model/teacher/add_teacher_model.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:dujo_kerala_website/model/teacher/teacher_model.dart';
 
 class TeacherController extends GetxController {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
@@ -14,7 +14,7 @@ class TeacherController extends GetxController {
   TeacherController teacherController = Get.put(TeacherController());
 
   ///creating a temporary teacher collection. It will be shows in main collection only whenever teacher signup on mobile device.
-  Future<void> createNewTeacher(AddTeachersModel teacherModel) async {
+  Future<void> createNewTeacher(TeacherModel teacherModel) async {
     try {
       await firebaseFirestore
           .collection('SchoolListCollection')

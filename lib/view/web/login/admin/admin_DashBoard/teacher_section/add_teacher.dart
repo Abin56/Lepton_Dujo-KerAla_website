@@ -3,8 +3,9 @@ import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import '../../../../../../model/teacher/add_teacher_model.dart';
+import '../../../../../../model/teacher/teacher_model.dart';
 import '../../../../../colors/colors.dart';
+import '../../../../../constant/constant.dart';
 import '../../../../../fonts/fonts.dart';
 
 class AddTeacherSectionScreen extends StatelessWidget {
@@ -12,6 +13,7 @@ class AddTeacherSectionScreen extends StatelessWidget {
   final TeacherController teacherController = Get.put(TeacherController());
 
   AddTeacherSectionScreen({super.key, required this.schoolID});
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -61,49 +63,25 @@ class AddTeacherSectionScreen extends StatelessWidget {
               height: screenSize.height,
               width: screenSize.width * 1 / 2,
               child: Column(children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 80, bottom: 10, left: 100, right: 100),
-                  child: TextField(
-                    controller: teacherController.nameController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Name',
-                    ),
-                  ),
+                CreateTeacherTextInputFieldWidget(
+                  labelText: "Name",
+                  textEditingController: teacherController.nameController,
+                  validator: checkFieldEmpty,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 30, bottom: 10, left: 100, right: 100),
-                  child: TextField(
-                    controller: teacherController.emailIDController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Email',
-                    ),
-                  ),
+                CreateTeacherTextInputFieldWidget(
+                  labelText: "Email",
+                  textEditingController: teacherController.emailIDController,
+                  validator: checkFieldEmailIsValid,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 30, bottom: 10, left: 100, right: 100),
-                  child: TextField(
-                    controller: teacherController.phoneNumber,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Phone Number',
-                    ),
-                  ),
+                CreateTeacherTextInputFieldWidget(
+                  labelText: "Phone Number",
+                  textEditingController: teacherController.phoneNumber,
+                  validator: checkFieldPhoneNumberIsValid,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 30, bottom: 10, left: 100, right: 100),
-                  child: TextField(
-                    controller: teacherController.employeeID,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Employee ID',
-                    ),
-                  ),
+                CreateTeacherTextInputFieldWidget(
+                  labelText: "Employee ID",
+                  textEditingController: teacherController.employeeID,
+                  validator: checkFieldEmpty,
                 ),
                 Padding(
                     padding: const EdgeInsets.all(18.0),
@@ -128,17 +106,28 @@ class AddTeacherSectionScreen extends StatelessWidget {
                           ),
                         ),
                         onPressed: () async {
-                          final teacher = AddTeachersModel(
-                            docid: "",
-                            teacherName: teacherController.nameController.text,
-                            employeeID:
-                                teacherController.emailIDController.text,
-                            createdAt: DateTime.now().toString(),
-                            teacherPhNo: teacherController.phoneNumber.text,
-                            teacherEmail:
-                                teacherController.emailIDController.text,
-                          );
-                          teacherController.createNewTeacher(teacher);
+                          if (formKey.currentState?.validate() ?? false) {
+                            final teacher = TeacherModel(
+                                docid: "",
+                                teacherName:
+                                    teacherController.nameController.text,
+                                employeeID:
+                                    teacherController.emailIDController.text,
+                                createdAt: DateTime.now().toString(),
+                                teacherPhNo: teacherController.phoneNumber.text,
+                                teacherEmail:
+                                    teacherController.emailIDController.text,
+                                altPhoneNo: '',
+                                district: '',
+                                gender: '',
+                                houseName: '',
+                                houseNumber: '',
+                                place: '',
+                                userRole: '',
+                                imageId: '',
+                                imageUrl: '');
+                            teacherController.createNewTeacher(teacher);
+                          }
                         },
                         child: const Text('Add Teacher'),
                       ),
@@ -147,6 +136,35 @@ class AddTeacherSectionScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class CreateTeacherTextInputFieldWidget extends StatelessWidget {
+  const CreateTeacherTextInputFieldWidget({
+    super.key,
+    required this.labelText,
+    required this.textEditingController,
+    this.validator,
+  });
+
+  final TextEditingController textEditingController;
+  final String labelText;
+  final String? Function(String?)? validator;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding:
+          const EdgeInsets.only(top: 80, bottom: 10, left: 100, right: 100),
+      child: TextFormField(
+        controller: textEditingController,
+        decoration: InputDecoration(
+          border: const OutlineInputBorder(),
+          labelText: labelText,
+        ),
+        validator: validator,
       ),
     );
   }

@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../../model/teacher/add_teacher_model.dart';
+import '../../../../../../model/teacher/teacher_model.dart';
 import '../../../../../colors/colors.dart';
 import 'class_subjects.dart';
 
@@ -48,7 +48,7 @@ class _AllClassesListViewForTeacherState
                     child: ListView.separated(
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
-                          final data = AddTeachersModel.fromJson(
+                          final data = TeacherModel.fromJson(
                               snapshot.data!.docs[index].data());
 
                           return GestureDetector(
