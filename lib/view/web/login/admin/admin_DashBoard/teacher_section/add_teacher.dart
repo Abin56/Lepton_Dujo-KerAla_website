@@ -58,81 +58,86 @@ class AddTeacherSectionScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              color: Colors.white,
+            SizedBox(
               height: screenSize.height,
               width: screenSize.width * 1 / 2,
-              child: Column(children: [
-                CreateTeacherTextInputFieldWidget(
-                  labelText: "Name",
-                  textEditingController: teacherController.nameController,
-                  validator: checkFieldEmpty,
-                ),
-                CreateTeacherTextInputFieldWidget(
-                  labelText: "Email",
-                  textEditingController: teacherController.emailIDController,
-                  validator: checkFieldEmailIsValid,
-                ),
-                CreateTeacherTextInputFieldWidget(
-                  labelText: "Phone Number",
-                  textEditingController: teacherController.phoneNumber,
-                  validator: checkFieldPhoneNumberIsValid,
-                ),
-                CreateTeacherTextInputFieldWidget(
-                  labelText: "Employee ID",
-                  textEditingController: teacherController.employeeID,
-                  validator: checkFieldEmpty,
-                ),
-                Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: Container(
-                      height: 60,
-                      width: 200,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        gradient: const LinearGradient(
-                            colors: [
-                              Color(0xFF26A69A),
-                              Color.fromARGB(255, 9, 49, 45),
-                            ],
-                            begin: Alignment.bottomCenter,
-                            end: Alignment.topCenter),
+              child: Form(
+                key: formKey,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CreateTeacherTextInputFieldWidget(
+                        labelText: "Name",
+                        textEditingController: teacherController.nameController,
+                        validator: checkFieldEmpty,
                       ),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(255, 3, 39, 68),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
-                        onPressed: () async {
-                          if (formKey.currentState?.validate() ?? false) {
-                            final teacher = TeacherModel(
-                                docid: "",
-                                teacherName:
-                                    teacherController.nameController.text,
-                                employeeID:
-                                    teacherController.emailIDController.text,
-                                createdAt: DateTime.now().toString(),
-                                teacherPhNo: teacherController.phoneNumber.text,
-                                teacherEmail:
-                                    teacherController.emailIDController.text,
-                                altPhoneNo: '',
-                                district: '',
-                                gender: '',
-                                houseName: '',
-                                houseNumber: '',
-                                place: '',
-                                userRole: '',
-                                imageId: '',
-                                imageUrl: '');
-                            teacherController.createNewTeacher(teacher);
-                          }
-                        },
-                        child: const Text('Add Teacher'),
+                      CreateTeacherTextInputFieldWidget(
+                        labelText: "Email",
+                        textEditingController:
+                            teacherController.emailIDController,
+                        validator: checkFieldEmailIsValid,
                       ),
-                    ))
-              ]),
+                      CreateTeacherTextInputFieldWidget(
+                        labelText: "Phone Number",
+                        textEditingController: teacherController.phoneNumber,
+                        validator: checkFieldPhoneNumberIsValid,
+                      ),
+                      CreateTeacherTextInputFieldWidget(
+                        labelText: "Employee ID",
+                        textEditingController: teacherController.employeeID,
+                        validator: checkFieldEmpty,
+                      ),
+                      Padding(
+                          padding: const EdgeInsets.only(
+                              top: 10, bottom: 10, left: 100, right: 100),
+                          child: SizedBox(
+                              height: 50,
+                              child: Obx(
+                                () => teacherController.isLoading.value
+                                    ? circularProgressIndicator
+                                    : ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: const Color.fromARGB(
+                                              255, 3, 39, 68),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
+                                        ),
+                                        onPressed: () async {
+                                          if (formKey.currentState
+                                                  ?.validate() ??
+                                              false) {
+                                            final teacher = TeacherModel(
+                                                docid: "",
+                                                teacherName: teacherController
+                                                    .nameController.text,
+                                                employeeID: teacherController
+                                                    .emailIDController.text,
+                                                createdAt:
+                                                    DateTime.now().toString(),
+                                                teacherPhNo: teacherController
+                                                    .phoneNumber.text,
+                                                teacherEmail: teacherController
+                                                    .emailIDController.text,
+                                                altPhoneNo: '',
+                                                district: '',
+                                                gender: '',
+                                                houseName: '',
+                                                houseNumber: '',
+                                                place: '',
+                                                userRole: '',
+                                                imageId: '',
+                                                imageUrl: '');
+                                            teacherController
+                                                .createNewTeacher(teacher);
+                                          }
+                                        },
+                                        child: const Text('Add Teacher'),
+                                      ),
+                              )))
+                    ]),
+              ),
             ),
           ],
         ),
@@ -157,7 +162,7 @@ class CreateTeacherTextInputFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding:
-          const EdgeInsets.only(top: 80, bottom: 10, left: 100, right: 100),
+          const EdgeInsets.only(top: 10, bottom: 10, left: 100, right: 100),
       child: TextFormField(
         controller: textEditingController,
         decoration: InputDecoration(

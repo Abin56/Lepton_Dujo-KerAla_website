@@ -186,8 +186,12 @@ Future<Uint8List?> pickImage(ImageSource source) async {
   }
   return null;
 }
+
 class TeacherLoginIDSaver {
   static String id = '';
-  static String teacherID ='';
-
+  static String teacherID = '';
 }
+
+Widget circularProgressIndicator = const Center(
+  child: CircularProgressIndicator(),
+);

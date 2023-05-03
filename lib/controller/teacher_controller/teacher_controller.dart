@@ -11,11 +11,12 @@ class TeacherController extends GetxController {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController phoneNumber = TextEditingController();
   final TextEditingController employeeID = TextEditingController();
-  TeacherController teacherController = Get.put(TeacherController());
+  RxBool isLoading = RxBool(false);
 
   ///creating a temporary teacher collection. It will be shows in main collection only whenever teacher signup on mobile device.
   Future<void> createNewTeacher(TeacherModel teacherModel) async {
     try {
+      isLoading.value = true;
       await firebaseFirestore
           .collection('SchoolListCollection')
           .doc(Get.find<AdminLoginScreenController>().schoolID)
@@ -27,10 +28,24 @@ class TeacherController extends GetxController {
             .doc(Get.find<AdminLoginScreenController>().schoolID)
             .collection('TempTeacherList')
             .doc(value.id)
-            .update({"docid": value.id});
+            .update({"docid": value.id}).then(
+          (value) {
+            showToast(msg: "Scuccessfully Created");
+            clearFields();
+          },
+        );
       });
+      isLoading.value = false;
     } catch (e) {
       showToast(msg: "Teacher Creation Failed");
+      isLoading.value = false;
     }
+  }
+
+  void clearFields() {
+    emailIDController.clear();
+    nameController.clear();
+    phoneNumber.clear();
+    employeeID.clear();
   }
 }
