@@ -40,15 +40,7 @@ class MyApp extends StatelessWidget {
                 // ignore: deprecated_member_use
                 accentColor: const Color(0xFF02BB9F),
               ),
-              home:
-                  // AlumniAssocation()
-                  //ClassTeacherAdmin(schoolID: '',teacherEmail:'' ,teacherID: '',)
-                  // AllStudentList()
-                  // AdminDashBoardPage(schoolID: '',date: '',loginTime: '',wadmin: '',key: null,)
-                  // AllStdf()
-                  // BusRoute()
-                  // NonTeachingLogin(schoolID: '',)
-                  DujoHomePage());
+              home: DujoHomePage());
         });
   }
 }
