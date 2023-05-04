@@ -127,7 +127,17 @@ class SubmitSubjectClassTeacher extends StatelessWidget {
                                               Text(snapshot.data?.docs[index]
                                                   ['subjectName']),
                                               IconButton(
-                                                  onPressed: () {},
+                                                  onPressed: () async {
+                                                    subjectController
+                                                        .editClassName(
+                                                            context,
+                                                            snapshot.data
+                                                                    ?.docs[index]
+                                                                ['subjectName'],
+                                                            snapshot.data?.docs[
+                                                                    index]
+                                                                ['docid']);
+                                                  },
                                                   icon: Icon(Icons.edit)),
                                               IconButton(
                                                   onPressed: () {},
