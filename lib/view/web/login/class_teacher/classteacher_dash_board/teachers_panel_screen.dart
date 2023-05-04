@@ -495,6 +495,9 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                                               .update({
                                                                             'classID':
                                                                                 classIDListValue['docid']
+                                                                          }).then((value) async {
+                                                                            await getFireBaseData.getTeacherClassRoll();
+                                                                            log("message");
                                                                           });
                                                                         },
                                                                         icon: Icon(Icons
