@@ -369,11 +369,20 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                   children: [
                     Container(
                         width: screenSize.width / 6,
-                        color: const Color.fromRGBO(0, 0, 0, 1),
+                        color: adminePrimayColor,
                         child: ListView(
                           children: [
                             Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: Text('Admin Dashboard',style: GoogleFonts.poppins(
+                                          color:Colors.red,
+                                          fontWeight: FontWeight.w800),
+                                          
+                                          ),
+                            ),
+                            Padding(
                               padding: const EdgeInsets.all(20.0),
+                            
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
@@ -451,12 +460,12 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                   },
                                   icon: Icon(Icons.arrow_back),
                                 ),
-                                Text(
-                                  'Admin Dashboard',
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w500),
-                                ),
+                                // Text(
+                                //   'Admin Dashboard',
+                                //   style: GoogleFonts.poppins(
+                                //       fontSize: 17,
+                                //       fontWeight: FontWeight.w500),
+                                // ),
                                 Row(
                                   children: [
                                     Text(
@@ -836,8 +845,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                             children: [
                                               Image.asset(
                                                 dashboardImagesList[index],
-                                                width: 50,
-                                                height: 50,
+                                                width: 55,
+                                                height: 55,
                                               ),
                                               const SizedBox(
                                                 height: 20,

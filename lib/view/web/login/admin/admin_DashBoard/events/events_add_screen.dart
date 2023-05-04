@@ -111,7 +111,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                           controller: dateController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            labelText: 'Date',
+                            hintText: 'Date',
                           ),
                         ),
                       ),
@@ -123,7 +123,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                            controller: headingController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            labelText: 'Heading',
+                            hintText: 'Heading',
                           ),
                         ),
                       ),
@@ -138,7 +138,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                            controller: venueController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            labelText: 'Venue',
+                            hintText: 'Venue',
                           ),
                         ),
                       ),
@@ -152,7 +152,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             
-                            labelText: 'Description',
+                            hintText: 'Description',
                           ),
                         ),
                       ),
@@ -163,7 +163,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                            controller: signedByController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            labelText: 'Signed by',
+                            hintText: 'Signed by',
                           ),
                         ),
                       ),

@@ -90,6 +90,7 @@ dependencies:
   video_player_web_hls: ^0.1.11
   visibility_detector: ^0.3.0
   wakelock: ^0.6.2
+  
 
 
 dev_dependencies:

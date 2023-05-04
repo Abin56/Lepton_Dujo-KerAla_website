@@ -111,9 +111,9 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
   @override
   Widget build(BuildContext context) {
     List<Widget> pages = [
-      // SubmitSubjectClassTeacher(
-      //     schoolID: Get.find<AdminLoginScreenController>().schoolID,
-      //     teacherClassId: teacherClassId), //1
+      SubmitSubjectClassTeacher(
+          schoolID: Get.find<AdminLoginScreenController>().schoolID,
+          teacherClassId: teacherClassId), //1
       AddStudentFromClassTeacher(
         schoolID: Get.find<AdminLoginScreenController>().schoolID,
         teacherIDE: widget.teacherEmail,
@@ -495,6 +495,9 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                                               .update({
                                                                             'classID':
                                                                                 classIDListValue['docid']
+                                                                          }).then((value) async {
+                                                                            await getFireBaseData.getTeacherClassRoll();
+                                                                            log("message");
                                                                           });
                                                                         },
                                                                         icon: Icon(Icons

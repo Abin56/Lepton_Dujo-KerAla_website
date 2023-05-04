@@ -1,20 +1,19 @@
 import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:dujo_kerala_website/ui%20team/sruthi/parent_guardian_alert_box_widget.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/transfer_cretificate/tc_genrate.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../view/colors/colors.dart';
 import '../../view/constant/constant.dart';
-import '../../view/web/login/admin/admin_DashBoard/all_Students/search_students.dart';
+
 import '../../view/web/widgets/Iconbackbutton.dart';
 import 'guardianInfo_alert_box.dart';
 
@@ -183,7 +182,9 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
                           sizedBoxH20,
                           Student_Info_Elevated_button_Widget(
                             text: 'Shift Class',
-                            onPressed: () {},
+                            onPressed: () {
+                            
+                            },
                           ),
                           sizedBoxH20,
                           Student_Info_Elevated_button_Widget(
@@ -234,15 +235,11 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
               child: ListBody(
                 children: <Widget>[
                   TextFormField(
-                    decoration: const InputDecoration(
-                      hintText: 'Enter S.No'
-                    ),
+                    decoration: const InputDecoration(hintText: 'Enter S.No'),
                     controller: sController,
                   ),
                   TextFormField(
-                       decoration: const InputDecoration(
-                      hintText: 'Enter Reg.No'
-                    ),
+                    decoration: const InputDecoration(hintText: 'Enter Reg.No'),
                     controller: regController,
                   )
                 ],

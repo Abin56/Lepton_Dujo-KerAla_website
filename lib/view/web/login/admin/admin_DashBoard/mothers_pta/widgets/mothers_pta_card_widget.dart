@@ -35,14 +35,16 @@ class MothersPtaCardWidget extends StatelessWidget {
       decoration: BoxDecoration(
           color: cWhite,
           borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: const Offset(0, 3),
-            ),
-          ]),
+          border: Border.all(color: Colors.grey)
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: Colors.grey.withOpacity(0.5),
+          //     spreadRadius: 5,
+          //     blurRadius: 7,
+          //     offset: const Offset(0, 3),
+          //   ),
+          // ]
+          ),
       child: SizedBox(
         width: 200,
         child: Column(

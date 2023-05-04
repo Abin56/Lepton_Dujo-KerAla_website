@@ -15,10 +15,11 @@ class LoginOrCreateButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(height: 60.h,
+    return Container(
+    height: 60.w,
     width: 220.w,
-    decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(15)),
-    color: adminePrimayColor,),
+    decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(15)),border: Border.all(color: cWhite),
+    color: adminScreencolor,),
     child: Center(child: GoogleMonstserratWidgets(fontsize: 15.w,text: text,color: cWhite,))
     );
   }
