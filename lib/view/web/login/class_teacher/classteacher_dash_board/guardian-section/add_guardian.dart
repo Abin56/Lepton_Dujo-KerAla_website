@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/model/guardian/guardian_temp_to_firebase.dart';
 import 'package:dujo_kerala_website/view/fonts/fonts.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -105,7 +106,7 @@ class _AddGuardianState extends State<AddGuardian> {
                     children: [
                       sizedBoxH30,
                       //GetClassesListDropDownButton(schoolID: Get.find<AdminLoginScreenController>().schoolID, teacherID: _auth.currentUser!.uid),
-                       dropDownButtonsec(),
+                      // dropDownButtonsec(),
                       // classesListValue == null
                       //     ? const SizedBox()
                       //     : dropDownButton(),
@@ -135,21 +136,24 @@ class _AddGuardianState extends State<AddGuardian> {
                               ),
                             ),
                             onPressed: () async {
+                     
                               if (formKey.currentState!.validate()) {
                                 final guardianDetails = GuardianAddModel(
-                                  studentID: studentID,
+                                 studentID: studentID,
                                   createdate: DateTime.now().toString(),
                                   guardianPhoneNumber:
                                       guardianPhoneNoController.text.trim(),
                                   guardianName:
                                       guardianNameController.text.trim(),
                                 );
-                                CreateGuardiansAddToFireBase()
-                                    .createSchoolController(
-                                        guardianDetails,
-                                        context,
-                                        widget.schoolId,
-                                        classesListValue['id']);
+                                // CreateGuardiansAddToFireBase()
+                                //     .createSchoolController(
+                                //         guardianDetails,
+                                //         context,
+                                //         widget.schoolId,
+                                //         classesListValue['id']); 
+                                AddTempGuardiansToFirebase().addGuardiansToTempList(guardianDetails, context, AdminLoginScreenController().schoolID,).then((value) => showToast(msg: 'New Guardian added!'));
+                                
                               }
                             },
                             child: const Text("Add Guardian"),
