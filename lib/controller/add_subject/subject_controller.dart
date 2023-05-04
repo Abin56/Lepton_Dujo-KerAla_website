@@ -18,19 +18,25 @@ class SubjectController extends GetxController {
       .doc(schoolListValue!['docid']);
 
   ///
-  addSubjectforGetClassID(
-      TextEditingController subjectName, String classID) async {
+  addSubjectInClassWise(
+    TextEditingController subjectName,
+  ) async {
     SubjectModel data = SubjectModel(
         subjectName: subjectName.text.trim(),
         docid: subjectName.text.trim() + uuid.v1());
 
     firebaseFirestore
         .collection("classes")
-        .doc(classID)
+        .doc(Get.find<GetFireBaseData>().getTeacherClassRole.value)
         .collection("subjects")
         .doc(subjectName.text.trim() + uuid.v1())
-        .set(data.toMap());
+        .set(data.toMap())
+        .then((value) {
+          showToast(msg: 'Added');
+          subjectName.clear();
+        });
   }
+
 
   Future<void> getClass(
     String teacherdocid,
