@@ -3,6 +3,7 @@ import 'package:dujo_kerala_website/model/admin_models/admin_pta_model/admin_pta
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/admin_pta/widgets/admin_pta_card_widget.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/admin_pta/widgets/admin_pta_dialogue_widget.dart';
+import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,11 +24,11 @@ class AdminPtaScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('School PTA',style: TextStyle(color: cBlack),),
-        backgroundColor: cWhite,
-        elevation: 0,iconTheme: IconThemeData(color: cBlack),
-      ),
+      // appBar: AppBar(
+      //   title: const Text('School PTA'),
+      // backgroundColor: adminePrimayColor,
+      //   elevation: 0,
+      // ),
       floatingActionButton: FloatingActionButton(
         tooltip: 'Add New Member',
         onPressed: () async {
@@ -77,158 +78,204 @@ class AdminPtaScreen extends StatelessWidget {
             return Row(
               children: [
                 SingleChildScrollView(
-                    child: Column(
-                  children: [
-                    SizedBox(
-                      width: ScreenSize.width * 0.4,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          children: [
-                            Text(
-                              "School PTA",
-                              style: GoogleFonts.oswald(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                                color: cBlack,
-                              ),
+                    child: Container(
+                  color: adminePrimayColor,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          IconButtonBackWidget(
+                            color: cWhite,
+                          ),
+                          Text(
+                            "School PTA",
+                            style: GoogleFonts.poppins(
+                              fontSize: 23,
+                              fontWeight: FontWeight.bold,
+                              color: cWhite,
                             ),
-                            sizedBoxH10,
-                            LeftSideCardWidget(
-                              querySnapshotList: querySnapshotList,
-                              adminPtaModelList: adminPtaModelList,
-                              index: 0,
-                              dataList: fields,
-                              positionData: const [
-                                "Name",
-                                "Head Master",
-                                "Position"
-                              ],
-                            ),
-                            sizedBoxH20,
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Flexible(
-                                  child: LeftSideCardWidget(
-                                    querySnapshotList: querySnapshotList,
-                                    adminPtaModelList: adminPtaModelList,
-                                    index: 1,
-                                    dataList: fields,
-                                    positionData: const [
-                                      "Name",
-                                      "President",
-                                      "Position"
-                                    ],
-                                  ),
-                                ),
-                                Flexible(
-                                  child: LeftSideCardWidget(
-                                    querySnapshotList: querySnapshotList,
-                                    adminPtaModelList: adminPtaModelList,
-                                    index: 2,
-                                    dataList: fields,
-                                    positionData: const [
-                                      "Name",
-                                      "Vice President",
-                                      "Position"
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                            sizedBoxH20,
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Flexible(
-                                  child: LeftSideCardWidget(
-                                    querySnapshotList: querySnapshotList,
-                                    adminPtaModelList: adminPtaModelList,
-                                    index: 3,
-                                    dataList: fields,
-                                    positionData: const [
-                                      "Name",
-                                      "Chairman",
-                                      "Position"
-                                    ],
-                                  ),
-                                ),
-                                Flexible(
-                                  child: LeftSideCardWidget(
-                                    querySnapshotList: querySnapshotList,
-                                    adminPtaModelList: adminPtaModelList,
-                                    index: 4,
-                                    dataList: fields,
-                                    positionData: const [
-                                      "Name",
-                                      "Vice Chairman",
-                                      "Position"
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                )),
-                const VerticalDivider(
-                  thickness: 5,
-                  color: Colors.black,
-                ),
-                Expanded(
-                  child: StreamBuilder(
-                      stream: FirebaseFirestore.instance
-                          .collection('SchoolListCollection')
-                          .doc(Get.find<AdminLoginScreenController>().schoolID)
-                          .collection(Get.find<GetFireBaseData>().bYear.value)
-                          .doc(Get.find<GetFireBaseData>().bYear.value)
-                          .collection('pta')
-                          .where(
-                        "id",
-                        whereNotIn: <String>[
-                          "chairPerson",
-                          "headMaster",
-                          "president",
-                          "representative",
-                          "vicePresident"
+                          ),
                         ],
-                      ).snapshots(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          return GridView.count(
-                            childAspectRatio: (1 / .9),
-                            mainAxisSpacing: 20,
-                            crossAxisSpacing: 20,
-                            padding: const EdgeInsets.all(10),
-                            crossAxisCount: _getCrossAxisCount(context),
-                            children: List.generate(
-                              snapshot.data!.docs.length,
-                              (index) => PtaCardWidget(
-                                name: snapshot.data!.docs[index].data()['name'],
-                                designation: snapshot.data!.docs[index]
-                                    .data()['designation'],
-                                position: snapshot.data!.docs[index]
-                                    .data()['position'],
-                                imageUrl: snapshot.data!.docs[index]
-                                    .data()['imageUrl'],
-                                iconData: Icons.delete,
-                                imageId: snapshot.data!.docs[index]
-                                    .data()['imageId'],
-                                memberId:
-                                    snapshot.data!.docs[index].data()['id'],
+                      ),
+                      Column(
+                        children: [
+                        
+                          SizedBox(
+                            width: ScreenSize.width * 0.4,
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "PTA Executive Members",
+                                    style: GoogleFonts.oswald(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                      color: cWhite,
+                                    ),
+                                  ),
+                                  sizedBoxH10,
+                                  LeftSideCardWidget(
+                                    querySnapshotList: querySnapshotList,
+                                    adminPtaModelList: adminPtaModelList,
+                                    index: 0,
+                                    dataList: fields,
+                                    positionData: const [
+                                      "Name",
+                                      "Head Master",
+                                      "Position"
+                                    ],
+                                  ),
+                                  sizedBoxH20,
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Flexible(
+                                        child: LeftSideCardWidget(
+                                          querySnapshotList: querySnapshotList,
+                                          adminPtaModelList: adminPtaModelList,
+                                          index: 1,
+                                          dataList: fields,
+                                          positionData: const [
+                                            "Name",
+                                            "President",
+                                            "Position"
+                                          ],
+                                        ),
+                                      ),
+                                      Flexible(
+                                        child: LeftSideCardWidget(
+                                          querySnapshotList: querySnapshotList,
+                                          adminPtaModelList: adminPtaModelList,
+                                          index: 2,
+                                          dataList: fields,
+                                          positionData: const [
+                                            "Name",
+                                            "Vice President",
+                                            "Position"
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  sizedBoxH20,
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Flexible(
+                                        child: LeftSideCardWidget(
+                                          querySnapshotList: querySnapshotList,
+                                          adminPtaModelList: adminPtaModelList,
+                                          index: 3,
+                                          dataList: fields,
+                                          positionData: const [
+                                            "Name",
+                                            "Chairman",
+                                            "Position"
+                                          ],
+                                        ),
+                                      ),
+                                      Flexible(
+                                        child: LeftSideCardWidget(
+                                          querySnapshotList: querySnapshotList,
+                                          adminPtaModelList: adminPtaModelList,
+                                          index: 4,
+                                          dataList: fields,
+                                          positionData: const [
+                                            "Name",
+                                            "Vice Chairman",
+                                            "Position"
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
                               ),
                             ),
-                          );
-                        } else {
-                          return const Center(
-                            child: Text('No Data Found'),
-                          );
-                        }
-                      }),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                )),
+                // const VerticalDivider(
+                //   thickness: 5,
+                //   color: Colors.black,
+                // ),
+                  sizedBoxW20,
+                Expanded(
+               
+                  child: Stack(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 30),
+                        child: StreamBuilder(
+                            stream: FirebaseFirestore.instance
+                                .collection('SchoolListCollection')
+                                .doc(Get.find<AdminLoginScreenController>().schoolID)
+                                .collection(Get.find<GetFireBaseData>().bYear.value)
+                                .doc(Get.find<GetFireBaseData>().bYear.value)
+                                .collection('pta')
+                                .where(
+                              "id",
+                              whereNotIn: <String>[
+                                "chairPerson",
+                                "headMaster",
+                                "president",
+                                "representative",
+                                "vicePresident"
+                              ],
+                            ).snapshots(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                return GridView.count(
+                                  childAspectRatio: (1 / .9),
+                                  mainAxisSpacing: 20,
+                                  crossAxisSpacing: 20,
+                                  padding: const EdgeInsets.all(10),
+                                  crossAxisCount: _getCrossAxisCount(context),
+                                  children: List.generate(
+                                    snapshot.data!.docs.length,
+                                    (index) => PtaCardWidget(
+                                      name: snapshot.data!.docs[index].data()['name'],
+                                      designation: snapshot.data!.docs[index]
+                                          .data()['designation'],
+                                      position: snapshot.data!.docs[index]
+                                          .data()['position'],
+                                      imageUrl: snapshot.data!.docs[index]
+                                          .data()['imageUrl'],
+                                      iconData: Icons.delete,
+                                      imageId: snapshot.data!.docs[index]
+                                          .data()['imageId'],
+                                      memberId:
+                                          snapshot.data!.docs[index].data()['id'],
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                return const Center(
+                                  child: Text('No Data Found'),
+                                );
+                              }
+                            }),
+                      ),
+                              Row(mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Members In PTA',
+                                     style: GoogleFonts.oswald(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: cBlack,)
+                               ) ],
+                              ),
+                    ],
+                  ),
                 )
               ],
             );

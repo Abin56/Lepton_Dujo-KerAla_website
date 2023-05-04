@@ -378,18 +378,18 @@ class StdAdmissionWidget extends StatelessWidget {
         sizedBoxH20,
         Flexible(
           child: TextFormFieldTextWidget(
-            title: 'Admission Number',
+             title: 'Admission Number',
             controller:
-                Get.find<SampoornaController>().admissionNumberController,
+            Get.find<SampoornaController>().admissionNumberController,
             validator: checkFieldEmpty,
           ),
         ),
       ],
+           
     );
   }
 }
-
-class TitleWidget extends StatelessWidget {
+   class TitleWidget extends StatelessWidget {
   const TitleWidget({
     super.key,
     required this.size,
@@ -449,7 +449,7 @@ class TitleWidget extends StatelessWidget {
           sizedBoxH40,
          const  TitleTextWidget(title: 'APPLICATION CUM DATA COLLECTION FORM'),
         ],
-      ),
-    );
-  }
+     ), 
+     );
+ }
 }
