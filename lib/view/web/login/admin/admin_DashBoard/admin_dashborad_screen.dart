@@ -374,15 +374,15 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(20),
-                              child: Text('Admin Dashboard',style: GoogleFonts.poppins(
-                                          color:Colors.red,
-                                          fontWeight: FontWeight.w800),
-                                          
-                                          ),
+                              child: Text(
+                                'Admin Dashboard',
+                                style: GoogleFonts.poppins(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w800),
+                              ),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(20.0),
-                            
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
