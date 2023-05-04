@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/model/class_teacher/add_subject/add_subjects.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
@@ -10,6 +12,7 @@ import '../get_firebase-data/get_firebase_data.dart';
 
 class SubjectController extends GetxController {
   final GlobalKey<FormState> updateFormkey = GlobalKey<FormState>();
+
   RxString classIDD = ''.obs;
   RxString className = ''.obs;
   RxString classTeacherdocid = ''.obs;
@@ -30,7 +33,7 @@ class SubjectController extends GetxController {
         .collection("classes")
         .doc(Get.find<GetFireBaseData>().getTeacherClassRole.value)
         .collection("subjects")
-        .doc(subjectName.text.trim() + uuid.v1())
+        .doc(data.docid)
         .set(data.toMap())
         .then((value) {
       showToast(msg: 'Added');
@@ -38,7 +41,51 @@ class SubjectController extends GetxController {
     });
   }
 
-  editClassName(BuildContext context, String helperText, String docid) async {
+  deleteClass(String docid, BuildContext context) async {
+    return showDialog(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Alert'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text(
+                    'Once you delete a subject all data will be lost \n Are you sure ?')
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('cancel'),
+              onPressed: () async {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('ok'),
+              onPressed: () async {
+                await firebaseFirestore
+                    .collection("classes")
+                    .doc(Get.find<GetFireBaseData>().getTeacherClassRole.value)
+                    .collection("subjects")
+                    .doc(docid)
+                    .delete()
+                    .then((value) {
+                  showToast(msg: 'Deleted');
+                  Navigator.of(context).pop();
+                });
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  editClassName(BuildContext context, String helperText, String classID,
+      String docid) async {
     TextEditingController updateController = TextEditingController();
     return showDialog(
       context: context,
@@ -75,21 +122,24 @@ class SubjectController extends GetxController {
               TextButton(
                 child: const Text('ok'),
                 onPressed: () async {
-                  if (updateFormkey.currentState!.validate()) {
-                    firebaseFirestore
-                        .collection("classes")
-                        .doc(Get.find<GetFireBaseData>()
-                            .getTeacherClassRole
-                            .value)
-                        .collection("subjects")
-                        .doc(docid)
-                        .update({
-                      'subjectName': updateController.text.trim()
-                    }).then((value) {
-                      showToast(msg: 'Changed');
-                      Navigator.of(context).pop();
-                    });
-                  }
+                  log(schoolListValue!['docid']);
+                  log(classID);
+                  log(docid);
+                  log(updateController.text.trim());
+                  await firebaseFirestore
+                      .collection("classes")
+                      .doc(classID)
+                      .collection("subjects")
+                      .doc(docid)
+                      .update({
+                    'subjectName': updateController.text.trim(),
+                  }).then((value) {
+                    showToast(msg: 'Changed');
+                    Navigator.of(context).pop();
+                  });
+                  // if (updateFormkey.currentState!.validate()) {
+
+                  // }
                 },
               ),
             ],
@@ -97,6 +147,19 @@ class SubjectController extends GetxController {
         );
       },
     );
+  }
+
+  addSubjectToNewBatch(String subjectDocid, String subjectName) async {
+    SubjectModel data =
+        SubjectModel(subjectName: subjectName, docid: subjectDocid);
+    firebaseFirestore
+        .collection(Get.find<GetFireBaseData>().bYear.value)
+        .doc(Get.find<GetFireBaseData>().bYear.value)
+        .collection('classes')
+        .doc(Get.find<GetFireBaseData>().getTeacherClassRole.value)
+        .collection('subjects')
+        .doc(subjectDocid)
+        .set(data.toMap());
   }
 
   Future<void> getClass(
