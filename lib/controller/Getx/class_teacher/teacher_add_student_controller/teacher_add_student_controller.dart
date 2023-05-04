@@ -24,6 +24,8 @@ class TeacherAddStudentController extends GetxController {
         studentName: studentNameController.text,
         parentPhoneNumber: parentPhNoController.text,
         admissionNumber: addmissionNumberController.text,
+        classID: Get.find<GetFireBaseData>().classIDD.value,
+        createDate: DateTime.now().toString(),
       );
       await firebaseFirestore
           .collection(Get.find<GetFireBaseData>().bYear.value)
