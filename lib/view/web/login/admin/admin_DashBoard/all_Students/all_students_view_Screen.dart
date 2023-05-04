@@ -12,7 +12,7 @@ import '../../../../../../controller/class_list/class_list_model.dart';
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../model/create_classModel/addStudent_model.dart';
 import '../../../../../../model/create_classModel/create_classModel.dart';
-import '../../../../../../model/student/student_list_model.dart';
+
 import '../../../../../../ui team/sruthi/student_details_alert_box_widget.dart';
 import '../../../../../constant/constant.dart';
 import '../classes/details_ofClasses.dart';
