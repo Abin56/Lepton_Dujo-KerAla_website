@@ -10,7 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../../controller/search_student/search_student.dart';
-import '../../../../../../model/create_classModel/addStudent_model.dart';
+import '../../../../../../model/create_classModel/add_student_model.dart';
 import '../../../../../../ui team/sruthi/parent_guardian_alert_box_widget.dart';
 import '../../../../../../ui team/sruthi/student_details_alert_box_widget.dart';
 
