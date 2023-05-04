@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:uuid/uuid.dart';
 
 const sizedBoxH10 = SizedBox(
   height: 10,
@@ -40,6 +41,9 @@ const sizedBoxw60 = SizedBox(
 );
 const sizedBoxw100 = SizedBox(
   width: 100,
+);
+const sizedBoxw20 = SizedBox(
+  width: 20,
 );
 const sizedBoxw120 = SizedBox(
   width: 120,
@@ -79,13 +83,14 @@ const sizedBoxw570 = SizedBox(
 const kwidth20 = SizedBox(
   width: 20,
 );
+const uuid = Uuid();
 
 void showToast({required String msg}) {
   Fluttertoast.showToast(
     msg: msg,
     toastLength: Toast.LENGTH_LONG,
     gravity: ToastGravity.CENTER,
-    timeInSecForIosWeb: 1,
+    timeInSecForIosWeb: 3,
     backgroundColor: Colors.red,
     textColor: Colors.white,
     fontSize: 16.0,
@@ -181,8 +186,12 @@ Future<Uint8List?> pickImage(ImageSource source) async {
   }
   return null;
 }
+
 class TeacherLoginIDSaver {
   static String id = '';
-  static String teacherID ='';
-
+  static String teacherID = '';
 }
+
+Widget circularProgressIndicator = const Center(
+  child: CircularProgressIndicator(),
+);

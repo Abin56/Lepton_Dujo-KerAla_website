@@ -1,4 +1,5 @@
 import 'package:dujo_kerala_website/utils/utils.dart';
+import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -23,8 +24,8 @@ class AddNewNotices extends StatelessWidget {
       key: _formKey,
       child: Scaffold(
         // backgroundColor: const Color.fromARGB(255, 27, 95, 88),
-        appBar: AppBar(
-            title: Text('Add New Notice'.tr), backgroundColor: adminePrimayColor),
+        // appBar: AppBar(
+        //     title: Text('Add New Notice'.tr), backgroundColor: adminePrimayColor),
         body: Center(
           child: SingleChildScrollView(
             child: Row(
@@ -34,23 +35,41 @@ class AddNewNotices extends StatelessWidget {
                   width: screenSize.width * 1 / 2,
                   color: adminePrimayColor,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        'Hi ! Admin \n Create\n Notices',
-                        style: ralewayStyle.copyWith(
-                          fontSize: 48.0,
-                          color: AppColors.whiteColor,
-                          fontWeight: FontWeight.w800,
+                      IconButtonBackWidget(color: cWhite),
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Hi ! Admin',
+                              style: ralewayStyle.copyWith(
+                                fontSize: 48.0,
+                                color: AppColors.whiteColor,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                            sizedBoxH20,
+                             Text(
+                              'Create Notices',
+                              style: ralewayStyle.copyWith(
+                                fontSize: 25.0,
+                                color: AppColors.whiteColor,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 300,
+                              width: screenSize.width / 2,
+                              child: LottieBuilder.network(
+                                  'https://assets7.lottiefiles.com/packages/lf20_2pckVUuMz6.json'),
+                            )
+                          ],
                         ),
                       ),
-                      SizedBox(
-                        height: 300,
-                        width: screenSize.width / 2,
-                        child: LottieBuilder.network(
-                            'https://assets7.lottiefiles.com/packages/lf20_2pckVUuMz6.json'),
-                      )
                     ],
                   ),
                 ),
@@ -226,16 +245,9 @@ class AddNewNotices extends StatelessWidget {
                                           adminNoticeController.signedImageId =
                                               result["imageUid"]!;
                                         },
-                                        child: Container(
-                                          height: screenSize.width * 1 / 40,
-                                          width: screenSize.width * 1 / 4,
-                                          decoration: BoxDecoration(
-                                              color: Colors.blue,
-                                              borderRadius:
-                                                  BorderRadius.circular(14)),
-                                          child: Center(
-                                              child: Text('Upload Sign'.tr)),
-                                        ),
+                                        child:SecondaryCreateButtonWidget(screenSize: screenSize,text: 'Upload Sign'.tr,) 
+                                        
+                                       
                                       ),
                                 const SizedBox(
                                   height: 30,
@@ -252,25 +264,16 @@ class AddNewNotices extends StatelessWidget {
                                           adminNoticeController.imageId =
                                               result["imageUid"]!;
                                         },
-                                        child: Container(
-                                          height: screenSize.width * 1 / 40,
-                                          width: screenSize.width * 1 / 4,
-                                          decoration: BoxDecoration(
-                                              color: Colors.blue,
-                                              borderRadius:
-                                                  BorderRadius.circular(14)),
-                                          child: Center(
-                                              child: Text('Upload Notices'.tr)),
-                                        ),
+                                        child: SecondaryCreateButtonWidget(screenSize: screenSize,text: 'Upload Notice'.tr),
                                       ),
                                 const SizedBox(
                                   height: 30,
                                 ),
                                 Container(
                                   height: screenSize.width * 1 / 30,
-                                  width: screenSize.width * 1 / 4,
+                                  width: screenSize.width * 1 / 5,
                                   decoration: BoxDecoration(
-                                      color: Colors.blue,
+                                      color: adminePrimayColor,
                                       borderRadius: BorderRadius.circular(14)),
                                   child: TextButton(
                                     style: TextButton.styleFrom(
@@ -298,6 +301,31 @@ class AddNewNotices extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class SecondaryCreateButtonWidget extends StatelessWidget {
+   SecondaryCreateButtonWidget({
+    required this .text,
+    super.key,
+    required this.screenSize,
+  });
+
+  final Size screenSize;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: screenSize.width * 1 / 40,
+      width: screenSize.width * 1 / 5,
+      decoration: BoxDecoration(
+          color: Colors.blue,
+          borderRadius:
+              BorderRadius.circular(14)),
+      child: Center(
+          child: Text(text)),
     );
   }
 }

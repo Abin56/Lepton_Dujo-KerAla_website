@@ -2,6 +2,7 @@
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/achievements/add_achievements.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
@@ -59,8 +60,8 @@ class _AchievementsState extends State<Achievements> {
                                       ),
                                       SizedBox(height: screenSize.width/20,),
                                        Text(
-                                        'Welcome',
-                                        style: GoogleFonts.aclonica(
+                                        'Achievements',
+                                        style: ralewayStyle.copyWith(
                                           fontSize: 25.0,
                                           color: AppColors.whiteColor,
                                           fontWeight: FontWeight.w800,
@@ -79,31 +80,32 @@ class _AchievementsState extends State<Achievements> {
                             ),
                     ),
                     Padding(
-             padding:  EdgeInsets.only(left: screenSize.width/8),
+             padding:  EdgeInsets.only(left: 120.w),
                          child: Container(
                           
                           child: Column(
           children: [
             Padding(
-                padding: const EdgeInsets.all(10),
-                child: (InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AddAchievements(
-                            schoolID: widget.schoolID,
-                          ),
-                        ));
-                  },
-                  child: SizedBox(
-                      height: screenSize.width * 1 / 10,
-                      width: screenSize.width * 1 / 3,
-                      child: CustomContainer(
-                        text: 'Add Achievements',
-                        onTap: () {},
-                      )),
-                ))),
+              padding: const EdgeInsets.all(10),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AddAchievements(
+                          schoolID: widget.schoolID,
+                        ),
+                      ));
+                },
+                child: SizedBox(
+                    height: screenSize.width * 1 / 15,
+                    width: screenSize.width * 1 / 3,
+                    child: CustomContainer(
+                      text: 'Add Achievements',
+                      onTap: () {},
+                    )),
+              ),
+            ),
             Padding(
                 padding: const EdgeInsets.all(10),
                 child: (InkWell(
@@ -116,7 +118,7 @@ class _AchievementsState extends State<Achievements> {
                         ));
                   },
                   child: SizedBox(
-                      height: screenSize.width * 1 / 10,
+                      height: screenSize.width * 1 / 15,
                       width: screenSize.width * 1 / 3,
                       child: CustomContainer(
                         text: 'Edit  Achievements',
@@ -134,7 +136,7 @@ class _AchievementsState extends State<Achievements> {
                   //       ));
                   // },
                   child: SizedBox(
-                      height: screenSize.width * 1 / 10,
+                      height: screenSize.width * 1 / 15,
                       width: screenSize.width * 1 / 3,
                       child: CustomContainer(
                         text: 'Remove Acheivements',

@@ -1,5 +1,8 @@
+// ignore_for_file: sort_child_properties_last
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/fonts/fonts.dart';
+import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -42,8 +45,8 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
       key:_formKey ,
       child: Scaffold(
         //backgroundColor: Color.fromARGB(255, 27, 95, 88),
-        appBar: AppBar(title: Text('Add New Events'),
-        backgroundColor: adminePrimayColor),
+        //appBar: AppBar(title: Text('Add New Events'),
+       // backgroundColor: adminePrimayColor),
         body: SingleChildScrollView(
           
             child: Center(
@@ -52,35 +55,45 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                   Container(height: screenSize.height,
                     width: screenSize.width * 1 / 2,
                     child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Hi ! Admin',
-                              style: ralewayStyle.copyWith(
-                                fontSize: 48.0,
-                                color: AppColors.whiteColor,
-                                fontWeight: FontWeight.w800,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+
+                      children: [
+                        IconButtonBackWidget(color: cWhite),
+                        Expanded(
+                          child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Hi ! Admin',
+                                    style: ralewayStyle.copyWith(
+                                      fontSize: 48.0,
+                                      color: AppColors.whiteColor,
+                                      fontWeight: FontWeight.w800,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Create New\n Events',
+                                    style: ralewayStyle.copyWith(
+                                      fontSize: 29.0,
+                                      color: AppColors.whiteColor,
+                                      fontWeight: FontWeight.w800,
+                                    ),
+                                  ),
+                              
+                                  
+                                  Container(
+                                    height: 300,
+                                    width:screenSize.width/2,
+                                    child: LottieBuilder.network(
+                                        'https://assets1.lottiefiles.com/packages/lf20_98vgucqb.json'),
+                                  ),
+                                ],
                               ),
-                            ),
-                            Text(
-                              'Create New\n Events',
-                              style: ralewayStyle.copyWith(
-                                fontSize: 29.0,
-                                color: AppColors.whiteColor,
-                                fontWeight: FontWeight.w800,
-                              ),
-                            ),
-                        
-                            
-                            Container(
-                              height: 300,
-                              width:screenSize.width/2,
-                              child: LottieBuilder.network(
-                                  'https://assets1.lottiefiles.com/packages/lf20_98vgucqb.json'),
-                            ),
-                          ],
                         ),
+                      ],
+                    ),
                     color:adminePrimayColor),
               
     
@@ -136,7 +149,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                           textAlign: TextAlign.start,
                            validator: checkFieldEmpty,
                            controller: descriptionController,
-                           maxLines: 8,
+                           maxLines: 5,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             
@@ -201,6 +214,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                                 setState(() {
                                     widget.loadingStatus = false;
                                 }); 
+                                
                                 
                                 // showToast(msg: 'New Event Added!');
     

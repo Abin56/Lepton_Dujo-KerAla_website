@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../utils/screen_size.dart';
 import '../../constant/constant.dart';
-import '../create_school/create_school.dart';
+import 'create_school/create_school.dart';
 import 'Subscription/school_aided.dart';
 import 'footer/footer.dart';
 import 'homep.dart';
@@ -73,59 +73,10 @@ class _DujoHomePageState extends State<DujoHomePage> {
                           alignment: Alignment.bottomCenter,
                         ),
                       ),
-                      //  Container(
-                      //           width: screenSize.width * 0.38,
-                      //           height: screenSize.width * 0.36,
-                      //           color: const Color(0XFFE8EAF6),
-                      //         ),
+
                     ]),
                   ),
-                  //       Container(
-                  //         width: double.infinity,
-                  //         height: screenSize.width * 0.35,
-                  //         color: const Color(0xFF3949AB),
-                  //       ),
-                  //       Container(
-                  //         height: screenSize.width * 0.35,
-                  //         width: MediaQuery.of(context).size.width * 0.65,
-                  //         color: const Color(0xFF26A69A),
-                  //       ),
-                  //       Container(
-                  //         //padding: const EdgeInsets.all(0),
-                  //         margin: EdgeInsets.only(
-                  //             left: MediaQuery.of(context).size.width * 0.4),
-                  //         // ignore: duplicate_ignore
-                  //         child: ClipPath(
-                  //           child: Container(
-                  //             width: MediaQuery.of(context).size.width * 0.5,
-                  //             height: screenSize.width * 0.35,
-                  //             color: const Color(0xFF26A69A),
-                  //           ),
-                  //           clipper: CustomClipPath(),
-                  //         ),
-                  //       ),
-                  //       Container(
-                  //         //height: 300,
-                  //        height: screenSize.width * 0.35,
-                  //         //width:300,
-                  //       width:screenSize .width * 0.45,
-                  //         color: const Color(0XFFE8EAF6),
 
-                  //       ),
-                  //       Container(
-                  //         //padding: const EdgeInsets.all(0),
-                  //         margin: EdgeInsets.only(
-                  //             left: MediaQuery.of(context).size.width * 0.2),
-                  //         child: ClipPath(
-                  //           child: Container(
-                  //             width: MediaQuery.of(context).size.width * 0.5,
-                  //             height: screenSize.width * 0.35,
-                  //             color: const Color(0XFFE8EAF6),
-
-                  //           ),
-                  //           clipper: CustomClipPath(),
-                  //         ),
-                  //  ),
                   Row(
                     children: [
                       Padding(
@@ -319,16 +270,7 @@ class _DujoHomePageState extends State<DujoHomePage> {
                                 fontSize: screenSize.width / 60,
                                 fontWeight: FontWeight.bold)),
                       ),
-                      // InkWell(
-                      // onTap: () {
-                      //     Navigator.push(context, MaterialPageRoute(builder: ((context) => SchoolPrivateSubscription())));
-                      //   },
-                      //   child: const Text("DuJo School \nKerala Private",
-                      //       style: TextStyle(
-                      //           color: Colors.black,
-                      //           fontSize: 20,
-                      //           fontWeight: FontWeight.bold)),
-                      // ),
+    
                       InkWell(
                         onTap: () {
                           Navigator.push(
@@ -343,16 +285,7 @@ class _DujoHomePageState extends State<DujoHomePage> {
                                 fontSize: screenSize.width / 60,
                                 fontWeight: FontWeight.bold)),
                       ),
-                      // InkWell(
-                      //   onTap: () {
-                      //     Navigator.push(context, MaterialPageRoute(builder: ((context) => CollegePrivateSubscription())));
-                      //   },
-                      //   child: const Text("DuJo Colleges\n Kerala Private",
-                      //       style: TextStyle(
-                      //           color: Colors.black,
-                      //           fontSize: 20,
-                      //           fontWeight: FontWeight.bold)),
-                      // ),
+
                       InkWell(
                           onTap: () {},
                           child: Text("Dujo Customize",

@@ -1,13 +1,4 @@
-import 'package:dujo_kerala_website/ui%20team/abin/alumini_accocation/alumni_assocation.dart';
-import 'package:dujo_kerala_website/ui%20team/abin/food_and_beverages/sample.dart';
-import 'package:dujo_kerala_website/utils/screen_size.dart';
 import 'package:dujo_kerala_website/view/web/home/dujo_home.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/admin_dashborad_screen.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/all_Students/all_students_view_Screen.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/bus_Route/bus_route.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/bus_Route/create_bus_route.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/non_Teaching_staff/non_teaching_staff.dart';
-import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/teachers_panel_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -35,7 +26,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    
     return ScreenUtilInit(
         minTextAdapt: true,
         splitScreenMode: true,

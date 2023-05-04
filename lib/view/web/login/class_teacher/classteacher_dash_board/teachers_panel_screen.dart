@@ -1,8 +1,13 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/subject/subject_screen.dart';
 import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/upload_timetable/select_class.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
+import 'dart:html' as html;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -11,11 +16,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import '../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../controller/get_firebase-data/get_firebase_data.dart';
+import '../../../../../model/teacher/teacher_model.dart';
 import '../../../../colors/colors.dart';
 import '../../../../constant/constant.dart';
 import '../../../../fonts/fonts.dart';
 import '../../../widgets/button_container_widget.dart';
 import '../../../widgets/drop_DownList/get_batchYear.dart';
+import '../../../widgets/drop_DownList/get_classList.dart';
 import '../../admin/admin_DashBoard/classes/list_of_classes.dart';
 import 'add_student/add_student.dart';
 import '../parents-section/add_parent.dart';
@@ -45,10 +52,10 @@ class ClassTeacherAdmin extends StatefulWidget {
 }
 
 class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
+  TeacherModel teacherModel = TeacherModel();
   DateTime? _selectedDateForApplyDate;
   DateTime? _selectedToDate;
   GetFireBaseData getFireBaseData = Get.put(GetFireBaseData());
-  TextEditingController subjectController = TextEditingController();
   TextEditingController applynewBatchYearContoller = TextEditingController();
   TextEditingController selectedToDaterContoller = TextEditingController();
   String teacherClassId = '';
@@ -104,10 +111,9 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
   @override
   Widget build(BuildContext context) {
     List<Widget> pages = [
-      SubmitSubjectClassTeacher(
-          schoolID: Get.find<AdminLoginScreenController>().schoolID,
-          subjecController: subjectController,
-          teacherClassId: teacherClassId), //1
+      // SubmitSubjectClassTeacher(
+      //     schoolID: Get.find<AdminLoginScreenController>().schoolID,
+      //     teacherClassId: teacherClassId), //1
       AddStudentFromClassTeacher(
         schoolID: Get.find<AdminLoginScreenController>().schoolID,
         teacherIDE: widget.teacherEmail,
@@ -121,14 +127,18 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
         teacherID: '',
       ), //4
       AddGuardian(
-        teacherIDE: widget.teacherEmail,
+          teacherIDE: widget.teacherEmail,
           schoolId: Get.find<AdminLoginScreenController>().schoolID), //5
-      // AddGuardian(
-      //     schoolId: Get.find<AdminLoginScreenController>().schoolID), //6
-      // SelectClassForTimeTable(
-      //     schoolID: Get.find<AdminLoginScreenController>().schoolID), //7
-      // AddGuardian(
-      //     schoolId: Get.find<AdminLoginScreenController>().schoolID), //8
+      ClassTeacherCreateEventsPage(
+        schoolId: Get.find<AdminLoginScreenController>().schoolID,
+        classId: teacherClassId,
+      ), //6
+      SelectClassForTimeTable(
+          schoolID: Get.find<AdminLoginScreenController>().schoolID), //7
+      ClassTeacherCreateEventsPage(
+        schoolId: Get.find<AdminLoginScreenController>().schoolID,
+        classId: teacherClassId,
+      ), //8
       ClassTeacherCreateEventsPage(
         schoolId: Get.find<AdminLoginScreenController>().schoolID,
         classId: teacherClassId,
@@ -194,6 +204,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                   'batchYear': schoolBatchYearListValue!['id']
                                 }, SetOptions(merge: true)).then((value) async {
                                   await getFireBaseData.getBatchYearId();
+                                  // ignore: use_build_context_synchronously
                                   Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
@@ -313,259 +324,400 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                     ),
                   ),
                 )
-              : Row(
-                  children: [
-                    Container(
-                        width: screenSize.width / 6,
-                        color: Colors.black,
+              : getFireBaseData.getTeacherClassRole.isEmpty
+                  ? Center(
+                      child: SizedBox(
+                        height: 400,
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Row(
-                              children: [
-                                IconButtonBackWidget(color: cWhite),
-                                const FittedBox(
-                                    child: Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Text(
-                                    'Teacher Admin Panel',
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: cWhite),
-                                  ),
-                                )),
-                              ],
-                            ),
-                            // sizedBoxH30,
-                            Expanded(
-                              child: ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: viewListNames.length,
-                                  itemBuilder: (context, index) {
-                                    return Padding(
-                                      padding: const EdgeInsets.all(20.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Image.asset(
-                                            viewListImages[index],
-                                            width: 15,
-                                            height: 15,
-                                          ),
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
-                                          GestureDetector(
-                                            onTap: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) {
-                                                    return drawerPages[index];
-                                                  },
-                                                ),
-                                              );
-                                            },
-                                            child: Text(
-                                              viewListNames[index],
-                                              style: GoogleFonts.poppins(
-                                                  color: Colors.white),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    );
-                                  }),
-                            ),
+                            Center(child: Text("Set Your Class")),
+                            Center(child: GetClassTeacherListDropDownButton()),
+                            Center(
+                              child: TextButton.icon(
+                                  onPressed: () async {
+                                    await FirebaseFirestore.instance
+                                        .collection("SchoolListCollection")
+                                        .doc(Get.find<
+                                                AdminLoginScreenController>()
+                                            .schoolID)
+                                        .collection('Teachers')
+                                        .doc(FirebaseAuth
+                                            .instance.currentUser!.uid)
+                                        .update({
+                                      'classID': classIDListValue['docid']
+                                    }).then((value) =>
+                                            html.window.location.reload());
+                                  },
+                                  icon: Icon(Icons.add),
+                                  label: Text('set')),
+                            )
                           ],
-                        )),
-                    Container(
-                      color: Colors.white54,
-                      width: screenSize.width * 5 / 6,
-                      child: Column(children: [
+                        ),
+                      ),
+                    )
+                  : Row(
+                      children: [
                         Container(
-                          color: Colors.white30,
-                          height: 60,
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.only(right: 30.0, left: 30),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            width: screenSize.width / 6,
+                            color: adminePrimayColor,
+                            child: Column(
                               children: [
-                                Text(
-                                  'Teacher Dashboard',
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 17.w,
-                                      fontWeight: FontWeight.w500),
-                                ),
+                                sizedBoxH20,
                                 Row(
                                   children: [
-                                    Text(
-                                      'Teacher',
-                                      style: GoogleFonts.poppins(),
-                                    ),
-                                    kwidth20,
-                                    Text('Batch Year ${getFireBaseData.bYear}'),
-                                    IconButton(
-                                        onPressed: () async {
-                                          showDialog(
-                                            context: context,
-                                            barrierDismissible:
-                                                false, // user must tap button!
-                                            builder: (BuildContext context) {
-                                              return AlertDialog(
-                                                title: const Text(
-                                                    'Change Batch Year'),
-                                                content: SingleChildScrollView(
-                                                  child: ListBody(
-                                                    children: <Widget>[
-                                                      GetBatchYearListDropDownButton(
-                                                          schoolID: Get.find<
-                                                                  AdminLoginScreenController>()
-                                                              .schoolID),
-                                                    ],
-                                                  ),
-                                                ),
-                                                actions: <Widget>[
-                                                  GestureDetector(
-                                                      onTap: () {
-                                                        Navigator.pop(context);
-                                                      },
-                                                      child: Text(
-                                                        'Cancel',
-                                                        style: GoogleFonts
-                                                            .poppins(),
-                                                      )),
-                                                  SizedBox(
-                                                    width:
-                                                        screenSize.width / 15,
-                                                  ),
-                                                  GestureDetector(
-                                                      onTap: () {
-                                                        FirebaseFirestore
-                                                            .instance
-                                                            .collection(
-                                                                "SchoolListCollection")
-                                                            .doc(Get.find<
-                                                                    AdminLoginScreenController>()
-                                                                .schoolID)
-                                                            .set(
-                                                                {
-                                                              'batchYear':
-                                                                  schoolBatchYearListValue![
-                                                                      'id']
-                                                            },
-                                                                SetOptions(
-                                                                    merge:
-                                                                        true)).then(
-                                                                (value) async {
-                                                          await getFireBaseData
-                                                              .getBatchYearId();
-                                                          // ignore: use_build_context_synchronously
-                                                          Navigator
-                                                              .pushReplacement(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                              builder:
-                                                                  (context) {
-                                                                return ClassTeacherAdmin(
-                                                                    teacherEmail:
-                                                                        widget
-                                                                            .teacherEmail,
-                                                                    teacherID:
-                                                                        widget
-                                                                            .teacherID,
-                                                                    schoolID: Get.find<
-                                                                            AdminLoginScreenController>()
-                                                                        .schoolID);
-                                                              },
-                                                            ),
-                                                          );
-                                                        });
-                                                      },
-                                                      child: Text(
-                                                        'Set BatchYear',
-                                                        style: GoogleFonts
-                                                            .poppins(),
-                                                      ))
-                                                ],
-                                              );
-                                            },
-                                          );
-                                        },
-                                        icon: Icon(Icons.replay_outlined)),
-                                    const SizedBox(
-                                      width: 20,
-                                    ),
-                                    const CircleAvatar(
-                                      backgroundImage: AssetImage(
-                                          'assets/images/icons8-teachers-64.png'),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    const Icon(Icons.logout_outlined)
+                                    IconButtonBackWidget(color: cWhite),
+                                    FittedBox(
+                                        child: Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Text(
+                                        'Teacher Admin Panel',
+                                        style: TextStyle(
+                                            fontSize: 20.w,
+                                            fontWeight: FontWeight.bold,
+                                            color: cWhite),
+                                      ),
+                                    )),
                                   ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: screenSize.height - 60,
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.only(right: 50.0, left: 50),
-                            child: GridView.count(
-                                crossAxisCount: 5,
-                                crossAxisSpacing: 4.0,
-                                mainAxisSpacing: 8.0,
-                                children: List.generate(
-                                    dashboardNamesList.length, (index) {
-                                  return Center(
-                                      child: SizedBox(
-                                    height: 200,
-                                    width: 200,
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: ((context) =>
-                                                    pages[index])));
-                                      },
-                                      child: Card(
-                                          elevation: 50,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
+                                ),
+                                // sizedBoxH30,
+                                Expanded(
+                                  child: ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: viewListNames.length,
+                                      itemBuilder: (context, index) {
+                                        return Padding(
+                                          padding: const EdgeInsets.all(20.0),
+                                          child: Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                                MainAxisAlignment.start,
                                             children: [
                                               Image.asset(
-                                                dashboardImagesList[index],
-                                                width: 50,
-                                                height: 50,
+                                                viewListImages[index],
+                                                width: 15,
+                                                height: 15,
                                               ),
                                               const SizedBox(
-                                                height: 20,
+                                                width: 10,
                                               ),
-                                              Text(
-                                                dashboardNamesList[index],
-                                                style: GoogleFonts.poppins(),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) {
+                                                        return drawerPages[
+                                                            index];
+                                                      },
+                                                    ),
+                                                  );
+                                                },
+                                                child: Text(
+                                                  viewListNames[index],
+                                                  style: GoogleFonts.poppins(
+                                                      color: Colors.white),
+                                                ),
                                               )
                                             ],
-                                          )),
+                                          ),
+                                        );
+                                      }),
+                                ),
+                              ],
+                            )),
+                        Container(
+                          color: Colors.white54,
+                          width: screenSize.width * 5 / 6,
+                          child: Column(children: [
+                            Container(
+                              color: Colors.white30,
+                              height: 60,
+                              child: Padding(
+                                padding:
+                                    EdgeInsets.only(right: 30.0.w, left: 30.w),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      Get.find<AdminLoginScreenController>()
+                                          .schoolName,
+                                      style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w500),
                                     ),
-                                  ));
-                                })),
-                          ),
+                                    Obx(() {
+                                      getFireBaseData.getClassDetail(
+                                          getFireBaseData
+                                              .getTeacherClassRole.value);
+                                      if (getFireBaseData.className.isEmpty) {
+                                        return const Center(
+                                          child: CircularProgressIndicator(),
+                                        );
+                                      } else {
+                                        return Row(
+                                          children: [
+                                            Text(Get.find<GetFireBaseData>()
+                                                .className
+                                                .value),
+                                            IconButton(
+                                                onPressed: () async {
+                                                  return showDialog(
+                                                    context: context,
+                                                    barrierDismissible:
+                                                        false, // user must tap button!
+                                                    builder:
+                                                        (BuildContext context) {
+                                                      return AlertDialog(
+                                                        title: const Text(
+                                                            "Set Your Class"),
+                                                        content:
+                                                            SingleChildScrollView(
+                                                          child: ListBody(
+                                                            children: <Widget>[
+                                                              Center(
+                                                                  child:
+                                                                      GetClassTeacherListDropDownButton()),
+                                                              Center(
+                                                                child: TextButton
+                                                                    .icon(
+                                                                        onPressed:
+                                                                            () async {
+                                                                          await FirebaseFirestore
+                                                                              .instance
+                                                                              .collection(
+                                                                                  "SchoolListCollection")
+                                                                              .doc(Get.find<AdminLoginScreenController>()
+                                                                                  .schoolID)
+                                                                              .collection(
+                                                                                  'Teachers')
+                                                                              .doc(FirebaseAuth
+                                                                                  .instance.currentUser!.uid)
+                                                                              .update({
+                                                                            'classID':
+                                                                                classIDListValue['docid']
+                                                                          }).then((value) async {
+                                                                            await getFireBaseData.getTeacherClassRoll();
+                                                                            log("message");
+                                                                          });
+                                                                        },
+                                                                        icon: Icon(Icons
+                                                                            .add),
+                                                                        label: Text(
+                                                                            'set')),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        actions: <Widget>[
+                                                          TextButton(
+                                                            child: const Text(
+                                                                'cancel'),
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                          ),
+                                                          TextButton(
+                                                            child: const Text(
+                                                                'ok'),
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  );
+                                                  /////////////
+                                                  ///
+                                                  ///
+                                                },
+                                                icon: Icon(Icons.edit))
+                                          ],
+                                        );
+                                      }
+                                    }),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Teacher',
+                                          style: GoogleFonts.poppins(),
+                                        ),
+                                        kwidth20,
+                                        Text(
+                                            'Batch Year ${getFireBaseData.bYear}'),
+                                        IconButton(
+                                            onPressed: () async {
+                                              showDialog(
+                                                context: context,
+                                                barrierDismissible:
+                                                    false, // user must tap button!
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return AlertDialog(
+                                                    title: const Text(
+                                                        'Change Batch Year'),
+                                                    content:
+                                                        SingleChildScrollView(
+                                                      child: ListBody(
+                                                        children: <Widget>[
+                                                          GetBatchYearListDropDownButton(
+                                                              schoolID: Get.find<
+                                                                      AdminLoginScreenController>()
+                                                                  .schoolID),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    actions: <Widget>[
+                                                      GestureDetector(
+                                                          onTap: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text(
+                                                            'Cancel',
+                                                            style: GoogleFonts
+                                                                .poppins(),
+                                                          )),
+                                                      SizedBox(
+                                                        width:
+                                                            screenSize.width /
+                                                                15,
+                                                      ),
+                                                      GestureDetector(
+                                                          onTap: () {
+                                                            FirebaseFirestore
+                                                                .instance
+                                                                .collection(
+                                                                    "SchoolListCollection")
+                                                                .doc(Get.find<
+                                                                        AdminLoginScreenController>()
+                                                                    .schoolID)
+                                                                .set(
+                                                                    {
+                                                                  'batchYear':
+                                                                      schoolBatchYearListValue![
+                                                                          'id']
+                                                                },
+                                                                    SetOptions(
+                                                                        merge:
+                                                                            true)).then(
+                                                                    (value) async {
+                                                              await getFireBaseData
+                                                                  .getBatchYearId();
+                                                              // ignore: use_build_context_synchronously
+                                                              Navigator
+                                                                  .pushReplacement(
+                                                                context,
+                                                                MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) {
+                                                                    return ClassTeacherAdmin(
+                                                                        teacherEmail:
+                                                                            widget
+                                                                                .teacherEmail,
+                                                                        teacherID:
+                                                                            widget
+                                                                                .teacherID,
+                                                                        schoolID:
+                                                                            Get.find<AdminLoginScreenController>().schoolID);
+                                                                  },
+                                                                ),
+                                                              );
+                                                            });
+                                                          },
+                                                          child: Text(
+                                                            'Set BatchYear',
+                                                            style: GoogleFonts
+                                                                .poppins(),
+                                                          ))
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                            },
+                                            icon: Icon(Icons.replay_outlined)),
+                                        const SizedBox(
+                                          width: 20,
+                                        ),
+                                        const CircleAvatar(
+                                          backgroundImage: AssetImage(
+                                              'assets/images/icons8-teachers-64.png'),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        const Icon(Icons.logout_outlined)
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: screenSize.height - 60,
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    right: 50.0, left: 50),
+                                child: GridView.count(
+                                    crossAxisCount: 5,
+                                    crossAxisSpacing: 4.0,
+                                    mainAxisSpacing: 8.0,
+                                    children: List.generate(
+                                        dashboardNamesList.length, (index) {
+                                      return Center(
+                                          child: SizedBox(
+                                        height: 200,
+                                        width: 200,
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: ((context) =>
+                                                        pages[index])));
+                                          },
+                                          child: Card(
+                                              elevation: 50,
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Image.asset(
+                                                    dashboardImagesList[index],
+                                                    width: 50,
+                                                    height: 50,
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 20,
+                                                  ),
+                                                  Text(
+                                                    dashboardNamesList[index],
+                                                    style:
+                                                        GoogleFonts.poppins(),
+                                                  )
+                                                ],
+                                              )),
+                                        ),
+                                      ));
+                                    })),
+                              ),
+                            )
+                          ]),
                         )
-                      ]),
-                    )
-                  ],
-                ),
+                      ],
+                    ),
+          // getFireBaseData.classTeacherdocid.value.isEmpty?
+          // Text('')
+          // :Text('')
+          // classTeacherdocid
+
+          ////
         ));
   }
 
@@ -699,207 +851,5 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
         log(formatted.toString());
       });
     }
-  }
-}
-
-class SubmitSubjectClassTeacher extends StatelessWidget {
-  const SubmitSubjectClassTeacher({
-    super.key,
-    required this.subjecController,
-    required this.schoolID,
-    required this.teacherClassId,
-  });
-  final TextEditingController subjecController;
-  final String schoolID;
-  final String teacherClassId;
-
-  @override
-  Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
-    return Scaffold(
-      body: SingleChildScrollView(
-          child: Column(children: [
-        Container(
-          child: Row(children: [
-            Container(
-              color: Color.fromARGB(255, 12, 34, 133),
-              height: screenSize.height,
-              width: screenSize.width * 1 / 2,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  IconButtonBackWidget(color: cWhite),
-                  Expanded(
-                    child: Column(
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Hi Admin ',
-                              style: ralewayStyle.copyWith(
-                                fontSize: 48.0,
-                                color: AppColors.whiteColor,
-                                fontWeight: FontWeight.w800,
-                              ),
-                            ),
-                            SizedBox(
-                              height: screenSize.width / 20,
-                            ),
-                            Text(
-                              'Welcome',
-                              style: GoogleFonts.aclonica(
-                                fontSize: 25.0,
-                                color: AppColors.whiteColor,
-                                fontWeight: FontWeight.w800,
-                              ),
-                            ),
-                            SizedBox(
-                              height: screenSize.width / 3.5,
-                              width: screenSize.width / 1,
-                              child: LottieBuilder.network(
-                                  "https://assets6.lottiefiles.com/packages/lf20_KWUxUaGUE7.json"),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-                padding: EdgeInsets.only(left: screenSize.width / 8),
-                child: Container(
-                    height: screenSize.height * 1 / 1,
-                    width: screenSize.width * 1 / 3,
-                    child: SingleChildScrollView(
-                        child: Column(children: [
-                      Container(
-                        child: Container(
-                          margin: EdgeInsets.only(top: 50.h),
-                          width: 500.h,
-                          //height: screenSize.width/30,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                margin:
-                                    EdgeInsets.only(top: screenSize.width / 10),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    border: Border()),
-                                child: TextFormField(
-                                    controller: subjecController,
-                                    decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor:
-                                            Color.fromARGB(255, 255, 255, 255),
-                                        hintText: 'Name of Subject',
-                                        prefixIcon: Icon(Icons.subject_rounded,
-                                            color: Color.fromARGB(
-                                                255, 14, 11, 168)),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(19),
-                                          borderSide: BorderSide(),
-                                        )),
-                                    style: const TextStyle(
-                                      color: Color.fromARGB(255, 0, 0, 0),
-                                      fontSize: 18,
-                                    )),
-                              ),
-                              SizedBox(
-                                height: screenSize.width / 30,
-                              ),
-                              Container(
-                                width: 280.w,
-                                height: 70.h,
-                                decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                        colors: containerColor[8]),
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: TextButton(
-                                  child: const Text('Add',
-                                      style: TextStyle(
-                                          fontSize: 20, color: Colors.white)),
-                                  onPressed: () async {
-                                    FirebaseFirestore.instance
-                                        .collection("SchoolListCollection")
-                                        .doc(schoolID)
-                                        .collection("Classes")
-                                        .doc(teacherClassId)
-                                        .collection("Subjects")
-                                        .doc(subjecController.text
-                                            .trim()
-                                            .toString())
-                                        .set({
-                                      'subject': subjecController.text
-                                          .trim()
-                                          .toString(),
-                                      'id': subjecController.text
-                                          .trim()
-                                          .toString()
-                                    }).then((value) => showDialog(
-                                              context: context,
-                                              barrierDismissible:
-                                                  false, // user must tap button!
-                                              builder: (BuildContext context) {
-                                                return AlertDialog(
-                                                  title: const Text('Message'),
-                                                  content:
-                                                      SingleChildScrollView(
-                                                    child: ListBody(
-                                                      children: const <Widget>[
-                                                        Text(
-                                                            'Successfully created'),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  actions: <Widget>[
-                                                    TextButton(
-                                                      child: const Text('ok'),
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            ));
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                height: screenSize.width / 38,
-                              ),
-                              Container(
-                                width: 230.w,
-                                height: 68.h,
-                                decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                        colors: containerColor[8]),
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: TextButton(
-                                  child: const Text('Cancel',
-                                      style: TextStyle(
-                                          fontSize: 20, color: Colors.white)),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ]))))
-          ]),
-        ),
-      ])),
-    );
   }
 }

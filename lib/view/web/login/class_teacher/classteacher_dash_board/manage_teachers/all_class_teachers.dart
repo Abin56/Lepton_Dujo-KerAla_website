@@ -2,18 +2,15 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../../../../../../model/create_classModel/create_classModel.dart';
-import '../../../../../../model/teacher/add_student.dart';
-import '../../../../../../model/teacher/add_teacher_model.dart';
+import '../../../../../../model/teacher/teacher_model.dart';
 import '../../../../../colors/colors.dart';
 import 'class_subjects.dart';
 
 class AllClassesListViewForTeacher extends StatefulWidget {
-  var schoolID;
-  var classID;
-  var teacherID;
+  String schoolID;
+  String classID;
+  String teacherID;
   AllClassesListViewForTeacher(
       {required this.schoolID,
       required this.classID,
@@ -32,8 +29,8 @@ class _AllClassesListViewForTeacherState
     log(widget.classID);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add teachers for the subject"), backgroundColor: adminePrimayColor
-      ),
+          title: const Text("Add teachers for the subject"),
+          backgroundColor: adminePrimayColor),
       body: SafeArea(
         child: StreamBuilder(
           stream: FirebaseFirestore.instance
@@ -46,12 +43,12 @@ class _AllClassesListViewForTeacherState
               return Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Container(
+                  SizedBox(
                     width: double.maxFinite,
                     child: ListView.separated(
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
-                          final data = AddTeachersModel.fromJson(
+                          final data = TeacherModel.fromMap(
                               snapshot.data!.docs[index].data());
 
                           return GestureDetector(
@@ -62,7 +59,7 @@ class _AllClassesListViewForTeacherState
                                     builder: (context) => ClassWiseSubject(
                                         schoolID: widget.schoolID,
                                         classID: widget.classID,
-                                        teacherID: data.id)),
+                                        teacherID: data.docid!)),
                               );
                             },
                             child: Container(
@@ -70,7 +67,7 @@ class _AllClassesListViewForTeacherState
                               width: double.infinity,
                               color: Colors.amber,
                               child: Center(
-                                child: Text(data.teacherName),
+                                child: Text(data.teacherName!),
                               ),
                             ),
                           );
