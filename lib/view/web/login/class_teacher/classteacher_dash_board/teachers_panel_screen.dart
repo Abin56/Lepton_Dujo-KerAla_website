@@ -334,7 +334,9 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                             Center(child: Text("Set Your Class")),
                             Center(child: GetClassTeacherListDropDownButton()),
                             Center(
-                              child: TextButton.icon(
+                              child:
+                               MaterialButton(
+                                color: Colors.green,
                                   onPressed: () async {
                                     await FirebaseFirestore.instance
                                         .collection("SchoolListCollection")
@@ -349,8 +351,14 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                     }).then((value) =>
                                             html.window.location.reload());
                                   },
-                                  icon: Icon(Icons.add),
-                                  label: Text('set')),
+                                  child: Text(
+                                                          'Set Class',
+                                                          style: GoogleFonts
+                                                              .poppins(
+                                                                  color: Colors
+                                                                      .white),
+                                                        )
+                                  ),
                             )
                           ],
                         ),
@@ -477,11 +485,28 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                               Center(
                                                                   child:
                                                                       GetClassTeacherListDropDownButton()),
-                                                              Center(
-                                                                child: TextButton
-                                                                    .icon(
-                                                                        onPressed:
-                                                                            () async {
+                                       
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        actions: <Widget>[
+                                                          MaterialButton(
+                                                        color: Colors.red,
+                                                        onPressed: () {
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                        child: Text(
+                                                          'Cancel',
+                                                          style: GoogleFonts
+                                                              .poppins(
+                                                                  color: Colors
+                                                                      .white),
+                                                        )),
+                                                        MaterialButton(
+                                                        color: Colors.green,
+                                                        onPressed: () {
+                                                           () async {
                                                                           await FirebaseFirestore
                                                                               .instance
                                                                               .collection(
@@ -499,41 +524,20 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                                             await getFireBaseData.getTeacherClassRoll();
                                                                             log("message");
                                                                           });
-                                                                        },
-                                                                        icon: Icon(Icons
-                                                                            .add),
-                                                                        label: Text(
-                                                                            'set')),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        actions: <Widget>[
-                                                          TextButton(
-                                                            child: const Text(
-                                                                'cancel'),
-                                                            onPressed: () {
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
-                                                            },
-                                                          ),
-                                                          TextButton(
-                                                            child: const Text(
-                                                                'ok'),
-                                                            onPressed: () {
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
-                                                            },
-                                                          ),
+                                                                        };
+                                                        },
+                                                        child: Text(
+                                                          'Set Class',
+                                                          style: GoogleFonts
+                                                              .poppins(
+                                                                  color: Colors
+                                                                      .white),
+                                                        )),
                                                         ],
                                                       );
                                                     },
                                                   );
-                                                  /////////////
-                                                  ///
-                                                  ///
+                                                 
                                                 },
                                                 icon: Icon(Icons.edit))
                                           ],
