@@ -1,4 +1,6 @@
+import 'package:dujo_kerala_website/view/web/home/family_policy.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../privacypolicy.dart';
@@ -51,7 +53,7 @@ class FooterHomeP extends StatelessWidget {
                                 final color =
                                     isHoverd ? Colors.orange : Colors.black;
                                 return SizedBox(
-                                    width: 160,
+                                    width: 160.w,
                                     child: Text(
                                       'Who We Are',
                                       style:
@@ -64,7 +66,7 @@ class FooterHomeP extends StatelessWidget {
                                 final color =
                                     isHoverd ? Colors.orange : Colors.black;
                                 return SizedBox(
-                                    width: 160,
+                                    width: 160.w,
                                     child: Text(
                                       'Why choose us',
                                       style:
@@ -90,7 +92,7 @@ class FooterHomeP extends StatelessWidget {
                                 final color =
                                     isHoverd ? Colors.orange : Colors.black;
                                 return SizedBox(
-                                    width: 160,
+                                    width: 160.w,
                                     child: Text(
                                       'Affiliates',
                                       style:
@@ -103,7 +105,7 @@ class FooterHomeP extends StatelessWidget {
                                 final color =
                                     isHoverd ? Colors.orange : Colors.black;
                                 return SizedBox(
-                                    width: 160,
+                                    width: 160.w,
                                     child: Text(
                                       'Careers',
                                       style:
@@ -116,7 +118,7 @@ class FooterHomeP extends StatelessWidget {
                                 final color =
                                     isHoverd ? Colors.orange : Colors.black;
                                 return SizedBox(
-                                    width: 160,
+                                    width: 160.w,
                                     child: Text(
                                       'News',
                                       style:
@@ -137,7 +139,7 @@ class FooterHomeP extends StatelessWidget {
                                   final color =
                                       isHoverd ? Color.fromARGB(255, 255, 0, 0) : Colors.black;
                                   return SizedBox(
-                                      width: 160,
+                                      width: 160.w,
                                       
                                       child: Text(
                                         'Super Admin',
@@ -162,7 +164,7 @@ class FooterHomeP extends StatelessWidget {
                                 final color =
                                     isHoverd ? Colors.orange : Colors.black;
                                 return SizedBox(
-                                    width: 160,
+                                    width: 160.w,
                                     child: Text(
                                       'Blog',
                                       style:
@@ -181,7 +183,7 @@ class FooterHomeP extends StatelessWidget {
                                     },));
                                   },
                                   child: SizedBox(
-                                      width: 160,
+                                      width: 160.w,
                                       child: Text(
                                         'Contact US',
                                         style:
@@ -195,7 +197,7 @@ class FooterHomeP extends StatelessWidget {
                                 final color =
                                     isHoverd ? Colors.orange : Colors.black;
                                 return SizedBox(
-                                    width: 160,
+                                    width: 160.w,
                                     child: Text(
                                       'Help Center',
                                       style:
@@ -208,7 +210,7 @@ class FooterHomeP extends StatelessWidget {
                                 final color =
                                     isHoverd ? Colors.orange : Colors.black;
                                 return SizedBox(
-                                    width: 160,
+                                    width: 160.w,
                                     child: Text(
                                       'Security',
                                       style:
@@ -235,7 +237,7 @@ class FooterHomeP extends StatelessWidget {
                                   final color =
                                       isHoverd ? Colors.orange : Colors.black;
                                   return SizedBox(
-                                      width: 160,
+                                      width: 160.w,
                                       child: Text(
                                         'Terms & Conditions',
                                         style:
@@ -253,9 +255,27 @@ class FooterHomeP extends StatelessWidget {
                                   final color =
                                       isHoverd ? Colors.orange : Colors.black;
                                   return SizedBox(
-                                      width: 160,
+                                      width: 160.w,
                                       child: Text(
                                         'Privacy Policy',
+                                        style:
+                                            k,
+                                      ));
+                                },
+                              ),
+                            ),
+                              GestureDetector(
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder:((context) => const FamilyPolicyScreen())));
+                              },
+                              child: OnHoverText(
+                                builder: (isHoverd) {
+                                  final color =
+                                      isHoverd ? Colors.orange : Colors.black;
+                                  return SizedBox(
+                                      width: 160.w,
+                                      child: Text(
+                                        'Family Policy',
                                         style:
                                             k,
                                       ));
@@ -267,7 +287,7 @@ class FooterHomeP extends StatelessWidget {
                                 final color =
                                     isHoverd ? Colors.orange : Colors.black;
                                 return SizedBox(
-                                    width: 160,
+                                    width: 160.w,
                                     child: Text(
                                       'Trademark Policy',
                                       style:
@@ -280,7 +300,7 @@ class FooterHomeP extends StatelessWidget {
                                 final color =
                                     isHoverd ? Colors.orange : Colors.black;
                                 return SizedBox(
-                                    width: 160,
+                                    width: 160.w,
                                     child: Text(
                                       'Cancellation Policy',
                                       style:

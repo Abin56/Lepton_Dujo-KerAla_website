@@ -111,7 +111,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                           controller: dateController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            labelText: 'Date',
+                            hintText: 'Date',
                           ),
                         ),
                       ),
@@ -123,7 +123,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                            controller: headingController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            labelText: 'Heading',
+                            hintText: 'Heading',
                           ),
                         ),
                       ),
@@ -138,7 +138,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                            controller: venueController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            labelText: 'Venue',
+                            hintText: 'Venue',
                           ),
                         ),
                       ),
@@ -146,15 +146,13 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                       Padding(
                          padding: EdgeInsets.only(top: 10, bottom: 10,left: 100,right: 100),
                         child: TextFormField(
-                          textAlign: TextAlign.start,
                            validator: checkFieldEmpty,
                            controller: descriptionController,
                            maxLines: 5,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             
-                            labelText: 'Description',
-                            
+                            hintText: 'Description',
                           ),
                         ),
                       ),
@@ -165,7 +163,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                            controller: signedByController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            labelText: 'Signed by',
+                            hintText: 'Signed by',
                           ),
                         ),
                       ),
@@ -194,7 +192,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                             height: screenSize.width * 1 / 30,
                             width: screenSize.width * 1 / 5,
                             decoration: BoxDecoration(
-                                color: adminePrimayColor,
+                                color: Colors.blue,
                                 borderRadius: BorderRadius.circular(14)),
                             child: TextButton(
                               style: TextButton.styleFrom(
