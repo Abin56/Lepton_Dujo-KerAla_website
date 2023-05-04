@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/controller/teacher_controller/teacher_controller.dart';
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:dujo_kerala_website/view/fonts/fonts.dart';
@@ -126,14 +127,14 @@ class _AddStudentFromClassTeacherState
                       key: formKey,
                       child: ListView(children: [
                         Padding(
-                            padding: EdgeInsets.all(15),
+                            padding:const EdgeInsets.all(15),
                             child: GetClassesListDropDownButton(
                               schoolID: Get.find<AdminLoginScreenController>()
                                   .schoolID,
-                              teacherID: 'abinjohn8089@gmail.com',
+                              teacherID: '',
                             )),
                         Padding(
-                            padding: EdgeInsets.all(15),
+                            padding:const EdgeInsets.all(15),
                             child: Container(
                               height: 110,
                               child: Column(
