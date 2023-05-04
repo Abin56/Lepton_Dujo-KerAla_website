@@ -133,6 +133,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                       Padding(
                          padding: EdgeInsets.only(top: 10, bottom: 10,left: 100,right: 100),
                         child: TextFormField(
+                          textAlign: TextAlign.start,
                            validator: checkFieldEmpty,
                            controller: descriptionController,
                            maxLines: 8,
@@ -140,6 +141,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                             border: OutlineInputBorder(),
                             
                             labelText: 'Description',
+                            
                           ),
                         ),
                       ),
@@ -179,7 +181,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                             height: screenSize.width * 1 / 30,
                             width: screenSize.width * 1 / 5,
                             decoration: BoxDecoration(
-                                color: Colors.blue,
+                                color: adminePrimayColor,
                                 borderRadius: BorderRadius.circular(14)),
                             child: TextButton(
                               style: TextButton.styleFrom(
