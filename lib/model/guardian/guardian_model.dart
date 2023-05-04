@@ -216,8 +216,8 @@ class CreateGuardiansAddToFireBase {
               return AlertDialog(
                 title: const Text('Message'),
                 content: SingleChildScrollView(
-                  child: ListBody(
-                    children: <Widget>[
+                  child:  ListBody(
+                    children: const <Widget>[
                       Text('Successfully created'),
                     ],
                   ),

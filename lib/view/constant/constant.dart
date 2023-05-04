@@ -90,7 +90,7 @@ void showToast({required String msg}) {
     msg: msg,
     toastLength: Toast.LENGTH_LONG,
     gravity: ToastGravity.CENTER,
-    timeInSecForIosWeb: 1,
+    timeInSecForIosWeb: 2,
     backgroundColor: Colors.red,
     textColor: Colors.white,
     fontSize: 16.0,
@@ -186,8 +186,12 @@ Future<Uint8List?> pickImage(ImageSource source) async {
   }
   return null;
 }
+
 class TeacherLoginIDSaver {
   static String id = '';
-  static String teacherID ='';
-
+  static String teacherID = '';
 }
+
+Widget circularProgressIndicator = const Center(
+  child: CircularProgressIndicator(),
+);
