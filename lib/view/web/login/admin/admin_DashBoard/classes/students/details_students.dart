@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/students/parents&guardian.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/students/student_summery.dart/student_summery.dart';
@@ -14,7 +13,7 @@ import 'package:lottie/lottie.dart';
 import '../../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../../controller/students_list/students_list.dart';
-import '../../../../../../../model/create_classModel/addStudent_model.dart';
+import '../../../../../../../model/create_classModel/add_student_model.dart';
 import '../../../../../../../model/profileextraDetails/students_extra_profile.dart';
 import '../../../../../../colors/colors.dart';
 import '../../../../../../constant/constant.dart';
@@ -43,7 +42,6 @@ class StudentsDetails extends StatelessWidget {
   final List<AddStudentModel> allData;
 
   @override
-  
   Widget build(BuildContext context) {
     final _firebase = FirebaseFirestore.instance
         .collection("SchoolListCollection")
@@ -175,7 +173,7 @@ class StudentsDetails extends StatelessWidget {
                                                   .collection("Students")
                                                   .doc(allData[getxController
                                                           .indexValue.value!]
-                                                      .uid)
+                                                      .docid)
                                                   .set({
                                                 'studentName':
                                                     _newStNameController.text
@@ -256,7 +254,7 @@ class StudentsDetails extends StatelessWidget {
                                                   .collection("Students")
                                                   .doc(allData[getxController
                                                           .indexValue.value!]
-                                                      .uid)
+                                                      .docid)
                                                   .set({
                                                 'parentPhoneNumber':
                                                     _newPhoneNoController.text
@@ -331,7 +329,7 @@ class StudentsDetails extends StatelessWidget {
                                                   .collection("Students")
                                                   .doc(allData[getxController
                                                           .indexValue.value!]
-                                                      .uid)
+                                                      .docid)
                                                   .set({
                                                 'admissionNumber':
                                                     _newAdIDController.text
@@ -396,7 +394,7 @@ class StudentsDetails extends StatelessWidget {
                                     schooilID: schooilID,
                                     studentID: allData[
                                             getxController.indexValue.value!]
-                                        .uid!);
+                                        .docid!);
                               },
                               child: Container(
                                 height: 40,
@@ -424,7 +422,7 @@ class StudentsDetails extends StatelessWidget {
                                     schooilID: schooilID,
                                     studentID: allData[
                                             getxController.indexValue.value!]
-                                        .uid!);
+                                        .docid!);
                               },
                               child: Container(
                                 height: 40,
@@ -571,7 +569,9 @@ class StudentsDetails extends StatelessWidget {
                                             ],
                                           ),
                                           sizedBoxH20,
-                                          GenrateTc(allData: allData, getxController: getxController),
+                                          GenrateTc(
+                                              allData: allData,
+                                              getxController: getxController),
                                           sizedBoxH20,
                                           GestureDetector(
                                             onTap: () async {
@@ -595,7 +595,7 @@ class StudentsDetails extends StatelessWidget {
                                                                   .doc(allData[getxController
                                                                           .indexValue
                                                                           .value!]
-                                                                      .uid)
+                                                                      .docid)
                                                                   .delete()
                                                                   .then((value) =>
                                                                       Navigator.pop(
@@ -683,110 +683,73 @@ class GenrateTc extends StatefulWidget {
 }
 
 class _GenrateTcState extends State<GenrateTc> {
-  String schoolName ='';
-  String schoolplace='';
+  String schoolName = '';
+  String schoolplace = '';
   @override
   void initState() {
-getSchoolDetails();
+    getSchoolDetails();
     super.initState();
   }
+
   Widget build(BuildContext context) {
     return StreamBuilder(
         stream: FirebaseFirestore.instance
-            .collection(
-                "SchoolListCollection")
-            .doc(Get.find<
-                    AdminLoginScreenController>()
-                .schoolID)
+            .collection("SchoolListCollection")
+            .doc(Get.find<AdminLoginScreenController>().schoolID)
             .collection("AllStudents")
-            .doc(widget.allData[widget.getxController
-                    .indexValue.value!]
-                .docid)
+            .doc(widget.allData[widget.getxController.indexValue.value!].docid)
             .collection("sampoorna")
             .where('docid',
-                isEqualTo: widget.allData[
-                        widget.getxController
-                            .indexValue
-                            .value!]
-                    .docid)
+                isEqualTo: widget
+                    .allData[widget.getxController.indexValue.value!].docid)
             .snapshots(),
         builder: (context, snappp) {
           return GestureDetector(
             onTap: () {
-              TextEditingController sNo =
-                  TextEditingController();
-              TextEditingController
-                  regNo =
-                  TextEditingController();
+              TextEditingController sNo = TextEditingController();
+              TextEditingController regNo = TextEditingController();
 
               showDialog(
                 context: context,
-                barrierDismissible:
-                    false, // user must tap button!
-                builder: (BuildContext
-                    context) {
+                barrierDismissible: false, // user must tap button!
+                builder: (BuildContext context) {
                   return AlertDialog(
-                    title: const Text(
-                        'Genrating.. TC'),
-                    content:
-                        SingleChildScrollView(
+                    title: const Text('Genrating.. TC'),
+                    content: SingleChildScrollView(
                       child: ListBody(
-                        children: <
-                            Widget>[
-                        const Text(
-                              'Enter Details'),
-                        
+                        children: <Widget>[
+                          const Text('Enter Details'),
                           TextFormField(
-                            controller:
-                                sNo,
-                                decoration: const InputDecoration(
-                                  hintText: "S.NO"
-                                ),
+                            controller: sNo,
+                            decoration: const InputDecoration(hintText: "S.NO"),
                           ),
-               
                           TextFormField(
-                            controller:
-                                regNo,
-                                decoration: const InputDecoration(
-                                  hintText: "Reg No"
-                                ),
+                            controller: regNo,
+                            decoration:
+                                const InputDecoration(hintText: "Reg No"),
                           )
                         ],
                       ),
                     ),
                     actions: <Widget>[
                       TextButton(
-                        child: const Text(
-                            'cancel'),
+                        child: const Text('cancel'),
                         onPressed: () {
-                          Navigator.of(
-                                  context)
-                              .pop();
+                          Navigator.of(context).pop();
                         },
                       ),
                       TextButton(
-                        child: const Text(
-                            'ok'),
-                        onPressed:
-                            () async {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                            builder:
-                                (context) {
+                        child: const Text('ok'),
+                        onPressed: () async {
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
                               return GenrateTC(
-                                  sno: sNo
-                                      .text
-                                      .trim(),
-                                  regNo: regNo
-                                      .text
-                                      .trim(),
+                                  sno: sNo.text.trim(),
+                                  regNo: regNo.text.trim(),
                                   parentName: snappp.data!.docs[0]
-                                      [
-                                      'nameOfStudentFather'],
-                                  studentName:
-                                      snappp.data!.docs[0][
-                                          'nameOfStudent'],
+                                      ['nameOfStudentFather'],
+                                  studentName: snappp.data!.docs[0]
+                                      ['nameOfStudent'],
                                   schoolName: schoolName,
                                   schoolPlace: schoolplace);
                             },
@@ -799,28 +762,23 @@ getSchoolDetails();
               );
             },
             child: Row(
-              mainAxisAlignment:
-                  MainAxisAlignment
-                      .spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
                   height: 40,
                   width: 40,
                   decoration: const BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage(
-                              'assets/images/work.png'))),
+                          image: AssetImage('assets/images/work.png'))),
                 ),
                 const Text("TC Genrate ",
-                    style: TextStyle(
-                        fontWeight:
-                            FontWeight
-                                .bold)),
+                    style: TextStyle(fontWeight: FontWeight.bold)),
               ],
             ),
           );
         });
   }
+
   void getSchoolDetails() async {
     var vari = await FirebaseFirestore.instance
         .collection("SchoolListCollection")
@@ -829,8 +787,8 @@ getSchoolDetails();
     setState(() {
       schoolName = vari.data()!['schoolName'];
       schoolplace = vari.data()!['place'];
-});
-}
+    });
+  }
 }
 
 final tea_style = GoogleFonts.poppins(

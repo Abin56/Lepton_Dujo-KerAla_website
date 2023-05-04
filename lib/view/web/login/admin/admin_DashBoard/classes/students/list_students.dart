@@ -7,7 +7,7 @@ import 'package:lottie/lottie.dart';
 import '../../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../../controller/students_list/students_list.dart';
-import '../../../../../../../model/create_classModel/addStudent_model.dart';
+import '../../../../../../../model/create_classModel/add_student_model.dart';
 import '../../../../../../../model/profileextraDetails/students_extra_profile.dart';
 import '../../../../../../constant/constant.dart';
 import 'details_students.dart';
