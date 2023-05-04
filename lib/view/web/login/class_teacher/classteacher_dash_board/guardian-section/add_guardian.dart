@@ -1,8 +1,10 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/model/guardian/guardian_temp_to_firebase.dart';
 import 'package:dujo_kerala_website/view/fonts/fonts.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -33,7 +35,10 @@ class _AddGuardianState extends State<AddGuardian> {
 
   TextEditingController guardianEmailController = TextEditingController();
 
-  TextEditingController guardianPhoneNoController = TextEditingController();
+  TextEditingController guardianPhoneNoController = TextEditingController(); 
+
+  final _auth = FirebaseAuth.instance; 
+
 
   @override
   Widget build(BuildContext context) {
@@ -100,10 +105,11 @@ class _AddGuardianState extends State<AddGuardian> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       sizedBoxH30,
-                      dropDownButtonsec(),
-                      classesListValue == null
-                          ? const SizedBox()
-                          : dropDownButton(),
+                      //GetClassesListDropDownButton(schoolID: Get.find<AdminLoginScreenController>().schoolID, teacherID: _auth.currentUser!.uid),
+                      // dropDownButtonsec(),
+                      // classesListValue == null
+                      //     ? const SizedBox()
+                      //     : dropDownButton(),
                       sizedBoxH30,
                       AddGuardianWidget(
                         function: checkFieldEmpty,
@@ -130,21 +136,24 @@ class _AddGuardianState extends State<AddGuardian> {
                               ),
                             ),
                             onPressed: () async {
+                     
                               if (formKey.currentState!.validate()) {
                                 final guardianDetails = GuardianAddModel(
-                                  studentID: studentID,
+                                 studentID: studentID,
                                   createdate: DateTime.now().toString(),
                                   guardianPhoneNumber:
                                       guardianPhoneNoController.text.trim(),
                                   guardianName:
                                       guardianNameController.text.trim(),
                                 );
-                                CreateGuardiansAddToFireBase()
-                                    .createSchoolController(
-                                        guardianDetails,
-                                        context,
-                                        widget.schoolId,
-                                        classesListValue['id']);
+                                // CreateGuardiansAddToFireBase()
+                                //     .createSchoolController(
+                                //         guardianDetails,
+                                //         context,
+                                //         widget.schoolId,
+                                //         classesListValue['id']); 
+                                AddTempGuardiansToFirebase().addGuardiansToTempList(guardianDetails, context, AdminLoginScreenController().schoolID,).then((value) => showToast(msg: 'New Guardian added!'));
+                                
                               }
                             },
                             child: const Text("Add Guardian"),
@@ -236,8 +245,8 @@ class _AddGuardianState extends State<AddGuardian> {
             .doc(Get.find<AdminLoginScreenController>().schoolID)
             .collection(Get.find<GetFireBaseData>().bYear.value)
             .doc(Get.find<GetFireBaseData>().bYear.value)
-            .collection("Classes")
-            .where('classIncharge', isEqualTo: widget.teacherIDE)
+            .collection("classes")
+           // .where('classIncharge', isEqualTo: widget.teacherIDE)
             .get(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
