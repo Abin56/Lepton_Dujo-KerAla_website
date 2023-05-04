@@ -18,5 +18,6 @@ const Color cBlack = Colors.black;
 const Color cBlue = Colors.blue;
 
 const Color adminScreencolor = Color.fromARGB(255, 48, 0, 70);
-
+const Color cred    = Color.fromARGB(255, 255, 0, 0);
+const Color cgreen  = Colors.green;
 const Color dujothemeColor = Color(0xFF26A69A);

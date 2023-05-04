@@ -1,14 +1,57 @@
+import 'package:dujo_kerala_website/ui%20team/abin/login_dummy/main_login_page.dart';
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
+import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
+import 'package:dujo_kerala_website/view/web/widgets/sample/under_maintance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'footer/footerhomep.dart';
 
 class HomeP extends StatelessWidget {
   HomeP({super.key});
+
+  final Uri _faceBookUrl =
+      Uri.parse('https://www.facebook.com/profile.php?id=100091062978371');
+  final Uri _twitterUrl = Uri.parse('https://twitter.com/LeptonDujo');
+  final Uri _instaUrl = Uri.parse('https://www.instagram.com/leptondujo/');
+  final Uri _utubeUrl =
+      Uri.parse('https://www.youtube.com/@LEPTONDUJO/featured');
+  final Uri _leptonUrl = Uri.parse('http://www.leptoncommunications.com');
+
+  Future<void> _launchFacebookUrl() async {
+    if (!await launchUrl(_faceBookUrl)) {
+      throw 'Could not launch $_faceBookUrl';
+    }
+  }
+
+  Future<void> _launchTwitterUrl() async {
+    if (!await launchUrl(_twitterUrl)) {
+      throw 'Could not launch $_twitterUrl';
+    }
+  }
+
+  Future<void> _launchyouTubeUrl() async {
+    if (!await launchUrl(_utubeUrl)) {
+      throw 'Could not launch $_utubeUrl';
+    }
+  }
+
+  Future<void> _launchInstaUrl() async {
+    if (!await launchUrl(_instaUrl)) {
+      throw 'Could not launch $_instaUrl';
+    }
+  }
+
+  Future<void> _launchleptonUrl() async {
+    if (!await launchUrl(_leptonUrl)) {
+      throw 'Could not launch $_leptonUrl';
+    }
+  }
+
 
   List<String> containerNames = [
     'Aided Schools',
@@ -48,23 +91,25 @@ class HomeP extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             stops: [
-              0.4,
-              2,
+              0.4.w,
+              2.w,
             ]),
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: ListView(children: [
           Padding(
-            padding: const EdgeInsets.only(right: 80.0, left: 80),
+            padding:  EdgeInsets.only(right: 80.0.w, left: 80.w),
             child: Container(
-              height: 80,
+             //
+              height: 60.w,
               width: MediaQuery.of(context).size.width,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    width: MediaQuery.of(context).size.width * 1 / 4,
+                    //color: cBlue,
+                    width: 400.w,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -72,13 +117,13 @@ class HomeP extends StatelessWidget {
                           children: [
                             Icon(Icons.phone),
                             SizedBox(
-                              width: 10,
+                              width: 10.w,
                             ),
                             Text(
-                              'Phone',
+                              '+91 8891436651',
                               style: GoogleFonts.poppins(
                                   color: adminePrimayColor,
-                                  fontSize: 18,
+                                  fontSize: 15.w,
                                   fontWeight: FontWeight.w500),
                             ),
                           ],
@@ -87,13 +132,13 @@ class HomeP extends StatelessWidget {
                           children: [
                             Icon(Icons.mail),
                             SizedBox(
-                              width: 10,
+                              width: 10.w,
                             ),
                             Text(
-                              'Mail Us',
+                              'leptondujo@gmail.com',
                               style: GoogleFonts.poppins(
                                   color: adminePrimayColor,
-                                  fontSize: 18,
+                                  fontSize: 14.w,
                                   fontWeight: FontWeight.w500),
                             ),
                           ],
@@ -101,43 +146,110 @@ class HomeP extends StatelessWidget {
                       ],
                     ),
                   ),
+                     SizedBox(width: 20.w),
+                     SizedBox(width: 20.w),
+                     SizedBox(width: 20.w),
+                     SizedBox(width: 20.w),
+                     SizedBox(width: 20.w),
+                  
+
                   Container(
-                    width: MediaQuery.of(context).size.width / 4,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text(
-                          'Login',
-                          style: GoogleFonts.poppins(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                              color: adminePrimayColor),
-                        ),
-                        Image.asset(
-                          'assets/images/logo-facebookpng-32247.png',
-                          height: 50,
-                          width: 50,
-                          color: adminePrimayColor,
-                        ),
-                        Image.asset(
-                          'assets/images/pngwing.com.png',
-                          height: 42,
-                          width: 42,
-                          color: adminePrimayColor,
-                        ),
-                        Image.asset(
-                          'assets/images/twit.png',
-                          height: 42,
-                          width: 42,
-                          color: adminePrimayColor,
-                        ),
-                        Image.asset(
-                          'assets/images/yout.png',
-                          height: 52,
-                          width: 52,
-                          color: adminePrimayColor,
-                        )
-                      ],
+                      InkWell(
+                        onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => const UnderMaintanceScreen() ,));
+                          },
+                        child: GoogleMonstserratWidgets(text: 'DuJo Tutions', fontsize: 15.w,color: adminePrimayColor,
+                        fontWeight: FontWeight.w700,
+                        )),
+                     SizedBox(width: 20.w),
+
+                InkWell(
+                onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => const UnderMaintanceScreen() ,));
+                          },
+                  child: GoogleMonstserratWidgets(text: 'DuJo Institutions', fontsize: 15.w, color: adminePrimayColor,fontWeight: FontWeight.w700,)),
+                     ],
+                    ),
+                  ),
+
+                    Padding(
+                      padding:  EdgeInsets.only(left: 220.w),
+                      child: Container(
+                        
+                        child: InkWell(
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => const NewAllLogin() ,));
+                              },
+                              child: Text(
+                                'Login',
+                                style: GoogleFonts.poppins(
+                                    fontSize: 18.w,
+                                    fontWeight: FontWeight.bold,
+                                    color: cred),
+                              ),
+                            ),
+                      ),
+                    ),
+                  
+                  Padding(
+                    padding:  EdgeInsets.only(left: 40.w),
+                    child: Container(
+                    //  width: MediaQuery.of(context).size.width / 4,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                        
+                          InkWell(
+                            onTap: () {
+                              _launchFacebookUrl();
+                            },
+                            child: Image.asset(
+                              'assets/images/frdd.png',
+                              height: 25.h,
+                              width: 38.w,
+                              color: adminePrimayColor,
+                            ),
+                          ),
+                          SizedBox(width: 10.w),
+                          InkWell(
+                            onTap: () {
+                              _launchInstaUrl() ;
+                            },
+                            child: Image.asset(
+                              'assets/images/instag.png',
+                               height: 40.h,
+                              width: 40.w,
+                              color: adminePrimayColor,
+                            ),
+                          ),
+                         SizedBox(width: 10.w),
+                          InkWell(
+                            onTap: () {
+                              _launchTwitterUrl() ;
+                            },
+                            child: Image.asset(
+                              'assets/images/twitt.png',
+                               height: 29.h,
+                              width: 30.w,
+                              color: adminePrimayColor,
+                            ),
+                          ),
+                        SizedBox(width: 10.w),
+                          InkWell(
+                            onTap: () {
+                              _launchyouTubeUrl() ;
+                            },
+                            child: Image.asset(
+                              'assets/images/utube.png',
+                              height: 28.h,
+                              width: 28.w,
+                              color: adminePrimayColor,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   )
                 ],
@@ -145,10 +257,11 @@ class HomeP extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(right: 80.0, left: 80),
+            padding:  EdgeInsets.only(right: 80.0.w, left: 80.w,),
             child: Container(
+            // color: cBlue,
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.width * .35,
+              height: 500.h,
               // color: Color.fromARGB(255, 142, 234, 243),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -158,58 +271,49 @@ class HomeP extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          width: 500,
-                          child: Stack(
-                            // crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Image.asset(
-                                'assets/images/leptdujo.png',
-                                // color: adminePrimayColor.withOpacity(0.5),
-                                width: 170.w,
-                                height: 170.h,
-                              ),
-                              // Positioned(
-                              //     left: 150,
-                              //     child: Image.asset(
-                              //       'assets/images/lepton.png',
-                              //       width: 170,
-                              //       height: 170,
-                              //       color: adminePrimayColor,
-                              //     )),
-                            ],
+                          width: 180.w,
+                          child: Image.asset(
+                            'assets/images/leptdujo.png',
+                            // color: adminePrimayColor.withOpacity(0.5),
+                            width: 170.w,
+                            height: 170.h,
                           ),
                         ),
-                        sizedBoxH40,
-                        sizedBoxH40,
-                        sizedBoxH40,
-                        Text(
-                          'Watch And Guide,\nLet Them Study',
-                          style: GoogleFonts.montserrat(
-                            fontSize: 50.h,
-                            fontWeight: FontWeight.bold,
-                            color: adminePrimayColor,
+                        // sizedBoxH40,
+                        // sizedBoxH40,
+                        // sizedBoxH20,
+                        Padding(
+                          padding:  EdgeInsets.only(top: 120.h),
+                          child: Text(
+                            'Watch And Guide,\nLet Them Study',
+                            style: GoogleFonts.montserrat(
+                              fontSize: 50.w,
+                              fontWeight: FontWeight.bold,
+                              color: adminePrimayColor,
+                            ),
                           ),
                         ),
                         SizedBox(
                           height: 20,
                         ),
                         MaterialButton(
-                          padding: EdgeInsets.all(20),
+                          //padding: EdgeInsets.all(20),
                           height: 60.h,
+                          minWidth: 250.w,
                           onPressed: () {},
                           color: adminePrimayColor,
                           child: Text(
                             'Create School Profile',
                             style: GoogleFonts.poppins(
                                 color: Colors.white,
-                                fontSize: 16,
+                                fontSize: 16.w,
                                 fontWeight: FontWeight.w500),
                           ),
                         )
                       ],
                     ),
                     Container(
-                      width: 600,
+                      width: 600.w,
                       child: ShaderMask(
                         shaderCallback: (rect) {
                           return LinearGradient(
@@ -228,23 +332,23 @@ class HomeP extends StatelessWidget {
                                   left: -100,
                                   child: Image.asset(
                                     'assets/images/boy.png',
-                                    width: 300,
-                                    height: 300,
+                                    width: 300.w,
+                                    height: 300.h,
                                   )),
                             ),
                             Positioned(
                                 left: 210,
                                 child: Image.asset(
                                   'assets/images/pngegg.png',
-                                  width: 400,
-                                  height: 400,
+                                  width: 400.w,
+                                  height: 400.h,
                                 )),
                             Positioned(
                                 left: 100,
                                 child: Image.asset(
                                   'assets/images/girl.png',
-                                  width: 400,
-                                  height: 400,
+                                  width: 400.w,
+                                  height: 400.h,
                                   fit: BoxFit.contain,
                                 )),
                           ],
@@ -260,20 +364,20 @@ class HomeP extends StatelessWidget {
               Text(
                 'Dujo Kerala Schools',
                 style: GoogleFonts.poppins(
-                    fontSize: 20,
+                    fontSize: 20.w,
                     fontWeight: FontWeight.w500,
                     color: Colors.white.withOpacity(0.7)),
               ),
               Text(
                 'Dujo Kerala Colleges',
                 style: GoogleFonts.poppins(
-                    fontSize: 20,
+                    fontSize: 20.w,
                     fontWeight: FontWeight.w500,
                     color: Colors.white.withOpacity(0.7)),
               ),
               Text('Dujo Customize',
                   style: GoogleFonts.poppins(
-                      fontSize: 20,
+                      fontSize: 20.w,
                       fontWeight: FontWeight.w500,
                       color: Colors.white.withOpacity(0.7))),
             ],
