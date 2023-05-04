@@ -1,52 +1,48 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../controller/get_firebase-data/get_firebase_data.dart';
 
-var classIDListValue;
+var allTeachersListValue;
 
-class GetClassTeacherListDropDownButton extends StatefulWidget {
-  GetClassTeacherListDropDownButton({Key? key}) : super(key: key);
+class GetAllTeachersListDropDownButton extends StatefulWidget {
+  var schoolID;
+  GetAllTeachersListDropDownButton({required this.schoolID, Key? key})
+      : super(key: key);
 
   @override
-  State<GetClassTeacherListDropDownButton> createState() =>
-      _GetClassTeacherListDropDownButtonState();
+  State<GetAllTeachersListDropDownButton> createState() =>
+      _GeClasseslListDropDownButtonState();
 }
 
-class _GetClassTeacherListDropDownButtonState
-    extends State<GetClassTeacherListDropDownButton> {
+class _GeClasseslListDropDownButtonState
+    extends State<GetAllTeachersListDropDownButton> {
   @override
   Widget build(BuildContext context) {
     return dropDownButton();
   }
 
-  FutureBuilder<QuerySnapshot<Map<String, dynamic>>> dropDownButton() {
-    return FutureBuilder(
-        future: FirebaseFirestore.instance
+  StreamBuilder<QuerySnapshot<Map<String, dynamic>>> dropDownButton() {
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance
             .collection("SchoolListCollection")
             .doc(Get.find<AdminLoginScreenController>().schoolID)
-            .collection(Get.find<GetFireBaseData>().bYear.value)
-            .doc(Get.find<GetFireBaseData>().bYear.value)
-            .collection("classes")
-            .where('classTeacherdocid',
-                isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-            .get(),
-        builder: (context,
-            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+            .collection("Teachers")
+            .snapshots(),
+        builder: (context, snapshot) {
           if (snapshot.hasData) {
             return DropdownButtonFormField(
-              hint: classIDListValue == null
+              hint: allTeachersListValue == null
                   ? const Text(
-                      "Select Class",
+                      "Select Teachers",
                       style: TextStyle(
                           color: Color.fromARGB(255, 0, 0, 0), fontSize: 18),
                     )
-                  : Text(classIDListValue!["className"]),
+                  : Text(allTeachersListValue!["teacherName"]),
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
                   borderSide:
@@ -63,21 +59,21 @@ class _GetClassTeacherListDropDownButtonState
               items: snapshot.data!.docs.map(
                 (val) {
                   return DropdownMenuItem(
-                    value: val["className"],
-                    child: Text(val["className"]),
+                    value: val["teacherName"],
+                    child: Text(val["teacherName"]),
                   );
                 },
               ).toList(),
               onChanged: (val) {
                 var categoryIDObject = snapshot.data!.docs
-                    .where((element) => element["className"] == val)
+                    .where((element) => element["teacherName"] == val)
                     .toList()
                     .first;
-                log(categoryIDObject["className"]);
+                log(categoryIDObject["teacherName"]);
 
                 setState(
                   () {
-                    classIDListValue = categoryIDObject;
+                    allTeachersListValue = categoryIDObject;
                   },
                 );
               },
