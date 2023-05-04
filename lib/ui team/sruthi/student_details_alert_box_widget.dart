@@ -134,15 +134,15 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
                                   style: GoogleFonts.poppins(
                                       fontSize: 16.h, color: cWhite))),
                           Obx(() {
-                            controller.getClassDetail(studentClass);
+                            controller.getClassDetail('');
 
                             if (controller.className.isEmpty) {
                               return const Center(
                                   child: CircularProgressIndicator());
                             } else {
-                              log("classsIDDD${controller.classIncharge.value}");
+                              // log("classsIDDD${controller.classIncharge.value}");
                               controller.getTeacherDetail(
-                                  controller.classIncharge.value);
+                                  controller.classTeacherdocid.value);
                               return ListTile(
                                   leading: const Icon(Icons.class_),
                                   title: const Student_Info_text_Widget(

@@ -20,7 +20,7 @@ class TeacherController extends GetxController {
           .collection('SchoolListCollection')
           .doc(Get.find<AdminLoginScreenController>().schoolID)
           .collection('TempTeacherList')
-          .add(teacherModel.toJson())
+          .add(teacherModel.toMap())
           .then((value) {
         firebaseFirestore
             .collection('SchoolListCollection')

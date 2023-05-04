@@ -105,6 +105,7 @@ class AddTeacherSectionScreen extends StatelessWidget {
                                                   ?.validate() ??
                                               false) {
                                             final teacher = TeacherModel(
+                                              classID: '',
                                                 docid: "",
                                                 teacherName: teacherController
                                                     .nameController.text,

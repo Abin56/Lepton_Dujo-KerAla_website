@@ -48,7 +48,7 @@ class _AllClassesListViewForTeacherState
                     child: ListView.separated(
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
-                          final data = TeacherModel.fromJson(
+                          final data = TeacherModel.fromMap(
                               snapshot.data!.docs[index].data());
 
                           return GestureDetector(
@@ -59,7 +59,7 @@ class _AllClassesListViewForTeacherState
                                     builder: (context) => ClassWiseSubject(
                                         schoolID: widget.schoolID,
                                         classID: widget.classID,
-                                        teacherID: data.docid)),
+                                        teacherID: data.docid!)),
                               );
                             },
                             child: Container(
@@ -67,7 +67,7 @@ class _AllClassesListViewForTeacherState
                               width: double.infinity,
                               color: Colors.amber,
                               child: Center(
-                                child: Text(data.teacherName),
+                                child: Text(data.teacherName!),
                               ),
                             ),
                           );
