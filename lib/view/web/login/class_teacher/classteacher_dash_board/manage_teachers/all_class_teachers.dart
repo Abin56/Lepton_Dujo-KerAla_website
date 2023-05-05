@@ -83,12 +83,21 @@ class AllClassesListViewForTeacher extends StatelessWidget {
                                       .collection('teachers')
                                       .doc(snapshot.data!.docs[index]['docid'])
                                       .collection('teacherSubject')
+                                      .where('teacherdocid',
+                                          isEqualTo: snapshot.data!.docs[index]
+                                              ['docid'])
                                       .snapshots(),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.hasData) {
-                                      return Text('View');
+                                  builder: (context, snap) {
+                                    if (snap.hasData) {
+                                      if (snap.data!.docs.isEmpty) {
+                                        return const Text('');
+                                      } else {
+                                        return GestureDetector(
+                                          onTap: (){},
+                                            child: const Text('View'));
+                                      }
                                     } else {
-                                      return Text('');
+                                      return const Text('');
                                     }
                                   })
                             ],

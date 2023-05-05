@@ -29,7 +29,7 @@ class ManageTeachersController extends GetxController {
     });
   }
 
-  addSubjectsToTeacher(BuildContext context,String teacherid) async {
+  addSubjectsToTeacher(BuildContext context, String teacherid) async {
     return showDialog(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -75,10 +75,11 @@ class ManageTeachersController extends GetxController {
                                         .collection('teacherSubject')
                                         .doc(snap.data!.docs[index]['docid'])
                                         .set({
-                                          'docid':snap.data!.docs[index]['docid'],
-                                          'subjectName':snap.data!.docs[index]['subjectName']
-                                        }).then(
-                                            (value) => showToast(msg: 'Added'));
+                                      'teacherdocid': teacherid,
+                                      'docid': snap.data!.docs[index]['docid'],
+                                      'subjectName': snap.data!.docs[index]
+                                          ['subjectName']
+                                    }).then((value) => showToast(msg: 'Added'));
                                   },
                                   icon: Icon(Icons.add))
                             ],
@@ -90,6 +91,45 @@ class ManageTeachersController extends GetxController {
                       },
                       itemCount: snap.data!.docs.length);
                 }),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('ok'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  viewTeacherSubjects(BuildContext context) async {
+    return showDialog(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Alert'),
+          content: SingleChildScrollView(
+            // child: Container(
+            //   height: 500,
+            //   width: 700,
+            //   child: StreamBuilder(
+            //     stream: ,
+            //     builder: (context) {
+            //       return ListView.separated(
+            //           itemBuilder: (context, index) {
+            //             return Container();
+            //           },
+            //           separatorBuilder: (context, index) {
+            //             return Divider();
+            //           },
+            //           itemCount: 10);
+            //     }
+            //   ),
+            // ),
           ),
           actions: <Widget>[
             TextButton(
