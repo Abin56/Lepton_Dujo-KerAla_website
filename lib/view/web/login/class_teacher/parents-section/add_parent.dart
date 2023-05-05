@@ -41,114 +41,109 @@ class _AddParentState extends State<AddParent> {
     log("Parent screen MAin");
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
-      
-      
-
-      
       body: SingleChildScrollView(
-          child: Row(
-            children: [
-              Container(
-                height: size.height,
-                width: size.width * 1 / 2,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    IconButtonBackWidget(color: cWhite),
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text('ADD New Parent',
-                              style: GoogleFont.headTextStyleBold),
-                          sizedBoxH20,
-                          SizedBox(
-                            height: 300,
-                            width: size.width / 2,
-                            child: LottieBuilder.network(
-                                'https://assets10.lottiefiles.com/packages/lf20_SPA6bgo7nO.json'),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                color: const Color.fromARGB(255, 6, 71, 157),
-              ),
-          SizedBox(
-            width: size.width / 2,
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 50),
-                child: Form(
-                  key: formKey,
-                  child: Column(
+        child: Row(
+          children: [
+            Container(
+              height: size.height,
+              width: size.width * 1 / 2,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  IconButtonBackWidget(color: cWhite),
+                  Expanded(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        
-                        sizedBoxH30,
-                      
-                       
-                        dropDownButtonsec(),
-                        classesListValue == null
-                            ? const SizedBox()
-                            : dropDownButton(),
-                            sizedBoxH30,
-                            sizedBoxH30,
-                        AddParentWidget(
-                            function: checkFieldPhoneNumberIsValid,
-                            labelText: 'Parent Phone Number',
-                            textEditingController: parentPhoneNumberController),
-                        sizedBoxH30,
-                          AddParentWidget( 
-                            function: checkFieldEmpty,
-                            labelText: 'Parent Name',
-                            textEditingController: parentNameController),
-                        sizedBoxH30,
+                        Text('ADD New Parent',
+                            style: GoogleFont.headTextStyleBold),
+                        sizedBoxH20,
                         SizedBox(
-                          width: 250.w,
-                          height: 60.h,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: adminePrimayColor,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                            ),
-                            onPressed: () async {
-                              log("Classs ID${classesListValue!["id"]}");
-                              log("Student ID${classListDropDown?['id']}");
-                              if (formKey.currentState!.validate()) {
-                                final parentDetails = ParentModel(
-                                    studentID: studentID,
-                                    parentEmail:
-                                        parentemailController.text.trim(),
-                                    parentPhoneNumber:
-                                        parentPhoneNumberController.text.trim(),
-                                    parentName: parentNameController.text,
-                                    createdate: DateTime.now().toString());
-
-                                CreateParentsAddToFireBase()
-                                    .createSchoolController(
-                                        parentDetails,
-                                        context,
-                                        widget.schoolID,
-                                        classesListValue['id']);
-                              }
-                            },
-                            child: const Text("Add Parent"),
-                          ),
+                          height: 300,
+                          width: size.width / 2,
+                          child: LottieBuilder.network(
+                              'https://assets10.lottiefiles.com/packages/lf20_SPA6bgo7nO.json'),
                         )
-                      ]),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              color: const Color.fromARGB(255, 6, 71, 157),
+            ),
+            SizedBox(
+              width: size.width / 2,
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 50),
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          sizedBoxH30,
+                          dropDownButtonsec(),
+                          classesListValue == null
+                              ? const SizedBox()
+                              : dropDownButton(),
+                          sizedBoxH30,
+                          sizedBoxH30,
+                          AddParentWidget(
+                              function: checkFieldPhoneNumberIsValid,
+                              labelText: 'Parent Phone Number',
+                              textEditingController:
+                                  parentPhoneNumberController),
+                          sizedBoxH30,
+                          AddParentWidget(
+                              function: checkFieldEmpty,
+                              labelText: 'Parent Name',
+                              textEditingController: parentNameController),
+                          sizedBoxH30,
+                          SizedBox(
+                            width: 250.w,
+                            height: 60.h,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: adminePrimayColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
+                              onPressed: () async {
+                                log("Classs ID${classesListValue!["id"]}");
+                                log("Student ID${classListDropDown?['id']}");
+                                if (formKey.currentState!.validate()) {
+                                  final parentDetails = ParentModel(
+                                      studentID: studentID,
+                                      parentEmail:
+                                          parentemailController.text.trim(),
+                                      parentPhoneNumber:
+                                          parentPhoneNumberController.text
+                                              .trim(),
+                                      parentName: parentNameController.text,
+                                      createdate: DateTime.now().toString());
+
+                                  CreateParentsAddToFireBase()
+                                      .createSchoolController(
+                                          parentDetails,
+                                          context,
+                                          widget.schoolID,
+                                          classesListValue['id']);
+                                }
+                              },
+                              child: const Text("Add Parent"),
+                            ),
+                          )
+                        ]),
+                  ),
                 ),
               ),
             ),
-          ),
-           ],
-          ),
-        ), 
+          ],
+        ),
+      ),
     );
   }
 
