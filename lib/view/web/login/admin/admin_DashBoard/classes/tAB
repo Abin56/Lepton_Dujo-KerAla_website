@@ -1,0 +1,62 @@
+Row(
+                                     mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                       Padding(
+                                                  padding:  EdgeInsets.only(left: 10.w),
+                                                  child: Container(
+                                                    width: screenSize.width*0.05,
+                                                  //  color: Color.fromARGB(255, 63, 181, 102),
+                                                    child: Center(
+                                                      child: GoogleMonstserratWidgets(
+                                                          text:
+                                                              'ClassName',
+                                                          fontsize: 15.w,
+                                                          color: cBlack,
+                                                          fontWeight: FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                ),
+
+                                                  Padding(
+                                                  padding:  EdgeInsets.symmetric(horizontal: 20.w),
+                                                  child: Container(
+                                                   // color: cBlue,
+                                                    alignment: Alignment.centerLeft ,
+                                                    width: screenSize.width*0.3,
+                                                    child: GoogleMonstserratWidgets(
+                                                      text: 
+                                                          'ClassTeacherName',
+                                                      fontsize: 16.w,
+                                                      color: cBlack,
+                                                      fontWeight: FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Container(
+                                                     // color: Colors.amber,
+                                                       width: screenSize.width*0.06,
+                                                      child: Center(
+                                                        child: GoogleMonstserratWidgets(
+                                                            text:
+                                                                'Add or Edit',
+                                                            fontsize: 12.w,
+                                                            color: cBlue,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600),
+                                                      )),
+
+                                                      Container(
+                                                  width: screenSize.width*0.03,
+                                                   child: Center(
+                                                     child: GoogleMonstserratWidgets(
+                                                            text:
+                                                                'Delete',
+                                                            fontsize: 12.w,
+                                                            color: cBlue,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600),
+                                                   ),
+                                                 ),
+                                  ],),

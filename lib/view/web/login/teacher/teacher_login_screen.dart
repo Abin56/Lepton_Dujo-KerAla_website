@@ -44,7 +44,7 @@ class TeacherLoginScreen extends StatelessWidget {
                           Text(
                             'Teacher Login',
                             style: ralewayStyle.copyWith(
-                              fontSize: 48.0,
+                              fontSize: 48.0.h,
                               color: AppColors.whiteColor,
                               fontWeight: FontWeight.w800,
                             ),
