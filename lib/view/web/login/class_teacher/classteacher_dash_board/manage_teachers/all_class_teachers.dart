@@ -93,13 +93,29 @@ class AllClassesListViewForTeacher extends StatelessWidget {
                                         return const Text('');
                                       } else {
                                         return GestureDetector(
-                                          onTap: (){},
+                                            onTap: () async {
+                                              manageTeachersController
+                                                  .viewTeacherSubjects(
+                                                      context,
+                                                      snapshot.data!.docs[index]
+                                                          ['docid']);
+                                            },
                                             child: const Text('View'));
                                       }
                                     } else {
                                       return const Text('');
                                     }
-                                  })
+                                  }),
+                              TextButton.icon(
+                                  onPressed: () async {
+                                    await manageTeachersController
+                                        .removeTeacher(
+                                            context,
+                                            snapshot.data!.docs[index]
+                                                ['docid']);
+                                  },
+                                  icon: Icon(Icons.remove),
+                                  label: Text('Remove Teacher'))
                             ],
                           ),
                         );
