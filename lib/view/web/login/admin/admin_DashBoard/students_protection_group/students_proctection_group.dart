@@ -85,7 +85,7 @@ class StudentProtectionGroup extends StatelessWidget {
                                              IconButtonBackWidget(
                             color: cWhite,
                           ), Text(
-                            "School PTA",
+                            "Student Protection Group",
                             style: GoogleFonts.poppins(
                               fontSize: 23,
                               fontWeight: FontWeight.bold,
@@ -258,7 +258,7 @@ class StudentProtectionGroup extends StatelessWidget {
                          Row(mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Members In PTA',
+                                    'Members In Student Protection Group',
                                      style: GoogleFonts.oswald(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,

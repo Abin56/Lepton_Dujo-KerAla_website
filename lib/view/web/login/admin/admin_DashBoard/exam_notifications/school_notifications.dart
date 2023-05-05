@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../constant/constant.dart';
@@ -43,13 +45,15 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
           'Exam Notifications',
           style: GoogleFonts.poppins(),
         ),
-        backgroundColor: Colors.green,
+        backgroundColor: adminePrimayColor,
       ),
       body: ListView(
         children: [
           ListTile(
+          leading: Icon(Icons.add),
             onTap: () {
               showDialog(
+                   barrierDismissible: false,
                   context: context,
                   builder: ((context) {
                     return AlertDialog(
@@ -59,59 +63,60 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                         height: 600,
                         child: Form(
                           key: formKey,
-                          child: Expanded(
-                            child: ListView(
-                              children: [
-                                TextFormField(
-                                      validator: checkFieldEmpty,
-                                  controller: name,
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    labelText: 'Name of Examination',  
-                                    labelStyle: GoogleFonts.poppins()
-                                  ),
-                                  style: GoogleFonts.poppins(),
-                                ), SizedBox(height: 20,),
-                                TextFormField(
-                                        validator: checkFieldEmpty,
-                                  controller: date,
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    labelText: 'Date of Examination',
-                                    labelStyle: GoogleFonts.poppins()
-                                  ),
-                                  style: GoogleFonts.poppins()
-                                ),SizedBox(height: 20,),
-                                TextFormField(
-                                        validator: checkFieldEmpty,
-                                  controller: description,
-                                  maxLines: 10,
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    labelText: 'Description',
-                                    labelStyle: GoogleFonts.poppins()
-                                  ),
-                                  style: GoogleFonts.poppins(),
-                                ),SizedBox(height: 20,),
-                                TextFormField(
-                                        validator: checkFieldEmpty,
-                                  controller: chaptersToCover,
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    labelText: 'Syllabus to cover', 
-                                    labelStyle: GoogleFonts.poppins()
-                                  ),
-                                  style: GoogleFonts.poppins(), 
-                                 
+                          child: ListView(
+                            children: [
+                              TextFormField(
+                                    validator: checkFieldEmpty,
+                                controller: name,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: 'Name of Examination',  
+                                  labelStyle: GoogleFonts.poppins()
                                 ),
-                              ],
-                            ),
+                                style: GoogleFonts.poppins(),
+                              ), SizedBox(height: 20,),
+                              TextFormField(
+                                      validator: checkFieldEmpty,
+                                controller: date,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: 'Date of Examination',
+                                  labelStyle: GoogleFonts.poppins()
+                                ),
+                                style: GoogleFonts.poppins()
+                              ),SizedBox(height: 20,),
+                              TextFormField(
+                                      validator: checkFieldEmpty,
+                                controller: description,
+                                maxLines: 10,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: 'Description',  alignLabelWithHint: true, // Align the label with the hint text
+    contentPadding: EdgeInsets.only(top: 16, left: 10),
+                                  
+                                  labelStyle: GoogleFonts.poppins()
+                                ),
+                                style: GoogleFonts.poppins(),
+                                 
+                              ),SizedBox(height: 20,),
+                              TextFormField(
+                                      validator: checkFieldEmpty,
+                                controller: chaptersToCover,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: 'Syllabus to cover', 
+                                  labelStyle: GoogleFonts.poppins()
+                                ),
+                                style: GoogleFonts.poppins(), 
+                               
+                              ),
+                            ],
                           ),
                         ),
                       ),
                       actions: [
                         MaterialButton(
-                            color: Colors.green,
+                            color: Colors.red,
                           onPressed: () {
                                                           Navigator.of(context)
                                                               .pop();
@@ -140,6 +145,7 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                   // check if form validation passed
                                   showToast(msg: 'Exam Notification successfully added ');
                                 }
+                                clearFields();
                             },
                             child: Text('Add', style: GoogleFonts.poppins(color: Colors.white),),
                           ),
@@ -169,21 +175,23 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                   },
                   shrinkWrap: true,
                   physics: ClampingScrollPhysics(),
+                  
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                      tileColor: Colors.green,
+                      leading: Icon(Icons.notification_add),
+                      tileColor: Colors.blue[100],
                       onTap: (){
                        // Navigator.push(context, MaterialPageRoute(builder: ((context) => SchoolExamMainPage(sn: snapshot.data!.docs[index]))));
                       },
                       title: Text(
                         snapshot.data!.docs[index]['examName'],
-                        style: GoogleFonts.poppins(color: Colors.white),
+                        style: GoogleFonts.poppins(color: Colors.black,fontSize: 17.h),
                       ),
                       subtitle: Text(
                         'Date of examination: ' +
                             snapshot.data!.docs[index]['examDate'],
-                        style: GoogleFonts.poppins(color: Colors.white),
+                        style: GoogleFonts.poppins(color: Colors.black,fontSize: 13.h),
                       ),
                     );
                   },
@@ -192,5 +200,12 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
         ],
       ),
     );
+  }
+  void clearFields() {
+    name.clear();
+    date.clear();
+    description.clear();
+    chaptersToCover.clear();
+
   }
 }

@@ -1,3 +1,4 @@
+
 import 'package:dujo_kerala_website/view/web/home/dujo_home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +49,8 @@ class MyApp extends StatelessWidget {
                   // AllStdf()
                   // BusRoute()
                   // NonTeachingLogin(schoolID: '',)
-                  DujoHomePage());
+                 DujoHomePage()
+                  );
         });
   }
 }

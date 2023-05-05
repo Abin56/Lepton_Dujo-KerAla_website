@@ -154,6 +154,8 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                             border: OutlineInputBorder(),
                             
                             labelText: 'Description',
+                            alignLabelWithHint: true, // Align the label with the hint text
+    contentPadding: EdgeInsets.only(top: 16, left: 10),
                             
                           ),
                         ),
