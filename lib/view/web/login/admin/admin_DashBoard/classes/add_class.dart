@@ -68,7 +68,9 @@ class AddClassesSectionScreen extends StatelessWidget {
                           width: 40.w,
                         ),
                         GoogleMonstserratWidgets(
-                          text: Get.find<GetFireBaseData>().bYear.value,     ////changed normal text to original batch year
+                          text: Get.find<GetFireBaseData>()
+                              .bYear
+                              .value, ////changed normal text to original batch year
                           //'2023 -2024 batch',
                           fontsize: 18.w,
                           color: cWhite,
@@ -318,7 +320,8 @@ class AddClassesSectionScreen extends StatelessWidget {
                               .collection('classes')
                               .snapshots(),
                           builder: (context, snapshots) {
-                            return GridView.builder(
+                            if (snapshots.hasData) {
+                                    return GridView.builder(
                               itemCount: snapshots.data!.docs.length,
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
@@ -332,7 +335,8 @@ class AddClassesSectionScreen extends StatelessWidget {
                                     padding: EdgeInsets.all(20),
                                     child: Container(
                                       decoration: BoxDecoration(
-                                          color: const Color.fromARGB( 255, 6, 71, 157)
+                                          color: const Color.fromARGB(
+                                                  255, 6, 71, 157)
                                               .withOpacity(0.9),
                                           borderRadius: BorderRadius.all(
                                             Radius.circular(20.w),
@@ -470,6 +474,12 @@ class AddClassesSectionScreen extends StatelessWidget {
                                 }
                               },
                             );
+                            }else{
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                      
                           }),
                     )
                   ]),
