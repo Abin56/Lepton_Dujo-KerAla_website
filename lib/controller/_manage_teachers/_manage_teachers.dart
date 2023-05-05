@@ -53,8 +53,8 @@ class ManageTeachersController extends GetxController {
                     .collection('subjects')
                     .snapshots(),
                 builder: (context, snap) {
-                  
-                  return ListView.separated(
+                  if (snap.hasData) {
+                      return ListView.separated(
                       itemBuilder: (context, index) {
                             subjectlist[snap.data?.docs[index]
                                             ['subjectName']] = null;
@@ -108,6 +108,12 @@ class ManageTeachersController extends GetxController {
                         return Divider();
                       },
                       itemCount: snap.data!.docs.length);
+                  }else{
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                
                 }),
           ),
           actions: <Widget>[
@@ -146,7 +152,8 @@ class ManageTeachersController extends GetxController {
                       .collection('teacherSubject')
                       .snapshots(),
                   builder: (context, snap) {
-                    return ListView.separated(
+                    if (snap.hasData) {
+                         return ListView.separated(
                         itemBuilder: (context, index) {
                           return Container(
                             height: 50,
@@ -224,6 +231,12 @@ class ManageTeachersController extends GetxController {
                           return Divider();
                         },
                         itemCount: snap.data!.docs.length);
+                    }else{
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                 
                   }),
             ),
           ),

@@ -173,7 +173,7 @@ class AllClassesListViewForTeacher extends StatelessWidget {
                       itemCount: snapshot.data!.docs.length),
                 );
               } else {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               }
