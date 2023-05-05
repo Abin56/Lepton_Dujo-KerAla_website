@@ -71,7 +71,8 @@ class SubmitSubjectClassTeacher extends StatelessWidget {
                               .collection('subjects')
                               .snapshots(),
                           builder: (context, snapshot) {
-                            return ListView.separated(
+                            if (snapshot.hasData) {
+                                return ListView.separated(
                                 itemBuilder: (context, index) {
                                   return Padding(
                                     padding: EdgeInsets.only(
@@ -121,6 +122,13 @@ class SubmitSubjectClassTeacher extends StatelessWidget {
                                   return const Divider();
                                 },
                                 itemCount: snapshot.data!.docs.length);
+                              
+                            }else{
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                          
                           })),
                 ],
               ),
