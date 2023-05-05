@@ -23,6 +23,7 @@ class GuardianController extends GetxController {
         guardianName: guardianName.text.trim(),
         guardianPhoneNumber: guardianPhoneNumber.text.trim(),
         studentID: studentDocID,
+        createdate: DateTime.now().toString(),
         docid: uuid.v1());
     firebaseFirestore
         .collection("classes")

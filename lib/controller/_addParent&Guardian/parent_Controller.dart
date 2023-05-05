@@ -22,6 +22,7 @@ class ParentController extends GetxController {
         parentName: parentName.text.trim(),
         parentPhoneNumber: parentPhoneNumber.text.trim(),
         studentID: studentDocID,
+        createdate: DateTime.now().toString(),
         docid: uuid.v1());
     firebaseFirestore
         .collection("classes")
