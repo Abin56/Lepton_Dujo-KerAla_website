@@ -1,57 +1,29 @@
-import 'dart:developer';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dujo_kerala_website/controller/teacher_controller/teacher_controller.dart';
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:dujo_kerala_website/view/fonts/fonts.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
+import '../../../../../../controller/Getx/class_teacher/teacher_add_student_controller/teacher_add_student_controller.dart';
 
-import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
-import '../../../../../../model/create_classModel/addStudent_model.dart';
-import '../../../../widgets/drop_DownList/get_batchYear.dart';
-import '../../../../widgets/drop_DownList/get_classes.dart';
+class AddStudentFromClassTeacher extends StatelessWidget {
+  final String schoolID;
+  final String teacherIDE;
 
-class AddStudentFromClassTeacher extends StatefulWidget {
-  var schoolID;
-  var teacherIDE;
+  AddStudentFromClassTeacher({
+    required this.schoolID,
+    required this.teacherIDE,
+    super.key,
+  });
 
-  AddStudentFromClassTeacher(
-      {this.schoolID, required this.teacherIDE, super.key});
-
-  @override
-  State<AddStudentFromClassTeacher> createState() =>
-      _AddStudentFromClassTeacherState();
-}
-
-DateTime? _selectedDateForApplyDate;
-DateTime? _selectedToDate;
-
-class _AddStudentFromClassTeacherState
-    extends State<AddStudentFromClassTeacher> {
-  TextEditingController studentNameController = TextEditingController();
-
-  TextEditingController parentPhNoController = TextEditingController();
-
-  TextEditingController parentNameController = TextEditingController();
-
-  TextEditingController addmissionNumberController = TextEditingController();
-
-  TextEditingController applynewBatchYearContoller = TextEditingController();
-  TextEditingController selectedToDaterContoller = TextEditingController();
+  final TeacherAddStudentController teacherAddStudentController =
+      Get.put(TeacherAddStudentController());
   final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    log("teacherEmail ID??????${widget.teacherIDE}");
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
-      // backgroundColor: Color.fromARGB(255, 27, 95, 88),
-
       body: ListView(children: [
         Row(
           children: [
@@ -67,48 +39,40 @@ class _AddStudentFromClassTeacherState
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back,
                         color: Colors.white,
                       )),
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Hi Admin ',
-                          style: ralewayStyle.copyWith(
-                            fontSize: 48.0,
-                            color: AppColors.whiteColor,
-                            fontWeight: FontWeight.w800,
-                          ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Hi Admin ',
+                        style: ralewayStyle.copyWith(
+                          fontSize: 48.0,
+                          color: AppColors.whiteColor,
+                          fontWeight: FontWeight.w800,
                         ),
-                        SizedBox(
-                          height: size.width / 20,
+                      ),
+                      SizedBox(
+                        height: size.width / 20,
+                      ),
+                      Text(
+                        'Add Your Student',
+                        style: ralewayStyle.copyWith(
+                          fontSize: 25.0,
+                          color: AppColors.whiteColor,
+                          fontWeight: FontWeight.w800,
                         ),
-                        Text(
-                          'Add Your Student',
-                          style: ralewayStyle.copyWith(
-                            fontSize: 25.0,
-                            color: AppColors.whiteColor,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-
-                        SizedBox(
-                          height: size.width / 5,
-                          width: size.width / 2,
-                          child: LottieBuilder.network(
-                              'https://assets8.lottiefiles.com/packages/lf20_ehs7xawx.json'),
-                        )
-                        //       SizedBox(
-                        // height: 400,
-                        // width: 600,
-                        // child: LottieBuilder.asset(
-                        //     "assets/images/")),
-                      ],
-                    ),
+                      ),
+                      SizedBox(
+                        height: size.width / 5,
+                        width: size.width / 2,
+                        child: LottieBuilder.network(
+                            'https://assets8.lottiefiles.com/packages/lf20_ehs7xawx.json'),
+                      )
+                    ],
                   ),
                 ],
               ),
@@ -127,120 +91,11 @@ class _AddStudentFromClassTeacherState
                       key: formKey,
                       child: ListView(children: [
                         Padding(
-                            padding:const EdgeInsets.all(15),
-                            child: GetClassesListDropDownButton(
-                              schoolID: Get.find<AdminLoginScreenController>()
-                                  .schoolID,
-                              teacherID: '',
-                            )),
-                        Padding(
-                            padding:const EdgeInsets.all(15),
-                            child: Container(
-                              height: 110,
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  GetBatchYearListDropDownButton(
-                                    schoolID: widget.schoolID,
-                                  ),
-                                  TextButton(
-                                      onPressed: () async {
-                                        showDialog(
-                                          context: context,
-                                          barrierDismissible:
-                                              false, // user must tap button!
-                                          builder: (BuildContext context) {
-                                            return AlertDialog(
-                                              title:
-                                                  const Text('Add BatchYear'),
-                                              content: SingleChildScrollView(
-                                                child: ListBody(
-                                                  children: <Widget>[
-                                                    Expanded(
-                                                      child: TextFormField(
-                                                        controller:
-                                                            applynewBatchYearContoller,
-                                                        readOnly: true,
-                                                        onTap: () =>
-                                                            _selectDate(
-                                                                context),
-                                                        decoration:
-                                                            const InputDecoration(
-                                                          labelText:
-                                                              'DD-MM-YYYY',
-                                                          border:
-                                                              OutlineInputBorder(),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    const Icon(Icons
-                                                        .arrow_downward_outlined),
-                                                    Expanded(
-                                                      child: TextFormField(
-                                                        controller:
-                                                            selectedToDaterContoller,
-                                                        readOnly: true,
-                                                        onTap: () =>
-                                                            _selectToDate(
-                                                                context),
-                                                        decoration:
-                                                            const InputDecoration(
-                                                          labelText: 'To',
-                                                          border:
-                                                              OutlineInputBorder(),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              actions: <Widget>[
-                                                TextButton(
-                                                  child: const Text('create'),
-                                                  onPressed: () async {
-                                                    bool? result = formKey
-                                                        .currentState
-                                                        ?.validate();
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                ),
-                                                TextButton(
-                                                  child: const Text('create'),
-                                                  onPressed: () async {
-                                                    await FirebaseFirestore
-                                                        .instance
-                                                        .collection(
-                                                            "SchoolListCollection")
-                                                        .doc(widget.schoolID)
-                                                        .collection("BatchYear")
-                                                        .doc(
-                                                            '${applynewBatchYearContoller.text.trim()}-${selectedToDaterContoller.text.trim()}')
-                                                        .set({
-                                                      'id':
-                                                          '${applynewBatchYearContoller.text.trim()}-${selectedToDaterContoller.text.trim()}'
-                                                    }).then((value) {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    });
-                                                  },
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                      },
-                                      child: Text("Add New Batch Year"))
-                                ],
-                              ),
-                            )),
-                        Padding(
                           padding: const EdgeInsets.all(15),
                           child: TextFormField(
                             validator: checkFieldEmpty,
-                            controller: studentNameController,
+                            controller: teacherAddStudentController
+                                .studentNameController,
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'Name',
@@ -251,7 +106,8 @@ class _AddStudentFromClassTeacherState
                           padding: const EdgeInsets.all(15),
                           child: TextFormField(
                             validator: checkFieldPhoneNumberIsValid,
-                            controller: parentPhNoController,
+                            controller: teacherAddStudentController
+                                .parentPhNoController,
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'Guardian Phone Number',
@@ -262,7 +118,8 @@ class _AddStudentFromClassTeacherState
                           padding: const EdgeInsets.all(15),
                           child: TextFormField(
                             validator: checkFieldEmpty,
-                            controller: addmissionNumberController,
+                            controller: teacherAddStudentController
+                                .addmissionNumberController,
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'AdmissionNumber',
@@ -273,52 +130,28 @@ class _AddStudentFromClassTeacherState
                           child: Padding(
                             padding: EdgeInsets.only(
                                 left: 50.w, right: 50.w, top: 30.h),
-                            child: Container(
+                            child: SizedBox(
                               height: 60.h,
                               width: 250.w,
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: adminePrimayColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                ),
-                                onPressed: () async {
-                                  bool? result =
-                                      formKey.currentState?.validate();
-                                  final studentDetails = AddStudentModel(
-                                      studentName:
-                                          studentNameController.text.trim(),
-                                      classID: classesListValue!["id"],
-                                      admissionNumber:
-                                          addmissionNumberController.text
-                                              .trim(),
-                                      parentPhoneNumber:
-                                          parentPhNoController.text.trim(),
-                                      createDate: DateTime.now().toString());
-
-                                  await AddStudentsToFireBase()
-                                      .addStudentsController(
-                                          studentDetails,
-                                          context,
-                                          widget.schoolID,
-                                          classesListValue!["id"],
-                                          schoolBatchYearListValue['id'])
-                                      .then((value) async {
-                                    studentNameController.clear();
-
-                                    parentPhNoController.clear();
-
-                                    parentNameController.clear();
-
-                                    addmissionNumberController.clear();
-
-                                    applynewBatchYearContoller.clear();
-                                    selectedToDaterContoller.clear();
-                                  });
-                                },
-                                child: Text("Create"),
-                              ),
+                              child: Obx(() => ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: adminePrimayColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                    ),
+                                    onPressed: () async {
+                                      if (formKey.currentState?.validate() ??
+                                          false) {
+                                        teacherAddStudentController
+                                            .createStudent();
+                                      }
+                                    },
+                                    child: teacherAddStudentController
+                                            .isLoading.value
+                                        ? circularProgressIndicator
+                                        : const Text("Create"),
+                                  )),
                             ),
                           ),
                         ),
@@ -332,46 +165,5 @@ class _AddStudentFromClassTeacherState
         ),
       ]),
     );
-  }
-
-  _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: _selectedDateForApplyDate ?? DateTime.now(),
-      firstDate: DateTime(2023),
-      lastDate: DateTime(2100),
-    );
-    if (picked != null && picked != _selectedDateForApplyDate) {
-      setState(() {
-        _selectedDateForApplyDate = picked;
-        DateTime parseDate =
-            DateTime.parse(_selectedDateForApplyDate.toString());
-        final DateFormat formatter = DateFormat('yyyy-MMMM');
-        String formatted = formatter.format(parseDate);
-
-        applynewBatchYearContoller.text = formatted.toString();
-        log(formatted.toString());
-      });
-    }
-  }
-
-  _selectToDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: _selectedToDate ?? DateTime.now(),
-      firstDate: DateTime(2023),
-      lastDate: DateTime(2100),
-    );
-    if (picked != null && picked != _selectedToDate) {
-      setState(() {
-        _selectedToDate = picked;
-        DateTime parseDate = DateTime.parse(_selectedToDate.toString());
-        final DateFormat formatter = DateFormat('yyyy-MMMM');
-        String formatted = formatter.format(parseDate);
-
-        selectedToDaterContoller.text = formatted.toString();
-        log(formatted.toString());
-      });
-    }
   }
 }
