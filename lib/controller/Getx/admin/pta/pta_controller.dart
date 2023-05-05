@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../../utils/utils.dart';
 import '../../../get_firebase-data/get_firebase_data.dart';
 
 class PtaController extends GetxController {

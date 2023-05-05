@@ -129,20 +129,11 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
       AddGuardian(
           teacherIDE: widget.teacherEmail,
           schoolId: Get.find<AdminLoginScreenController>().schoolID), //5
-      ClassTeacherCreateEventsPage(
-        schoolId: Get.find<AdminLoginScreenController>().schoolID,
-        classId: teacherClassId,
-      ), //6
+      ClassTeacherCreateEventsPage(), //6
       SelectClassForTimeTable(
           schoolID: Get.find<AdminLoginScreenController>().schoolID), //7
-      ClassTeacherCreateEventsPage(
-        schoolId: Get.find<AdminLoginScreenController>().schoolID,
-        classId: teacherClassId,
-      ), //8
-      ClassTeacherCreateEventsPage(
-        schoolId: Get.find<AdminLoginScreenController>().schoolID,
-        classId: teacherClassId,
-      ), //9
+      ClassTeacherCreateEventsPage(), //8
+      ClassTeacherCreateEventsPage(), //9
       ClassTeacherCreateNoticePage(
         schoolId: widget.schoolID,
         classId: teacherClassId,

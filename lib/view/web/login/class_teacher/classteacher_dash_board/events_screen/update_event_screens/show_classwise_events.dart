@@ -75,48 +75,38 @@ class ClassTeacherEventShow extends StatelessWidget {
                       sizedBoxH20,
                       imageUrl.isNotEmpty
                           ? const Text('Image Updated Successfully')
-                          : teacherEventController.isImageUpload.value
-                              ? const Center(
-                                  child: CircularProgressIndicator(),
-                                )
-                              : TextButton(
-                                  onPressed: () async {
-                                    imageUrl = await teacherEventController
-                                        .eventPhotoUpdate(
-                                      uid: classTeacherEventModel.image,
-                                    );
-                                  },
-                                  child: const Text('Upload Image'),
-                                ),
+                          : TextButton(
+                              onPressed: () async {
+                                // imageUrl = await teacherEventController
+                                //     .eventPhotoUpdate(
+                                //   uid: classTeacherEventModel.imageUrl,
+                                // );
+                              },
+                              child: const Text('Upload Image'),
+                            ),
                       sizedBoxH20,
                       ElevatedButton(
                         onPressed: () async {
-                          // imageUrl = '';
-                          // imageUrl =
-                          //     await teacherEventController.eventPhotoUpdate(
-                          //         uid: classTeacherEventModel.imageUid);
                           if (context.mounted) {
-                            teacherEventController.updateEvent(
-                                schoolId: schoolId,
-                                classId: classId,
-                                classTeacherEventModel: ClassTeacherEventModel(
-                                    eventId: classTeacherEventModel.eventId,
-                                    eventName: teacherEventController
-                                        .nameController.text,
-                                    eventDate: teacherEventController
-                                        .dateController.text,
-                                    description: teacherEventController
-                                        .descriptionController.text,
-                                    venue: teacherEventController
-                                        .venueController.text,
-                                    chiefGuest: teacherEventController
-                                        .chiefGuestController.text,
-                                    participants: teacherEventController
-                                        .participantsController.text,
-                                    image: imageUrl,
-                                    imageUid: classTeacherEventModel.imageUid),
-                                documentId: classTeacherEventModel.eventId,
-                                context: context);
+                            // teacherEventController.updateEvent(
+                            //     classTeacherEventModel: ClassTeacherEventModel(
+                            //         eventId: classTeacherEventModel.eventId,
+                            //         eventName: teacherEventController
+                            //             .nameController.text,
+                            //         eventDate: teacherEventController
+                            //             .dateController.text,
+                            //         description: teacherEventController
+                            //             .descriptionController.text,
+                            //         venue: teacherEventController
+                            //             .venueController.text,
+                            //         chiefGuest: teacherEventController
+                            //             .chiefGuestController.text,
+                            //         participants: teacherEventController
+                            //             .participantsController.text,
+                            //         imageUrl: imageUrl,
+                            //         imageUid: classTeacherEventModel.imageUid),
+                            //     documentId: classTeacherEventModel.eventId,
+                            //     context: context);
                           }
                         },
                         child: const Text(

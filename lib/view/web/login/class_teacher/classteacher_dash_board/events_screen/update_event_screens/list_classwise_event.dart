@@ -43,10 +43,7 @@ class ClassEventsPageList extends StatelessWidget {
                     onTap: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) {
-                        return ClassTeacherCreateEventsPage(
-                          classId: classId,
-                          schoolId: schoolId,
-                        );
+                        return ClassTeacherCreateEventsPage();
                       }));
                     },
                     child: const Text('Create'))),
@@ -113,7 +110,8 @@ class ClassEventsPageList extends StatelessWidget {
                                             .venue,
                                       ),
                                       if (teacherEventController
-                                              .classTeacherEventModelData.value ==
+                                              .classTeacherEventModelData
+                                              .value ==
                                           null)
                                         const SizedBox()
                                       else
@@ -173,23 +171,19 @@ class ClassEventsPageList extends StatelessWidget {
                                                                 'Cancel'),
                                                           ),
                                                           TextButton(
-                                                            onPressed: () async {
-                                                              teacherEventController.deleteEvent(
-                                                                  schoolId:
-                                                                      schoolId,
-                                                                  classId:
-                                                                      classId,
-                                                                  documentId:
-                                                                      teacherEventController
-                                                                          .classTeacherEventModelData
-                                                                          .value!
-                                                                          .eventId,
-                                                                  context:
-                                                                      context,
-                                                                  imageId: teacherEventController
-                                                                      .classTeacherEventModelData
-                                                                      .value!
-                                                                      .imageUid);
+                                                            onPressed:
+                                                                () async {
+                                                              // teacherEventController.deleteEvent(
+                                                              //     documentId: teacherEventController
+                                                              //         .classTeacherEventModelData
+                                                              //         .value!
+                                                              //         .eventId,
+                                                              //     context:
+                                                              //         context,
+                                                              //     imageId: teacherEventController
+                                                              //         .classTeacherEventModelData
+                                                              //         .value!
+                                                              //         .imageUid);
                                                             },
                                                             child: const Text(
                                                                 'Remove'),
@@ -228,9 +222,9 @@ class ClassEventsPageList extends StatelessWidget {
                                     crossAxisCount: 3),
                             itemBuilder: (context, index) {
                               ClassTeacherEventModel data =
-                                  ClassTeacherEventModel.fromJson(
+                                  ClassTeacherEventModel.fromMap(
                                       snapshot.data!.docs[index].data());
-    
+
                               return GestureDetector(
                                 onTap: () {
                                   teacherEventController
