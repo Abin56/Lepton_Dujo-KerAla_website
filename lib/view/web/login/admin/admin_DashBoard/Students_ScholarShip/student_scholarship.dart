@@ -520,17 +520,12 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                               return AlertDialog(
                                 content: Text('Scholarship succesfully added!'),
                                 actions: [
+                                  
                                   MaterialButton(
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    child: Text('OK'),
-                                  ),
-                                  MaterialButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text('Cancel'),
+                                    child: Text('Ok'),
                                   )
                                 ],
                               );

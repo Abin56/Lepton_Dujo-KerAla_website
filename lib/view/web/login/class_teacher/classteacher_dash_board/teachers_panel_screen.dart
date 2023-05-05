@@ -326,33 +326,75 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                 )
               : getFireBaseData.getTeacherClassRole.isEmpty
                   ? Center(
-                      child: SizedBox(
-                        height: 400,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Center(child: Text("Set Your Class")),
-                            Center(child: GetClassTeacherListDropDownButton()),
-                            Center(
-                              child: TextButton.icon(
-                                  onPressed: () async {
-                                    await FirebaseFirestore.instance
-                                        .collection("SchoolListCollection")
-                                        .doc(Get.find<
-                                                AdminLoginScreenController>()
-                                            .schoolID)
-                                        .collection('Teachers')
-                                        .doc(FirebaseAuth
-                                            .instance.currentUser!.uid)
-                                        .update({
-                                      'classID': classIDListValue['docid']
-                                    }).then((value) =>
-                                            html.window.location.reload());
-                                  },
-                                  icon: Icon(Icons.add),
-                                  label: Text('set')),
-                            )
-                          ],
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 100),
+                        child: Scaffold(
+                          backgroundColor: cWhite,
+                          body: Center(
+                            child: Container(
+                              
+                               height: 300,width: 400,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                             border: Border.all(color: Colors.white10),
+                                boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 1,
+                                  color: Colors.grey
+                                  ),],
+                                
+                              
+                                
+                                
+                                ),
+                              
+                              
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Center(child: Text("Set Your Class", style: GoogleFonts.poppins(
+                                                fontSize: 25)),),
+                                  SizedBox(
+                                    height: 100,
+                                    width: 300,
+                                    child: GetClassTeacherListDropDownButton()),
+                                  Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: [
+                                      MaterialButton(onPressed: (){
+                                            Navigator.pop(context);
+                                          },color: Colors.red,child: Text(
+                                            'Cancel',
+                                            style: GoogleFonts.poppins(
+                                                color: Colors.white),
+                                          )),
+                                      MaterialButton(
+                                          color: Colors.green,
+                                          onPressed: () async {
+                                            await FirebaseFirestore.instance
+                                                .collection("SchoolListCollection")
+                                                .doc(Get.find<
+                                                        AdminLoginScreenController>()
+                                                    .schoolID)
+                                                .collection('Teachers')
+                                                .doc(FirebaseAuth
+                                                    .instance.currentUser!.uid)
+                                                .update({
+                                              'classID': classIDListValue['docid']
+                                            }).then((value) =>
+                                                    html.window.location.reload());
+                                          },
+                                          child: Text(
+                                            'Set Class',
+                                            style: GoogleFonts.poppins(
+                                                color: Colors.white),
+                                          )),
+                                          
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     )
@@ -366,18 +408,18 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                 sizedBoxH20,
                                 Row(
                                   children: [
-                                    IconButtonBackWidget(color: cWhite),
+                                    IconButtonBackWidget(color: Colors.red),
                                     FittedBox(
                                         child: Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: Text(
-                                        'Teacher Admin Panel',
-                                        style: TextStyle(
-                                            fontSize: 20.w,
-                                            fontWeight: FontWeight.bold,
-                                            color: cWhite),
-                                      ),
-                                    )),
+                              padding: const EdgeInsets.all(20),
+                              child: Text(
+                                'Admin Dashboard',
+                                style: GoogleFonts.poppins(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 15.h),
+                              ),
+                            ),),
                                   ],
                                 ),
                                 // sizedBoxH30,
@@ -477,63 +519,63 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                               Center(
                                                                   child:
                                                                       GetClassTeacherListDropDownButton()),
-                                                              Center(
-                                                                child: TextButton
-                                                                    .icon(
-                                                                        onPressed:
-                                                                            () async {
-                                                                          await FirebaseFirestore
-                                                                              .instance
-                                                                              .collection(
-                                                                                  "SchoolListCollection")
-                                                                              .doc(Get.find<AdminLoginScreenController>()
-                                                                                  .schoolID)
-                                                                              .collection(
-                                                                                  'Teachers')
-                                                                              .doc(FirebaseAuth
-                                                                                  .instance.currentUser!.uid)
-                                                                              .update({
-                                                                            'classID':
-                                                                                classIDListValue['docid']
-                                                                          }).then((value) async {
-                                                                            await getFireBaseData.getTeacherClassRoll();
-                                                                            log("message");
-                                                                          });
-                                                                        },
-                                                                        icon: Icon(Icons
-                                                                            .add),
-                                                                        label: Text(
-                                                                            'set')),
-                                                              ),
                                                             ],
                                                           ),
                                                         ),
                                                         actions: <Widget>[
-                                                          TextButton(
-                                                            child: const Text(
-                                                                'cancel'),
-                                                            onPressed: () {
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
-                                                            },
-                                                          ),
-                                                          TextButton(
-                                                            child: const Text(
-                                                                'ok'),
-                                                            onPressed: () {
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
-                                                            },
-                                                          ),
+                                                          MaterialButton(
+                                                              color: Colors.red,
+                                                              onPressed: () {
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                              child: Text(
+                                                                'Cancel',
+                                                                style: GoogleFonts
+                                                                    .poppins(
+                                                                        color: Colors
+                                                                            .white),
+                                                              )),
+                                                          MaterialButton(
+                                                              color:
+                                                                  Colors.green,
+                                                              onPressed: () {
+                                                                () async {
+                                                                  await FirebaseFirestore
+                                                                      .instance
+                                                                      .collection(
+                                                                          "SchoolListCollection")
+                                                                      .doc(Get.find<
+                                                                              AdminLoginScreenController>()
+                                                                          .schoolID)
+                                                                      .collection(
+                                                                          'Teachers')
+                                                                      .doc(FirebaseAuth
+                                                                          .instance
+                                                                          .currentUser!
+                                                                          .uid)
+                                                                      .update({
+                                                                    'classID':
+                                                                        classIDListValue[
+                                                                            'docid']
+                                                                  }).then((value) async {
+                                                                    await getFireBaseData
+                                                                        .getTeacherClassRoll();
+                                                                    log("message");
+                                                                  });
+                                                                };
+                                                              },
+                                                              child: Text(
+                                                                'Set Class',
+                                                                style: GoogleFonts
+                                                                    .poppins(
+                                                                        color: Colors
+                                                                            .white),
+                                                              )),
                                                         ],
                                                       );
                                                     },
                                                   );
-                                                  /////////////
-                                                  ///
-                                                  ///
                                                 },
                                                 icon: Icon(Icons.edit))
                                           ],
@@ -565,75 +607,216 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                       child: ListBody(
                                                         children: <Widget>[
                                                           GetBatchYearListDropDownButton(
-                                                              schoolID: Get.find<
-                                                                      AdminLoginScreenController>()
-                                                                  .schoolID),
+                                                            schoolID:
+                                                                widget.schoolID,
+                                                          ),
                                                         ],
                                                       ),
                                                     ),
                                                     actions: <Widget>[
-                                                      GestureDetector(
-                                                          onTap: () {
-                                                            Navigator.pop(
-                                                                context);
-                                                          },
-                                                          child: Text(
-                                                            'Cancel',
-                                                            style: GoogleFonts
-                                                                .poppins(),
-                                                          )),
-                                                      SizedBox(
-                                                        width:
-                                                            screenSize.width /
-                                                                15,
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(20.0),
+                                                        child: MaterialButton(
+                                                            color: Colors.red,
+                                                            onPressed: () {
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
+                                                            child: Text(
+                                                              'Cancel',
+                                                              style: GoogleFonts
+                                                                  .poppins(
+                                                                      color: Colors
+                                                                          .white),
+                                                            )),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(20.0),
+                                                        child: MaterialButton(
+                                                            color: Colors.blue,
+                                                            onPressed: () {
+                                                              FirebaseFirestore
+                                                                  .instance
+                                                                  .collection(
+                                                                      "SchoolListCollection")
+                                                                  .doc(widget
+                                                                      .schoolID)
+                                                                  .set(
+                                                                      {
+                                                                    'batchYear':
+                                                                        schoolBatchYearListValue![
+                                                                            'id']
+                                                                  },
+                                                                      SetOptions(
+                                                                          merge:
+                                                                              true)).then(
+                                                                      (value) async {
+                                                                await getFireBaseData
+                                                                    .getBatchYearId();
+                                                                // ignore: use_build_context_synchronously
+                                                                Navigator
+                                                                    .pushReplacement(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                    builder:
+                                                                        (context) {
+                                                                      return ClassTeacherAdmin(
+                                                                        teacherID:
+                                                                            '',
+                                                                        schoolID:
+                                                                            widget.schoolID,
+                                                                        teacherEmail:
+                                                                            '',
+                                                                      );
+                                                                    },
+                                                                  ),
+                                                                );
+                                                              });
+                                                            },
+                                                            child: Text(
+                                                              'Set BatchYear',
+                                                              style: GoogleFonts
+                                                                  .poppins(
+                                                                      color: Colors
+                                                                          .white),
+                                                            )),
                                                       ),
                                                       GestureDetector(
-                                                          onTap: () {
-                                                            FirebaseFirestore
-                                                                .instance
-                                                                .collection(
-                                                                    "SchoolListCollection")
-                                                                .doc(Get.find<
-                                                                        AdminLoginScreenController>()
-                                                                    .schoolID)
-                                                                .set(
-                                                                    {
-                                                                  'batchYear':
-                                                                      schoolBatchYearListValue![
-                                                                          'id']
+                                                        onTap: () {
+                                                          FirebaseFirestore
+                                                              .instance
+                                                              .collection(
+                                                                  "SchoolListCollection")
+                                                              .doc(widget
+                                                                  .schoolID)
+                                                              .set(
+                                                                  {
+                                                                'batchYear':
+                                                                    schoolBatchYearListValue![
+                                                                        'id']
+                                                              },
+                                                                  SetOptions(
+                                                                      merge:
+                                                                          true)).then(
+                                                                  (value) async {
+                                                            await getFireBaseData
+                                                                .getBatchYearId();
+                                                            // ignore: use_build_context_synchronously
+                                                            Navigator
+                                                                .pushReplacement(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                builder:
+                                                                    (context) {
+                                                                  return ClassTeacherAdmin(
+                                                                      schoolID:
+                                                                          '',
+                                                                      teacherID:
+                                                                          '',
+                                                                      teacherEmail:
+                                                                          '');
                                                                 },
-                                                                    SetOptions(
-                                                                        merge:
-                                                                            true)).then(
-                                                                    (value) async {
-                                                              await getFireBaseData
-                                                                  .getBatchYearId();
-                                                              // ignore: use_build_context_synchronously
-                                                              Navigator
-                                                                  .pushReplacement(
-                                                                context,
-                                                                MaterialPageRoute(
-                                                                  builder:
-                                                                      (context) {
-                                                                    return ClassTeacherAdmin(
-                                                                        teacherEmail:
-                                                                            widget
-                                                                                .teacherEmail,
-                                                                        teacherID:
-                                                                            widget
-                                                                                .teacherID,
-                                                                        schoolID:
-                                                                            Get.find<AdminLoginScreenController>().schoolID);
-                                                                  },
-                                                                ),
+                                                              ),
+                                                            );
+                                                          });
+                                                        },
+                                                        child: MaterialButton(
+                                                            color: Colors.green,
+                                                            onPressed: () {
+                                                              showDialog(
+                                                                context:
+                                                                    context,
+                                                                barrierDismissible:
+                                                                    false, // user must tap button!
+                                                                builder:
+                                                                    (BuildContext
+                                                                        context) {
+                                                                  return AlertDialog(
+                                                                    title: const Text(
+                                                                        'Add BatchYear'),
+                                                                    content:
+                                                                        SingleChildScrollView(
+                                                                      child:
+                                                                          ListBody(
+                                                                        children: <
+                                                                            Widget>[
+                                                                          Expanded(
+                                                                            child:
+                                                                                TextFormField(
+                                                                              controller: applynewBatchYearContoller,
+                                                                              readOnly: true,
+                                                                              onTap: () => _selectDate(context),
+                                                                              decoration: const InputDecoration(
+                                                                                labelText: 'DD-MM-YYYY',
+                                                                                border: OutlineInputBorder(),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                          const Icon(
+                                                                              Icons.arrow_downward_outlined),
+                                                                          Expanded(
+                                                                            child:
+                                                                                TextFormField(
+                                                                              controller: selectedToDaterContoller,
+                                                                              readOnly: true,
+                                                                              onTap: () => _selectToDate(context),
+                                                                              decoration: const InputDecoration(
+                                                                                labelText: 'To',
+                                                                                border: OutlineInputBorder(),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                    actions: <
+                                                                        Widget>[
+                                                                      TextButton(
+                                                                        child: const Text(
+                                                                            'Cancel'),
+                                                                        onPressed:
+                                                                            () async {
+                                                                          Navigator.of(context)
+                                                                              .pop();
+                                                                        },
+                                                                      ),
+                                                                      TextButton(
+                                                                        child: const Text(
+                                                                            'Create'),
+                                                                        onPressed:
+                                                                            () async {
+                                                                          await FirebaseFirestore
+                                                                              .instance
+                                                                              .collection("SchoolListCollection")
+                                                                              .doc(Get.find<AdminLoginScreenController>().schoolID)
+                                                                              .collection("BatchYear")
+                                                                              .doc('${applynewBatchYearContoller.text.trim()}-${selectedToDaterContoller.text.trim()}')
+                                                                              .set({
+                                                                            'id':
+                                                                                '${applynewBatchYearContoller.text.trim()}-${selectedToDaterContoller.text.trim()}'
+                                                                          }).then((value) {
+                                                                            Navigator.of(context).pop();
+                                                                            Navigator.of(context).pop();
+                                                                          });
+                                                                        },
+                                                                      ),
+                                                                    ],
+                                                                  );
+                                                                },
                                                               );
-                                                            });
-                                                          },
-                                                          child: Text(
-                                                            'Set BatchYear',
-                                                            style: GoogleFonts
-                                                                .poppins(),
-                                                          ))
+                                                            },
+                                                            child: Text(
+                                                              'Add Batch Year',
+                                                              style: GoogleFonts
+                                                                  .poppins(
+                                                                      color: Colors
+                                                                          .white),
+                                                            )),
+                                                      ),
                                                     ],
                                                   );
                                                 },
