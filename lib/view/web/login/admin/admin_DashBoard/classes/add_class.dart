@@ -68,7 +68,8 @@ class AddClassesSectionScreen extends StatelessWidget {
                           width: 40.w,
                         ),
                         GoogleMonstserratWidgets(
-                          text: '2023 -2024 batch',
+                          text: Get.find<GetFireBaseData>().bYear.value,     ////changed normal text to original batch year
+                          //'2023 -2024 batch',
                           fontsize: 18.w,
                           color: cWhite,
                         )
@@ -331,8 +332,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                                     padding: EdgeInsets.all(20),
                                     child: Container(
                                       decoration: BoxDecoration(
-                                          color: const Color.fromARGB(
-                                                  255, 6, 71, 157)
+                                          color: const Color.fromARGB( 255, 6, 71, 157)
                                               .withOpacity(0.9),
                                           borderRadius: BorderRadius.all(
                                             Radius.circular(20.w),
