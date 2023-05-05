@@ -11,7 +11,9 @@ import 'get_classes.dart';
 var schoolStudentListValue;
 
 class GetStudentsListDropDownButton extends StatefulWidget {
-  GetStudentsListDropDownButton({Key? key}) : super(key: key);
+  String classID;
+  GetStudentsListDropDownButton({required this.classID, Key? key})
+      : super(key: key);
 
   @override
   State<GetStudentsListDropDownButton> createState() =>
@@ -22,19 +24,19 @@ class _GeClasseslListDropDownButtonState
     extends State<GetStudentsListDropDownButton> {
   @override
   Widget build(BuildContext context) {
-    
+    log(widget.classID);
     return dropDownButton();
   }
 
-  StreamBuilder<QuerySnapshot<Map<String, dynamic>>>dropDownButton() {
+  StreamBuilder<QuerySnapshot<Map<String, dynamic>>> dropDownButton() {
     return StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection("SchoolListCollection")
             .doc(Get.find<AdminLoginScreenController>().schoolID)
             .collection(Get.find<GetFireBaseData>().bYear.value)
             .doc(Get.find<GetFireBaseData>().bYear.value)
-            .collection("Classes")
-            .doc(classesListValue?["id"])
+            .collection("classes")
+            .doc(widget.classID)
             .collection("Students")
             .orderBy('studentName', descending: false)
             .snapshots(),

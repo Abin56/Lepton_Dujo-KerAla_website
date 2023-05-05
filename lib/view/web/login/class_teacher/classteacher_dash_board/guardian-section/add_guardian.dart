@@ -1,8 +1,11 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/controller/_addParent&Guardian/guardian_Controller.dart';
+import 'package:dujo_kerala_website/model/guardian/guardian_temp_to_firebase.dart';
 import 'package:dujo_kerala_website/view/fonts/fonts.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -14,19 +17,18 @@ import '../../../../../../model/guardian/guardian_model.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
 import '../../../../widgets/drop_DownList/get_classes.dart';
+import '../../../../widgets/drop_DownList/get_students.dart';
 
-class AddGuardian extends StatefulWidget {
+class AddGuardian extends StatelessWidget {
+  GuardianController guardianController = Get.put(GuardianController());
   String teacherIDE;
   AddGuardian({super.key, required this.schoolId, required this.teacherIDE});
   String schoolId;
 
-  @override
-  State<AddGuardian> createState() => _AddGuardianState();
-}
-
-class _AddGuardianState extends State<AddGuardian> {
   String studentID = '';
+
   Map<String, dynamic>? classListDropDown;
+
   final formKey = GlobalKey<FormState>();
 
   TextEditingController guardianNameController = TextEditingController();
@@ -34,6 +36,8 @@ class _AddGuardianState extends State<AddGuardian> {
   TextEditingController guardianEmailController = TextEditingController();
 
   TextEditingController guardianPhoneNoController = TextEditingController();
+
+  final _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -100,10 +104,10 @@ class _AddGuardianState extends State<AddGuardian> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       sizedBoxH30,
-                      dropDownButtonsec(),
-                      classesListValue == null
-                          ? const SizedBox()
-                          : dropDownButton(),
+                      GetStudentsListDropDownButton(
+                          classID: Get.find<GetFireBaseData>()
+                              .getTeacherClassRole
+                              .value),
                       sizedBoxH30,
                       AddGuardianWidget(
                         function: checkFieldEmpty,
@@ -118,7 +122,8 @@ class _AddGuardianState extends State<AddGuardian> {
                       ),
                       sizedBoxH30,
                       Padding(
-                        padding:  EdgeInsets.only(left: 50.w,bottom: 50.w,top: 30.w),
+                        padding: EdgeInsets.only(
+                            left: 50.w, bottom: 50.w, top: 30.w),
                         child: SizedBox(
                           width: 250.w,
                           height: 60.h,
@@ -131,20 +136,13 @@ class _AddGuardianState extends State<AddGuardian> {
                             ),
                             onPressed: () async {
                               if (formKey.currentState!.validate()) {
-                                final guardianDetails = GuardianAddModel(
-                                  studentID: studentID,
-                                  createdate: DateTime.now().toString(),
-                                  guardianPhoneNumber:
-                                      guardianPhoneNoController.text.trim(),
-                                  guardianName:
-                                      guardianNameController.text.trim(),
-                                );
-                                CreateGuardiansAddToFireBase()
-                                    .createSchoolController(
-                                        guardianDetails,
-                                        context,
-                                        widget.schoolId,
-                                        classesListValue['id']);
+                                guardianController.addGuardian(
+                                    guardianNameController,
+                                    guardianPhoneNoController,
+                                    schoolStudentListValue!['docid'],
+                                    Get.find<GetFireBaseData>()
+                                        .getTeacherClassRole
+                                        .value);
                               }
                             },
                             child: const Text("Add Guardian"),
@@ -158,139 +156,6 @@ class _AddGuardianState extends State<AddGuardian> {
         ],
       ),
     );
-  }
-
-  dropDownButton() {
-    return FutureBuilder(
-        future: FirebaseFirestore.instance
-            .collection("SchoolListCollection")
-            .doc(Get.find<AdminLoginScreenController>().schoolID)
-            .collection(Get.find<GetFireBaseData>().bYear.value)
-            .doc(Get.find<GetFireBaseData>().bYear.value)
-            .collection("Classes")
-            .doc(classesListValue?["id"])
-            .collection("Students")
-            .orderBy('studentName', descending: false)
-            .get(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return DropdownButtonFormField(
-              hint: classListDropDown == null
-                  ? const Text(
-                      "Select Student",
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 0, 0, 0), fontSize: 18),
-                    )
-                  : Text(classListDropDown!["studentName"]),
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Colors.transparent, width: 0.5),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                border: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Colors.transparent, width: 0.5),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                filled: true,
-              ),
-              items: snapshot.data!.docs.map(
-                (val) {
-                  return DropdownMenuItem(
-                    value: val["studentName"],
-                    child: Text(val["studentName"]),
-                  );
-                },
-              ).toList(),
-              onChanged: (val) {
-                var categoryIDObject = snapshot.data!.docs
-                    .where((element) => element["studentName"] == val)
-                    .toList()
-                    .first;
-                log("studenssssss##########${categoryIDObject["studentName"]}");
-
-                setState(
-                  () {
-                    studentID = categoryIDObject["docid"];
-                    log(classListDropDown.toString());
-                    classListDropDown =
-                        categoryIDObject as Map<String, dynamic>?;
-                  },
-                );
-              },
-            );
-          }
-          return const SizedBox(
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        });
-  }
-
-  FutureBuilder<QuerySnapshot<Map<String, dynamic>>> dropDownButtonsec() {
-    return FutureBuilder(
-        future: FirebaseFirestore.instance
-            .collection("SchoolListCollection")
-            .doc(Get.find<AdminLoginScreenController>().schoolID)
-            .collection(Get.find<GetFireBaseData>().bYear.value)
-            .doc(Get.find<GetFireBaseData>().bYear.value)
-            .collection("Classes")
-            .where('classIncharge', isEqualTo: widget.teacherIDE)
-            .get(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return DropdownButtonFormField(
-              hint: classesListValue == null
-                  ? const Text(
-                      "Select Class",
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 0, 0, 0), fontSize: 18),
-                    )
-                  : Text(classesListValue!["className"]),
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Colors.transparent, width: 0.5),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                border: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Colors.transparent, width: 0.5),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                filled: true,
-              ),
-              items: snapshot.data!.docs.map(
-                (val) {
-                  return DropdownMenuItem(
-                    value: val["className"],
-                    child: Text(val["className"]),
-                  );
-                },
-              ).toList(),
-              onChanged: (val) {
-                var categoryIDObject = snapshot.data!.docs
-                    .where((element) => element["className"] == val)
-                    .toList()
-                    .first;
-                log(categoryIDObject["className"]);
-
-                setState(
-                  () {
-                    classesListValue = categoryIDObject;
-                  },
-                );
-              },
-            );
-          }
-          return const SizedBox(
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        });
   }
 }
 

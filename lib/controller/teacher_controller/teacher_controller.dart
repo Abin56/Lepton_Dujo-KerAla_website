@@ -29,7 +29,7 @@ class TeacherController extends GetxController {
             .doc(value.id)
             .update({"docid": value.id}).then(
           (value) {
-            showToast(msg: "Scuccessfully Created");
+            showToast(msg: "Successfully Created");
             clearFields();
           },
         );
