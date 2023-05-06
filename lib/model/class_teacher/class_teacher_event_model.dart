@@ -3,79 +3,60 @@ import 'dart:convert';
 
 // To parse this JSON data, do
 //
-//     final classTeacherEventModel = classTeacherEventModelFromJson(jsonString);
 
 class ClassTeacherEventModel {
-  String eventId;
   String eventName;
   String eventDate;
-  String description;
+  String eventDescription;
   String venue;
-  String chiefGuest;
-  String participants;
-  String imageUrl;
-  String imageUid;
+  String signedBy;
+  String docid;
   ClassTeacherEventModel({
-    required this.eventId,
     required this.eventName,
     required this.eventDate,
-    required this.description,
+    required this.eventDescription,
     required this.venue,
-    required this.chiefGuest,
-    required this.participants,
-    required this.imageUrl,
-    required this.imageUid,
+    required this.signedBy,
+    required this.docid,
   });
 
   ClassTeacherEventModel copyWith({
-    String? eventId,
     String? eventName,
     String? eventDate,
-    String? description,
+    String? eventDescription,
     String? venue,
-    String? chiefGuest,
-    String? participants,
-    String? imageUrl,
-    String? imageUid,
+    String? signedBy,
+    String? docid,
   }) {
     return ClassTeacherEventModel(
-      eventId: eventId ?? this.eventId,
       eventName: eventName ?? this.eventName,
       eventDate: eventDate ?? this.eventDate,
-      description: description ?? this.description,
+      eventDescription: eventDescription ?? this.eventDescription,
       venue: venue ?? this.venue,
-      chiefGuest: chiefGuest ?? this.chiefGuest,
-      participants: participants ?? this.participants,
-      imageUrl: imageUrl ?? this.imageUrl,
-      imageUid: imageUid ?? this.imageUid,
+      signedBy: signedBy ?? this.signedBy,
+      docid: docid ?? this.docid,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'eventId': eventId,
       'eventName': eventName,
       'eventDate': eventDate,
-      'description': description,
+      'eventDescription': eventDescription,
       'venue': venue,
-      'chiefGuest': chiefGuest,
-      'participants': participants,
-      'imageUrl': imageUrl,
-      'imageUid': imageUid,
+      'signedBy': signedBy,
+      'docid': docid,
     };
   }
 
   factory ClassTeacherEventModel.fromMap(Map<String, dynamic> map) {
     return ClassTeacherEventModel(
-      eventId: map['eventId'] ?? "",
       eventName: map['eventName'] ?? "",
       eventDate: map['eventDate'] ?? "",
-      description: map['description'] ?? "",
+      eventDescription: map['eventDescription'] ?? "",
       venue: map['venue'] ?? "",
-      chiefGuest: map['chiefGuest'] ?? "",
-      participants: map['participants'] ?? "",
-      imageUrl: map['imageUrl'] ?? "",
-      imageUid: map['imageUid'] ?? "",
+      signedBy: map['signedBy'] ?? "",
+      docid: map['docid'] ?? "",
     );
   }
 
@@ -87,34 +68,28 @@ class ClassTeacherEventModel {
 
   @override
   String toString() {
-    return 'ClassTeacherEventModel(eventId: $eventId, eventName: $eventName, eventDate: $eventDate, description: $description, venue: $venue, chiefGuest: $chiefGuest, participants: $participants, imageUrl: $imageUrl, imageUid: $imageUid)';
+    return 'ClassTeacherEventModel(eventName: $eventName, eventDate: $eventDate, eventDescription: $eventDescription, venue: $venue, signedBy: $signedBy, docid: $docid,)';
   }
 
   @override
   bool operator ==(covariant ClassTeacherEventModel other) {
     if (identical(this, other)) return true;
 
-    return other.eventId == eventId &&
-        other.eventName == eventName &&
+    return other.eventName == eventName &&
         other.eventDate == eventDate &&
-        other.description == description &&
+        other.eventDescription == eventDescription &&
         other.venue == venue &&
-        other.chiefGuest == chiefGuest &&
-        other.participants == participants &&
-        other.imageUrl == imageUrl &&
-        other.imageUid == imageUid;
+        other.signedBy == signedBy &&
+        other.docid == docid;
   }
 
   @override
   int get hashCode {
-    return eventId.hashCode ^
-        eventName.hashCode ^
+    return eventName.hashCode ^
         eventDate.hashCode ^
-        description.hashCode ^
+        eventDescription.hashCode ^
         venue.hashCode ^
-        chiefGuest.hashCode ^
-        participants.hashCode ^
-        imageUrl.hashCode ^
-        imageUid.hashCode;
+        signedBy.hashCode ^
+        docid.hashCode;
   }
 }

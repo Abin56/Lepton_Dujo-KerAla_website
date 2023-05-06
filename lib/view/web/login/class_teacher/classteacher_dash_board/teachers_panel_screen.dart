@@ -140,10 +140,10 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
       ), //10/10
     ];
     List<Widget> drawerPages = [
-      ClassEventsPageList(
-        classId: teacherClassId,
-        schoolId: widget.schoolID,
-      ), //1
+      // ClassEventsPageList(
+      //   classId: teacherClassId,
+      //   schoolId: widget.schoolID,
+      // ), //1
       ClassNoticeTeacher(
         schoolId: widget.schoolID,
         classId: teacherClassId,
