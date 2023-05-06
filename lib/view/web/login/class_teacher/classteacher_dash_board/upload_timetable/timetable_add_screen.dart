@@ -15,13 +15,15 @@ class TimeTableScreen extends StatefulWidget {
   String classID;
   String schoolID;
 
+
   @override
   State<TimeTableScreen> createState() => _TimeTableScreenState();
 }
 
 class _TimeTableScreenState extends State<TimeTableScreen> {
   TextEditingController numberOfPeriodsController = TextEditingController();
-  GlobalKey<FormState> globalKey = GlobalKey<FormState>();
+  GlobalKey<FormState> globalKey = GlobalKey<FormState>(); 
+    final _formKey = GlobalKey<FormState>();
 
   List<TextEditingController> mondayList = [
     TextEditingController(),
@@ -127,8 +129,10 @@ class _TimeTableScreenState extends State<TimeTableScreen> {
                 padding: const EdgeInsets.all(10.0),
                 child: ElevatedButton(
                   onPressed: () async {
-                    //monday timetable
-                    MondayModel Mondaymodel = await MondayModel(firstPeriod: {
+                    //monday timetable 
+                
+                    if(_formKey.currentState!.validate()){
+                         MondayModel Mondaymodel = await MondayModel(firstPeriod: {
                       'firstPeriod': mondayList[0].text,
                       'firstPeriodTeacher': mondayList[1].text
                     }, secondPeriod: {
@@ -256,7 +260,9 @@ class _TimeTableScreenState extends State<TimeTableScreen> {
                         Thursdaymodel,
                         Fridaymodel);
                     // Navigator.push(context, MaterialPageRoute(builder: ((context) => ShowTimeTable(k))));
-                  },
+                  
+                    }},
+                 
                   child:  Text(
                     'Submit Timetable',
                     style: GoogleFonts.poppins(color: Colors.black),
@@ -516,9 +522,12 @@ class _TimeTableScreenState extends State<TimeTableScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Flexible(
-                    child: Container(
-                      child: periodListWidget('Monday', mondayList),
+                  Form( 
+                    key: _formKey,
+                    child: Flexible(
+                      child: Container(
+                        child: periodListWidget('Monday', mondayList),
+                      ),
                     ),
                   ),
                   Flexible(

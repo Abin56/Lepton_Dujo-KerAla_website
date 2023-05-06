@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
@@ -29,7 +30,8 @@ class AddGuardian extends StatefulWidget {
 class _AddGuardianState extends State<AddGuardian> {
   String studentID = '';
   Map<String, dynamic>? classListDropDown;
-  final formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>(); 
+  String uid = Uuid().v1();
 
   TextEditingController guardianNameController = TextEditingController();
 
@@ -145,6 +147,7 @@ class _AddGuardianState extends State<AddGuardian> {
                                       guardianPhoneNoController.text.trim(),
                                   guardianName:
                                       guardianNameController.text.trim(),
+                                      docid: uid
                                 );
                                 // CreateGuardiansAddToFireBase()
                                 //     .createSchoolController(
