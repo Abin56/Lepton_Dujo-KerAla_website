@@ -12,10 +12,12 @@ class AppColors {
 }
 
 const Color adminePrimayColor = Color.fromARGB(255, 6, 71, 157);
+const Color adminePrimayColor1 = Color.fromARGB(255, 67, 0, 212);
 const Color cWhite = Color(0xffFFFFFF);
 const Color cBlack = Colors.black;
 const Color cBlue = Colors.blue;
 
 const Color adminScreencolor = Color.fromARGB(255, 48, 0, 70);
-
+const Color cred    = Color.fromARGB(255, 255, 0, 0);
+const Color cgreen  = Colors.green;
 const Color dujothemeColor = Color(0xFF26A69A);

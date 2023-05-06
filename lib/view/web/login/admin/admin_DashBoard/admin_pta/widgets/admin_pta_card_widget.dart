@@ -31,16 +31,18 @@ class PtaCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey),
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: const Offset(0, 3),
-            ),
-          ]),
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: Colors.grey.withOpacity(0.5),
+          //     spreadRadius: 3,
+          //     blurRadius: 3,
+          //     offset: const Offset(0, 3),
+          //   ),
+          // ]
+          ),
       child: SizedBox(
         width: 200,
         child: Column(
