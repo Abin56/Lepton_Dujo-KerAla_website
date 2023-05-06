@@ -8,7 +8,7 @@ class GuardianModel {
   String? docid;
   String? createdate;
   String? guardianPhoneNumber;
-  String? parentEmail;
+  String? guardianEmail;
   String? studentID;
   String? houseName;
   String? place;
@@ -24,7 +24,7 @@ class GuardianModel {
     this.docid,
     this.createdate,
     this.guardianPhoneNumber,
-    this.parentEmail,
+    this.guardianEmail,
     this.studentID,
     this.houseName,
     this.place,
@@ -34,7 +34,7 @@ class GuardianModel {
     this.gender,
     this.profileImageID,
     this.profileImageURL,
-     this.userRole='parent',
+     this.userRole='guardian',
   });
 
   GuardianModel copyWith({
@@ -42,7 +42,7 @@ class GuardianModel {
     String? docid,
     String? createdate,
     String? guardianPhoneNumber,
-    String? parentEmail,
+    String? guardianEmail,
     String? studentID,
     String? houseName,
     String? place,
@@ -59,7 +59,7 @@ class GuardianModel {
       docid: docid ?? this.docid,
       createdate: createdate ?? this.createdate,
       guardianPhoneNumber: guardianPhoneNumber ?? this.guardianPhoneNumber,
-      parentEmail: parentEmail ?? this.parentEmail,
+      guardianEmail: guardianEmail ?? this.guardianEmail,
       studentID: studentID ?? this.studentID,
       houseName: houseName ?? this.houseName,
       place: place ?? this.place,
@@ -79,7 +79,7 @@ class GuardianModel {
       'docid': docid ?? '',
       'createdate': createdate ?? '',
       'guardianPhoneNumber': guardianPhoneNumber ?? '',
-      'parentEmail': parentEmail ?? '',
+      'guardianEmail': guardianEmail ?? '',
       'studentID': studentID ?? '',
       'houseName': houseName ?? '',
       'place': place ?? '',
@@ -101,8 +101,8 @@ class GuardianModel {
       guardianPhoneNumber: map['guardianPhoneNumber'] != null
           ? map['guardianPhoneNumber'] as String
           : '',
-      parentEmail:
-          map['parentEmail'] != null ? map['parentEmail'] as String : '',
+      guardianEmail:
+          map['guardianEmail'] != null ? map['guardianEmail'] as String : '',
       studentID: map['studentID'] != null ? map['studentID'] as String : '',
       houseName: map['houseName'] != null ? map['houseName'] as String : '',
       place: map['place'] != null ? map['place'] as String : '',
@@ -126,7 +126,7 @@ class GuardianModel {
 
   @override
   String toString() {
-    return 'GuardianModel(guardianName: $guardianName, docid: $docid, createdate: $createdate, guardianPhoneNumber: $guardianPhoneNumber, parentEmail: $parentEmail, studentID: $studentID, houseName: $houseName, place: $place, state: $state, pincode: $pincode, district: $district, gender: $gender, profileImageID: $profileImageID, profileImageURL: $profileImageURL, userRole: $userRole)';
+    return 'GuardianModel(guardianName: $guardianName, docid: $docid, createdate: $createdate, guardianPhoneNumber: $guardianPhoneNumber, guardianEmail: $guardianEmail, studentID: $studentID, houseName: $houseName, place: $place, state: $state, pincode: $pincode, district: $district, gender: $gender, profileImageID: $profileImageID, profileImageURL: $profileImageURL, userRole: $userRole)';
   }
 
   @override
@@ -137,7 +137,7 @@ class GuardianModel {
         other.docid == docid &&
         other.createdate == createdate &&
         other.guardianPhoneNumber == guardianPhoneNumber &&
-        other.parentEmail == parentEmail &&
+        other.guardianEmail == guardianEmail &&
         other.studentID == studentID &&
         other.houseName == houseName &&
         other.place == place &&
@@ -156,7 +156,7 @@ class GuardianModel {
         docid.hashCode ^
         createdate.hashCode ^
         guardianPhoneNumber.hashCode ^
-        parentEmail.hashCode ^
+        guardianEmail.hashCode ^
         studentID.hashCode ^
         houseName.hashCode ^
         place.hashCode ^

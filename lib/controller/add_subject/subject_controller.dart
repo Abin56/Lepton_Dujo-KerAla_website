@@ -136,6 +136,17 @@ class SubjectController extends GetxController {
                   }).then((value) {
                     showToast(msg: 'Changed');
                     Navigator.of(context).pop();
+                  }).then((value) {
+                    firebaseFirestore
+                        .collection(Get.find<GetFireBaseData>().bYear.value)
+                        .doc(Get.find<GetFireBaseData>().bYear.value)
+                        .collection('classes')
+                        .doc(Get.find<GetFireBaseData>()
+                            .getTeacherClassRole
+                            .value)
+                        .collection('subjects')
+                        .doc(docid)
+                        .update({'subjectName': updateController.text.trim()});
                   });
                   // if (updateFormkey.currentState!.validate()) {
 
@@ -160,6 +171,51 @@ class SubjectController extends GetxController {
         .collection('subjects')
         .doc(subjectDocid)
         .set(data.toMap());
+  }
+
+  deleteYearWiseSubject(String docid, BuildContext context) async {
+    return showDialog(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Alert'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text(
+                    'Once you delete a subject all data will be lost \n Are you sure ?')
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('cancel'),
+              onPressed: () async {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('ok'),
+              onPressed: () async {
+                await firebaseFirestore
+                    .collection(Get.find<GetFireBaseData>().bYear.value)
+                    .doc(Get.find<GetFireBaseData>().bYear.value)
+                    .collection('classes')
+                    .doc(Get.find<GetFireBaseData>().getTeacherClassRole.value)
+                    .collection('subjects')
+                    .doc(docid)
+                    .delete()
+                    .then((value) {
+                  showToast(msg: 'Deleted');
+                  Navigator.of(context).pop();
+                });
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Future<void> getClass(

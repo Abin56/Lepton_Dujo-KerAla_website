@@ -79,6 +79,7 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
                 )
               ],
             ),
+            sizedBoxH10,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -97,8 +98,6 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
                     Student_Info_text_Widget(
                       text: 'Name :$studentName',
                     ),
-                    sizedBoxH20,
-                    Student_Info_text_Widget(text: 'Class :$studentClass'),
                     sizedBoxH20,
                     Student_Info_text_Widget(text: 'Adm.No:$admissionNumber'),
                     sizedBoxH20,
@@ -133,7 +132,7 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
                                   style: GoogleFonts.poppins(
                                       fontSize: 16.h, color: cWhite))),
                           Obx(() {
-                            controller.getClassDetail('');
+                            controller.getClassDetail(studentClass);
 
                             if (controller.className.isEmpty) {
                               return const Center(
