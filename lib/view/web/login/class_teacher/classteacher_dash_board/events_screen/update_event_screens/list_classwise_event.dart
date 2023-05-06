@@ -117,7 +117,7 @@ class ClassEventsPageList extends StatelessWidget {
                                                             return AlertDialog(
                                                               icon: Align(
                                                                 alignment: Alignment
-                                                                    .bottomRight,
+                                                                    .topRight,
                                                                 child: CloseButton(
                                                                     onPressed: () =>
                                                                         Navigator.pop(

@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
+import 'package:dujo_kerala_website/controller/get_firebase-data/get_firebase_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../model/class_teacher/class_teacher_notice_model.dart';
@@ -18,61 +20,59 @@ class TeacherNoticeController extends GetxController {
   //create events
 
   Future<void> createNotice({
-    required String schoolId,
-    required String classId,
     required ClassTeacherNoticeModel classTeacherNoticeModel,
   }) async {
     //creating new event
 
     try {
       isLoading.value = true;
-      final result = await firebaseFirestore
-          .collection('SchoolListCollection')
-          .doc(schoolId)
-          .collection('Classes')
-          .doc(classId)
-          .collection('Notice')
+      final CollectionReference<Map<String, dynamic>> noticeCollection =
+          firebaseFirestore
+              .collection('SchoolListCollection')
+              .doc(Get.find<AdminLoginScreenController>().schoolID)
+              .collection(Get.find<GetFireBaseData>().bYear.value)
+              .doc(Get.find<GetFireBaseData>().bYear.value)
+              .collection('classes')
+              .doc(Get.find<GetFireBaseData>().classIDD.value)
+              .collection('ClassNotice');
+
+      //add and update
+
+      await noticeCollection
           .add(
-            classTeacherNoticeModel.toJson(),
-          );
-//updating document id to firebase
-      await firebaseFirestore
-          .collection('SchoolListCollection')
-          .doc(schoolId)
-          .collection('Classes')
-          .doc(classId)
-          .collection('Notice')
-          .doc(result.id)
-          .update({
-        "noticeId": result.id,
-      });
+            classTeacherNoticeModel.toMap(),
+          )
+          .then((value) async =>
+              await noticeCollection.doc(value.id).update({"docid": value.id}));
 
       clearControllers();
       isLoading.value = false;
       showToast(msg: 'Successfully Created');
     } catch (e) {
-      showToast(msg: e.toString());
+      showToast(msg: "Failed");
     }
   }
 
   Future<void> updateNotice(
-      {required String schoolId,
-      required String classId,
-      required ClassTeacherNoticeModel classTeacherNoticeModel,
+      {required ClassTeacherNoticeModel classTeacherNoticeModel,
       required String documentId,
       required BuildContext context}) async {
     try {
       isLoading.value = true;
-      await firebaseFirestore
-          .collection('SchoolListCollection')
-          .doc(schoolId)
-          .collection('Classes')
-          .doc(classId)
-          .collection('Notice')
-          .doc(documentId)
-          .update(
-            classTeacherNoticeModel.toJson(),
-          );
+
+      final DocumentReference<Map<String, dynamic>> noticeCollection =
+          firebaseFirestore
+              .collection('SchoolListCollection')
+              .doc(Get.find<AdminLoginScreenController>().schoolID)
+              .collection(Get.find<GetFireBaseData>().bYear.value)
+              .doc(Get.find<GetFireBaseData>().bYear.value)
+              .collection('classes')
+              .doc(Get.find<GetFireBaseData>().classIDD.value)
+              .collection('ClassNotice')
+              .doc(documentId);
+      noticeCollection.update(
+        classTeacherNoticeModel.toMap(),
+      );
       clearControllers();
       isLoading.value = false;
       classTeacherNoticeModelData.value = null;
@@ -82,32 +82,33 @@ class TeacherNoticeController extends GetxController {
       }
     } catch (e) {
       showToast(
-        msg: e.toString(),
+        msg: "Failed",
       );
     }
   }
 
   Future<void> deleteNotice(
-      {required String schoolId,
-      required String classId,
-      required String documentId,
-      required BuildContext context}) async {
+      {required String documentId, required BuildContext context}) async {
     try {
-      await firebaseFirestore
-          .collection('SchoolListCollection')
-          .doc(schoolId)
-          .collection('Classes')
-          .doc(classId)
-          .collection('Notice')
-          .doc(documentId)
-          .delete();
+      final DocumentReference<Map<String, dynamic>> noticeCollection =
+          firebaseFirestore
+              .collection('SchoolListCollection')
+              .doc(Get.find<AdminLoginScreenController>().schoolID)
+              .collection(Get.find<GetFireBaseData>().bYear.value)
+              .doc(Get.find<GetFireBaseData>().bYear.value)
+              .collection('classes')
+              .doc(Get.find<GetFireBaseData>().classIDD.value)
+              .collection('ClassNotice')
+              .doc(documentId);
+
+      noticeCollection.delete();
       classTeacherNoticeModelData.value = null;
       showToast(msg: 'Successfully Removed');
       if (context.mounted) {
         Navigator.of(context).pop();
       }
     } catch (e) {
-      showToast(msg: e.toString());
+      showToast(msg: "Failed");
     }
   }
 
