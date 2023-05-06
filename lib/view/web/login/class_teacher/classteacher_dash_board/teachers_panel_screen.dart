@@ -140,10 +140,10 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
       ), //10/10
     ];
     List<Widget> drawerPages = [
-      // ClassEventsPageList(
-      //   classId: teacherClassId,
-      //   schoolId: widget.schoolID,
-      // ), //1
+      ClassEventsPageList(
+        classId: teacherClassId,
+        schoolId: widget.schoolID,
+      ), //1
       ClassNoticeTeacher(
         schoolId: widget.schoolID,
         classId: teacherClassId,
@@ -323,37 +323,39 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                           backgroundColor: cWhite,
                           body: Center(
                             child: Container(
-                              
-                               height: 300,width: 400,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                             border: Border.all(color: Colors.white10),
+                              height: 300,
+                              width: 400,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(color: Colors.white10),
                                 boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 1,
-                                  color: Colors.grey
-                                  ),],
-                                
-                              
-                                
-                                
-                                ),
-                              
-                              
+                                  BoxShadow(blurRadius: 1, color: Colors.grey),
+                                ],
+                              ),
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Center(child: Text("Set Your Class", style: GoogleFonts.poppins(
-                                                fontSize: 25)),),
+                                  Center(
+                                    child: Text("Set Your Class",
+                                        style:
+                                            GoogleFonts.poppins(fontSize: 25)),
+                                  ),
                                   SizedBox(
-                                    height: 100,
-                                    width: 300,
-                                    child: GetClassTeacherListDropDownButton()),
-                                  Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      height: 100,
+                                      width: 300,
+                                      child:
+                                          GetClassTeacherListDropDownButton()),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
                                     children: [
-                                      MaterialButton(onPressed: (){
+                                      MaterialButton(
+                                          onPressed: () {
                                             Navigator.pop(context);
-                                          },color: Colors.red,child: Text(
+                                          },
+                                          color: Colors.red,
+                                          child: Text(
                                             'Cancel',
                                             style: GoogleFonts.poppins(
                                                 color: Colors.white),
@@ -362,7 +364,8 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                           color: Colors.green,
                                           onPressed: () async {
                                             await FirebaseFirestore.instance
-                                                .collection("SchoolListCollection")
+                                                .collection(
+                                                    "SchoolListCollection")
                                                 .doc(Get.find<
                                                         AdminLoginScreenController>()
                                                     .schoolID)
@@ -370,16 +373,17 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                 .doc(FirebaseAuth
                                                     .instance.currentUser!.uid)
                                                 .update({
-                                              'classID': classIDListValue['docid']
-                                            }).then((value) =>
-                                                    html.window.location.reload());
+                                              'classID':
+                                                  classIDListValue['docid']
+                                            }).then((value) => html
+                                                    .window.location
+                                                    .reload());
                                           },
                                           child: Text(
                                             'Set Class',
                                             style: GoogleFonts.poppins(
                                                 color: Colors.white),
                                           )),
-                                          
                                     ],
                                   )
                                 ],
@@ -401,16 +405,17 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                   children: [
                                     IconButtonBackWidget(color: Colors.red),
                                     FittedBox(
-                                        child: Padding(
-                              padding: const EdgeInsets.all(20),
-                              child: Text(
-                                'Admin Dashboard',
-                                style: GoogleFonts.poppins(
-                                    color: Colors.red,
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 15.h),
-                              ),
-                            ),),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(20),
+                                        child: Text(
+                                          'Admin Dashboard',
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.red,
+                                              fontWeight: FontWeight.w800,
+                                              fontSize: 15.h),
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
                                 // sizedBoxH30,
@@ -896,14 +901,15 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
   }
 
   void getTeacherDetails() async {
+    User? user = FirebaseAuth.instance.currentUser;
     var vari = await FirebaseFirestore.instance
         .collection("SchoolListCollection")
         .doc(Get.find<AdminLoginScreenController>().schoolID)
         .collection("Teachers")
-        .doc(widget.teacherEmail)
+        .doc(user?.uid)
         .get();
     setState(() {
-      teacherClassId = vari.data()!['classIncharge'];
+      teacherClassId = vari.data()?['classID'];
     });
     log(vari.toString());
   }
