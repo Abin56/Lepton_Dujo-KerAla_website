@@ -1,9 +1,11 @@
 
 // ignore_for_file: sort_child_properties_last
 
+import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/events/event_edit.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../colors/colors.dart';
@@ -69,64 +71,64 @@ class _EventsUpdatesState extends State<EventsUpdates> {
                   ),
                   color: adminePrimayColor),
             Container(
-              child: Column(
-                children: [
-                  Padding(
-                     padding: const EdgeInsets.only(top: 120,right: 110, left: 110, bottom: 30),
-                      child: (InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => AddEventsAdmin(schoolID: widget.schoolID),
-                              ));
-                        },
-                        child: Container(
-                            height: screenSize.width * 1 / 15,
-                            width: screenSize.width * 1 / 3.5,
-                            child: CustomContainer(
-                              text: 'Create Events',
-                              onTap: () {},
-                            )),
-                      ))),
-                  Padding(
-                      padding: const EdgeInsets.only(top: 30,right: 110, left: 110, bottom: 30),
-                      child: (InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => EventsEditREmove(schoolID: widget.schoolID),
-                              ));
-                        },
-                        child: Container(
-                            height: screenSize.width * 1 / 15,
-                            width: screenSize.width * 1 / 3.5,
-                            //color: Colors.red,
-                            child: CustomContainer(
-                              text: 'Edit / Remove',
-                              onTap: () {},
-                            )),
-                      ))),
-                  // Padding(
-                  //     padding: const EdgeInsets.all(10),
-                  //     child: (InkWell(
-                  //       onTap: () {
-                  //         Navigator.push(
-                  //             context,
-                  //             MaterialPageRoute(
-                  //               builder: (context) => AdminTeacherList(),
-                  //             ));
-                  //       },
-                  //       child: Container(
-                  //           height: screenSize.width * 1 / 10,
-                  //           width: screenSize.width * 1 / 3,
-                  //           child: CustomContainer(
-                  //             text: 'Remove Events',
-                  //             onTap: () {},
-                  //           )),
-                  //     ))),
-                ],
+              child: Padding(
+                padding:  EdgeInsets.only(top: 250.w,left: 165.w),
+                child: Column(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AddEventsAdmin(schoolID: widget.schoolID),
+                            ));
+                      },
+                      child: Container(
+                          height: screenSize.width * 1 / 15,
+                          width: screenSize.width * 1 / 3,
+                          child: CustomContainer(
+                            text: 'Create Events',
+                            onTap: () {},
+                          )),
+                    ),
+                    sizedBoxH30,
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => EventsEditREmove(schoolID: widget.schoolID),
+                            ));
+                      },
+                      child: Container(
+                          height: screenSize.width * 1 / 15,
+                          width: screenSize.width * 1 / 3,
+                          //color: Colors.red,
+                          child: CustomContainer(
+                            text: 'Edit / Remove',
+                            onTap: () {},
+                          )),
+                    ),
+                    // Padding(
+                    //     padding: const EdgeInsets.all(10),
+                    //     child: (InkWell(
+                    //       onTap: () {
+                    //         Navigator.push(
+                    //             context,
+                    //             MaterialPageRoute(
+                    //               builder: (context) => AdminTeacherList(),
+                    //             ));
+                    //       },
+                    //       child: Container(
+                    //           height: screenSize.width * 1 / 10,
+                    //           width: screenSize.width * 1 / 3,
+                    //           child: CustomContainer(
+                    //             text: 'Remove Events',
+                    //             onTap: () {},
+                    //           )),
+                    //     ))),
+                  ],
+                ),
               ),
             ),
           ],

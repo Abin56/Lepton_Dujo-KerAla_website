@@ -9,7 +9,7 @@ class GoogleMonstserratWidgets extends StatelessWidget {
   FontWeight? fontWeight;
   double? letterSpacing;
   Color? color;
-  TextOverflow? overflow;
+  TextOverflow?overflow;
   GoogleMonstserratWidgets({
     required this.text,
     required this.fontsize,
@@ -23,6 +23,7 @@ class GoogleMonstserratWidgets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
+      
       text,
       overflow: overflow,
       style: GoogleFonts.montserrat(

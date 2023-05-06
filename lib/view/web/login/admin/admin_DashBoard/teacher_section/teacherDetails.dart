@@ -313,7 +313,7 @@ class TeacherDeatils extends StatelessWidget {
                                                     padding: EdgeInsets.all(15),
                                                     child:
                                                         GetClassTeacherListDropDownButton(
-                                                      schooID: schooilID,
+                                                
                                                     )),
                                                 SizedBox(
                                                   height: 50,

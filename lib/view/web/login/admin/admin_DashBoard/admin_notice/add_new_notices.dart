@@ -271,7 +271,7 @@ class AddNewNotices extends StatelessWidget {
                                 ),
                                 Container(
                                   height: screenSize.width * 1 / 30,
-                                  width: screenSize.width * 1 / 4,
+                                  width: screenSize.width * 1 / 5,
                                   decoration: BoxDecoration(
                                       color: adminePrimayColor,
                                       borderRadius: BorderRadius.circular(14)),

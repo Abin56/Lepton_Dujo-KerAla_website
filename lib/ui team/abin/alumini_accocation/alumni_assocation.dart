@@ -91,7 +91,7 @@ class _AlumniAssocationState extends State<AlumniAssocation> {
                 },
                 child: Container(
                     height: size.width * 1 / 13,
-                    width: size.width * 1 / 4,
+                    width: size.width * 1 / 3,
                     child: CustomContainer(
                       text: 'Create Members',
                       onTap: () {},
@@ -108,7 +108,7 @@ class _AlumniAssocationState extends State<AlumniAssocation> {
                 // },
                 child: Container(
                     height: size.width * 1 / 13,
-                    width: size.width * 1 / 4,
+                    width: size.width * 1 / 3,
                     child: CustomContainer(
                       text: 'Create Alumni Category',
                       onTap: () {},
@@ -125,7 +125,7 @@ class _AlumniAssocationState extends State<AlumniAssocation> {
                 // },
                 child: Container(
                     height: size.width * 1 / 13,
-                    width: size.width * 1 / 4,
+                    width: size.width * 1 / 3,
                     child: CustomContainer(
                       text: 'Remove Members',
                       onTap: () {},

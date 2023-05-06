@@ -135,7 +135,7 @@ class NavigationBarWidget extends StatelessWidget {
                             await Navigator.push(context, MaterialPageRoute(
                               builder: (context) {
                                 return LoginScreen(
-                                  schoolID: schoolListValue!["id"],
+                              
                                 );
                               },
                             ));

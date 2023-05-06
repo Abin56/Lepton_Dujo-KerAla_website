@@ -1,6 +1,7 @@
 
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -61,7 +62,7 @@ class _FoodBeveragesState extends State<FoodBeverages> {
                                       SizedBox(height: screenSize.width/20,),
                                        Text(
                                         'Food and Beverages',
-                                        style: GoogleFonts.aclonica(
+                                        style:ralewayStyle.copyWith(
                                           fontSize: 25.0,
                                           color: AppColors.whiteColor,
                                           fontWeight: FontWeight.w800,
@@ -80,7 +81,7 @@ class _FoodBeveragesState extends State<FoodBeverages> {
                             ),
                     ),                            
                         Padding(
-                            padding:  EdgeInsets.only(left: screenSize.width/8),
+                            padding:  EdgeInsets.only(left: 140.w,),
                             child: Container(
                               height: screenSize.height * 1 /1 ,
                                width: screenSize.width * 1 / 3,
@@ -88,6 +89,7 @@ class _FoodBeveragesState extends State<FoodBeverages> {
                                  child: Padding(
                                    padding:  EdgeInsets.only(top: screenSize.width/15),
                                    child: Container(
+                                    margin: EdgeInsets.only(top: 110.w),
                                      child: Column(
                                        children: [
                                          Padding(
@@ -101,7 +103,7 @@ class _FoodBeveragesState extends State<FoodBeverages> {
                                                      ));
                                                },
                                                child: Container(
-                                                   height: screenSize.width * 1 / 10,
+                                                   height: screenSize.width * 1 / 15,
                                                    width: screenSize.width * 1 / 3,
                                                    child: CustomContainer(
                                                      text: 'Create Food Menu',
@@ -119,7 +121,7 @@ class _FoodBeveragesState extends State<FoodBeverages> {
                                                      ));
                                                },
                                                child: Container(
-                                                   height: screenSize.width * 1 / 10,
+                                                   height: screenSize.width * 1 / 15,
                                                    width: screenSize.width * 1 / 3,
                                                    child: CustomContainer(
                                                      text: 'Show Food Menu',
@@ -137,7 +139,7 @@ class _FoodBeveragesState extends State<FoodBeverages> {
                                                //       ));
                                                // },
                                                child: Container(
-                                                   height: screenSize.width * 1 / 10,
+                                                   height: screenSize.width * 1 / 15,
                                                    width: screenSize.width * 1 / 3,
                                                    child: CustomContainer(
                                                      text: 'Create Food Commities',

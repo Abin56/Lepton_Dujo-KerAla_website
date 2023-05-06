@@ -2,6 +2,7 @@ import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
@@ -73,7 +74,7 @@ class _FoodBeveragesState extends State<FoodBeverages> {
                             ),
                     ),                            
                         Padding(
-                            padding:  EdgeInsets.only(left: screenSize.width/8),
+                            padding:  EdgeInsets.only(left: 80.w,top:250.w),
                             child: Container(
                               height: screenSize.height * 1 /1 ,
                                width: screenSize.width * 1 / 3,
@@ -94,7 +95,7 @@ class _FoodBeveragesState extends State<FoodBeverages> {
                                                      ));
                                                },
                                                child: Container(
-                                                   height: screenSize.width * 1 / 10,
+                                                   height: screenSize.width * 1 / 15,
                                                    width: screenSize.width * 1 / 3,
                                                    child: CustomContainer(
                                                      text: 'Create Food Menu',
@@ -112,7 +113,7 @@ class _FoodBeveragesState extends State<FoodBeverages> {
                                                      ));
                                                },
                                                child: Container(
-                                                   height: screenSize.width * 1 / 10,
+                                                   height: screenSize.width * 1 / 15,
                                                    width: screenSize.width * 1 / 3,
                                                    child: CustomContainer(
                                                      text: 'Show Food Menu',
@@ -130,7 +131,7 @@ class _FoodBeveragesState extends State<FoodBeverages> {
                                                //       ));
                                                // },
                                                child: Container(
-                                                   height: screenSize.width * 1 / 10,
+                                                   height: screenSize.width * 1 / 15,
                                                    width: screenSize.width * 1 / 3,
                                                    child: CustomContainer(
                                                      text: 'Create Food Commities',

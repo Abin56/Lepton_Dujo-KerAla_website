@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/fonts/fonts.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,6 @@ import 'package:lottie/lottie.dart';
 import '../../../../../../controller/text_form_hide/password_filed.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
-
 
 class AddNewAdmin extends StatefulWidget {
   String schoolID;
@@ -57,16 +57,6 @@ class _AddNewAdminState extends State<AddNewAdmin> {
       key: _formKey,
       child: Scaffold(
         backgroundColor: const Color.fromARGB(255, 6, 71, 157),
-        // appBar: AppBar(
-        //     backgroundColor: const Color.fromARGB(255, 6, 71, 157),
-        //     title: Text(
-        //       'ADD NEW ADMIN ',
-        //       style: GoogleFonts.montserrat(
-        //         fontSize: 18,
-        //         fontWeight: FontWeight.w700,
-        //         color: cWhite,
-        //       ),
-        //     )),
         body: SingleChildScrollView(
           child: Row(
             children: [
@@ -100,14 +90,14 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                 color: const Color.fromARGB(255, 6, 71, 157),
               ),
               Container(
-              //  margin: EdgeInsets.only(top: 50.h),
+                //  margin: EdgeInsets.only(top: 50.h),
                 color: Colors.white,
                 height: screenSize.height,
                 width: screenSize.width * 1 / 2,
                 child: Padding(
                   padding: const EdgeInsets.all(15),
                   child: Column(
-                     // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         sizedBoxH30,
                         Padding(
@@ -156,7 +146,7 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                                 return null;
                               }
                             },
-                            obscureText:true,
+                            obscureText: true,
                             controller: passwordController,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(),
@@ -176,7 +166,7 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                                 return null;
                               }
                             },
-                            obscureText:true,
+                            obscureText: true,
                             controller: confirmPasswordController,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(),
@@ -210,7 +200,7 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                             ),
                           ),
                         ),
-                        sizedBoxH10,
+                        sizedBoxH30,
                         Container(
                           height: screenSize.width * 1 / 30,
                           width: screenSize.width * 1 / 6,
@@ -219,142 +209,21 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                               borderRadius: BorderRadius.circular(14)),
                           child: TextButton(
                             style: TextButton.styleFrom(
-                              foregroundColor: Color.fromARGB(255, 255, 255, 255),
+                              foregroundColor:
+                                  Color.fromARGB(255, 255, 255, 255),
                               padding: const EdgeInsets.all(9.0),
                               textStyle: const TextStyle(fontSize: 17),
                             ),
                             onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                showDialog(
-                                  context: context,
-                                  barrierDismissible:
-                                      false, // user must tap button!
-                                  builder: (BuildContext context) {
-                                    TextEditingController _schoolId =
-                                        TextEditingController();
-                                    TextEditingController _password =
-                                        TextEditingController();
-                                    return AlertDialog(
-                                      title: const Text('Authorization'),
-                                      content: SingleChildScrollView(
-                                        child: ListBody(
-                                          children: <Widget>[
-                                            Text("Enter ID and Password"),
-                                            sizedBoxH10,
-                                            Padding(
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: Obx(() => TextFormField(
-                                                    controller: _schoolId,
-                                                    obscureText:
-                                                        _hideGetxController
-                                                            .isObscurefirst.value,
-                                                    decoration: InputDecoration(
-                                                      suffixIcon: IconButton(
-                                                        icon: Icon(_hideGetxController
-                                                                .isObscurefirst
-                                                                .value
-                                                            ? Icons.visibility_off
-                                                            : Icons
-                                                                .visibility),
-                                                        onPressed: () {
-                                                          _hideGetxController
-                                                              .toggleObscureFirst();
-                                                        },
-                                                      ),
-                                                      border:
-                                                          OutlineInputBorder(),
-                                                      labelText: 'ID',
-                                                    ),
-                                                  )),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: Obx(() => TextFormField(
-                                                    controller: _password,
-                                                    obscureText:
-                                                        _hideGetxController
-                                                            .isObscureSecond
-                                                            .value,
-                                                    decoration: InputDecoration(
-                                                      suffixIcon: IconButton(
-                                                        icon: Icon(_hideGetxController
-                                                                .isObscureSecond 
-                                                                .value
-                                                            ? Icons
-                                                                .visibility_off
-                                                            :Icons.visibility ),
-                                                        onPressed: () {
-                                                          _hideGetxController
-                                                              .toggleObscureSecond();
-                                                        },
-                                                      ),
-                                                      border:
-                                                          OutlineInputBorder(),
-                                                      labelText: 'Password',
-                                                    ),
-                                                  )),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          child: const Text('ok'),
-                                          onPressed: () async {
-                                            if (_schoolId.text.trim() ==
-                                                    widget.schoolID &&
-                                                _password.text.trim() ==
-                                                    adminpassword) {
-                                              createNewAdmin(
-                                                  adminUserNameController.text
-                                                      .trim(),
-                                                  employeeIDController.text
-                                                      .trim(),
-                                                  passwordController.text.trim(),
-                                                  emailController.text.trim(),
-                                                  phoneNumberController.text
-                                                      .trim());
-                                              Navigator.of(context).pop();
-                                            } else {
-                                              showDialog(
-                                                context: context,
-                                                barrierDismissible:
-                                                    false, // user must tap button!
-                                                builder: (BuildContext context) {
-                                                  return AlertDialog(
-                                                    title: const Text(
-                                                        'Wrong password'),
-                                                    content:
-                                                        SingleChildScrollView(
-                                                      child: ListBody(
-                                                        children: <Widget>[],
-                                                      ),
-                                                    ),
-                                                    actions: <Widget>[
-                                                      TextButton(
-                                                        child: const Text('ok'),
-                                                        onPressed: () {
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                        },
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              );
-                                            }
-                                          },
-                                        ),
-                                        TextButton(
-                                          child: const Text('cancel'),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
+                              if (_formKey.currentState!.validate() &&
+                                  widget.schoolID ==
+                                      FirebaseAuth.instance.currentUser!.uid) {
+                                createNewAdmin(
+                                    adminUserNameController.text.trim(),
+                                    employeeIDController.text.trim(),
+                                    passwordController.text.trim(),
+                                    emailController.text.trim(),
+                                    phoneNumberController.text.trim());
                               }
                             },
                             child: const Text('Create'),
@@ -371,28 +240,33 @@ class _AddNewAdminState extends State<AddNewAdmin> {
   }
 
   createNewAdmin(String username, String employeeID, String password,
-      String email, String phno) {
-    FirebaseFirestore.instance
-        .collection('SchoolListCollection')
-        .doc(widget.schoolID)
-        .collection('Admins')
-        .doc(email)
-        .set({
-          'username': username,
-          'employeeID': employeeID,
-          'password': password,
-          'email': email,
-          'phoneNumber': phno
-        })
-        .then((value) => showToast(msg: 'New Admin Created'))
-        .then((value) => {
-              employeeIDController.clear(),
-              adminUserNameController.clear(),
-              passwordController.clear(),
-              emailController.clear(),
-              phoneNumberController.clear(),
-              confirmPasswordController.clear()
-            });
+      String email, String phno) async {
+    await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: email, password: password)
+        .then((value) {
+      FirebaseFirestore.instance
+          .collection('SchoolListCollection')
+          .doc(widget.schoolID)
+          .collection('Admins')
+          .doc(value.user!.uid)
+          .set({
+            'docid': value.user!.uid,
+            'username': username,
+            'employeeID': employeeID,
+            'password': password,
+            'email': email,
+            'phoneNumber': phno
+          })
+          .then((value) => showToast(msg: 'New Admin Created'))
+          .then((value) => {
+                employeeIDController.clear(),
+                adminUserNameController.clear(),
+                passwordController.clear(),
+                emailController.clear(),
+                phoneNumberController.clear(),
+                confirmPasswordController.clear()
+              });
+    });
   }
 
   void getAdminDetail() async {
@@ -405,4 +279,3 @@ class _AddNewAdminState extends State<AddNewAdmin> {
     });
   }
 }
-

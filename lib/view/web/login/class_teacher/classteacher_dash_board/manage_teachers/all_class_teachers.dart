@@ -1,20 +1,22 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/controller/_manage_teachers/_manage_teachers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../../../../model/create_classModel/create_classModel.dart';
-import '../../../../../../model/teacher/add_student.dart';
-import '../../../../../../model/teacher/add_teacher_model.dart';
+import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
+import '../../../../../../model/teacher/teacher_model.dart';
 import '../../../../../colors/colors.dart';
+import '../../../../widgets/drop_DownList/schoolDropDownList.dart';
 import 'class_subjects.dart';
 
-class AllClassesListViewForTeacher extends StatefulWidget {
-  var schoolID;
-  var classID;
-  var teacherID;
+class AllClassesListViewForTeacher extends StatelessWidget {
+  ManageTeachersController manageTeachersController =
+      Get.put(ManageTeachersController());
+  String schoolID;
+  String classID;
+  String teacherID;
   AllClassesListViewForTeacher(
       {required this.schoolID,
       required this.classID,
@@ -22,77 +24,163 @@ class AllClassesListViewForTeacher extends StatefulWidget {
       super.key});
 
   @override
-  State<AllClassesListViewForTeacher> createState() =>
-      _AllClassesListViewForTeacherState();
-}
-
-class _AllClassesListViewForTeacherState
-    extends State<AllClassesListViewForTeacher> {
-  @override
   Widget build(BuildContext context) {
-    log(widget.classID);
+    log(classID);
     return Scaffold(
       appBar: AppBar(
-          title: Text("Add teachers for the subject"),
+          title: const Text("Add teachers for the subject"),
           backgroundColor: adminePrimayColor),
       body: SafeArea(
-        child: StreamBuilder(
-          stream: FirebaseFirestore.instance
-              .collection("SchoolListCollection")
-              .doc(widget.schoolID)
-              .collection("Teachers")
-              .snapshots(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Container(
-                    width: double.maxFinite,
-                    child: ListView.separated(
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          final data = AddTeachersModel.fromJson(
-                              snapshot.data!.docs[index].data());
+          child: Row(
+        children: [
+          StreamBuilder(
+            stream: FirebaseFirestore.instance
+                .collection('SchoolListCollection')
+                .doc(schoolListValue!['docid'])
+                .collection(Get.find<GetFireBaseData>().bYear.value)
+                .doc(Get.find<GetFireBaseData>().bYear.value)
+                .collection('classes')
+                .doc(Get.find<GetFireBaseData>().getTeacherClassRole.value)
+                .collection('teachers')
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Expanded(
+                  child: ListView.separated(
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          height: 60,
+                          width: double.infinity,
+                          color: Colors.amber,
+                          child: Row(
+                            children: [
+                              Text(snapshot.data?.docs[index]['teacherName']),
+                              TextButton.icon(
+                                  onPressed: () async {
+                                    manageTeachersController
+                                        .addSubjectsToTeacher(
+                                            context,
+                                            snapshot.data!.docs[index]
+                                                ['docid']);
+                                  },
+                                  icon: Icon(Icons.change_circle),
+                                  label: Text("Manage")),
+                              StreamBuilder(
+                                  stream: FirebaseFirestore.instance
+                                      .collection('SchoolListCollection')
+                                      .doc(schoolListValue!['docid'])
+                                      .collection(Get.find<GetFireBaseData>()
+                                          .bYear
+                                          .value)
+                                      .doc(Get.find<GetFireBaseData>()
+                                          .bYear
+                                          .value)
+                                      .collection('classes')
+                                      .doc(Get.find<GetFireBaseData>()
+                                          .getTeacherClassRole
+                                          .value)
+                                      .collection('teachers')
+                                      .doc(snapshot.data!.docs[index]['docid'])
+                                      .collection('teacherSubject')
+                                      .where('teacherdocid',
+                                          isEqualTo: snapshot.data!.docs[index]
+                                              ['docid'])
+                                      .snapshots(),
+                                  builder: (context, snap) {
+                                    if (snap.hasData) {
+                                      if (snap.data!.docs.isEmpty) {
+                                        return const Text('');
+                                      } else {
+                                        return GestureDetector(
+                                            onTap: () async {
+                                              manageTeachersController
+                                                  .viewTeacherSubjects(
+                                                      context,
+                                                      snapshot.data!.docs[index]
+                                                          ['docid']);
+                                            },
+                                            child: const Text('View'));
+                                      }
+                                    } else {
+                                      return const Text('');
+                                    }
+                                  }),
+                              TextButton.icon(
+                                  onPressed: () async {
+                                    await manageTeachersController
+                                        .removeTeacher(
+                                            context,
+                                            snapshot.data!.docs[index]
+                                                ['docid']);
+                                  },
+                                  icon: Icon(Icons.remove),
+                                  label: Text('Remove Teacher'))
+                            ],
+                          ),
+                        );
+                      },
+                      separatorBuilder: (context, index) {
+                        return Divider();
+                      },
+                      itemCount: snapshot.data!.docs.length),
+                );
+              } else {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            },
+          ),
+          StreamBuilder(
+            stream: FirebaseFirestore.instance
+                .collection("SchoolListCollection")
+                .doc(schoolID)
+                .collection("Teachers")
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Expanded(
+                  child: ListView.separated(
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        final data = TeacherModel.fromMap(
+                            snapshot.data!.docs[index].data());
 
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ClassWiseSubject(
-                                        schoolID: widget.schoolID,
-                                        classID: widget.classID,
-                                        teacherID: data.id)),
-                              );
-                            },
-                            child: Container(
-                              height: 60.w,
-                              width: 300.w,   
-
-                              
-                              color: Colors.amber,
-                              child: Center(
-                                child: Text(data.teacherName),
-                              ),
-                            ),
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return Divider();
-                        },
-                        itemCount: snapshot.data!.docs.length),
-                  ),
-                ],
-              );
-            } else {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          },
-        ),
-      ),
+                        return Container(
+                          height: 60,
+                          width: double.infinity,
+                          color: Colors.amber,
+                          child: Row(
+                            children: [
+                              Text(data.teacherName!),
+                              TextButton.icon(
+                                  onPressed: () async {
+                                    manageTeachersController.addteachersToClass(
+                                        snapshot.data!.docs[index]['docid'],
+                                        snapshot.data!.docs[index]
+                                            ['teacherName']);
+                                  },
+                                  icon: Icon(Icons.add),
+                                  label: Text('Add'))
+                            ],
+                          ),
+                        );
+                      },
+                      separatorBuilder: (context, index) {
+                        return Divider();
+                      },
+                      itemCount: snapshot.data!.docs.length),
+                );
+              } else {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            },
+          ),
+        ],
+      )),
     );
   }
 }

@@ -163,7 +163,7 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                           height: screenSize.width / 2.5,
                           width: screenSize.width / 2,
                           child: LottieBuilder.network(
-                              'https://assets3.lottiefiles.com/packages/lf20_cqnuh0al.json'),
+                              'https://assets1.lottiefiles.com/packages/lf20_gay13id1.json'),
                         )
                       ],
                     ),
@@ -427,7 +427,7 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                           borderRadius: BorderRadius.all(Radius.circular(20))),
                       icon: Icon(Icons.format_list_numbered,
                           color: AppColors.blueDarkColor),
-                      labelText: 'ADMISSION NUMBER',
+                      labelText: 'Admission Number',
                     ),
                   ),
                 ),
@@ -441,7 +441,7 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                           borderRadius: BorderRadius.all(Radius.circular(20))),
                       icon: Icon(Icons.card_membership_sharp,
                           color: AppColors.blueDarkColor),
-                      labelText: 'SCHOLARSHIP NAME',
+                      labelText: 'ScholarShip Name',
                     ),
                   ),
                 ),
@@ -455,7 +455,7 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                           borderRadius: BorderRadius.all(Radius.circular(20))),
                       icon: Icon(Icons.note_alt_outlined,
                           color: AppColors.blueDarkColor),
-                      labelText: 'DESCRIPTION',
+                      labelText: 'Description',
                     ),
                   ),
                 ),
@@ -487,7 +487,7 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                     },
                     child: Container(
                         height: screenSize.width * 1 / 20,
-                        width: screenSize.width * 1 / 4,
+                        width: screenSize.width * 1 / 5,
                         //color: Colors.red,
                         child: CustomContainer2(
                           text: 'Upload Document',
@@ -520,17 +520,12 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                               return AlertDialog(
                                 content: Text('Scholarship succesfully added!'),
                                 actions: [
+                                  
                                   MaterialButton(
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    child: Text('OK'),
-                                  ),
-                                  MaterialButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text('Cancel'),
+                                    child: Text('Ok'),
                                   )
                                 ],
                               );

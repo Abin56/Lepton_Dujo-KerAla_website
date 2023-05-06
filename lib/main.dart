@@ -1,3 +1,4 @@
+
 import 'package:dujo_kerala_website/view/web/home/dujo_home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -40,9 +41,7 @@ class MyApp extends StatelessWidget {
                 // ignore: deprecated_member_use
                 accentColor: const Color(0xFF02BB9F),
               ),
-              home:
-               DujoHomePage()
-                  );
+              home: DujoHomePage());
         });
   }
 }

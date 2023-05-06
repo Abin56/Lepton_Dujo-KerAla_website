@@ -91,8 +91,8 @@ class CreationGeneralInstruction extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    height: size.width * 1 / 20,
-                    width: size.width * 1 / 3.7,
+                    height: size.width * 1 / 15,
+                    width: size.width * 1 / 3,
                     child: CustomContainer(
                       text: 'Create Instructions',
                       onTap: () {},
@@ -111,8 +111,8 @@ class CreationGeneralInstruction extends StatelessWidget {
                   //     }),
                   sizedBoxH30,
                   Container(
-                    height: size.width * 1 / 20,
-                    width: size.width * 1 / 3.7,
+                    height: size.width * 1 / 15,
+                    width: size.width * 1 / 3,
                     child: CustomContainer(
                       text: 'View Instructions',
                       onTap: () {},
@@ -120,8 +120,8 @@ class CreationGeneralInstruction extends StatelessWidget {
                   ),
                   sizedBoxH30,
                   Container(
-                    height: size.width * 1 / 20,
-                    width: size.width * 1 / 3.7,
+                    height: size.width * 1 / 15,
+                    width: size.width * 1 / 3,
                     child: CustomContainer(
                       text: 'Edit Instructions',
                       onTap: () {},

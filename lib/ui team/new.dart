@@ -13,15 +13,8 @@ class _MyWidgetState extends State<MyWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('ADD hhh'),
-      
-      
-      
-      
-      )
-      
-      
-      
-    );
+        appBar: AppBar(
+      title: Text('ADD hhh'),
+    ));
   }
 }

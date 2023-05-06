@@ -83,7 +83,7 @@ class _StudentSummaryState extends State<StudentSummary> {
            height: size.height * 1 / 1,
             width:640.w,
           child: Container(
-           margin: EdgeInsets.only(left: 140.w,top: 120.w ),
+           margin: EdgeInsets.only(left: 140.w,top: 190.w ),
             child: Column(children: [
               InkWell(
                 onTap: () {
@@ -94,8 +94,8 @@ class _StudentSummaryState extends State<StudentSummary> {
                   //       ));
                 },
                 child: Container(
-                    height: size.width * 1 / 13,
-                    width: size.width * 1 / 4,
+                    height: size.width * 1 / 15,
+                    width: size.width * 1 / 3,
                     child: CustomContainer(
                       text: 'Create Summary',
                       onTap: () {},
@@ -111,8 +111,8 @@ class _StudentSummaryState extends State<StudentSummary> {
                 //       ));
                 // },
                 child: Container(
-                    height: size.width * 1 / 13,
-                    width: size.width * 1 / 4,
+                    height: size.width * 1 / 15,
+                    width: size.width * 1 / 3,
                     child: CustomContainer(
                       text: 'Edit Summary',
                       onTap: () {},
@@ -128,8 +128,8 @@ class _StudentSummaryState extends State<StudentSummary> {
                 //       ));
                 // },
                 child: Container(
-                    height: size.width * 1 / 13,
-                    width: size.width * 1 / 4,
+                    height: size.width * 1 / 15,
+                    width: size.width * 1 / 3,
                     child: CustomContainer(
                       text: 'Remove Summary',
                       onTap: () {},

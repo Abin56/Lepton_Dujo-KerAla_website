@@ -17,7 +17,7 @@ class GetClassesListDropDownButton extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<GetClassesListDropDownButton> createState() =>
+  State<GetClassesListDropDownButton> createState() =>  
       _GeClasseslListDropDownButtonState();
 }
 
@@ -25,7 +25,8 @@ class _GeClasseslListDropDownButtonState
     extends State<GetClassesListDropDownButton> {
   @override
   Widget build(BuildContext context) {
-    return dropDownButton();
+    log('hhhh'+ widget.teacherID);
+    return dropDownButton(); 
   }
 
   FutureBuilder<QuerySnapshot<Map<String, dynamic>>> dropDownButton() {
@@ -35,9 +36,9 @@ class _GeClasseslListDropDownButtonState
             .doc(Get.find<AdminLoginScreenController>().schoolID)
             .collection(Get.find<GetFireBaseData>().bYear.value)
             .doc(Get.find<GetFireBaseData>().bYear.value)
-            .collection("Classes")
-            .where('classIncharge', isEqualTo: widget.teacherID)
-            .get(),
+            .collection("classes").get(),
+            // .where('classIncharge', isEqualTo: widget.teacherID)
+            // .get(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return DropdownButtonFormField(

@@ -1,15 +1,6 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../../controller/admin_login_screen/admin_login_screen_controller.dart';
-import '../../controller/get_firebase-data/get_firebase_data.dart';
-
 class AddStudentModel {
-  String? uid;
   String? studentName;
   String? gender;
   String? admissionNumber;
@@ -30,7 +21,6 @@ class AddStudentModel {
   String? guardianID;
   String userRole;
   AddStudentModel({
-    this.uid,
     this.studentName,
     this.gender,
     this.admissionNumber,
@@ -49,7 +39,7 @@ class AddStudentModel {
     this.docid,
     this.parentID,
     this.guardianID,
-     this.userRole='student',
+    this.userRole = 'student',
   });
 
   AddStudentModel copyWith({
@@ -75,7 +65,6 @@ class AddStudentModel {
     String? userRole,
   }) {
     return AddStudentModel(
-      uid: uid ?? this.uid,
       studentName: studentName ?? this.studentName,
       gender: gender ?? this.gender,
       admissionNumber: admissionNumber ?? this.admissionNumber,
@@ -100,7 +89,6 @@ class AddStudentModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'uid': uid ?? "",
       'studentName': studentName ?? "",
       'gender': gender ?? "",
       'admissionNumber': admissionNumber ?? "",
@@ -125,40 +113,34 @@ class AddStudentModel {
 
   factory AddStudentModel.fromMap(Map<String, dynamic> map) {
     return AddStudentModel(
-      uid: map['uid'] != null ? map['uid'] as String : null,
       studentName:
-          map['studentName'] != null ? map['studentName'] as String : null,
-      gender: map['gender'] != null ? map['gender'] as String : null,
-      admissionNumber: map['admissionNumber'] != null
-          ? map['admissionNumber'] as String
-          : null,
+          map['studentName'] != null ? map['studentName'] as String : "",
+      gender: map['gender'] != null ? map['gender'] as String : "",
+      admissionNumber:
+          map['admissionNumber'] != "" ? map['admissionNumber'] as String : "",
       studentemail:
-          map['studentemail'] != null ? map['studentemail'] as String : null,
+          map['studentemail'] != null ? map['studentemail'] as String : "",
       parentPhoneNumber: map['parentPhoneNumber'] != null
           ? map['parentPhoneNumber'] as String
-          : null,
-      classID: map['classID'] != null ? map['classID'] as String : null,
-      houseName: map['houseName'] != null ? map['houseName'] as String : null,
-      place: map['place'] != null ? map['place'] as String : null,
-      district: map['district'] != null ? map['district'] as String : null,
+          : "",
+      classID: map['classID'] != null ? map['classID'] as String : "",
+      houseName: map['houseName'] != null ? map['houseName'] as String : "",
+      place: map['place'] != null ? map['place'] as String : "",
+      district: map['district'] != null ? map['district'] as String : "",
       alPhoneNumber:
-          map['alPhoneNumber'] != null ? map['alPhoneNumber'] as String : null,
-      profileImageId: map['profileImageId'] != null
-          ? map['profileImageId'] as String
-          : null,
+          map['alPhoneNumber'] != null ? map['alPhoneNumber'] as String : "",
+      profileImageId:
+          map['profileImageId'] != null ? map['profileImageId'] as String : "",
       profileImageUrl: map['profileImageUrl'] != null
           ? map['profileImageUrl'] as String
-          : null,
-      createDate:
-          map['createDate'] != null ? map['createDate'] as String : null,
-      bloodgroup:
-          map['bloodgroup'] != null ? map['bloodgroup'] as String : null,
+          : "",
+      createDate: map['createDate'] != null ? map['createDate'] as String : "",
+      bloodgroup: map['bloodgroup'] != null ? map['bloodgroup'] as String : "",
       dateofBirth:
-          map['dateofBirth'] != null ? map['dateofBirth'] as String : null,
-      docid: map['docid'] != null ? map['docid'] as String : null,
-      parentID: map['parentID'] != null ? map['parentID'] as String : null,
-      guardianID:
-          map['guardianID'] != null ? map['guardianID'] as String : null,
+          map['dateofBirth'] != null ? map['dateofBirth'] as String : "",
+      docid: map['docid'] != null ? map['docid'] as String : "",
+      parentID: map['parentID'] != null ? map['parentID'] as String : "",
+      guardianID: map['guardianID'] != null ? map['guardianID'] as String : "",
       userRole: map['userRole'] as String,
     );
   }
@@ -170,15 +152,14 @@ class AddStudentModel {
 
   @override
   String toString() {
-    return 'AddStudentModel(uid: $uid, studentName: $studentName, gender: $gender, admissionNumber: $admissionNumber, studentemail: $studentemail, parentPhoneNumber: $parentPhoneNumber, classID: $classID, houseName: $houseName, place: $place, district: $district, alPhoneNumber: $alPhoneNumber, profileImageId: $profileImageId, profileImageUrl: $profileImageUrl, createDate: $createDate, bloodgroup: $bloodgroup, dateofBirth: $dateofBirth, docid: $docid, parentID: $parentID, guardianID: $guardianID, userRole: $userRole)';
+    return 'AddStudentModel( studentName: $studentName, gender: $gender, admissionNumber: $admissionNumber, studentemail: $studentemail, parentPhoneNumber: $parentPhoneNumber, classID: $classID, houseName: $houseName, place: $place, district: $district, alPhoneNumber: $alPhoneNumber, profileImageId: $profileImageId, profileImageUrl: $profileImageUrl, createDate: $createDate, bloodgroup: $bloodgroup, dateofBirth: $dateofBirth, docid: $docid, parentID: $parentID, guardianID: $guardianID, userRole: $userRole)';
   }
 
   @override
   bool operator ==(covariant AddStudentModel other) {
     if (identical(this, other)) return true;
 
-    return other.uid == uid &&
-        other.studentName == studentName &&
+    return other.studentName == studentName &&
         other.gender == gender &&
         other.admissionNumber == admissionNumber &&
         other.studentemail == studentemail &&
@@ -201,8 +182,7 @@ class AddStudentModel {
 
   @override
   int get hashCode {
-    return uid.hashCode ^
-        studentName.hashCode ^
+    return studentName.hashCode ^
         gender.hashCode ^
         admissionNumber.hashCode ^
         studentemail.hashCode ^
@@ -221,85 +201,5 @@ class AddStudentModel {
         parentID.hashCode ^
         guardianID.hashCode ^
         userRole.hashCode;
-  }
-}
-
-class AddStudentsToFireBase {
-  Future addStudentsController(AddStudentModel productModel, context, schoolid,
-      classId, batchYear) async {
-    try {
-      final firebase = FirebaseFirestore.instance;
-
-      String studentId = "";
-      firebase
-          .collection("SchoolListCollection")
-          .doc(Get.find<AdminLoginScreenController>().schoolID)
-          .collection(Get.find<GetFireBaseData>().bYear.value)
-          .doc(Get.find<GetFireBaseData>().bYear.value)
-          .collection("Classes")
-          .doc(classId)
-          .collection('Students')
-          .add(productModel.toMap())
-          .then((value) {
-        studentId = value.id;
-        firebase
-            .collection("SchoolListCollection")
-            .doc(Get.find<AdminLoginScreenController>().schoolID)
-            .collection(Get.find<GetFireBaseData>().bYear.value)
-            .doc(Get.find<GetFireBaseData>().bYear.value)
-            .collection("Classes")
-            .doc(classId)
-            .collection('Students')
-            .doc(value.id)
-            .update({"docid": value.id});
-      }).then((value) {
-        firebase
-            .collection("SchoolListCollection")
-            .doc(schoolid)
-            .collection("AllStudents")
-            .doc(studentId)
-            .set(productModel.toMap())
-            .then((value) {
-          firebase
-              .collection("SchoolListCollection")
-              .doc(schoolid)
-              .collection("AllStudents")
-              .doc(studentId)
-              .update({"docid": studentId});
-        }).then(
-          (value) {
-            return showDialog(
-              context: context,
-              barrierDismissible: false, // user must tap button!
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: const Text('Message'),
-                  content: SingleChildScrollView(
-                    child: ListBody(
-                      children: const <Widget>[
-                        Text('Successfully created'),
-                      ],
-                    ),
-                  ),
-                  actions: <Widget>[
-                    TextButton(
-                      child: const Text('ok'),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  ],
-                );
-              },
-            );
-          },
-        );
-      });
-      // .collection(classId)
-      // .doc(productModel.admissionNumber)
-      // .set(productModel.toJson())
-    } on FirebaseException catch (e) {
-      print('Error ${e.message.toString()}');
-    }
   }
 }
