@@ -12,7 +12,7 @@ Future<void> updateStudentProtectionDialogue(
   String? imageUrl,
 ) {
   StudentProtectionController protectionController =
-      Get.find<StudentProtectionController>();
+      Get.put(StudentProtectionController());
   return showDialog(
     context: context,
     builder: (BuildContext context) {

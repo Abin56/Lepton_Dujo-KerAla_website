@@ -50,7 +50,7 @@ class AdminPtaScreen extends StatelessWidget {
             assigningValueToModel(snapshot);
             return Row(
               children: [
-                LeftSideWidget(
+                PtaLeftSideWidget(
                   headMasterModel: headMasterModel,
                   presidentModel: presidentModel,
                   vicePresidentModel: vicePresidentModel,

@@ -8,8 +8,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../../../../controller/Getx/admin/student_protection_controller/student_protection_controller.dart';
 import '../../../../../../constant/constant.dart';
 
-class CardWidget extends StatelessWidget {
-  CardWidget({
+class StudentProtectionCardWidet extends StatelessWidget {
+  StudentProtectionCardWidet({
     super.key,
     required this.name,
     required this.designation,
@@ -34,10 +34,9 @@ class CardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.grey)
-      ),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.grey)),
       child: SizedBox(
         width: 200,
         child: Column(
@@ -109,7 +108,7 @@ class CardWidget extends StatelessWidget {
                         controller.nameController.text = name;
                         controller.positionController.text = position;
                         controller.designationController.text = designation;
-                        
+
                         updateStudentProtectionDialogue(
                           context,
                           memberId,

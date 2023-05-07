@@ -13,15 +13,14 @@ import '../../../../model/admin_models/mothers_pta_model/mothers_pta_model.dart'
 import '../../../../utils/utils.dart';
 import '../../../get_firebase-data/get_firebase_data.dart';
 
-class MothersPtaController
- extends GetxController {
+class MothersPtaController extends GetxController {
   final CollectionReference<Map<String, dynamic>> firebaseFirestore =
       FirebaseFirestore.instance
           .collection('SchoolListCollection')
           .doc(Get.find<AdminLoginScreenController>().schoolID)
           .collection(Get.find<GetFireBaseData>().bYear.value)
           .doc(Get.find<GetFireBaseData>().bYear.value)
-          .collection('mothers_pta');
+          .collection('MothersPta');
   final FirebaseStorage firebaseStorage = FirebaseStorage.instance;
   RxBool isLoading = RxBool(false);
   TextEditingController nameController = TextEditingController();
@@ -52,7 +51,7 @@ class MothersPtaController
         if (imageDataUin8.value != null) {
           final String id = const Uuid().v1();
           final filePath = await firebaseStorage
-              .ref('files/mothers_pta/$id')
+              .ref('files/MothersPta/$id')
               .putData(imageDataUin8.value!);
           String imageUrlPath = await filePath.ref.getDownloadURL();
           await firebaseFirestore.doc(result.id).update(
@@ -102,7 +101,7 @@ class MothersPtaController
             );
         if (imageDataUin8.value != null) {
           final filePath = await firebaseStorage
-              .ref('files/mothers_pta/$imageId')
+              .ref('files/MothersPta/$imageId')
               .putData(imageDataUin8.value!);
 
           String fileUrl = await filePath.ref.getDownloadURL();
@@ -135,7 +134,7 @@ class MothersPtaController
       isLoading.value = true;
       await firebaseFirestore.doc(memberId).delete();
       if (imageId.isNotEmpty) {
-        await firebaseStorage.ref('files/mothers_pta/$imageId').delete();
+        await firebaseStorage.ref('files/MothersPta/$imageId').delete();
       }
 
       showToast(
