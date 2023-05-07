@@ -1,11 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../../controller/Getx/admin/notice_controller.dart';
 import '../../../../../../../model/admin_models/admin_notice_model/admin_notice_model.dart';
+import '../../../../../../../utils/utils.dart';
 import '../../../../../../constant/constant.dart';
-
 
 class AdminNoticeShow extends StatefulWidget {
   const AdminNoticeShow(
@@ -49,7 +48,12 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                   : Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                          TextField(
+                          TextFormField(
+                            readOnly: true,
+                            onTap: () async => adminNoticeController
+                                .publishedDateController
+                                .text = await dateTimePicker(context),
+                            validator: checkFieldEmpty,
                             controller:
                                 adminNoticeController.publishedDateController,
                             decoration: InputDecoration(
@@ -58,7 +62,8 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                             ),
                           ),
                           sizedBoxH20,
-                          TextField(
+                          TextFormField(
+                            validator: checkFieldEmpty,
                             controller: adminNoticeController.headingController,
                             decoration: InputDecoration(
                               border: const OutlineInputBorder(),
@@ -66,7 +71,12 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                             ),
                           ),
                           sizedBoxH20,
-                          TextField(
+                          TextFormField(
+                            readOnly: true,
+                            onTap: () async => adminNoticeController
+                                .dateOfOccasionController
+                                .text = await dateTimePicker(context),
+                            validator: checkFieldEmpty,
                             controller:
                                 adminNoticeController.dateOfOccasionController,
                             decoration: InputDecoration(
@@ -75,7 +85,8 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                             ),
                           ),
                           sizedBoxH20,
-                          TextField(
+                          TextFormField(
+                            validator: checkFieldEmpty,
                             decoration: InputDecoration(
                                 border: const OutlineInputBorder(),
                                 labelText: 'Venue'.tr,
@@ -83,7 +94,8 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                                     color: Colors.black, fontSize: 16)),
                           ),
                           sizedBoxH20,
-                          TextField(
+                          TextFormField(
+                            validator: checkFieldEmpty,
                             controller:
                                 adminNoticeController.chiefGuestController,
                             decoration: InputDecoration(
@@ -92,7 +104,12 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                             ),
                           ),
                           sizedBoxH20,
-                          TextField(
+                          TextFormField(
+                            readOnly: true,
+                            onTap: () async => adminNoticeController
+                                .dateOfOccasionController
+                                .text = await dateTimePicker(context),
+                            validator: checkFieldEmpty,
                             controller: adminNoticeController
                                 .dateOfSubmissionController,
                             decoration: InputDecoration(
@@ -101,7 +118,8 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                             ),
                           ),
                           sizedBoxH20,
-                          TextField(
+                          TextFormField(
+                            validator: checkFieldEmpty,
                             controller:
                                 adminNoticeController.signedByController,
                             decoration: InputDecoration(
