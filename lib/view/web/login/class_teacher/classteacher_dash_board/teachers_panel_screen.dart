@@ -1,33 +1,31 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:developer';
+import 'dart:html' as html;
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/subject/subject_screen.dart';
-import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/upload_timetable/select_class.dart';
-import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/upload_timetable/timetable_add_screen.dart';
 import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/upload_timetable/ttsample.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-import 'dart:html' as html;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
+
 import '../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../model/teacher/teacher_model.dart';
 import '../../../../colors/colors.dart';
 import '../../../../constant/constant.dart';
-import '../../../../fonts/fonts.dart';
 import '../../../widgets/button_container_widget.dart';
 import '../../../widgets/drop_DownList/get_batchYear.dart';
 import '../../../widgets/drop_DownList/get_classList.dart';
 import '../../admin/admin_DashBoard/classes/list_of_classes.dart';
-import 'add_student/add_student.dart';
 import '../parents-section/add_parent.dart';
+import 'add_student/add_student.dart';
 import 'events_screen/create_events_screen.dart';
 import 'events_screen/update_event_screens/list_classwise_event.dart';
 import 'guardian-section/add_guardian.dart';
@@ -146,8 +144,9 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
 
       ), //9
       ClassTeacherCreateEventsPage(), //6
-      SelectClassForTimeTable(
-          schoolID: Get.find<AdminLoginScreenController>().schoolID), //7
+      TTSample(),
+      // SelectClassForTimeTable(
+      //     schoolID: Get.find<AdminLoginScreenController>().schoolID), //7
       ClassTeacherCreateEventsPage(), //8
       ClassTeacherCreateEventsPage(), //9
       ClassTeacherCreateNoticePage(
@@ -344,7 +343,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 border: Border.all(color: Colors.white10),
-                                boxShadow: [
+                                boxShadow: const [
                                   BoxShadow(blurRadius: 1, color: Colors.grey),
                                 ],
                               ),
