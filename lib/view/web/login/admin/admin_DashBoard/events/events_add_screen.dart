@@ -113,7 +113,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                           controller: dateController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            hintText: 'Date',
+                            labelText: 'Date',
                           ),
                         ),
                       ),
@@ -125,7 +125,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                            controller: headingController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            hintText: 'Heading',
+                            labelText: 'Heading',
                           ),
                         ),
                       ),
@@ -140,7 +140,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                            controller: venueController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            hintText: 'Venue',
+                            labelText: 'Venue',
                           ),
                         ),
                       ),
@@ -148,13 +148,17 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                       Padding(
                          padding: EdgeInsets.only(top: 10, bottom: 10,left: 100,right: 100),
                         child: TextFormField(
+                          textAlign: TextAlign.start,
                            validator: checkFieldEmpty,
                            controller: descriptionController,
                            maxLines: 5,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             
-                            hintText: 'Description',
+                            labelText: 'Description',
+                            alignLabelWithHint: true, // Align the label with the hint text
+    contentPadding: EdgeInsets.only(top: 16, left: 10),
+
                           ),
                         ),
                       ),
@@ -165,7 +169,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                            controller: signedByController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            hintText: 'Signed by',
+                            labelText: 'Signed by',
                           ),
                         ),
                       ),
@@ -194,7 +198,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                             height: screenSize.width * 1 / 30,
                             width: screenSize.width * 1 / 5,
                             decoration: BoxDecoration(
-                                color: Colors.blue,
+                                color: adminePrimayColor,
                                 borderRadius: BorderRadius.circular(14)),
                             child: TextButton(
                               style: TextButton.styleFrom(

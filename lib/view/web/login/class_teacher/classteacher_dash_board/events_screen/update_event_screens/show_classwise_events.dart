@@ -8,16 +8,13 @@ import '../../../../../../constant/constant.dart';
 class ClassTeacherEventShow extends StatelessWidget {
   ClassTeacherEventShow({
     super.key,
-    required this.schoolId,
-    required this.classId,
     required this.classTeacherEventModel,
   });
-  final String schoolId;
-  final String classId;
   final TeacherEventController teacherEventController =
       Get.put(TeacherEventController());
   final ClassTeacherEventModel classTeacherEventModel;
-  String imageUrl = '';
+
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -33,97 +30,75 @@ class ClassTeacherEventShow extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 )
               : Form(
-                  child: ListView(
-                    children: <Widget>[
-                      IconButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        icon: const Icon(Icons.close),
-                      ),
-                      TextFormFieldWidget(
-                        hint: 'Event Name',
-                        controller: teacherEventController.nameController,
-                      ),
-                      sizedBoxH20,
-                      TextFormFieldWidget(
-                        hint: 'Event date',
-                        controller: teacherEventController.dateController,
-                      ),
-                      sizedBoxH20,
-                      TextFormFieldWidget(
-                        hint: 'Event Description',
-                        controller:
-                            teacherEventController.descriptionController,
-                      ),
-                      sizedBoxH20,
-                      TextFormFieldWidget(
-                        hint: 'Venue',
-                        controller: teacherEventController.venueController,
-                      ),
-                      sizedBoxH20,
-                      TextFormFieldWidget(
-                        hint: 'Chief Guest',
-                        controller: teacherEventController.chiefGuestController,
-                      ),
-                      sizedBoxH20,
-                      TextFormFieldWidget(
-                        hint: 'Participants',
-                        controller:
-                            teacherEventController.participantsController,
-                      ),
-                      sizedBoxH20,
-                      imageUrl.isNotEmpty
-                          ? const Text('Image Updated Successfully')
-                          : teacherEventController.isImageUpload.value
-                              ? const Center(
-                                  child: CircularProgressIndicator(),
-                                )
-                              : TextButton(
-                                  onPressed: () async {
-                                    imageUrl = await teacherEventController
-                                        .eventPhotoUpdate(
-                                      uid: classTeacherEventModel.image,
-                                    );
-                                  },
-                                  child: const Text('Upload Image'),
-                                ),
-                      sizedBoxH20,
-                      ElevatedButton(
-                        onPressed: () async {
-                          // imageUrl = '';
-                          // imageUrl =
-                          //     await teacherEventController.eventPhotoUpdate(
-                          //         uid: classTeacherEventModel.imageUid);
-                          if (context.mounted) {
-                            teacherEventController.updateEvent(
-                                schoolId: schoolId,
-                                classId: classId,
-                                classTeacherEventModel: ClassTeacherEventModel(
-                                    eventId: classTeacherEventModel.eventId,
-                                    eventName: teacherEventController
-                                        .nameController.text,
-                                    eventDate: teacherEventController
-                                        .dateController.text,
-                                    description: teacherEventController
-                                        .descriptionController.text,
-                                    venue: teacherEventController
-                                        .venueController.text,
-                                    chiefGuest: teacherEventController
-                                        .chiefGuestController.text,
-                                    participants: teacherEventController
-                                        .participantsController.text,
-                                    image: imageUrl,
-                                    imageUid: classTeacherEventModel.imageUid),
-                                documentId: classTeacherEventModel.eventId,
-                                context: context);
-                          }
-                        },
-                        child: const Text(
-                          "Update",
+                  child: Form(
+                    key: formKey,
+                    child: ListView(
+                      children: <Widget>[
+                        TextFormFieldWidget(
+                          hint: 'Event Name',
+                          controller: teacherEventController.nameController,
+                          validator: checkFieldEmpty,
                         ),
-                      )
-                    ],
+                        sizedBoxH20,
+                        TextFormFieldWidget(
+                          hint: 'Event date',
+                          controller: teacherEventController.dateController,
+                          validator: checkFieldEmpty,
+                        ),
+                        sizedBoxH20,
+                        TextFormFieldWidget(
+                          hint: 'Event Description',
+                          controller:
+                              teacherEventController.descriptionController,
+                          validator: checkFieldEmpty,
+                        ),
+                        sizedBoxH20,
+                        TextFormFieldWidget(
+                          hint: 'Venue',
+                          controller: teacherEventController.venueController,
+                          validator: checkFieldEmpty,
+                        ),
+                        sizedBoxH20,
+                        TextFormFieldWidget(
+                          hint: 'Signed By',
+                          controller: teacherEventController.signedByController,
+                          validator: checkFieldEmpty,
+                        ),
+                        sizedBoxH20,
+                        TextButton(
+                          onPressed: () async {
+                            if (formKey.currentState?.validate() ?? false) {
+                              //creatin event model
+                              final eventModel = ClassTeacherEventModel(
+                                  eventDate: teacherEventController
+                                      .dateController.text,
+                                  eventDescription: teacherEventController
+                                      .descriptionController.text,
+                                  eventName: teacherEventController
+                                      .nameController.text,
+                                  docid: classTeacherEventModel.docid,
+                                  signedBy: teacherEventController
+                                      .signedByController.text,
+                                  venue: teacherEventController
+                                      .venueController.text);
+
+                              //update data to firebase
+                              teacherEventController.updateEvent(
+                                  classTeacherEventModel: eventModel,
+                                  documentId: classTeacherEventModel.docid,
+                                  context: context);
+                            }
+                          },
+                          child: Obx(
+                            () => teacherEventController.isLoading.value
+                                ? circularProgressIndicator
+                                : const Text(
+                                    "Update",
+                                  ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
         );
@@ -137,24 +112,25 @@ class ClassTeacherEventShow extends StatelessWidget {
     teacherEventController.dateController.text =
         classTeacherEventModel.eventDate;
     teacherEventController.descriptionController.text =
-        classTeacherEventModel.description;
+        classTeacherEventModel.eventDescription;
     teacherEventController.venueController.text = classTeacherEventModel.venue;
-    teacherEventController.chiefGuestController.text =
-        classTeacherEventModel.chiefGuest;
-    teacherEventController.participantsController.text =
-        classTeacherEventModel.participants;
+
+    teacherEventController.signedByController.text =
+        classTeacherEventModel.signedBy;
   }
 }
 
 class TextFormFieldWidget extends StatelessWidget {
   const TextFormFieldWidget(
-      {super.key, this.hint = '', required this.controller});
+      {super.key, this.hint = '', required this.controller, this.validator});
   final String hint;
   final TextEditingController controller;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: validator,
       decoration: InputDecoration(
         hintText: hint,
         border: OutlineInputBorder(

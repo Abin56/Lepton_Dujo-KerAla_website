@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_protection_group/widgets/student_protection_dialogue_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,8 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../../../../controller/Getx/admin/student_protection_controller/student_protection_controller.dart';
 import '../../../../../../constant/constant.dart';
 
-class CardWidget extends StatelessWidget {
-  CardWidget({
+class StudentProtectionCardWidet extends StatelessWidget {
+  StudentProtectionCardWidet({
     super.key,
     required this.name,
     required this.designation,
@@ -24,7 +22,7 @@ class CardWidget extends StatelessWidget {
   final String designation;
   final String position;
 
-  final String? imageUrl;
+  final String imageUrl;
   final IconData iconData;
   final String memberId;
   final String imageId;
@@ -34,9 +32,9 @@ class CardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-      ),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.grey)),
       child: SizedBox(
         width: 200,
         child: Column(
@@ -45,9 +43,9 @@ class CardWidget extends StatelessWidget {
             FittedBox(
               child: CircleAvatar(
                 maxRadius: MediaQuery.of(context).size.width * .03,
-                backgroundImage: imageUrl == null || imageUrl!.isEmpty
+                backgroundImage: imageUrl.isEmpty
                     ? const AssetImage('assets/images/user.png')
-                    : NetworkImage(imageUrl!) as ImageProvider,
+                    : NetworkImage(imageUrl) as ImageProvider,
               ),
             ),
             FittedBox(
@@ -108,7 +106,7 @@ class CardWidget extends StatelessWidget {
                         controller.nameController.text = name;
                         controller.positionController.text = position;
                         controller.designationController.text = designation;
-                        
+
                         updateStudentProtectionDialogue(
                           context,
                           memberId,

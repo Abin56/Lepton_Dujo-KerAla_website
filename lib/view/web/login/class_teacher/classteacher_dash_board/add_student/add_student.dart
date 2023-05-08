@@ -110,7 +110,7 @@ class AddStudentFromClassTeacher extends StatelessWidget {
                                 .parentPhNoController,
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
-                              labelText: 'Guardian Phone Number',
+                              labelText: 'Parent Phone Number',
                             ),
                           ),
                         ),

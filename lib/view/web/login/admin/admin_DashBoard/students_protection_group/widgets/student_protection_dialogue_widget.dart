@@ -9,10 +9,10 @@ Future<void> updateStudentProtectionDialogue(
   BuildContext context,
   String memberId,
   String imageid,
-  String? imageUrl,
+  String imageUrl,
 ) {
   StudentProtectionController protectionController =
-      Get.find<StudentProtectionController>();
+      Get.put(StudentProtectionController());
   return showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -43,7 +43,7 @@ Future<void> updateStudentProtectionDialogue(
                                   child: CircularProgressIndicator(),
                                 )
                               : CircleAvatar(
-                                  backgroundImage: imageUrl == null &&
+                                  backgroundImage: imageUrl.isEmpty &&
                                           protectionController
                                                   .imageDataUin8.value ==
                                               null
@@ -52,7 +52,7 @@ Future<void> updateStudentProtectionDialogue(
                                       : protectionController
                                                   .imageDataUin8.value ==
                                               null
-                                          ? NetworkImage(imageUrl!)
+                                          ? NetworkImage(imageUrl)
                                           : MemoryImage(
                                               protectionController
                                                   .imageDataUin8.value!,
@@ -79,7 +79,7 @@ Future<void> updateStudentProtectionDialogue(
                         onPressed: () {
                           protectionController
                               .updateStudentProtectionMemberDetail(
-                                  memberId, context, imageid, imageUrl ?? "");
+                                  memberId, context, imageid, imageUrl);
                         },
                         child: const Text('Edit'),
                       )

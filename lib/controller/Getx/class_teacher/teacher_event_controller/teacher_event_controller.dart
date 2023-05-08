@@ -1,85 +1,79 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uuid/uuid.dart';
-
 import '../../../../model/class_teacher/class_teacher_event_model.dart';
 import '../../../../view/constant/constant.dart';
+import '../../../admin_login_screen/admin_login_screen_controller.dart';
+import '../../../get_firebase-data/get_firebase_data.dart';
 
 class TeacherEventController extends GetxController {
-  final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   final TextEditingController nameController = TextEditingController();
   final TextEditingController dateController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController venueController = TextEditingController();
-  final TextEditingController chiefGuestController = TextEditingController();
-  final TextEditingController participantsController = TextEditingController();
+  final TextEditingController signedByController = TextEditingController();
   RxBool isLoading = false.obs;
-  RxBool isImageUpload = false.obs;
   Rxn<ClassTeacherEventModel> classTeacherEventModelData =
       Rxn<ClassTeacherEventModel>(null);
+
+  final DocumentReference<Map<String, dynamic>> firebaseFirestore =
+      FirebaseFirestore.instance
+          .collection('SchoolListCollection')
+          .doc(Get.find<AdminLoginScreenController>().schoolID);
+
   //create events
 
-  Future<void> createEvents({
-    required String schoolId,
-    required String classId,
-    required ClassTeacherEventModel classTeacherEventModel,
-  }) async {
-    //creating new event
-
+  Future<void> createEvents() async {
+    final CollectionReference<Map<String, dynamic>> eventsCollection =
+        firebaseFirestore
+            .collection(Get.find<GetFireBaseData>().bYear.value)
+            .doc(Get.find<GetFireBaseData>().bYear.value)
+            .collection('classes')
+            .doc(Get.find<GetFireBaseData>().classIDD.value)
+            .collection('ClassEvents');
     try {
       isLoading.value = true;
-      final result = await firebaseFirestore
-          .collection('SchoolListCollection')
-          .doc(schoolId)
-          .collection('Classes')
-          .doc(classId)
-          .collection('Events')
+      final classTeacherEventModel = ClassTeacherEventModel(
+        eventDate: dateController.text,
+        eventDescription: descriptionController.text,
+        eventName: nameController.text,
+        docid: "",
+        signedBy: signedByController.text,
+        venue: venueController.text,
+      );
+      await eventsCollection
           .add(
-            classTeacherEventModel.toJson(),
-          );
-//updating document id to firebase
-      await firebaseFirestore
-          .collection('SchoolListCollection')
-          .doc(schoolId)
-          .collection('Classes')
-          .doc(classId)
-          .collection('Events')
-          .doc(result.id)
-          .update({
-        "eventId": result.id,
+        classTeacherEventModel.toMap(),
+      )
+          .then((value) async {
+        //updating document id to firebase
+        await eventsCollection.doc(value.id).update({
+          "docid": value.id,
+        });
       });
-
       clearControllers();
       isLoading.value = false;
       showToast(msg: 'Successfully Creted');
     } catch (e) {
-      showToast(msg: e.toString());
+      showToast(msg: "Failed");
     }
   }
 
   Future<void> updateEvent(
-      {required String schoolId,
-      required String classId,
-      required ClassTeacherEventModel classTeacherEventModel,
+      {required ClassTeacherEventModel classTeacherEventModel,
       required String documentId,
       required BuildContext context}) async {
+    final CollectionReference<Map<String, dynamic>> eventsCollection =
+        firebaseFirestore
+            .collection(Get.find<GetFireBaseData>().bYear.value)
+            .doc(Get.find<GetFireBaseData>().bYear.value)
+            .collection('classes')
+            .doc(Get.find<GetFireBaseData>().classIDD.value)
+            .collection('ClassEvents');
     try {
       isLoading.value = true;
-      await firebaseFirestore
-          .collection('SchoolListCollection')
-          .doc(schoolId)
-          .collection('Classes')
-          .doc(classId)
-          .collection('Events')
-          .doc(documentId)
-          .update(
-            classTeacherEventModel.toJson(),
+      await eventsCollection.doc(documentId).update(
+            classTeacherEventModel.toMap(),
           );
       clearControllers();
       isLoading.value = false;
@@ -89,6 +83,7 @@ class TeacherEventController extends GetxController {
         Navigator.of(context).pop();
       }
     } catch (e) {
+      isLoading.value = false;
       showToast(
         msg: e.toString(),
       );
@@ -96,24 +91,20 @@ class TeacherEventController extends GetxController {
   }
 
   Future<void> deleteEvent(
-      {required String schoolId,
-      required String classId,
-      required String documentId,
-      required String imageId,
-      required BuildContext context}) async {
+      {required String documentId, required BuildContext context}) async {
+    final CollectionReference<Map<String, dynamic>> eventsCollection =
+        firebaseFirestore
+            .collection(Get.find<GetFireBaseData>().bYear.value)
+            .doc(Get.find<GetFireBaseData>().bYear.value)
+            .collection('classes')
+            .doc(Get.find<GetFireBaseData>().classIDD.value)
+            .collection('ClassEvents');
     try {
-      await firebaseFirestore
-          .collection('SchoolListCollection')
-          .doc(schoolId)
-          .collection('Classes')
-          .doc(classId)
-          .collection('Events')
-          .doc(documentId)
-          .delete();
+      eventsCollection.doc(documentId).delete().then((value) {
+        classTeacherEventModelData.value = null;
+        showToast(msg: 'Successfully Removed');
+      });
 
-      FirebaseStorage.instance.ref().child('files/events/$imageId').delete();
-      classTeacherEventModelData.value = null;
-      showToast(msg: 'Successfully Removed');
       if (context.mounted) {
         Navigator.of(context).pop();
       }
@@ -127,59 +118,6 @@ class TeacherEventController extends GetxController {
     dateController.clear();
     descriptionController.clear();
     venueController.clear();
-    chiefGuestController.clear();
-    participantsController.clear();
-  }
-
-  Future<Map<String, String>> eventPhotoUpload() async {
-    try {
-      FilePickerResult? result = await FilePicker.platform.pickFiles();
-      if (result != null) {
-        Uint8List? file = result.files.first.bytes;
-        String uid = const Uuid().v1();
-        isImageUpload.value = true;
-        UploadTask uploadTask = FirebaseStorage.instance
-            .ref()
-            .child("files/events/$uid")
-            .putData(file!);
-
-        final TaskSnapshot snap = await uploadTask;
-        final String downloadUrl = await snap.ref.getDownloadURL();
-        isImageUpload.value = false;
-        return {
-          "downloadUrl": downloadUrl,
-          "imageUid": uid,
-        };
-      } else {
-        return {};
-      }
-    } catch (e) {
-      log(e.toString());
-      return {};
-    }
-  }
-
-  Future<String> eventPhotoUpdate({required String uid}) async {
-    try {
-      FilePickerResult? result = await FilePicker.platform.pickFiles();
-      if (result != null) {
-        Uint8List? file = result.files.first.bytes;
-        isImageUpload.value = true;
-        UploadTask uploadTask = FirebaseStorage.instance
-            .ref()
-            .child("files/events/$uid")
-            .putData(file!);
-
-        final TaskSnapshot snap = await uploadTask;
-        final String downloadUrl = await snap.ref.getDownloadURL();
-        isImageUpload.value = false;
-        return downloadUrl;
-      } else {
-        return '';
-      }
-    } catch (e) {
-      log(e.toString());
-      return '';
-    }
+    signedByController.clear();
   }
 }

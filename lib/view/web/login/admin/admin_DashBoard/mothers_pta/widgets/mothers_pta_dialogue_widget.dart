@@ -9,7 +9,7 @@ Future<void> updateMothersPtaDialogue(
   BuildContext context,
   String memberId,
   String imageid,
-  String? imageUrl,
+  String imageUrl,
 ) {
   MothersPtaController mothersPtaController = Get.find<MothersPtaController>();
   return showDialog(
@@ -42,7 +42,7 @@ Future<void> updateMothersPtaDialogue(
                                   child: CircularProgressIndicator(),
                                 )
                               : CircleAvatar(
-                                  backgroundImage: imageUrl == null &&
+                                  backgroundImage: imageUrl.isEmpty &&
                                           mothersPtaController
                                                   .imageDataUin8.value ==
                                               null
@@ -51,7 +51,7 @@ Future<void> updateMothersPtaDialogue(
                                       : mothersPtaController
                                                   .imageDataUin8.value ==
                                               null
-                                          ? NetworkImage(imageUrl!)
+                                          ? NetworkImage(imageUrl)
                                           : MemoryImage(
                                               mothersPtaController
                                                   .imageDataUin8.value!,
@@ -77,7 +77,7 @@ Future<void> updateMothersPtaDialogue(
                       ElevatedButton(
                         onPressed: () {
                           mothersPtaController.updateMothersPtaMemberDetails(
-                              memberId, context, imageid, imageUrl ?? "");
+                              memberId, context, imageid, imageUrl);
                         },
                         child: const Text('Edit'),
                       )

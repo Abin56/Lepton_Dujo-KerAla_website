@@ -25,9 +25,11 @@ class SampoornaHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-       appBar: AppBar(title: Text('Sampoorna'),
+      appBar: AppBar(
+        title: const Text('Sampoorna'),
         backgroundColor: adminePrimayColor,
-        elevation: 0,),
+        elevation: 0,
+      ),
       body: Form(
         key: sampoornaController.sampoornaFormKey,
         autovalidateMode: AutovalidateMode.disabled,
@@ -378,18 +380,18 @@ class StdAdmissionWidget extends StatelessWidget {
         sizedBoxH20,
         Flexible(
           child: TextFormFieldTextWidget(
-             title: 'Admission Number',
+            title: 'Admission Number',
             controller:
-            Get.find<SampoornaController>().admissionNumberController,
+                Get.find<SampoornaController>().admissionNumberController,
             validator: checkFieldEmpty,
           ),
         ),
       ],
-           
     );
   }
 }
-   class TitleWidget extends StatelessWidget {
+
+class TitleWidget extends StatelessWidget {
   const TitleWidget({
     super.key,
     required this.size,
@@ -425,7 +427,7 @@ class StdAdmissionWidget extends StatelessWidget {
                       title: 'Lepton HIGHER SECONDARY SCHOOL');
                 }
               }),
-         StreamBuilder(
+          StreamBuilder(
               stream: FirebaseFirestore.instance
                   .collection("SchoolListCollection")
                   .where('id',
@@ -438,8 +440,7 @@ class StdAdmissionWidget extends StatelessWidget {
                     return const TitleTextWidget(
                         title: 'ROADVILA, C.V.NALLOOR P.O');
                   } else {
-                    return TitleTextWidget(
-                        title: snap.data!.docs[0]['place']);
+                    return TitleTextWidget(title: snap.data!.docs[0]['place']);
                   }
                 } else {
                   return const TitleTextWidget(
@@ -447,9 +448,9 @@ class StdAdmissionWidget extends StatelessWidget {
                 }
               }),
           sizedBoxH40,
-         const  TitleTextWidget(title: 'APPLICATION CUM DATA COLLECTION FORM'),
+          const TitleTextWidget(title: 'APPLICATION CUM DATA COLLECTION FORM'),
         ],
-     ), 
-     );
- }
+      ),
+    );
+  }
 }

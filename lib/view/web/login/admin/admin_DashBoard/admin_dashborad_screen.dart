@@ -9,6 +9,7 @@ import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/non_Tea
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/research_and_development/research_and_development.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_protection_group/students_proctection_group.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'dart:html' as html;
 
@@ -375,15 +376,16 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(20),
-                              child: Text('Admin Dashboard',style: GoogleFonts.poppins(
-                                          color:Colors.red,
-                                          fontWeight: FontWeight.w800),
-                                          
-                                          ),
+                              child: Text(
+                                'Admin Dashboard',
+                                style: GoogleFonts.poppins(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 15.h),
+                              ),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(20.0),
-                            
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [

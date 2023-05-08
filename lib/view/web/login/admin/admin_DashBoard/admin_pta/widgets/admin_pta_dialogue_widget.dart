@@ -9,7 +9,7 @@ Future<void> updateAdminPtaDialogue(
   BuildContext context,
   String memberId,
   String imageid,
-  String? imageUrl,
+  String imageUrl,
 ) {
   PtaController ptaController = Get.find<PtaController>();
   return showDialog(
@@ -42,18 +42,19 @@ Future<void> updateAdminPtaDialogue(
                                   child: CircularProgressIndicator(),
                                 )
                               : CircleAvatar(
-                                  backgroundImage: imageUrl == null &&
-                                          ptaController.imageDataUin8.value ==
-                                              null
-                                      ? const AssetImage(
-                                          "assets/images/user.png")
-                                      : ptaController.imageDataUin8.value ==
-                                              null
-                                          ? NetworkImage(imageUrl!)
-                                          : MemoryImage(
-                                              ptaController
-                                                  .imageDataUin8.value!,
-                                            ) as ImageProvider,
+                                  backgroundImage:
+                                      ptaController.imageDataUin8.value ==
+                                                  null &&
+                                              imageUrl.isEmpty
+                                          ? const AssetImage(
+                                              "assets/images/user.png")
+                                          : ptaController.imageDataUin8.value ==
+                                                  null
+                                              ? NetworkImage(imageUrl)
+                                              : MemoryImage(
+                                                  ptaController
+                                                      .imageDataUin8.value!,
+                                                ) as ImageProvider,
                                   radius: 30,
                                 )),
                       sizedBoxH20,
@@ -75,7 +76,7 @@ Future<void> updateAdminPtaDialogue(
                       ElevatedButton(
                         onPressed: () {
                           ptaController.updatePta(
-                              memberId, context, imageid, imageUrl ?? "");
+                              memberId, context, imageid, imageUrl);
                         },
                         child: const Text('Update'),
                       )
@@ -161,4 +162,17 @@ Future<void> createAdminPtaDialogue(
       );
     },
   );
+}
+
+ImageProvider<Object>? netWorkImage(String? imageUrl) {
+  PtaController ptaController = Get.find<PtaController>();
+  if (imageUrl == null)
+    imageUrl == null && ptaController.imageDataUin8.value == null ||
+            imageUrl!.isEmpty
+        ? const AssetImage("assets/images/user.png")
+        : ptaController.imageDataUin8.value == null
+            ? NetworkImage(imageUrl)
+            : MemoryImage(
+                ptaController.imageDataUin8.value!,
+              );
 }

@@ -5,8 +5,9 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
-
 import '../../../../../../controller/Getx/class_teacher/teacher_notice_controller.dart/teacher_notice_controller.dart';
+import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
+import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../model/class_teacher/class_teacher_notice_model.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
@@ -26,230 +27,217 @@ class ClassNoticeTeacher extends StatelessWidget {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
 
-    return 
-    Scaffold( 
-      body
-      : Container(
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-          colors: [
-            Color(0xFF1a2980),
-            Color(0xFF26d0ce),
-          ],
-        )),
-        child: Scaffold(
-            backgroundColor: Colors.transparent,
-            appBar: AppBar(
-                title: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context)
-                          .push(MaterialPageRoute(builder: (context) {
-                        return ClassTeacherCreateNoticePage(
-                          classId: classId,
-                          schoolId: schoolId,
-                        );
-                      }));
-                    },
-                    child: const Text('Create'))),
-            body: SafeArea(
-              child: Row(
-                children: [
-                  Obx(() {
-                    return teacherNoticeController
-                                .classTeacherNoticeModelData.value ==
-                            null
+    return Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+            title: GestureDetector(
+                onTap: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return ClassTeacherCreateNoticePage(
+                      classId: classId,
+                      schoolId: schoolId,
+                    );
+                  }));
+                },
+                child: const Text('Create'))),
+        body: SafeArea(
+          child: Row(
+            children: [
+              Obx(() {
+                return teacherNoticeController
+                            .classTeacherNoticeModelData.value ==
+                        null
+                    ? SizedBox(
+                        width: screenSize.width * 0.4,
+                        height: screenSize.width,
+                        child: Lottie.network(
+                          'https://assets6.lottiefiles.com/packages/lf20_7p6kyzmg.json',
+                          fit: BoxFit.fill,
+                        ),
+                      )
+                    : teacherNoticeController.isLoading.value
                         ? SizedBox(
                             width: screenSize.width * 0.4,
-                            height: screenSize.width,
-                            child: Lottie.network(
-                              'https://assets6.lottiefiles.com/packages/lf20_7p6kyzmg.json',
-                              fit: BoxFit.fill,
+                            height: screenSize.height,
+                            child: const Center(
+                              child: CircularProgressIndicator(),
                             ),
                           )
-                        : teacherNoticeController.isLoading.value
-                            ? SizedBox(
-                                width: screenSize.width * 0.4,
-                                height: screenSize.height,
-                                child: const Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                              )
-                            : Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(),
-                                ),
-                                width: screenSize.width * 0.4,
-                                height: screenSize.height,
-                                alignment: Alignment.center,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 50,
+                        : Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(),
+                            ),
+                            width: screenSize.width * 0.4,
+                            height: screenSize.height,
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 50,
+                              ),
+                              child: ListView(
+                                shrinkWrap: true,
+                                children: <Widget>[
+                                  DataTableWidget(
+                                    heading: teacherNoticeController
+                                        .classTeacherNoticeModelData
+                                        .value!
+                                        .heading,
+                                    content: teacherNoticeController
+                                        .classTeacherNoticeModelData
+                                        .value!
+                                        .content,
+                                    signedBy: teacherNoticeController
+                                        .classTeacherNoticeModelData
+                                        .value!
+                                        .signedBy,
+                                    topic: teacherNoticeController
+                                        .classTeacherNoticeModelData
+                                        .value!
+                                        .topic,
                                   ),
-                                  child: ListView(
-                                    shrinkWrap: true,
-                                    children: <Widget>[
-                                      DataTableWidget(
-                                        heading: teacherNoticeController
-                                            .classTeacherNoticeModelData
-                                            .value!
-                                            .heading,
-                                        content: teacherNoticeController
-                                            .classTeacherNoticeModelData
-                                            .value!
-                                            .content,
-                                        signedBy: teacherNoticeController
-                                            .classTeacherNoticeModelData
-                                            .value!
-                                            .signedBy,
-                                        topic: teacherNoticeController
-                                            .classTeacherNoticeModelData
-                                            .value!
-                                            .topic,
-                                      ),
-                                      sizedBoxH20,
-                                      if (teacherNoticeController
-                                              .classTeacherNoticeModelData
-                                              .value ==
-                                          null)
-                                        const SizedBox()
-                                      else
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: <Widget>[
-                                            Flexible(
-                                              child:
-                                                  NoticePageElevatedButtonWidget(
-                                                      title: 'Edit',
-                                                      function: () {
-                                                        showDialog(
-                                                          context: context,
-                                                          builder: (BuildContext
-                                                              context) {
-                                                            return AlertDialog(
-                                                              content: ClassTeacherNoticeShow(
-                                                                  schoolId:
-                                                                      schoolId,
-                                                                  classTeacherNoticeModel:
-                                                                      teacherNoticeController
-                                                                          .classTeacherNoticeModelData
-                                                                          .value!,
-                                                                  classId:
-                                                                      classId),
-                                                            );
-                                                          },
-                                                        );
-                                                      }),
-                                            ),
-                                            const SizedBox(
-                                              width: 10,
-                                            ),
-                                            Expanded(
-                                              child:
-                                                  NoticePageElevatedButtonWidget(
-                                                title: 'Remove',
-                                                function: () {
-                                                  showDialog(
-                                                    context: context,
-                                                    builder:
-                                                        (BuildContext context) {
-                                                      return AlertDialog(
-                                                        title: const Text(
-                                                            'Confirm Remove'),
-                                                        content: const Text(
-                                                            'Are you sure you want to remove this Notice'),
-                                                        actions: [
-                                                          TextButton(
-                                                            onPressed: () {
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
-                                                            },
-                                                            child: const Text(
-                                                                'Cancel'),
-                                                          ),
-                                                          TextButton(
-                                                            onPressed: () async {
-                                                              teacherNoticeController.deleteNotice(
-                                                                  schoolId:
-                                                                      schoolId,
-                                                                  classId:
-                                                                      classId,
+                                  sizedBoxH20,
+                                  if (teacherNoticeController
+                                          .classTeacherNoticeModelData.value ==
+                                      null)
+                                    const SizedBox()
+                                  else
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Flexible(
+                                          child: NoticePageElevatedButtonWidget(
+                                              title: 'Edit',
+                                              function: () {
+                                                showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return AlertDialog(
+                                                      icon: Align(
+                                                        alignment:
+                                                            Alignment.topRight,
+                                                        child: CloseButton(
+                                                            onPressed: () =>
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop()),
+                                                      ),
+                                                      content:
+                                                          ClassTeacherNoticeShow(
+                                                        classTeacherNoticeModel:
+                                                            teacherNoticeController
+                                                                .classTeacherNoticeModelData
+                                                                .value!,
+                                                      ),
+                                                    );
+                                                  },
+                                                );
+                                              }),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Expanded(
+                                          child: NoticePageElevatedButtonWidget(
+                                            title: 'Remove',
+                                            function: () {
+                                              showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return AlertDialog(
+                                                    title: const Text(
+                                                        'Confirm Remove'),
+                                                    content: const Text(
+                                                        'Are you sure you want to remove this Notice'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: const Text(
+                                                            'Cancel'),
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () async {
+                                                          teacherNoticeController
+                                                              .deleteNotice(
                                                                   documentId:
                                                                       teacherNoticeController
                                                                           .classTeacherNoticeModelData
                                                                           .value!
-                                                                          .noticeId,
+                                                                          .docid,
                                                                   context:
                                                                       context);
-                                                            },
-                                                            child: const Text(
-                                                                'Remove'),
-                                                          )
-                                                        ],
-                                                      );
-                                                    },
+                                                        },
+                                                        child: const Text(
+                                                            'Remove'),
+                                                      )
+                                                    ],
                                                   );
                                                 },
-                                              ),
-                                            ),
-                                          ],
-                                        )
-                                    ],
-                                  ),
-                                ),
-                              );
-                  }),
-                  Container(
-                    // color: const Color(0xFFE1F8DC),
-                    width: screenSize.width * 0.6,
-                    child: StreamBuilder(
-                      stream: FirebaseFirestore.instance
-                          .collection('SchoolListCollection')
-                          .doc(schoolId)
-                          .collection('Classes')
-                          .doc(classId)
-                          .collection('Notice')
-                          .snapshots(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          return GridView.builder(
-                            itemCount: snapshot.data!.docs.length,
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3),
-                            itemBuilder: (context, index) {
-                              ClassTeacherNoticeModel data =
-                                  ClassTeacherNoticeModel.fromJson(
-                                      snapshot.data!.docs[index].data());
-    
-                              return GestureDetector(
-                                onTap: () {
-                                  teacherNoticeController
-                                      .classTeacherNoticeModelData.value = data;
-                                },
-                                child: ClassTeacherNoticeCardWidget(
-                                  date: data.date,
-                                  heading: data.heading,
-                                  topic: data.topic,
-                                  signedBy: data.signedBy,
-                                ),
-                              );
-                            },
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                ],
+                              ),
+                            ),
                           );
-                        } else {
-                          return const Center(child: Text('No Data Found'));
-                        }
-                      },
-                    ),
-                  ),
-                ],
+              }),
+              SizedBox(
+                // color: const Color(0xFFE1F8DC),
+                width: screenSize.width * 0.6,
+                child: StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection('SchoolListCollection')
+                      .doc(Get.find<AdminLoginScreenController>().schoolID)
+                      .collection(Get.find<GetFireBaseData>().bYear.value)
+                      .doc(Get.find<GetFireBaseData>().bYear.value)
+                      .collection('classes')
+                      .doc(Get.find<GetFireBaseData>().classIDD.value)
+                      .collection('ClassNotice')
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return GridView.builder(
+                        itemCount: snapshot.data!.docs.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3),
+                        itemBuilder: (context, index) {
+                          ClassTeacherNoticeModel data =
+                              ClassTeacherNoticeModel.fromMap(
+                                  snapshot.data!.docs[index].data());
+
+                          return GestureDetector(
+                            onTap: () {
+                              teacherNoticeController
+                                  .classTeacherNoticeModelData.value = data;
+                            },
+                            child: ClassTeacherNoticeCardWidget(
+                              date: data.date,
+                              heading: data.heading,
+                              topic: data.topic,
+                              signedBy: data.signedBy,
+                            ),
+                          );
+                        },
+                      );
+                    } else {
+                      return const Center(child: Text('No Data Found'));
+                    }
+                  },
+                ),
               ),
-            )),
-      ),
-    );
+            ],
+          ),
+        ));
   }
 }
 
@@ -298,39 +286,55 @@ class DataTableWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return DataTable(columns: <DataColumn>[
       const DataColumn(
-        label: ClassTeacherNoticeCard(title: 'Heading', color: cWhite),
+        label: ClassTeacherNoticeCard(
+          title: 'Heading',
+        ),
       ),
       DataColumn(
-        label: ClassTeacherNoticeCard(title: heading, color: cWhite),
+        label: ClassTeacherNoticeCard(
+          title: heading,
+        ),
       ),
     ], rows: <DataRow>[
       DataRow(
         cells: <DataCell>[
           const DataCell(
-            ClassTeacherNoticeCard(title: 'Content', color: cWhite),
+            ClassTeacherNoticeCard(
+              title: 'Content',
+            ),
           ),
           DataCell(
-            ClassTeacherNoticeCard(title: content, color: cWhite),
+            ClassTeacherNoticeCard(
+              title: content,
+            ),
           ),
         ],
       ),
       DataRow(
         cells: <DataCell>[
           const DataCell(
-            ClassTeacherNoticeCard(title: 'Topic', color: cWhite),
+            ClassTeacherNoticeCard(
+              title: 'Topic',
+            ),
           ),
           DataCell(
-            ClassTeacherNoticeCard(title: topic, color: cWhite),
+            ClassTeacherNoticeCard(
+              title: topic,
+            ),
           ),
         ],
       ),
       DataRow(
         cells: <DataCell>[
           const DataCell(
-            ClassTeacherNoticeCard(title: 'Signed By', color: cWhite),
+            ClassTeacherNoticeCard(
+              title: 'Signed By',
+            ),
           ),
           DataCell(
-            ClassTeacherNoticeCard(title: signedBy, color: cWhite),
+            ClassTeacherNoticeCard(
+              title: signedBy,
+            ),
           ),
         ],
       ),
@@ -361,12 +365,6 @@ class ClassTeacherNoticeCardWidget extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           border: Border.all(),
-          gradient: const LinearGradient(
-            colors: [
-              Color(0xFF77a1d3),
-              Color(0xFF79cbca),
-            ],
-          ),
         ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -375,22 +373,22 @@ class ClassTeacherNoticeCardWidget extends StatelessWidget {
             children: [
               Text(
                 heading,
-                style: GoogleFonts.sansita(color: cWhite),
+                style: GoogleFonts.sansita(color: cBlack),
               ),
               sizedBoxH10,
               Text(
                 date,
-                style: GoogleFonts.sansita(color: cWhite),
+                style: GoogleFonts.sansita(color: cBlack),
               ),
               sizedBoxH10,
               Text(
                 topic,
-                style: GoogleFonts.sansita(color: cWhite),
+                style: GoogleFonts.sansita(color: cBlack),
               ),
               sizedBoxH10,
               Text(
                 signedBy,
-                style: GoogleFonts.sansita(color: cWhite),
+                style: GoogleFonts.sansita(color: cBlack),
               ),
               sizedBoxH10,
             ],

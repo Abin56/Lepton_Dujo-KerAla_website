@@ -1,3 +1,4 @@
+import 'package:dujo_kerala_website/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -6,16 +7,12 @@ import '../../../../../../../model/class_teacher/class_teacher_notice_model.dart
 import '../../../../../../constant/constant.dart';
 
 class ClassTeacherNoticeShow extends StatelessWidget {
-  ClassTeacherNoticeShow(
-      {super.key,
-      required this.schoolId,
-      required this.classId,
-      required this.classTeacherNoticeModel});
-  final String schoolId;
-  final String classId;
+  ClassTeacherNoticeShow({super.key, required this.classTeacherNoticeModel});
   final TeacherNoticeController teacherNoticeController =
       Get.put(TeacherNoticeController());
   final ClassTeacherNoticeModel classTeacherNoticeModel;
+
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -35,59 +32,76 @@ class ClassTeacherNoticeShow extends StatelessWidget {
                   vertical: 25,
                 ),
                 child: Form(
+                  key: formKey,
                   child: ListView(
                     children: <Widget>[
                       TextFormFieldWidget(
-                          hint: 'Heading',
-                          controller:
-                              teacherNoticeController.headingController),
+                        hint: 'Heading',
+                        controller: teacherNoticeController.headingController,
+                        validator: checkFieldEmpty,
+                      ),
                       sizedBoxH20,
                       TextFormFieldWidget(
-                          hint: 'Topic',
-                          controller: teacherNoticeController.topicController),
+                        hint: 'Topic',
+                        controller: teacherNoticeController.topicController,
+                        validator: checkFieldEmpty,
+                      ),
                       sizedBoxH20,
                       TextFormFieldWidget(
-                          hint: 'Content',
-                          controller:
-                              teacherNoticeController.contentController),
+                        hint: 'Content',
+                        controller: teacherNoticeController.contentController,
+                        validator: checkFieldEmpty,
+                      ),
                       sizedBoxH20,
                       TextFormFieldWidget(
-                          hint: 'Signed By',
-                          controller:
-                              teacherNoticeController.signedByController),
+                        hint: 'Signed By',
+                        controller: teacherNoticeController.signedByController,
+                        validator: checkFieldEmpty,
+                      ),
                       sizedBoxH20,
                       TextFormFieldWidget(
-                          hint: 'Date',
-                          controller: teacherNoticeController.dateController),
+                        hint: 'Date',
+                        controller: teacherNoticeController.dateController,
+                        validator: checkFieldEmpty,
+                        onTap: () async => teacherNoticeController
+                            .dateController
+                            .text = await dateTimePicker(context),
+                        readOnly: true,
+                      ),
                       sizedBoxH20,
                       ElevatedButton(
-                        onPressed: () async {
-                          teacherNoticeController.updateNotice(
-                            schoolId: schoolId,
-                            classId: classId,
-                            classTeacherNoticeModel: ClassTeacherNoticeModel(
-                              heading: teacherNoticeController
-                                  .headingController.text,
-                              topic:
-                                  teacherNoticeController.topicController.text,
-                              content: teacherNoticeController
-                                  .contentController.text,
-                              signedBy: teacherNoticeController
-                                  .signedByController.text,
-                              date: teacherNoticeController.dateController.text,
-                              noticeId: classTeacherNoticeModel.noticeId,
-                            ),
-                            documentId: classTeacherNoticeModel.noticeId,
-                            context: context,
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          shape: const StadiumBorder(),
-                        ),
-                        child: const Text(
-                          "Update",
-                        ),
-                      )
+                          onPressed: () async {
+                            if (formKey.currentState?.validate() ?? false) {
+                              teacherNoticeController.updateNotice(
+                                classTeacherNoticeModel:
+                                    ClassTeacherNoticeModel(
+                                  heading: teacherNoticeController
+                                      .headingController.text,
+                                  topic: teacherNoticeController
+                                      .topicController.text,
+                                  content: teacherNoticeController
+                                      .contentController.text,
+                                  signedBy: teacherNoticeController
+                                      .signedByController.text,
+                                  date: teacherNoticeController
+                                      .dateController.text,
+                                  docid: classTeacherNoticeModel.docid,
+                                ),
+                                documentId: classTeacherNoticeModel.docid,
+                                context: context,
+                              );
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            shape: const StadiumBorder(),
+                          ),
+                          child: Obx(
+                            () => teacherNoticeController.isLoading.value
+                                ? circularProgressIndicator
+                                : const Text(
+                                    "Update",
+                                  ),
+                          ))
                     ],
                   ),
                 ),
@@ -111,13 +125,24 @@ class ClassTeacherNoticeShow extends StatelessWidget {
 
 class TextFormFieldWidget extends StatelessWidget {
   const TextFormFieldWidget(
-      {super.key, this.hint = '', required this.controller});
+      {super.key,
+      this.hint = '',
+      required this.controller,
+      this.validator,
+      this.onTap,
+      this.readOnly = false});
   final String hint;
   final TextEditingController controller;
+  final String? Function(String?)? validator;
+  final void Function()? onTap;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: readOnly,
+      onTap: onTap,
+      validator: validator,
       decoration: InputDecoration(
         hintText: hint,
         border: OutlineInputBorder(
