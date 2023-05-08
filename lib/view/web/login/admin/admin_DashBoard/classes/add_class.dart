@@ -384,7 +384,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                             )),
                       ),
                       SizedBox(
-                        height: 600.h,
+                        height: 500.h,
                         child: StreamBuilder(
                             stream: FirebaseFirestore.instance
                                 .collection('SchoolListCollection')
