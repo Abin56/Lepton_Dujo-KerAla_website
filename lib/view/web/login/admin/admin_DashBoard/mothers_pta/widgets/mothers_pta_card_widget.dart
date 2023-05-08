@@ -24,7 +24,7 @@ class MothersPtaCardWidget extends StatelessWidget {
   final String designation;
   final String position;
 
-  final String? imageUrl;
+  final String imageUrl;
   final IconData iconData;
   final String memberId;
   final String imageId;
@@ -58,9 +58,9 @@ class MothersPtaCardWidget extends StatelessWidget {
                   }
                 },
                 maxRadius: MediaQuery.of(context).size.width * .03,
-                backgroundImage: imageUrl == null || imageUrl!.isEmpty
+                backgroundImage: imageUrl.isEmpty
                     ? const AssetImage('assets/images/user.png')
-                    : NetworkImage(imageUrl!) as ImageProvider,
+                    : NetworkImage(imageUrl) as ImageProvider,
               ),
             ),
             FittedBox(

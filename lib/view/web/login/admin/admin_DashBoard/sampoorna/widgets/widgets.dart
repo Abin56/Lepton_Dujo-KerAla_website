@@ -83,11 +83,11 @@ class TextFormFieldTextWidget extends StatelessWidget {
     super.key,
     required this.title,
     required this.controller,
-    required this.validator,
+    this.validator,
   });
   final String title;
   final TextEditingController controller;
-  final String? Function(String?) validator;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {

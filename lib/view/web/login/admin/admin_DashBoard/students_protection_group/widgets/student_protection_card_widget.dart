@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_protection_group/widgets/student_protection_dialogue_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,7 +22,7 @@ class StudentProtectionCardWidet extends StatelessWidget {
   final String designation;
   final String position;
 
-  final String? imageUrl;
+  final String imageUrl;
   final IconData iconData;
   final String memberId;
   final String imageId;
@@ -45,9 +43,9 @@ class StudentProtectionCardWidet extends StatelessWidget {
             FittedBox(
               child: CircleAvatar(
                 maxRadius: MediaQuery.of(context).size.width * .03,
-                backgroundImage: imageUrl == null || imageUrl!.isEmpty
+                backgroundImage: imageUrl.isEmpty
                     ? const AssetImage('assets/images/user.png')
-                    : NetworkImage(imageUrl!) as ImageProvider,
+                    : NetworkImage(imageUrl) as ImageProvider,
               ),
             ),
             FittedBox(
