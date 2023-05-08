@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 class AddTimeTableToFirebase{
   FirebaseFirestore _firestore = FirebaseFirestore.instance; 
 
-  AddTimeTablesToFirebase(String schoolID, String classID, MondayModel MondayModel,MondayModel tuesdayModel, MondayModel wednesdayModel,
+  Future<void>AddTimeTablesToFirebase(String schoolID, String classID, MondayModel MondayModel,MondayModel tuesdayModel, MondayModel wednesdayModel,
   MondayModel thursdayModel, MondayModel fridayModel )async{ 
     try{
        await _firestore.collection('SchoolListCollection').doc(schoolID).collection(Get.find<GetFireBaseData>().bYear.value).doc(Get.find<GetFireBaseData>().bYear.value).collection('classes').doc(Get.find<GetFireBaseData>().classIDD.value).collection('TimeTables').doc(MondayModel.dayName)

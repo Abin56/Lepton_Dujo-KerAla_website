@@ -1,10 +1,12 @@
 // ignore_for_file: sort_child_properties_last
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/controller/get_firebase-data/get_firebase_data.dart';
 import 'package:dujo_kerala_website/view/fonts/fonts.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../../model/admin_models/event_model/events_model.dart';
@@ -35,7 +37,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
   final _formKey = GlobalKey<FormState>();
 
     addEvent(){
-    FirebaseFirestore.instance.collection('SchoolListCollection').doc(widget.schoolID).collection('AdminEvents').doc(modell!.id).set(modell!.toJson()).then((value) => showToast(msg: 'New Achievement Added!'));
+    FirebaseFirestore.instance.collection('SchoolListCollection').doc(widget.schoolID).collection(Get.find<GetFireBaseData>().bYear.value).doc(Get.find<GetFireBaseData>().bYear.value).collection('AdminEvents').doc(modell!.id).set(modell!.toJson()).then((value) => showToast(msg: 'New Event Added!'));
   }
 
   @override

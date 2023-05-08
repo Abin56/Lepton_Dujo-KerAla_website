@@ -113,7 +113,7 @@ class _TimeTableScreenState extends State<TimeTableScreen> {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size.width;
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(colors: [
           Color.fromRGBO(131, 234, 241, 1), 
           Color.fromRGBO(99, 164, 255, 1)
@@ -128,7 +128,8 @@ class _TimeTableScreenState extends State<TimeTableScreen> {
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: ElevatedButton(
-                  onPressed: () async {
+                  onPressed: () async { 
+
                     //monday timetable 
                 
                     if(_formKey.currentState!.validate()){
@@ -251,14 +252,16 @@ class _TimeTableScreenState extends State<TimeTableScreen> {
                       'seventhPeriodTeacher': tuesdayList[13].text
                     }, dayName: 'Friday');
               
-                    AddTimeTableToFirebase().AddTimeTablesToFirebase(
+                      AddTimeTableToFirebase().AddTimeTablesToFirebase(
                         widget.schoolID,
                         widget.classID,
                         Mondaymodel,
                         Tuesdaymodel,
                         Wednesdaymodel,
                         Thursdaymodel,
-                        Fridaymodel);
+                        Fridaymodel).then((value) => showToast(msg: 'TimeTable Added!'));
+
+                        
                     // Navigator.push(context, MaterialPageRoute(builder: ((context) => ShowTimeTable(k))));
                   
                     }},
@@ -792,18 +795,24 @@ ui_W(String text, TextEditingController cont) {
     ),
     child: SizedBox(
       //height: 36,
-      child: TextField(
+      child: TextFormField(
+         validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please don\'t leave any empty fields';
+              }
+              return null;
+            },
         controller: cont,
         decoration: InputDecoration(
             labelText: text,
-            labelStyle: GoogleFonts.poppins(color: Color.fromARGB(255, 0, 70, 128)),
+            labelStyle: GoogleFonts.poppins(color:const Color.fromARGB(255, 0, 70, 128)),
             //  hintStyle: const TextStyle(color: Colors.black),
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(5),
-                borderSide:  BorderSide(color: Color.fromARGB(255, 0, 70, 128))),
+                borderSide:  BorderSide(color: const Color.fromARGB(255, 0, 70, 128))),
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(5),
-                borderSide:  BorderSide(color: Colors.blue))),
+                borderSide:  BorderSide(color:  Colors.blue))),
       ),
     ),
   );

@@ -2,6 +2,8 @@ import 'package:dujo_kerala_website/ui%20team/abin/login_dummy/main_login_page.d
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
+import 'package:dujo_kerala_website/view/web/home/create_school/create_school.dart';
+import 'package:dujo_kerala_website/view/web/login/loginscreen.dart';
 import 'package:dujo_kerala_website/view/web/widgets/sample/under_maintance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,6 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../widgets/drop_DownList/schoolDropDownList.dart';
 import 'footer/footerhomep.dart';
 
 class HomeP extends StatelessWidget {
@@ -180,7 +183,46 @@ class HomeP extends StatelessWidget {
                         
                         child: InkWell(
                               onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => const NewAllLogin() ,));
+                                 showDialog(
+                  context: context,
+                  barrierDismissible: false, // user must tap button!
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Enter Your School ID'),
+                      content: SingleChildScrollView(
+                        child: ListBody(
+                          children: <Widget>[GetSchoolListDropDownButton()],
+                          // children: [
+                          //   // TextFormField(
+                          //   //   controller:schoolIdController,
+                          //   // )
+                          // ],
+                        ),
+                      ),
+                      actions: <Widget>[
+                        TextButton(
+                          child: const Text('Ok'),
+                          onPressed: () async {
+                            await Navigator.push(context, MaterialPageRoute(
+                              builder: (context) {
+                                return LoginScreen(
+                              
+                                );
+                              },
+                            ));
+                          },
+                        ),
+                        TextButton(
+                          child: const Text('Cancel'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+          
                               },
                               child: Text(
                                 'Login',
@@ -300,7 +342,13 @@ class HomeP extends StatelessWidget {
                           //padding: EdgeInsets.all(20),
                           height: 60.h,
                           minWidth: 250.w,
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(
+                          builder: (context) {
+                            return SchoolProfile();
+                          },
+                        ));
+                          },
                           color: adminePrimayColor,
                           child: Text(
                             'Create School Profile',
@@ -357,7 +405,7 @@ class HomeP extends StatelessWidget {
                     )
                   ]),
             ),
-          ),
+          ), const SizedBox(height: 100,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -414,8 +462,8 @@ class HomeP extends StatelessWidget {
                             // ),
                             LottieBuilder.network(
                               lottieFiles[index],
-                              width: 300,
-                              height: 300,
+                              width: 220,
+                              height: 220,
                             ),
                             const SizedBox(
                               height: 20,
@@ -433,6 +481,7 @@ class HomeP extends StatelessWidget {
                   ),
                 ));
               })),
+             const SizedBox(height: 100,),
           FooterHomeP()
         ]),
       ),

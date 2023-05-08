@@ -30,8 +30,8 @@ final formKey6 = GlobalKey<FormState>();
 class _CreateFoodMenuState extends State<CreateFoodMenu> {
   
 
-  addFoodandBeveragesToCollection(String day, FoodModel model){
-   FirebaseFirestore.instance.collection('SchoolListCollection').doc(widget.schoolID).collection('BatchYear').doc(Get.find<GetFireBaseData>().bYear.value).collection('FoodAndBeverages').doc(day).set(model.toJson()) 
+  Future<void>addFoodandBeveragesToCollection(String day, FoodModel model)async{
+   FirebaseFirestore.instance.collection('SchoolListCollection').doc(widget.schoolID).collection(Get.find<GetFireBaseData>().bYear.value).doc(Get.find<GetFireBaseData>().bYear.value).collection('FoodAndBeverages').doc(day).set(model.toJson()) 
    .then((value) => showDialog(context: context, builder: ((context) {
      return AlertDialog(
       title: Text('Food and Beverages'), 
@@ -135,7 +135,11 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
                               bool? result1 =
                                             formKey1.currentState?.validate();
                                             if (result1==true) {
-                                addFoodandBeveragesToCollection('Monday',modell );
+                                addFoodandBeveragesToCollection('Monday',modell ).then((value) {
+                                  mondayBreak.clear(); 
+                                  mondayLunch.clear(); 
+                                  mondaySnacks.clear();
+                                });
                               } },)
                                ],
                              ),
@@ -169,7 +173,11 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
                                 bool? result2 =
                                             formKey2.currentState?.validate();
                                             if (result2==true) {
-                                addFoodandBeveragesToCollection('Tuesday',modell );
+                                addFoodandBeveragesToCollection('Tuesday',modell ).then((value) {
+                                  tuesdayBreak.clear(); 
+                                  tuesdayLunch.clear(); 
+                                  tuesdaySnacks.clear();
+                                });
                             }},)
                               ],
                             ),
@@ -204,7 +212,11 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
                                 bool? result3 =
                                             formKey3.currentState?.validate();
                                             if (result3==true) {
-                                addFoodandBeveragesToCollection('Wednesday',modell );
+                                addFoodandBeveragesToCollection('Wednesday',modell ).then((value) {
+                                  wednesdayBreak.clear(); 
+                                  wednesdayLunch.clear(); 
+                                  wednesdaySnacks.clear();
+                                });;
                              }},)
                                ],
                              ),
@@ -238,7 +250,11 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
                                 bool? result4 =
                                             formKey4.currentState?.validate();
                                             if (result4==true) {
-                                addFoodandBeveragesToCollection('Thursday',modell );
+                                addFoodandBeveragesToCollection('Thursday',modell ).then((value) {
+                                  thursdayBreak.clear(); 
+                                  thursdayLunch.clear(); 
+                                  thursdaySnacks.clear();
+                                });
                                 } },)
                               ],
                             ),
@@ -271,7 +287,11 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
                                 });bool? result5 =
                                           formKey5.currentState?.validate();
                                           if (result5==true) {
-                                addFoodandBeveragesToCollection('Friday',modell );
+                                addFoodandBeveragesToCollection('Friday',modell ).then((value) {
+                                  fridayBreak.clear(); 
+                                  fridayLunch.clear(); 
+                                  fridaySnacks.clear();
+                                });;
                                   }},)
                                ],
                              ),
@@ -305,7 +325,11 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
                                  bool? result6 =
                                         formKey6.currentState?.validate();
                                         if (result6==true) {
-                                addFoodandBeveragesToCollection('Saturday',modell );
+                                addFoodandBeveragesToCollection('Saturday',modell ).then((value) {
+                                  thursdayBreak.clear(); 
+                                  thursdayLunch.clear(); 
+                                  thursdaySnacks.clear();
+                                });
                              } },)
                               ],
                             ),

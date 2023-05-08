@@ -183,69 +183,75 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                       stream: FirebaseFirestore.instance
                           .collection('SchoolListCollection')
                           .doc(widget.schoolID)
-                          .collection('Classes')
+                          .collection('classes')
                           .snapshots(),
                       builder: (context, snapshot) {
+                        log(snapshot.data?.docs[0]['className']);
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
                           return Center(child: CircularProgressIndicator());
                         }
-                        return Container(
-                          height: screenSize.width * 1 / 30,
-                          width: screenSize.width * 0.30,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                                color: Color.fromARGB(255, 238, 238, 238)),
-                            borderRadius: BorderRadius.circular(13),
-                          ),
-                          child: DropdownButton(
-                              hint: Padding(
-                                  padding: EdgeInsets.all(10.0),
-                                  child: (classListValue == null)
-                                      ? Text(
-                                          "Select Class",
-                                          style: TextStyle(
-                                              color:
-                                                  Color.fromARGB(255, 0, 0, 0),
-                                              fontSize: 18),
-                                        )
-                                      : Text(classListValue['id'])),
-                              underline: const SizedBox(),
-                              style: const TextStyle(
-                                fontSize: 18,
-                                color: Colors.black,
-                              ),
-                              icon: const Padding(
-                                padding: EdgeInsets.all(
-                                  13,
+                        return GestureDetector( 
+                          onTap: (){
+                            log(widget.schoolID);
+                          },
+                          child: Container(
+                            height: screenSize.width * 1 / 30,
+                            width: screenSize.width * 0.30,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(
+                                  color: Color.fromARGB(255, 238, 238, 238)),
+                              borderRadius: BorderRadius.circular(13),
+                            ),
+                            child: DropdownButton(
+                                hint: Padding(
+                                    padding: EdgeInsets.all(10.0),
+                                    child: (classListValue == null)
+                                        ? Text(
+                                            "Select Class",
+                                            style: TextStyle(
+                                                color:
+                                                    Color.fromARGB(255, 0, 0, 0),
+                                                fontSize: 18),
+                                          )
+                                        : Text(classListValue['id'])),
+                                underline: const SizedBox(),
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
                                 ),
-                                child: Icon(Icons.arrow_drop_down,
-                                    size: 18, color: Colors.grey),
-                              ),
-                              isExpanded: true,
-                              items: snapshot.data!.docs.map(
-                                (val) {
-                                  return DropdownMenuItem(
-                                    value: val["classID"],
-                                    child: Text(val["classID"]),
-                                  );
-                                },
-                              ).toList(),
-                              onChanged: (val) {
-                                var categoryIDObject = snapshot.data!.docs
-                                    .where(
-                                        (element) => element["classID"] == val)
-                                    .toList()
-                                    .first;
-                                print(categoryIDObject['classID']);
-
-                                setState(
-                                  () {
-                                    classListValue = categoryIDObject;
+                                icon: const Padding(
+                                  padding: EdgeInsets.all(
+                                    13,
+                                  ),
+                                  child: Icon(Icons.arrow_drop_down,
+                                      size: 18, color: Colors.grey),
+                                ),
+                                isExpanded: true,
+                                items: snapshot.data!.docs.map(
+                                  (val) {
+                                    return DropdownMenuItem(
+                                      value: val["classID"],
+                                      child: Text(val["classID"]),
+                                    );
                                   },
-                                );
-                              }),
+                                ).toList(),
+                                onChanged: (val) {
+                                  var categoryIDObject = snapshot.data!.docs
+                                      .where(
+                                          (element) => element["classID"] == val)
+                                      .toList()
+                                      .first;
+                                  print(categoryIDObject['classID']);
+                        
+                                  setState(
+                                    () {
+                                      classListValue = categoryIDObject;
+                                    },
+                                  );
+                                }),
+                          ),
                         );
                       }),
                 ),
