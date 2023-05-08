@@ -1,6 +1,7 @@
 import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../../../colors/colors.dart';
 import '../family_policy.dart';
 import '../lepton_Admin/admin_panel_Screen.dart';
@@ -30,12 +31,12 @@ class FooterSection extends StatelessWidget {
             width: double.infinity,
             color: Colors.transparent,
             child: Padding(
-              padding:  EdgeInsets.all(8.0),
+              padding:  const EdgeInsets.all(8.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
+                  SizedBox(
                     height: 300,
                     width: double.infinity,
                     child: Row(
@@ -79,7 +80,7 @@ class FooterSection extends StatelessWidget {
                               child: OnHoverText(
                                 builder: (isHoverd) {
                                   final color =
-                                      isHoverd ? Color.fromARGB(255, 168, 15, 4) : Colors.black;
+                                      isHoverd ? const Color.fromARGB(255, 168, 15, 4) : Colors.black;
                                   return SizedBox(
                                        width: screenSize.width/10,
                                       child: Text(
@@ -140,7 +141,7 @@ class FooterSection extends StatelessWidget {
                                child: OnHoverText(
                                 builder: (isHoverd) {
                                   final color =
-                                      isHoverd ? Color.fromARGB(255, 255, 0, 0) : Colors.black;
+                                      isHoverd ? const Color.fromARGB(255, 255, 0, 0) : Colors.black;
                                   return SizedBox(
                                       width: screenSize.width/15,
                                       
@@ -233,7 +234,7 @@ class FooterSection extends StatelessWidget {
                             ),
                             GestureDetector(
                               onTap: () {
-                                 Navigator.push(context, MaterialPageRoute(builder:((context) =>TermsAndConditions())));
+                                 Navigator.push(context, MaterialPageRoute(builder:((context) =>const TermsAndConditions())));
                               },
                               child: OnHoverText(
                                 builder: (isHoverd) {
@@ -251,7 +252,7 @@ class FooterSection extends StatelessWidget {
                             ),
                                 GestureDetector(
                               onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder:((context) => FamilyPolicyScreen())));
+                                Navigator.push(context, MaterialPageRoute(builder:((context) => const FamilyPolicyScreen())));
                               },
                               child: OnHoverText(
                                 builder: (isHoverd) {
@@ -269,7 +270,7 @@ class FooterSection extends StatelessWidget {
                             ),
                             GestureDetector(
                               onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder:((context) => PrivacyPolicy())));
+                                Navigator.push(context, MaterialPageRoute(builder:((context) => const PrivacyPolicy())));
                               },
                               child: OnHoverText(
                                 builder: (isHoverd) {
@@ -325,7 +326,7 @@ class FooterSection extends StatelessWidget {
                             ),
                             Row(
                               children: [
-                                 Icon(Icons.location_on,color: Color.fromARGB(255, 4, 124, 4),size: screenSize.width/50),
+                                 Icon(Icons.location_on,color: const Color.fromARGB(255, 4, 124, 4),size: screenSize.width/50),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -339,7 +340,7 @@ class FooterSection extends StatelessWidget {
                             sizedBoxW20,
                              Row(
                               children: [
-                                 Icon(Icons.location_on,color: Color.fromARGB(255, 4, 124, 4),size: screenSize.width/50),
+                                 Icon(Icons.location_on,color: const Color.fromARGB(255, 4, 124, 4),size: screenSize.width/50),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -381,22 +382,22 @@ class FooterSection extends StatelessWidget {
               ),
             ),
           ),
-           Divider(
+           const Divider(
             thickness: 1,
             color: Color(0xFF26A69A),
           ),
-          Container(
+          SizedBox(
             height: 200,
             width: double.infinity,
             child: Padding(
-              padding:  EdgeInsets.all(8.0),
+              padding:  const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
                     height: screenSize.width/10,
                     width: screenSize.width/6,
-                    decoration:  BoxDecoration(
+                    decoration:  const BoxDecoration(
                         image: DecorationImage(
                             image: NetworkImage(
                                 'https://firebasestorage.googleapis.com/v0/b/leptonscipro-31792.appspot.com/o/files%2Fimages%2FLepton-removebg-preview.png?alt=media&token=cb2cbd20-7630-4681-8857-f8b245018453'))),
