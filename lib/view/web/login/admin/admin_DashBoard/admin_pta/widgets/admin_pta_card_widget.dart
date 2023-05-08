@@ -22,7 +22,7 @@ class PtaCardWidget extends StatelessWidget {
   final String designation;
   final String position;
 
-  final String? imageUrl;
+  final String imageUrl;
   final IconData iconData;
   final String memberId;
   final String imageId;
@@ -32,17 +32,9 @@ class PtaCardWidget extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey),
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
-          // boxShadow: [
-          //   BoxShadow(
-          //     color: Colors.grey.withOpacity(0.5),
-          //     spreadRadius: 3,
-          //     blurRadius: 3,
-          //     offset: const Offset(0, 3),
-          //   ),
-          // ]
-          ),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+      ),
       child: SizedBox(
         width: 200,
         child: Column(
@@ -51,9 +43,9 @@ class PtaCardWidget extends StatelessWidget {
             FittedBox(
               child: CircleAvatar(
                 maxRadius: MediaQuery.of(context).size.width * .03,
-                backgroundImage: imageUrl == null || imageUrl!.isEmpty
+                backgroundImage:  imageUrl.isEmpty
                     ? const AssetImage('assets/images/user.png')
-                    : NetworkImage(imageUrl!) as ImageProvider,
+                    : NetworkImage(imageUrl) as ImageProvider,
               ),
             ),
             FittedBox(

@@ -24,11 +24,11 @@ class MothersPtaCardWidget extends StatelessWidget {
   final String designation;
   final String position;
 
-  final String? imageUrl;
+  final String imageUrl;
   final IconData iconData;
   final String memberId;
   final String imageId;
-  final MothersPtaController controller = Get.find<MothersPtaController>();
+  final MothersPtaController controller = Get.put(MothersPtaController());
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
@@ -58,9 +58,9 @@ class MothersPtaCardWidget extends StatelessWidget {
                   }
                 },
                 maxRadius: MediaQuery.of(context).size.width * .03,
-                backgroundImage: imageUrl == null || imageUrl!.isEmpty
+                backgroundImage: imageUrl.isEmpty
                     ? const AssetImage('assets/images/user.png')
-                    : NetworkImage(imageUrl!) as ImageProvider,
+                    : NetworkImage(imageUrl) as ImageProvider,
               ),
             ),
             FittedBox(

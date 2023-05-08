@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../../../../model/admin_models/student_protection_model/student_protection_model.dart';
+import '../../../../../../../model/admin_models/mothers_pta_model/mothers_pta_model.dart';
 import '../../../../../../../utils/screen_size.dart';
 import '../../../../../../colors/colors.dart';
 import '../../../../../../constant/constant.dart';
 import '../../../../../widgets/Iconbackbutton.dart';
-import 'student_protection_card_widget.dart';
+import '../../admin_pta/widgets/admin_pta_card_widget.dart';
+import 'mothers_pta_card_widget.dart';
 
-class StudentProtectionLeftCardWidget extends StatelessWidget {
-  const StudentProtectionLeftCardWidget({
+class MothersPtaLeftSideWidget extends StatelessWidget {
+  const MothersPtaLeftSideWidget({
     super.key,
     required this.headMasterModel,
     required this.presidentModel,
@@ -18,11 +19,11 @@ class StudentProtectionLeftCardWidget extends StatelessWidget {
     required this.representativeModel,
   });
 
-  final StudentProtectionGroupModel? headMasterModel;
-  final StudentProtectionGroupModel? presidentModel;
-  final StudentProtectionGroupModel? vicePresidentModel;
-  final StudentProtectionGroupModel? chairPersonModel;
-  final StudentProtectionGroupModel? representativeModel;
+  final MothersPtaModel? headMasterModel;
+  final MothersPtaModel? presidentModel;
+  final MothersPtaModel? vicePresidentModel;
+  final MothersPtaModel? chairPersonModel;
+  final MothersPtaModel? representativeModel;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,7 @@ class StudentProtectionLeftCardWidget extends StatelessWidget {
                 color: cWhite,
               ),
               Text(
-                "Student Protection Group",
+                "Mothers PTA",
                 style: GoogleFonts.poppins(
                   fontSize: 23,
                   fontWeight: FontWeight.bold,
@@ -57,7 +58,7 @@ class StudentProtectionLeftCardWidget extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        "Executive Members",
+                        "Mothers PTA Executive Members",
                         style: GoogleFonts.oswald(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
@@ -65,7 +66,7 @@ class StudentProtectionLeftCardWidget extends StatelessWidget {
                         ),
                       ),
                       sizedBoxH10,
-                      StudentProtectionCardWidet(
+                      MothersPtaCardWidget(
                           designation:
                               headMasterModel?.designation ?? "Headmaster",
                           iconData: Icons.edit,
@@ -79,7 +80,7 @@ class StudentProtectionLeftCardWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Flexible(
-                            child: StudentProtectionCardWidet(
+                            child: MothersPtaCardWidget(
                                 designation:
                                     presidentModel?.designation ?? "President",
                                 iconData: Icons.edit,
@@ -91,7 +92,7 @@ class StudentProtectionLeftCardWidget extends StatelessWidget {
                                     presidentModel?.position ?? "Position"),
                           ),
                           Flexible(
-                            child: StudentProtectionCardWidet(
+                            child: MothersPtaCardWidget(
                                 designation: vicePresidentModel?.designation ??
                                     "Vice President",
                                 iconData: Icons.edit,
@@ -110,7 +111,7 @@ class StudentProtectionLeftCardWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Flexible(
-                            child: StudentProtectionCardWidet(
+                            child: MothersPtaCardWidget(
                                 designation: chairPersonModel?.designation ??
                                     "ChairPerson",
                                 iconData: Icons.edit,
@@ -122,7 +123,7 @@ class StudentProtectionLeftCardWidget extends StatelessWidget {
                                     chairPersonModel?.position ?? "Position"),
                           ),
                           Flexible(
-                            child: StudentProtectionCardWidet(
+                            child: MothersPtaCardWidget(
                                 designation: representativeModel?.designation ??
                                     "Representative",
                                 iconData: Icons.edit,

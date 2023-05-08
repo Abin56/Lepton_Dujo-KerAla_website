@@ -4,6 +4,8 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
+import 'package:dujo_kerala_website/controller/get_firebase-data/get_firebase_data.dart';
 import 'package:dujo_kerala_website/view/fonts/fonts.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Create_buttonWidget.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
@@ -11,6 +13,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
@@ -45,12 +48,13 @@ class _AddAchievementsState extends State<AddAchievements> {
       }
     });
   }
-  var classListValue;
-  var studentListValue;
+  QueryDocumentSnapshot<Map<String, dynamic>>? classListValue;
+  QueryDocumentSnapshot<Map<String, dynamic>>? studentListValue;
   final FirebaseStorage _storage = FirebaseStorage.instance;
   Uint8List? _file;
   Uint8List? file;
   bool loadingStatus = false;
+  String studentID = '';
 
 
 
@@ -80,15 +84,18 @@ class _AddAchievementsState extends State<AddAchievements> {
 
       AchievementModel modell = AchievementModel(
           photoUrl: downloadUrl,
-          studentName: studentListValue['studentName'],
+          studentName: studentListValue?['studentName'],
           dateofAchievement: dateController.text,
           description: descriptionController.text,
           achievement: achievementController.text,
-          admissionNumber: admissionNumberController.text);
+          admissionNumber: admissionNumberController.text, 
+          studentID: studentID);
 
-      FirebaseFirestore.instance
+      FirebaseFirestore.instance //d4srOy0ovzUPBmZs3CBFRoOImIU2
           .collection('SchoolListCollection')
           .doc(widget.schoolID)
+          .collection(Get.find<GetFireBaseData>().bYear.value)
+          .doc(Get.find<GetFireBaseData>().bYear.value)
           .collection('Achievements')
           .doc()
           .set(modell.toJson());
@@ -175,14 +182,19 @@ class _AddAchievementsState extends State<AddAchievements> {
                   child: StreamBuilder(
                       stream: FirebaseFirestore.instance
                           .collection('SchoolListCollection')
-                          .doc(widget.schoolID)
-                          .collection('Classes')
+                          .doc(Get.find<AdminLoginScreenController>().schoolID)
+                          .collection('classes')
                           .snapshots(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
                           return Center(child: CircularProgressIndicator());
-                        }
+                        } 
+
+                    //
+                    //    if(snapshot.hasData){
+                         // return Text(snapshot.data!.docs[0]['className']);
+                       // }
                         return Container(
                           height: screenSize.width * 1 / 30,
                           width: screenSize.width * 0.30,
@@ -203,7 +215,7 @@ class _AddAchievementsState extends State<AddAchievements> {
                                                   Color.fromARGB(255, 0, 0, 0),
                                               fontSize: 18),
                                         )
-                                      : Text(classListValue['id'])),
+                                      : Text(classListValue?['className'])),
                               underline: const SizedBox(),
                               style: const TextStyle(
                                 fontSize: 18,
@@ -217,27 +229,33 @@ class _AddAchievementsState extends State<AddAchievements> {
                                     size: 18, color: Colors.grey),
                               ),
                               isExpanded: true,
-                              items: snapshot.data!.docs.map(
+                              items: snapshot.data?.docs.map(
                                 (val) {
                                   return DropdownMenuItem(
-                                    value: val["classID"],
-                                    child: Text(val["classID"]),
+                                    value: val["docid"],
+                                    child: Text(val["className"]),
                                   );
                                 },
                               ).toList(),
                               onChanged: (val) {
-                                var categoryIDObject = snapshot.data!.docs
+                                 QueryDocumentSnapshot<Map<String, dynamic>>? categoryIDObject = snapshot.data?.docs
                                     .where(
-                                        (element) => element["classID"] == val)
+                                        (element) => element["docid"] == val.toString())
                                     .toList()
                                     .first;
-                                print(categoryIDObject['classID']);
-
+                               log(categoryIDObject?['docid']);
+                        
                                 setState(
                                   () {
-                                    classListValue = categoryIDObject;
-                                  },
-                                );
+                        
+                                     classListValue = categoryIDObject; 
+                                     studentID = studentListValue?['docid'];
+                                  }, 
+
+              
+                                  
+                                ); 
+                                log(classListValue?['docid']);
                               }),
                         );
                       }),
@@ -252,14 +270,16 @@ class _AddAchievementsState extends State<AddAchievements> {
                         stream: FirebaseFirestore.instance
                             .collection('SchoolListCollection')
                             .doc(widget.schoolID)
-                            .collection('Classes')
-                            .doc(classListValue['classID'])
+                            .collection(Get.find<GetFireBaseData>().bYear.value)
+                            .doc(Get.find<GetFireBaseData>().bYear.value)
+                            .collection('classes')
+                            .doc(classListValue?['docid'])
                             .collection('Students')
                             .snapshots(),
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
-                            return Center(child: CircularProgressIndicator());
+                            return const Center(child: CircularProgressIndicator());
                           }
                           return Container(
                             height: screenSize.width * 1 / 30,
@@ -281,7 +301,7 @@ class _AddAchievementsState extends State<AddAchievements> {
                                                     255, 0, 0, 0),
                                                 fontSize: 18),
                                           )
-                                        : Text(studentListValue['id'])),
+                                        : Text(studentListValue?['studentName'])),
                                 underline: const SizedBox(),
                                 style: const TextStyle(
                                   fontSize: 18,
@@ -295,17 +315,17 @@ class _AddAchievementsState extends State<AddAchievements> {
                                       size: 18, color: Colors.grey),
                                 ),
                                 isExpanded: true,
-                                items: snapshot.data!.docs.map(
+                                items: snapshot.data?.docs.map(
                                   (val) {
                                     return DropdownMenuItem(
-                                      value: val["id"],
-                                      child: Text(val["id"]),
+                                      value: val["docid"],
+                                      child: Text(val["studentName"]),
                                     );
                                   },
                                 ).toList(),
                                 onChanged: (val) {
-                                  var categoryIDObject = snapshot.data!.docs
-                                      .where((element) => element["id"] == val)
+                                  var categoryIDObject = snapshot.data?.docs
+                                      .where((element) => element["docid"] == val.toString())
                                       .toList()
                                       .first;
 
@@ -313,7 +333,8 @@ class _AddAchievementsState extends State<AddAchievements> {
                                     () {
                                       studentListValue = categoryIDObject;
                                     },
-                                  );
+                                  ); 
+                                  log(studentListValue?['docid']);
                                 }),
                           );
                         }),
@@ -446,13 +467,14 @@ class _AddAchievementsState extends State<AddAchievements> {
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: (InkWell(
-                    onTap: () {
+                    onTap: () async{
+                  
+                      
+                     await uploadImageToStorage(file).then((value) => showToast(msg: 'New Achievement Added!'));
                       achievementController.clear();
                       dateController.clear();
                       descriptionController.clear();
                       admissionNumberController.clear();
-                      
-                      uploadImageToStorage(file).then((value) => showToast(msg: 'New Achievement Added!'));
                     },
                     child: CreateContainerWidget(text: 'Create',fontSize: 20.w,),
                   )),

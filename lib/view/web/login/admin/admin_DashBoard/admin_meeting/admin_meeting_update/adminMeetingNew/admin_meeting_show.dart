@@ -22,14 +22,13 @@ class MeetingDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     Size screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
         appBar: AppBar(
           // backgroundColor: const Color(0xFFF7D8BA),
           backgroundColor: adminePrimayColor,
-          title: Text("Meetings List"),
+          title: const Text("Meetings List"),
         ),
         // backgroundColor: const Color(0xFFF7D8BA),
         body: SafeArea(
@@ -107,6 +106,18 @@ class MeetingDisplay extends StatelessWidget {
                                                   builder:
                                                       (BuildContext context) {
                                                     return AlertDialog(
+                                                      icon: Align(
+                                                          alignment: Alignment
+                                                              .topRight,
+                                                          child: CloseButton(
+                                                            onPressed: () {
+                                                              adminMeetingController
+                                                                  .clearControllers();
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                          )),
                                                       content: AdminMeetingShowPage(
                                                           schoolId: schoolId,
                                                           adminMeetingModel:

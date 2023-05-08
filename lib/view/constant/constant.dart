@@ -168,24 +168,7 @@ String? checkFieldPasswordIsValid(String? fieldContent) {
   }
 }
 
-//image picket
 
-Future<Uint8List?> pickImage(ImageSource source) async {
-  try {
-    final pickedFile = await ImagePicker().pickImage(
-      source: source,
-    );
-    if (pickedFile != null) {
-      return await pickedFile.readAsBytes();
-    }
-  } catch (e) {
-    if (kDebugMode) {
-      print(e);
-    }
-    return null;
-  }
-  return null;
-}
 
 class TeacherLoginIDSaver {
   static String id = '';
