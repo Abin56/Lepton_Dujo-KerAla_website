@@ -1,11 +1,9 @@
-
 import 'package:dujo_kerala_website/view/web/home/dujo_home.dart';
+import 'package:dujo_kerala_website/view/web/home/homep.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
-import 'view/web/login/admin/admin_DashBoard/classes/add_class.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,10 +41,9 @@ class MyApp extends StatelessWidget {
                 // ignore: deprecated_member_use
                 accentColor: const Color(0xFF02BB9F),
               ),
-              home:
-             // AddClassesSectionScreen(schoolID: '',)
-               DujoHomePage()
-              );
+              home: 
+            HomeP());
+            
         });
   }
 }

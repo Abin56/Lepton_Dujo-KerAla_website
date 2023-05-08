@@ -17,7 +17,8 @@ class AchievementModel {
       required this.dateofAchievement,
       required this.description,
       required this.achievement,
-      required this.admissionNumber
+      required this.admissionNumber, 
+      required this.studentID
   });
 
   String photoUrl;
@@ -25,7 +26,8 @@ class AchievementModel {
   String dateofAchievement;
   String description;
   String achievement;
-  String admissionNumber;
+  String admissionNumber; 
+  String studentID;
 
   factory AchievementModel.fromJson(Map<String, dynamic> json) =>
       AchievementModel(
@@ -34,7 +36,8 @@ class AchievementModel {
           dateofAchievement: json["dateofAchievement"],
           description: json["description"],
           achievement: json["achievement"],
-          admissionNumber: json["admissionNumber"]
+          admissionNumber: json["admissionNumber"], 
+          studentID: json["studentID"],
          );
 
   Map<String, dynamic> toJson() => {
@@ -43,6 +46,7 @@ class AchievementModel {
         "dateofAchievement": dateofAchievement,
         "description": description,
         "achievement": achievement,
-        "admissionNumber" : admissionNumber
+        "admissionNumber" : admissionNumber, 
+        "studentID": studentID
       };
 }

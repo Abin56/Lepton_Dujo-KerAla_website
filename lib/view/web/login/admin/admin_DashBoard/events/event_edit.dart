@@ -5,6 +5,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
 
@@ -36,6 +37,7 @@ class _EventsEditREmoveState extends State<EventsEditREmove> {
           stream: FirebaseFirestore.instance
               .collection('SchoolListCollection')
               .doc(widget.schoolID)
+              .collection(Get.find<GetFireBaseData>().bYear.value).doc(Get.find<GetFireBaseData>().bYear.value)
               .collection('AdminEvents')
               .snapshots(),
           builder: (context, snapshot) {
@@ -169,6 +171,7 @@ class _EventsEditREmoveState extends State<EventsEditREmove> {
                                                       .collection(
                                                           'SchoolListCollection')
                                                       .doc(widget.schoolID)
+                                                      .collection(Get.find<GetFireBaseData>().bYear.value).doc(Get.find<GetFireBaseData>().bYear.value)
                                                       .collection('AdminEvents')
                                                       .doc(snapshot.data!
                                                           .docs[index]['id'])
@@ -287,6 +290,7 @@ class _EventsEditREmoveState extends State<EventsEditREmove> {
                                                   .collection(
                                                       'SchoolListCollection')
                                                   .doc(widget.schoolID)
+                                                  .collection(Get.find<GetFireBaseData>().bYear.value).doc(Get.find<GetFireBaseData>().bYear.value)
                                                   .collection('AdminEvents')
                                                   .doc(snapshot
                                                       .data!.docs[index]['id'])
