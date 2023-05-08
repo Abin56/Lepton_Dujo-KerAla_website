@@ -18,16 +18,10 @@ class _FamilyPolicyScreenState extends State<FamilyPolicyScreen> {
             width: screenSize.width * 1 / 2,
             child: Column(
               children: [
-                Container(
-                  child: Image.asset(
-                    "assets/images/child policy_1.jpg",
-                  ),
-                ),
-                Container(
-                  child: Image.asset(
-                    "assets/images/child policy_2.jpg",
-                  ),
-                ),
+                Image.network(
+                    'https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/files%2FImages%2Fpolicy%2Fchild%20policy_1.jpg?alt=media&token=09a998f0-412b-474e-a7f6-82affda0f92f'),
+                Image.network(
+                    'https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/files%2FImages%2Fpolicy%2Fchild%20policy_2.jpg?alt=media&token=dd2b4a24-86c4-40c6-aa0a-374938492901'),
               ],
             ),
           ),
