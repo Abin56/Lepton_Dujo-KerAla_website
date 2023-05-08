@@ -28,7 +28,7 @@ class MothersPtaCardWidget extends StatelessWidget {
   final IconData iconData;
   final String memberId;
   final String imageId;
-  final MothersPtaController controller = Get.find<MothersPtaController>();
+  final MothersPtaController controller = Get.put(MothersPtaController());
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(

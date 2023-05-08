@@ -1,11 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../../controller/Getx/admin/notice_controller.dart';
 import '../../../../../../../model/admin_models/admin_notice_model/admin_notice_model.dart';
+import '../../../../../../../utils/utils.dart';
 import '../../../../../../constant/constant.dart';
-
 
 class AdminNoticeShow extends StatefulWidget {
   const AdminNoticeShow(
@@ -22,6 +21,7 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
   int _selectedContainerIndex = 0;
   AdminNoticeController adminNoticeController =
       Get.put(AdminNoticeController());
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -46,229 +46,257 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                   ? const Center(
                       child: CircularProgressIndicator(),
                     )
-                  : Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                          TextField(
-                            controller:
-                                adminNoticeController.publishedDateController,
-                            decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
-                              labelText: 'Published Date'.tr,
-                            ),
-                          ),
-                          sizedBoxH20,
-                          TextField(
-                            controller: adminNoticeController.headingController,
-                            decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
-                              labelText: 'Heading'.tr,
-                            ),
-                          ),
-                          sizedBoxH20,
-                          TextField(
-                            controller:
-                                adminNoticeController.dateOfOccasionController,
-                            decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
-                              labelText: 'Date of occation'.tr,
-                            ),
-                          ),
-                          sizedBoxH20,
-                          TextField(
-                            decoration: InputDecoration(
+                  : Form(
+                      key: formKey,
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextFormField(
+                              readOnly: true,
+                              onTap: () async => adminNoticeController
+                                  .publishedDateController
+                                  .text = await dateTimePicker(context),
+                              validator: checkFieldEmpty,
+                              controller:
+                                  adminNoticeController.publishedDateController,
+                              decoration: InputDecoration(
                                 border: const OutlineInputBorder(),
-                                labelText: 'Venue'.tr,
-                                labelStyle: const TextStyle(
-                                    color: Colors.black, fontSize: 16)),
-                          ),
-                          sizedBoxH20,
-                          TextField(
-                            controller:
-                                adminNoticeController.chiefGuestController,
-                            decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
-                              labelText: 'Chief Guest'.tr,
+                                labelText: 'Published Date'.tr,
+                              ),
                             ),
-                          ),
-                          sizedBoxH20,
-                          TextField(
-                            controller: adminNoticeController
-                                .dateOfSubmissionController,
-                            decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
-                              labelText: 'Date of Submission'.tr,
+                            sizedBoxH20,
+                            TextFormField(
+                              validator: checkFieldEmpty,
+                              controller:
+                                  adminNoticeController.headingController,
+                              decoration: InputDecoration(
+                                border: const OutlineInputBorder(),
+                                labelText: 'Heading'.tr,
+                              ),
                             ),
-                          ),
-                          sizedBoxH20,
-                          TextField(
-                            controller:
-                                adminNoticeController.signedByController,
-                            decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
-                              labelText: 'Signed by'.tr,
+                            sizedBoxH20,
+                            TextFormField(
+                              readOnly: true,
+                              onTap: () async => adminNoticeController
+                                  .dateOfOccasionController
+                                  .text = await dateTimePicker(context),
+                              validator: checkFieldEmpty,
+                              controller: adminNoticeController
+                                  .dateOfOccasionController,
+                              decoration: InputDecoration(
+                                border: const OutlineInputBorder(),
+                                labelText: 'Date of occation'.tr,
+                              ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
+                            sizedBoxH20,
+                            TextFormField(
+                              validator: checkFieldEmpty,
+                              decoration: InputDecoration(
+                                  border: const OutlineInputBorder(),
+                                  labelText: 'Venue'.tr,
+                                  labelStyle: const TextStyle(
+                                      color: Colors.black, fontSize: 16)),
+                            ),
+                            sizedBoxH20,
+                            TextFormField(
+                              validator: checkFieldEmpty,
+                              controller:
+                                  adminNoticeController.chiefGuestController,
+                              decoration: InputDecoration(
+                                border: const OutlineInputBorder(),
+                                labelText: 'Chief Guest'.tr,
+                              ),
+                            ),
+                            sizedBoxH20,
+                            TextFormField(
+                              readOnly: true,
+                              onTap: () async => adminNoticeController
+                                  .dateOfOccasionController
+                                  .text = await dateTimePicker(context),
+                              validator: checkFieldEmpty,
+                              controller: adminNoticeController
+                                  .dateOfSubmissionController,
+                              decoration: InputDecoration(
+                                border: const OutlineInputBorder(),
+                                labelText: 'Date of Submission'.tr,
+                              ),
+                            ),
+                            sizedBoxH20,
+                            TextFormField(
+                              validator: checkFieldEmpty,
+                              controller:
+                                  adminNoticeController.signedByController,
+                              decoration: InputDecoration(
+                                border: const OutlineInputBorder(),
+                                labelText: 'Signed by'.tr,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                mainAxisSize: MainAxisSize.max,
+                                children: <Widget>[
+                                  Row(
+                                    children: [
+                                      Checkbox(
+                                        value: adminNoticeController
+                                            .studentCheckBox.value,
+                                        onChanged: (value) {
+                                          adminNoticeController.studentCheckBox
+                                              .value = value ?? false;
+                                        },
+                                      ),
+                                      const Text('Students')
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Checkbox(
+                                        value: adminNoticeController
+                                            .teacherCheckBox.value,
+                                        onChanged: (value) {
+                                          adminNoticeController.teacherCheckBox
+                                              .value = value ?? false;
+                                        },
+                                      ),
+                                      const Text('Teacher')
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Checkbox(
+                                        value: adminNoticeController
+                                            .guardianCheckBox.value,
+                                        onChanged: (value) {
+                                          adminNoticeController.guardianCheckBox
+                                              .value = value ?? false;
+                                        },
+                                      ),
+                                      const Text('Guardian')
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              mainAxisSize: MainAxisSize.max,
                               children: <Widget>[
-                                Row(
-                                  children: [
-                                    Checkbox(
-                                      value: adminNoticeController
-                                          .studentCheckBox.value,
-                                      onChanged: (value) {
-                                        adminNoticeController.studentCheckBox
-                                            .value = value ?? false;
-                                      },
+                                Flexible(
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      shape: const StadiumBorder(),
                                     ),
-                                    const Text('Students')
-                                  ],
+                                    onPressed: () async {
+                                      final data = await adminNoticeController
+                                          .photoUpdate(
+                                              uid: widget.adminNoticeModel
+                                                  .signedImageId);
+                                      if (data.isNotEmpty) {
+                                        adminNoticeController
+                                            .signedImageUrl.value = data;
+                                      }
+                                    },
+                                    child: Text(
+                                      'Update Sign'.tr,
+                                    ),
+                                  ),
                                 ),
-                                Row(
-                                  children: [
-                                    Checkbox(
-                                      value: adminNoticeController
-                                          .teacherCheckBox.value,
-                                      onChanged: (value) {
-                                        adminNoticeController.teacherCheckBox
-                                            .value = value ?? false;
-                                      },
+                                Flexible(
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      shape: const StadiumBorder(),
                                     ),
-                                    const Text('Teacher')
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Checkbox(
-                                      value: adminNoticeController
-                                          .guardianCheckBox.value,
-                                      onChanged: (value) {
-                                        adminNoticeController.guardianCheckBox
-                                            .value = value ?? false;
-                                      },
+                                    onPressed: () async {
+                                      final data = await adminNoticeController
+                                          .photoUpdate(
+                                        uid: widget
+                                            .adminNoticeModel.signedImageId,
+                                      );
+                                      if (data.isNotEmpty) {
+                                        adminNoticeController.imageUrl.value =
+                                            data;
+                                      }
+                                    },
+                                    child: Text(
+                                      'Update Image'.tr,
                                     ),
-                                    const Text('Guardian')
-                                  ],
+                                  ),
                                 ),
                               ],
                             ),
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Flexible(
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    shape: const StadiumBorder(),
-                                  ),
-                                  onPressed: () async {
-                                    final data =
-                                        await adminNoticeController.photoUpdate(
-                                            uid: widget.adminNoticeModel
-                                                .signedImageId);
-                                    if (data.isNotEmpty) {
-                                      adminNoticeController
-                                          .signedImageUrl.value = data;
-                                    }
-                                  },
-                                  child: Text(
-                                    'Update Sign'.tr,
-                                  ),
-                                ),
-                              ),
-                              Flexible(
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    shape: const StadiumBorder(),
-                                  ),
-                                  onPressed: () async {
-                                    final data =
-                                        await adminNoticeController.photoUpdate(
-                                      uid:
-                                          widget.adminNoticeModel.signedImageId,
-                                    );
-                                    if (data.isNotEmpty) {
-                                      adminNoticeController.imageUrl.value =
-                                          data;
-                                    }
-                                  },
-                                  child: Text(
-                                    'Update Image'.tr,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          GestureDetector(
-                            onTap: () async {
-                              await adminNoticeController.updateAdminNotice(
-                                  AdminNoticeModel(
-                                    publishedDate: adminNoticeController
-                                        .publishedDateController.text,
-                                    heading: adminNoticeController
-                                        .headingController.text,
-                                    dateofoccation: adminNoticeController
-                                        .dateOfOccasionController.text,
-                                    venue: adminNoticeController
-                                        .venueController.text,
-                                    chiefGuest: adminNoticeController
-                                        .chiefGuestController.text,
-                                    dateOfSubmission: adminNoticeController
-                                        .dateOfSubmissionController.text,
-                                    signedBy: adminNoticeController
-                                        .signedByController.text,
-                                    imageUrl:
-                                        adminNoticeController.imageUrl.value,
-                                    signedImageUrl: adminNoticeController
-                                        .signedImageUrl.value,
-                                    imageId: widget.adminNoticeModel.imageId,
-                                    signedImageId:
-                                        widget.adminNoticeModel.signedImageId,
-                                    noticeId: widget.adminNoticeModel.noticeId,
-                                    customContent: adminNoticeController
-                                        .customContentController.text,
-                                    visibleGuardian: adminNoticeController
-                                        .guardianCheckBox.value,
-                                    visibleStudent: adminNoticeController
-                                        .studentCheckBox.value,
-                                    visibleTeacher: adminNoticeController
-                                        .teacherCheckBox.value,
-                                  ),
-                                  widget.schoolId,
-                                  context);
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            GestureDetector(
+                              onTap: () async {
+                                if (formKey.currentState?.validate() ?? false) {
+                                  await adminNoticeController.updateAdminNotice(
+                                      AdminNoticeModel(
+                                        publishedDate: adminNoticeController
+                                            .publishedDateController.text,
+                                        heading: adminNoticeController
+                                            .headingController.text,
+                                        dateofoccation: adminNoticeController
+                                            .dateOfOccasionController.text,
+                                        venue: adminNoticeController
+                                            .venueController.text,
+                                        chiefGuest: adminNoticeController
+                                            .chiefGuestController.text,
+                                        dateOfSubmission: adminNoticeController
+                                            .dateOfSubmissionController.text,
+                                        signedBy: adminNoticeController
+                                            .signedByController.text,
+                                        imageUrl: adminNoticeController
+                                            .imageUrl.value,
+                                        signedImageUrl: adminNoticeController
+                                            .signedImageUrl.value,
+                                        imageId:
+                                            widget.adminNoticeModel.imageId,
+                                        signedImageId: widget
+                                            .adminNoticeModel.signedImageId,
+                                        noticeId:
+                                            widget.adminNoticeModel.noticeId,
+                                        customContent: adminNoticeController
+                                            .customContentController.text,
+                                        visibleGuardian: adminNoticeController
+                                            .guardianCheckBox.value,
+                                        visibleStudent: adminNoticeController
+                                            .studentCheckBox.value,
+                                        visibleTeacher: adminNoticeController
+                                            .teacherCheckBox.value,
+                                      ),
+                                      widget.schoolId,
+                                      context);
+                                }
 
-                              setState(() {
-                                _selectedContainerIndex = 0;
-                              });
-                            },
-                            child: Container(
-                              height: screenSize.width * 1 / 30,
-                              width: screenSize.width,
-                              decoration: BoxDecoration(
-                                  color: _selectedContainerIndex == 0
-                                      ? Colors.blue
-                                      : Colors.grey,
-                                  borderRadius: BorderRadius.circular(14)),
-                              child: Center(
-                                child: Text('Update'.tr,
-                                    style: const TextStyle(fontSize: 17)),
+                                setState(() {
+                                  _selectedContainerIndex = 0;
+                                });
+                              },
+                              child: Container(
+                                height: screenSize.width * 1 / 30,
+                                width: screenSize.width,
+                                decoration: BoxDecoration(
+                                    color: _selectedContainerIndex == 0
+                                        ? Colors.blue
+                                        : Colors.grey,
+                                    borderRadius: BorderRadius.circular(14)),
+                                child: Center(
+                                  child: Text('Update'.tr,
+                                      style: const TextStyle(fontSize: 17)),
+                                ),
                               ),
                             ),
-                          ),
-                        ]),
+                          ]),
+                    ),
             ),
           ),
         ),

@@ -1,6 +1,8 @@
 import 'dart:developer';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 Future<String> dateTimePicker(BuildContext context) async {
@@ -29,4 +31,23 @@ Future<String> timePicker(BuildContext context) async {
   } else {
     return "";
   }
+}
+
+//image picket
+
+Future<Uint8List?> pickImage(ImageSource source) async {
+  try {
+    final pickedFile = await ImagePicker().pickImage(
+      source: source,
+    );
+    if (pickedFile != null) {
+      return await pickedFile.readAsBytes();
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print(e);
+    }
+    return null;
+  }
+  return null;
 }

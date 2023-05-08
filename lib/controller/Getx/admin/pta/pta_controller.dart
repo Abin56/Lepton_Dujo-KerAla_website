@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../../utils/utils.dart';
 import '../../../get_firebase-data/get_firebase_data.dart';
 
 class PtaController extends GetxController {
@@ -19,7 +20,7 @@ class PtaController extends GetxController {
           .doc(Get.find<AdminLoginScreenController>().schoolID)
           .collection(Get.find<GetFireBaseData>().bYear.value)
           .doc(Get.find<GetFireBaseData>().bYear.value)
-          .collection('pta');
+          .collection('Pta');
   final FirebaseStorage firebaseStorage = FirebaseStorage.instance;
   RxBool isLoading = RxBool(false);
   TextEditingController nameController = TextEditingController();

@@ -1,9 +1,7 @@
-import 'package:dujo_kerala_website/view/web/widgets/icon_back.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:lottie/lottie.dart';
 import '../../../../controller/text_form_hide/password_filed.dart';
 import '../../../colors/colors.dart';

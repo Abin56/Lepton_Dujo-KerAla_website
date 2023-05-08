@@ -99,27 +99,27 @@ class TeacherModel {
   factory TeacherModel.fromMap(Map<String, dynamic> map) {
     return TeacherModel(
       teacherName:
-          map['teacherName'] != null ? map['teacherName'] as String : null,
+          map['teacherName'] != null ? map['teacherName'] as String : "",
       teacherEmail:
-          map['teacherEmail'] != null ? map['teacherEmail'] as String : null,
-      houseName: map['houseName'] != null ? map['houseName'] as String : null,
+          map['teacherEmail'] != null ? map['teacherEmail'] as String : "",
+      houseName: map['houseName'] != null ? map['houseName'] as String : "",
       houseNumber:
-          map['houseNumber'] != null ? map['houseNumber'] as String : null,
-      place: map['place'] != null ? map['place'] as String : null,
-      gender: map['gender'] != null ? map['gender'] as String : null,
-      district: map['district'] != null ? map['district'] as String : null,
+          map['houseNumber'] != null ? map['houseNumber'] as String : "",
+      place: map['place'] != null ? map['place'] as String : "",
+      gender: map['gender'] != null ? map['gender'] as String : "",
+      district: map['district'] != null ? map['district'] as String : "",
       altPhoneNo:
-          map['altPhoneNo'] != null ? map['altPhoneNo'] as String : null,
+          map['altPhoneNo'] != null ? map['altPhoneNo'] as String : "",
       employeeID:
-          map['employeeID'] != null ? map['employeeID'] as String : null,
-      createdAt: map['createdAt'] != null ? map['createdAt'] as String : null,
+          map['employeeID'] != null ? map['employeeID'] as String : "",
+      createdAt: map['createdAt'] != null ? map['createdAt'] as String : "",
       teacherPhNo:
-          map['teacherPhNo'] != null ? map['teacherPhNo'] as String : null,
-      docid: map['docid'] != null ? map['docid'] as String : null,
+          map['teacherPhNo'] != null ? map['teacherPhNo'] as String : "",
+      docid: map['docid'] != null ? map['docid'] as String : "",
       userRole: map['userRole'] as String,
-      imageId: map['imageId'] != null ? map['imageId'] as String : null,
-      imageUrl: map['imageUrl'] != null ? map['imageUrl'] as String : null,
-      classID: map['classID'] != null ? map['classID'] as String : null,
+      imageId: map['imageId'] != null ? map['imageId'] as String : "",
+      imageUrl: map['imageUrl'] != null ? map['imageUrl'] as String : "",
+      classID: map['classID'] != null ? map['classID'] as String : "",
     );
   }
 

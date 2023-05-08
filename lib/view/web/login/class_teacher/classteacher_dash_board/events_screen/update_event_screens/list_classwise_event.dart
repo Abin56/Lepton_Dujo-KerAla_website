@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import '../../../../../../../controller/Getx/class_teacher/teacher_event_controller/teacher_event_controller.dart';
+import '../../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../../model/class_teacher/class_teacher_event_model.dart';
 import '../../../../../../colors/colors.dart';
 import '../../../../../../constant/constant.dart';
@@ -24,29 +25,15 @@ class ClassEventsPageList extends StatelessWidget {
     Size screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: AppBar(backgroundColor: adminePrimayColor),
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            colors: <Color>[
-              Color(0xFF314755),
-              Color(0xFF26a0da),
-            ],
-          ),
-        ),
+        decoration: const BoxDecoration(),
         child: Scaffold(
-            backgroundColor: Colors.transparent,
             appBar: AppBar(
                 title: GestureDetector(
                     onTap: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) {
-                        return ClassTeacherCreateEventsPage(
-                          classId: classId,
-                          schoolId: schoolId,
-                        );
+                        return ClassTeacherCreateEventsPage();
                       }));
                     },
                     child: const Text('Create'))),
@@ -98,22 +85,19 @@ class ClassEventsPageList extends StatelessWidget {
                                         description: teacherEventController
                                             .classTeacherEventModelData
                                             .value!
-                                            .description,
-                                        chiefGuest: teacherEventController
-                                            .classTeacherEventModelData
-                                            .value!
-                                            .chiefGuest,
-                                        participants: teacherEventController
-                                            .classTeacherEventModelData
-                                            .value!
-                                            .participants,
+                                            .eventDescription,
                                         venue: teacherEventController
                                             .classTeacherEventModelData
                                             .value!
                                             .venue,
+                                        signedBy: teacherEventController
+                                            .classTeacherEventModelData
+                                            .value!
+                                            .signedBy,
                                       ),
                                       if (teacherEventController
-                                              .classTeacherEventModelData.value ==
+                                              .classTeacherEventModelData
+                                              .value ==
                                           null)
                                         const SizedBox()
                                       else
@@ -131,15 +115,21 @@ class ClassEventsPageList extends StatelessWidget {
                                                           builder: (BuildContext
                                                               context) {
                                                             return AlertDialog(
-                                                              content: ClassTeacherEventShow(
-                                                                  schoolId:
-                                                                      schoolId,
-                                                                  classTeacherEventModel:
-                                                                      teacherEventController
-                                                                          .classTeacherEventModelData
-                                                                          .value!,
-                                                                  classId:
-                                                                      classId),
+                                                              icon: Align(
+                                                                alignment: Alignment
+                                                                    .topRight,
+                                                                child: CloseButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            context)),
+                                                              ),
+                                                              content:
+                                                                  ClassTeacherEventShow(
+                                                                classTeacherEventModel:
+                                                                    teacherEventController
+                                                                        .classTeacherEventModelData
+                                                                        .value!,
+                                                              ),
                                                             );
                                                           },
                                                         );
@@ -173,23 +163,16 @@ class ClassEventsPageList extends StatelessWidget {
                                                                 'Cancel'),
                                                           ),
                                                           TextButton(
-                                                            onPressed: () async {
+                                                            onPressed:
+                                                                () async {
                                                               teacherEventController.deleteEvent(
-                                                                  schoolId:
-                                                                      schoolId,
-                                                                  classId:
-                                                                      classId,
-                                                                  documentId:
-                                                                      teacherEventController
-                                                                          .classTeacherEventModelData
-                                                                          .value!
-                                                                          .eventId,
                                                                   context:
                                                                       context,
-                                                                  imageId: teacherEventController
-                                                                      .classTeacherEventModelData
-                                                                      .value!
-                                                                      .imageUid);
+                                                                  documentId: teacherEventController
+                                                                          .classTeacherEventModelData
+                                                                          .value
+                                                                          ?.docid ??
+                                                                      "");
                                                             },
                                                             child: const Text(
                                                                 'Remove'),
@@ -208,16 +191,17 @@ class ClassEventsPageList extends StatelessWidget {
                                 ),
                               );
                   }),
-                  Container(
-                    // color: const Color(0xFFE1F8DC),
+                  SizedBox(
                     width: screenSize.width * 0.6,
                     child: StreamBuilder(
                       stream: FirebaseFirestore.instance
                           .collection('SchoolListCollection')
                           .doc(schoolId)
-                          .collection('Classes')
+                          .collection(Get.find<GetFireBaseData>().bYear.value)
+                          .doc(Get.find<GetFireBaseData>().bYear.value)
+                          .collection('classes')
                           .doc(classId)
-                          .collection('Events')
+                          .collection('ClassEvents')
                           .snapshots(),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
@@ -228,9 +212,9 @@ class ClassEventsPageList extends StatelessWidget {
                                     crossAxisCount: 3),
                             itemBuilder: (context, index) {
                               ClassTeacherEventModel data =
-                                  ClassTeacherEventModel.fromJson(
+                                  ClassTeacherEventModel.fromMap(
                                       snapshot.data!.docs[index].data());
-    
+
                               return GestureDetector(
                                 onTap: () {
                                   teacherEventController
@@ -239,7 +223,7 @@ class ClassEventsPageList extends StatelessWidget {
                                 child: ClassTeacherEventsCardWidget(
                                   date: data.eventDate,
                                   heading: data.eventName,
-                                  description: data.description,
+                                  description: data.eventDescription,
                                   venue: data.venue,
                                 ),
                               );
@@ -295,15 +279,13 @@ class DataTableWidget extends StatelessWidget {
     required this.eventName,
     required this.eventsDate,
     required this.description,
-    required this.chiefGuest,
-    required this.participants,
+    required this.signedBy,
     required this.venue,
   });
   final String eventName;
   final String eventsDate;
   final String description;
-  final String chiefGuest;
-  final String participants;
+  final String signedBy;
   final String venue;
 
   @override
@@ -329,20 +311,10 @@ class DataTableWidget extends StatelessWidget {
       DataRow(
         cells: <DataCell>[
           const DataCell(
-            ClassTeacherNoticeCard(title: 'Chief Guest'),
+            ClassTeacherNoticeCard(title: 'Date'),
           ),
           DataCell(
-            ClassTeacherNoticeCard(title: chiefGuest),
-          ),
-        ],
-      ),
-      DataRow(
-        cells: <DataCell>[
-          const DataCell(
-            ClassTeacherNoticeCard(title: 'Participants'),
-          ),
-          DataCell(
-            ClassTeacherNoticeCard(title: participants),
+            ClassTeacherNoticeCard(title: eventsDate),
           ),
         ],
       ),
@@ -353,6 +325,16 @@ class DataTableWidget extends StatelessWidget {
           ),
           DataCell(
             ClassTeacherNoticeCard(title: venue),
+          ),
+        ],
+      ),
+      DataRow(
+        cells: <DataCell>[
+          const DataCell(
+            ClassTeacherNoticeCard(title: 'Signed By'),
+          ),
+          DataCell(
+            ClassTeacherNoticeCard(title: signedBy),
           ),
         ],
       ),
@@ -381,28 +363,27 @@ class ClassTeacherEventsCardWidget extends StatelessWidget {
         height: screenSize.width * .14,
         width: screenSize.width * .17,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(),
-            gradient: const LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: <Color>[
-                Color(0xFF373B44),
-                Color(0xFF4286f4),
-              ],
-            )),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0),
+              blurRadius: 7,
+            ),
+          ],
+        ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: SingleChildScrollView(
               child: Column(
             children: [
-              Text(heading, style: GoogleFonts.sansita(color: cWhite)),
+              Text(heading, style: GoogleFonts.sansita(color: cBlack)),
               sizedBoxH10,
-              Text(date, style: GoogleFonts.sansita(color: cWhite)),
+              Text(date, style: GoogleFonts.sansita(color: cBlack)),
               sizedBoxH10,
-              Text(description, style: GoogleFonts.sansita(color: cWhite)),
+              Text(description, style: GoogleFonts.sansita(color: cBlack)),
               sizedBoxH10,
-              Text(venue, style: GoogleFonts.sansita(color: cWhite)),
+              Text(venue, style: GoogleFonts.sansita(color: cBlack)),
               sizedBoxH10,
             ],
           )),
@@ -428,7 +409,7 @@ class ClassTeacherNoticeCard extends StatelessWidget {
         title,
         style: GoogleFonts.sansita(
           fontSize: fontSize,
-          color: cWhite,
+          color: cBlack,
         ),
         overflow: TextOverflow.ellipsis,
       ),
