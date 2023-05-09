@@ -1,7 +1,6 @@
 //import 'package:dujo_website/view/pages/web/class_teacher/upload_timetable/showtimetable.dart';
 //import 'package:dujo_website/view/pages/web/class_teacher/upload_timetable/upload_time_tables.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../model/time_table_model/day_model.dart';
@@ -123,7 +122,7 @@ class _TimeTableScreenState extends State<TimeTableScreen> {
         backgroundColor: Colors.transparent,
           appBar: AppBar(
             title: Text('Add Timetable', style: GoogleFonts.poppins(),), 
-            backgroundColor:  Color.fromARGB(255, 0, 70, 128),
+            backgroundColor:  const Color.fromARGB(255, 0, 70, 128),
             actions: [
               Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -133,7 +132,7 @@ class _TimeTableScreenState extends State<TimeTableScreen> {
                     //monday timetable 
                 
                     if(_formKey.currentState!.validate()){
-                         MondayModel Mondaymodel = await MondayModel(firstPeriod: {
+                         MondayModel Mondaymodel = MondayModel(firstPeriod: {
                       'firstPeriod': mondayList[0].text,
                       'firstPeriodTeacher': mondayList[1].text
                     }, secondPeriod: {
@@ -142,7 +141,7 @@ class _TimeTableScreenState extends State<TimeTableScreen> {
                     }, thirdPeriod: {
                       'thirdPeriod': mondayList[4].text,
                       'thirdPeriodTeacher': mondayList[5].text
-                    }, fouthPeriod: {
+                    }, fourthPeriod: {
                       'fourthPeriod': mondayList[6].text,
                       'fourthPeriodTeacher': mondayList[7].text
                     }, fifthPeriod: {
@@ -157,7 +156,7 @@ class _TimeTableScreenState extends State<TimeTableScreen> {
                     }, dayName: 'Monday');
               
                     //tuesday timetable
-                    MondayModel Tuesdaymodel = await MondayModel(firstPeriod: {
+                    MondayModel Tuesdaymodel = MondayModel(firstPeriod: {
                       'firstPeriod': tuesdayList[0].text,
                       'firstPeriodTeacher': tuesdayList[1].text
                     }, secondPeriod: {
@@ -166,7 +165,7 @@ class _TimeTableScreenState extends State<TimeTableScreen> {
                     }, thirdPeriod: {
                       'thirdPeriod': tuesdayList[4].text,
                       'thirdPeriodTeacher': tuesdayList[5].text
-                    }, fouthPeriod: {
+                    }, fourthPeriod: {
                       'fourthPeriod': tuesdayList[6].text,
                       'fourthPeriodTeacher': tuesdayList[7].text
                     }, fifthPeriod: {
@@ -181,75 +180,75 @@ class _TimeTableScreenState extends State<TimeTableScreen> {
                     }, dayName: 'Tuesday');
               
                     //wednesday
-                    MondayModel Wednesdaymodel = await MondayModel(firstPeriod: {
-                      'firstPeriod': tuesdayList[0].text,
-                      'firstPeriodTeacher': tuesdayList[1].text
+                    MondayModel Wednesdaymodel = MondayModel(firstPeriod: {
+                      'firstPeriod': wednesdayList[0].text,
+                      'firstPeriodTeacher': wednesdayList[1].text
                     }, secondPeriod: {
-                      'secondPeriod': tuesdayList[2].text,
-                      'secondPeriodTeacher': tuesdayList[3].text
+                      'secondPeriod': wednesdayList[2].text,
+                      'secondPeriodTeacher': wednesdayList[3].text
                     }, thirdPeriod: {
-                      'thirdPeriod': tuesdayList[4].text,
-                      'thirdPeriodTeacher': tuesdayList[5].text
-                    }, fouthPeriod: {
-                      'fourthPeriod': tuesdayList[6].text,
-                      'fourthPeriodTeacher': tuesdayList[7].text
+                      'thirdPeriod': wednesdayList[4].text,
+                      'thirdPeriodTeacher': wednesdayList[5].text
+                    }, fourthPeriod: {
+                      'fourthPeriod': wednesdayList[6].text,
+                      'fourthPeriodTeacher': wednesdayList[7].text
                     }, fifthPeriod: {
-                      'fifthPeriod': tuesdayList[8].text,
-                      'fifthPeriodTeacher': tuesdayList[9].text
+                      'fifthPeriod': wednesdayList[8].text,
+                      'fifthPeriodTeacher': wednesdayList[9].text
                     }, sixthPeriod: {
-                      'sixthPeriod': tuesdayList[10].text,
-                      'sixthPeriodTeacher': tuesdayList[11].text
+                      'sixthPeriod': wednesdayList[10].text,
+                      'sixthPeriodTeacher': wednesdayList[11].text
                     }, seventhPeriod: {
-                      'seventhPeriod': tuesdayList[12].text,
+                      'seventhPeriod': wednesdayList[12].text,
                       'seventhPeriodTeacher': tuesdayList[13].text
                     }, dayName: 'Wednesday');
               
                     //thursday
-                    MondayModel Thursdaymodel = await MondayModel(firstPeriod: {
-                      'firstPeriod': tuesdayList[0].text,
-                      'firstPeriodTeacher': tuesdayList[1].text
+                    MondayModel Thursdaymodel = MondayModel(firstPeriod: {
+                      'firstPeriod': thursdayList[0].text,
+                      'firstPeriodTeacher': thursdayList[1].text
                     }, secondPeriod: {
-                      'secondPeriod': tuesdayList[2].text,
-                      'secondPeriodTeacher': tuesdayList[3].text
+                      'secondPeriod': thursdayList[2].text,
+                      'secondPeriodTeacher': thursdayList[3].text
                     }, thirdPeriod: {
-                      'thirdPeriod': tuesdayList[4].text,
-                      'thirdPeriodTeacher': tuesdayList[5].text
-                    }, fouthPeriod: {
-                      'fourthPeriod': tuesdayList[6].text,
-                      'fourthPeriodTeacher': tuesdayList[7].text
+                      'thirdPeriod': thursdayList[4].text,
+                      'thirdPeriodTeacher': thursdayList[5].text
+                    }, fourthPeriod: {
+                      'fourthPeriod': thursdayList[6].text,
+                      'fourthPeriodTeacher': thursdayList[7].text
                     }, fifthPeriod: {
-                      'fifthPeriod': tuesdayList[8].text,
-                      'fifthPeriodTeacher': tuesdayList[9].text
+                      'fifthPeriod': thursdayList[8].text,
+                      'fifthPeriodTeacher': thursdayList[9].text
                     }, sixthPeriod: {
-                      'sixthPeriod': tuesdayList[10].text,
-                      'sixthPeriodTeacher': tuesdayList[11].text
+                      'sixthPeriod': thursdayList[10].text,
+                      'sixthPeriodTeacher': thursdayList[11].text
                     }, seventhPeriod: {
-                      'seventhPeriod': tuesdayList[12].text,
+                      'seventhPeriod': thursdayList[12].text,
                       'seventhPeriodTeacher': tuesdayList[13].text
                     }, dayName: 'Thursday');
               
                     //friday
-                    MondayModel Fridaymodel = await MondayModel(firstPeriod: {
-                      'firstPeriod': tuesdayList[0].text,
-                      'firstPeriodTeacher': tuesdayList[1].text
+                    MondayModel Fridaymodel = MondayModel(firstPeriod: {
+                      'firstPeriod': fridayList[0].text,
+                      'firstPeriodTeacher': fridayList[1].text
                     }, secondPeriod: {
-                      'secondPeriod': tuesdayList[2].text,
-                      'secondPeriodTeacher': tuesdayList[3].text
+                      'secondPeriod': fridayList[2].text,
+                      'secondPeriodTeacher': fridayList[3].text
                     }, thirdPeriod: {
-                      'thirdPeriod': tuesdayList[4].text,
-                      'thirdPeriodTeacher': tuesdayList[5].text
-                    }, fouthPeriod: {
-                      'fourthPeriod': tuesdayList[6].text,
-                      'fourthPeriodTeacher': tuesdayList[7].text
+                      'thirdPeriod': fridayList[4].text,
+                      'thirdPeriodTeacher': fridayList[5].text
+                    }, fourthPeriod: {
+                      'fourthPeriod': fridayList[6].text,
+                      'fourthPeriodTeacher': fridayList[7].text
                     }, fifthPeriod: {
-                      'fifthPeriod': tuesdayList[8].text,
-                      'fifthPeriodTeacher': tuesdayList[9].text
+                      'fifthPeriod': fridayList[8].text,
+                      'fifthPeriodTeacher': fridayList[9].text
                     }, sixthPeriod: {
-                      'sixthPeriod': tuesdayList[10].text,
-                      'sixthPeriodTeacher': tuesdayList[11].text
+                      'sixthPeriod': fridayList[10].text,
+                      'sixthPeriodTeacher': fridayList[11].text
                     }, seventhPeriod: {
-                      'seventhPeriod': tuesdayList[12].text,
-                      'seventhPeriodTeacher': tuesdayList[13].text
+                      'seventhPeriod': fridayList[12].text,
+                      'seventhPeriodTeacher': fridayList[13].text
                     }, dayName: 'Friday');
               
                       AddTimeTableToFirebase().AddTimeTablesToFirebase(
@@ -265,12 +264,12 @@ class _TimeTableScreenState extends State<TimeTableScreen> {
                     // Navigator.push(context, MaterialPageRoute(builder: ((context) => ShowTimeTable(k))));
                   
                     }},
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
                  
                   child:  Text(
                     'Submit Timetable',
                     style: GoogleFonts.poppins(color: Colors.black),
                   ),
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
                 ),
               )
             ],
@@ -725,7 +724,7 @@ periodListWidget(String day, List<TextEditingController> contList) {
       const SizedBox(
         height: 0,
       ),
-      SizedBox(
+      const SizedBox(
         height: 5,
       ),
       ui_W('First Period Teacher', contList[1]),
@@ -734,7 +733,7 @@ periodListWidget(String day, List<TextEditingController> contList) {
       const SizedBox(
         height: 0,
       ),
-      SizedBox(
+      const SizedBox(
         height: 5,
       ),
       ui_W('Second Period Teacher', contList[3]),
@@ -743,7 +742,7 @@ periodListWidget(String day, List<TextEditingController> contList) {
       const SizedBox(
         height: 0,
       ),
-      SizedBox(
+      const SizedBox(
         height: 5,
       ),
       ui_W('Third Period Teacher', contList[5]),
@@ -752,7 +751,7 @@ periodListWidget(String day, List<TextEditingController> contList) {
       const SizedBox(
         height: 0,
       ),
-      SizedBox(
+      const SizedBox(
         height: 5,
       ),
       ui_W('Fourth Period Teacher', contList[7]),
@@ -761,7 +760,7 @@ periodListWidget(String day, List<TextEditingController> contList) {
       const SizedBox(
         height: 0,
       ),
-      SizedBox(
+      const SizedBox(
         height: 5,
       ),
       ui_W('Fifth Period Teacher', contList[9]),
@@ -770,7 +769,7 @@ periodListWidget(String day, List<TextEditingController> contList) {
       const SizedBox(
         height: 0,
       ),
-      SizedBox(
+      const SizedBox(
         height: 5,
       ),
       ui_W('Sixth Period Teacher', contList[11]),
@@ -779,7 +778,7 @@ periodListWidget(String day, List<TextEditingController> contList) {
       const SizedBox(
         height: 0,
       ),
-      SizedBox(
+      const SizedBox(
         height: 5,
       ),
       ui_W('Seventh Period Teacher', contList[13]),
@@ -809,10 +808,10 @@ ui_W(String text, TextEditingController cont) {
             //  hintStyle: const TextStyle(color: Colors.black),
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(5),
-                borderSide:  BorderSide(color: const Color.fromARGB(255, 0, 70, 128))),
+                borderSide:  const BorderSide(color: Color.fromARGB(255, 0, 70, 128))),
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(5),
-                borderSide:  BorderSide(color:  Colors.blue))),
+                borderSide:  const BorderSide(color:  Colors.blue))),
       ),
     ),
   );

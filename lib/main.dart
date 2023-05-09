@@ -1,8 +1,8 @@
 
-import 'package:dujo_kerala_website/view/web/home/dujo_home.dart';
 import 'package:dujo_kerala_website/view/web/home/homep.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +18,7 @@ void main() async {
         appId: "1:1019389632971:web:73f653f467a7d5dc06164e",
         measurementId: "G-NBQ0J2X8HQ"),
   );
-  ScreenUtil.ensureScreenSize();
+ 
   runApp(const MyApp());
 }
 
