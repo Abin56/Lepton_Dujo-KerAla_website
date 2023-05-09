@@ -345,7 +345,7 @@ class ManageTeachersController extends GetxController {
             child: ListBody(
               children: const <Widget>[
                 Text(
-                    'Once remove the teacher all data will be lost \n Are you shure ?')
+                    'Once remove the teacher all data will be lost \n Are you sure ?')
               ],
             ),
           ),
