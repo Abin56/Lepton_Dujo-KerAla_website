@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../../model/admin_models/student_protection_model/student_protection_model.dart';
-import '../../../../../../../utils/screen_size.dart';
 import '../../../../../../colors/colors.dart';
 import '../../../../../../constant/constant.dart';
 import '../../../../../widgets/Iconbackbutton.dart';
@@ -26,6 +25,7 @@ class StudentProtectionLeftCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
     return SingleChildScrollView(
         child: Container(
       color: adminePrimayColor,
@@ -51,7 +51,7 @@ class StudentProtectionLeftCardWidget extends StatelessWidget {
           Column(
             children: [
               SizedBox(
-                width: ScreenSize.width * 0.4,
+                width: screenSize.width * 0.4,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(

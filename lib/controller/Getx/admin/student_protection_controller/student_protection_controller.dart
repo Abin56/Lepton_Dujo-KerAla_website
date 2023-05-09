@@ -51,7 +51,7 @@ class StudentProtectionController extends GetxController {
         if (imageDataUin8.value != null) {
           final String id = const Uuid().v1();
           final filePath = await firebaseStorage
-              .ref('files/studentProtection/$id')
+              .ref('files/${Get.find<AdminLoginScreenController>().schoolID}/${Get.find<GetFireBaseData>().bYear.value}/studentProtection/$id')
               .putData(imageDataUin8.value!);
           String imageUrlPath = await filePath.ref.getDownloadURL();
           await firebaseFirestore.doc(result.id).update(
@@ -101,7 +101,7 @@ class StudentProtectionController extends GetxController {
             );
         if (imageDataUin8.value != null) {
           final filePath = await firebaseStorage
-              .ref('files/studentProtection/$imageId')
+              .ref('files/${Get.find<AdminLoginScreenController>().schoolID}/${Get.find<GetFireBaseData>().bYear.value}/studentProtection/$imageId')
               .putData(imageDataUin8.value!);
 
           String fileUrl = await filePath.ref.getDownloadURL();
@@ -134,7 +134,7 @@ class StudentProtectionController extends GetxController {
       isLoading.value = true;
       await firebaseFirestore.doc(memberId).delete();
       if (imageId.isNotEmpty) {
-        await firebaseStorage.ref('files/studentProtection/$imageId').delete();
+        await firebaseStorage.ref('files/${Get.find<AdminLoginScreenController>().schoolID}/${Get.find<GetFireBaseData>().bYear.value}/studentProtection/$imageId').delete();
       }
 
       showToast(
