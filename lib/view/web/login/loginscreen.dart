@@ -1,10 +1,8 @@
 // ignore_for_file: file_names
 
-import 'dart:developer';
 import 'package:dujo_kerala_website/view/web/login/teacher/teacher_login_screen.dart';
-import 'package:dujo_kerala_website/view/web/widgets/drop_DownList/schoolDropDownList.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 import '../../colors/colors.dart';
 import '../../fonts/fonts.dart';
 import '../widgets/button_container_widget.dart';
@@ -13,7 +11,7 @@ import 'admin/admin_login.dart';
 import 'class_teacher/class_teacher_screen_login.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({ Key? key}) : super(key: key);
+  const LoginScreen({ Key? key}) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -23,11 +21,10 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    log(schoolListValue!["docid"]);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-       appBar: AppBar(backgroundColor: Colors.transparent,elevation: 0,iconTheme: IconThemeData(color: Colors.black),),
+       appBar: AppBar(backgroundColor: Colors.transparent,elevation: 0,iconTheme: const IconThemeData(color: Colors.black),),
       backgroundColor: AppColors.backColor,
       body: SizedBox(
         height: height,

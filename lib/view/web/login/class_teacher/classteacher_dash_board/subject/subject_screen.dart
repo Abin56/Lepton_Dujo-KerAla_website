@@ -9,6 +9,7 @@ import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../widgets/Iconbackbutton.dart';
@@ -98,20 +99,26 @@ class SubmitSubjectClassTeacher extends StatelessWidget {
                                           )
                                               // Text(),
                                               ),
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                                top: 35.h, right: 10.w),
-                                            height: 28.h,
-                                            width: 80.w,
-                                            decoration: BoxDecoration(
-                                                color: cgreen.withOpacity(0.9),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(2))),
-                                            child: Center(
-                                                child: GoogleMonstserratWidgets(
-                                                    text: "Edit",
-                                                    fontsize: 12.w,
-                                                    color: cWhite)),
+                                          GestureDetector(
+                                            onTap: ()async {
+                                              subjectControllerr.deleteYearWiseSubject(snapshot.data?.docs[index]
+                                                ['docid'], context);
+                                            },
+                                            child: Container(
+                                              margin: EdgeInsets.only(
+                                                  top: 35.h, right: 10.w),
+                                              height: 28.h,
+                                              width: 80.w,
+                                              decoration: BoxDecoration(
+                                                  color: cred.withOpacity(0.9),
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(2))),
+                                              child: Center(
+                                                  child: GoogleMonstserratWidgets(
+                                                      text: "Delete",
+                                                      fontsize: 12.w,
+                                                      color: cWhite)),
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -144,7 +151,7 @@ class SubmitSubjectClassTeacher extends StatelessWidget {
                   child: Column(children: [
                     Padding(
                       padding: EdgeInsets.only(top: 100.h),
-                      child: Container(
+                      child: SizedBox(
                         width: 500.h,
                         //height: screenSize.width/30,
                         child: Column(

@@ -1,4 +1,3 @@
-
 import 'package:dujo_kerala_website/view/web/home/dujo_home.dart';
 import 'package:dujo_kerala_website/view/web/home/homep.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -42,9 +41,7 @@ class MyApp extends StatelessWidget {
                 // ignore: deprecated_member_use
                 accentColor: const Color(0xFF02BB9F),
               ),
-              home: 
-            HomeP());
-            
+              home: HomeP());
         });
   }
 }
