@@ -125,24 +125,7 @@ class _AchievementsState extends State<Achievements> {
                         onTap: () {},
                       )),
                 ))),
-            Padding(
-                padding: const EdgeInsets.all(10),
-                child: (InkWell(
-                  // onTap: () {
-                  //   Navigator.push(
-                  //       context,
-                  //       MaterialPageRoute(
-                  //         builder: (context) => AdminTeacherList(),
-                  //       ));
-                  // },
-                  child: SizedBox(
-                      height: screenSize.width * 1 / 15,
-                      width: screenSize.width * 1 / 3,
-                      child: CustomContainer(
-                        text: 'Remove Acheivements',
-                        onTap: () {},
-                      )),
-                ))),
+            
           ],
         ), 
                         ),
