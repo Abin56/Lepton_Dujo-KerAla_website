@@ -3,6 +3,7 @@ import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/sampoorna/sampoorna_home.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/transfer_cretificate/tc_genrate.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -61,15 +62,21 @@ class StudentsDetails extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       sizedBoxH40,
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          "S T U D E N T S Info",
-                          style: GoogleFonts.montserrat(
-                              color: const Color.fromARGB(255, 75, 75, 75),
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold),
-                        ),
+                      Row(
+                        children: [
+                         
+                          SizedBox(width: 20.w,),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "S T U D E N T S Info",
+                              style: GoogleFonts.montserrat(
+                                  color: const Color.fromARGB(255, 75, 75, 75),
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
                       ),
                       sizedBoxH10,
                       LottieBuilder.network(
@@ -188,7 +195,7 @@ class StudentsDetails extends StatelessWidget {
                                       padding: const EdgeInsets.all(8.0),
                                       child: GestureDetector(
                                           onTap: () {
-                                            Navigator.pop(context);
+                                          Navigator.pop(context);
                                           },
                                           child: const Text('back')),
                                     ),
