@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/ui%20team/sruthi/parent_guardian_alert_box_widget.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/students/student_summery.dart/student_summery.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/transfer_cretificate/tc_genrate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -194,24 +195,27 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
                                   .where('admissionNumber',
                                       isEqualTo: admissionNumber)
                                   .snapshots(),
-                              builder: (context,snap) {
-                           if (snap.hasData) {
-                            if (snap.data!.docs.isEmpty) {
-                              return const Text('asdfasdfasdf');
-                              
-                            }else{
-                                   return Student_Info_Elevated_button_Widget(
-                                  text: 'Generate Summary',
-                                  onPressed: () {},
-                                );
-                            }
-                             
-                           }else{
-                            return const Text('');
-                           }
+                              builder: (context, snap) {
+                                if (snap.hasData) {
+                                  if (snap.data!.docs.isEmpty) {
+                                    return const Text('');
+                                  } else {
+                                    return Student_Info_Elevated_button_Widget(
+                                      text: 'Generate Summary',
+                                      onPressed: () async{
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                        return StundentSummery(
+                                          studentId: studentID,
+                                          stundetAdmissionId: admissionNumber);
+                                      },));
+                                      },
+                                    );
+                                  }
+                                } else {
+                                  return const Text('');
+                                }
                               }),
                         ]))
-
                   ],
                 )
               ],
