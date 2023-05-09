@@ -33,10 +33,7 @@ class ClassNoticeTeacher extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return ClassTeacherCreateNoticePage(
-                      classId: classId,
-                      schoolId: schoolId,
-                    );
+                    return ClassTeacherCreateNoticePage();
                   }));
                 },
                 child: const Text('Notice'))),

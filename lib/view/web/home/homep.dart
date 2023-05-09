@@ -1,15 +1,17 @@
 import 'package:dujo_kerala_website/view/colors/colors.dart';
-import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:dujo_kerala_website/view/web/home/create_school/create_school.dart';
 import 'package:dujo_kerala_website/view/web/login/loginscreen.dart';
-import 'package:dujo_kerala_website/view/web/widgets/sample/under_maintance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../fonts/google_monstre.dart';
+import '../login/loginscreen.dart';
 import '../widgets/drop_DownList/schoolDropDownList.dart';
+import '../widgets/sample/under_maintance.dart';
+import 'create_school/create_school.dart';
 import 'footer/footerhomep.dart';
 
 class HomeP extends StatelessWidget {
@@ -52,6 +54,7 @@ class HomeP extends StatelessWidget {
       throw 'Could not launch $_leptonUrl';
     }
   }
+
 
   List<String> containerNames = [
     'Aided Schools',
@@ -111,19 +114,19 @@ class HomeP extends StatelessWidget {
                     //color: cBlue,
                     width: 400.w,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
                           children: [
                             const Icon(Icons.phone),
                             SizedBox(
-                              width: 10.w,
+                              width: 5.w,
                             ),
                             Text(
                               '+91 8891436651',
                               style: GoogleFonts.poppins(
                                   color: adminePrimayColor,
-                                  fontSize: 15.w,
+                                  fontSize: 16.w,
                                   fontWeight: FontWeight.w500),
                             ),
                           ],
@@ -132,13 +135,13 @@ class HomeP extends StatelessWidget {
                           children: [
                             const Icon(Icons.mail),
                             SizedBox(
-                              width: 10.w,
+                              width: 5.w,
                             ),
                             Text(
                               'leptondujo@gmail.com',
                               style: GoogleFonts.poppins(
                                   color: adminePrimayColor,
-                                  fontSize: 14.w,
+                                  fontSize: 16.w,
                                   fontWeight: FontWeight.w500),
                             ),
                           ],
@@ -151,43 +154,7 @@ class HomeP extends StatelessWidget {
                   SizedBox(width: 20.w),
                   SizedBox(width: 20.w),
                   SizedBox(width: 20.w),
-                  Container(
-                    child: Row(
-                      children: [
-                        InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const UnderMaintanceScreen(),
-                                  ));
-                            },
-                            child: GoogleMonstserratWidgets(
-                              text: 'DuJo Tutions',
-                              fontsize: 15.w,
-                              color: adminePrimayColor,
-                              fontWeight: FontWeight.w700,
-                            )),
-                        SizedBox(width: 20.w),
-                        InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const UnderMaintanceScreen(),
-                                  ));
-                            },
-                            child: GoogleMonstserratWidgets(
-                              text: 'DuJo Institutions',
-                              fontsize: 15.w,
-                              color: adminePrimayColor,
-                              fontWeight: FontWeight.w700,
-                            )),
-                      ],
-                    ),
-                  ),
+
                   Padding(
                     padding: EdgeInsets.only(left: 220.w),
                     child: Container(
@@ -274,12 +241,13 @@ class HomeP extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 40.w),
+                    padding:  EdgeInsets.only(left: 40.w),
                     child: Container(
-                      //  width: MediaQuery.of(context).size.width / 4,
+                    //  width: MediaQuery.of(context).size.width / 4,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
+                        
                           InkWell(
                             onTap: () {
                               _launchFacebookUrl();
@@ -318,7 +286,7 @@ class HomeP extends StatelessWidget {
                           SizedBox(width: 10.w),
                           InkWell(
                             onTap: () {
-                              _launchyouTubeUrl();
+                              _launchyouTubeUrl() ;
                             },
                             child: Image.asset(
                               'assets/images/utube.png',
@@ -349,10 +317,10 @@ class HomeP extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
-                      //  / mainAxisAlignment: MainAxisAlignment.center,
+                    //  / mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(
+                        Container(
                           width: 180.w,
                           child: Image.asset(
                             'assets/images/leptdujo.png',
@@ -418,23 +386,23 @@ class HomeP extends StatelessWidget {
                               angle: 0,
                               child: Positioned(
                                   left: -100,
-                                  child: Image.asset(
-                                    'assets/images/boy.png',
+                                  child: Image.network(
+                                    'https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/homeimages%2Fboy.png?alt=media&token=1532405b-4043-417f-bdcf-071b6cb54653',
                                     width: 300.w,
                                     height: 300.h,
                                   )),
                             ),
                             Positioned(
                                 left: 210,
-                                child: Image.asset(
-                                  'assets/images/pngegg.png',
+                                child: Image.network(
+                                  'https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/homeimages%2Fpngegg.png?alt=media&token=9f946c64-53d3-41c7-ba31-5c4156308e27',
                                   width: 400.w,
                                   height: 400.h,
                                 )),
                             Positioned(
                                 left: 100,
-                                child: Image.asset(
-                                  'assets/images/girl.png',
+                                child: Image.network(
+                                  'https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/homeimages%2Fgirl.png?alt=media&token=e9bd460a-e3f8-411b-bdb9-7be1258490b7',
                                   width: 400.w,
                                   height: 400.h,
                                   fit: BoxFit.contain,
@@ -524,9 +492,7 @@ class HomeP extends StatelessWidget {
                   ),
                 ));
               })),
-          const SizedBox(
-            height: 100,
-          ),
+             const SizedBox(height: 100,),
           FooterHomeP()
         ]),
       ),

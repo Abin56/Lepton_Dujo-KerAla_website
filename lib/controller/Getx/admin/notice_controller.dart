@@ -197,14 +197,16 @@ class AdminNoticeController extends GetxController {
       if (noticeImageId.isNotEmpty) {
         await FirebaseStorage.instance
             .ref()
-            .child('files/${Get.find<AdminLoginScreenController>().schoolID}/${Get.find<GetFireBaseData>().bYear.value}/adminNotice/$noticeImageId')
+            .child(
+                'files/${Get.find<AdminLoginScreenController>().schoolID}/${Get.find<GetFireBaseData>().bYear.value}/adminNotice/$noticeImageId')
             .delete();
       }
 //deleting signed image from firebase storage
       if (signImageId.isNotEmpty) {
         await FirebaseStorage.instance
             .ref()
-            .child('files/${Get.find<AdminLoginScreenController>().schoolID}/${Get.find<GetFireBaseData>().bYear.value}/adminNotice/$signImageId')
+            .child(
+                'files/${Get.find<AdminLoginScreenController>().schoolID}/${Get.find<GetFireBaseData>().bYear.value}/adminNotice/$signImageId')
             .delete();
       }
       adminNoticeModelData.value = null;

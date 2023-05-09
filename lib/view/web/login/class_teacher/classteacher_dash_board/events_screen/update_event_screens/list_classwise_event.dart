@@ -116,12 +116,18 @@ class ClassEventsPageList extends StatelessWidget {
                                                               context) {
                                                             return AlertDialog(
                                                               icon: Align(
-                                                                alignment: Alignment
-                                                                    .topRight,
-                                                                child: CloseButton(
-                                                                    onPressed: () =>
-                                                                        Navigator.pop(
-                                                                            context)),
+                                                                alignment:
+                                                                    Alignment
+                                                                        .topRight,
+                                                                child:
+                                                                    CloseButton(
+                                                                        onPressed:
+                                                                            () {
+                                                                  teacherEventController
+                                                                      .clearControllers();
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                }),
                                                               ),
                                                               content:
                                                                   ClassTeacherEventShow(

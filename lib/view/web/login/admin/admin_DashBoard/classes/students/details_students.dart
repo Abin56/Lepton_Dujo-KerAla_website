@@ -488,7 +488,7 @@ class StudentsDetails extends StatelessWidget {
                                                   AdminLoginScreenController>()
                                               .schoolID);
                                     },
-                                  ))
+                                  )) 
                                 // ignore: use_build_context_synchronously
                                 : Navigator.push(context, MaterialPageRoute(
                                     builder: (context) {
