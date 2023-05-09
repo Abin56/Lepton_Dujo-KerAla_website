@@ -5,7 +5,7 @@ import 'dart:html' as html;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/subject/subject_screen.dart';
-import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/upload_timetable/ttsample.dart';
+import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/upload_timetable/timetable_add_screen.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -132,10 +132,10 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
       ClassTeacherCreateEventsPage(
 
       ), //6
-      TTSample(),
+    
       // SelectClassForTimeTable(
       //     schoolID: Get.find<AdminLoginScreenController>().schoolID), //7
-      //     TimeTableScreen(classID: teacherClassId, schoolID: widget.schoolID,),
+          TimeTableScreen(classID: teacherClassId, schoolID: widget.schoolID,),
       // ClassTeacherCreateEventsPage(
       //   schoolId: Get.find<AdminLoginScreenController>().schoolID,
       //   classId: teacherClassId,
@@ -144,7 +144,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
 
       ), //9
       ClassTeacherCreateEventsPage(), //6
-      TTSample(),
+    
       // SelectClassForTimeTable(
       //     schoolID: Get.find<AdminLoginScreenController>().schoolID), //7
       ClassTeacherCreateEventsPage(), //8

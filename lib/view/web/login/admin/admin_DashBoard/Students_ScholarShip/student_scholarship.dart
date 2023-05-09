@@ -29,14 +29,16 @@ class AdminScholarships extends StatefulWidget {
 }
 
 class _AdminScholarshipsState extends State<AdminScholarships> {
-  var classListValue;
-  var studentListValue;
+  QueryDocumentSnapshot<Map<String, dynamic>>? classListValue;
+  QueryDocumentSnapshot<Map<String, dynamic>>? studentListValue;
   Uint8List? file;
+  Uint8List? sFile;
   Uint8List? _file;
   bool loadingStatus = false;
   FilePickerResult? result;
   PlatformFile? pickedFile;
-  File? finalFile;
+  File? finalFile; 
+  bool docLoading= false;
 
   TextEditingController dateController = TextEditingController();
   TextEditingController admissionNumberController = TextEditingController();
@@ -45,6 +47,7 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
 
   final _formKey = GlobalKey<FormState>();
   String studentID = '';
+  String downloadUrl2 = '';
 
   Future<Map<String, String>> uploadToStorage() async {
     try {
@@ -57,7 +60,7 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
       UploadTask uploadTask = FirebaseStorage.instance
           .ref()
           .child(
-              "files/scholarshipimages/${studentListValue['studentName']}/images/$uid")
+              "files/scholarshipimages/${studentListValue?['studentName']}/images/$uid")
           .putData(file!);
 
       print('check 1');
@@ -86,12 +89,12 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
 
       ScholarshipModel modell = ScholarshipModel(
           photoUrl: downloadUrl,
-          studentName: studentListValue['studentName'],
+          studentName: studentListValue?['studentName'],
           admissionNumber: admissionNumberController.text,
           scholarshipName: scholarshipNameController.text,
           date: dateController.text,
           description: descriptionController.text,
-          document: '', 
+          document: downloadUrl2, 
           studentID: studentID);
 
       FirebaseFirestore.instance
@@ -109,13 +112,71 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
 
       return {
         "imageUrl": downloadUrl,
-        'documentUrl': '',
         "imageUid": uid,
       };
     } catch (e) {
       log(e.toString());
       return {};
     }
+  } 
+
+  Future<String> uploadDoc()async{ 
+   
+
+    String uid2 = const Uuid().v1();
+      UploadTask uploadTask2 =  FirebaseStorage.instance.ref()
+      .child("files/scholarshipdocuments/${studentListValue?['studentName']}/documents/$uid2")
+      .putData(sFile!);
+
+      return '';
+
+  
+
+  }
+
+   uploadTwo()async{ 
+    setState(() {
+  bool docLoading= true;
+     
+   });
+     try{
+          // log('gggggg${studentListValue?['studentName']}');
+       String uid2 = const Uuid().v1();
+      //isImageUpload.value = true; 
+      
+      UploadTask uploadTask2 =  FirebaseStorage.instance.ref()
+      .child("files/scholarshipdocuments/${studentListValue?['studentName']}/documents/$uid2")
+      .putData(sFile!);
+
+ 
+
+      // final path =   'teachernotes/${pickedFile!.name}';
+      //          final file =  pickedFile!.bytes;
+      //          log('this is path: $path');
+      //          final ref = FirebaseStorage.instance.ref().child(path);
+      //          ref.putData(file!);
+      //          log('completed ${ref.fullPath}'); 
+
+      
+      final TaskSnapshot snap2 = await uploadTask2;
+      downloadUrl2 = await snap2.ref.getDownloadURL(); 
+      log('downloadUrl2$downloadUrl2');  
+
+      setState(() {
+  bool docLoading= false;
+     
+   });
+
+      return downloadUrl2;
+
+      
+     } catch(e){
+      log(e.toString()); 
+     }
+
+     return '';
+
+
   }
 
   @override
@@ -186,19 +247,23 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                 Padding(
                   padding: EdgeInsets.only(
                       top: MediaQuery.of(context).size.height * 0.10),
-                  child: StreamBuilder(
-                      stream: FirebaseFirestore.instance
+                  child:(Get.find<AdminLoginScreenController>().schoolID == null)? const SizedBox():  StreamBuilder(
+                      stream:FirebaseFirestore.instance
                           .collection('SchoolListCollection')
                           .doc(Get.find<AdminLoginScreenController>().schoolID)
                           .collection('classes')
                           .snapshots(),
                       builder: (context, snapshot) {
-                        log(snapshot.data?.docs[0]['className']);
+                      
+                        
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
                           return const Center(child: CircularProgressIndicator());
                         }
-                        return GestureDetector( 
+
+
+                      if(snapshot.hasData){
+                          return GestureDetector( 
                           onTap: (){
                             log(widget.schoolID);
                           },
@@ -265,7 +330,10 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                                 log(classListValue?['docid']);
                               }),
                           ),
-                        );
+                        ); 
+
+                      
+                      } return const Text('Something went wrong!');
                       }),
                 ),
                 const SizedBox(
@@ -274,7 +342,7 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                 Padding(
                   padding: EdgeInsets.only(
                       top: MediaQuery.of(context).size.height * 0.01),
-                  child: (classListValue == null)
+                  child: (classListValue == null )
                       ? const SizedBox()
                       : StreamBuilder(
                         stream: FirebaseFirestore.instance
@@ -291,7 +359,8 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                             ConnectionState.waiting) {
                           return const Center(child: CircularProgressIndicator());
                         }
-                          return Container(
+                         if(snapshot.hasData){
+                           return Container(
                             height: screenSize.width * 1 / 30,
                             width: screenSize.width * 0.30,
                             decoration: BoxDecoration(
@@ -347,7 +416,10 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                                   ); 
                                   log(studentListValue?['docid']);
                                 }),
-                          );
+                          ); 
+
+                         
+                         } return const Text('Something went wrong');
                         }),
                 ),
                 Stack(
@@ -397,11 +469,6 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                       ),
                     ),
                   ],
-                ),
-                sizedBoxH20,
-                const Text(
-                  'Upload Photo',
-                  style: TextStyle(color: adminePrimayColor),
                 ),
                 sizedBoxH20,
                 Padding(
@@ -482,13 +549,14 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                   ),
                 ),
                 SizedBox(
-                  height: screenSize.width / 38,
+                  height: screenSize.width / 75,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: (InkWell(
-                    onTap: () async {
-                      result = await FilePicker.platform.pickFiles(
+                    onTap: ()async  {
+                       try {
+                           await FilePicker.platform.pickFiles(
                         type: FileType.custom,
                         allowedExtensions: [
                           'jpg',
@@ -499,21 +567,35 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                           'xlsx',
                           'txt'
                         ],
-                      );
+                      ).then((value) async{
+                        log('hey $value');
+                          setState(() {
+                        pickedFile = value?.files.first;
+                        sFile = value?.files.first.bytes;
+                      }); 
 
-                      setState(() {
-                        pickedFile = result!.files.first;
+                      //finalFile = File(sFile); 
+                   await uploadTwo();
+                   return null;
                       });
+                        
+                      } catch (e) {
+                         log('gggggg${e.toString()}');
+                        
+                      }
+                   
 
-                      finalFile = File(pickedFile!.path!);
                     },
-                    child: SizedBox(
+                    child: (docLoading == true)? const Center(child: CircularProgressIndicator(),): SizedBox(
                         height: screenSize.width * 1 / 20,
                         width: screenSize.width * 1 / 5,
                         //color: Colors.red,
-                        child: CustomContainer2(
+                        child:(docLoading == true)? const Center(child: CircularProgressIndicator(),) : CustomContainer2(
                           text: 'Upload Document',
-                          onTap: () {},
+                          onTap: ()async {
+                           
+                    
+                          },
                         )),
                   )),
                 ),

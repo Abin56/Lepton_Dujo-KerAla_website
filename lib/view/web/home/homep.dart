@@ -1,10 +1,6 @@
-import 'package:dujo_kerala_website/ui%20team/abin/login_dummy/main_login_page.dart';
 import 'package:dujo_kerala_website/view/colors/colors.dart';
-import 'package:dujo_kerala_website/view/constant/constant.dart';
-import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:dujo_kerala_website/view/web/home/create_school/create_school.dart';
 import 'package:dujo_kerala_website/view/web/login/loginscreen.dart';
-import 'package:dujo_kerala_website/view/web/widgets/sample/under_maintance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -85,7 +81,7 @@ class HomeP extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-            colors: [
+            colors: const [
               Colors.white,
 
               adminePrimayColor,
@@ -103,45 +99,45 @@ class HomeP extends StatelessWidget {
         body: ListView(children: [
           Padding(
             padding:  EdgeInsets.only(right: 80.0.w, left: 80.w),
-            child: Container(
+            child: SizedBox(
              //
               height: 60.w,
               width: MediaQuery.of(context).size.width,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
+                  SizedBox(
                     //color: cBlue,
                     width: 400.w,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
                           children: [
-                            Icon(Icons.phone),
+                            const Icon(Icons.phone),
                             SizedBox(
-                              width: 10.w,
+                              width: 5.w,
                             ),
                             Text(
                               '+91 8891436651',
                               style: GoogleFonts.poppins(
                                   color: adminePrimayColor,
-                                  fontSize: 15.w,
+                                  fontSize: 16.w,
                                   fontWeight: FontWeight.w500),
                             ),
                           ],
                         ),
                         Row(
                           children: [
-                            Icon(Icons.mail),
+                            const Icon(Icons.mail),
                             SizedBox(
-                              width: 10.w,
+                              width: 5.w,
                             ),
                             Text(
                               'leptondujo@gmail.com',
                               style: GoogleFonts.poppins(
                                   color: adminePrimayColor,
-                                  fontSize: 14.w,
+                                  fontSize: 16.w,
                                   fontWeight: FontWeight.w500),
                             ),
                           ],
@@ -156,27 +152,7 @@ class HomeP extends StatelessWidget {
                      SizedBox(width: 20.w),
                   
 
-                  Container(
-                    child: Row(
-                      children: [
-                      InkWell(
-                        onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const UnderMaintanceScreen() ,));
-                          },
-                        child: GoogleMonstserratWidgets(text: 'DuJo Tutions', fontsize: 15.w,color: adminePrimayColor,
-                        fontWeight: FontWeight.w700,
-                        )),
-                     SizedBox(width: 20.w),
-
-                InkWell(
-                onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const UnderMaintanceScreen() ,));
-                          },
-                  child: GoogleMonstserratWidgets(text: 'DuJo Institutions', fontsize: 15.w, color: adminePrimayColor,fontWeight: FontWeight.w700,)),
-                     ],
-                    ),
-                  ),
-
+                 
                     Padding(
                       padding:  EdgeInsets.only(left: 220.w),
                       child: Container(
@@ -191,7 +167,7 @@ class HomeP extends StatelessWidget {
                       title: const Text('Enter Your School ID'),
                       content: SingleChildScrollView(
                         child: ListBody(
-                          children: <Widget>[GetSchoolListDropDownButton()],
+                          children: const <Widget>[GetSchoolListDropDownButton()],
                           // children: [
                           //   // TextFormField(
                           //   //   controller:schoolIdController,
@@ -300,7 +276,7 @@ class HomeP extends StatelessWidget {
           ),
           Padding(
             padding:  EdgeInsets.only(right: 80.0.w, left: 80.w,),
-            child: Container(
+            child: SizedBox(
             // color: cBlue,
               width: MediaQuery.of(context).size.width,
               height: 500.h,
@@ -312,7 +288,7 @@ class HomeP extends StatelessWidget {
                     //  / mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
+                        SizedBox(
                           width: 180.w,
                           child: Image.asset(
                             'assets/images/leptdujo.png',
@@ -335,7 +311,7 @@ class HomeP extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         MaterialButton(
@@ -360,11 +336,11 @@ class HomeP extends StatelessWidget {
                         )
                       ],
                     ),
-                    Container(
+                    SizedBox(
                       width: 600.w,
                       child: ShaderMask(
                         shaderCallback: (rect) {
-                          return LinearGradient(
+                          return const LinearGradient(
                             begin: Alignment.center,
                             end: Alignment.bottomCenter,
                             colors: [adminePrimayColor, Colors.transparent],
@@ -431,7 +407,7 @@ class HomeP extends StatelessWidget {
             ],
           ),
           GridView.count(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               crossAxisCount: 3,
               crossAxisSpacing: 4.0,
