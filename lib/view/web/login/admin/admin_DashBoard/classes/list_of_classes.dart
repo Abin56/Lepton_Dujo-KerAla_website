@@ -1,6 +1,4 @@
-import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
@@ -9,7 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../../controller/class_list/class_list_model.dart';
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
-import '../../../../../../model/create_classModel/create_classModel.dart';
+import '../../../../../../model/add_class/add_new_class.dart';
+
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
 import 'details_ofClasses.dart';
@@ -37,14 +36,15 @@ class _ListOfClassesScreenState extends State<ListOfClassesScreen> {
     super.initState();
   }
 
+  @override
   Widget build(BuildContext context) {
-    List<AddClassesModel> allData = [];
+    List<SchoolClassesModel> allData = [];
     int columnCount = 3;
-    double _w = MediaQuery.of(context).size.width;
-    double _h = MediaQuery.of(context).size.height;
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-          title: Text('Classes List'), backgroundColor: adminePrimayColor),
+          title: const Text('Classes List'), backgroundColor: adminePrimayColor),
       body: SafeArea(
           child: StreamBuilder(
         stream: FirebaseFirestore.instance
@@ -52,7 +52,7 @@ class _ListOfClassesScreenState extends State<ListOfClassesScreen> {
             .doc(Get.find<AdminLoginScreenController>().schoolID)
             .collection(Get.find<GetFireBaseData>().bYear.value)
             .doc(Get.find<GetFireBaseData>().bYear.value)
-            .collection("Classes")
+            .collection("classes")
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -93,12 +93,12 @@ class _ListOfClassesScreenState extends State<ListOfClassesScreen> {
                           child: GridView.count(
                             physics: const BouncingScrollPhysics(
                                 parent: AlwaysScrollableScrollPhysics()),
-                            padding: EdgeInsets.all(_w / 60),
+                            padding: EdgeInsets.all(w / 60),
                             crossAxisCount: columnCount,
                             children: List.generate(
                               snapshot.data!.docs.length,
                               (int index) {
-                                AddClassesModel data = AddClassesModel.fromJson(
+                                SchoolClassesModel data = SchoolClassesModel.fromMap(
                                     snapshot.data!.docs[index].data());
                                 allData.add(data);
                                 return AnimationConfiguration.staggeredGrid(
@@ -116,7 +116,7 @@ class _ListOfClassesScreenState extends State<ListOfClassesScreen> {
                                             getxController.indexValue.value =
                                                 index;
                                           },
-                                          child: Container(
+                                          child: SizedBox(
                                             height: 400,
                                             width: 400,
                                             child: Padding(
@@ -150,14 +150,14 @@ class _ListOfClassesScreenState extends State<ListOfClassesScreen> {
                                                                     .bold),
                                                   ),
                                                   sizedBoxH10,
-                                                  Text(
-                                                    'Create Date : ${stringTimeToDateConvert(data.joinDate)}',
-                                                    style: GoogleFonts.poppins(
-                                                      color: Colors.black
-                                                          .withOpacity(0.4),
-                                                      fontSize: 14,
-                                                    ),
-                                                  ),
+                                                  // Text(
+                                                  //   'Create Date : ${stringTimeToDateConvert(data.)}',
+                                                  //   style: GoogleFonts.poppins(
+                                                  //     color: Colors.black
+                                                  //         .withOpacity(0.4),
+                                                  //     fontSize: 14,
+                                                  //   ),
+                                                  // ),
                                                   sizedBoxH10,
                                                   Text(
                                                     "Class : ${data.className}",
@@ -169,19 +169,13 @@ class _ListOfClassesScreenState extends State<ListOfClassesScreen> {
                                                   ),
                                                   sizedBoxH10,
                                                   Text(
-                                                    "Class Incharge : ${data.classIncharge}",
+                                                    "Class Incharge : ${data.classTeacherName}",
                                                     style: GoogleFonts.poppins(
                                                       color: Colors.black,
                                                       fontSize: 12,
                                                     ),
                                                   ),
-                                                  Text(
-                                                    "Class ID : ${data.classID}",
-                                                    style: GoogleFonts.poppins(
-                                                      color: Colors.black,
-                                                      fontSize: 12,
-                                                    ),
-                                                  ),
+                                            
                                                 ],
                                               ),
                                             ),
@@ -202,7 +196,7 @@ class _ListOfClassesScreenState extends State<ListOfClassesScreen> {
               ],
             );
           } else {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator.adaptive(),
             );
           }
@@ -217,10 +211,10 @@ class _ListOfClassesScreenState extends State<ListOfClassesScreen> {
         .doc(Get.find<AdminLoginScreenController>().schoolID)
         .collection(Get.find<GetFireBaseData>().bYear.value)
         .doc(Get.find<GetFireBaseData>().bYear.value)
-        .collection("Classes")
+        .collection("classes")
         .get();
     final data = a.docs.map((e) {
-      return e.data()['id'];
+      return e.data()['docid'];
     }).toList();
     int studentsLength = 0;
     for (int i = 0; i <= data.length - 1; i++) {
@@ -229,7 +223,7 @@ class _ListOfClassesScreenState extends State<ListOfClassesScreen> {
           .doc(Get.find<AdminLoginScreenController>().schoolID)
           .collection(Get.find<GetFireBaseData>().bYear.value)
           .doc(Get.find<GetFireBaseData>().bYear.value)
-          .collection("Classes")
+          .collection("classes")
           .doc(data[i])
           .collection('Students')
           .get();
@@ -248,10 +242,10 @@ class _ListOfClassesScreenState extends State<ListOfClassesScreen> {
         .doc(Get.find<AdminLoginScreenController>().schoolID)
         .collection(Get.find<GetFireBaseData>().bYear.value)
         .doc(Get.find<GetFireBaseData>().bYear.value)
-        .collection("Classes")
+        .collection("classes")
         .get();
     final data = a.docs.map((e) {
-      return e.data()['id'];
+      return e.data()['docid'];
     }).toList();
 
     int maleCount = 0;
@@ -268,9 +262,9 @@ class _ListOfClassesScreenState extends State<ListOfClassesScreen> {
           .collection('Students')
           .get();
       for (var element in b.docs) {
-        if (element.data()['gender'] == 'male') {
+        if (element.data()['gender'] == 'Male') {
           maleCount++;
-        } else if (element.data()['gender'] == 'female') {
+        } else if (element.data()['gender'] == 'Female') {
           femaleCount++;
         }
       }

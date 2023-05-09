@@ -4,16 +4,15 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/students/list_students.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
-import '../../../../../../model/create_classModel/create_classModel.dart';
+import '../../../../../../model/add_class/add_new_class.dart';
+
 import '../../../../../constant/constant.dart';
 import '../../../../widgets/button_container_widget.dart';
 import '../teacher_section/class_listing_drop_down.dart';
@@ -36,11 +35,11 @@ class ClassesDeatils extends StatelessWidget {
   });
 
   final getxController;
-  final List<AddClassesModel> allData;
+  final List<SchoolClassesModel> allData;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: double.infinity,
       width: width,
       child: Obx(() {
@@ -75,40 +74,40 @@ class ClassesDeatils extends StatelessWidget {
                       )
                     ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Row(
-                      children: [
-                        LottieBuilder.network(
-                          'https://assets10.lottiefiles.com/packages/lf20_sxoye5rr.json',
-                          height: 100,
-                        ),
-                        Text(
-                          " Total Male :  $noofMale",
-                          style: GoogleFonts.poppins(
-                              color: const Color.fromARGB(255, 11, 11, 11),
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    ),
-                  ),
-                  sizedBoxH10,
-                  Row(
-                    children: [
-                      LottieBuilder.network(
-                        'https://assets2.lottiefiles.com/packages/lf20_pt810qkq.json',
-                        height: 100,
-                      ),
-                      Text(
-                        " Total Female :  $noofFemale",
-                        style: GoogleFonts.poppins(
-                            color: const Color.fromARGB(255, 22, 22, 22),
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.all(10),
+                  //   child: Row(
+                  //     children: [
+                  //       LottieBuilder.network(
+                  //         'https://assets10.lottiefiles.com/packages/lf20_sxoye5rr.json',
+                  //         height: 100,
+                  //       ),
+                  //       Text(
+                  //         " Total Male :  $noofMale",
+                  //         style: GoogleFonts.poppins(
+                  //             color: const Color.fromARGB(255, 11, 11, 11),
+                  //             fontSize: 20,
+                  //             fontWeight: FontWeight.bold),
+                  //       )
+                  //     ],
+                  //   ),
+                  // ),
+                  // sizedBoxH10,
+                  // Row(
+                  //   children: [
+                  //     LottieBuilder.network(
+                  //       'https://assets2.lottiefiles.com/packages/lf20_pt810qkq.json',
+                  //       height: 100,
+                  //     ),
+                  //     Text(
+                  //       " Total Female :  $noofFemale",
+                  //       style: GoogleFonts.poppins(
+                  //           color: const Color.fromARGB(255, 22, 22, 22),
+                  //           fontSize: 20,
+                  //           fontWeight: FontWeight.bold),
+                  //     )
+                  //   ],
+                  // ),
                 ],
               )
             : Padding(
@@ -128,19 +127,13 @@ class ClassesDeatils extends StatelessWidget {
                     ),
                     sizedBoxH10,
                     Text(
-                      'Class Incharge :  ${allData[getxController.indexValue.value!].classIncharge}',
+                      'Class Incharge :  ${allData[getxController.indexValue.value!].classTeacherName}',
                       style: tea_style,
                     ),
                     sizedBoxH10,
-                    Text(
-                      'Class ID : ${allData[getxController.indexValue.value!].classID}',
-                      style: tea_style,
-                    ),
+        
                     sizedBoxH10,
-                    Text(
-                      'Creation Date : ${allData[getxController.indexValue.value!].joinDate}',
-                      style: tea_style,
-                    ),
+              
                     sizedBoxH10,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -150,7 +143,7 @@ class ClassesDeatils extends StatelessWidget {
                             updateClass(
                                 context,
                                 allData[getxController.indexValue.value!]
-                                    .classID,
+                                    .docid,
                                 allData[getxController.indexValue.value!]
                                     .className,
                                 schooilID);
@@ -208,7 +201,7 @@ class ClassesDeatils extends StatelessWidget {
                                             .collection("Classes")
                                             .doc(allData[getxController
                                                     .indexValue.value!]
-                                                .id)
+                                                .docid)
                                             .delete()
                                             .then((value) =>
                                                 Navigator.pop(context));
@@ -257,7 +250,7 @@ class ClassesDeatils extends StatelessWidget {
                                           .className,
                                   classID:
                                       allData[getxController.indexValue.value!]
-                                          .classID,
+                                          .docid,
                                   schoolID: schooilID);
                             },
                           ),
@@ -335,7 +328,6 @@ class ClassesDeatils extends StatelessWidget {
                               height: 60,
                               width: 150,
                               child: ElevatedButton(
-                                  child: Text("Change Incharge"),
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor:
                                         const Color.fromARGB(255, 3, 39, 68),
@@ -386,7 +378,7 @@ class ClassesDeatils extends StatelessWidget {
                                                                   getxController
                                                                       .indexValue
                                                                       .value!]
-                                                              .classID)
+                                                              .docid)
                                                           .set(
                                                               {
                                                             "classIncharge":
@@ -407,7 +399,7 @@ class ClassesDeatils extends StatelessWidget {
                                                                     getxController
                                                                         .indexValue
                                                                         .value!]
-                                                                .classIncharge)
+                                                                .classTeacherdocid)
                                                             .set(
                                                                 {
                                                               "classIncharge":
@@ -456,7 +448,6 @@ class ClassesDeatils extends StatelessWidget {
                                                                     },
                                                                   ));
                                                     },
-                                                    child: const Text("Change"),
                                                     style: ElevatedButton
                                                         .styleFrom(
                                                       backgroundColor:
@@ -469,6 +460,7 @@ class ClassesDeatils extends StatelessWidget {
                                                                 .circular(20),
                                                       ),
                                                     ),
+                                                    child: const Text("Change"),
                                                   ),
                                                 ),
                                                 sizedBoxH10,
@@ -494,7 +486,8 @@ class ClassesDeatils extends StatelessWidget {
                                         );
                                       },
                                     );
-                                  }),
+                                  },
+                                  child: Text("Change Incharge")),
                             ),
                             SizedBox(
                               height: 60,
@@ -526,7 +519,7 @@ class ClassesDeatils extends StatelessWidget {
                                         .collection("Classes")
                                         .doc(allData[getxController
                                                 .indexValue.value!]
-                                            .id);
+                                            .docid);
                                     if (newclassName.isNotEmpty) {
                                       await data.update({
                                         "className": newclassName

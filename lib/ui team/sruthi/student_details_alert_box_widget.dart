@@ -1,19 +1,18 @@
 import 'dart:developer';
 
-import 'package:dropdown_search/dropdown_search.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/ui%20team/sruthi/parent_guardian_alert_box_widget.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/transfer_cretificate/tc_genrate.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../view/colors/colors.dart';
 import '../../view/constant/constant.dart';
-
 import '../../view/web/widgets/Iconbackbutton.dart';
 import 'guardianInfo_alert_box.dart';
 
@@ -61,7 +60,7 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
                   style: GoogleFonts.poppins(fontSize: 16.h, color: cWhite)),
             ],
           )),
-      content: Container(
+      content: SizedBox(
         width: 600,
         child: ListView(
           children: [
@@ -181,16 +180,38 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
                           sizedBoxH20,
                           Student_Info_Elevated_button_Widget(
                             text: 'Shift Class',
-                            onPressed: () {
-                            
-                            },
-                          ),
-                          sizedBoxH20,
-                          Student_Info_Elevated_button_Widget(
-                            text: 'Generate Summary',
                             onPressed: () {},
                           ),
+                          sizedBoxH20,
+                          StreamBuilder(
+                              stream: FirebaseFirestore.instance
+                                  .collection("SchoolListCollection")
+                                  .doc(Get.find<AdminLoginScreenController>()
+                                      .schoolID)
+                                  .collection("AllStudents")
+                                  .doc(studentID)
+                                  .collection("sampoorna")
+                                  .where('admissionNumber',
+                                      isEqualTo: admissionNumber)
+                                  .snapshots(),
+                              builder: (context,snap) {
+                           if (snap.hasData) {
+                            if (snap.data!.docs.isEmpty) {
+                              return const Text('asdfasdfasdf');
+                              
+                            }else{
+                                   return Student_Info_Elevated_button_Widget(
+                                  text: 'Generate Summary',
+                                  onPressed: () {},
+                                );
+                            }
+                             
+                           }else{
+                            return const Text('');
+                           }
+                              }),
                         ]))
+
                   ],
                 )
               ],
@@ -279,29 +300,33 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
           );
         });
   }
+
+  void _showParentAlertbox(BuildContext context, String studentID) {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => ParentAlert_box_Widget(
+        classID: studentClass,
+        studentID: studentID,
+        text: 'Parent Info',
+      ),
+    );
+  }
+
+  void _showGuardianAlertbox(BuildContext context, String studentID) {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => GuardianInfoAlert_box_Widget(
+        classID: studentClass,
+        studentID: studentID,
+        text: 'Guardian Info',
+      ),
+    );
+  }
 }
 
-void _showParentAlertbox(BuildContext context, String studentID) {
-  showDialog(
-    barrierDismissible: false,
-    context: context,
-    builder: (context) => ParentAlert_box_Widget(
-      studentID: studentID,
-      text: 'Parent Info',
-    ),
-  );
-}
 
-void _showGuardianAlertbox(BuildContext context, String studentID) {
-  showDialog(
-    barrierDismissible: false,
-    context: context,
-    builder: (context) => GuardianInfoAlert_box_Widget(
-      studentID: studentID,
-      text: 'Parent Info',
-    ),
-  );
-}
 // void _showAlert(BuildContext context) {
 //   var screenSize = MediaQuery.of(context).size;
 //   showDialog(

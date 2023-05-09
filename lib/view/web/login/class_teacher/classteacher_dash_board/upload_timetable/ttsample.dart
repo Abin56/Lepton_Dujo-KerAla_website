@@ -1,10 +1,7 @@
-import 'package:dujo_kerala_website/view/colors/colors.dart';
-import 'package:dujo_kerala_website/view/constant/constant.dart';
-import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/upload_timetable/timetable_add_screen.dart';
 import 'package:flutter/material.dart';
 
 class TTSample extends StatefulWidget {
-  TTSample({super.key}); 
+  const TTSample({super.key}); 
 
   @override
   State<TTSample> createState() => _TTSampleState();
@@ -26,7 +23,13 @@ class _TTSampleState extends State<TTSample> {
     'Eighth Period'
   ];  
 
-  List<String> _items = [];
+  final List<String> days = [
+    'Monday', 
+    'Tuesday', 
+    'Wednesday', 
+    'Thursday', 
+    'Friday'
+  ];
 
   TextEditingController periodController = TextEditingController();
 
@@ -34,7 +37,7 @@ class _TTSampleState extends State<TTSample> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [],
+        actions: const [],
       ),
       body: Padding(
         padding: EdgeInsets.only(
@@ -43,7 +46,7 @@ class _TTSampleState extends State<TTSample> {
         child: ListView(
           children: [
             DropdownButton(
-      hint: Text('Select an item'),
+      hint: const Text('Select an item'),
       value: _selectedItem,
       onChanged: (newValue) {
         setState(() {
@@ -51,20 +54,20 @@ class _TTSampleState extends State<TTSample> {
         });
         print('Selected item: $_selectedItem');
       },
-      items: _items.map((item) {
+      items: days.map((item) {
         return DropdownMenuItem(
-          child: new Text(item),
           value: item,
+          child: Text(item), 
         );
       }).toList(),),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             ListView.separated(
                 shrinkWrap: true,
-                physics: ClampingScrollPhysics(),
+                physics: const ClampingScrollPhysics(),
                 separatorBuilder: ((context, index) {
-                  return SizedBox(
+                  return const SizedBox(
                     height: 20,
                   );
                 }),
@@ -72,31 +75,31 @@ class _TTSampleState extends State<TTSample> {
                 itemBuilder: ((context, index) {
                   return ListView(
                     shrinkWrap: true,
-                    physics: ClampingScrollPhysics(),
+                    physics: const ClampingScrollPhysics(),
                     children: [
                       // Note: Same code is applied for the TextFormField as well
                        TextField(
                         decoration: InputDecoration(
                           hintText: periodNames[index],
-                          enabledBorder: OutlineInputBorder(
+                          enabledBorder: const OutlineInputBorder(
                             borderSide: BorderSide(
-                                width: 3,
-                                color: Colors.greenAccent), //<-- SEE HERE
+                                width: 2,
+                                color: Colors.black), //<-- SEE HERE
                           ),
                         ),
                       ),
 
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       // Note: Same code is applied for the TextFormField as well
                        TextField(
                         decoration: InputDecoration(
                           hintText: _selectedItem,
-                          enabledBorder: OutlineInputBorder(
+                          enabledBorder: const OutlineInputBorder(
                             borderSide: BorderSide(
-                                width: 3,
-                                color: Colors.greenAccent), //<-- SEE HERE
+                                width: 2,
+                                color: Colors.black), //<-- SEE HERE
                           ),
                         ),
                       )

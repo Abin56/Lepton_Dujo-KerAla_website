@@ -6,6 +6,7 @@ import '../../../../../../controller/Getx/admin/sampoorna/sampoorna_controller.d
 import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
+import '../../../../widgets/drop_DownList/schoolDropDownList.dart';
 import 'widgets/address_detail_widget.dart';
 import 'widgets/admission_detail_widget.dart';
 import 'widgets/club_widget.dart';
@@ -16,13 +17,19 @@ import 'widgets/school_previously_attended_widger.dart';
 import 'widgets/widgets.dart';
 
 class SampoornaHomeScreen extends StatelessWidget {
+
   SampoornaHomeScreen({super.key, required this.schoolId});
-  final SampoornaController sampoornaController =
-      Get.put(SampoornaController());
   final String schoolId;
 
   @override
+
+
+  final SampoornaController sampoornaController =
+      Get.put(SampoornaController());
+
+  @override
   Widget build(BuildContext context) {
+ 
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -391,7 +398,7 @@ class StdAdmissionWidget extends StatelessWidget {
   }
 }
 
-class TitleWidget extends StatelessWidget {
+class TitleWidget extends StatefulWidget {
   const TitleWidget({
     super.key,
     required this.size,
@@ -400,9 +407,23 @@ class TitleWidget extends StatelessWidget {
   final Size size;
 
   @override
+  
+  State<TitleWidget> createState() => _TitleWidgetState();
+}
+
+class _TitleWidgetState extends State<TitleWidget> {
+  String schoolName='';
+  String schoolPlace ='';
+  @override
+  void initState() {
+    getSchoolDetails();
+    // TODO: implement initState
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: size.width,
+      width: widget.size.width,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
@@ -416,15 +437,15 @@ class TitleWidget extends StatelessWidget {
               builder: (context, snap) {
                 if (snap.hasData) {
                   if (snap.data!.docs.isEmpty) {
-                    return const TitleTextWidget(
-                        title: 'Lepton HIGHER SECONDARY SCHOOL');
+                    return  TitleTextWidget(
+                        title: schoolName);
                   } else {
                     return TitleTextWidget(
                         title: snap.data!.docs[0]['schoolName']);
                   }
                 } else {
-                  return const TitleTextWidget(
-                      title: 'Lepton HIGHER SECONDARY SCHOOL');
+                  return  TitleTextWidget(
+                      title: schoolName);
                 }
               }),
           StreamBuilder(
@@ -437,14 +458,14 @@ class TitleWidget extends StatelessWidget {
               builder: (context, snap) {
                 if (snap.hasData) {
                   if (snap.data!.docs.isEmpty) {
-                    return const TitleTextWidget(
-                        title: 'ROADVILA, C.V.NALLOOR P.O');
+                    return  TitleTextWidget(
+                        title: schoolPlace);
                   } else {
                     return TitleTextWidget(title: snap.data!.docs[0]['place']);
                   }
                 } else {
-                  return const TitleTextWidget(
-                      title: 'ROADVILA, C.V.NALLOOR P.O');
+                  return  TitleTextWidget(
+                      title: schoolPlace);
                 }
               }),
           sizedBoxH40,
@@ -453,4 +474,14 @@ class TitleWidget extends StatelessWidget {
       ),
     );
   }
+   void getSchoolDetails() async {
+    var vari = await FirebaseFirestore.instance
+        .collection("SchoolListCollection")
+        .doc(schoolListValue!['docid'])
+        .get();
+    setState(() {
+      schoolName = vari.data()!['schoolName'];
+        schoolPlace = vari.data()!['place'];
+});
+}
 }

@@ -1,19 +1,20 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:dujo_kerala_website/controller/add_new_class/add_new_class.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../../../../../../model/profileextraDetails/teacher_extra_profile.dart';
 import '../../../../../../controller/teachersList/teachers_list.dart';
+import '../../../../../../model/teacher/teacher_model.dart';
 import '../../../../../constant/constant.dart';
 import '../../../../widgets/button_container_widget.dart';
-import '../../../../widgets/drop_DownList/get_classList.dart';
 
 class TeacherDeatils extends StatelessWidget {
+  AddSchoolClassController addSchoolClassController =
+      Get.put(AddSchoolClassController());
   String schooilID;
   TeacherDeatils({
     super.key,
@@ -23,11 +24,11 @@ class TeacherDeatils extends StatelessWidget {
   });
 
   final TeachersProfileList getxController;
-  final List<AddExtraDetailsofTeacherModel> allData;
+  final List<TeacherModel> allData;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: double.infinity,
       width: 500,
       child: Obx(() {
@@ -40,7 +41,7 @@ class TeacherDeatils extends StatelessWidget {
                     Text(
                       "T e a c h e r ",
                       style: GoogleFonts.montserrat(
-                          color: Color.fromARGB(255, 75, 75, 75),
+                          color: const Color.fromARGB(255, 75, 75, 75),
                           fontSize: 40,
                           fontWeight: FontWeight.bold),
                     ),
@@ -60,7 +61,8 @@ class TeacherDeatils extends StatelessWidget {
                         radius: 90,
                         backgroundImage: NetworkImage(
                             allData[getxController.indexValue.value!]
-                                .teacherImage),
+                                    .imageUrl ??
+                                ''),
                       ),
                       sizedBoxH30,
                       Text(
@@ -68,10 +70,10 @@ class TeacherDeatils extends StatelessWidget {
                         style: tea_style,
                       ),
                       sizedBoxH10,
-                      Text(
-                        'Class Incharge :  ${allData[getxController.indexValue.value!].classIncharge}',
-                        style: tea_style,
-                      ),
+                      // Text(
+                      //   'Class Incharge :  ${allData[getxController.indexValue.value!].}',
+                      //   style: tea_style,
+                      // ),
                       sizedBoxH10,
                       Text(
                         'E mail : ${allData[getxController.indexValue.value!].teacherEmail}',
@@ -88,10 +90,10 @@ class TeacherDeatils extends StatelessWidget {
                         style: tea_style,
                       ),
                       sizedBoxH10,
-                      Text(
-                        'Blood Group : ${allData[getxController.indexValue.value!].bloodGroup}',
-                        style: tea_style,
-                      ),
+                      // Text(
+                      //   'Blood Group : ${allData[getxController.indexValue.value!].b}',
+                      //   style: tea_style,
+                      // ),
                       sizedBoxH10,
                       const Divider(),
                       sizedBoxH10,
@@ -118,7 +120,7 @@ class TeacherDeatils extends StatelessWidget {
                       ),
                       sizedBoxH10,
                       Text(
-                        'Creation Date : ${allData[getxController.indexValue.value!].joinDate}',
+                        'Creation Date : ${allData[getxController.indexValue.value!].createdAt}',
                         style: tea_style,
                       ),
                       sizedBoxH10,
@@ -130,11 +132,14 @@ class TeacherDeatils extends StatelessWidget {
                               updateTeacher(
                                   context,
                                   allData[getxController.indexValue.value!]
-                                      .employeeID,
+                                          .employeeID ??
+                                      '',
                                   allData[getxController.indexValue.value!]
-                                      .teacherName,
+                                          .teacherName ??
+                                      "",
                                   allData[getxController.indexValue.value!]
-                                      .teacherPhNo,
+                                          .teacherPhNo ??
+                                      "",
                                   schooilID);
                             },
                             child: ButtonContainerWidget(
@@ -146,7 +151,8 @@ class TeacherDeatils extends StatelessWidget {
                                 child: Text(
                                   'Edit',
                                   style: GoogleFonts.poppins(
-                                      color: Color.fromARGB(255, 255, 254, 254),
+                                      color: const Color.fromARGB(
+                                          255, 255, 254, 254),
                                       fontSize: 14,
                                       fontWeight: FontWeight.w600),
                                 ),
@@ -180,7 +186,7 @@ class TeacherDeatils extends StatelessWidget {
                                               .collection("Teachers")
                                               .doc(allData[getxController
                                                       .indexValue.value!]
-                                                  .id)
+                                                  .docid)
                                               .delete()
                                               .then((value) =>
                                                   Navigator.pop(context));
@@ -206,7 +212,8 @@ class TeacherDeatils extends StatelessWidget {
                                 child: Text(
                                   'Remove',
                                   style: GoogleFonts.poppins(
-                                      color: Color.fromARGB(255, 255, 254, 254),
+                                      color: const Color.fromARGB(
+                                          255, 255, 254, 254),
                                       fontSize: 14,
                                       fontWeight: FontWeight.w600),
                                 ),
@@ -246,7 +253,7 @@ class TeacherDeatils extends StatelessWidget {
             child: ListBody(
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.only(top: 20),
                   child: Center(
                     child: Container(
                       color: Colors.white,
@@ -284,140 +291,28 @@ class TeacherDeatils extends StatelessWidget {
                           ),
                         ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(
-                              height: 60,
-                              width: 150,
-                              child: ElevatedButton(
-                                  child: Text("Change Incharge"),
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor:
-                                        const Color.fromARGB(255, 3, 39, 68),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                  ),
-                                  onPressed: () async {
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible:
-                                          false, // user must tap button!
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: const Text('Change Incharge '),
-                                          content: SingleChildScrollView(
-                                            child: ListBody(
-                                              children: [
-                                                Padding(
-                                                    padding: EdgeInsets.all(15),
-                                                    child:
-                                                        GetClassTeacherListDropDownButton(
-                                                
-                                                    )),
-                                                SizedBox(
-                                                  height: 50,
-                                                  width: 140,
-                                                  child: ElevatedButton(
-                                                    onPressed: () async {
-                                                      FirebaseFirestore.instance
-                                                          .collection(
-                                                              "SchoolListCollection")
-                                                          .doc(schooilID)
-                                                          .collection(
-                                                              "Teachers")
-                                                          .doc(allData[
-                                                                  getxController
-                                                                      .indexValue
-                                                                      .value!]
-                                                              .id)
-                                                          .set(
-                                                              {
-                                                            "classIncharge":
-                                                                classIDListValue![
-                                                                    'id'],
-                                                          },
-                                                              SetOptions(
-                                                                  merge:
-                                                                      true)).then(
-                                                              (value) =>
-                                                                  showDialog(
-                                                                    context:
-                                                                        context,
-                                                                    barrierDismissible:
-                                                                        false, // user must tap button!
-                                                                    builder:
-                                                                        (BuildContext
-                                                                            context) {
-                                                                      return AlertDialog(
-                                                                        title: const Text(
-                                                                            'Message'),
-                                                                        content:
-                                                                            SingleChildScrollView(
-                                                                          child:
-                                                                              ListBody(
-                                                                            children: const <Widget>[
-                                                                              Text('Successfully Updated'),
-                                                                            ],
-                                                                          ),
-                                                                        ),
-                                                                        actions: <
-                                                                            Widget>[
-                                                                          TextButton(
-                                                                            child:
-                                                                                const Text('Ok'),
-                                                                            onPressed:
-                                                                                () {
-                                                                              Navigator.of(context).pop();
-                                                                              Navigator.of(context).pop();
-                                                                              Navigator.of(context).pop();
-                                                                            },
-                                                                          ),
-                                                                      
-                                                                        ],
-                                                                      );
-                                                                    },
-                                                                  ));
-                                                    },
-                                                    child: Text("Change"),
-                                                    style: ElevatedButton
-                                                        .styleFrom(
-                                                      backgroundColor:
-                                                          const Color.fromARGB(
-                                                              255, 3, 39, 68),
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(20),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),sizedBoxH10,
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    TextButton(
-                                                      child:
-                                                          const Text('Cancel'),
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    );
-                                  }),
-                            ),
+                            // SizedBox(
+                            //   height: 60,
+                            //   width: 150,
+                            //   child: ElevatedButton(
+                            //       style: ElevatedButton.styleFrom(
+                            //         backgroundColor:
+                            //             const Color.fromARGB(255, 3, 39, 68),
+                            //         shape: RoundedRectangleBorder(
+                            //           borderRadius: BorderRadius.circular(20),
+                            //         ),
+                            //       ),
+                            //       onPressed: () async {
+                            //         addSchoolClassController.setclassIncharge(
+                            //             allData[getxController
+                            //                     .indexValue.value!]
+                            //                 .docid!,
+                            //             context);
+                            //       },
+                            //       child: const Text("Change Incharge")),
+                            // ),
                             SizedBox(
                               height: 60,
                               width: 150,
@@ -445,7 +340,7 @@ class TeacherDeatils extends StatelessWidget {
                                         .collection("Teachers")
                                         .doc(allData[getxController
                                                 .indexValue.value!]
-                                            .id);
+                                            .docid);
                                     if (newTeacherName.isNotEmpty &&
                                         newEmployID.isEmpty &&
                                         newPhoneNumber.isEmpty) {
@@ -483,7 +378,7 @@ class TeacherDeatils extends StatelessWidget {
                                         newPhoneNumber.isNotEmpty &&
                                         newEmployID.isNotEmpty) {
                                       await data.update({
-                                        "phoneNumber": newPhoneNumber
+                                        "teacherPhNo": newPhoneNumber
                                       }).then((value) {
                                         return showDialog(
                                           context: context,
@@ -551,7 +446,7 @@ class TeacherDeatils extends StatelessWidget {
                                       await data.update({
                                         "teacherName": newTeacherName,
                                         "employeeID": newEmployID,
-                                        "phoneNumber": newPhoneNumber,
+                                        "teacherPhNo": newPhoneNumber,
                                       }).then((value) {
                                         return showDialog(
                                           context: context,
@@ -585,7 +480,7 @@ class TeacherDeatils extends StatelessWidget {
                                         newEmployID.isEmpty) {
                                       await data.update({
                                         "teacherName": newTeacherName,
-                                        "phoneNumber": newPhoneNumber,
+                                        "teacherPhNo": newPhoneNumber,
                                       }).then((value) {
                                         return showDialog(
                                           context: context,
@@ -714,6 +609,6 @@ class TeacherDeatils extends StatelessWidget {
 }
 
 final tea_style = GoogleFonts.poppins(
-    color: Color.fromARGB(255, 115, 114, 114),
+    color: const Color.fromARGB(255, 115, 114, 114),
     fontSize: 14,
     fontWeight: FontWeight.w600);

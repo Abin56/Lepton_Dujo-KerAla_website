@@ -205,9 +205,9 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
         schoolId: widget.schoolID,
       ),
       AdminPtaScreen(),
-      NonTeachingStaffView(
-        schoolID: widget.schoolID,
-      ),
+      // NonTeachingStaffView(
+      //   schoolID: widget.schoolID,
+      // ),
       DateWiseLoginScreen(schoolID: widget.schoolID),
     ];
     var screenSize = MediaQuery.of(context).size;

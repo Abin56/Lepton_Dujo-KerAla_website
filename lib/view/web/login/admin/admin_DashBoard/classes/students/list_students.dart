@@ -4,11 +4,11 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+
 import '../../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../../controller/students_list/students_list.dart';
 import '../../../../../../../model/create_classModel/add_student_model.dart';
-import '../../../../../../../model/profileextraDetails/students_extra_profile.dart';
 import '../../../../../../constant/constant.dart';
 import 'details_students.dart';
 
@@ -40,11 +40,12 @@ class _ListOfStudentsState extends State<ListOfStudents> {
     super.initState();
   }
 
+  @override
   Widget build(BuildContext context) {
     List<AddStudentModel> allData = [];
     int columnCount = 3;
-    double _w = MediaQuery.of(context).size.width;
-    double _h = MediaQuery.of(context).size.height;
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
           child: StreamBuilder(
@@ -53,7 +54,7 @@ class _ListOfStudentsState extends State<ListOfStudents> {
             .doc(Get.find<AdminLoginScreenController>().schoolID)
             .collection(Get.find<GetFireBaseData>().bYear.value)
             .doc(Get.find<GetFireBaseData>().bYear.value)
-            .collection("Classes")
+            .collection("classes")
             .doc(widget.classID)
             .collection("Students")
             .orderBy('studentName', descending: false)
@@ -98,7 +99,7 @@ class _ListOfStudentsState extends State<ListOfStudents> {
                           child: GridView.count(
                             physics: const BouncingScrollPhysics(
                                 parent: AlwaysScrollableScrollPhysics()),
-                            padding: EdgeInsets.all(_w / 60),
+                            padding: EdgeInsets.all(w / 60),
                             crossAxisCount: columnCount,
                             children: List.generate(
                               snapshot.data!.docs.length,
@@ -122,7 +123,7 @@ class _ListOfStudentsState extends State<ListOfStudents> {
                                             getxController.indexValue.value =
                                                 index;
                                           },
-                                          child: Container(
+                                          child: SizedBox(
                                             height: 400,
                                             width: 400,
                                             child: Padding(
@@ -134,13 +135,13 @@ class _ListOfStudentsState extends State<ListOfStudents> {
                                                   CircleAvatar(
                                                       radius: 60,
                                                       backgroundColor:
-                                                          Color.fromARGB(255,
+                                                          const Color.fromARGB(255,
                                                               210, 235, 255),
                                                       child: Container(
                                                         height: double.infinity,
                                                         width: double.infinity,
                                                         decoration:
-                                                            BoxDecoration(
+                                                            const BoxDecoration(
                                                                 shape: BoxShape
                                                                     .circle),
                                                         child: data.gender ==
@@ -221,7 +222,7 @@ class _ListOfStudentsState extends State<ListOfStudents> {
               ],
             );
           } else {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator.adaptive(),
             );
           }
@@ -238,7 +239,7 @@ class _ListOfStudentsState extends State<ListOfStudents> {
         .doc(Get.find<AdminLoginScreenController>().schoolID)
         .collection(Get.find<GetFireBaseData>().bYear.value)
         .doc(Get.find<GetFireBaseData>().bYear.value)
-        .collection("Classes")
+        .collection("classes")
         .doc(widget.classID)
         .collection("Students")
         .get();

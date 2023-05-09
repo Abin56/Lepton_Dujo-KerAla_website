@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../view/web/widgets/drop_DownList/schoolDropDownList.dart';
+import '../get_firebase-data/get_firebase_data.dart';
 
 class ParentController extends GetxController {
   final firebaseFirestore = FirebaseFirestore.instance
@@ -24,7 +25,8 @@ class ParentController extends GetxController {
         studentID: studentDocID,
         createdate: DateTime.now().toString(),
         docid: uuid.v1());
-    firebaseFirestore
+    firebaseFirestore.collection(Get.find<GetFireBaseData>().bYear.value)
+        .doc(Get.find<GetFireBaseData>().bYear.value)
         .collection("classes")
         .doc(classID)
         .collection('Temp_ParentCollection')
