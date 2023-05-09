@@ -18,7 +18,8 @@ class ScholarshipModel {
       required this.scholarshipName,
       required this.date, 
       required this.description, 
-      required this.document
+      required this.document, 
+      required this.studentID
   });
 
   String photoUrl;
@@ -27,7 +28,8 @@ class ScholarshipModel {
   String description;
   String scholarshipName;
   String date; 
-  String document;
+  String document; 
+  String studentID;
 
   factory ScholarshipModel.fromJson(Map<String, dynamic> json) =>
       ScholarshipModel(
@@ -37,7 +39,8 @@ class ScholarshipModel {
           description: json["description"],
           scholarshipName : json["scholarshipName"],
           date: json["date"],
-          document: json["document"]
+          document: json["document"], 
+          studentID: json["studentID"]
          );
 
   Map<String, dynamic> toJson() => {
@@ -47,6 +50,7 @@ class ScholarshipModel {
         "description": description,
         "scholarshipName": scholarshipName,
         "date" : date, 
-        "document": document
+        "document": document, 
+        "studentID": studentID
       };
 }

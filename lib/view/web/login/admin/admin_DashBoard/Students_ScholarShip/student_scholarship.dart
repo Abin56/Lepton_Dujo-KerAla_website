@@ -1,11 +1,15 @@
 import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
+import 'package:dujo_kerala_website/controller/get_firebase-data/get_firebase_data.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:uuid/uuid.dart';
@@ -14,7 +18,6 @@ import '../../../../../../model/admin_models/scholarship_model/scholarship_model
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
 import '../../../../../fonts/fonts.dart';
-import '../../../../widgets/custom_container.dart';
 
 class AdminScholarships extends StatefulWidget {
   AdminScholarships({super.key, required this.schoolID});
@@ -41,6 +44,7 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
   TextEditingController descriptionController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+  String studentID = '';
 
   Future<Map<String, String>> uploadToStorage() async {
     try {
@@ -87,11 +91,14 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
           scholarshipName: scholarshipNameController.text,
           date: dateController.text,
           description: descriptionController.text,
-          document: '');
+          document: '', 
+          studentID: studentID);
 
       FirebaseFirestore.instance
           .collection('SchoolListCollection')
           .doc(widget.schoolID)
+          .collection(Get.find<GetFireBaseData>().bYear.value)
+          .doc(Get.find<GetFireBaseData>().bYear.value)
           .collection('Scholarships')
           .doc()
           .set(modell.toJson());
@@ -123,7 +130,7 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
     return Form(
       key: _formKey,
       child: Scaffold(
-          backgroundColor: Color.fromARGB(255, 241, 247, 246),
+          backgroundColor: const Color.fromARGB(255, 241, 247, 246),
           body: SingleChildScrollView(
               child: Row(children: [
             Container(
@@ -182,14 +189,14 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                   child: StreamBuilder(
                       stream: FirebaseFirestore.instance
                           .collection('SchoolListCollection')
-                          .doc(widget.schoolID)
+                          .doc(Get.find<AdminLoginScreenController>().schoolID)
                           .collection('classes')
                           .snapshots(),
                       builder: (context, snapshot) {
                         log(snapshot.data?.docs[0]['className']);
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return Center(child: CircularProgressIndicator());
+                          return const Center(child: CircularProgressIndicator());
                         }
                         return GestureDetector( 
                           onTap: (){
@@ -201,21 +208,110 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                             decoration: BoxDecoration(
                               color: Colors.white,
                               border: Border.all(
-                                  color: Color.fromARGB(255, 238, 238, 238)),
+                                  color: const Color.fromARGB(255, 238, 238, 238)),
+                              borderRadius: BorderRadius.circular(13),
+                            ),
+                            child: DropdownButton(
+                              hint: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: (classListValue == null)
+                                      ? const Text(
+                                          "Select Class",
+                                          style: TextStyle(
+                                              color:
+                                                  Color.fromARGB(255, 0, 0, 0),
+                                              fontSize: 18),
+                                        )
+                                      : Text(classListValue?['className'])),
+                              underline: const SizedBox(),
+                              style: const TextStyle(
+                                fontSize: 18,
+                                color: Colors.black,
+                              ),
+                              icon: const Padding(
+                                padding: EdgeInsets.all(
+                                  13,
+                                ),
+                                child: Icon(Icons.arrow_drop_down,
+                                    size: 18, color: Colors.grey),
+                              ),
+                              isExpanded: true,
+                              items: snapshot.data?.docs.map(
+                                (val) {
+                                  return DropdownMenuItem(
+                                    value: val["docid"],
+                                    child: Text(val["className"]),
+                                  );
+                                },
+                              ).toList(),
+                              onChanged: (val) {
+                                 QueryDocumentSnapshot<Map<String, dynamic>>? categoryIDObject = snapshot.data?.docs
+                                    .where(
+                                        (element) => element["docid"] == val.toString())
+                                    .toList()
+                                    .first;
+                               log(categoryIDObject?['docid']);
+                        
+                                setState(
+                                  () {
+                        
+                                     classListValue = categoryIDObject; 
+                                     
+                                  }, 
+
+              
+                                  
+                                ); 
+                                log(classListValue?['docid']);
+                              }),
+                          ),
+                        );
+                      }),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.01),
+                  child: (classListValue == null)
+                      ? const SizedBox()
+                      : StreamBuilder(
+                        stream: FirebaseFirestore.instance
+                            .collection('SchoolListCollection')
+                            .doc(widget.schoolID)
+                            .collection(Get.find<GetFireBaseData>().bYear.value)
+                            .doc(Get.find<GetFireBaseData>().bYear.value)
+                            .collection('classes')
+                            .doc(classListValue?['docid'])
+                            .collection('Students')
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(child: CircularProgressIndicator());
+                        }
+                          return Container(
+                            height: screenSize.width * 1 / 30,
+                            width: screenSize.width * 0.30,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(
+                                  color: const Color.fromARGB(255, 238, 238, 238)),
                               borderRadius: BorderRadius.circular(13),
                             ),
                             child: DropdownButton(
                                 hint: Padding(
-                                    padding: EdgeInsets.all(10.0),
-                                    child: (classListValue == null)
-                                        ? Text(
-                                            "Select Class",
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: (studentListValue == null)
+                                        ? const Text(
+                                            "Select Students",
                                             style: TextStyle(
-                                                color:
-                                                    Color.fromARGB(255, 0, 0, 0),
+                                                color: Color.fromARGB(
+                                                    255, 0, 0, 0),
                                                 fontSize: 18),
                                           )
-                                        : Text(classListValue['id'])),
+                                        : Text(studentListValue?['studentName'])),
                                 underline: const SizedBox(),
                                 style: const TextStyle(
                                   fontSize: 18,
@@ -229,117 +325,37 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                                       size: 18, color: Colors.grey),
                                 ),
                                 isExpanded: true,
-                                items: snapshot.data!.docs.map(
+                                items: snapshot.data?.docs.map(
                                   (val) {
                                     return DropdownMenuItem(
-                                      value: val["classID"],
-                                      child: Text(val["classID"]),
+                                      value: val["docid"],
+                                      child: Text(val["studentName"]),
                                     );
                                   },
                                 ).toList(),
                                 onChanged: (val) {
-                                  var categoryIDObject = snapshot.data!.docs
-                                      .where(
-                                          (element) => element["classID"] == val)
+                                  var categoryIDObject = snapshot.data?.docs
+                                      .where((element) => element["docid"] == val.toString())
                                       .toList()
                                       .first;
-                                  print(categoryIDObject['classID']);
-                        
+
                                   setState(
                                     () {
-                                      classListValue = categoryIDObject;
+                                      studentListValue = categoryIDObject; 
+                                      studentID = studentListValue?['docid'];
                                     },
-                                  );
+                                  ); 
+                                  log(studentListValue?['docid']);
                                 }),
-                          ),
-                        );
-                      }),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.01),
-                  child: (classListValue == null)
-                      ? SizedBox()
-                      : StreamBuilder(
-                          stream: FirebaseFirestore.instance
-                              .collection('SchoolListCollection')
-                              .doc(widget.schoolID)
-                              .collection('Classes')
-                              .doc(classListValue['classID'])
-                              .collection('Students')
-                              .snapshots(),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return Center(child: CircularProgressIndicator());
-                            }
-                            return Container(
-                              height: screenSize.width * 1 / 30,
-                              width: screenSize.width * 0.30,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(
-                                    color: Color.fromARGB(255, 238, 238, 238)),
-                                borderRadius: BorderRadius.circular(13),
-                              ),
-                              child: DropdownButton(
-                                  hint: Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: (studentListValue == null)
-                                          ? Text(
-                                              "Select Students",
-                                              style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 0, 0, 0),
-                                                  fontSize: 18),
-                                            )
-                                          : Text(studentListValue['id'])),
-                                  underline: const SizedBox(),
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.black,
-                                  ),
-                                  icon: const Padding(
-                                    padding: EdgeInsets.all(
-                                      13,
-                                    ),
-                                    child: Icon(Icons.arrow_drop_down,
-                                        size: 18, color: Colors.grey),
-                                  ),
-                                  isExpanded: true,
-                                  items: snapshot.data!.docs.map(
-                                    (val) {
-                                      return DropdownMenuItem(
-                                        value: val["id"],
-                                        child: Text(val["id"]),
-                                      );
-                                    },
-                                  ).toList(),
-                                  onChanged: (val) {
-                                    var categoryIDObject = snapshot.data!.docs
-                                        .where(
-                                            (element) => element["id"] == val)
-                                        .toList()
-                                        .first;
-
-                                    setState(
-                                      () {
-                                        studentListValue = categoryIDObject;
-                                      },
-                                    );
-                                  }),
-                            );
-                          }),
+                          );
+                        }),
                 ),
                 Stack(
                   children: [
                     Padding(
                       padding: EdgeInsets.only(top: screenSize.width / 30),
                       child: (_file == null)
-                          ? CircleAvatar(
+                          ? const CircleAvatar(
                               radius: 80,
                               backgroundImage: NetworkImage(
                                   'https://via.placeholder.com/150'),
@@ -368,32 +384,32 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                         child: Container(
                           height: screenSize.width / 40,
                           width: screenSize.width / 40,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             color: Color.fromARGB(255, 82, 196, 173),
                           ),
-                          child: Icon(
+                          alignment: Alignment.center,
+                          child: const Icon(
                             Icons.camera_alt_outlined,
                             color: Color.fromARGB(255, 156, 20, 20),
                           ),
-                          alignment: Alignment.center,
                         ),
                       ),
                     ),
                   ],
                 ),
                 sizedBoxH20,
-                Text(
+                const Text(
                   'Upload Photo',
                   style: TextStyle(color: adminePrimayColor),
                 ),
                 sizedBoxH20,
                 Padding(
-                  padding: const EdgeInsets.only(left: 80, right: 80, top: 20),
+                  padding: const EdgeInsets.only(left: 80, right: 80, top: 10),
                   child: TextFormField(
                     validator: checkFieldEmpty,
                     controller: dateController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20))),
@@ -424,7 +440,7 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 80, right: 80, top: 20),
+                  padding: const EdgeInsets.only(left: 80, right: 80, top: 10),
                   child: TextFormField(
                     validator: checkFieldEmpty,
                     controller: admissionNumberController,
@@ -438,7 +454,7 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 80, right: 80, top: 20),
+                  padding: const EdgeInsets.only(left: 80, right: 80, top: 10),
                   child: TextFormField(
                     validator: checkFieldEmpty,
                     controller: scholarshipNameController,
@@ -452,7 +468,7 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 80, right: 80, top: 20),
+                  padding: const EdgeInsets.only(left: 80, right: 80, top: 10),
                   child: TextFormField(
                     validator: checkFieldEmpty,
                     controller: descriptionController,
@@ -491,7 +507,7 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
 
                       finalFile = File(pickedFile!.path!);
                     },
-                    child: Container(
+                    child: SizedBox(
                         height: screenSize.width * 1 / 20,
                         width: screenSize.width * 1 / 5,
                         //color: Colors.red,
@@ -502,15 +518,15 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                   )),
                 ),
                 SizedBox(
-                  height: screenSize.width / 38,
+                  height: screenSize.width / 50,
                 ),
                 (pickedFile == null)
-                    ? SizedBox()
+                    ? const SizedBox()
                     : Padding(
                         padding: const EdgeInsets.all(10),
                         child: Text(
                           pickedFile!.name,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -518,27 +534,27 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                   padding: const EdgeInsets.all(10),
                   child: (InkWell(
                     onTap: () {
-                      if (_formKey.currentState!.validate())
-                        //this
+                      if (_formKey.currentState!.validate()) {
                         uploadToStorage().then((value) => showDialog(
                             context: context,
                             builder: (context) {
                               return AlertDialog(
-                                content: Text('Scholarship succesfully added!'),
+                                content: const Text('Scholarship succesfully added!'),
                                 actions: [
                                   
                                   MaterialButton(
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    child: Text('Ok'),
+                                    child: const Text('Ok'),
                                   )
                                 ],
                               );
                             }));
+                      }
                     },
                     child: (loadingStatus == false)
-                        ? Container(
+                        ? SizedBox(
                             height: screenSize.width * 1 / 20,
                             width: screenSize.width * 1 / 4,
                             //color: Colors.red,
@@ -546,7 +562,7 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                               text: 'CREATE',
                               onTap: () {},
                             ))
-                        : Center(
+                        : const Center(
                             child: CircularProgressIndicator(),
                           ),
                   )),
@@ -568,7 +584,7 @@ class CustomContainer1 extends StatelessWidget {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Padding(
-        padding: EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8.0),
         child: InkWell(
           child: Container(
             decoration: BoxDecoration(
@@ -582,7 +598,7 @@ class CustomContainer1 extends StatelessWidget {
             child: Center(
               child: Text(
                 text,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 25, color: Color.fromARGB(255, 251, 250, 250)),
               ),
             ),
@@ -613,7 +629,7 @@ class CustomContainer2 extends StatelessWidget {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Padding(
-        padding: EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8.0),
         child: InkWell(
           child: Container(
             decoration: BoxDecoration(
@@ -627,7 +643,7 @@ class CustomContainer2 extends StatelessWidget {
             child: Center(
               child: Text(
                 text,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 25, color: Color.fromARGB(255, 251, 250, 250)),
               ),
             ),

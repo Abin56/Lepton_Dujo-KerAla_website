@@ -6,6 +6,7 @@ import '../../../../../../controller/Getx/admin/sampoorna/sampoorna_controller.d
 import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
+import '../../../../widgets/drop_DownList/schoolDropDownList.dart';
 import 'widgets/address_detail_widget.dart';
 import 'widgets/admission_detail_widget.dart';
 import 'widgets/club_widget.dart';
@@ -16,18 +17,26 @@ import 'widgets/school_previously_attended_widger.dart';
 import 'widgets/widgets.dart';
 
 class SampoornaHomeScreen extends StatelessWidget {
+
   SampoornaHomeScreen({super.key, required this.schoolId});
-  final SampoornaController sampoornaController =
-      Get.put(SampoornaController());
   final String schoolId;
 
   @override
+
+
+  final SampoornaController sampoornaController =
+      Get.put(SampoornaController());
+
+  @override
   Widget build(BuildContext context) {
+ 
     final size = MediaQuery.of(context).size;
     return Scaffold(
-       appBar: AppBar(title: Text('Sampoorna'),
+      appBar: AppBar(
+        title: const Text('Sampoorna'),
         backgroundColor: adminePrimayColor,
-        elevation: 0,),
+        elevation: 0,
+      ),
       body: Form(
         key: sampoornaController.sampoornaFormKey,
         autovalidateMode: AutovalidateMode.disabled,
@@ -378,18 +387,18 @@ class StdAdmissionWidget extends StatelessWidget {
         sizedBoxH20,
         Flexible(
           child: TextFormFieldTextWidget(
-             title: 'Admission Number',
+            title: 'Admission Number',
             controller:
-            Get.find<SampoornaController>().admissionNumberController,
+                Get.find<SampoornaController>().admissionNumberController,
             validator: checkFieldEmpty,
           ),
         ),
       ],
-           
     );
   }
 }
-   class TitleWidget extends StatelessWidget {
+
+class TitleWidget extends StatefulWidget {
   const TitleWidget({
     super.key,
     required this.size,
@@ -398,9 +407,23 @@ class StdAdmissionWidget extends StatelessWidget {
   final Size size;
 
   @override
+  
+  State<TitleWidget> createState() => _TitleWidgetState();
+}
+
+class _TitleWidgetState extends State<TitleWidget> {
+  String schoolName='';
+  String schoolPlace ='';
+  @override
+  void initState() {
+    getSchoolDetails();
+    // TODO: implement initState
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: size.width,
+      width: widget.size.width,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
@@ -414,18 +437,18 @@ class StdAdmissionWidget extends StatelessWidget {
               builder: (context, snap) {
                 if (snap.hasData) {
                   if (snap.data!.docs.isEmpty) {
-                    return const TitleTextWidget(
-                        title: 'Lepton HIGHER SECONDARY SCHOOL');
+                    return  TitleTextWidget(
+                        title: schoolName);
                   } else {
                     return TitleTextWidget(
                         title: snap.data!.docs[0]['schoolName']);
                   }
                 } else {
-                  return const TitleTextWidget(
-                      title: 'Lepton HIGHER SECONDARY SCHOOL');
+                  return  TitleTextWidget(
+                      title: schoolName);
                 }
               }),
-         StreamBuilder(
+          StreamBuilder(
               stream: FirebaseFirestore.instance
                   .collection("SchoolListCollection")
                   .where('id',
@@ -435,21 +458,30 @@ class StdAdmissionWidget extends StatelessWidget {
               builder: (context, snap) {
                 if (snap.hasData) {
                   if (snap.data!.docs.isEmpty) {
-                    return const TitleTextWidget(
-                        title: 'ROADVILA, C.V.NALLOOR P.O');
+                    return  TitleTextWidget(
+                        title: schoolPlace);
                   } else {
-                    return TitleTextWidget(
-                        title: snap.data!.docs[0]['place']);
+                    return TitleTextWidget(title: snap.data!.docs[0]['place']);
                   }
                 } else {
-                  return const TitleTextWidget(
-                      title: 'ROADVILA, C.V.NALLOOR P.O');
+                  return  TitleTextWidget(
+                      title: schoolPlace);
                 }
               }),
           sizedBoxH40,
-         const  TitleTextWidget(title: 'APPLICATION CUM DATA COLLECTION FORM'),
+          const TitleTextWidget(title: 'APPLICATION CUM DATA COLLECTION FORM'),
         ],
-     ), 
-     );
- }
+      ),
+    );
+  }
+   void getSchoolDetails() async {
+    var vari = await FirebaseFirestore.instance
+        .collection("SchoolListCollection")
+        .doc(schoolListValue!['docid'])
+        .get();
+    setState(() {
+      schoolName = vari.data()!['schoolName'];
+        schoolPlace = vari.data()!['place'];
+});
+}
 }

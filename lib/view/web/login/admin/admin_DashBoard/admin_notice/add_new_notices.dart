@@ -19,13 +19,13 @@ class AddNewNotices extends StatelessWidget {
   Widget build(BuildContext context) {
     adminNoticeController.clearControllers();
     var screenSize = MediaQuery.of(context).size;
-     final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
     return Form(
-      key: _formKey,
+      key: formKey,
       child: Scaffold(
         // backgroundColor: const Color.fromARGB(255, 27, 95, 88),
         // appBar: AppBar(
-        //     title: Text('Add New Notice'.tr), backgroundColor: adminePrimayColor),
+        //  //     title: Text('Add New Notice'.tr), backgroundColor: adminePrimayColor),
         body: Center(
           child: SingleChildScrollView(
             child: Row(
@@ -53,7 +53,7 @@ class AddNewNotices extends StatelessWidget {
                               ),
                             ),
                             sizedBoxH20,
-                             Text(
+                            Text(
                               'Create Notices',
                               style: ralewayStyle.copyWith(
                                 fontSize: 25.0,
@@ -91,16 +91,18 @@ class AddNewNotices extends StatelessWidget {
                                   textEditingController: adminNoticeController
                                       .publishedDateController,
                                   function: () async {
-                                    String result = await dateTimePicker(context);
+                                    String result =
+                                        await dateTimePicker(context);
                                     if (result.isNotEmpty) {
                                       adminNoticeController
-                                          .publishedDateController.text = result;
+                                          .publishedDateController
+                                          .text = result;
                                     }
                                   },
                                 ),
                                 sizedBoxH20,
                                 TextFormField(
-                                  validator:checkFieldEmpty ,
+                                  validator: checkFieldEmpty,
                                   controller:
                                       adminNoticeController.headingController,
                                   decoration: InputDecoration(
@@ -110,33 +112,35 @@ class AddNewNotices extends StatelessWidget {
                                 ),
                                 sizedBoxH20,
                                 DateTimeTextField(
-                                  
                                   labelText: "Date of occation",
                                   textEditingController: adminNoticeController
                                       .dateOfOccasionController,
                                   function: () async {
-                                    String result = await dateTimePicker(context);
+                                    String result =
+                                        await dateTimePicker(context);
                                     if (result.isNotEmpty) {
                                       adminNoticeController
-                                          .dateOfOccasionController.text = result;
+                                          .dateOfOccasionController
+                                          .text = result;
                                     }
                                   },
                                 ),
                                 sizedBoxH20,
                                 TextFormField(
-                                    validator:checkFieldEmpty ,
+                                  validator: checkFieldEmpty,
                                   controller:
                                       adminNoticeController.venueController,
                                   decoration: InputDecoration(
                                       border: const OutlineInputBorder(),
                                       labelText: 'Venue'.tr,
-                                      labelStyle: const TextStyle(fontSize: 16)),
+                                      labelStyle:
+                                          const TextStyle(fontSize: 16)),
                                 ),
                                 sizedBoxH20,
                                 TextFormField(
-                                    validator:checkFieldEmpty ,
-                                  controller:
-                                      adminNoticeController.chiefGuestController,
+                                  validator: checkFieldEmpty,
+                                  controller: adminNoticeController
+                                      .chiefGuestController,
                                   decoration: InputDecoration(
                                     border: const OutlineInputBorder(),
                                     labelText: 'Chief Guest'.tr,
@@ -148,7 +152,8 @@ class AddNewNotices extends StatelessWidget {
                                   textEditingController: adminNoticeController
                                       .dateOfSubmissionController,
                                   function: () async {
-                                    String result = await dateTimePicker(context);
+                                    String result =
+                                        await dateTimePicker(context);
                                     if (result.isNotEmpty) {
                                       adminNoticeController
                                           .dateOfSubmissionController
@@ -169,7 +174,7 @@ class AddNewNotices extends StatelessWidget {
                                   height: 30,
                                 ),
                                 TextFormField(
-                                    validator:checkFieldEmpty ,
+                                  validator: checkFieldEmpty,
                                   controller: adminNoticeController
                                       .customContentController,
                                   decoration: InputDecoration(
@@ -245,10 +250,10 @@ class AddNewNotices extends StatelessWidget {
                                           adminNoticeController.signedImageId =
                                               result["imageUid"]!;
                                         },
-                                        child:SecondaryCreateButtonWidget(screenSize: screenSize,text: 'Upload Sign'.tr,) 
-                                        
-                                       
-                                      ),
+                                        child: SecondaryCreateButtonWidget(
+                                          screenSize: screenSize,
+                                          text: 'Upload Sign'.tr,
+                                        )),
                                 const SizedBox(
                                   height: 30,
                                 ),
@@ -264,7 +269,9 @@ class AddNewNotices extends StatelessWidget {
                                           adminNoticeController.imageId =
                                               result["imageUid"]!;
                                         },
-                                        child: SecondaryCreateButtonWidget(screenSize: screenSize,text: 'Upload Notice'.tr),
+                                        child: SecondaryCreateButtonWidget(
+                                            screenSize: screenSize,
+                                            text: 'Upload Notice'.tr),
                                       ),
                                 const SizedBox(
                                   height: 30,
@@ -306,8 +313,8 @@ class AddNewNotices extends StatelessWidget {
 }
 
 class SecondaryCreateButtonWidget extends StatelessWidget {
-   SecondaryCreateButtonWidget({
-    required this .text,
+  const SecondaryCreateButtonWidget({
+    required this.text,
     super.key,
     required this.screenSize,
   });
@@ -321,11 +328,8 @@ class SecondaryCreateButtonWidget extends StatelessWidget {
       height: screenSize.width * 1 / 40,
       width: screenSize.width * 1 / 5,
       decoration: BoxDecoration(
-          color: Colors.blue,
-          borderRadius:
-              BorderRadius.circular(14)),
-      child: Center(
-          child: Text(text)),
+          color: Colors.blue, borderRadius: BorderRadius.circular(14)),
+      child: Center(child: Text(text)),
     );
   }
 }
@@ -336,7 +340,6 @@ class DateTimeTextField extends StatelessWidget {
     required this.textEditingController,
     required this.labelText,
     required this.function,
-  
   });
 
   final TextEditingController textEditingController;

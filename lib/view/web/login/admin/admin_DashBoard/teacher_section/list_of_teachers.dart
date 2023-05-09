@@ -5,7 +5,8 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../../../controller/teachersList/teachers_list.dart';
-import '../../../../../../model/profileextraDetails/teacher_extra_profile.dart';
+
+import '../../../../../../model/teacher/teacher_model.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
 
@@ -17,7 +18,7 @@ class ListOfSchoolTeachers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<AddExtraDetailsofTeacherModel> allData = [];
+    List<TeacherModel> allData = [];
     int columnCount = 3;
     double _w = MediaQuery.of(context).size.width;
     double _h = MediaQuery.of(context).size.height;
@@ -72,8 +73,8 @@ class ListOfSchoolTeachers extends StatelessWidget {
                             children: List.generate(
                               snapshot.data!.docs.length,
                               (int index) {
-                                AddExtraDetailsofTeacherModel data =
-                                    AddExtraDetailsofTeacherModel.fromJson(
+                                TeacherModel data =
+                                    TeacherModel.fromMap(
                                         snapshot.data!.docs[index].data());
                                 allData.add(data);
                                 return AnimationConfiguration.staggeredGrid(
@@ -123,7 +124,7 @@ class ListOfSchoolTeachers extends StatelessWidget {
                                                     ),
                                                     sizedBoxH10,
                                                     Text(
-                                                      'Create Date : ${stringTimeToDateConvert(data.joinDate)}',
+                                                      'Create Date : ${stringTimeToDateConvert(data.createdAt!)}',
                                                       style:
                                                           GoogleFonts.poppins(
                                                         color: Colors.black

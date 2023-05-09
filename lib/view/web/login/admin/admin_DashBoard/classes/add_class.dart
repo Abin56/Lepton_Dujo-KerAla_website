@@ -10,16 +10,15 @@ import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
-import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
+
+
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
-import '../../../../../../model/create_classModel/create_classModel.dart';
+
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
-import '../../../../../fonts/fonts.dart';
+
 import '../../../../widgets/drop_DownList/schoolDropDownList.dart';
-import '../teacher_section/class_listing_drop_down.dart';
+
 
 class AddClassesSectionScreen extends StatelessWidget {
   AddSchoolClassController addSchoolClassController =
@@ -160,7 +159,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                                           borderRadius: BorderRadius.all(
                                             Radius.circular(5.w),
                                           ),
-                                          
+
                                         ),
                                         height: 65.w,
                                         width: 85.w,
@@ -387,7 +386,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 4,
-                                
+
                                 ),
                                 itemBuilder: (context, index) {
                                   if (snapshots.hasData) {
@@ -459,7 +458,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                                                     fontWeight: FontWeight.w600,
                                                   ),
                                                 ),
-                                                
+
                                               ),
                                             ),
                                             Row(

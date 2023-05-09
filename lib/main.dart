@@ -41,9 +41,7 @@ class MyApp extends StatelessWidget {
                 // ignore: deprecated_member_use
                 accentColor: const Color(0xFF02BB9F),
               ),
-              home: 
-            HomeP());
-            
+              home: HomeP());
         });
   }
 }

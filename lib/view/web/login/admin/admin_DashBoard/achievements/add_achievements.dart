@@ -249,7 +249,7 @@ class _AddAchievementsState extends State<AddAchievements> {
                                   () {
                         
                                      classListValue = categoryIDObject; 
-                                     studentID = studentListValue?['docid'];
+                                     
                                   }, 
 
               
@@ -331,7 +331,8 @@ class _AddAchievementsState extends State<AddAchievements> {
 
                                   setState(
                                     () {
-                                      studentListValue = categoryIDObject;
+                                      studentListValue = categoryIDObject; 
+                                      studentID = studentListValue?['docid'];
                                     },
                                   ); 
                                   log(studentListValue?['docid']);
