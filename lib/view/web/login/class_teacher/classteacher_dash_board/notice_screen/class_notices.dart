@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -29,7 +28,7 @@ class ClassNoticeTeacher extends StatelessWidget {
 
     return Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: AppBar(
+        appBar: AppBar(backgroundColor: adminePrimayColor,
             title: GestureDetector(
                 onTap: () {
                   Navigator.of(context)
@@ -40,7 +39,7 @@ class ClassNoticeTeacher extends StatelessWidget {
                     );
                   }));
                 },
-                child: const Text('Create'))),
+                child: const Text('Notice'))),
         body: SafeArea(
           child: Row(
             children: [

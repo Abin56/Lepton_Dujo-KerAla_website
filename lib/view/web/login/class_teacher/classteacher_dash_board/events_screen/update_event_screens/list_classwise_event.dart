@@ -28,7 +28,7 @@ class ClassEventsPageList extends StatelessWidget {
       body: Container(
         decoration: const BoxDecoration(),
         child: Scaffold(
-            appBar: AppBar(
+            appBar: AppBar(backgroundColor: adminePrimayColor,
                 title: GestureDetector(
                     onTap: () {
                       Navigator.of(context)
@@ -36,7 +36,7 @@ class ClassEventsPageList extends StatelessWidget {
                         return ClassTeacherCreateEventsPage();
                       }));
                     },
-                    child: const Text('Create'))),
+                    child: const Text('Events'))),
             body: SafeArea(
               child: Row(
                 children: [
