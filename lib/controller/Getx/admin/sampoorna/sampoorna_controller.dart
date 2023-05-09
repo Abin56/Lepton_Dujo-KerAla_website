@@ -8,6 +8,7 @@ import '../../../../view/constant/constant.dart';
 import '../../../../view/web/login/admin/admin_DashBoard/sampoorna/widgets/widgets.dart';
 
 class SampoornaController extends GetxController {
+  
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   RxBool isLoading = RxBool(false);
   final GlobalKey<FormState> sampoornaFormKey = GlobalKey<FormState>();
@@ -181,7 +182,7 @@ class SampoornaController extends GetxController {
     );
   }
 
-  Future<void> addSampoornaToFirebase(String schoolId) async {
+  Future<void> addSampoornaToFirebase(String schoolId,String studentDocid ) async {
     if (genderRadio.isEmpty ||
         nationalityRadio.isEmpty ||
         aplOrBplRadio.isEmpty ||
@@ -285,7 +286,7 @@ class SampoornaController extends GetxController {
 
         final result = await firebaseFirestore
             .collection('SchoolListCollection')
-            .doc(schoolId).collection("AllStudents").doc(admissionNumberController.text.trim())
+            .doc(schoolId).collection("AllStudents").doc(studentDocid)
             .collection('sampoorna')
             .doc(admissionNumberController.text.trim())
             .set(sampoornaData.toJson());
