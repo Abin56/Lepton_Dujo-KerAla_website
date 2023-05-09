@@ -201,7 +201,7 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
                                     return const Text('');
                                   } else {
                                     return Student_Info_Elevated_button_Widget(
-                                      text: 'Generate Summary',
+                                      text: 'View Summary',
                                       onPressed: () async{
                                       Navigator.push(context, MaterialPageRoute(builder: (context) {
                                         return StundentSummery(
