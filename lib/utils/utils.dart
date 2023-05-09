@@ -62,13 +62,13 @@ void handleFirebaseError(FirebaseAuthException error) {
       showToast(msg: 'invalid-email');
       break;
     case 'user-disabled':
-      showToast(msg: 'invalid-email');
+      showToast(msg: 'user-disabled');
       break;
     case 'user-not-found':
-      showToast(msg: 'invalid-email');
+      showToast(msg: 'user-not-found');
       break;
     case 'wrong-password':
-      showToast(msg: 'invalid-email');
+      showToast(msg: 'wrong-password');
       break;
     default:
       showToast(msg: 'Something went wrong');
