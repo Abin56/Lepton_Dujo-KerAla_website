@@ -129,9 +129,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
       AddGuardian(
           teacherIDE: widget.teacherEmail,
           schoolId: Get.find<AdminLoginScreenController>().schoolID), //5
-      ClassTeacherCreateEventsPage(
-
-      ), //6
+      ClassTeacherCreateEventsPage(), //6
       TTSample(),
       // SelectClassForTimeTable(
       //     schoolID: Get.find<AdminLoginScreenController>().schoolID), //7
@@ -140,19 +138,14 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
       //   schoolId: Get.find<AdminLoginScreenController>().schoolID,
       //   classId: teacherClassId,
       // ), //8
-      ClassTeacherCreateEventsPage(
-
-      ), //9
+      ClassTeacherCreateEventsPage(), //9
       ClassTeacherCreateEventsPage(), //6
       TTSample(),
       // SelectClassForTimeTable(
       //     schoolID: Get.find<AdminLoginScreenController>().schoolID), //7
-      ClassTeacherCreateEventsPage(), //8
+      ClassTeacherCreateNoticePage(), //8
       ClassTeacherCreateEventsPage(), //9
-      ClassTeacherCreateNoticePage(
-        schoolId: widget.schoolID,
-        classId: teacherClassId,
-      ), //10/10
+      ClassTeacherCreateNoticePage(), //10/10
     ];
     List<Widget> drawerPages = [
       ClassEventsPageList(
