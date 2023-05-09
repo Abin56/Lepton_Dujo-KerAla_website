@@ -61,12 +61,15 @@ class _StudentSummaryState extends State<StudentSummary> {
                         fontWeight: FontWeight.w800,
                       ),
                     ),
+                    SizedBox(
+                      height: size.width / 20,
+                    ),
 
                     SizedBox(
                       height: size.width / 5,
                       width: size.width / 2,
                       child: LottieBuilder.network(
-                          'https://assets2.lottiefiles.com/packages/lf20_p7ml1rhe.json'),
+                          'https://assets2.lottiefiles.com/packages/lf20_2rjwlguq.json'),
                     )
                     //       SizedBox(
                     // height: 400,
@@ -80,10 +83,10 @@ class _StudentSummaryState extends State<StudentSummary> {
           ),
         ),
         SizedBox(
-           height: size.height * 1 / 1,
-            width:640.w,
+          height: size.height * 1 / 1,
+          width: 640.w,
           child: Container(
-           margin: EdgeInsets.only(left: 140.w,top: 190.w ),
+            margin: EdgeInsets.only(left: 140.w, top: 190.w),
             child: Column(children: [
               InkWell(
                 onTap: () {
@@ -93,7 +96,7 @@ class _StudentSummaryState extends State<StudentSummary> {
                   //         builder: (context) => AdminTeacherList(),
                   //       ));
                 },
-                child: Container(
+                child: SizedBox(
                     height: size.width * 1 / 15,
                     width: size.width * 1 / 3,
                     child: CustomContainer(
@@ -110,7 +113,7 @@ class _StudentSummaryState extends State<StudentSummary> {
                 //         builder: (context) => AdminTeacherList(),
                 //       ));
                 // },
-                child: Container(
+                child: SizedBox(
                     height: size.width * 1 / 15,
                     width: size.width * 1 / 3,
                     child: CustomContainer(
@@ -118,7 +121,7 @@ class _StudentSummaryState extends State<StudentSummary> {
                       onTap: () {},
                     )),
               ),
-               sizedBoxH20,
+              sizedBoxH20,
               InkWell(
                 // onTap: () {
                 //   Navigator.push(
@@ -127,7 +130,7 @@ class _StudentSummaryState extends State<StudentSummary> {
                 //         builder: (context) => AdminTeacherList(),
                 //       ));
                 // },
-                child: Container(
+                child: SizedBox(
                     height: size.width * 1 / 15,
                     width: size.width * 1 / 3,
                     child: CustomContainer(

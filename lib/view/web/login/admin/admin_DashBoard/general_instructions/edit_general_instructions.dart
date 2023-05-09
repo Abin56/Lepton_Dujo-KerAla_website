@@ -17,8 +17,13 @@ class EditGeneralInstructions extends StatelessWidget {
     return Scaffold(
         backgroundColor: adminePrimayColor,
         appBar: AppBar(
-          backgroundColor: adminePrimayColor,
-        ),
+            backgroundColor: adminePrimayColor,
+            title: const Center(
+              child: Text(
+                'Edit Instruction',
+                style: TextStyle(color: cWhite),
+              ),
+            )),
         body: Obx(() {
           return generalInstructionsController.isLoading.value
               ? const Center(
