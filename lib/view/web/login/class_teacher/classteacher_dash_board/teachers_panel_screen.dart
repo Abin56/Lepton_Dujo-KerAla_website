@@ -132,8 +132,8 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
           teacherIDE: widget.teacherEmail,
           schoolId: Get.find<AdminLoginScreenController>().schoolID), //5
       ClassTeacherCreateEventsPage(
-        schoolId: Get.find<AdminLoginScreenController>().schoolID,
-        classId: teacherClassId,
+        // schoolId: Get.find<AdminLoginScreenController>().schoolID,
+        // classId: teacherClassId,
       ), //6
       TTSample(),
       // SelectClassForTimeTable(
@@ -144,8 +144,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
       //   classId: teacherClassId,
       // ), //8
       ClassTeacherCreateEventsPage(
-        schoolId: Get.find<AdminLoginScreenController>().schoolID,
-        classId: teacherClassId,
+        
       ), //9
       ClassTeacherCreateNoticePage(
         schoolId: widget.schoolID,

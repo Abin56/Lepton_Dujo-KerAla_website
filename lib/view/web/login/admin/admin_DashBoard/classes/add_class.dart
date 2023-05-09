@@ -12,11 +12,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-
 import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../model/create_classModel/create_classModel.dart';
-
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
 import '../../../../../fonts/fonts.dart';
@@ -162,20 +160,12 @@ class AddClassesSectionScreen extends StatelessWidget {
                                           borderRadius: BorderRadius.all(
                                             Radius.circular(5.w),
                                           ),
-                                          // border: Border.all(color: cBlack),
-                                          // boxShadow: [
-                                          //   BoxShadow(
-                                          //     color: Color.fromARGB(255, 201, 197, 197).withOpacity(0.5),
-                                          //     spreadRadius: 5,
-                                          //     blurRadius: 10,
-                                          //     offset: Offset(0, 3),
-                                          //   ),
-                                          // ],
+                                          
                                         ),
-                                        height: 65.h,
+                                        height: 65.w,
                                         width: 85.w,
                                         child: Container(
-                                          height: 75.h,
+                                          height: 75.w ,
                                           width: 90.w,
                                           margin: EdgeInsets.only(top: 15.h),
                                           child: Row(
@@ -363,7 +353,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        height: 50.h,
+                        height: 50.w,
                         width: 160.w,
                         decoration: BoxDecoration(
                             border: Border.all(),
@@ -384,7 +374,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                             )),
                       ),
                       SizedBox(
-                        height: 500.h,
+                        height: 500.w,
                         child: StreamBuilder(
                             stream: FirebaseFirestore.instance
                                 .collection('SchoolListCollection')
@@ -397,13 +387,12 @@ class AddClassesSectionScreen extends StatelessWidget {
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 4,
-                                  // crossAxisSpacing: 30.0,
-                                  //  mainAxisSpacing: 20.0,
+                                
                                 ),
                                 itemBuilder: (context, index) {
                                   if (snapshots.hasData) {
                                     return Padding(
-                                      padding: EdgeInsets.all(20),
+                                      padding: EdgeInsets.all(20.w),
                                       child: Container(
                                         decoration: BoxDecoration(
                                             color: Colors.white,
@@ -422,14 +411,14 @@ class AddClassesSectionScreen extends StatelessWidget {
                                             borderRadius: BorderRadius.all(
                                               Radius.circular(3.w),
                                             )),
-                                        height: 80.h,
+                                        height: 80.w,
                                         width: 160.w,
                                         child: Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
                                           children: [
                                             SizedBox(
-                                              height: 10.h,
+                                              height: 10.w,
                                             ),
                                             GoogleMonstserratWidgets(
                                                 text:
@@ -458,9 +447,9 @@ class AddClassesSectionScreen extends StatelessWidget {
                                                     borderRadius:
                                                         BorderRadius.all(
                                                             Radius.circular(
-                                                                4))),
+                                                                4.w))),
                                                 width: 105.w,
-                                                height: 29,
+                                                height: 29.w,
                                                 child: Center(
                                                   child:
                                                       GoogleMonstserratWidgets(
@@ -470,7 +459,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                                                     fontWeight: FontWeight.w600,
                                                   ),
                                                 ),
-                                                //Text(''),
+                                                
                                               ),
                                             ),
                                             Row(
