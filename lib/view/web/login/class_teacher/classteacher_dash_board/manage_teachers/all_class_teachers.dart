@@ -166,7 +166,7 @@ class AllClassesListViewForTeacher extends StatelessWidget {
                                               padding: EdgeInsets.only(left: 10.w),
                                               child: Container(
                                                  alignment: Alignment.centerLeft,
-                                                 width: screenSize.width * 0.28,
+                                                 width: screenSize.width * 0.25,
                                                 child: GoogleMonstserratWidgets(
                                                   text: snapshot.data?.docs[index]['teacherName'],
                                                   fontsize: 15.w,
@@ -189,7 +189,7 @@ class AllClassesListViewForTeacher extends StatelessWidget {
                                             ),
                                             SizedBox(width: 10.w,),
                                             SizedBox(width: 10.w,),
-                                            SizedBox(width: 5.w,),
+                                            
                                             Container(
                                               child: StreamBuilder(
                                                   stream: FirebaseFirestore.instance
@@ -215,7 +215,10 @@ class AllClassesListViewForTeacher extends StatelessWidget {
                                                   builder: (context, snap) {
                                                     if (snap.hasData) {
                                                       if (snap.data!.docs.isEmpty) {
-                                                        return const Text('');
+                                                        return 
+                                                        GoogleMonstserratWidgets(text: '<-Addsubject',
+                                                         fontsize:12.w); 
+                                                        
                                                       } else {
                                                         return GestureDetector(
                                                             onTap: () async {

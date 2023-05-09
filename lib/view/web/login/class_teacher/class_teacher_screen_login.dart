@@ -234,13 +234,14 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            adminLoginScreenController.forgetPassWord(context);
+                          },
                           child: Text(
-                            'Forgot Password?',
+                            'Forgot Password?/ Reset Password ?',
                             style: ralewayStyle.copyWith(
-                              fontSize: 12.0,
-                              color: AppColors.whiteColor,
-                              //,
+                              fontSize: 14.0,
+                              color: cWhite,
                               fontWeight: FontWeight.w600,
                             ),
                           ),

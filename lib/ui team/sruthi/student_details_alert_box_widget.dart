@@ -15,6 +15,7 @@ import '../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../view/colors/colors.dart';
 import '../../view/constant/constant.dart';
 import '../../view/web/widgets/Iconbackbutton.dart';
+import '../../view/web/widgets/sample/under_maintance.dart';
 import 'guardianInfo_alert_box.dart';
 
 class Student_Details_AlertBox_Widget extends StatelessWidget {
@@ -119,8 +120,8 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
                 Column(
                   children: [
                     Container(
-                        width: 300,
-                        height: 380,
+                        width: 300.w,
+                        height: 380.w,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
                           color: Colors.grey.withOpacity(0.3),
@@ -181,7 +182,9 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
                           sizedBoxH20,
                           Student_Info_Elevated_button_Widget(
                             text: 'Shift Class',
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => UnderMaintanceScreen(),));
+                            },
                           ),
                           sizedBoxH20,
                           StreamBuilder(

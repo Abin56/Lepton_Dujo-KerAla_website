@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
+import '../../../../../../../colors/colors.dart';
 
 class StundentSummery extends StatelessWidget {
   var stundetAdmissionId;
@@ -31,6 +32,7 @@ class StundentSummery extends StatelessWidget {
           // final data = snap.data!.docs[0];
           if (snap.hasData) {
             return Scaffold(
+              appBar: AppBar(backgroundColor: adminePrimayColor),
               body: ListView(
                 children: [
                   Container(

@@ -115,7 +115,8 @@ class SubmitSubjectClassTeacher extends StatelessWidget {
                                                                     
                                              IconButton(
                                               onPressed: () {
-                                               
+                                               subjectControllerr.deleteYearWiseSubject(snapshot.data?.docs[index]
+                                                        ['docid'], context);
                                              }, 
                                              icon: Icon(Icons.delete,color: cred,size: 18.w,))
                                             ],

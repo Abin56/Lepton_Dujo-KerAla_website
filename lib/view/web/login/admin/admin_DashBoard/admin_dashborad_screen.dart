@@ -95,8 +95,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'Alumni Associations',
     'Fees in Classwise',
     'Non-Teaching Staffs',
-    'Generate TC',
-    'Generate Summary',
+    // 'Generate TC',
+    // 'Generate Summary',
     'Sampoorna'
   ];
 
@@ -125,8 +125,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'assets/images/alumni.png',
     'assets/images/tuition.png',
     'assets/images/steward.png',
-    'assets/images/file-transfer.png',
-    'assets/images/report.png',
+    // 'assets/images/file-transfer.png',
+    // 'assets/images/report.png',
     'assets/images/folders.png',
   ];
 
@@ -186,8 +186,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       const AlumniAssocation(), //10
       const UnderMaintanceScreen(),
       NonTeachingLogin(schoolID: widget.schoolID),
-      const UnderMaintanceScreen(), //11
-      const UnderMaintanceScreen(),
+      // const UnderMaintanceScreen(), //11
+      // const UnderMaintanceScreen(),
       SampoornaHomeScreen(schoolId: widget.schoolID,studentId: ''), //13
     ];
     List<Widget> drawerPages = [
@@ -233,8 +233,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             SizedBox(
-                              height: 100,
-                              width: 300,
+                              height: 100.w,
+                              width: 300.w,
                               child: GetBatchYearListDropDownButton(
                                 schoolID: widget.schoolID,
                               ),
@@ -264,8 +264,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                               child: ButtonContainerWidget(
                                 curving: 20,
                                 colorindex: 0,
-                                height: 60,
-                                width: 200,
+                                height: 60.w,
+                                width: 200.w,
                                 child: Center(
                                   child: Text(
                                     "Set Batch Year",
@@ -411,8 +411,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                       children: [
                                         Image.asset(
                                           viewListImages[index],
-                                          width: 15,
-                                          height: 15,
+                                          width: 15.w,
+                                          height: 15.w,
                                         ),
                                         const SizedBox(
                                           width: 10,
@@ -446,10 +446,10 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                       child: Column(children: [
                         Container(
                           color: Colors.white30,
-                          height: 60,
+                          height: 60.w,
                           child: Padding(
                             padding:
-                                const EdgeInsets.only(right: 30.0, left: 30),
+                                 EdgeInsets.only(right: 30.0.w, left: 30.w),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -821,11 +821,11 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                 crossAxisCount: 5,
                                 crossAxisSpacing: 4.0,
                                 mainAxisSpacing: 8.0,
-                                children: List.generate(27, (index) {
+                                children: List.generate(24, (index) {
                                   return Center(
                                       child: SizedBox(
-                                    height: 200,
-                                    width: 200,
+                                    height: 200.w,
+                                    width: 200.w,
                                     child: GestureDetector(
                                       onTap: () {
                                         Navigator.push(
@@ -844,11 +844,11 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                             children: [
                                               Image.asset(
                                                 dashboardImagesList[index],
-                                                width: 55,
-                                                height: 55,
+                                                width: 55.w,
+                                                height: 55.w,
                                               ),
-                                              const SizedBox(
-                                                height: 20,
+                                               SizedBox(
+                                                height: 20.w,
                                               ),
                                               Text(
                                                 dashboardNamesList[index],
