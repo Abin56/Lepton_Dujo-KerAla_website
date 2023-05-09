@@ -20,15 +20,15 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
   Widget build(BuildContext context) {
    var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(title: Text('FOOD TIME TABLE')),
+      appBar: AppBar(title: const Text('FOOD TIME TABLE'),backgroundColor: adminePrimayColor,),
       body:StreamBuilder( 
         stream:  FirebaseFirestore.instance.collection('SchoolListCollection').doc(Get.find<AdminLoginScreenController>().schoolID).collection(Get.find<GetFireBaseData>().bYear.value).doc(Get.find<GetFireBaseData>().bYear.value).collection('FoodAndBeverages').snapshots(),
         builder: (context, snapshot) {
-          if(snapshot.data!.docs.length==0){
+          if(snapshot.data!.docs.isEmpty){
             return Center(child: Text('No Data Found', style: GoogleFonts.poppins(fontWeight:FontWeight.w500),));
           } 
           if(snapshot.connectionState == ConnectionState.waiting){
-            return Center(child: CircularProgressIndicator(),);
+            return const Center(child: CircularProgressIndicator(),);
           }
           return SingleChildScrollView(child:
                   Column(
@@ -43,7 +43,7 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                             Container(
                               height: screenSize.width/6,
                              width: screenSize.width/7.3,
-                              decoration: BoxDecoration(color: Color.fromARGB(255, 120, 119, 121),
+                              decoration: BoxDecoration(color: const Color.fromARGB(255, 120, 119, 121),
                                   borderRadius: BorderRadius.circular(15)),
                               child: const Center(child: Text(
                                                     "DAYS",
@@ -53,11 +53,11 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                                                         fontWeight: FontWeight.bold),
                                                   ),),
                             ),
-                            SizedBox(width: 8,),
+                            const SizedBox(width: 8,),
                             Container(
                               height: screenSize.width/6,
                                width: screenSize.width/7.3,
-                               decoration: BoxDecoration(color: Color.fromARGB(255, 120, 119, 121),
+                               decoration: BoxDecoration(color: const Color.fromARGB(255, 120, 119, 121),
                                   borderRadius: BorderRadius.circular(15)),
                               child: const Center(child: Text(
                                                     "MONDAY",
@@ -67,11 +67,11 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                                                         fontWeight: FontWeight.bold),
                                                   ),),
                             ),
-                            SizedBox(width: 8,),
+                            const SizedBox(width: 8,),
                             Container(
                               height: screenSize.width/6,
                                width: screenSize.width/7.3,
-                              decoration: BoxDecoration(color:Color.fromARGB(255, 120, 119, 121),
+                              decoration: BoxDecoration(color:const Color.fromARGB(255, 120, 119, 121),
                                   borderRadius: BorderRadius.circular(15)),
                               child: const Center(child: Text(
                                                     "TUESDAY",
@@ -81,11 +81,11 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                                                         fontWeight: FontWeight.bold),
                                                   ),),
                             ),
-                            SizedBox(width: 8,),
+                            const SizedBox(width: 8,),
                             Container(
                               height: screenSize.width/6,
                                width: screenSize.width/7.3,
-                             decoration: BoxDecoration(color:Color.fromARGB(255, 120, 119, 121),
+                             decoration: BoxDecoration(color:const Color.fromARGB(255, 120, 119, 121),
                                   borderRadius: BorderRadius.circular(15)),
                               child: const Center(child: Text(
                                                     "WEDNESDAY",
@@ -95,11 +95,11 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                                                         fontWeight: FontWeight.bold),
                                                   ),),
                             ),
-                            SizedBox(width: 8,),
+                            const SizedBox(width: 8,),
                             Container(
                               height: screenSize.width/6,
                               width: screenSize.width/7.3,
-                               decoration: BoxDecoration(color: Color.fromARGB(255, 120, 119, 121),
+                               decoration: BoxDecoration(color: const Color.fromARGB(255, 120, 119, 121),
                                   borderRadius: BorderRadius.circular(15)),
                               child: const Center(child: Text(
                                                     "THURSDAY",
@@ -109,11 +109,11 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                                                         fontWeight: FontWeight.bold),
                                                   ),),
                             ),
-                            SizedBox(width: 8,),
+                            const SizedBox(width: 8,),
                             Container(
                               height: screenSize.width/6,
                               width: screenSize.width/7.3,
-                              decoration: BoxDecoration(color:Color.fromARGB(255, 120, 119, 121),
+                              decoration: BoxDecoration(color:const Color.fromARGB(255, 120, 119, 121),
                                   borderRadius: BorderRadius.circular(15)),
                               child: const Center(child: Text(
                                                     "FRIDAY",
@@ -123,11 +123,11 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                                                         fontWeight: FontWeight.bold),
                                                   ),),
                             ),
-                            SizedBox(width: 8,),
+                            const SizedBox(width: 8,),
                             Container(
                               height: screenSize.width/6,
                                width: screenSize.width/7.5,
-                                decoration: BoxDecoration(color:Color.fromARGB(255, 120, 119, 121),
+                                decoration: BoxDecoration(color:const Color.fromARGB(255, 120, 119, 121),
                                   borderRadius: BorderRadius.circular(15)),
                               child: const Center(child: Text(
                                                     "SATURDAY",
@@ -153,7 +153,7 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                                 Container(
                                   height: screenSize.width/10,
                                   width: screenSize.width/15,
-                                    decoration: BoxDecoration(color: Color.fromARGB(255, 194, 143, 209),
+                                    decoration: BoxDecoration(color: const Color.fromARGB(255, 194, 143, 209),
                                   borderRadius: BorderRadius.circular(15)),
                                   child: const Center(child: Text(
                                                     "BREAKFAST\n8AM-11AM",
@@ -163,11 +163,11 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                                                         fontWeight: FontWeight.bold),
                                                   ),),
                                 ),
-                                SizedBox(height: 4,),
+                                const SizedBox(height: 4,),
                                 Container(
                                   height: screenSize.width/10,
                                   width: screenSize.width/15,
-                                   decoration: BoxDecoration(color: Color.fromARGB(255, 194, 143, 209),
+                                   decoration: BoxDecoration(color: const Color.fromARGB(255, 194, 143, 209),
                                   borderRadius: BorderRadius.circular(15)),
                                   child: const Center(child: Text(
                                                     "LUNCH\n12PM-3PM",
@@ -177,11 +177,11 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                                                         fontWeight: FontWeight.bold),
                                                   ),),
                                 ),
-                                SizedBox(height: 4,),
+                                const SizedBox(height: 4,),
                                 Container(
                                   height: screenSize.width/10,
                                   width: screenSize.width/15,
-                                 decoration: BoxDecoration(color: Color.fromARGB(255, 194, 143, 209),
+                                 decoration: BoxDecoration(color: const Color.fromARGB(255, 194, 143, 209),
                                   borderRadius: BorderRadius.circular(15)),
                                   child: const Center(child: Text(
                                                     "SNACKS\n8AM-5PM",
@@ -196,14 +196,14 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                             ),
                           ),
                           
-                          Container(
+                          SizedBox(
                             width: screenSize.width/7,
                             height: screenSize.height,
                             child: StreamBuilder(
                               stream:  FirebaseFirestore.instance.collection('SchoolListCollection').doc(Get.find<AdminLoginScreenController>().schoolID).collection(Get.find<GetFireBaseData>().bYear.value).doc(Get.find<GetFireBaseData>().bYear.value).collection('FoodAndBeverages').doc('Monday').snapshots(),
                               builder: (context, snapshot) {
                                 if(snapshot.connectionState == ConnectionState.waiting){
-                                  return Center(child: CircularProgressIndicator(),);
+                                  return const Center(child: CircularProgressIndicator(),);
                                 } 
                             
                                 return ListView(
@@ -212,28 +212,28 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                                   children: <Widget>[
                                    
                                     Container(
-                                    child: ItemWidget(snap: snapshot, time: 'Breakfast',day: 'Monday', otherTime1 : 'Lunch', otherTime2: 'Snacks'),
-                                      height: screenSize.width/10,
+                                    height: screenSize.width/10,
                                       width: screenSize.width/15,
-                                     decoration: BoxDecoration(color: Color.fromARGB(255, 131, 236, 184),
+                                     decoration: BoxDecoration(color: const Color.fromARGB(255, 131, 236, 184),
                                       borderRadius: BorderRadius.circular(15)),
+                                    child: ItemWidget(snap: snapshot, time: 'Breakfast',day: 'Monday', otherTime1 : 'Lunch', otherTime2: 'Snacks'),
                                     
                                     ),
-                                    SizedBox(height: 4,),
+                                    const SizedBox(height: 4,),
                                                  
                                     Container(
                                       height: screenSize.width/10,
                                       width: screenSize.width/15,
-                                       decoration: BoxDecoration(color: Color.fromARGB(255, 131, 236, 184),
+                                       decoration: BoxDecoration(color: const Color.fromARGB(255, 131, 236, 184),
                                       borderRadius: BorderRadius.circular(15)),
                                       child: ItemWidget(snap: snapshot, time: 'Lunch',day: 'Monday', otherTime1 : 'Breakfast', otherTime2: 'Snacks'),
                                       // child: const Center(child: SelectSubjectDropDownButton()),
                                     ),
-                                    SizedBox(height: 4,),
+                                    const SizedBox(height: 4,),
                                     Container(
                                       height: screenSize.width/10,
                                       width: screenSize.width/15,
-                                     decoration: BoxDecoration(color: Color.fromARGB(255, 131, 236, 184),
+                                     decoration: BoxDecoration(color: const Color.fromARGB(255, 131, 236, 184),
                                       borderRadius: BorderRadius.circular(15)),
                                       child: ItemWidget(snap: snapshot, time: 'Snacks',day: 'Monday', otherTime1 : 'Lunch', otherTime2: 'Breakfast'),
                                     ),
@@ -253,13 +253,13 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                               stream: FirebaseFirestore.instance.collection('SchoolListCollection').doc(Get.find<AdminLoginScreenController>().schoolID).collection(Get.find<GetFireBaseData>().bYear.value).doc(Get.find<GetFireBaseData>().bYear.value).collection('FoodAndBeverages').doc('Tuesday').snapshots(),
                               builder: (context, snapshot) {
                                 if(snapshot.connectionState == ConnectionState.waiting){
-                                  return Center(child: CircularProgressIndicator(),);
+                                  return const Center(child: CircularProgressIndicator(),);
                                 }
                                 
                                 if(snapshot.data!.data()!.isEmpty){
                                   return Center(
                                     child: Container(
-                                      child: Text('No Item Added'),
+                                      child: const Text('No Item Added'),
                                     ),
                                   );}
                                 return ListView(
@@ -269,23 +269,23 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                                     Container(
                                       height: screenSize.width/10,
                                       width: screenSize.width/15,
-                                      decoration: BoxDecoration(color: Color.fromARGB(255, 255, 102, 222),
+                                      decoration: BoxDecoration(color: const Color.fromARGB(255, 255, 102, 222),
                                       borderRadius: BorderRadius.circular(15)),
                                       child: ItemWidget(snap: snapshot, time: 'Breakfast',day: 'Tuesday', otherTime1 : 'Lunch', otherTime2: 'Snacks'),
                                     ),
-                                    SizedBox(height: 4,),
+                                    const SizedBox(height: 4,),
                                     Container(
                                       height: screenSize.width/10,
                                       width: screenSize.width/15,
-                                       decoration: BoxDecoration(color: Color.fromARGB(255, 255, 102, 222),
+                                       decoration: BoxDecoration(color: const Color.fromARGB(255, 255, 102, 222),
                                       borderRadius: BorderRadius.circular(15)),
                                       child: ItemWidget(snap: snapshot, time: 'Lunch',day: 'Tuesday', otherTime1 : 'Breakfast', otherTime2: 'Snacks'),
                                     ),
-                                    SizedBox(height: 4,),
+                                    const SizedBox(height: 4,),
                                     Container(
                                       height: screenSize.width/10,
                                       width: screenSize.width/15,
-                                       decoration: BoxDecoration(color: Color.fromARGB(255, 255, 102, 222),
+                                       decoration: BoxDecoration(color: const Color.fromARGB(255, 255, 102, 222),
                                       borderRadius: BorderRadius.circular(15)),
                                       child: ItemWidget(snap: snapshot, time: 'Snacks',day: 'Tuesday', otherTime1 : 'Lunch', otherTime2: 'Breakfast'),
                                     ),
@@ -304,12 +304,12 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                               stream: FirebaseFirestore.instance.collection('SchoolListCollection').doc(Get.find<AdminLoginScreenController>().schoolID).collection(Get.find<GetFireBaseData>().bYear.value).doc(Get.find<GetFireBaseData>().bYear.value).collection('FoodAndBeverages').doc('Wednesday').snapshots(),
                               builder: (context, snapshot) {
                                 if(snapshot.connectionState == ConnectionState.waiting){
-                                  return Center(child: CircularProgressIndicator(),);
+                                  return const Center(child: CircularProgressIndicator(),);
                                 }
                                  if(snapshot.data!.data()!.isEmpty){
                                   return Center(
                                     child: Container(
-                                      child: Text('No Item Added'),
+                                      child: const Text('No Item Added'),
                                     ),
                                   );}
                                 return ListView(
@@ -319,23 +319,23 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                                     Container(
                                       height: screenSize.width/10,
                                       width: screenSize.width/15,
-                                     decoration: BoxDecoration(color: Color.fromARGB(255, 236, 238, 148),
+                                     decoration: BoxDecoration(color: const Color.fromARGB(255, 236, 238, 148),
                                       borderRadius: BorderRadius.circular(15)),
                                       child: ItemWidget(snap: snapshot, time: 'Breakfast',day: 'Wednesday', otherTime1 : 'Lunch', otherTime2: 'Snacks'),
                                     ),
-                                    SizedBox(height: 4,),
+                                    const SizedBox(height: 4,),
                                     Container(
                                       height: screenSize.width/10,
                                       width: screenSize.width/15,
-                                       decoration: BoxDecoration(color: Color.fromARGB(255, 236, 238, 148),
+                                       decoration: BoxDecoration(color: const Color.fromARGB(255, 236, 238, 148),
                                       borderRadius: BorderRadius.circular(15)),
                                       child: ItemWidget(snap: snapshot, time: 'Lunch',day: 'Wednesday', otherTime1 : 'Breakfast', otherTime2: 'Snacks'),
                                     ),
-                                    SizedBox(height: 4,),
+                                    const SizedBox(height: 4,),
                                     Container(
                                       height: screenSize.width/10,
                                       width: screenSize.width/15,
-                                       decoration: BoxDecoration(color: Color.fromARGB(255, 236, 238, 148),
+                                       decoration: BoxDecoration(color: const Color.fromARGB(255, 236, 238, 148),
                                       borderRadius: BorderRadius.circular(15)),
                                       child: ItemWidget(snap: snapshot, time: 'Snacks',day: 'Wednesday', otherTime1 : 'Lunch', otherTime2: 'Breakfast'),
                                     ),
@@ -354,13 +354,13 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                               stream: FirebaseFirestore.instance.collection('SchoolListCollection').doc(Get.find<AdminLoginScreenController>().schoolID).collection(Get.find<GetFireBaseData>().bYear.value).doc(Get.find<GetFireBaseData>().bYear.value).collection('FoodAndBeverages').doc('Thursday').snapshots(),
                               builder: (context, snapshot) {
                                 if(snapshot.connectionState ==ConnectionState.waiting){
-                                  return Center(child: CircularProgressIndicator(),);
+                                  return const Center(child: CircularProgressIndicator(),);
                                 }
 
                                  if(snapshot.data!.data()!.isEmpty){
                                   return Center(
                                     child: Container(
-                                      child: Text('No Item Added'),
+                                      child: const Text('No Item Added'),
                                     ),
                                   );}
                                 return ListView(
@@ -370,23 +370,23 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                                     Container(
                                       height: screenSize.width/10,
                                       width: screenSize.width/15,
-                                       decoration: BoxDecoration(color: Color.fromARGB(255, 253, 146, 173),
+                                       decoration: BoxDecoration(color: const Color.fromARGB(255, 253, 146, 173),
                                       borderRadius: BorderRadius.circular(15)),
                                       child:  ItemWidget(snap: snapshot, time: 'Breakfast',day: 'Thursday',  otherTime1 : 'Lunch', otherTime2: 'Snacks'),
                                     ),
-                                    SizedBox(height: 4,),
+                                    const SizedBox(height: 4,),
                                     Container(
                                       height: screenSize.width/10,
                                       width: screenSize.width/15,
-                                      decoration: BoxDecoration(color: Color.fromARGB(255, 253, 146, 173),
+                                      decoration: BoxDecoration(color: const Color.fromARGB(255, 253, 146, 173),
                                       borderRadius: BorderRadius.circular(15)),
                                       child: ItemWidget(snap: snapshot, time: 'Lunch',day: 'Thursday',  otherTime1 : 'Breakfast', otherTime2: 'Snacks'),
                                     ),
-                                    SizedBox(height: 4,),
+                                    const SizedBox(height: 4,),
                                     Container(
                                       height: screenSize.width/10,
                                       width: screenSize.width/15,
-                                      decoration: BoxDecoration(color: Color.fromARGB(255, 253, 146, 173),
+                                      decoration: BoxDecoration(color: const Color.fromARGB(255, 253, 146, 173),
                                       borderRadius: BorderRadius.circular(15)),
                                       child: ItemWidget(snap: snapshot, time: 'Snacks',day: 'Thursday',  otherTime1 : 'Lunch', otherTime2: 'Breakfast'),
                                     ),
@@ -405,12 +405,12 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                               stream: FirebaseFirestore.instance.collection('SchoolListCollection').doc(Get.find<AdminLoginScreenController>().schoolID).collection(Get.find<GetFireBaseData>().bYear.value).doc(Get.find<GetFireBaseData>().bYear.value).collection('FoodAndBeverages').doc('Friday').snapshots(),
                               builder: (context, snapshot) {
                                 if(snapshot.connectionState == ConnectionState.waiting){
-                                  return Center(child: CircularProgressIndicator(),);
+                                  return const Center(child: CircularProgressIndicator(),);
                                 }
                                  if(snapshot.data!.data()!.isEmpty){
                                   return Center(
                                     child: Container(
-                                      child: Text('No Item Added'),
+                                      child: const Text('No Item Added'),
                                     ),
                                   );}
                                 return ListView(
@@ -420,23 +420,23 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                                     Container(
                                       height: screenSize.width/10,
                                       width: screenSize.width/15,
-                                      decoration: BoxDecoration(color: Color.fromARGB(255, 0, 255, 221),
+                                      decoration: BoxDecoration(color: const Color.fromARGB(255, 0, 255, 221),
                                       borderRadius: BorderRadius.circular(15)),
                                       child: ItemWidget(snap: snapshot, time: 'Breakfast',day: 'Friday',  otherTime1 : 'Lunch', otherTime2: 'Snacks'),
                                     ),
-                                    SizedBox(height: 4,),
+                                    const SizedBox(height: 4,),
                                     Container(
                                       height: screenSize.width/10,
                                       width: screenSize.width/15,
-                                      decoration: BoxDecoration(color: Color.fromARGB(255, 0, 255, 221),
+                                      decoration: BoxDecoration(color: const Color.fromARGB(255, 0, 255, 221),
                                       borderRadius: BorderRadius.circular(15)),
                                       child:ItemWidget(snap: snapshot, time: 'Lunch',day: 'Friday',  otherTime1 : 'Breakfast', otherTime2: 'Snacks'),
                                     ),
-                                    SizedBox(height: 4,),
+                                    const SizedBox(height: 4,),
                                     Container(
                                       height: screenSize.width/10,
                                       width: screenSize.width/15,
-                                      decoration: BoxDecoration(color: Color.fromARGB(255, 0, 255, 221),
+                                      decoration: BoxDecoration(color: const Color.fromARGB(255, 0, 255, 221),
                                       borderRadius: BorderRadius.circular(15)),
                                       child:  ItemWidget(snap: snapshot, time: 'Snacks',day: 'Friday',  otherTime1 : 'Lunch', otherTime2: 'Breakfast'),
                                     ),
@@ -456,7 +456,7 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                               builder: (context, snapshot) {
                                
                                 if(snapshot.connectionState == ConnectionState.waiting){
-                                  return Center(child: CircularProgressIndicator(),);
+                                  return const Center(child: CircularProgressIndicator(),);
                                 }
                                 
                                 return ListView(
@@ -464,25 +464,25 @@ class _FoodTimeTableMenuState extends State<FoodTimeTableMenu> {
                                   padding: const EdgeInsets.only(left: 8, right: 8),
                                   children: <Widget>[
                                     Container(
-                                       decoration: BoxDecoration(color: Color.fromARGB(255, 235, 190, 200),
+                                       decoration: BoxDecoration(color: const Color.fromARGB(255, 235, 190, 200),
                                       borderRadius: BorderRadius.circular(15)),
                                       height: screenSize.width/10,
                                       width: screenSize.width/15,
                                      //color: Color.fromARGB(255, 0, 255, 221),
                                       child: ItemWidget(snap: snapshot, time: 'Breakfast',day: 'Saturday',  otherTime1 : 'Lunch', otherTime2: 'Snacks'),
                                     ),
-                                    SizedBox(height: 4,),
+                                    const SizedBox(height: 4,),
                                     Container(
-                                      decoration: BoxDecoration(color: Color.fromARGB(255, 235, 190, 200),
+                                      decoration: BoxDecoration(color: const Color.fromARGB(255, 235, 190, 200),
                                       borderRadius: BorderRadius.circular(15)),
                                       height: screenSize.width/10,
                                       width: screenSize.width/15,
                                        
                                       child: ItemWidget(snap: snapshot, time: 'Lunch',day: 'Saturday',  otherTime1 : 'Breakfast', otherTime2: 'Snacks'),
                                     ),
-                                    SizedBox(height: 4,),
+                                    const SizedBox(height: 4,),
                                     Container(
-                                       decoration: BoxDecoration(color: Color.fromARGB(255, 235, 190, 200),
+                                       decoration: BoxDecoration(color: const Color.fromARGB(255, 235, 190, 200),
                                       borderRadius: BorderRadius.circular(15)),
                                       height: screenSize.width/10,
                                       width: screenSize.width/15,
@@ -528,14 +528,14 @@ class ItemWidget extends StatelessWidget {
       children: [
         Center(child:Text(
                           snap.data!.data()!['item1'][time],
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.black,
                               fontSize:15,
                               fontWeight: FontWeight.bold),
                         ),), IconButton(onPressed: (){
                           showDialog(context: context, builder: (context){
                             return  AlertDialog(
-                              title: Text('Edit Item'), 
+                              title: const Text('Edit Item'), 
                               content: TextFormField(
                                 controller: editController,
                                 decoration: InputDecoration(
@@ -554,17 +554,17 @@ class ItemWidget extends StatelessWidget {
                                           }
                                         }); 
                                          Navigator.pop(context);
-                                    }, child: Text('Edit'),), 
+                                    }, child: const Text('Edit'),), 
                                     sizedBoxW20, 
                                     MaterialButton(onPressed: (){
                                       Navigator.pop(context);
-                                    }, child: Text('Cancel'),)
+                                    }, child: const Text('Cancel'),)
                                   ],
                                 )
                               ],
                             );
                           });
-                        }, icon: Icon(Icons.edit))
+                        }, icon: const Icon(Icons.edit))
       ],
     );
   }
