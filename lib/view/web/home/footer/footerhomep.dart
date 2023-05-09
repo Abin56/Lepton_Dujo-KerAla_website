@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../lepton_Admin/admin_panel_Screen.dart';
 import '../privacypolicy.dart';
 import '../terms _and_condition.dart';
 import 'email/mailsender.dart';
@@ -130,7 +131,7 @@ class FooterHomeP extends StatelessWidget {
                              GestureDetector(
                               onTap: () {
                                 //  Navigator.push(context, MaterialPageRoute(builder: ((context) =>RequestedSchoolsApproval())));
-                                      // Navigator.push(context, MaterialPageRoute(builder: ((context) =>LeptonAdminLoginScreen())));
+                                      Navigator.push(context, MaterialPageRoute(builder: ((context) =>LeptonAdminLoginScreen())));
                                 
                               },
 
@@ -385,7 +386,7 @@ class FooterHomeP extends StatelessWidget {
                   ),
                   Text(
                     'Lepton Plus Communications is a customer oriented company offering digital solutions in Healthcare, E-Commerce Applications,\nHome Automation and Social Networking. We are committed to\n providing high end sustainable products and services that\nenhances the quality of life',
-                 style:  GoogleFonts.poppins(color: Color.fromRGBO(103, 53, 107, 1)),
+                 style:  GoogleFonts.poppins(color: Color.fromRGBO(255, 255, 255, 1)),
                   )
                 ],
               ),

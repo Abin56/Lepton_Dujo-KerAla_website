@@ -1,7 +1,7 @@
-import 'package:dujo_kerala_website/ui%20team/abin/login_dummy/main_login_page.dart';
 import 'package:dujo_kerala_website/view/colors/colors.dart';
-import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
+import 'package:dujo_kerala_website/view/web/home/create_school/create_school.dart';
+import 'package:dujo_kerala_website/view/web/login/loginscreen.dart';
 import 'package:dujo_kerala_website/view/web/widgets/sample/under_maintance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../widgets/drop_DownList/schoolDropDownList.dart';
 import 'footer/footerhomep.dart';
 
 class HomeP extends StatelessWidget {
@@ -52,7 +53,6 @@ class HomeP extends StatelessWidget {
     }
   }
 
-
   List<String> containerNames = [
     'Aided Schools',
     'Unaided Schoools',
@@ -82,7 +82,7 @@ class HomeP extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-            colors: [
+            colors: const [
               Colors.white,
 
               adminePrimayColor,
@@ -99,15 +99,15 @@ class HomeP extends StatelessWidget {
         backgroundColor: Colors.transparent,
         body: ListView(children: [
           Padding(
-            padding:  EdgeInsets.only(right: 80.0.w, left: 80.w),
-            child: Container(
-             //
+            padding: EdgeInsets.only(right: 80.0.w, left: 80.w),
+            child: SizedBox(
+              //
               height: 60.w,
               width: MediaQuery.of(context).size.width,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
+                  SizedBox(
                     //color: cBlue,
                     width: 400.w,
                     child: Row(
@@ -115,7 +115,7 @@ class HomeP extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Icon(Icons.phone),
+                            const Icon(Icons.phone),
                             SizedBox(
                               width: 10.w,
                             ),
@@ -130,7 +130,7 @@ class HomeP extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            Icon(Icons.mail),
+                            const Icon(Icons.mail),
                             SizedBox(
                               width: 10.w,
                             ),
@@ -146,61 +146,111 @@ class HomeP extends StatelessWidget {
                       ],
                     ),
                   ),
-                     SizedBox(width: 20.w),
-                     SizedBox(width: 20.w),
-                     SizedBox(width: 20.w),
-                     SizedBox(width: 20.w),
-                     SizedBox(width: 20.w),
-                  
-
+                  SizedBox(width: 20.w),
+                  SizedBox(width: 20.w),
+                  SizedBox(width: 20.w),
+                  SizedBox(width: 20.w),
+                  SizedBox(width: 20.w),
                   Container(
                     child: Row(
                       children: [
-                      InkWell(
-                        onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const UnderMaintanceScreen() ,));
-                          },
-                        child: GoogleMonstserratWidgets(text: 'DuJo Tutions', fontsize: 15.w,color: adminePrimayColor,
-                        fontWeight: FontWeight.w700,
-                        )),
-                     SizedBox(width: 20.w),
-
-                InkWell(
-                onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const UnderMaintanceScreen() ,));
-                          },
-                  child: GoogleMonstserratWidgets(text: 'DuJo Institutions', fontsize: 15.w, color: adminePrimayColor,fontWeight: FontWeight.w700,)),
-                     ],
+                        InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const UnderMaintanceScreen(),
+                                  ));
+                            },
+                            child: GoogleMonstserratWidgets(
+                              text: 'DuJo Tutions',
+                              fontsize: 15.w,
+                              color: adminePrimayColor,
+                              fontWeight: FontWeight.w700,
+                            )),
+                        SizedBox(width: 20.w),
+                        InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const UnderMaintanceScreen(),
+                                  ));
+                            },
+                            child: GoogleMonstserratWidgets(
+                              text: 'DuJo Institutions',
+                              fontsize: 15.w,
+                              color: adminePrimayColor,
+                              fontWeight: FontWeight.w700,
+                            )),
+                      ],
                     ),
                   ),
-
-                    Padding(
-                      padding:  EdgeInsets.only(left: 220.w),
-                      child: Container(
-                        
-                        child: InkWell(
-                              onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => const NewAllLogin() ,));
-                              },
-                              child: Text(
-                                'Login',
-                                style: GoogleFonts.poppins(
-                                    fontSize: 18.w,
-                                    fontWeight: FontWeight.bold,
-                                    color: cred),
-                              ),
-                            ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 220.w),
+                    child: Container(
+                      child: InkWell(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false, // user must tap button!
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text('Enter Your School ID'),
+                                content: SingleChildScrollView(
+                                  child: ListBody(
+                                    children: const <Widget>[
+                                      GetSchoolListDropDownButton()
+                                    ],
+                                    // children: [
+                                    //   // TextFormField(
+                                    //   //   controller:schoolIdController,
+                                    //   // )
+                                    // ],
+                                  ),
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: const Text('Ok'),
+                                    onPressed: () async {
+                                      await Navigator.push(context,
+                                          MaterialPageRoute(
+                                        builder: (context) {
+                                          return LoginScreen();
+                                        },
+                                      ));
+                                    },
+                                  ),
+                                  TextButton(
+                                    child: const Text('Cancel'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        child: Text(
+                          'Login',
+                          style: GoogleFonts.poppins(
+                              fontSize: 18.w,
+                              fontWeight: FontWeight.bold,
+                              color: cred),
+                        ),
                       ),
                     ),
-                  
+                  ),
                   Padding(
-                    padding:  EdgeInsets.only(left: 40.w),
+                    padding: EdgeInsets.only(left: 40.w),
                     child: Container(
-                    //  width: MediaQuery.of(context).size.width / 4,
+                      //  width: MediaQuery.of(context).size.width / 4,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                        
                           InkWell(
                             onTap: () {
                               _launchFacebookUrl();
@@ -215,31 +265,31 @@ class HomeP extends StatelessWidget {
                           SizedBox(width: 10.w),
                           InkWell(
                             onTap: () {
-                              _launchInstaUrl() ;
+                              _launchInstaUrl();
                             },
                             child: Image.asset(
                               'assets/images/instag.png',
-                               height: 40.h,
+                              height: 40.h,
                               width: 40.w,
                               color: adminePrimayColor,
                             ),
                           ),
-                         SizedBox(width: 10.w),
+                          SizedBox(width: 10.w),
                           InkWell(
                             onTap: () {
-                              _launchTwitterUrl() ;
+                              _launchTwitterUrl();
                             },
                             child: Image.asset(
                               'assets/images/twitt.png',
-                               height: 29.h,
+                              height: 29.h,
                               width: 30.w,
                               color: adminePrimayColor,
                             ),
                           ),
-                        SizedBox(width: 10.w),
+                          SizedBox(width: 10.w),
                           InkWell(
                             onTap: () {
-                              _launchyouTubeUrl() ;
+                              _launchyouTubeUrl();
                             },
                             child: Image.asset(
                               'assets/images/utube.png',
@@ -257,9 +307,12 @@ class HomeP extends StatelessWidget {
             ),
           ),
           Padding(
-            padding:  EdgeInsets.only(right: 80.0.w, left: 80.w,),
-            child: Container(
-            // color: cBlue,
+            padding: EdgeInsets.only(
+              right: 80.0.w,
+              left: 80.w,
+            ),
+            child: SizedBox(
+              // color: cBlue,
               width: MediaQuery.of(context).size.width,
               height: 500.h,
               // color: Color.fromARGB(255, 142, 234, 243),
@@ -267,10 +320,10 @@ class HomeP extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
-                    //  / mainAxisAlignment: MainAxisAlignment.center,
+                      //  / mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
+                        SizedBox(
                           width: 180.w,
                           child: Image.asset(
                             'assets/images/leptdujo.png',
@@ -283,7 +336,7 @@ class HomeP extends StatelessWidget {
                         // sizedBoxH40,
                         // sizedBoxH20,
                         Padding(
-                          padding:  EdgeInsets.only(top: 120.h),
+                          padding: EdgeInsets.only(top: 120.h),
                           child: Text(
                             'Watch And Guide,\nLet Them Study',
                             style: GoogleFonts.montserrat(
@@ -293,14 +346,20 @@ class HomeP extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         MaterialButton(
                           //padding: EdgeInsets.all(20),
                           height: 60.h,
                           minWidth: 250.w,
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(
+                              builder: (context) {
+                                return SchoolProfile();
+                              },
+                            ));
+                          },
                           color: adminePrimayColor,
                           child: Text(
                             'Create School Profile',
@@ -312,11 +371,11 @@ class HomeP extends StatelessWidget {
                         )
                       ],
                     ),
-                    Container(
+                    SizedBox(
                       width: 600.w,
                       child: ShaderMask(
                         shaderCallback: (rect) {
-                          return LinearGradient(
+                          return const LinearGradient(
                             begin: Alignment.center,
                             end: Alignment.bottomCenter,
                             colors: [adminePrimayColor, Colors.transparent],
@@ -358,6 +417,9 @@ class HomeP extends StatelessWidget {
                   ]),
             ),
           ),
+          const SizedBox(
+            height: 100,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -383,7 +445,7 @@ class HomeP extends StatelessWidget {
             ],
           ),
           GridView.count(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               crossAxisCount: 3,
               crossAxisSpacing: 4.0,
@@ -414,8 +476,8 @@ class HomeP extends StatelessWidget {
                             // ),
                             LottieBuilder.network(
                               lottieFiles[index],
-                              width: 300,
-                              height: 300,
+                              width: 220,
+                              height: 220,
                             ),
                             const SizedBox(
                               height: 20,
@@ -433,6 +495,9 @@ class HomeP extends StatelessWidget {
                   ),
                 ));
               })),
+          const SizedBox(
+            height: 100,
+          ),
           FooterHomeP()
         ]),
       ),

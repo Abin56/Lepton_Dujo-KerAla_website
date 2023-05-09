@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dujo_kerala_website/controller/Getx/admin/student_protection_controller/student_protection_controller.dart';
 import 'package:dujo_kerala_website/model/admin_models/student_protection_model/student_protection_model.dart';
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_protection_group/widgets/student_protection_dialogue_widget.dart';
@@ -7,11 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../../../controller/Getx/admin/student_protection_controller/student_protection_controller.dart';
 import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../constant/constant.dart';
-import '../../../../widgets/Iconbackbutton.dart';
 import 'widgets/student_protection_card_widget.dart';
+import 'widgets/student_protection_left_side_widget.dart';
 
 class StudentProtectionGroup extends StatelessWidget {
   StudentProtectionGroup({super.key});
@@ -19,17 +19,19 @@ class StudentProtectionGroup extends StatelessWidget {
   final StudentProtectionController studentProtectionController = Get.put(
     StudentProtectionController(),
   );
+  StudentProtectionGroupModel? headMasterModel;
+  StudentProtectionGroupModel? chairPersonModel;
+  StudentProtectionGroupModel? presidentModel;
+  StudentProtectionGroupModel? vicePresidentModel;
+  StudentProtectionGroupModel? representativeModel;
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
-
     return Scaffold(
-     
-     
       floatingActionButton: FloatingActionButton(
+        tooltip: 'Add New Member',
         onPressed: () async {
-          Get.find<StudentProtectionController>().clearField();
+          studentProtectionController.clearField();
           await createDialogue(context);
         },
         child: const Icon(
@@ -45,171 +47,29 @@ class StudentProtectionGroup extends StatelessWidget {
               .collection('StudentProtection')
               .snapshots(),
           builder: (context, snapshot) {
-            List<String> fields = const <String>[
-              "headMaster",
-              "chairPerson",
-              "president",
-              "vicePresident",
-              "representative"
-            ];
-            List<QueryDocumentSnapshot<Map<String, dynamic>>?>
-                querySnapshotList = [];
-            RxList<StudentProtectionGroupModel> studentProtectionModelList =
-                RxList<StudentProtectionGroupModel>([]);
-
-            for (String data in fields) {
-              querySnapshotList.add(
-                snapshot.data?.docs.firstWhereOrNull(
-                    (element) => element.data()["id"] == data),
-              );
-            }
-            for (var data in querySnapshotList) {
-              if (data != null) {
-                studentProtectionModelList.add(
-                  StudentProtectionGroupModel.fromJson(
-                    data.data(),
-                  ),
-                );
-              }
-            }
-
+            assigningValueToModel(snapshot);
             return Row(
               children: [
-                SingleChildScrollView(
-                    child: Container(color: adminePrimayColor,
-
-                      child: Column(mainAxisAlignment: MainAxisAlignment.start,crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                         Row(
-                                           children: [
-                                             IconButtonBackWidget(
-                            color: cWhite,
-                          ), Text(
-                            "Student Protection Group",
-                            style: GoogleFonts.poppins(
-                              fontSize: 23,
-                              fontWeight: FontWeight.bold,
-                              color: cWhite,
-                            ),
-                          ),
-                                           ],
-                                         ),
-                                       
-                      SizedBox(
-                        width: screenSize.width * 0.4,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(15),
-                                child: Text(
-                                  "Student Protection Group",
-                                  style: GoogleFonts.oswald(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold,
-                                      color: cWhite),
-                                ),
-                              ),
-                              LeftSideCardWidget(
-                                querySnapshotList: querySnapshotList,
-                                studentProtectionModelList:
-                                    studentProtectionModelList,
-                                index: 0,
-                                dataList: fields,
-                                positionData: const [
-                                  "Name",
-                                  "Head Master",
-                                  "Position"
-                                ],
-                              ),
-                              sizedBoxH20,
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Flexible(
-                                    child: LeftSideCardWidget(
-                                      querySnapshotList: querySnapshotList,
-                                      studentProtectionModelList:
-                                          studentProtectionModelList,
-                                      index: 1,
-                                      dataList: fields,
-                                      positionData: const [
-                                        "Name",
-                                        "President",
-                                        "Position"
-                                      ],
-                                    ),
-                                  ),
-                                  Flexible(
-                                    child: LeftSideCardWidget(
-                                      querySnapshotList: querySnapshotList,
-                                      studentProtectionModelList:
-                                          studentProtectionModelList,
-                                      index: 2,
-                                      dataList: fields,
-                                      positionData: const [
-                                        "Name",
-                                        "Vice President",
-                                        "Position"
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              sizedBoxH20,
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Flexible(
-                                    child: LeftSideCardWidget(
-                                      querySnapshotList: querySnapshotList,
-                                      studentProtectionModelList:
-                                          studentProtectionModelList,
-                                      index: 3,
-                                      dataList: fields,
-                                      positionData: const [
-                                        "Name",
-                                        "Chairman",
-                                        "Position"
-                                      ],
-                                    ),
-                                  ),
-                                  Flexible(
-                                    child: LeftSideCardWidget(
-                                      querySnapshotList: querySnapshotList,
-                                      studentProtectionModelList:
-                                          studentProtectionModelList,
-                                      index: 4,
-                                      dataList: fields,
-                                      positionData: const [
-                                        "Name",
-                                        "Vice Chairman",
-                                        "Position"
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                                      ],
-                                    ),
-                    )),
-                    sizedBoxW20,
-            
+                StudentProtectionLeftCardWidget(
+                  headMasterModel: headMasterModel,
+                  presidentModel: presidentModel,
+                  vicePresidentModel: vicePresidentModel,
+                  chairPersonModel: chairPersonModel,
+                  representativeModel: representativeModel,
+                ),
+                sizedBoxW20,
                 Expanded(
                   child: Stack(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top:35),
+                        padding: const EdgeInsets.only(top: 30),
                         child: StreamBuilder(
                             stream: FirebaseFirestore.instance
                                 .collection('SchoolListCollection')
-                                .doc(Get.find<AdminLoginScreenController>().schoolID)
-                                .collection(Get.find<GetFireBaseData>().bYear.value)
+                                .doc(Get.find<AdminLoginScreenController>()
+                                    .schoolID)
+                                .collection(
+                                    Get.find<GetFireBaseData>().bYear.value)
                                 .doc(Get.find<GetFireBaseData>().bYear.value)
                                 .collection('StudentProtection')
                                 .where(
@@ -232,8 +92,9 @@ class StudentProtectionGroup extends StatelessWidget {
                                   crossAxisCount: _getCrossAxisCount(context),
                                   children: List.generate(
                                     snapshot.data!.docs.length,
-                                    (index) => CardWidget(
-                                      name: snapshot.data!.docs[index].data()['name'],
+                                    (index) => StudentProtectionCardWidet(
+                                      name: snapshot.data!.docs[index]
+                                          .data()['name'],
                                       designation: snapshot.data!.docs[index]
                                           .data()['designation'],
                                       position: snapshot.data!.docs[index]
@@ -243,8 +104,8 @@ class StudentProtectionGroup extends StatelessWidget {
                                       iconData: Icons.delete,
                                       imageId: snapshot.data!.docs[index]
                                           .data()['imageId'],
-                                      memberId:
-                                          snapshot.data!.docs[index].data()['id'],
+                                      memberId: snapshot.data!.docs[index]
+                                          .data()['id'],
                                     ),
                                   ),
                                 );
@@ -255,16 +116,17 @@ class StudentProtectionGroup extends StatelessWidget {
                               }
                             }),
                       ),
-                         Row(mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Members In Student Protection Group',
-                                     style: GoogleFonts.oswald(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: cBlack,)
-                               ) ],
-                              ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Members In PTA',
+                              style: GoogleFonts.oswald(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: cBlack,
+                              ))
+                        ],
+                      ),
                     ],
                   ),
                 )
@@ -284,43 +146,47 @@ class StudentProtectionGroup extends StatelessWidget {
       return 1;
     }
   }
-}
 
-class LeftSideCardWidget extends StatelessWidget {
-  const LeftSideCardWidget({
-    super.key,
-    required this.querySnapshotList,
-    required this.studentProtectionModelList,
-    required this.index,
-    required this.dataList,
-    required this.positionData,
-  });
+  void assigningValueToModel(
+      AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+    if (snapshot.hasData) {
+      final QueryDocumentSnapshot<Map<String, dynamic>>? headMaster = snapshot
+          .data?.docs
+          .firstWhereOrNull((element) => element.id == "headMaster");
+      final QueryDocumentSnapshot<Map<String, dynamic>>? chairPerson = snapshot
+          .data?.docs
+          .firstWhereOrNull((element) => element.id == "chairPerson");
+      final QueryDocumentSnapshot<Map<String, dynamic>>? president = snapshot
+          .data?.docs
+          .firstWhereOrNull((element) => element.id == "president");
+      final QueryDocumentSnapshot<Map<String, dynamic>>? vicePresident =
+          snapshot.data?.docs
+              .firstWhereOrNull((element) => element.id == "vicePresident");
+      final QueryDocumentSnapshot<Map<String, dynamic>>? representative =
+          snapshot.data?.docs
+              .firstWhereOrNull((element) => element.id == "representative");
 
-  final List<QueryDocumentSnapshot<Map<String, dynamic>>?> querySnapshotList;
-  final RxList<StudentProtectionGroupModel> studentProtectionModelList;
-  final List<String> dataList;
-  final List<String> positionData;
-  final int index;
+      if (headMaster != null) {
+        headMasterModel =
+            StudentProtectionGroupModel.fromJson(headMaster.data());
+      }
+      if (chairPerson != null) {
+        chairPersonModel =
+            StudentProtectionGroupModel.fromJson(chairPerson.data());
+      }
+      if (president != null) {
+        presidentModel = StudentProtectionGroupModel.fromJson(president.data());
+      }
+      if (vicePresident != null) {
+        vicePresidentModel =
+            StudentProtectionGroupModel.fromJson(vicePresident.data());
+      }
 
-  @override
-  Widget build(BuildContext context) {
-    return CardWidget(
-      name: querySnapshotList[index] == null
-          ? positionData[0]
-          : studentProtectionModelList[index].name,
-      designation: querySnapshotList[index] == null
-          ? positionData[1]
-          : studentProtectionModelList[index].designation,
-      position: querySnapshotList[index] == null
-          ? positionData[2]
-          : studentProtectionModelList[index].position,
-      iconData: Icons.edit,
-      imageId: dataList[index],
-      memberId: dataList[index],
-      imageUrl: querySnapshotList[index] == null
-          ? null
-          : studentProtectionModelList[index].imageUrl,
-    );
+      if (representative != null) {
+        representativeModel =
+            StudentProtectionGroupModel.fromJson(representative.data());
+      }
+    }
   }
 }
 
@@ -334,9 +200,13 @@ class StudentProtectionTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FittedBox(
-      child: Text("MEMBER IN SPG",
-          style: GoogleFonts.alumniSans(
-              fontSize: 18, fontWeight: FontWeight.bold)),
+      child: Text(
+        "MEMBER IN STUDENT PROTECTION GROUP",
+        style: GoogleFonts.alumniSans(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
     );
   }
 }

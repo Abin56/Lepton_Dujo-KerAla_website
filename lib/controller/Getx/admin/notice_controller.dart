@@ -125,7 +125,8 @@ class AdminNoticeController extends GetxController {
         //isImageUpload.value = true;
         UploadTask uploadTask = FirebaseStorage.instance
             .ref()
-            .child("files/adminNotice/$uid")
+            .child(
+                "files/${Get.find<AdminLoginScreenController>().schoolID}/${Get.find<GetFireBaseData>().bYear.value}/adminNotice/$uid")
             .putData(file!);
 
         final TaskSnapshot snap = await uploadTask;
@@ -160,7 +161,8 @@ class AdminNoticeController extends GetxController {
         //isImageUpload.value = true;
         UploadTask uploadTask = FirebaseStorage.instance
             .ref()
-            .child("files/adminNotice/$uid")
+            .child(
+                "files/${Get.find<AdminLoginScreenController>().schoolID}/${Get.find<GetFireBaseData>().bYear.value}/adminNotice/$uid")
             .putData(file!);
 
         final TaskSnapshot snap = await uploadTask;
@@ -195,14 +197,14 @@ class AdminNoticeController extends GetxController {
       if (noticeImageId.isNotEmpty) {
         await FirebaseStorage.instance
             .ref()
-            .child('files/adminNotice/$noticeImageId')
+            .child('files/${Get.find<AdminLoginScreenController>().schoolID}/${Get.find<GetFireBaseData>().bYear.value}/adminNotice/$noticeImageId')
             .delete();
       }
 //deleting signed image from firebase storage
       if (signImageId.isNotEmpty) {
         await FirebaseStorage.instance
             .ref()
-            .child('files/adminNotice/$signImageId')
+            .child('files/${Get.find<AdminLoginScreenController>().schoolID}/${Get.find<GetFireBaseData>().bYear.value}/adminNotice/$signImageId')
             .delete();
       }
       adminNoticeModelData.value = null;

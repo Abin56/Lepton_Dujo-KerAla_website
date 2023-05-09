@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../../utils/utils.dart';
 import '../../../get_firebase-data/get_firebase_data.dart';
 
 class PtaController extends GetxController {
@@ -19,7 +20,7 @@ class PtaController extends GetxController {
           .doc(Get.find<AdminLoginScreenController>().schoolID)
           .collection(Get.find<GetFireBaseData>().bYear.value)
           .doc(Get.find<GetFireBaseData>().bYear.value)
-          .collection('pta');
+          .collection('Pta');
   final FirebaseStorage firebaseStorage = FirebaseStorage.instance;
   RxBool isLoading = RxBool(false);
   TextEditingController nameController = TextEditingController();
@@ -50,7 +51,8 @@ class PtaController extends GetxController {
         if (imageDataUin8.value != null) {
           final String id = const Uuid().v1();
           final filePath = await firebaseStorage
-              .ref('files/pta/$id')
+              .ref(
+                  'files/${Get.find<AdminLoginScreenController>().schoolID}/${Get.find<GetFireBaseData>().bYear.value}/pta/$id')
               .putData(imageDataUin8.value!);
           String imageUrlPath = await filePath.ref.getDownloadURL();
           await firebaseFirestore.doc(result.id).update(
@@ -100,7 +102,8 @@ class PtaController extends GetxController {
             .set(studentData.toJson(), SetOptions(merge: true));
         if (imageDataUin8.value != null) {
           final filePath = await firebaseStorage
-              .ref('files/pta/$imageId')
+              .ref(
+                  'files/${Get.find<AdminLoginScreenController>().schoolID}/${Get.find<GetFireBaseData>().bYear.value}/pta/$imageId')
               .putData(imageDataUin8.value!);
 
           String fileUrl = await filePath.ref.getDownloadURL();
@@ -133,7 +136,10 @@ class PtaController extends GetxController {
       isLoading.value = true;
       await firebaseFirestore.doc(memberId).delete();
       if (imageId.isNotEmpty) {
-        await firebaseStorage.ref('files/pta/$imageId').delete();
+        await firebaseStorage
+            .ref(
+                'files/${Get.find<AdminLoginScreenController>().schoolID}/${Get.find<GetFireBaseData>().bYear.value}/pta/$imageId')
+            .delete();
       }
 
       showToast(
