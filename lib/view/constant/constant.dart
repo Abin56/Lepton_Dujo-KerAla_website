@@ -1,9 +1,5 @@
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
 const sizedBoxH10 = SizedBox(
@@ -111,7 +107,7 @@ String stringTimeToDateConvert(String date) {
 bool validateEmail(String value) {
   String pattern =
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-  RegExp regex = new RegExp(pattern);
+  RegExp regex = RegExp(pattern);
   return (!regex.hasMatch(value)) ? false : true;
 }
 
@@ -167,8 +163,6 @@ String? checkFieldPasswordIsValid(String? fieldContent) {
     return 'Minimum 6 Charaters is required';
   }
 }
-
-
 
 class TeacherLoginIDSaver {
   static String id = '';

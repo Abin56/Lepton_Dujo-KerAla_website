@@ -1,15 +1,15 @@
 import 'package:dujo_kerala_website/view/colors/colors.dart';
-import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
-import 'package:dujo_kerala_website/view/web/home/create_school/create_school.dart';
-import 'package:dujo_kerala_website/view/web/login/loginscreen.dart';
-import 'package:dujo_kerala_website/view/web/widgets/sample/under_maintance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../fonts/google_monstre.dart';
+import '../login/loginscreen.dart';
 import '../widgets/drop_DownList/schoolDropDownList.dart';
+import '../widgets/sample/under_maintance.dart';
+import 'create_school/create_school.dart';
 import 'footer/footerhomep.dart';
 
 class HomeP extends StatelessWidget {

@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,7 +16,7 @@ final AdminNoticeController adminNoticeController =
     Get.put(AdminNoticeController());
 
 class NoticeDisplay extends StatelessWidget {
-  NoticeDisplay({super.key, required this.schoolId});
+  const NoticeDisplay({super.key, required this.schoolId});
   final String schoolId;
 
   @override
@@ -26,7 +25,7 @@ class NoticeDisplay extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text("Notice List"),
+          title: const Text("Notice List"),
           backgroundColor: adminePrimayColor,
           elevation: 0,
           iconTheme: const IconThemeData(color: cWhite),
@@ -376,7 +375,7 @@ class DataTableWidget extends StatelessWidget {
 }
 
 class NoticeCardWidget extends StatelessWidget {
-  NoticeCardWidget({
+  const NoticeCardWidget({
     super.key,
     required this.heading,
     required this.date,

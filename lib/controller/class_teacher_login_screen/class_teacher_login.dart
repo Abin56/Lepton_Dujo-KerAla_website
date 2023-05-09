@@ -1,13 +1,14 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/teachers_panel_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+
+import '../../utils/utils.dart';
 import '../admin_login_screen/admin_login_screen_controller.dart';
 
 class ClassTeacherLoginController extends GetxController {
@@ -50,11 +51,19 @@ class ClassTeacherLoginController extends GetxController {
 
         emailController.clear();
         passwordController.clear();
+      }).catchError((error) {
+        // Handle sign-in errors
+        if (error is FirebaseAuthException) {
+          handleFirebaseError(error);
+        } else if (error is PlatformException) {
+          showToast(msg: "Device Error");
+        } else {
+          // Handle other exceptions
+        }
       });
       isLoading.value = false;
     } catch (e) {
-      showToast(msg: "Login Failed");
-      isLoading.value = false;
+      showToast(msg: "Something went wrong");
     }
   }
 }
