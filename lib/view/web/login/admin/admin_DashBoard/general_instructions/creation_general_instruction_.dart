@@ -1,3 +1,4 @@
+import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -17,52 +18,50 @@ class CreationGeneralInstruction extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: adminePrimayColor,
-      appBar: AppBar(
-        title: Center(
-            child: Text('GENERAL INSTRUCTION',
-                style: GoogleFonts.oswald(
-                    fontSize: 25,
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                    fontWeight: FontWeight.w800))),
-        backgroundColor: adminePrimayColor,
-        elevation: 0,
-      ),
+     // backgroundColor: adminePrimayColor,
       body: ListView(children: [
         Row(
           children: [
-            SizedBox(
+            Container(
+              color: adminePrimayColor,
               height: size.height,
-              width: size.width * .5,
+              width: size.width * 0.5,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    'Hi Admin ',
-                    style: ralewayStyle.copyWith(
-                      fontSize: 48.0,
-                      color: AppColors.whiteColor,
-                      fontWeight: FontWeight.w800,
-                    ),
+                  IconButtonBackWidget(color: cWhite,),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Hi Admin ',
+                        style: ralewayStyle.copyWith(
+                          fontSize: 48.0,
+                          color: AppColors.whiteColor,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      SizedBox(
+                        height: size.width / 20,
+                      ),
+                      Text(
+                        'GENERAL INSTRUCTION',
+                        style: ralewayStyle.copyWith(
+                          fontSize: 20.0,
+                          color: AppColors.whiteColor,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      SizedBox(
+                        height: size.width / 5,
+                        width: size.width / 2,
+                        child: LottieBuilder.network(
+                            'https://assets7.lottiefiles.com/packages/lf20_OP8F21PTtz.json'),
+                      )
+                    ],
                   ),
-                  SizedBox(
-                    height: size.width / 20,
-                  ),
-                  Text(
-                    'Welcome To ',
-                    style: ralewayStyle.copyWith(
-                      fontSize: 25.0,
-                      color: AppColors.whiteColor,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                  SizedBox(
-                    height: size.width / 5,
-                    width: size.width / 2,
-                    child: LottieBuilder.network(
-                        'https://assets4.lottiefiles.com/packages/lf20_p7ml1rhe.json'),
-                  )
                 ],
               ),
             ),
@@ -71,45 +70,57 @@ class CreationGeneralInstruction extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  GenInstruHomeButtonWidget(
-                      title: 'Create Instructions',
-                      function: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                AddGeneralInstruction(schoolId: schoolId),
-                          ),
-                        );
-                      }),
-                  sizedBoxH30,
-                  GenInstruHomeButtonWidget(
-                      title: 'View Instruction',
-                      function: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                GeneralInstruction(
-                              schoolId: schoolId,
+                  Container(
+                     height: size.width * 1 / 15,
+                              width: size.width * 1 / 3,
+                    child: GenInstruHomeButtonWidget(
+                        title: 'Create Instructions',
+                        function: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  AddGeneralInstruction(schoolId: schoolId),
                             ),
-                          ),
-                        );
-                      }),
+                          );
+                        }),
+                  ),
                   sizedBoxH30,
-                  GenInstruHomeButtonWidget(
-                      title: 'Edit Instruction',
-                      function: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                EditGeneralInstructions(
-                              schoolId: schoolId,
+                  Container(
+                     height: size.width * 1 / 15,
+                              width: size.width * 1 / 3,
+                    child: GenInstruHomeButtonWidget(
+                        title: 'View Instruction',
+                        function: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  GeneralInstruction(
+                                schoolId: schoolId,
+                              ),
                             ),
-                          ),
-                        );
-                      }),
+                          );
+                        }),
+                  ),
+                  sizedBoxH30,
+                  Container(
+                     height: size.width * 1 / 15,
+                              width: size.width * 1 / 3,
+                    child: GenInstruHomeButtonWidget(
+                        title: 'Edit Instruction',
+                        function: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  EditGeneralInstructions(
+                                schoolId: schoolId,
+                              ),
+                            ),
+                          );
+                        }),
+                  ),
                 ],
               ),
             ),
@@ -134,12 +145,13 @@ class GenInstruHomeButtonWidget extends StatelessWidget {
         child: Container(
           width: size.width * .3,
           decoration: BoxDecoration(
-            color: Colors.white,
-            border: Border.all(color: adminePrimayColor),
-            borderRadius: BorderRadius.circular(
-              15,
+              borderRadius: BorderRadius.circular(18),
+              border: Border.all(width: 1),
+              gradient: LinearGradient(
+                  colors: containerColor[7],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter),
             ),
-          ),
           child: FittedBox(
             fit: BoxFit.none,
             child: Padding(
@@ -156,3 +168,16 @@ class GenInstruHomeButtonWidget extends StatelessWidget {
         ));
   }
 }
+
+
+const containerColor = [
+  [Color(0xff6448fe), Color(0xff5fc6ff)],
+  [Color.fromARGB(255, 212, 150, 145), Color.fromARGB(255, 212, 150, 145)],
+  [Color(0xfffe6197), Color(0xffffb463)],
+  [Color.fromARGB(255, 30, 196, 30), Color.fromARGB(255, 79, 163, 30)],
+  [Color.fromARGB(255, 116, 130, 255), Color.fromARGB(255, 86, 74, 117)],
+  [Color.fromARGB(255, 205, 215, 15), Color.fromARGB(255, 224, 173, 22)],
+  [Color.fromARGB(255, 208, 104, 105), Color.fromARGB(255, 241, 66, 66)],
+  [Color.fromARGB(255, 255, 255, 255), Color.fromARGB(255, 205, 216, 228)],
+  [adminePrimayColor, adminePrimayColor]
+];

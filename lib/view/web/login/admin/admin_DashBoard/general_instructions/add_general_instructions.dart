@@ -52,7 +52,7 @@ class AddGeneralInstruction extends StatelessWidget {
                           height: screenSize.width / 20,
                         ),
                         Text(
-                          'Welcome To ',
+                          'Add Instruction ',
                           style: ralewayStyle.copyWith(
                             fontSize: 25.0,
                             color: AppColors.whiteColor,

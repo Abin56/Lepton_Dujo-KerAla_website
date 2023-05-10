@@ -1,4 +1,5 @@
 import 'package:dujo_kerala_website/view/web/home/homep.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/general_instructions/creation_general_instruction_.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,7 +41,10 @@ class MyApp extends StatelessWidget {
                 // ignore: deprecated_member_use
                 accentColor: const Color(0xFF02BB9F),
               ),
-              home: HomeP());
+              home: 
+             
+              HomeP()
+              );
         });
   }
 }
