@@ -93,7 +93,7 @@ class AddGeneralInstruction extends StatelessWidget {
                               sizedBoxH20,
                               ContainerWidget(
                                 screenSize: screenSize,
-                                hintText: "Instructions",
+                                hintText: "General Instructions",
                                 textEditingController:
                                     generalInstructionsController
                                         .textEditingController,
