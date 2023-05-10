@@ -2,13 +2,13 @@ class MondayModel{
   Map<String,String> firstPeriod; 
   Map<String,String> secondPeriod; 
   Map<String,String> thirdPeriod; 
-  Map<String,String> fouthPeriod; 
+  Map<String,String> fourthPeriod; 
   Map<String,String> fifthPeriod; 
   Map<String,String> sixthPeriod; 
   Map<String,String> seventhPeriod; 
   String dayName;
 
-  MondayModel({required this.firstPeriod, required this.secondPeriod, required this.thirdPeriod, required this.fouthPeriod,
+  MondayModel({required this.firstPeriod, required this.secondPeriod, required this.thirdPeriod, required this.fourthPeriod,
   required this.fifthPeriod, required this.sixthPeriod, required this.seventhPeriod, required this.dayName}); 
 
     factory MondayModel.fromJson(Map<String, dynamic> json) =>
@@ -16,7 +16,7 @@ class MondayModel{
         firstPeriod: json["firstPeriod"] ?? '',
         secondPeriod: json["secondPeriod"] ?? '',
         thirdPeriod: json["thirdPeriod"] ?? '',
-        fouthPeriod: json["fouthPeriod"] ?? '',
+        fourthPeriod: json["fourthPeriod"] ?? '',
         fifthPeriod: json["fifthPeriod"] ?? '',
         sixthPeriod: json["sixthPeriod"] ?? '',
         seventhPeriod: json["seventhPeriod"] ?? '', 
@@ -27,7 +27,7 @@ class MondayModel{
         "firstPeriod": firstPeriod, 
         "secondPeriod": secondPeriod,  
         "thirdPeriod": thirdPeriod, 
-        "fouthPeriod": fouthPeriod,  
+        "fourthPeriod": fourthPeriod,  
         "fifthPeriod": fifthPeriod, 
         "sixthPeriod": sixthPeriod, 
         "seventhPeriod": seventhPeriod, 
