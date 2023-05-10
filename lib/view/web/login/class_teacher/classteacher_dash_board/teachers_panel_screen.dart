@@ -128,7 +128,9 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
       ), //4
       AddGuardian(
           teacherIDE: widget.teacherEmail,
-          schoolId: Get.find<AdminLoginScreenController>().schoolID), //5
+          schoolId: Get.find<AdminLoginScreenController>().schoolID),
+          
+           //5
       ClassTeacherCreateEventsPage(), //6
 
       // SelectClassForTimeTable(

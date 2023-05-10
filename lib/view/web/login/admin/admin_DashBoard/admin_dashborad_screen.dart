@@ -201,6 +201,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
         schoolId: widget.schoolID,
       ),
       AdminPtaScreen(),
+      UnderMaintanceScreen(),
       // NonTeachingStaffView(
       //   schoolID: widget.schoolID,
       // ),
@@ -376,7 +377,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
-                                  icon: const Icon(Icons.arrow_back,color: cWhite), 
+                                  icon: const Icon(Icons.arrow_back,color: cred), 
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(20),
