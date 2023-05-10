@@ -124,7 +124,7 @@ class TeacherLoginScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(16.0),
                           color: AppColors.whiteColor,
                         ),
-                        child: Obx(() => TextFormField(
+                        child:  TextFormField(
                         //  controller: TextEditingController. teacheridController,
                             obscureText:
                                 _hideGetxController.isObscurefirst.value,
@@ -139,15 +139,7 @@ class TeacherLoginScreen extends StatelessWidget {
                               onPressed: () {},
                               icon: Image.asset(AppIcons.emailIcon),
                             ),
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                    _hideGetxController.isObscurefirst.value
-                                        ? Icons.visibility_off
-                                        : Icons.visibility),
-                                onPressed: () {
-                                  _hideGetxController.toggleObscureFirst();
-                                },
-                              ),
+                              
                             contentPadding: const EdgeInsets.only(top: 16.0),
                             hintText: 'Enter ID',
                             hintStyle: ralewayStyle.copyWith(
@@ -157,7 +149,7 @@ class TeacherLoginScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        ),
+                        
                       ),
                       SizedBox(height: height * 0.014),
                       Padding(

@@ -304,7 +304,7 @@ class SampoornaController extends GetxController {
       }
     } catch (e) {
       isLoading.value = false;
-      showToast(msg: 'Sampoorna not created');
+      showToast(msg: 'Sampoorna not created ');
     }
   }
 
@@ -385,7 +385,7 @@ class SampoornaController extends GetxController {
 
   @override
   void onInit() {
-    generateClubWidget();
+   // generateClubWidget();
     generateDisabilityWidget();
     super.onInit();
   }

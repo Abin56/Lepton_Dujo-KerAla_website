@@ -1,3 +1,7 @@
+
+
+
+
 // ignore_for_file: sort_child_properties_last
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -75,9 +79,9 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                                     ),
                                   ),
                                   Text(
-                                    'Create New Events',
+                                    'Create New\n Events',
                                     style: ralewayStyle.copyWith(
-                                      fontSize: 20.0,
+                                      fontSize: 29.0,
                                       color: AppColors.whiteColor,
                                       fontWeight: FontWeight.w800,
                                     ),
@@ -193,7 +197,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                       //  ),
                       
                   
-                           (widget.loadingStatus == false)? Container(
+                 (widget.loadingStatus == false)? Container(
                             height: screenSize.width * 1 / 30,
                             width: screenSize.width * 1 / 5,
                             decoration: BoxDecoration(
@@ -212,13 +216,12 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                                 });
     
                                  modell = EventModel(eventName: headingController.text, eventDate: dateController.text,
-                                 eventDescription: descriptionController.text, venue: venueController.text, 
-                                 signedBy: signedByController.text, 
-                                 id: headingController.text.substring(0,5).trim() + DateTime.now().microsecondsSinceEpoch.toString());
+                                 eventDescription: descriptionController.text, venue: venueController.text, signedBy: signedByController.text, id: headingController.text.substring(0,5).trim() + DateTime.now().microsecondsSinceEpoch.toString());
                               await addEvent(); 
                                 setState(() {
                                     widget.loadingStatus = false;
                                 }); 
+                                clearEventFunction();
                                 
                                 
                                 // showToast(msg: 'New Event Added!');
@@ -238,8 +241,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                               //     );
                               //   });
     
-                              }clearFeild;
-                              },
+                              }},
                               child: const Text('Upload Events'), 
     
                             ),
@@ -255,11 +257,12 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
     ),
     );
 }
-void clearFeild(){
-  descriptionController.clear();
-  headingController.clear();
-   dateController.clear();
+void clearEventFunction() {
+    headingController.clear();
+    dateController.clear();
+    descriptionController.clear();
     venueController.clear();
-     signedByController.clear();
-}
+    signedByController.clear();
+  
+  }
 }

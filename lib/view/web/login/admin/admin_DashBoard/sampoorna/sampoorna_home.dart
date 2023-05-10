@@ -9,7 +9,6 @@ import '../../../../../constant/constant.dart';
 import '../../../../widgets/drop_DownList/schoolDropDownList.dart';
 import 'widgets/address_detail_widget.dart';
 import 'widgets/admission_detail_widget.dart';
-import 'widgets/club_widget.dart';
 import 'widgets/current_detail_widget.dart';
 import 'widgets/parent_details_widget.dart';
 import 'widgets/personal_detail_widget.dart';
@@ -145,7 +144,7 @@ class SampoornaHomeScreen extends StatelessWidget {
                             title: '13. Clubs :',
                           ),
                           sizedBoxH30,
-                          ClubWidget(),
+                         // ClubWidget(),
                           Center(
                             child: SizedBox(
                               width: size.width / 2,

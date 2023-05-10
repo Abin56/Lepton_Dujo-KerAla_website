@@ -1,12 +1,9 @@
-import 'dart:developer';
-
 import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
-import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+
 import '../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../controller/text_form_hide/password_filed.dart';
 import '../../../colors/colors.dart';
@@ -34,9 +31,9 @@ class AdminLoginScreen extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-          iconTheme: IconThemeData(color: cWhite),
-          backgroundColor: Color.fromARGB(255, 74, 3, 107)),
-      backgroundColor: Color.fromARGB(255, 74, 3, 107),
+          iconTheme: const IconThemeData(color: cWhite),
+          backgroundColor: const Color.fromARGB(255, 74, 3, 107)),
+      backgroundColor: const Color.fromARGB(255, 74, 3, 107),
       body: SizedBox(
         height: height,
         width: width,
@@ -79,7 +76,7 @@ class AdminLoginScreen extends StatelessWidget {
                     horizontal: ResponsiveWidget.isSmallScreen(context)
                         ? height * 0.032
                         : height * 0.15),
-                color: Color.fromARGB(255, 74, 3, 107),
+                color: const Color.fromARGB(255, 74, 3, 107),
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.only(bottom: 40.0),
                   child: Column(
@@ -141,12 +138,10 @@ class AdminLoginScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(16.0),
                           color: AppColors.whiteColor,
                         ),
-                        child: Obx(
-                          () => TextFormField(
+                        child: TextFormField(
                             controller:
                                 adminLoginScreenController.schoolIdController,
-                            obscureText:
-                                _hideGetxController.isObscurefirst.value,
+                            
                             style: ralewayStyle.copyWith(
                               fontWeight: FontWeight.w400,
                               color: AppColors.blueDarkColor,
@@ -158,15 +153,7 @@ class AdminLoginScreen extends StatelessWidget {
                                 onPressed: () {},
                                 icon: Image.asset(AppIcons.emailIcon),
                               ),
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                    _hideGetxController.isObscurefirst.value
-                                        ? Icons.visibility_off
-                                        : Icons.visibility),
-                                onPressed: () {
-                                  _hideGetxController.toggleObscureFirst();
-                                },
-                              ),
+                              
                               contentPadding: const EdgeInsets.only(top: 16.0),
                               hintText: 'Enter your ID',
                               hintStyle: ralewayStyle.copyWith(
@@ -176,7 +163,7 @@ class AdminLoginScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                        ),
+                        
                       ),
                       SizedBox(height: height * 0.014),
                       Padding(
@@ -274,7 +261,7 @@ class AdminLoginScreen extends StatelessWidget {
                               'Sign In',
                               style: ralewayStyle.copyWith(
                                 fontWeight: FontWeight.w700,
-                                color: Color.fromARGB(255, 58, 18, 238),
+                                color: const Color.fromARGB(255, 58, 18, 238),
                                 fontSize: 16.0,
                               ),
                             ),

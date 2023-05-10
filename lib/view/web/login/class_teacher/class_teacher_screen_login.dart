@@ -134,12 +134,10 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(16.0),
                           color: AppColors.whiteColor,
                         ),
-                        child: Obx(
-                          () => TextFormField(
+                        child:TextFormField(
                             controller:
                                 classTeacherLoginController.emailController,
-                            obscureText:
-                                _hideGetxController.isObscurefirst.value,
+                         
                             style: ralewayStyle.copyWith(
                               fontWeight: FontWeight.w400,
                               color: cBlack,
@@ -151,15 +149,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                                 onPressed: () {},
                                 icon: Image.asset(AppIcons.emailIcon),
                               ),
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                    _hideGetxController.isObscurefirst.value
-                                        ? Icons.visibility_off
-                                        : Icons.visibility),
-                                onPressed: () {
-                                  _hideGetxController.toggleObscureFirst();
-                                },
-                              ),
+                              
                               contentPadding: const EdgeInsets.only(top: 16.0),
                               hintText: 'Email',
                               hintStyle: ralewayStyle.copyWith(
@@ -169,7 +159,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                        ),
+                        
                       ),
                       SizedBox(height: height * 0.014),
                       Padding(

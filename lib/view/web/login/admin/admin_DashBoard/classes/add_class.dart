@@ -1,3 +1,6 @@
+
+
+
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:developer';
@@ -368,6 +371,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                                   .addNewClassFunction(classNameController);
                                   showToast(msg: 'Class added');
                                }
+                               classNameController.clear();
                             },
                             icon: const Icon(Icons.add, color: cWhite),
                             label: GoogleMonstserratWidgets(
@@ -386,9 +390,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                                 .collection('classes')
                                 .snapshots(),
                             builder: (context, snapshots) {
-
-                              if(snapshots.hasData){
-                                 return GridView.builder(
+                              return GridView.builder(
                                 itemCount: snapshots.data!.docs.length,
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
@@ -396,7 +398,7 @@ class AddClassesSectionScreen extends StatelessWidget {
 
                                 ),
                                 itemBuilder: (context, index) {
-                                  
+                                  if (snapshots.hasData) {
                                     return Padding(
                                       padding: EdgeInsets.all(20.w),
                                       child: Container(
@@ -516,12 +518,13 @@ class AddClassesSectionScreen extends StatelessWidget {
                                         ),
                                       ),
                                     );
-                                 
+                                  } else {
+                                    return const Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  }
                                 },
                               );
-                              }
-                              return circularProgressIndicator;
-                             
                             }),
                       )
                     ]),

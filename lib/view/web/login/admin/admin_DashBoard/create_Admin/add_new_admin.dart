@@ -7,9 +7,7 @@ import 'package:dujo_kerala_website/view/fonts/fonts.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../../controller/text_form_hide/password_filed.dart';
@@ -26,7 +24,8 @@ class AddNewAdmin extends StatefulWidget {
 }
 
 class _AddNewAdminState extends State<AddNewAdmin> {
-  final _hideGetxController = Get.put(PasswordField());
+  final _hideGetxController = Get.put(PasswordField()); 
+  bool loadingStatus = false;
   String adminpassword = '';
 
   TextEditingController employeeIDController = TextEditingController();
@@ -49,6 +48,7 @@ class _AddNewAdminState extends State<AddNewAdmin> {
     super.initState();
   }
 
+  @override
   Widget build(BuildContext context) {
     log(adminpassword);
     log(widget.schoolID);
@@ -101,7 +101,7 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                       children: [
                         sizedBoxH30,
                         Padding(
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           child: TextFormField(
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -111,7 +111,7 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                               }
                             },
                             controller: adminUserNameController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'Admin UserName',
                             ),
@@ -119,7 +119,7 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                         ),
                         sizedBoxH10,
                         Padding(
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           child: TextFormField(
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -129,7 +129,7 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                               }
                             },
                             controller: employeeIDController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'Employee ID',
                             ),
@@ -137,7 +137,7 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                         ),
                         sizedBoxH10,
                         Padding(
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           child: TextFormField(
                             validator: (value) {
                               if (value!.isEmpty || value.length < 4) {
@@ -148,7 +148,7 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                             },
                             obscureText: true,
                             controller: passwordController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'Password',
                             ),
@@ -156,7 +156,7 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                         ),
                         sizedBoxH10,
                         Padding(
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           child: TextFormField(
                             validator: (value) {
                               if (passwordController.text.trim() !=
@@ -168,7 +168,7 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                             },
                             obscureText: true,
                             controller: confirmPasswordController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'Confirm Password',
                             ),
@@ -176,13 +176,13 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                         ),
                         sizedBoxH10,
                         Padding(
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           child: TextFormField(
                             validator: (input) => input!.isValidEmail()
                                 ? null
                                 : "Please Enter a vaild email id",
                             controller: emailController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'Email',
                             ),
@@ -190,18 +190,18 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                         ),
                         sizedBoxH10,
                         Padding(
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           child: TextFormField(
                             validator: checkFieldPhoneNumberIsValid,
                             controller: phoneNumberController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'Phone Number',
                             ),
                           ),
                         ),
                         sizedBoxH30,
-                        Container(
+                      (loadingStatus==true)? const Center(child: CircularProgressIndicator(),):  Container(
                           height: screenSize.width * 1 / 30,
                           width: screenSize.width * 1 / 6,
                           decoration: BoxDecoration(
@@ -210,7 +210,7 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                           child: TextButton(
                             style: TextButton.styleFrom(
                               foregroundColor:
-                                  Color.fromARGB(255, 255, 255, 255),
+                                  const Color.fromARGB(255, 255, 255, 255),
                               padding: const EdgeInsets.all(9.0),
                               textStyle: const TextStyle(fontSize: 17),
                             ),
@@ -241,7 +241,12 @@ class _AddNewAdminState extends State<AddNewAdmin> {
 
   createNewAdmin(String username, String employeeID, String password,
       String email, String phno) async {
-    await FirebaseAuth.instance
+        setState(() {
+          loadingStatus = true;
+        });
+
+        try{
+            await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) {
       FirebaseFirestore.instance
@@ -266,6 +271,14 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                 phoneNumberController.clear(),
                 confirmPasswordController.clear()
               });
+    }); 
+
+        } catch(e){
+          log('Create admin  $e');
+        }
+  
+    setState(() {
+      loadingStatus = false;
     });
   }
 
