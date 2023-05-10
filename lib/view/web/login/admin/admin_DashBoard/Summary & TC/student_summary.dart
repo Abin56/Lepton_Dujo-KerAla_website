@@ -2,7 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../widgets/drop_DownList/schoolDropDownList.dart';
+
 class Summary extends StatefulWidget {
+  
   const 
   Summary({super.key});
 
@@ -46,7 +49,7 @@ class _SummaryState extends State<Summary> {
 
   void _getFieldValue() async {
     DocumentSnapshot snapshot = await FirebaseFirestore.instance
-         .collection("SchoolListCollection").doc("mthssCheng16767").collection("sampoorna")
+         .collection("SchoolListCollection").doc(schoolListValue!['docid']).collection("sampoorna")
         .doc('YL0t9TBB8QTCUnD1rXgz')
         .get();
     setState(() {

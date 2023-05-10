@@ -11,13 +11,11 @@ import '../../../../../constant/constant.dart';
 class ClassTeacherCreateNoticePage extends StatelessWidget {
   ClassTeacherCreateNoticePage({
     super.key,
-    required this.schoolId,
-    required this.classId,
+
   });
 
   final formKey = GlobalKey<FormState>();
-  final String schoolId;
-  final String classId;
+
   final TeacherNoticeController teacherNoticeController =
       Get.put(TeacherNoticeController());
 

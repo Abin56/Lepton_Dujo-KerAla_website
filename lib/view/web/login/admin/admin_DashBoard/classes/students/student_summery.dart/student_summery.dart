@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:flutter/material.dart';
@@ -5,20 +7,24 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
+import '../../../../../../../colors/colors.dart';
 
 class StundentSummery extends StatelessWidget {
   var stundetAdmissionId;
-  StundentSummery({required this.stundetAdmissionId, super.key});
+  String studentId;
+  StundentSummery({required this.stundetAdmissionId,required this.studentId, super.key});
 
   @override
   Widget build(BuildContext context) {
+    log(studentId);
+    log(stundetAdmissionId);
     var screenSize = MediaQuery.of(context).size;
     return StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection("SchoolListCollection")
             .doc(Get.find<AdminLoginScreenController>().schoolID)
             .collection("AllStudents")
-            .doc(stundetAdmissionId)
+            .doc(studentId)
             .collection("sampoorna")
             .where('admissionNumber', isEqualTo: stundetAdmissionId)
             .snapshots(),
@@ -26,6 +32,7 @@ class StundentSummery extends StatelessWidget {
           // final data = snap.data!.docs[0];
           if (snap.hasData) {
             return Scaffold(
+              appBar: AppBar(backgroundColor: adminePrimayColor),
               body: ListView(
                 children: [
                   Container(
@@ -50,7 +57,7 @@ class StundentSummery extends StatelessWidget {
                       Container(
                         width: screenSize.width * 0.3,
                         height: screenSize.height * 1,
-                        color: Color.fromARGB(255, 14, 57, 92),
+                        color: const Color.fromARGB(255, 14, 57, 92),
                         child: SingleChildScrollView(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,8 +66,8 @@ class StundentSummery extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 20),
+                                  const Padding(
+                                    padding: EdgeInsets.only(top: 20),
                                     child: CircleAvatar(
                                       radius: 90,
                                       // backgroundImage: NetworkImage(
@@ -108,7 +115,7 @@ class StundentSummery extends StatelessWidget {
                         ),
                       ),
                       SizedBox(width: screenSize.width * 0.01),
-                      Container(
+                      SizedBox(
                         width: screenSize.width * 0.68,
                         height: screenSize.height * 1,
                         child: SingleChildScrollView(
@@ -128,13 +135,13 @@ class StundentSummery extends StatelessWidget {
                               RightWidget(
                                 screenSize: screenSize,
                                 maintext: "Extra Curricular Activities",
-                                texts: ["Arts :", "Sports", "Technology"],
+                                texts: const ["Arts :", "Sports", "Technology"],
                               ),
                               sizedBoxH20,
                               RightWidget(
                                 screenSize: screenSize,
                                 maintext: "Achievement",
-                                texts: [
+                                texts: const [
                                   "School Level",
                                   "District Level",
                                   "State Level"
@@ -144,19 +151,19 @@ class StundentSummery extends StatelessWidget {
                               RightWidget(
                                 screenSize: screenSize,
                                 maintext: "Skills/Talents",
-                                texts: ["*"],
+                                texts: const ["*"],
                               ),
                               sizedBoxH20,
                               RightWidget(
                                 screenSize: screenSize,
                                 maintext: "Clubs",
-                                texts: ["*"],
+                                texts: const ["*"],
                               ),
                               sizedBoxH20,
                               RightWidget(
                                 screenSize: screenSize,
                                 maintext: "Teachers Opinion",
-                                texts: ["Good"],
+                                texts: const ["Good"],
                               ),
                             ],
                           ),
@@ -214,7 +221,7 @@ class RightWidget extends StatelessWidget {
             for (String text in texts)
               Column(children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 15),
+                  padding: const EdgeInsets.only(top: 15),
                   child: Text(text,
                       style: GoogleFonts.poppins(
                           color: const Color.fromARGB(255, 115, 114, 114),
@@ -267,7 +274,7 @@ class LeftWidget extends StatelessWidget {
             for (String text in texts)
               Column(children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 15),
+                  padding: const EdgeInsets.only(top: 15),
                   child: Text(text,
                       style: GoogleFonts.poppins(
                           color: Colors.white,

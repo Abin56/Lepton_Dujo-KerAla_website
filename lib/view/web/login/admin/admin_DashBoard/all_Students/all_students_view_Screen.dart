@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../../controller/class_list/class_list_model.dart';
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
+import '../../../../../../model/add_class/add_new_class.dart';
 import '../../../../../../model/create_classModel/add_student_model.dart';
-import '../../../../../../model/create_classModel/create_classModel.dart';
 import '../../../../../../ui team/sruthi/student_details_alert_box_widget.dart';
 import '../../../../../constant/constant.dart';
 import '../classes/details_ofClasses.dart';
@@ -33,10 +34,10 @@ class _AllStudentListState extends State<AllStudentList> {
 
   @override
   Widget build(BuildContext context) {
-    List<AddClassesModel> allData = [];
+    List<SchoolClassesModel> allData = [];
     int columnCount = 4;
-    double _w = MediaQuery.of(context).size.width;
-    double _h = MediaQuery.of(context).size.height;
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
@@ -129,7 +130,7 @@ class _AllStudentListState extends State<AllStudentList> {
                           child: GridView.count(
                             physics: const BouncingScrollPhysics(
                                 parent: AlwaysScrollableScrollPhysics()),
-                            padding: EdgeInsets.all(_w / 60),
+                            padding: EdgeInsets.all(w / 60),
                             crossAxisCount: columnCount,
                             children: List.generate(
                               snapshot.data!.docs.length,
@@ -156,7 +157,7 @@ class _AllStudentListState extends State<AllStudentList> {
                                             onTap: () async {
                                               _showlert(context, data);
                                             },
-                                            child: Container(
+                                            child: SizedBox(
                                               height: screenSize.width * 6,
                                               width: screenSize.width / 10,
                                               child: Padding(
@@ -233,7 +234,7 @@ class _AllStudentListState extends State<AllStudentList> {
                                                                 .bYear
                                                                 .value)
                                                             .collection(
-                                                                "Classes")
+                                                                "classes")
                                                             .doc(data.classID)
                                                             .get(),
                                                         builder: (context,
@@ -315,17 +316,17 @@ class _AllStudentListState extends State<AllStudentList> {
     var a = await FirebaseFirestore.instance
         .collection("SchoolListCollection")
         .doc(Get.find<AdminLoginScreenController>().schoolID)
-        .collection('Classes')
+        .collection('classes')
         .get();
     final data = a.docs.map((e) {
-      return e.data()['id'];
+      return e.data()['docid'];
     }).toList();
     int studentsLength = 0;
     for (int i = 0; i <= data.length - 1; i++) {
       var b = await FirebaseFirestore.instance
           .collection("SchoolListCollection")
           .doc(Get.find<AdminLoginScreenController>().schoolID)
-          .collection('Classes')
+          .collection('classes')
           .doc(data[i])
           .collection('Students')
           .get();
@@ -338,43 +339,7 @@ class _AllStudentListState extends State<AllStudentList> {
     });
   }
 
-  Future<void> getMaleCount() async {
-    var a = await FirebaseFirestore.instance
-        .collection("SchoolListCollection")
-        .doc(Get.find<AdminLoginScreenController>().schoolID)
-        .collection('Classes')
-        .get();
-    final data = a.docs.map((e) {
-      return e.data()['id'];
-    }).toList();
 
-    int maleCount = 0;
-    int femaleCount = 0;
-
-    for (int i = 0; i <= data.length - 1; i++) {
-      var b = await FirebaseFirestore.instance
-          .collection("SchoolListCollection")
-          .doc(Get.find<AdminLoginScreenController>().schoolID)
-          .collection('Classes')
-          .doc(data[i])
-          .collection('Students')
-          .get();
-      for (var element in b.docs) {
-        if (element.data()['gender'] == 'male') {
-          maleCount++;
-        } else if (element.data()['gender'] == 'female') {
-          femaleCount++;
-        }
-      }
-    }
-
-    // print(maleCount);
-    // print(femaleCount);
-    setState(() {
-      widget.NoofMaleStundets = maleCount.toString();
-      widget.NoofFemaleStudents = femaleCount.toString();
-    });
-  }
 }
 
 void _showlert(BuildContext context, AddStudentModel data) {

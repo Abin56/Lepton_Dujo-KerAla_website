@@ -1,12 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/students/parents&guardian.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/students/student_summery.dart/student_summery.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/sampoorna/sampoorna_home.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/transfer_cretificate/tc_genrate.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
@@ -14,7 +11,8 @@ import '../../../../../../../controller/admin_login_screen/admin_login_screen_co
 import '../../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../../controller/students_list/students_list.dart';
 import '../../../../../../../model/create_classModel/add_student_model.dart';
-import '../../../../../../../model/profileextraDetails/students_extra_profile.dart';
+import '../../../../../../../ui team/sruthi/guardianInfo_alert_box.dart';
+import '../../../../../../../ui team/sruthi/parent_guardian_alert_box_widget.dart';
 import '../../../../../../colors/colors.dart';
 import '../../../../../../constant/constant.dart';
 import '../../../../../widgets/button_container_widget.dart';
@@ -43,14 +41,14 @@ class StudentsDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _firebase = FirebaseFirestore.instance
+    final firebase = FirebaseFirestore.instance
         .collection("SchoolListCollection")
         .doc(Get.find<AdminLoginScreenController>().schoolID)
         .collection(Get.find<GetFireBaseData>().bYear.value)
         .doc(Get.find<GetFireBaseData>().bYear.value)
         .collection("Classes")
         .doc(classID);
-    return Container(
+    return SizedBox(
       height: double.infinity,
       width: 500,
       child: Obx(() {
@@ -88,7 +86,7 @@ class StudentsDetails extends StatelessWidget {
                           ),
                           sizedBoxW20,
                           Text(
-                            "Total Students : ${totalstudents}",
+                            "Total Students : $totalstudents",
                             style: GoogleFonts.poppins(
                                 color: const Color.fromARGB(255, 0, 0, 0),
                                 fontSize: 20,
@@ -154,7 +152,7 @@ class StudentsDetails extends StatelessWidget {
                         sizedBoxw10,
                         IconButton(
                           onPressed: () async {
-                            TextEditingController _newStNameController =
+                            TextEditingController newStNameController =
                                 TextEditingController();
                             showDialog(
                               context: context,
@@ -167,16 +165,16 @@ class StudentsDetails extends StatelessWidget {
                                       padding: const EdgeInsets.all(8.0),
                                       child: GestureDetector(
                                           onTap: () {
-                                            if (_newStNameController
+                                            if (newStNameController
                                                 .text.isNotEmpty) {
-                                              _firebase
+                                              firebase
                                                   .collection("Students")
                                                   .doc(allData[getxController
                                                           .indexValue.value!]
                                                       .docid)
                                                   .set({
                                                 'studentName':
-                                                    _newStNameController.text
+                                                    newStNameController.text
                                                         .trim()
                                               }, SetOptions(merge: true)).then(
                                                       (value) => Navigator.pop(
@@ -204,7 +202,7 @@ class StudentsDetails extends StatelessWidget {
                                               hintText: allData[getxController
                                                       .indexValue.value!]
                                                   .studentName),
-                                          controller: _newStNameController,
+                                          controller: newStNameController,
                                         )
                                       ],
                                     ),
@@ -235,7 +233,7 @@ class StudentsDetails extends StatelessWidget {
                         sizedBoxw10,
                         IconButton(
                           onPressed: () async {
-                            TextEditingController _newPhoneNoController =
+                            TextEditingController newPhoneNoController =
                                 TextEditingController();
                             showDialog(
                               context: context,
@@ -248,16 +246,16 @@ class StudentsDetails extends StatelessWidget {
                                       padding: const EdgeInsets.all(8.0),
                                       child: GestureDetector(
                                           onTap: () {
-                                            if (_newPhoneNoController
+                                            if (newPhoneNoController
                                                 .text.isNotEmpty) {
-                                              _firebase
+                                              firebase
                                                   .collection("Students")
                                                   .doc(allData[getxController
                                                           .indexValue.value!]
                                                       .docid)
                                                   .set({
                                                 'parentPhoneNumber':
-                                                    _newPhoneNoController.text
+                                                    newPhoneNoController.text
                                                         .trim()
                                               }, SetOptions(merge: true)).then(
                                                       (value) => Navigator.pop(
@@ -285,7 +283,7 @@ class StudentsDetails extends StatelessWidget {
                                               hintText: allData[getxController
                                                       .indexValue.value!]
                                                   .parentPhoneNumber),
-                                          controller: _newPhoneNoController,
+                                          controller: newPhoneNoController,
                                         )
                                       ],
                                     ),
@@ -311,7 +309,7 @@ class StudentsDetails extends StatelessWidget {
                         sizedBoxw10,
                         IconButton(
                           onPressed: () async {
-                            TextEditingController _newAdIDController =
+                            TextEditingController newAdIDController =
                                 TextEditingController();
                             showDialog(
                               context: context,
@@ -323,16 +321,16 @@ class StudentsDetails extends StatelessWidget {
                                       padding: const EdgeInsets.all(8.0),
                                       child: GestureDetector(
                                           onTap: () {
-                                            if (_newAdIDController
+                                            if (newAdIDController
                                                 .text.isNotEmpty) {
-                                              _firebase
+                                              firebase
                                                   .collection("Students")
                                                   .doc(allData[getxController
                                                           .indexValue.value!]
                                                       .docid)
                                                   .set({
                                                 'admissionNumber':
-                                                    _newAdIDController.text
+                                                    newAdIDController.text
                                                         .trim()
                                               }, SetOptions(merge: true)).then(
                                                       (value) => Navigator.pop(
@@ -360,7 +358,7 @@ class StudentsDetails extends StatelessWidget {
                                               hintText: allData[getxController
                                                       .indexValue.value!]
                                                   .admissionNumber),
-                                          controller: _newAdIDController,
+                                          controller: newAdIDController,
                                         )
                                       ],
                                     ),
@@ -389,12 +387,19 @@ class StudentsDetails extends StatelessWidget {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                getParentDatas(
-                                    context: context,
-                                    schooilID: schooilID,
+                                showDialog(
+                                  barrierDismissible: false,
+                                  context: context,
+                                  builder: (context) => ParentAlert_box_Widget(
+                                    classID: allData[
+                                            getxController.indexValue.value!]
+                                        .classID!,
                                     studentID: allData[
                                             getxController.indexValue.value!]
-                                        .docid!);
+                                        .docid!,
+                                    text: 'Parent Info',
+                                  ),
+                                );
                               },
                               child: Container(
                                 height: 40,
@@ -417,12 +422,20 @@ class StudentsDetails extends StatelessWidget {
                           children: [
                             GestureDetector(
                               onTap: () async {
-                                await getGuardianDatas(
-                                    context: context,
-                                    schooilID: schooilID,
+                                showDialog(
+                                  barrierDismissible: false,
+                                  context: context,
+                                  builder: (context) =>
+                                      GuardianInfoAlert_box_Widget(
+                                    classID: allData[
+                                            getxController.indexValue.value!]
+                                        .classID!,
                                     studentID: allData[
                                             getxController.indexValue.value!]
-                                        .docid!);
+                                        .docid!,
+                                    text: 'Guardian Info',
+                                  ),
+                                );
                               },
                               child: Container(
                                 height: 40,
@@ -462,15 +475,21 @@ class StudentsDetails extends StatelessWidget {
                                 Navigator.push(context, MaterialPageRoute(
                                     builder: (context) {
                                       return SampoornaHomeScreen(
+                                        studentId:allData[getxController.indexValue.value!]
+                                    .docid! ,
                                           schoolId: Get.find<
                                                   AdminLoginScreenController>()
                                               .schoolID);
                                     },
-                                  ))
+                                  )) 
                                 // ignore: use_build_context_synchronously
                                 : Navigator.push(context, MaterialPageRoute(
                                     builder: (context) {
                                       return StundentSummery(
+                                        studentId: allData[
+                                                getxController
+                                                    .indexValue.value!]
+                                            .docid!,
                                         stundetAdmissionId: allData[
                                                 getxController
                                                     .indexValue.value!]
@@ -589,7 +608,7 @@ class StudentsDetails extends StatelessWidget {
                                                                 .all(8.0),
                                                         child: GestureDetector(
                                                             onTap: () {
-                                                              _firebase
+                                                              firebase
                                                                   .collection(
                                                                       "Students")
                                                                   .doc(allData[getxController
@@ -621,8 +640,9 @@ class StudentsDetails extends StatelessWidget {
                                                     content:
                                                         SingleChildScrollView(
                                                       child: ListBody(
-                                                        children: <Widget>[
-                                                          const Text(
+                                                        children: const <
+                                                            Widget>[
+                                                          Text(
                                                               "Are you shure remove the student \n when press ok all data will be lost")
                                                         ],
                                                       ),
@@ -691,6 +711,7 @@ class _GenrateTcState extends State<GenrateTc> {
     super.initState();
   }
 
+  @override
   Widget build(BuildContext context) {
     return StreamBuilder(
         stream: FirebaseFirestore.instance

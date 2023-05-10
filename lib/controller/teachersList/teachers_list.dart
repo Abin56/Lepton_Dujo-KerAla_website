@@ -3,13 +3,13 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
-import '../../model/profileextraDetails/teacher_extra_profile.dart';
+import '../../model/teacher/teacher_model.dart';
 
 class TeachersProfileList extends GetxController {
   List<Map<String, dynamic>> list1 = [];
   List<Map<String, dynamic>> categoryCollections = [];
    RxnInt indexValue = RxnInt();
-  Stream<List<AddExtraDetailsofTeacherModel>> getProduct(String type,id) {
+  Stream<List<TeacherModel>> getProduct(String type,id) {
     log(">>>>>>>>iddddddddddddddddddddddddd${type}");
     String catData = '';
     for (Map<String, dynamic> map in categoryCollections) {
@@ -23,7 +23,7 @@ class TeachersProfileList extends GetxController {
         .where('ptaCategory', isEqualTo: catData)
         .snapshots();
     final d = data.map((event) =>
-        event.docs.map((e) => AddExtraDetailsofTeacherModel.fromJson(e.data())).toList());
+        event.docs.map((e) => TeacherModel.fromMap(e.data())).toList());
     log('lepton>>>>>>>>>>>>>>>...${d.toString()}');
 
     return d;

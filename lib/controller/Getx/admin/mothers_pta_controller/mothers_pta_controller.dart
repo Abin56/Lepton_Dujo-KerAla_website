@@ -51,7 +51,7 @@ class MothersPtaController extends GetxController {
         if (imageDataUin8.value != null) {
           final String id = const Uuid().v1();
           final filePath = await firebaseStorage
-              .ref('files/MothersPta/$id')
+              .ref('files/${Get.find<AdminLoginScreenController>().schoolID}/${Get.find<GetFireBaseData>().bYear.value}/MothersPta/$id')
               .putData(imageDataUin8.value!);
           String imageUrlPath = await filePath.ref.getDownloadURL();
           await firebaseFirestore.doc(result.id).update(
@@ -101,7 +101,7 @@ class MothersPtaController extends GetxController {
             );
         if (imageDataUin8.value != null) {
           final filePath = await firebaseStorage
-              .ref('files/MothersPta/$imageId')
+              .ref('files/${Get.find<AdminLoginScreenController>().schoolID}/${Get.find<GetFireBaseData>().bYear.value}/MothersPta/$imageId')
               .putData(imageDataUin8.value!);
 
           String fileUrl = await filePath.ref.getDownloadURL();
@@ -134,7 +134,7 @@ class MothersPtaController extends GetxController {
       isLoading.value = true;
       await firebaseFirestore.doc(memberId).delete();
       if (imageId.isNotEmpty) {
-        await firebaseStorage.ref('files/MothersPta/$imageId').delete();
+        await firebaseStorage.ref('files/${Get.find<AdminLoginScreenController>().schoolID}/${Get.find<GetFireBaseData>().bYear.value}/MothersPta/$imageId').delete();
       }
 
       showToast(

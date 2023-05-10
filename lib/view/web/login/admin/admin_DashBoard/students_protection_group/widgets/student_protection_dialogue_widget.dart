@@ -81,7 +81,7 @@ Future<void> updateStudentProtectionDialogue(
                               .updateStudentProtectionMemberDetail(
                                   memberId, context, imageid, imageUrl);
                         },
-                        child: const Text('Edit'),
+                        child: const Text('Update'),
                       )
                     ],
                   ),

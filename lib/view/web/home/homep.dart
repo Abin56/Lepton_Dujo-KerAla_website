@@ -7,7 +7,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../fonts/google_monstre.dart';
+import '../login/loginscreen.dart';
 import '../widgets/drop_DownList/schoolDropDownList.dart';
+import '../widgets/sample/under_maintance.dart';
+import 'create_school/create_school.dart';
 import 'footer/footerhomep.dart';
 
 class HomeP extends StatelessWidget {
@@ -98,9 +102,9 @@ class HomeP extends StatelessWidget {
         backgroundColor: Colors.transparent,
         body: ListView(children: [
           Padding(
-            padding:  EdgeInsets.only(right: 80.0.w, left: 80.w),
+            padding: EdgeInsets.only(right: 80.0.w, left: 80.w),
             child: SizedBox(
-             //
+              //
               height: 60.w,
               width: MediaQuery.of(context).size.width,
               child: Row(
@@ -145,72 +149,97 @@ class HomeP extends StatelessWidget {
                       ],
                     ),
                   ),
-                     SizedBox(width: 20.w),
-                     SizedBox(width: 20.w),
-                     SizedBox(width: 20.w),
-                     SizedBox(width: 20.w),
-                     SizedBox(width: 20.w),
-                  
+                  SizedBox(width: 20.w),
+                  SizedBox(width: 20.w),
+                  SizedBox(width: 20.w),
+                  SizedBox(width: 20.w),
+                  SizedBox(width: 20.w),
 
-                 
-                    Padding(
-                      padding:  EdgeInsets.only(left: 220.w),
-                      child: Container(
-                        
-                        child: InkWell(
-                              onTap: () {
-                                 showDialog(
-                  context: context,
-                  barrierDismissible: false, // user must tap button!
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text('Enter Your School ID'),
-                      content: SingleChildScrollView(
-                        child: ListBody(
-                          children: const <Widget>[GetSchoolListDropDownButton()],
-                          // children: [
-                          //   // TextFormField(
-                          //   //   controller:schoolIdController,
-                          //   // )
-                          // ],
+                  Padding(
+                    padding: EdgeInsets.only(left: 220.w),
+                    child: Container(
+                      child: InkWell(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false, // user must tap button!
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text('Enter Your School ID'),
+                                content: SingleChildScrollView(
+                                  child: ListBody(
+                                    children: const <Widget>[
+                                      GetSchoolListDropDownButton()
+                                    ],
+                                    // children: [
+                                    //   // TextFormField(
+                                    //   //   controller:schoolIdController,
+                                    //   // )
+                                    // ],
+                                  ),
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: const Text('Ok'),
+                                    onPressed: () async {
+                                      if (schoolListValue['docid'] == null) {
+                                        return showDialog(
+                                          context: context,
+                                          barrierDismissible:
+                                              false, // user must tap button!
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: const Text('Alert'),
+                                              content: SingleChildScrollView(
+                                                child: ListBody(
+                                                  children: const <Widget>[
+                                                    Text(
+                                                        'Sorry you have no access to delete')
+                                                  ],
+                                                ),
+                                              ),
+                                              actions: <Widget>[
+                                                TextButton(
+                                                  child: const Text('ok'),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      } else {
+                                        await Navigator.push(context,
+                                            MaterialPageRoute(
+                                          builder: (context) {
+                                            return const LoginScreen();
+                                          },
+                                        ));
+                                      }
+                                    },
+                                  ),
+                                  TextButton(
+                                    child: const Text('Cancel'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        child: Text(
+                          'Login',
+                          style: GoogleFonts.poppins(
+                              fontSize: 18.w,
+                              fontWeight: FontWeight.bold,
+                              color: cred),
                         ),
-                      ),
-                      actions: <Widget>[
-                        TextButton(
-                          child: const Text('Ok'),
-                          onPressed: () async {
-                            await Navigator.push(context, MaterialPageRoute(
-                              builder: (context) {
-                                return LoginScreen(
-                              
-                                );
-                              },
-                            ));
-                          },
-                        ),
-                        TextButton(
-                          child: const Text('Cancel'),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                      ],
-                    );
-                  },
-                );
-          
-                              },
-                              child: Text(
-                                'Login',
-                                style: GoogleFonts.poppins(
-                                    fontSize: 18.w,
-                                    fontWeight: FontWeight.bold,
-                                    color: cred),
-                              ),
-                            ),
                       ),
                     ),
-                  
+                  ),
                   Padding(
                     padding:  EdgeInsets.only(left: 40.w),
                     child: Container(
@@ -233,28 +262,28 @@ class HomeP extends StatelessWidget {
                           SizedBox(width: 10.w),
                           InkWell(
                             onTap: () {
-                              _launchInstaUrl() ;
+                              _launchInstaUrl();
                             },
                             child: Image.asset(
                               'assets/images/instag.png',
-                               height: 40.h,
+                              height: 40.h,
                               width: 40.w,
                               color: adminePrimayColor,
                             ),
                           ),
-                         SizedBox(width: 10.w),
+                          SizedBox(width: 10.w),
                           InkWell(
                             onTap: () {
-                              _launchTwitterUrl() ;
+                              _launchTwitterUrl();
                             },
                             child: Image.asset(
                               'assets/images/twitt.png',
-                               height: 29.h,
+                              height: 29.h,
                               width: 30.w,
                               color: adminePrimayColor,
                             ),
                           ),
-                        SizedBox(width: 10.w),
+                          SizedBox(width: 10.w),
                           InkWell(
                             onTap: () {
                               _launchyouTubeUrl() ;
@@ -275,9 +304,12 @@ class HomeP extends StatelessWidget {
             ),
           ),
           Padding(
-            padding:  EdgeInsets.only(right: 80.0.w, left: 80.w,),
+            padding: EdgeInsets.only(
+              right: 80.0.w,
+              left: 80.w,
+            ),
             child: SizedBox(
-            // color: cBlue,
+              // color: cBlue,
               width: MediaQuery.of(context).size.width,
               height: 500.h,
               // color: Color.fromARGB(255, 142, 234, 243),
@@ -288,7 +320,7 @@ class HomeP extends StatelessWidget {
                     //  / mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(
+                        Container(
                           width: 180.w,
                           child: Image.asset(
                             'assets/images/leptdujo.png',
@@ -301,7 +333,7 @@ class HomeP extends StatelessWidget {
                         // sizedBoxH40,
                         // sizedBoxH20,
                         Padding(
-                          padding:  EdgeInsets.only(top: 120.h),
+                          padding: EdgeInsets.only(top: 120.h),
                           child: Text(
                             'Watch And Guide,\nLet Them Study',
                             style: GoogleFonts.montserrat(
@@ -320,10 +352,10 @@ class HomeP extends StatelessWidget {
                           minWidth: 250.w,
                           onPressed: () {
                             Navigator.push(context, MaterialPageRoute(
-                          builder: (context) {
-                            return SchoolProfile();
-                          },
-                        ));
+                              builder: (context) {
+                                return SchoolProfile();
+                              },
+                            ));
                           },
                           color: adminePrimayColor,
                           child: Text(
@@ -381,7 +413,10 @@ class HomeP extends StatelessWidget {
                     )
                   ]),
             ),
-          ), const SizedBox(height: 100,),
+          ),
+          const SizedBox(
+            height: 100,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [

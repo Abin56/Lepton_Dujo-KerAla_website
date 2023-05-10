@@ -1,7 +1,6 @@
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../controller/Getx/web_controllers/generainstructions/general_instructions_controller.dart';
@@ -26,9 +25,16 @@ class GeneralInstruction extends StatelessWidget {
           child: Text('No data found'),
         );
       } else {
-        return Scaffold(appBar: AppBar(backgroundColor: adminePrimayColor),
-        body: 
-           ListView(
+        return Scaffold(
+          appBar: AppBar(
+              backgroundColor: adminePrimayColor,
+              title: const Center(
+                child: Text(
+                  'View Instruction',
+                  style: TextStyle(color: cWhite),
+                ),
+              )),
+          body: ListView(
             children: [
               Container(
                 height: 200,
@@ -60,8 +66,8 @@ class GeneralInstruction extends StatelessWidget {
                   Center(
                     child: Text(
                       generalInstructionsController.schoolName.value,
-                      style:
-                          GoogleFonts.adamina(fontSize: 35, color: Colors.white),
+                      style: GoogleFonts.adamina(
+                          fontSize: 35, color: Colors.white),
                     ),
                   ),
                 ]),
@@ -129,9 +135,9 @@ class GeneralInstruction extends StatelessWidget {
                     separatorBuilder: (context, index) {
                       return sizedBoxH20;
                     },
-                    itemCount:
-                        generalInstructionsController.listOfGeneralIModel.length +
-                            1),
+                    itemCount: generalInstructionsController
+                            .listOfGeneralIModel.length +
+                        1),
               ),
             ],
           ),

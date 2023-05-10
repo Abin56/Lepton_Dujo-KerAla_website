@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:dujo_kerala_website/view/constant/constant.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -50,4 +52,26 @@ Future<Uint8List?> pickImage(ImageSource source) async {
     return null;
   }
   return null;
+}
+
+//firebase exceptions
+
+void handleFirebaseError(FirebaseAuthException error) {
+  switch (error.code) {
+    case 'invalid-email':
+      showToast(msg: 'invalid-email');
+      break;
+    case 'user-disabled':
+      showToast(msg: 'user-disabled');
+      break;
+    case 'user-not-found':
+      showToast(msg: 'user-not-found');
+      break;
+    case 'wrong-password':
+      showToast(msg: 'wrong-password');
+      break;
+    default:
+      showToast(msg: 'Something went wrong');
+      break;
+  }
 }

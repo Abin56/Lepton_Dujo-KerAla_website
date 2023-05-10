@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
-import '../../model/create_classModel/create_classModel.dart';
 import '../../model/profileextraDetails/students_extra_profile.dart';
 
 class StudentsProfileList extends GetxController {

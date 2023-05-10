@@ -79,7 +79,7 @@ Future<void> updateMothersPtaDialogue(
                           mothersPtaController.updateMothersPtaMemberDetails(
                               memberId, context, imageid, imageUrl);
                         },
-                        child: const Text('Edit'),
+                        child: const Text('Update'),
                       )
                     ],
                   ),

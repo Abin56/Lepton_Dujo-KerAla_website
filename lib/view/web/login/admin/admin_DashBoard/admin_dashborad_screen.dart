@@ -1,28 +1,25 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:developer';
+import 'dart:html' as html;
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/list_of_classes.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/exam_notifications/new_exam_page.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/non_Teaching_staff/non_teaching_staff_view.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/research_and_development/research_and_development.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_protection_group/students_proctection_group.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_summary/students_summary.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/teacher_section/add_teacher.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/teacher_section/list_of_teachers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'dart:html' as html;
-
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_summary/students_summary.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/teacher_section/add_teacher.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/teacher_section/list_of_teachers.dart';
-
 import '../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../model/loginHistory_model/login_history_model.dart';
+import '../../../../../ui team/abin/alumini_accocation/alumni_assocation.dart';
 import '../../../../colors/colors.dart';
 import '../../../../constant/constant.dart';
 import '../../../widgets/button_container_widget.dart';
@@ -36,7 +33,6 @@ import 'admin_notice/add_new_notices.dart';
 import 'admin_notice/admin_notice_new_ui/admin_notice_show_new.dart';
 import 'admin_pta/admin_pta_screen.dart';
 import 'all_Students/all_students_view_Screen.dart';
-import '../../../../../ui team/abin/alumini_accocation/alumni_assocation.dart';
 import 'bus_Route/bus_route.dart';
 import 'classes/add_class.dart';
 import 'create_Admin/add_new_admin.dart';
@@ -99,8 +95,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'Alumni Associations',
     'Fees in Classwise',
     'Non-Teaching Staffs',
-    'Generate TC',
-    'Generate Summary',
+    // 'Generate TC',
+    // 'Generate Summary',
     'Sampoorna'
   ];
 
@@ -129,8 +125,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'assets/images/alumni.png',
     'assets/images/tuition.png',
     'assets/images/steward.png',
-    'assets/images/file-transfer.png',
-    'assets/images/report.png',
+    // 'assets/images/file-transfer.png',
+    // 'assets/images/report.png',
     'assets/images/folders.png',
   ];
 
@@ -190,9 +186,9 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       const AlumniAssocation(), //10
       const UnderMaintanceScreen(),
       NonTeachingLogin(schoolID: widget.schoolID),
-      const UnderMaintanceScreen(), //11
-      const UnderMaintanceScreen(),
-      SampoornaHomeScreen(schoolId: widget.schoolID), //13
+      // const UnderMaintanceScreen(), //11
+      // const UnderMaintanceScreen(),
+      SampoornaHomeScreen(schoolId: widget.schoolID,studentId: ''), //13
     ];
     List<Widget> drawerPages = [
       AllStudentList(),
@@ -205,9 +201,9 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
         schoolId: widget.schoolID,
       ),
       AdminPtaScreen(),
-      NonTeachingStaffView(
-        schoolID: widget.schoolID,
-      ),
+      // NonTeachingStaffView(
+      //   schoolID: widget.schoolID,
+      // ),
       DateWiseLoginScreen(schoolID: widget.schoolID),
     ];
     var screenSize = MediaQuery.of(context).size;
@@ -237,8 +233,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             SizedBox(
-                              height: 100,
-                              width: 300,
+                              height: 100.w,
+                              width: 300.w,
                               child: GetBatchYearListDropDownButton(
                                 schoolID: widget.schoolID,
                               ),
@@ -268,8 +264,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                               child: ButtonContainerWidget(
                                 curving: 20,
                                 colorindex: 0,
-                                height: 60,
-                                width: 200,
+                                height: 60.w,
+                                width: 200.w,
                                 child: Center(
                                   child: Text(
                                     "Set Batch Year",
@@ -389,7 +385,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  Icon(
+                                  const Icon(
                                     Icons.home,
                                     color: Colors.white,
                                   ),
@@ -404,7 +400,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                             ),
                             ListView.builder(
                                 shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
+                                physics: const NeverScrollableScrollPhysics(),
                                 itemCount: viewListNames.length,
                                 itemBuilder: (context, index) {
                                   return Padding(
@@ -415,8 +411,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                       children: [
                                         Image.asset(
                                           viewListImages[index],
-                                          width: 15,
-                                          height: 15,
+                                          width: 15.w,
+                                          height: 15.w,
                                         ),
                                         const SizedBox(
                                           width: 10,
@@ -450,10 +446,10 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                       child: Column(children: [
                         Container(
                           color: Colors.white30,
-                          height: 60,
+                          height: 60.w,
                           child: Padding(
                             padding:
-                                const EdgeInsets.only(right: 30.0, left: 30),
+                                 EdgeInsets.only(right: 30.0.w, left: 30.w),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -461,7 +457,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
-                                  icon: Icon(Icons.arrow_back), 
+                                  icon: const Icon(Icons.arrow_back), 
                                 ),
                                 // Text(
                                 //   'Admin Dashboard',
@@ -724,7 +720,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                             },
                                           );
                                         },
-                                        icon: Icon(Icons.replay_outlined)),
+                                        icon: const Icon(Icons.replay_outlined)),
                                     const CircleAvatar(
                                       backgroundImage: AssetImage(
                                           'assets/images/icons8-teachers-64.png'),
@@ -755,7 +751,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                       Navigator.of(context)
                                                           .pop();
                                                     },
-                                                    child: Text("Cancel")),
+                                                    child: const Text("Cancel")),
                                                 TextButton(
                                                   child: const Text('ok'),
                                                   onPressed: () async {
@@ -825,11 +821,11 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                 crossAxisCount: 5,
                                 crossAxisSpacing: 4.0,
                                 mainAxisSpacing: 8.0,
-                                children: List.generate(27, (index) {
+                                children: List.generate(24, (index) {
                                   return Center(
                                       child: SizedBox(
-                                    height: 200,
-                                    width: 200,
+                                    height: 200.w,
+                                    width: 200.w,
                                     child: GestureDetector(
                                       onTap: () {
                                         Navigator.push(
@@ -848,11 +844,11 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                             children: [
                                               Image.asset(
                                                 dashboardImagesList[index],
-                                                width: 55,
-                                                height: 55,
+                                                width: 55.w,
+                                                height: 55.w,
                                               ),
-                                              const SizedBox(
-                                                height: 20,
+                                               SizedBox(
+                                                height: 20.w,
                                               ),
                                               Text(
                                                 dashboardNamesList[index],
