@@ -7,7 +7,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/list_of_classes.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_protection_group/students_proctection_group.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_summary/students_summary.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/teacher_section/add_teacher.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/teacher_section/list_of_teachers.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +18,6 @@ import 'package:lottie/lottie.dart';
 
 import '../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../model/loginHistory_model/login_history_model.dart';
-import '../../../../../ui team/abin/alumini_accocation/alumni_assocation.dart';
 import '../../../../colors/colors.dart';
 import '../../../../constant/constant.dart';
 import '../../../widgets/button_container_widget.dart';
@@ -33,12 +31,9 @@ import 'admin_notice/add_new_notices.dart';
 import 'admin_notice/admin_notice_new_ui/admin_notice_show_new.dart';
 import 'admin_pta/admin_pta_screen.dart';
 import 'all_Students/all_students_view_Screen.dart';
-import 'bus_Route/bus_route.dart';
 import 'classes/add_class.dart';
 import 'create_Admin/add_new_admin.dart';
 import 'events/events_screen.dart';
-import 'exam_notifications/select_type.dart';
-import 'feesandupdates/fees_and_update.dart';
 import 'food_and_beverages/food_and_bev.dart';
 import 'general_instructions/creation_general_instruction_.dart';
 import 'login_Register_history/date_wise.dart';
@@ -166,7 +161,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
           schoolId: widget.schoolID), //4-general instructions
       AddNewNotices(schoolId: widget.schoolID), //5-notices
       EventsUpdates(schoolID: widget.schoolID), //6-events
-      const FeesUpdates(), // MeetingCreates(schoolId: widget.schoolID), //7-fees and bills
+      //const FeesUpdates(), 
+      const UnderMaintanceScreen(), //fees and bills
       MeetingCreates(
         schoolId: widget.schoolID,
       ), //8-Meetings
@@ -175,15 +171,18 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       Achievements(schoolID: widget.schoolID), //11-Achievements
       StudentProtectionGroup(), //12-Students Protection Group
       AdminScholarships(schoolID: widget.schoolID), //13-ScholarShip
-      BusRoute(), //14-Bus Route
-      const StudentSummary(), //15-Student Summary
+      //BusRoute(), 
+      const UnderMaintanceScreen(),//14-Bus Route
+      const UnderMaintanceScreen(), //15-Student Summary
       const UnderMaintanceScreen(), //16-Research and development
       const UnderMaintanceScreen(), //17-School Calendar
       const UnderMaintanceScreen(), //8
       const UnderMaintanceScreen(), //9
       FoodBeverages(schoolID: widget.schoolID),
-      SelectType(schoolID: widget.schoolID),
-      const AlumniAssocation(), //10
+      //SelectType(schoolID: widget.schoolID),
+      const UnderMaintanceScreen(),
+      //const AlumniAssocation(), //10
+      const UnderMaintanceScreen(),
       const UnderMaintanceScreen(),
       NonTeachingLogin(schoolID: widget.schoolID),
       // const UnderMaintanceScreen(), //11
@@ -201,7 +200,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
         schoolId: widget.schoolID,
       ),
       AdminPtaScreen(),
-      UnderMaintanceScreen(),
+      const UnderMaintanceScreen(),
       // NonTeachingStaffView(
       //   schoolID: widget.schoolID,
       // ),
@@ -812,53 +811,55 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: screenSize.height - 60,
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.only(right: 50.0, left: 50),
-                            child: GridView.count(
-                                crossAxisCount: 5,
-                                crossAxisSpacing: 4.0,
-                                mainAxisSpacing: 8.0,
-                                children: List.generate(24, (index) {
-                                  return Center(
-                                      child: SizedBox(
-                                    height: 200.w,
-                                    width: 200.w,
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: ((context) =>
-                                                    pages[index])));
-                                      },
-                                      child: Card(
-                                          elevation: 50,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Image.asset(
-                                                dashboardImagesList[index],
-                                                width: 55.w,
-                                                height: 55.w,
-                                              ),
-                                               SizedBox(
-                                                height: 20.w,
-                                              ),
-                                              Text(
-                                                dashboardNamesList[index],
-                                                style: GoogleFonts.poppins(),
-                                              )
-                                            ],
-                                          )),
-                                    ),
-                                  ));
-                                })),
+                        Expanded(
+                          child: SizedBox(
+                            height: screenSize.height - 60,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 50.0, left: 50),
+                              child: GridView.count(
+                                  crossAxisCount: 5,
+                                  crossAxisSpacing: 4.0,
+                                  mainAxisSpacing: 8.0,
+                                  children: List.generate(dashboardNamesList.length, (index) {
+                                    return Center(
+                                        child: SizedBox(
+                                      height: 200.w,
+                                      width: 200.w,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: ((context) =>
+                                                      pages[index])));
+                                        },
+                                        child: Card(
+                                            elevation: 50,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Image.asset(
+                                                  dashboardImagesList[index],
+                                                  width: 55.w,
+                                                  height: 55.w,
+                                                ),
+                                                 SizedBox(
+                                                  height: 20.w,
+                                                ),
+                                                Text(
+                                                  dashboardNamesList[index],
+                                                  style: GoogleFonts.poppins(),
+                                                )
+                                              ],
+                                            )),
+                                      ),
+                                    ));
+                                  })),
+                            ),
                           ),
                         )
                       ]),

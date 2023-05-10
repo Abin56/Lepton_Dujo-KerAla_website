@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/subject/subject_screen.dart';
 import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/upload_timetable/timetable_add_screen.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
+import 'package:dujo_kerala_website/view/web/widgets/sample/under_maintance.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -128,11 +129,13 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
       ), //4
       AddGuardian(
           teacherIDE: widget.teacherEmail,
-          schoolId: Get.find<AdminLoginScreenController>().schoolID),
-          
-           //5
-      ClassTeacherCreateEventsPage(), //6
+          schoolId: Get.find<AdminLoginScreenController>().schoolID), 
 
+      
+          
+           //5 
+
+          const UnderMaintanceScreen(),//6
       // SelectClassForTimeTable(
       //     schoolID: Get.find<AdminLoginScreenController>().schoolID), //7
           TimeTableScreen(classID: teacherClassId, schoolID: widget.schoolID,),
@@ -140,14 +143,14 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
       //   schoolId: Get.find<AdminLoginScreenController>().schoolID,
       //   classId: teacherClassId,
       // ), //8
-      ClassTeacherCreateEventsPage(), //9
+      const UnderMaintanceScreen(), //9
       ClassTeacherCreateEventsPage(), //6
 
       // SelectClassForTimeTable(
       //     schoolID: Get.find<AdminLoginScreenController>().schoolID), //7
       ClassTeacherCreateNoticePage(), //8
-      ClassTeacherCreateEventsPage(), //9
-      ClassTeacherCreateNoticePage(), //10/10
+      const UnderMaintanceScreen(),//9
+      const UnderMaintanceScreen(),//10/10
     ];
     List<Widget> drawerPages = [
       ClassEventsPageList(
@@ -418,11 +421,11 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                       child: Padding(
                                         padding: const EdgeInsets.all(20),
                                         child: Text(
-                                          'Admin Dashboard',
+                                          'Teacher Dashboard',
                                           style: GoogleFonts.poppins(
                                               color: Colors.red,
                                               fontWeight: FontWeight.w800,
-                                              fontSize: 15.h),
+                                              fontSize: 13    .h),
                                         ),
                                       ),
                                     ),

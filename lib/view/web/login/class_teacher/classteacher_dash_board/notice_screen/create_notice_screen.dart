@@ -26,8 +26,8 @@ class ClassTeacherCreateNoticePage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Create New Notice'),
-          backgroundColor: cWhite,
-          iconTheme: const IconThemeData(color: cBlack),
+          backgroundColor: adminePrimayColor,
+          iconTheme: const IconThemeData(color: cWhite),
         ),
         body: Row(
           children: [

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/controller/add_new_class/add_new_class.dart';
 import 'package:dujo_kerala_website/model/add_class/add_new_class.dart';
@@ -8,16 +9,12 @@ import 'package:dujo_kerala_website/ui%20team/abin/alumini_accocation/create_alu
 import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
-
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
-
 import '../../../../widgets/drop_DownList/schoolDropDownList.dart';
 
 
@@ -42,7 +39,7 @@ class AddClassesSectionScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Row(
             children: [
-              Container(
+              SizedBox(
                 height: screenSize.height,
                 width: screenSize.width * 1 / 2,
                 // ignore: sort_child_properties_last
@@ -66,8 +63,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                           width: 40.w,
                         ),
                         GoogleMonstserratWidgets(
-                          text: Get.find<GetFireBaseData>().bYear.value +
-                              ' -Class Teacher Pannel', ////changed normal text to original batch year
+                          text: '${Get.find<GetFireBaseData>().bYear.value} -Class Teacher Pannel', ////changed normal text to original batch year
                           //'2023 -2024 batch',
                           fontsize: 17.w,
                           color: cWhite,
@@ -79,7 +75,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                       children: [
                         Padding(
                           padding: EdgeInsets.only(left: 10.w),
-                          child: Container(
+                          child: SizedBox(
                             width: screenSize.width * 0.062,
                             //  color: Color.fromARGB(255, 63, 181, 102),
                             child: Center(
@@ -107,7 +103,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Container(
+                        SizedBox(
                             // color: Colors.amber,
                             width: screenSize.width * 0.06,
                             child: Center(
@@ -117,7 +113,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                                   color: cWhite,
                                   fontWeight: FontWeight.w600),
                             )),
-                        Container(
+                        SizedBox(
                           width: screenSize.width * 0.03,
                           child: Center(
                             child: GoogleMonstserratWidgets(
@@ -175,7 +171,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                                               Padding(
                                                 padding:
                                                     EdgeInsets.only(left: 10.w),
-                                                child: Container(
+                                                child: SizedBox(
                                                   width:
                                                       screenSize.width * 0.05,
                                                   //  color: Color.fromARGB(255, 63, 181, 102),
@@ -229,7 +225,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                                                                         'docid'],
                                                                     context);
                                                           },
-                                                          child: Container(
+                                                          child: SizedBox(
                                                             // color: Colors.amber,
                                                             width: screenSize
                                                                     .width *
@@ -258,7 +254,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                                                                         'docid'],
                                                                     context);
                                                           },
-                                                          child: Container(
+                                                          child: SizedBox(
                                                             width: screenSize
                                                                     .width *
                                                                 0.03,
@@ -276,7 +272,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                                                                       .edit)),
                                                             ),
                                                           )),
-                                                  Container(
+                                                  SizedBox(
                                                     width:
                                                         screenSize.width * 0.03,
                                                     child: Center(
@@ -331,8 +327,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                     child: Column(children: [
                       sizedBoxH30,
                        GoogleMonstserratWidgets(
-                          text: Get.find<GetFireBaseData>().bYear.value +
-                              ' -Class List', ////changed normal text to original batch year
+                          text: '${Get.find<GetFireBaseData>().bYear.value} -Class List', ////changed normal text to original batch year
                           //'2023 -2024 batch',
                           fontsize: 17.w,
                           color: cBlack,
@@ -391,7 +386,9 @@ class AddClassesSectionScreen extends StatelessWidget {
                                 .collection('classes')
                                 .snapshots(),
                             builder: (context, snapshots) {
-                              return GridView.builder(
+
+                              if(snapshots.hasData){
+                                 return GridView.builder(
                                 itemCount: snapshots.data!.docs.length,
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
@@ -399,7 +396,7 @@ class AddClassesSectionScreen extends StatelessWidget {
 
                                 ),
                                 itemBuilder: (context, index) {
-                                  if (snapshots.hasData) {
+                                  
                                     return Padding(
                                       padding: EdgeInsets.all(20.w),
                                       child: Container(
@@ -519,13 +516,12 @@ class AddClassesSectionScreen extends StatelessWidget {
                                         ),
                                       ),
                                     );
-                                  } else {
-                                    return const Center(
-                                      child: CircularProgressIndicator(),
-                                    );
-                                  }
+                                 
                                 },
                               );
+                              }
+                              return circularProgressIndicator;
+                             
                             }),
                       )
                     ]),

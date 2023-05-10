@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/controller/get_firebase-data/get_firebase_data.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../colors/colors.dart';
@@ -21,6 +23,8 @@ class AchievementsViewAndEdit extends StatelessWidget {
           stream: FirebaseFirestore.instance
               .collection('SchoolListCollection')
               .doc(schoolID)
+              .collection(Get.find<GetFireBaseData>().bYear.value)
+              .doc(Get.find<GetFireBaseData>().bYear.value)
               .collection('Achievements')
               .snapshots(),
           builder: (context, snapshot) {
@@ -46,12 +50,14 @@ class AchievementsViewAndEdit extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                            children: [
                              CircleAvatar(radius: 80, backgroundImage: NetworkImage(snapshot.data!.docs[index]['photoUrl']),), const SizedBox(height: 20,),
-                             Row(
-                              children: [
-                                MaterialButton(onPressed: (){}, color: Colors.blue, child:  Text('Edit', style: GoogleFonts.poppins(color: Colors.white),),), const SizedBox(width: 20,),
-                                MaterialButton(onPressed: (){}, color: Colors.red, child:  Text('Delete', style: GoogleFonts.poppins(color: Colors.white),), )
-                              ],
-                             )
+                            //  Row(
+                            //   children: [
+                            //     MaterialButton(onPressed: (){
+                                   
+                            //     }, color: Colors.blue, child:  Text('Edit', style: GoogleFonts.poppins(color: Colors.white),),), const SizedBox(width: 20,),
+                            //     MaterialButton(onPressed: (){}, color: Colors.red, child:  Text('Delete', style: GoogleFonts.poppins(color: Colors.white),), )
+                            //   ],
+                            //  )
                            ],
                          ), 
                          const SizedBox(width: 50,),

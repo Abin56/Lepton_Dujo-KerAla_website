@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/colors/colors.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -247,7 +246,7 @@ class NoticePageElevatedButtonWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(12), // <-- Radius
           ),
         ),
-        child: NoticeTextWidget(title: title),
+        child: Text(title),
       ),
     );
   }

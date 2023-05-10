@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         designSize: const Size(1536, 792),
         builder: (context, child) {
           return GetMaterialApp(
-              title: 'DuJo Web',
+              title: 'DuJo',
               debugShowCheckedModeBanner: false,
               theme: ThemeData(
                 primaryColor: const Color(0xFF02BB9F),

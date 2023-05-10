@@ -1,9 +1,9 @@
 import 'package:dujo_kerala_website/view/web/home/family_policy.dart';
+import 'package:dujo_kerala_website/view/web/home/lepton_Admin/admin_panel_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../lepton_Admin/admin_panel_Screen.dart';
 import '../privacypolicy.dart';
 import '../terms _and_condition.dart';
 import 'email/mailsender.dart';
@@ -131,7 +131,11 @@ class FooterHomeP extends StatelessWidget {
                              GestureDetector(
                               onTap: () {
                                 //  Navigator.push(context, MaterialPageRoute(builder: ((context) =>RequestedSchoolsApproval())));
-                                      Navigator.push(context, MaterialPageRoute(builder: ((context) =>LeptonAdminLoginScreen())));
+                                      Navigator.push(context, MaterialPageRoute(builder: ((context) =>
+                                      
+                                      LeptonAdminLoginScreen()
+                
+                                      )));
                                 
                               },
 
