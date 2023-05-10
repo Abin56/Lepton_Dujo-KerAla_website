@@ -75,7 +75,7 @@ class AllClassesListViewForTeacher extends StatelessWidget {
                           child: Container(
                             // color: cBlue,
                             alignment: Alignment.centerLeft,
-                            width: screenSize.width * 0.27,
+                            width: screenSize.width * 0.25,
                             child: Center(
                               child: GoogleMonstserratWidgets(
                                 text: 'ClassTeacherName',
@@ -88,7 +88,7 @@ class AllClassesListViewForTeacher extends StatelessWidget {
                         ),
                         Container(
                             // color: Colors.amber,
-                            width: screenSize.width * 0.07,
+                            width: screenSize.width * 0.06,
                             child: Center(
                               child: GoogleMonstserratWidgets(
                                   text: 'Manage teacher',
@@ -101,7 +101,7 @@ class AllClassesListViewForTeacher extends StatelessWidget {
                           child: Center(
                             child: GoogleMonstserratWidgets(
                                 text: 'View',
-                                fontsize: 12.w,
+                                fontsize: 14.w,
                                 color: cWhite,
                                 fontWeight: FontWeight.w600),
                           ),
@@ -229,7 +229,7 @@ class AllClassesListViewForTeacher extends StatelessWidget {
                                                                           ['docid']);
                                                             },
                                                             child: GoogleMonstserratWidgets(
-                                                              text: 'View', fontsize: 11.w,
+                                                              text: 'View', fontsize: 14.w,
                                                             color: cBlue,fontWeight: FontWeight.w500),
                                                              );
                                                       }
@@ -254,7 +254,7 @@ class AllClassesListViewForTeacher extends StatelessWidget {
                                                   },
                                                   icon: Icon(Icons.remove),
                                                   label: GoogleMonstserratWidgets(text: 'Remove Teacher', 
-                                                  fontsize: 11.w,fontWeight: FontWeight.w500,)
+                                                  fontsize: 13.w,fontWeight: FontWeight.w500,)
                                                   ),
                                             )
                                           ],

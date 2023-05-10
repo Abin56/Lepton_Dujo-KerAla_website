@@ -634,6 +634,7 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                               );
                             }));
                       }
+                      clearField();
                     },
                     child: (loadingStatus == false)
                         ? SizedBox(
@@ -653,6 +654,12 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
             )
           ]))),
     );
+  }
+  void clearField(){
+    dateController.clear();
+    admissionNumberController.clear();
+    descriptionController.clear();
+    scholarshipNameController.clear();
   }
 }
 

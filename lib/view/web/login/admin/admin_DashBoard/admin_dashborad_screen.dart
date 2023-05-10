@@ -201,6 +201,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
         schoolId: widget.schoolID,
       ),
       AdminPtaScreen(),
+      UnderMaintanceScreen(),
       // NonTeachingStaffView(
       //   schoolID: widget.schoolID,
       // ),
@@ -370,15 +371,25 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                         color: adminePrimayColor,
                         child: ListView(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.all(20),
-                              child: Text(
-                                'Admin Dashboard',
-                                style: GoogleFonts.poppins(
-                                    color: Colors.red,
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 15.h),
-                              ),
+                            Row(
+                              children: [
+                                IconButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  icon: const Icon(Icons.arrow_back,color: cred), 
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: Text(
+                                    'Admin Dashboard',
+                                    style: GoogleFonts.poppins(
+                                        color: Colors.red,
+                                        fontWeight: FontWeight.w800,
+                                        fontSize: 15.h),
+                                  ),
+                                ),
+                              ],
                             ),
                             Padding(
                               padding: const EdgeInsets.all(20.0),
@@ -450,23 +461,13 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                           child: Padding(
                             padding:
                                  EdgeInsets.only(right: 30.0.w, left: 30.w),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                IconButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  icon: const Icon(Icons.arrow_back), 
-                                ),
-                                // Text(
-                                //   'Admin Dashboard',
-                                //   style: GoogleFonts.poppins(
-                                //       fontSize: 17,
-                                //       fontWeight: FontWeight.w500),
-                                // ),
+                            child:
+                                
+                               
                                 Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: [
+
                                     Text(
                                       Get.find<AdminLoginScreenController>()
                                           .schoolName,
@@ -806,8 +807,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                       },
                                       icon: const Icon(Icons.logout_outlined),
                                     )
-                                  ],
-                                )
+                                  
                               ],
                             ),
                           ),

@@ -50,9 +50,17 @@ class _EventsUpdatesState extends State<EventsUpdates> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  'Hi ! Admin \n Create\n Events',
+                                  'Hi ! Admin ',
                                   style: ralewayStyle.copyWith(
                                     fontSize: 48.0,
+                                    color: AppColors.whiteColor,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                                Text(
+                                  ' Create Events',
+                                  style: ralewayStyle.copyWith(
+                                    fontSize: 28.0,
                                     color: AppColors.whiteColor,
                                     fontWeight: FontWeight.w800,
                                   ),

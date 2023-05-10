@@ -8,6 +8,7 @@ import 'package:dujo_kerala_website/ui%20team/abin/alumini_accocation/create_alu
 import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -341,7 +342,13 @@ class AddClassesSectionScreen extends StatelessWidget {
                         child: Padding(
                           padding: EdgeInsets.all(20.w),
                           child: TextFormField(
-                            validator: checkFieldEmpty,
+                          validator: (value) {
+                                if (classNameController.text.isEmpty) {
+                                  return 'Invalid';
+                                } else {
+                                  return null;
+                                }
+                              },
                             controller: classNameController,
                             // ignore: prefer_const_constructors
                             decoration: InputDecoration(
@@ -361,8 +368,11 @@ class AddClassesSectionScreen extends StatelessWidget {
                                 BorderRadius.all(Radius.circular(15))),
                         child: TextButton.icon(
                             onPressed: () async {
+                               if (formKey.currentState!.validate()) {
                               addSchoolClassController
                                   .addNewClassFunction(classNameController);
+                                  showToast(msg: 'Class added');
+                               }
                             },
                             icon: const Icon(Icons.add, color: cWhite),
                             label: GoogleMonstserratWidgets(
@@ -435,6 +445,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                                                         snapshots.data!
                                                                 .docs[index]
                                                             ['docid']);
+                                                            showToast(msg: 'Added to Panel');
                                               },
                                               child: Container(
                                                 decoration: BoxDecoration(
