@@ -72,7 +72,10 @@ class _AchievementsState extends State<Achievements> {
                                         width:screenSize.width/1,
                                         child: LottieBuilder.network(
                                             "https://assets5.lottiefiles.com/packages/lf20_6qeidctp.json"),
-                                      )                        
+                                      ) 
+
+                                      
+                                                             
                                     ],
                                   ),
                                 ),

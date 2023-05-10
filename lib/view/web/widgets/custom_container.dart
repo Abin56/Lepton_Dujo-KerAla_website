@@ -23,7 +23,9 @@ class CustomContainer extends StatelessWidget {
                   end: Alignment.topCenter),
             ),
             child: Center(
-              child: Text(
+              child:
+              
+               Text(
                 text,
                 style: TextStyle(fontSize: 25, color: cBlack),
               ),

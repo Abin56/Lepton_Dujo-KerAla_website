@@ -80,7 +80,7 @@ class _BusRouteState extends State<BusRoute> {
             ),
             SizedBox(
               height: size.height * 1 / 1,
-                width: 650.w,
+                width: size.width * .5,
               child: Container(
                 margin: EdgeInsets.only(left: 140.w,top: 220.w),
                 

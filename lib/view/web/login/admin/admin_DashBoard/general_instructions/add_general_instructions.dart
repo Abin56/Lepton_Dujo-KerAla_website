@@ -52,7 +52,7 @@ class AddGeneralInstruction extends StatelessWidget {
                           height: screenSize.width / 20,
                         ),
                         Text(
-                          'Welcome To ',
+                          'Create Instructions ',
                           style: ralewayStyle.copyWith(
                             fontSize: 25.0,
                             color: AppColors.whiteColor,
@@ -112,8 +112,8 @@ class AddGeneralInstruction extends StatelessWidget {
                                         .trim()
                                         .isEmpty) {
                                       showToast(
-                                          msg: 'Error:Field is Empty',
-                                        );
+                                        msg: 'Error:Field is Empty',
+                                      );
                                       return;
                                     }
                                     if (generalInstructionsController
