@@ -9,7 +9,6 @@ import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../widgets/Iconbackbutton.dart';
@@ -52,8 +51,8 @@ class SubmitSubjectClassTeacher extends StatelessWidget {
                         width: 50.w,
                       ),
                       GoogleMonstserratWidgets(
-                          text: Get.find<GetFireBaseData>().bYear.value,
-                          fontsize: 18,
+                          text: '${Get.find<GetFireBaseData>().bYear.value} '+'  Subject List',
+                          fontsize: 18.w,
                           color: cWhite),
                     ],
                   ),
@@ -73,62 +72,62 @@ class SubmitSubjectClassTeacher extends StatelessWidget {
                               .snapshots(),
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
-                                return ListView.separated(
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: EdgeInsets.only(
-                                        top: 20.h,
-                                        left: 50.w,
-                                        right: 50.w,
-                                        bottom: 20.h),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          color: cWhite.withOpacity(0.9),
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10))),
-                                      height: 100.h,
-                                      width: 150.w,
-                                      child: Column(
-                                        children: [
-                                          Center(
-                                              child: GoogleMonstserratWidgets(
-                                            text: snapshot.data?.docs[index]
-                                                ['subjectName'],
-                                            fontsize: 20.w,
-                                            fontWeight: FontWeight.w600,
-                                          )
-                                              // Text(),
-                                              ),
-                                          GestureDetector(
-                                            onTap: ()async {
-                                              subjectControllerr.deleteYearWiseSubject(snapshot.data?.docs[index]
-                                                ['docid'], context);
-                                            },
-                                            child: Container(
-                                              margin: EdgeInsets.only(
-                                                  top: 35.h, right: 10.w),
-                                              height: 28.h,
-                                              width: 80.w,
-                                              decoration: BoxDecoration(
-                                                  color: cred.withOpacity(0.9),
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(2))),
-                                              child: Center(
-                                                  child: GoogleMonstserratWidgets(
-                                                      text: "Delete",
-                                                      fontsize: 12.w,
-                                                      color: cWhite)),
-                                            ),
+                                return Container(
+                                  margin: EdgeInsets.all(10.w),
+                                  color: cWhite,
+                                  child: ListView.builder(
+                                  itemBuilder: (context, index) {
+                                    return Padding(
+                                      padding:  EdgeInsets.only(top: 5.w),
+                                      child: Container(
+                                         decoration: BoxDecoration(
+                                            color: Color.fromARGB(
+                                                255, 224, 219, 219),
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(5.w),
+                                            ), 
                                           ),
-                                        ],
+                                        height: 65.w,
+                                          width: 85.w,
+                                        child: Container(
+                                           height: 75.w ,
+                                            width: 90.w,
+                                                                    
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Padding(
+                                                padding:  EdgeInsets.symmetric(horizontal: 20.w),
+                                                child: Container(
+                                                  alignment: Alignment.centerLeft,
+                                                  width: screenSize.width * 0.28,
+                                                  child: Center(
+                                                      child: GoogleMonstserratWidgets(
+                                                    text: snapshot.data?.docs[index]
+                                                        ['subjectName'],
+                                                    fontsize: 15.w,
+                                                    fontWeight: FontWeight.w600,
+                                                  )
+                                                      
+                                                      ),
+                                                ),
+                                              ),
+                                                                    
+                                             IconButton(
+                                              onPressed: () {
+                                               subjectControllerr.deleteYearWiseSubject(snapshot.data?.docs[index]
+                                                        ['docid'], context);
+                                             }, 
+                                             icon: Icon(Icons.delete,color: cred,size: 18.w,))
+                                            ],
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                },
-                                separatorBuilder: (context, index) {
-                                  return const Divider();
-                                },
-                                itemCount: snapshot.data!.docs.length);
+                                    );
+                                  },
+                                 
+                                  itemCount: snapshot.data!.docs.length),
+                                );
                               
                             }else{
                               return const Center(
@@ -140,298 +139,255 @@ class SubmitSubjectClassTeacher extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                left: screenSize.width / 8,
-              ),
-              child: SizedBox(
-                height: screenSize.height * 1 / 1,
-                width: screenSize.width * 1 / 3,
-                child: SingleChildScrollView(
-                  child: Column(children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 100.h),
-                      child: SizedBox(
-                        width: 500.h,
-                        //height: screenSize.width/30,
-                        child: Column(
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  border: const Border()),
-                              child: TextFormField(
-                                validator: (value) {
-                                  if (subjecController.text.isEmpty) {
-                                    return 'Invalid';
-                                  } else {
-                                    return null;
-                                  }
-                                },
-                                controller: subjecController,
-                                decoration: InputDecoration(
-                                    filled: true,
-                                    fillColor: const Color.fromARGB(
-                                        255, 255, 255, 255),
-                                    hintText: 'Enter Name of Subject',
-                                    prefixIcon: const Icon(
-                                        Icons.subject_rounded,
-                                        color:
-                                            Color.fromARGB(255, 14, 11, 168)),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(19),
-                                      borderSide: const BorderSide(),
-                                    )),
-                                style: const TextStyle(
-                                  color: Color.fromARGB(255, 0, 0, 0),
-                                  fontSize: 18,
-                                ),
+            Container(
+              
+              child: SingleChildScrollView(
+                child: Column(children: [
+                  Container(
+                    color: Colors.white,
+                  height: screenSize.height,
+                  width: screenSize.width * 1 / 2,
+                    //height: screenSize.width/30,
+                    child: Column(
+                      children: [
+                        GoogleMonstserratWidgets(
+                      text: Get.find<GetFireBaseData>().bYear.value +
+                          ' -Add Subject', ////changed normal text to original batch year
+                      //'2023 -2024 batch',
+                      fontsize: 17.w,
+                      color: cBlack,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    SizedBox(height: 10.w,),
+
+                        Padding(
+                          padding:  EdgeInsets.all(15.w),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(0),
+                                border: const Border()),
+                            child: TextFormField(
+                              validator: (value) {
+                                if (subjecController.text.isEmpty) {
+                                  return 'Invalid';
+                                } else {
+                                  return null;
+                                }
+                              },
+                              controller: subjecController,
+                              decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: const Color.fromARGB(
+                                      255, 255, 255, 255),
+                                  hintText: 'Enter Name of Subject',
+                                  prefixIcon: const Icon(
+                                      Icons.subject_rounded,
+                                      color:
+                                          Color.fromARGB(255, 14, 11, 168)),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(0),
+                                    borderSide: const BorderSide(),
+                                  )),
+                              style:  TextStyle(
+                                color: Color.fromARGB(255, 0, 0, 0),
+                                fontSize: 18.w,
                               ),
                             ),
-                            Padding(
-                              padding: EdgeInsets.all(20),
-                              child: Container(
-                                height: 50.h,
-                                width: 160.w,
-                                decoration: BoxDecoration(
-                                    border: Border.all(),
-                                    color: Colors.blue.withOpacity(0.5),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(15))),
-                                child: TextButton.icon(
-                                    onPressed: () async {
-                                      if (addFormkey.currentState!.validate()) {
-                                        subjectControllerr
-                                            .addSubjectInClassWise(
-                                                subjecController);
-                                      }
-                                    },
-                                    icon: const Icon(Icons.add),
-                                    label: GoogleMonstserratWidgets(
-                                      text: 'Add',
-                                      fontsize: 15,
-                                      color: cWhite,
-                                      fontWeight: FontWeight.w600,
-                                    )),
-                              ),
+                          ),
+                        ),
+                         SizedBox(height: 10.w,), 
+                         SizedBox(height: 10.w,),
+                        Container(
+                          height: 50.h,
+                          width: 160.w,
+                          decoration: BoxDecoration(
+                              border: Border.all(),
+                              color: Colors.blue.withOpacity(0.5),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15.w))),
+                          child: TextButton.icon(
+                              onPressed: () async {
+                                if (addFormkey.currentState!.validate()) {
+                                  subjectControllerr
+                                      .addSubjectInClassWise(
+                                          subjecController);
+                                }
+                              },
+                              icon: const Icon(Icons.add),
+                              label: GoogleMonstserratWidgets(
+                                text: 'Add',
+                                fontsize: 15.w,
+                                color: cWhite,
+                                fontWeight: FontWeight.w600,
+                              )),
+                        ),
+                       
+                  
+                        Container(
+                         
+                          height: 500.w,
+                          child: StreamBuilder(
+                              stream: FirebaseFirestore.instance
+                                  .collection('SchoolListCollection')
+                                  .doc(schoolListValue!['docid'])
+                                  .collection("classes")
+                                  .doc(Get.find<GetFireBaseData>()
+                                      .getTeacherClassRole
+                                      .value)
+                                  .collection("subjects")
+                                  .snapshots(),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  return GridView.builder(
+                                     itemCount: snapshot.data!.docs.length,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 4,
+                             
                             ),
-                            sizedBoxH10,
-                            SizedBox(
-                              height: 20.h,
-                            ),
-                            SizedBox(
-                              height: 20.h,
-                            ),
-                            SizedBox(
-                              height: 700.h,
-                              child: StreamBuilder(
-                                  stream: FirebaseFirestore.instance
-                                      .collection('SchoolListCollection')
-                                      .doc(schoolListValue!['docid'])
-                                      .collection("classes")
-                                      .doc(Get.find<GetFireBaseData>()
-                                          .getTeacherClassRole
-                                          .value)
-                                      .collection("subjects")
-                                      .snapshots(),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.hasData) {
-                                      return ListView.separated(
-                                          itemBuilder: (context, index) {
-                                            return GestureDetector(
-                                              onTap: () {
-                                                log(snapshot.data!.docs[index]
-                                                    ['docid']);
-                                              },
-                                              child: Padding(
-                                                padding: EdgeInsets.all(10.w),
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                      color:
-                                                          const Color.fromARGB(
-                                                                  255,
-                                                                  6,
-                                                                  71,
-                                                                  157)
-                                                              .withOpacity(0.9),
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                        Radius.circular(20.w),
-                                                      )),
-                                                  // color: Colors.amber,
-                                                  height: 225.h,
-                                                  width: 140.w,
-                                                  child: Column(
-                                                    children: [
-                                                      SizedBox(
-                                                        height: 20.h,
-                                                      ),
-                                                      GoogleMonstserratWidgets(
-                                                          text: snapshot.data!
-                                                                  .docs[index]
-                                                              ['subjectName'],
-                                                          fontsize: 18,
-                                                          color: cWhite),
-                                                      SizedBox(
-                                                        height: 20.h,
-                                                      ),
-                                                      GestureDetector(
-                                                          onTap: () async {
-                                                            subjectControllerr.addSubjectToNewBatch(
-                                                                snapshot.data!
-                                                                            .docs[
-                                                                        index]
-                                                                    ['docid'],
-                                                                snapshot.data!
-                                                                            .docs[
-                                                                        index][
-                                                                    'subjectName']);
-                                                          },
-                                                          child: Container(
-                                                              height: 45.h,
-                                                              width: 160.w,
-                                                              decoration: BoxDecoration(
-                                                                  color: Colors
-                                                                      .blue
-                                                                      .withOpacity(
-                                                                          0.5),
-                                                                  borderRadius:
-                                                                      BorderRadius.all(
-                                                                          Radius.circular(
-                                                                              15))),
-                                                              child: Center(
-                                                                child:
-                                                                    GoogleMonstserratWidgets(
-                                                                  text:
-                                                                      "+ Add subject",
-                                                                  fontsize:
-                                                                      16.w,
-                                                                  color: cWhite,
-                                                                ),
-                                                              ))),
-                                                      SizedBox(
-                                                        height: 20.h,
-                                                      ),
-                                                      SizedBox(
-                                                        height: 5.h,
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    20),
+                                      itemBuilder: (context, index) {
+                                        return GestureDetector(
+                                          onTap: () {
+                                            log(snapshot.data!.docs[index]
+                                                ['docid']);
+                                          },
+                                          child: Padding(
+                                            padding:  EdgeInsets.all(20.w),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          // .withOpacity(0.9),
+                                          // border: Border.all(),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Color.fromARGB(
+                                                      211, 122, 117, 117)
+                                                  .withOpacity(0.5),
+                                              spreadRadius: 10,
+                                              blurRadius: 10,
+                                              offset: Offset(0, 3),
+                                            ),
+                                          ],
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(3.w),
+                                          )),
+                                      height: 80.w,
+                                      width: 160.w,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                children: [
+                                                  SizedBox(
+                                                    height: 10.w,
+                                                  ),
+                                                  GoogleMonstserratWidgets(
+                                                      text: snapshot.data!
+                                                              .docs[index]
+                                                          ['subjectName'],
+                                                      fontsize: 13.w,
+                                                      color: cBlack,fontWeight: FontWeight.w600),
+                                                  SizedBox(
+                                                    height: 20.h,
+                                                  ),
+                                                  GestureDetector(
+                                                      onTap: () async {
+                                                        subjectControllerr.addSubjectToNewBatch(
+                                                            snapshot.data!
+                                                                        .docs[
+                                                                    index]
+                                                                ['docid'],
+                                                            snapshot.data!
+                                                                        .docs[
+                                                                    index][
+                                                                'subjectName']);
+                                                      },
+                                                      child: 
+                                                       Container (
+                                                            width: 105.w,
+                                                         height: 29.w,
+                                                          decoration: BoxDecoration(
+                                                              color: Colors
+                                                                  .blue
+                                                                  .withOpacity(
+                                                                      0.5),
+                                                              borderRadius:
+                                                                  BorderRadius.all(
+                                                                       Radius.circular(
+                                                                          4.w))),
+                                                          child: Center(
                                                             child:
-                                                                GestureDetector(
-                                                              onTap: () async {
-                                                                log(Get.find<
+                                                                GoogleMonstserratWidgets(
+                                                              text:
+                                                                  "Add subject",
+                                                              fontsize:
+                                                                  13.w,
+                                                              color: cBlack,
+                                                              fontWeight: FontWeight.w600,
+                                                            ),
+                                                           )
+                                                      )
+                                                      ),
+                                                 
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .end,
+                                                    children: [
+
+
+                                                      IconButton(onPressed: () async {
+                                                            log(Get.find<
+                                                                    GetFireBaseData>()
+                                                                .getTeacherClassRole
+                                                                .value);
+                                                            await subjectControllerr.editClassName(
+                                                                context,
+                                                                snapshot.data!
+                                                                        .docs[index]
+                                                                    [
+                                                                    'subjectName'],
+                                                                Get.find<
                                                                         GetFireBaseData>()
                                                                     .getTeacherClassRole
-                                                                    .value);
-                                                                await subjectControllerr.editClassName(
-                                                                    context,
-                                                                    snapshot.data!
-                                                                            .docs[index]
-                                                                        [
-                                                                        'subjectName'],
-                                                                    Get.find<
-                                                                            GetFireBaseData>()
-                                                                        .getTeacherClassRole
-                                                                        .value,
-                                                                    snapshot.data!
-                                                                            .docs[index]
-                                                                        [
-                                                                        'docid']);
-                                                              },
-                                                              child: Container(
-                                                                height: 35.h,
-                                                                width: 80.w,
-                                                                decoration: BoxDecoration(
-                                                                    color: cgreen
-                                                                        .withOpacity(
-                                                                            0.9),
-                                                                    borderRadius:
-                                                                        BorderRadius.all(
-                                                                            Radius.circular(2))),
-                                                                child: Center(
-                                                                    child: GoogleMonstserratWidgets(
-                                                                        text:
-                                                                            "Edit",
-                                                                        fontsize:
-                                                                            10,
-                                                                        color:
-                                                                            cWhite)),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    20),
-                                                            child:
-                                                                GestureDetector(
-                                                              onTap: () async {
-                                                                subjectControllerr
-                                                                    .deleteClass(
-                                                                        snapshot
-                                                                            .data!
-                                                                            .docs[index]['docid'],
-                                                                        context);
-                                                              },
-                                                              child: Container(
-                                                                height: 35.h,
-                                                                width: 80.w,
-                                                                decoration: BoxDecoration(
-                                                                    color: Color.fromARGB(
-                                                                            255,
-                                                                            255,
-                                                                            0,
-                                                                            0)
-                                                                        .withOpacity(
-                                                                            0.7),
-                                                                    borderRadius:
-                                                                        BorderRadius.all(
-                                                                            Radius.circular(2))),
-                                                                child: Center(
-                                                                    child: GoogleMonstserratWidgets(
-                                                                        text:
-                                                                            "Delete",
-                                                                        fontsize:
-                                                                            10,
-                                                                        color:
-                                                                            cWhite)),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
+                                                                    .value,
+                                                                snapshot.data!
+                                                                        .docs[index]
+                                                                    [
+                                                                    'docid']);
+                                                          },
+
+                                                       icon: Icon(Icons.edit, color: cgreen,size: 18.w,)),
+
+
+                                                       IconButton(onPressed: () async {
+                                                            subjectControllerr
+                                                                .deleteClass(
+                                                                    snapshot
+                                                                        .data!
+                                                                        .docs[index]['docid'],
+                                                                    context);
+                                                          },
+                                                       icon: Icon(Icons.delete,color: cred,size: 18.w,)),
+                                                   
                                                     ],
                                                   ),
-                                                ),
+                                                ],
                                               ),
-                                            );
-                                          },
-                                          separatorBuilder: (context, index) {
-                                            return const Divider();
-                                          },
-                                          itemCount:
-                                              snapshot.data!.docs.length);
-                                    } else {
-                                      return const Center(
-                                        child: CircularProgressIndicator(),
-                                      );
-                                    }
-                                  }),
-                            )
-                          ],
-                        ),
-                      ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                } else {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                }
+                              }),
+                        )
+                      ],
                     ),
-                  ]),
-                ),
+                  ),
+                ]),
               ),
             )
           ]),

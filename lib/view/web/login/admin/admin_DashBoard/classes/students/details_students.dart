@@ -475,6 +475,8 @@ class StudentsDetails extends StatelessWidget {
                                 Navigator.push(context, MaterialPageRoute(
                                     builder: (context) {
                                       return SampoornaHomeScreen(
+                                        studentId:allData[getxController.indexValue.value!]
+                                    .docid! ,
                                           schoolId: Get.find<
                                                   AdminLoginScreenController>()
                                               .schoolID);
@@ -484,6 +486,10 @@ class StudentsDetails extends StatelessWidget {
                                 : Navigator.push(context, MaterialPageRoute(
                                     builder: (context) {
                                       return StundentSummery(
+                                        studentId: allData[
+                                                getxController
+                                                    .indexValue.value!]
+                                            .docid!,
                                         stundetAdmissionId: allData[
                                                 getxController
                                                     .indexValue.value!]

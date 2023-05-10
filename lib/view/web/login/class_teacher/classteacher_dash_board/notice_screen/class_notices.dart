@@ -28,7 +28,7 @@ class ClassNoticeTeacher extends StatelessWidget {
 
     return Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: AppBar(
+        appBar: AppBar(backgroundColor: adminePrimayColor,
             title: GestureDetector(
                 onTap: () {
                   Navigator.of(context)
@@ -36,7 +36,7 @@ class ClassNoticeTeacher extends StatelessWidget {
                     return ClassTeacherCreateNoticePage();
                   }));
                 },
-                child: const Text('Create'))),
+                child: const Text('Notice'))),
         body: SafeArea(
           child: Row(
             children: [

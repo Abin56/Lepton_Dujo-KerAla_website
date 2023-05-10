@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/ui%20team/sruthi/parent_guardian_alert_box_widget.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/students/student_summery.dart/student_summery.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/transfer_cretificate/tc_genrate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,6 +15,7 @@ import '../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../view/colors/colors.dart';
 import '../../view/constant/constant.dart';
 import '../../view/web/widgets/Iconbackbutton.dart';
+import '../../view/web/widgets/sample/under_maintance.dart';
 import 'guardianInfo_alert_box.dart';
 
 class Student_Details_AlertBox_Widget extends StatelessWidget {
@@ -118,8 +120,8 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
                 Column(
                   children: [
                     Container(
-                        width: 300,
-                        height: 380,
+                        width: 300.w,
+                        height: 380.w,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
                           color: Colors.grey.withOpacity(0.3),
@@ -180,7 +182,9 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
                           sizedBoxH20,
                           Student_Info_Elevated_button_Widget(
                             text: 'Shift Class',
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => UnderMaintanceScreen(),));
+                            },
                           ),
                           sizedBoxH20,
                           StreamBuilder(
@@ -194,24 +198,27 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
                                   .where('admissionNumber',
                                       isEqualTo: admissionNumber)
                                   .snapshots(),
-                              builder: (context,snap) {
-                           if (snap.hasData) {
-                            if (snap.data!.docs.isEmpty) {
-                              return const Text('asdfasdfasdf');
-                              
-                            }else{
-                                   return Student_Info_Elevated_button_Widget(
-                                  text: 'Generate Summary',
-                                  onPressed: () {},
-                                );
-                            }
-                             
-                           }else{
-                            return const Text('');
-                           }
+                              builder: (context, snap) {
+                                if (snap.hasData) {
+                                  if (snap.data!.docs.isEmpty) {
+                                    return const Text('');
+                                  } else {
+                                    return Student_Info_Elevated_button_Widget(
+                                      text: 'Generate Summary',
+                                      onPressed: () async{
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                        return StundentSummery(
+                                          studentId: studentID,
+                                          stundetAdmissionId: admissionNumber);
+                                      },));
+                                      },
+                                    );
+                                  }
+                                } else {
+                                  return const Text('');
+                                }
                               }),
                         ]))
-
                   ],
                 )
               ],

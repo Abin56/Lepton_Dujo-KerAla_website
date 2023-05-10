@@ -17,8 +17,9 @@ import 'widgets/school_previously_attended_widger.dart';
 import 'widgets/widgets.dart';
 
 class SampoornaHomeScreen extends StatelessWidget {
+  String studentId;
 
-  SampoornaHomeScreen({super.key, required this.schoolId});
+  SampoornaHomeScreen({super.key, required this.schoolId,required this.studentId});
   final String schoolId;
 
   @override
@@ -154,7 +155,7 @@ class SampoornaHomeScreen extends StatelessWidget {
                                 ),
                                 onPressed: () async {
                                   await Get.find<SampoornaController>()
-                                      .addSampoornaToFirebase(schoolId);
+                                      .addSampoornaToFirebase(schoolId,studentId);
                                 },
                                 child: const Text('Submit'),
                               ),

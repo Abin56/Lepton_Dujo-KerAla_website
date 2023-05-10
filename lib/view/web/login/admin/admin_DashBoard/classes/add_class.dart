@@ -12,9 +12,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 
-
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
-
 
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
@@ -67,203 +65,255 @@ class AddClassesSectionScreen extends StatelessWidget {
                           width: 40.w,
                         ),
                         GoogleMonstserratWidgets(
-                          text: Get.find<GetFireBaseData>()
-                              .bYear
-                              .value, ////changed normal text to original batch year
+                          text: Get.find<GetFireBaseData>().bYear.value +
+                              ' -Class Teacher Pannel', ////changed normal text to original batch year
                           //'2023 -2024 batch',
-                          fontsize: 18.w,
+                          fontsize: 17.w,
                           color: cWhite,
                         )
                       ],
                     ),
-                    Expanded(
-                      child: StreamBuilder(
-                        stream: FirebaseFirestore.instance
-                            .collection('SchoolListCollection')
-                            .doc(schoolListValue!['docid'])
-                            .collection(Get.find<GetFireBaseData>().bYear.value)
-                            .doc(Get.find<GetFireBaseData>().bYear.value)
-                            .collection('classes')
-                            .snapshots(),
-                        builder: (context, snapshots) {
-                          if (snapshots.hasData) {
-                            return GridView.builder(
-                              itemCount: snapshots.data!.docs.length,
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 3,
-                                crossAxisSpacing: 35.0,
-                                mainAxisSpacing: 25.0,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(left: 10.w),
+                          child: Container(
+                            width: screenSize.width * 0.062,
+                            //  color: Color.fromARGB(255, 63, 181, 102),
+                            child: Center(
+                              child: GoogleMonstserratWidgets(
+                                  text: 'ClassName',
+                                  fontsize: 12.w,
+                                  color: cWhite,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20.w),
+                          child: Container(
+                            // color: cBlue,
+                            alignment: Alignment.centerLeft,
+                            width: screenSize.width * 0.28,
+                            child: Center(
+                              child: GoogleMonstserratWidgets(
+                                text: 'ClassTeacherName',
+                                fontsize: 15.w,
+                                color: cWhite,
+                                fontWeight: FontWeight.w500,
                               ),
-                              itemBuilder: (context, index) {
-                                SchoolClassesModel data =
-                                    SchoolClassesModel.fromMap(
-                                        snapshots.data!.docs[index].data());
-                                return Padding(
-                                  padding: const EdgeInsets.all(26),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: cWhite,
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(20.w),
-                                      ),
-                                      border: Border.all(color: cBlack),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.5),
-                                          spreadRadius: 5,
-                                          blurRadius: 10,
-                                          offset: Offset(0, 3),
+                            ),
+                          ),
+                        ),
+                        Container(
+                            // color: Colors.amber,
+                            width: screenSize.width * 0.06,
+                            child: Center(
+                              child: GoogleMonstserratWidgets(
+                                  text: 'Add/Edit',
+                                  fontsize: 12.w,
+                                  color: cWhite,
+                                  fontWeight: FontWeight.w600),
+                            )),
+                        Container(
+                          width: screenSize.width * 0.03,
+                          child: Center(
+                            child: GoogleMonstserratWidgets(
+                                text: 'Delete',
+                                fontsize: 12.w,
+                                color: cWhite,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      child: Expanded(
+                        child: StreamBuilder(
+                          stream: FirebaseFirestore.instance
+                              .collection('SchoolListCollection')
+                              .doc(schoolListValue!['docid'])
+                              .collection(
+                                  Get.find<GetFireBaseData>().bYear.value)
+                              .doc(Get.find<GetFireBaseData>().bYear.value)
+                              .collection('classes')
+                              .snapshots(),
+                          builder: (context, snapshots) {
+                            if (snapshots.hasData) {
+                              return Container(
+                                margin: EdgeInsets.all(10.w),
+                                color: cWhite,
+                                child: ListView.builder(
+                                  itemCount: snapshots.data!.docs.length,
+                                  itemBuilder: (context, index) {
+                                    SchoolClassesModel data =
+                                        SchoolClassesModel.fromMap(
+                                            snapshots.data!.docs[index].data());
+                                    return Padding(
+                                      padding: EdgeInsets.only(top: 5.h),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: Color.fromARGB(
+                                              255, 224, 219, 219),
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(5.w),
+                                          ),
+
                                         ),
-                                      ],
-                                    ),
-                                    height: 105.h,
-                                    width: 85.w,
-                                    child: Container(
-                                      height: 100.h,
-                                      width: 90.w,
-                                      margin: EdgeInsets.only(top: 15.h),
-                                      child: Column(
-                                        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          GoogleMonstserratWidgets(
-                                              text:
-                                                  '${snapshots.data!.docs[index]['className']}',
-                                              fontsize: 17.w,
-                                              color: cBlack,
-                                              fontWeight: FontWeight.bold),
-                                          SizedBox(
-                                            height: 20.h,
-                                          ),
-                                          GoogleMonstserratWidgets(
-                                            text: snapshots.data!.docs[index]
-                                                ['classTeacherName'],
-                                            fontsize: 14.w,
-                                            color: cBlack,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                          SizedBox(
-                                            height: 30.h,
-                                          ),
-                                          SizedBox(
-                                            height: 20.h,
-                                          ),
-                                          Row(
+                                        height: 65.w,
+                                        width: 85.w,
+                                        child: Container(
+                                          height: 75.w ,
+                                          width: 90.w,
+                                          margin: EdgeInsets.only(top: 15.h),
+                                          child: Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                                MainAxisAlignment.start,
                                             children: [
                                               Padding(
-                                                padding: EdgeInsets.all(10.w),
-                                                child: GestureDetector(
-                                                  onTap: () async {
-                                                    addSchoolClassController
-                                                        .deleteBatchClasses(
-                                                            context,
-                                                            snapshots.data!
-                                                                    .docs[index]
-                                                                ['docid']);
-                                                  },
-                                                  child: Container(
-                                                    height: 30.h,
-                                                    width: 60.w,
-                                                    decoration: BoxDecoration(
-                                                        color: cred,
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    2))),
-                                                    child: Center(
-                                                        child:
-                                                            GoogleMonstserratWidgets(
-                                                                text: "Delete",
-                                                                fontsize: 10,
-                                                                color: cWhite)),
+                                                padding:
+                                                    EdgeInsets.only(left: 10.w),
+                                                child: Container(
+                                                  width:
+                                                      screenSize.width * 0.05,
+                                                  //  color: Color.fromARGB(255, 63, 181, 102),
+                                                  child: Center(
+                                                    child: GoogleMonstserratWidgets(
+                                                        text:
+                                                            '${snapshots.data!.docs[index]['className']}',
+                                                        fontsize: 15.w,
+                                                        color: cBlack,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   ),
                                                 ),
                                               ),
-                                              data.classTeacherdocid == ''
-                                                  ? GestureDetector(
-                                                      onTap: () {
-                                                        addSchoolClassController
-                                                            .setclassIncharge(
-                                                                snapshots.data!
-                                                                            .docs[
-                                                                        index]
-                                                                    ['docid'],
-                                                                context);
-                                                      },
-                                                      child: Padding(
-                                                        padding: EdgeInsets.all(
-                                                            10.w),
-                                                        child: Container(
-                                                          decoration: BoxDecoration(
-                                                              color:
-                                                                  Colors.green,
-                                                              borderRadius: BorderRadius
-                                                                  .all(Radius
-                                                                      .circular(
-                                                                          2))),
-                                                          height: 30.h,
-                                                          width: 78.w,
-                                                          child: Center(
-                                                            child: GoogleMonstserratWidgets(
-                                                                text:
-                                                                    'Add your \nClass teacher',
-                                                                fontsize: 10.w,
-                                                                color: cWhite,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    )
-                                                  : Padding(
-                                                      padding:
-                                                          EdgeInsets.all(10.w),
-                                                      child: GestureDetector(
-                                                        onTap: () async {
-                                                          addSchoolClassController
-                                                              .setclassIncharge(
-                                                                  snapshots.data!
-                                                                              .docs[
-                                                                          index]
-                                                                      ['docid'],
-                                                                  context);
-                                                        },
-                                                        child: Container(
-                                                          height: 30.h,
-                                                          width: 60.w,
-                                                          decoration: BoxDecoration(
-                                                              color: cgreen,
-                                                              borderRadius: BorderRadius
-                                                                  .all(Radius
-                                                                      .circular(
-                                                                          2))),
-                                                          child: Center(
-                                                              child: GoogleMonstserratWidgets(
-                                                                  text: "Edit",
-                                                                  fontsize: 10,
-                                                                  color:
-                                                                      cWhite)),
-                                                        ),
-                                                      ),
+                                              Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 20.w),
+                                                child: Container(
+                                                  // color: cBlue,
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  width: screenSize.width * 0.3,
+                                                  child: Center(
+                                                    child:
+                                                        GoogleMonstserratWidgets(
+                                                      text: snapshots
+                                                              .data!.docs[index]
+                                                          ['classTeacherName'],
+                                                      fontsize: 16.w,
+                                                      color: cBlack,
+                                                      fontWeight:
+                                                          FontWeight.w500,
                                                     ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  data.classTeacherdocid == ''
+                                                      ? GestureDetector(
+                                                          onTap: () {
+                                                            addSchoolClassController
+                                                                .setclassIncharge(
+                                                                    snapshots
+                                                                            .data!
+                                                                            .docs[index]
+                                                                        [
+                                                                        'docid'],
+                                                                    context);
+                                                          },
+                                                          child: Container(
+                                                            // color: Colors.amber,
+                                                            width: screenSize
+                                                                    .width *
+                                                                0.06,
+                                                            child: Center(
+                                                              child: GoogleMonstserratWidgets(
+                                                                  text:
+                                                                      '+ Add Class\n teacher',
+                                                                  fontsize:
+                                                                      12.w,
+                                                                  color: cBlue,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600),
+                                                            ),
+                                                          ),
+                                                        )
+                                                      : GestureDetector(
+                                                          onTap: () async {
+                                                            addSchoolClassController
+                                                                .setclassIncharge(
+                                                                    snapshots
+                                                                            .data!
+                                                                            .docs[index]
+                                                                        [
+                                                                        'docid'],
+                                                                    context);
+                                                          },
+                                                          child: Container(
+                                                            width: screenSize
+                                                                    .width *
+                                                                0.03,
+                                                            child: Center(
+                                                              child: IconButton(
+                                                                  onPressed:
+                                                                      () async {
+                                                                    addSchoolClassController.setclassIncharge(
+                                                                        snapshots
+                                                                            .data!
+                                                                            .docs[index]['docid'],
+                                                                        context);
+                                                                  },
+                                                                  icon: Icon(Icons
+                                                                      .edit)),
+                                                            ),
+                                                          )),
+                                                  Container(
+                                                    width:
+                                                        screenSize.width * 0.03,
+                                                    child: Center(
+                                                      child: IconButton(
+                                                          onPressed: () async {
+                                                            addSchoolClassController
+                                                                .deleteBatchClasses(
+                                                                    context,
+                                                                    snapshots
+                                                                            .data!
+                                                                            .docs[index]
+                                                                        [
+                                                                        'docid']);
+                                                          },
+                                                          icon: Icon(
+                                                            Icons.delete,
+                                                            color: cred,
+                                                            size: 20.w,
+                                                          )),
+                                                    ),
+                                                  ),
+                                                ],
+                                              )
                                             ],
                                           ),
-                                        ],
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                );
-                              },
-                            );
-                          } else {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          }
-                        },
+                                    );
+                                  },
+                                ),
+                              );
+                            } else {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                          },
+                        ),
                       ),
                     ),
                   ],
@@ -275,213 +325,200 @@ class AddClassesSectionScreen extends StatelessWidget {
                   color: Colors.white,
                   height: screenSize.height,
                   width: screenSize.width * 1 / 2,
-                  child: Column(children: [
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: TextFormField(
-                          validator: checkFieldEmpty,
-                          controller: classNameController,
-                          // ignore: prefer_const_constructors
-                          decoration: InputDecoration(
-                            border: const OutlineInputBorder(),
-                            labelText: 'Class Name',
+                  child: Container(
+                   // height: screenSize.height,
+                    child: Column(children: [
+                      sizedBoxH30,
+                       GoogleMonstserratWidgets(
+                          text: Get.find<GetFireBaseData>().bYear.value +
+                              ' -Class List', ////changed normal text to original batch year
+                          //'2023 -2024 batch',
+                          fontsize: 17.w,
+                          color: cBlack,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(20.w),
+                          child: TextFormField(
+                            validator: checkFieldEmpty,
+                            controller: classNameController,
+                            // ignore: prefer_const_constructors
+                            decoration: InputDecoration(
+                              border: const OutlineInputBorder(),
+                              labelText: 'Class Name',
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Container(
-                      height: 50.h,
-                      width: 160.w,
-                      decoration: BoxDecoration(
-                          border: Border.all(),
-                          color: Colors.blue.withOpacity(0.5),
-                          borderRadius: BorderRadius.all(Radius.circular(15))),
-                      child: TextButton.icon(
-                          onPressed: () async {
-                            addSchoolClassController
-                                .addNewClassFunction(classNameController);
-                          },
-                          icon: const Icon(Icons.add, color: cWhite),
-                          label: GoogleMonstserratWidgets(
-                            text: 'Add Class',
-                            fontsize: 15,
-                            color: cWhite,
-                            fontWeight: FontWeight.w600,
-                          )),
-                    ),
-                    SizedBox(
-                      height: 600.h,
-                      child: StreamBuilder(
-                          stream: FirebaseFirestore.instance
-                              .collection('SchoolListCollection')
-                              .doc(schoolListValue!['docid'])
-                              .collection('classes')
-                              .snapshots(),
-                          builder: (context, snapshots) {
-                            if (snapshots.hasData) {
-                                    return GridView.builder(
-                              itemCount: snapshots.data!.docs.length,
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 3,
-                                crossAxisSpacing: 30.0,
-                                mainAxisSpacing: 20.0,
-                              ),
-                              itemBuilder: (context, index) {
-                                if (snapshots.hasData) {
-                                  return Padding(
-                                    padding: EdgeInsets.all(20),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          color: const Color.fromARGB(
-                                                  255, 6, 71, 157)
-                                              .withOpacity(0.9),
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(20.w),
-                                          )),
-                                      height: 80.h,
-                                      width: 160.w,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          SizedBox(
-                                            height: 10.h,
-                                          ),
-                                          GoogleMonstserratWidgets(
-                                              text:
-                                                  '${snapshots.data!.docs[index]['className']}',
-                                              fontsize: 15.w,
-                                              color: cWhite,
-                                              fontWeight: FontWeight.w600),
-                                          GestureDetector(
-                                            onTap: () async {
-                                              addSchoolClassController
-                                                  .setClassForbatchYear(
-                                                      snapshots
-                                                              .data!.docs[index]
-                                                          ['className'],
-                                                      snapshots
-                                                              .data!.docs[index]
-                                                          ['docid']);
-                                            },
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      // color: cWhite
-                                                      ),
-                                                  color: Colors.blue
-                                                      .withOpacity(0.5),
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(4))),
-                                              width: 100.w,
-                                              height: 27,
-                                              child: Center(
-                                                child: GoogleMonstserratWidgets(
-                                                  text: '+ Add',
-                                                  fontsize: 15,
-                                                  color: cWhite,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                              //Text(''),
-                                            ),
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              //SizedBox(height: 20.h,),
+                      Container(
+                        height: 50.w,
+                        width: 160.w,
+                        decoration: BoxDecoration(
+                            border: Border.all(),
+                            color: Colors.blue.withOpacity(0.5),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
+                        child: TextButton.icon(
+                            onPressed: () async {
+                              addSchoolClassController
+                                  .addNewClassFunction(classNameController);
+                            },
+                            icon: const Icon(Icons.add, color: cWhite),
+                            label: GoogleMonstserratWidgets(
+                              text: 'Add Class',
+                              fontsize: 15.w,
+                              color: cWhite,
+                              fontWeight: FontWeight.w600,
+                            )),
+                      ),
+                      SizedBox(
+                        height: 500.w,
+                        child: StreamBuilder(
+                            stream: FirebaseFirestore.instance
+                                .collection('SchoolListCollection')
+                                .doc(schoolListValue!['docid'])
+                                .collection('classes')
+                                .snapshots(),
+                            builder: (context, snapshots) {
+                              return GridView.builder(
+                                itemCount: snapshots.data!.docs.length,
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 4,
 
-                                              Padding(
-                                                padding: EdgeInsets.all(15.w),
-                                                child: GestureDetector(
-                                                  onTap: () async {
-                                                    addSchoolClassController
-                                                        .deleteClass(
-                                                            snapshots.data!
-                                                                    .docs[index]
-                                                                ['docid'],
-                                                            context);
-                                                  },
-                                                  child: Container(
-                                                    height: 25.h,
-                                                    width: 60.w,
-                                                    decoration: BoxDecoration(
-                                                        color: Color.fromARGB(
-                                                                255, 255, 0, 0)
-                                                            .withOpacity(0.7),
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    2))),
-                                                    child: Center(
-                                                        child:
-                                                            GoogleMonstserratWidgets(
-                                                                text: "Delete",
-                                                                fontsize: 10,
-                                                                color: cWhite)),
-                                                  ),
-                                                ),
-                                              ),
-
-                                              Padding(
-                                                padding: EdgeInsets.all(15.w),
-                                                child: GestureDetector(
-                                                  onTap: () async {
-                                                    addSchoolClassController
-                                                        .updateClassName(
-                                                            snapshots.data!
-                                                                    .docs[index]
-                                                                ['docid'],
-                                                            context,
-                                                            snapshots.data!
-                                                                    .docs[index]
-                                                                ['className']);
-                                                  },
-                                                  child: Container(
-                                                    height: 25.h,
-                                                    width: 60.w,
-                                                    decoration: BoxDecoration(
-                                                        color: cgreen
-                                                            .withOpacity(0.9),
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    2))),
-                                                    child: Center(
-                                                        child:
-                                                            GoogleMonstserratWidgets(
-                                                                text: "Edit",
-                                                                fontsize: 10,
-                                                                color: cWhite)),
-                                                  ),
-                                                ),
+                                ),
+                                itemBuilder: (context, index) {
+                                  if (snapshots.hasData) {
+                                    return Padding(
+                                      padding: EdgeInsets.all(20.w),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            // .withOpacity(0.9),
+                                            // border: Border.all(),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Color.fromARGB(
+                                                        211, 122, 117, 117)
+                                                    .withOpacity(0.5),
+                                                spreadRadius: 10,
+                                                blurRadius: 10,
+                                                offset: Offset(0, 3),
                                               ),
                                             ],
-                                          ),
-                                        ],
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(3.w),
+                                            )),
+                                        height: 80.w,
+                                        width: 160.w,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            SizedBox(
+                                              height: 10.w,
+                                            ),
+                                            GoogleMonstserratWidgets(
+                                                text:
+                                                    '${snapshots.data!.docs[index]['className']}',
+                                                fontsize: 15.w,
+                                                color: cBlack,
+                                                fontWeight: FontWeight.w600),
+                                            GestureDetector(
+                                              onTap: () async {
+                                                addSchoolClassController
+                                                    .setClassForbatchYear(
+                                                        snapshots.data!
+                                                                .docs[index]
+                                                            ['className'],
+                                                        snapshots.data!
+                                                                .docs[index]
+                                                            ['docid']);
+                                              },
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        // color: cWhite
+                                                        ),
+                                                    color: Colors.blue
+                                                        .withOpacity(0.5),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                4.w))),
+                                                width: 105.w,
+                                                height: 29.w,
+                                                child: Center(
+                                                  child:
+                                                      GoogleMonstserratWidgets(
+                                                    text: 'Add to Panel',
+                                                    fontsize: 13.w,
+                                                    color: cBlack,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+
+                                              ),
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                //SizedBox(height: 20.h,),
+
+                                                IconButton(
+                                                    onPressed: () async {
+                                                      addSchoolClassController
+                                                          .updateClassName(
+                                                              snapshots.data!
+                                                                          .docs[
+                                                                      index]
+                                                                  ['docid'],
+                                                              context,
+                                                              snapshots.data!
+                                                                          .docs[
+                                                                      index][
+                                                                  'className']);
+                                                    },
+                                                    icon: Icon(
+                                                      Icons.edit,
+                                                      color: cgreen,
+                                                      size: 20.w,
+                                                    )),
+
+                                                IconButton(
+                                                    onPressed: () async {
+                                                      addSchoolClassController
+                                                          .deleteClass(
+                                                              snapshots.data!
+                                                                          .docs[
+                                                                      index]
+                                                                  ['docid'],
+                                                              context);
+                                                    },
+                                                    icon: Icon(
+                                                      Icons.delete,
+                                                      color: cred,
+                                                      size: 20.w,
+                                                    )),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                } else {
-                                  return const Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                }
-                              },
-                            );
-                            }else{
-                              return const Center(
-                                child: CircularProgressIndicator(),
+                                    );
+                                  } else {
+                                    return const Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  }
+                                },
                               );
-                            }
-                      
-                          }),
-                    )
-                  ]),
+                            }),
+                      )
+                    ]),
+                  ),
                 ),
               ),
             ],

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../colors/colors.dart';
+
 class FamilyPolicyScreen extends StatefulWidget {
   const FamilyPolicyScreen({super.key});
 
@@ -12,6 +14,9 @@ class _FamilyPolicyScreenState extends State<FamilyPolicyScreen> {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
+       backgroundColor: adminePrimayColor,
+      appBar: AppBar(iconTheme: IconThemeData(color: cWhite),
+      backgroundColor: adminePrimayColor),
       body: SingleChildScrollView(
         child: Center(
           child: SizedBox(
