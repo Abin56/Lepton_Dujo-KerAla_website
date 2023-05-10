@@ -1,11 +1,9 @@
-import 'dart:math';
 import 'package:country_state_city_picker/country_state_city_picker.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import '../../../../../model/schools_to_be_verified/schools_to_be_verified_create_list.dart';
+
 import '../../../../controller/add_Newschool/add_new_schhol.dart';
 import '../../../colors/colors.dart';
 import '../../../fonts/fonts.dart';
@@ -160,12 +158,9 @@ class SchoolProfile extends StatelessWidget {
                         labelText: 'Designation',
                         icon: Icons.person_4,
                       ),
-                      const CircleAvatar(
-                        radius: 60,
-                      ),
                       Padding(
                         padding: const EdgeInsets.all(20),
-                        child: Container(
+                        child: SizedBox(
                           height: size.width * 1 / 25,
                           width: size.width * 1 / 6,
                           child: ElevatedButton(
@@ -221,7 +216,7 @@ class SchoolTextFormFieldWidget extends StatelessWidget {
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
           icon: Icon(
             icon,
-            color: Color.fromARGB(221, 28, 9, 110),
+            color: const Color.fromARGB(221, 28, 9, 110),
           ),
           labelText: labelText,
         ),
