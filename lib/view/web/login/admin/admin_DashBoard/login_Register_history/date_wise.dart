@@ -140,7 +140,7 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
                                                             context) {
                                                           return AlertDialog(
                                                             title: const Text(
-                                                                'Wrong password'),
+                                                                'You Are Not a MainAdmin'),
                                                             content:
                                                                 SingleChildScrollView(
                                                               child: ListBody(

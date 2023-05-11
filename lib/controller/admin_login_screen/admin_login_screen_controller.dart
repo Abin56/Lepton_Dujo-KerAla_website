@@ -1,18 +1,15 @@
 import 'dart:developer';
+import 'dart:html' as html;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dujo_kerala_website/ui%20team/abin/alumini_accocation/create_alumni.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import 'dart:html' as html;
-
 import '../../model/loginHistory_model/login_history_model.dart';
 import '../../view/web/login/admin/admin_DashBoard/admin_dashborad_screen.dart';
-import '../../view/web/widgets/drop_DownList/get_batchYear.dart';
 import '../../view/web/widgets/drop_DownList/schoolDropDownList.dart';
 import '../get_firebase-data/get_firebase_data.dart';
 
@@ -47,10 +44,12 @@ class AdminLoginScreenController extends GetxController {
 //>> Checking batch Yeard
 
         if (schoolID == value.user!.uid || result.docs.isNotEmpty) {
-          schoolIdController.clear();
-          passwordController.clear();
+
           if (Get.find<GetFireBaseData>().bYear.value.isNotEmpty) {
+            LoginTimeIDSavingClass.emailId = schoolIdController.text.trim();
             // Login user
+
+            log(LoginTimeIDSavingClass.emailId);
 
             final date = DateTime.now();
             DateTime parseDate = DateTime.parse(date.toString());
@@ -64,7 +63,7 @@ class AdminLoginScreenController extends GetxController {
                 .doc(Get.find<GetFireBaseData>().bYear.value)
                 .collection("LoginHistory")
                 .doc(LoginTimeIDSavingClass.date)
-                .set({'id': LoginTimeIDSavingClass.date}).then((value) {
+                .set({'id': LoginTimeIDSavingClass.date,'docid':DateTime.now()}).then((value) {
               firebaseFirestore
                   .collection(Get.find<GetFireBaseData>().bYear.value)
                   .doc(Get.find<GetFireBaseData>().bYear.value)
@@ -74,11 +73,14 @@ class AdminLoginScreenController extends GetxController {
                   .doc(LoginTimeIDSavingClass.id)
                   .set(
                 {
-                  'adminuser': schoolIdController.text.trim(),
+
+                  'adminuser': LoginTimeIDSavingClass.emailId,
                   'loginTime': LoginTimeIDSavingClass.id
                 },
                 SetOptions(merge: true),
               ).then((value) {
+                          schoolIdController.clear();
+          passwordController.clear();
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
                     return AdminDashBoardPage(
@@ -211,7 +213,7 @@ class AdminLoginScreenController extends GetxController {
       });
 
       log("end");
-    } on FirebaseException catch (e) {
+    } on FirebaseException {
       log("catchout");
 
       showToast(msg: 'Login Failed');
@@ -220,8 +222,8 @@ class AdminLoginScreenController extends GetxController {
 
   TextEditingController applynewBatchYearContoller = TextEditingController();
   TextEditingController selectedToDaterContoller = TextEditingController();
-  Rxn<DateTime> _selectedDateForApplyDate = Rxn<DateTime>();
-  Rxn<DateTime> _selectedToDate = Rxn<DateTime>();
+  final Rxn<DateTime> _selectedDateForApplyDate = Rxn<DateTime>();
+  final Rxn<DateTime> _selectedToDate = Rxn<DateTime>();
   _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
