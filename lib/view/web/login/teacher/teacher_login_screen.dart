@@ -126,8 +126,6 @@ class TeacherLoginScreen extends StatelessWidget {
                         ),
                         child:  TextFormField(
                         //  controller: TextEditingController. teacheridController,
-                            obscureText:
-                                _hideGetxController.isObscurefirst.value,
                           style: ralewayStyle.copyWith(
                             fontWeight: FontWeight.w400,
                             color: cBlack,
@@ -217,7 +215,7 @@ class TeacherLoginScreen extends StatelessWidget {
                             // adminLoginScreenController.forgetPassWord(context);
                           },
                           child: Text(
-                            'Forgot Password?/ Reset Password ?',
+                            'Forgot Password ?',
                             style: ralewayStyle.copyWith(
                               fontSize: 14.0,
                               color: cWhite,

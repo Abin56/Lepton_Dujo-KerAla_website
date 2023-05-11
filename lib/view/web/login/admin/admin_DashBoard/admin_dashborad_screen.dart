@@ -5,6 +5,7 @@ import 'dart:html' as html;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
+import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/list_of_classes.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_protection_group/students_proctection_group.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/teacher_section/add_teacher.dart';
@@ -39,7 +40,6 @@ import 'general_instructions/creation_general_instruction_.dart';
 import 'login_Register_history/date_wise.dart';
 import 'mothers_pta/mothers_pta_screen.dart';
 import 'non_Teaching_staff/non_teaching_staff.dart';
-import 'sampoorna/sampoorna_home.dart';
 
 class AdminDashBoardPage extends StatefulWidget {
   AdminDashBoardPage(
@@ -92,7 +92,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'Non-Teaching Staffs',
     // 'Generate TC',
     // 'Generate Summary',
-    'Sampoorna'
+    //r'Sampoorna'
   ];
 
   List<String> dashboardImagesList = [
@@ -122,7 +122,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'assets/images/steward.png',
     // 'assets/images/file-transfer.png',
     // 'assets/images/report.png',
-    'assets/images/folders.png',
+    //'assets/images/folders.png',
   ];
 
   List<String> viewListNames = [
@@ -187,7 +187,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       NonTeachingLogin(schoolID: widget.schoolID),
       // const UnderMaintanceScreen(), //11
       // const UnderMaintanceScreen(),
-      SampoornaHomeScreen(schoolId: widget.schoolID, studentId: ''), //13
+     // SampoornaHomeScreen(schoolId: widget.schoolID, studentId: ''), //13
     ];
     List<Widget> drawerPages = [
       AllStudentList(),
@@ -370,6 +370,11 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                         color: adminePrimayColor,
                         child: ListView(
                           children: [
+                            
+                            Padding(
+                              padding:  EdgeInsets.only(left: 60.w,top: 20.w),
+                              child: GoogleMonstserratWidgets(text: 'DuJo',fontsize: 14.w,color: cWhite,fontWeight: FontWeight.w600),
+                            ),
                             Row(
                               children: [
                                 IconButton(
@@ -386,7 +391,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                     style: GoogleFonts.poppins(
                                         color: Colors.red,
                                         fontWeight: FontWeight.w800,
-                                        fontSize: 15.h),
+                                        fontSize: 15.w),
                                   ),
                                 ),
                               ],
@@ -704,77 +709,82 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                 const SizedBox(
                                   width: 10,
                                 ),
-                                IconButton(
-                                  onPressed: () async {
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible:
-                                          false, // user must tap button!
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: const Text('Message'),
-                                          content: SingleChildScrollView(
-                                            child: ListBody(
-                                              children: const <Widget>[
-                                                Text(
-                                                    'Are you sure you want to logout?')
-                                              ],
-                                            ),
-                                          ),
-                                          actions: <Widget>[
-                                            TextButton(
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                                child: const Text("Cancel")),
-                                            TextButton(
-                                              child: const Text('ok'),
-                                              onPressed: () async {
-                                                log("school id${Get.find<AdminLoginScreenController>().schoolID}");
-                                                log("batch year${Get.find<GetFireBaseData>().bYear.value}");
-                                                log("dateee${LoginTimeIDSavingClass.date}");
-                                                log("idddddddd${LoginTimeIDSavingClass.id.toString()}");
-                                                await FirebaseFirestore.instance
-                                                    .collection(
-                                                        "SchoolListCollection")
-                                                    .doc(Get.find<AdminLoginScreenController>()
-                                                        .schoolID)
-                                                    .collection(Get.find<
-                                                            GetFireBaseData>()
-                                                        .bYear
-                                                        .value)
-                                                    .doc(Get.find<
-                                                            GetFireBaseData>()
-                                                        .bYear
-                                                        .value)
-                                                    .collection("LoginHistory")
-                                                    .doc(LoginTimeIDSavingClass
-                                                        .date)
-                                                    .collection(
-                                                        LoginTimeIDSavingClass
-                                                            .date)
-                                                    .doc(LoginTimeIDSavingClass
-                                                        .id)
-                                                    .set(
-                                                        {
-                                                      'logOutTime':
-                                                          DateTime.now()
-                                                              .toString(),
+                                Row(
+                                  children: [
+                                    IconButton(
+                                      onPressed: () async {
+                                        showDialog(
+                                          context: context,
+                                          barrierDismissible:
+                                              false, // user must tap button!
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: const Text('Message'),
+                                              content: SingleChildScrollView(
+                                                child: ListBody(
+                                                  children: const <Widget>[
+                                                    Text(
+                                                        'Are you sure you want to logout?')
+                                                  ],
+                                                ),
+                                              ),
+                                              actions: <Widget>[
+                                                TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context).pop();
                                                     },
-                                                        SetOptions(
-                                                            merge: true)).then(
-                                                        (value) => html
-                                                            .window.location
-                                                            .reload());
-                                              },
-                                            ),
-                                          ],
+                                                    child: const Text("Cancel")),
+                                                TextButton(
+                                                  child: const Text('ok'),
+                                                  onPressed: () async {
+                                                    log("school id${Get.find<AdminLoginScreenController>().schoolID}");
+                                                    log("batch year${Get.find<GetFireBaseData>().bYear.value}");
+                                                    log("dateee${LoginTimeIDSavingClass.date}");
+                                                    log("idddddddd${LoginTimeIDSavingClass.id.toString()}");
+                                                    await FirebaseFirestore.instance
+                                                        .collection(
+                                                            "SchoolListCollection")
+                                                        .doc(Get.find<AdminLoginScreenController>()
+                                                            .schoolID)
+                                                        .collection(Get.find<
+                                                                GetFireBaseData>()
+                                                            .bYear
+                                                            .value)
+                                                        .doc(Get.find<
+                                                                GetFireBaseData>()
+                                                            .bYear
+                                                            .value)
+                                                        .collection("LoginHistory")
+                                                        .doc(LoginTimeIDSavingClass
+                                                            .date)
+                                                        .collection(
+                                                            LoginTimeIDSavingClass
+                                                                .date)
+                                                        .doc(LoginTimeIDSavingClass
+                                                            .id)
+                                                        .set(
+                                                            {
+                                                          'logOutTime':
+                                                              DateTime.now()
+                                                                  .toString(),
+                                                        },
+                                                            SetOptions(
+                                                                merge: true)).then(
+                                                            (value) => html
+                                                                .window.location
+                                                                .reload());
+                                                  },
+                                                ),
+                                              ],
+                                            );
+                                          },
                                         );
                                       },
-                                    );
-                                  },
-                                  icon: const Icon(Icons.logout_outlined),
-                                )
+                                      icon: const Icon(Icons.logout_outlined),
+                                    ),
+                                GoogleMonstserratWidgets(fontsize: 13.w,text: 'logout',)
+                                 ],
+                                ),
                               ],
                             ),
                           ),

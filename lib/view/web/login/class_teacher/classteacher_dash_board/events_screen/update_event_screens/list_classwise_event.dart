@@ -1,9 +1,13 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/events_screen/update_event_screens/show_classwise_events.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+
 import '../../../../../../../controller/Getx/class_teacher/teacher_event_controller/teacher_event_controller.dart';
 import '../../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../../model/class_teacher/class_teacher_event_model.dart';
@@ -259,11 +263,12 @@ class NoticePageElevatedButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return SizedBox(
-      width: width * 0.1,
+      width: 70.w,
+      height: 40.w,
       child: ElevatedButton(
         onPressed: function,
         style: ElevatedButton.styleFrom(
-          backgroundColor: cWhite,
+          backgroundColor: adminePrimayColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12), // <-- Radius
           ),
@@ -271,7 +276,7 @@ class NoticePageElevatedButtonWidget extends StatelessWidget {
         child: Text(
           title,
           style: const TextStyle(
-            color: cBlack,
+            color: cWhite,
           ),
         ),
       ),
@@ -369,15 +374,17 @@ class ClassTeacherEventsCardWidget extends StatelessWidget {
         height: screenSize.width * .14,
         width: screenSize.width * .17,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0),
-              blurRadius: 7,
+          borderRadius: BorderRadius.circular(5.w),
+           // border: Border.all(),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+              color: const Color.fromARGB(211, 122, 117, 117).withOpacity(0.5),
+              spreadRadius: 10,
+              blurRadius: 10,
+              offset: const Offset(0, 3),
             ),
-          ],
-        ),
+            ]),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: SingleChildScrollView(

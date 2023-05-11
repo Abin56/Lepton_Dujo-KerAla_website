@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
@@ -9,6 +11,7 @@ import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
@@ -244,7 +247,57 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
               height: screenSize.height * 1.4,
               width: screenSize.width * 1 / 2,
               child: Column(children: [
-                Padding(
+               
+                Stack(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: screenSize.width / 30),
+                      child: (_file == null)
+                          ?  CircleAvatar(
+                              radius: 80.w,
+                              backgroundImage: const NetworkImage(
+                                  'https://via.placeholder.com/150'),
+                              backgroundColor:
+                                  const Color.fromARGB(241, 54, 225, 248),
+                            )
+                          : CircleAvatar(
+                              radius: 80.w, backgroundImage: MemoryImage(_file!)),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: 120.w,
+                        top: 160.h,
+                      ),
+                      child: InkWell(
+                        onTap: () async {
+                          FilePickerResult? result = await FilePicker.platform
+                              .pickFiles(type: FileType.image);
+                          if (result != null) {
+                            file = result.files.first.bytes;
+                            setState(() {
+                              _file = file;
+                            });
+                          }
+                        },
+                        child: Container(
+                          height: screenSize.width / 40,
+                          width: screenSize.width / 40,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Color.fromARGB(255, 82, 196, 173),
+                          ),
+                          alignment: Alignment.center,
+                          child:  Icon(
+                            Icons.camera_alt_outlined,
+                            color: Color.fromARGB(255, 156, 20, 20),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                sizedBoxH20,
+                 Padding(
                   padding: EdgeInsets.only(
                       top: MediaQuery.of(context).size.height * 0.10),
                   child:(Get.find<AdminLoginScreenController>().schoolID == null)? const SizedBox():  StreamBuilder(
@@ -272,9 +325,8 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                             width: screenSize.width * 0.30,
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              border: Border.all(
-                                  color: const Color.fromARGB(255, 238, 238, 238)),
-                              borderRadius: BorderRadius.circular(13),
+                              border: Border.all(),
+                              borderRadius: BorderRadius.circular(13.w),
                             ),
                             child: DropdownButton(
                               hint: Padding(
@@ -336,8 +388,8 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                       } return const Text('Something went wrong!');
                       }),
                 ),
-                const SizedBox(
-                  height: 10,
+                 SizedBox(
+                  height: 10.w,
                 ),
                 Padding(
                   padding: EdgeInsets.only(
@@ -365,9 +417,9 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                             width: screenSize.width * 0.30,
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              border: Border.all(
-                                  color: const Color.fromARGB(255, 238, 238, 238)),
-                              borderRadius: BorderRadius.circular(13),
+                              border: Border.all(),
+                                  //color: const Color.fromARGB(255, 238, 238, 238)),
+                              borderRadius: BorderRadius.circular(13.w),
                             ),
                             child: DropdownButton(
                                 hint: Padding(
@@ -422,64 +474,17 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                          } return const Text('Something went wrong');
                         }),
                 ),
-                Stack(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: screenSize.width / 30),
-                      child: (_file == null)
-                          ? const CircleAvatar(
-                              radius: 80,
-                              backgroundImage: NetworkImage(
-                                  'https://via.placeholder.com/150'),
-                              backgroundColor:
-                                  Color.fromARGB(241, 54, 225, 248),
-                            )
-                          : CircleAvatar(
-                              radius: 80, backgroundImage: MemoryImage(_file!)),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: screenSize.width * 1 / 12,
-                        top: screenSize.width * 1 / 9.5,
-                      ),
-                      child: InkWell(
-                        onTap: () async {
-                          FilePickerResult? result = await FilePicker.platform
-                              .pickFiles(type: FileType.image);
-                          if (result != null) {
-                            file = result.files.first.bytes;
-                            setState(() {
-                              _file = file;
-                            });
-                          }
-                        },
-                        child: Container(
-                          height: screenSize.width / 40,
-                          width: screenSize.width / 40,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Color.fromARGB(255, 82, 196, 173),
-                          ),
-                          alignment: Alignment.center,
-                          child: const Icon(
-                            Icons.camera_alt_outlined,
-                            color: Color.fromARGB(255, 156, 20, 20),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
                 sizedBoxH20,
+
                 Padding(
-                  padding: const EdgeInsets.only(left: 80, right: 80, top: 10),
+                  padding:  EdgeInsets.only(left: 80.w, right: 80.w, top: 10.h),
                   child: TextFormField(
                     validator: checkFieldEmpty,
                     controller: dateController,
-                    decoration: const InputDecoration(
+                    decoration:  InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius:
-                                BorderRadius.all(Radius.circular(20))),
+                                BorderRadius.all(Radius.circular(13.w))),
                         icon: Icon(Icons.calendar_today,
                             color: AppColors.blueDarkColor),
                         labelText: "Enter Date"),
@@ -507,13 +512,13 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 80, right: 80, top: 10),
+                  padding:  EdgeInsets.only(left: 80.w, right: 80.w, top: 10),
                   child: TextFormField(
                     validator: checkFieldEmpty,
                     controller: admissionNumberController,
-                    decoration: const InputDecoration(
+                    decoration:  InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                          borderRadius: BorderRadius.all(Radius.circular(13.w))),
                       icon: Icon(Icons.format_list_numbered,
                           color: AppColors.blueDarkColor),
                       labelText: 'Admission Number',
@@ -521,13 +526,13 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 80, right: 80, top: 10),
+                  padding:  EdgeInsets.only(left: 80.w, right: 80.w, top: 10),
                   child: TextFormField(
                     validator: checkFieldEmpty,
                     controller: scholarshipNameController,
-                    decoration: const InputDecoration(
+                    decoration:  InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                          borderRadius: BorderRadius.all(Radius.circular(13.w))),
                       icon: Icon(Icons.card_membership_sharp,
                           color: AppColors.blueDarkColor),
                       labelText: 'ScholarShip Name',
@@ -535,13 +540,13 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 80, right: 80, top: 10),
+                  padding:  EdgeInsets.only(left: 80.w, right: 80.w, top: 10),
                   child: TextFormField(
                     validator: checkFieldEmpty,
                     controller: descriptionController,
-                    decoration: const InputDecoration(
+                    decoration:  InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                          borderRadius: BorderRadius.all(Radius.circular(13.w))),
                       icon: Icon(Icons.note_alt_outlined,
                           color: AppColors.blueDarkColor),
                       labelText: 'Description',

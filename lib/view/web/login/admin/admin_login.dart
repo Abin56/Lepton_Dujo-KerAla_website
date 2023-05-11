@@ -231,7 +231,7 @@ class AdminLoginScreen extends StatelessWidget {
                             adminLoginScreenController.forgetPassWord(context);
                           },
                           child: Text(
-                            'Forgot Password?/ Reset Password ?',
+                            'Forgot Password ?',
                             style: ralewayStyle.copyWith(
                               fontSize: 14.0,
                               color: cWhite,

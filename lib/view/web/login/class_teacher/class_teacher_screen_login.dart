@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
 import 'package:dujo_kerala_website/controller/class_teacher_login_screen/class_teacher_login.dart';
 import 'package:dujo_kerala_website/view/web/widgets/responsive.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -228,7 +227,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                             adminLoginScreenController.forgetPassWord(context);
                           },
                           child: Text(
-                            'Forgot Password?/ Reset Password ?',
+                            'Forgot Password ?',
                             style: ralewayStyle.copyWith(
                               fontSize: 14.0,
                               color: cWhite,

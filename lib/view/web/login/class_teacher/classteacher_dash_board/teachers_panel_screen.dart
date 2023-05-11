@@ -21,6 +21,7 @@ import '../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../model/teacher/teacher_model.dart';
 import '../../../../colors/colors.dart';
 import '../../../../constant/constant.dart';
+import '../../../../fonts/google_monstre.dart';
 import '../../../widgets/button_container_widget.dart';
 import '../../../widgets/drop_DownList/get_batchYear.dart';
 import '../../../widgets/drop_DownList/get_classList.dart';
@@ -397,21 +398,27 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                             color: adminePrimayColor,
                             child: Column(
                               children: [
-                                sizedBoxH20,
+                               // sizedBoxH20,
+                                Padding(
+                                  padding:  EdgeInsets.only(top: 20.w),
+                                  child: GoogleMonstserratWidgets(text: 'DuJo',fontsize: 14.w,color: cWhite,fontWeight: FontWeight.w600),
+                                ),
                                 Row(
                                   children: [
                                     IconButtonBackWidget(color: Colors.red),
                                     FittedBox(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(20),
-                                        child: Text(
-                                          'Teacher Dashboard',
-                                          style: GoogleFonts.poppins(
-                                              color: Colors.red,
-                                              fontWeight: FontWeight.w800,
-                                              fontSize: 13.h),
-                                        ),
-                                      ),
+                                      child: 
+                                          Padding( 
+                                            padding: const EdgeInsets.all(20),
+                                            child: Text(
+                                              'Teacher Dashboard',
+                                              style: GoogleFonts.poppins(
+                                                  color: Colors.red,
+                                                  fontWeight: FontWeight.w800,
+                                                  fontSize: 13.h),
+                                            ),
+                                          ),
+                                        
                                     ),
                                   ],
                                 ),
@@ -472,7 +479,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                     EdgeInsets.only(right: 30.0.w, left: 30.w),
                                 child: Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceAround,
                                   children: [
                                     Text(
                                       Get.find<AdminLoginScreenController>()
@@ -826,7 +833,9 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                         const SizedBox(
                                           width: 10,
                                         ),
-                                        const Icon(Icons.logout_outlined)
+                                        const Icon(Icons.logout_outlined),
+                                        GoogleMonstserratWidgets(text: 'logout', fontsize: 13.w
+                                        ),
                                       ],
                                     )
                                   ],
