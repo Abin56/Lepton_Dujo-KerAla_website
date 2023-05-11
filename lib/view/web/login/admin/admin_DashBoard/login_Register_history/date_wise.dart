@@ -29,6 +29,7 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
     super.initState();
   }
 
+  @override
   Widget build(BuildContext context) {
     log(widget.schoolID);
     return Scaffold(
@@ -55,13 +56,13 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
                               builder: (context) {
                                 return AdminLoginDetailsScreen(
                                   schoolID: widget.schoolID,
-                                  dateId: snapshot.data!.docs[index]['id'],
+                                  dateId: snapshot.data?.docs[index]['id'],
                                 );
                               },
                             ));
                           },
                           child: Container(
-                            color: Color.fromARGB(255, 117, 182, 212),
+                            color: const Color.fromARGB(255, 117, 182, 212),
                             height: 60,
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -70,7 +71,7 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
                                 children: [
                                   const Icon(Icons.drive_file_move_sharp),
                                   sizedBoxw10,
-                                  Text(snapshot.data!.docs[index]['id']),
+                                  Text(snapshot.data?.docs[index]['id']),
                                   const Spacer(),
                                   IconButton(
                                       onPressed: () async {
@@ -86,7 +87,7 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
                                                 child: ListBody(
                                                   children: <Widget>[
                                                     Text(
-                                                        "Clear all the data registered on ${snapshot.data!.docs[index]['id']}. ")
+                                                        "Clear all the data registered on ${snapshot.data?.docs[index]['id']}. ")
                                                   ],
                                                 ),
                                               ),
@@ -96,13 +97,14 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
                                                       Navigator.of(context)
                                                           .pop();
                                                     },
-                                                    child: Text("Cancel")),
+                                                    child:
+                                                        const Text("Cancel")),
                                                 TextButton(
                                                   child: const Text('ok'),
                                                   onPressed: () async {
                                                     if (widget.schoolID ==
                                                         FirebaseAuth.instance
-                                                            .currentUser!.uid) {
+                                                            .currentUser?.uid) {
                                                       await FirebaseFirestore
                                                           .instance
                                                           .collection(
@@ -144,7 +146,7 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
                                                             content:
                                                                 SingleChildScrollView(
                                                               child: ListBody(
-                                                                children: <
+                                                                children: const <
                                                                     Widget>[],
                                                               ),
                                                             ),
@@ -184,7 +186,7 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
                       separatorBuilder: (context, index) {
                         return const Divider();
                       },
-                      itemCount: snapshot.data!.docs.length);
+                      itemCount: snapshot.data?.docs.length ?? 0);
                 } else {
                   return const Center(
                     child: CircularProgressIndicator(),
@@ -200,7 +202,7 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
         .doc(widget.schoolID)
         .get();
     setState(() {
-      adminpassword = vari.data()!['password'];
+      adminpassword = vari.data()?['password'];
     });
   }
 }
