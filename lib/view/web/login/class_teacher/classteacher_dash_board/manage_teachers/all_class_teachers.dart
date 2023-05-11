@@ -139,6 +139,7 @@ class AllClassesListViewForTeacher extends StatelessWidget {
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
+                        ////dsfe
                         return Container(
                           margin: EdgeInsets.all(10.w),
                           color: cWhite,
@@ -203,6 +204,7 @@ class AllClassesListViewForTeacher extends StatelessWidget {
                                             width: 10.w,
                                           ),
                                           Container(
+                                            
                                             child: StreamBuilder(
                                                 stream: FirebaseFirestore
                                                     .instance
