@@ -146,7 +146,7 @@ String? checkFieldPhoneNumberIsValid(String? fieldContent) {
   if (fieldContent == null || fieldContent.isEmpty) {
     return 'Field is mandatory';
   }
-  if (fieldContent.length <= 10) {
+  if (fieldContent.length < 10) {
     return 'Please enter 10 digit number';
   }
   if (RegExp(r'^\d{10}$').hasMatch(fieldContent)) {
