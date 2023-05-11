@@ -146,7 +146,7 @@ class SampoornaHomeScreen extends StatelessWidget {
                           ClubWidget(),
                           Center(
                             child: SizedBox(
-                              width: size.width / 2,
+                              width: size.width / 4,
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   shape: const StadiumBorder(),
