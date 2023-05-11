@@ -224,6 +224,8 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                                     passwordController.text.trim(),
                                     emailController.text.trim(),
                                     phoneNumberController.text.trim());
+                              }else{
+                                return showToast(msg: 'Sorry you are not a main Admin');
                               }
                             },
                             child: const Text('Create'),

@@ -245,44 +245,39 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                 onPressed: () async {
                                   showDialog(
                                     context: context,
-                                    barrierDismissible:
-                                        false, // user must tap button!
+               
                                     builder: (BuildContext context) {
                                       return AlertDialog(
                                         title: const Text('Add BatchYear'),
                                         content: SingleChildScrollView(
                                           child: ListBody(
                                             children: <Widget>[
-                                              Expanded(
-                                                child: TextFormField(
-                                                  controller:
-                                                      applynewBatchYearContoller,
-                                                  readOnly: true,
-                                                  onTap: () =>
-                                                      _selectDate(context),
-                                                  decoration:
-                                                      const InputDecoration(
-                                                    labelText: 'DD-MM-YYYY',
-                                                    border:
-                                                        OutlineInputBorder(),
-                                                  ),
+                                              TextFormField(
+                                                controller:
+                                                    applynewBatchYearContoller,
+                                                readOnly: true,
+                                                onTap: () =>
+                                                    _selectDate(context),
+                                                decoration:
+                                                    const InputDecoration(
+                                                  labelText: 'DD-MM-YYYY',
+                                                  border:
+                                                      OutlineInputBorder(),
                                                 ),
                                               ),
                                               const Icon(Icons
                                                   .arrow_downward_outlined),
-                                              Expanded(
-                                                child: TextFormField(
-                                                  controller:
-                                                      selectedToDaterContoller,
-                                                  readOnly: true,
-                                                  onTap: () =>
-                                                      _selectToDate(context),
-                                                  decoration:
-                                                      const InputDecoration(
-                                                    labelText: 'To',
-                                                    border:
-                                                        OutlineInputBorder(),
-                                                  ),
+                                              TextFormField(
+                                                controller:
+                                                    selectedToDaterContoller,
+                                                readOnly: true,
+                                                onTap: () =>
+                                                    _selectToDate(context),
+                                                decoration:
+                                                    const InputDecoration(
+                                                  labelText: 'To',
+                                                  border:
+                                                      OutlineInputBorder(),
                                                 ),
                                               ),
                                             ],
