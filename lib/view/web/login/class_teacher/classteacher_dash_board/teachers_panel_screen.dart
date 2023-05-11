@@ -129,28 +129,20 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
       ), //4
       AddGuardian(
           teacherIDE: widget.teacherEmail,
-          schoolId: Get.find<AdminLoginScreenController>().schoolID), 
+          schoolId: Get.find<AdminLoginScreenController>().schoolID),
+      const UnderMaintanceScreen(), //6
 
-      
-          
-           //5 
+      TimeTableScreen(
+        classID: teacherClassId,
+        schoolID: widget.schoolID,
+      ),
 
-          const UnderMaintanceScreen(),//6
-      // SelectClassForTimeTable(
-      //     schoolID: Get.find<AdminLoginScreenController>().schoolID), //7
-          TimeTableScreen(classID: teacherClassId, schoolID: widget.schoolID,),
-      // ClassTeacherCreateEventsPage(
-      //   schoolId: Get.find<AdminLoginScreenController>().schoolID,
-      //   classId: teacherClassId,
-      // ), //8
       const UnderMaintanceScreen(), //9
       ClassTeacherCreateEventsPage(), //6
 
-      // SelectClassForTimeTable(
-      //     schoolID: Get.find<AdminLoginScreenController>().schoolID), //7
       ClassTeacherCreateNoticePage(), //8
-      const UnderMaintanceScreen(),//9
-      const UnderMaintanceScreen(),//10/10
+      const UnderMaintanceScreen(), //9
+      const UnderMaintanceScreen(), //10/10
     ];
     List<Widget> drawerPages = [
       ClassEventsPageList(
@@ -245,7 +237,6 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                 onPressed: () async {
                                   showDialog(
                                     context: context,
-               
                                     builder: (BuildContext context) {
                                       return AlertDialog(
                                         title: const Text('Add BatchYear'),
@@ -261,8 +252,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                 decoration:
                                                     const InputDecoration(
                                                   labelText: 'DD-MM-YYYY',
-                                                  border:
-                                                      OutlineInputBorder(),
+                                                  border: OutlineInputBorder(),
                                                 ),
                                               ),
                                               const Icon(Icons
@@ -276,8 +266,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                 decoration:
                                                     const InputDecoration(
                                                   labelText: 'To',
-                                                  border:
-                                                      OutlineInputBorder(),
+                                                  border: OutlineInputBorder(),
                                                 ),
                                               ),
                                             ],
@@ -420,7 +409,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                           style: GoogleFonts.poppins(
                                               color: Colors.red,
                                               fontWeight: FontWeight.w800,
-                                              fontSize: 13    .h),
+                                              fontSize: 13.h),
                                         ),
                                       ),
                                     ),

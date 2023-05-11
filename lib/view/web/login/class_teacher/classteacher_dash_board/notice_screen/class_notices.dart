@@ -27,8 +27,8 @@ class ClassNoticeTeacher extends StatelessWidget {
     Size screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(backgroundColor: adminePrimayColor,
+        appBar: AppBar(
+            backgroundColor: adminePrimayColor,
             title: GestureDetector(
                 onTap: () {
                   Navigator.of(context)
