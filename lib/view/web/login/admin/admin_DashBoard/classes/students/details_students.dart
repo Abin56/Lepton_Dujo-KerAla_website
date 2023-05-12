@@ -799,7 +799,7 @@ class _GenrateTcState extends State<GenrateTc> {
                       image: DecorationImage(
                           image: AssetImage('assets/images/work.png'))),
                 ),
-                const Text("TC Genrate ",
+                const Text(" Genrate TC",
                     style: TextStyle(fontWeight: FontWeight.bold)),
               ],
             ),

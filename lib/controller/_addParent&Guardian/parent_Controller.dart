@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/model/parent&guardian/parent_model.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
+import 'package:dujo_kerala_website/view/web/widgets/drop_DownList/get_students.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -35,8 +36,10 @@ class ParentController extends GetxController {
         .then((value) {
           parentName.clear();
           parentPhoneNumber.clear();
+          schoolStudentListValue = null;
       
       showToast(msg: "Added");
     });
   }
 }
+

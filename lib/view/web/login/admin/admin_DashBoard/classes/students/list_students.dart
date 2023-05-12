@@ -165,19 +165,19 @@ class _ListOfStudentsState extends State<ListOfStudents> {
                                                                         'https://assets4.lottiefiles.com/packages/lf20_u7yrcwlk.json'),
                                                       )),
                                                   sizedBoxH10,
-                                                  Text(
-                                                    "S T U D E N T ${index + 1}",
-                                                    style:
-                                                        GoogleFonts.montserrat(
-                                                            color: Colors.grey,
-                                                            fontSize: 18,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                  ),
+                                                  // Text(
+                                                  //   "S T U D E N T ${index + 1}",
+                                                  //   style:
+                                                  //       GoogleFonts.montserrat(
+                                                  //           color: Colors.grey,
+                                                  //           fontSize: 18,
+                                                  //           fontWeight:
+                                                  //               FontWeight
+                                                  //                   .bold),
+                                                  // ),
                                                   sizedBoxH10,
                                                   Text(
-                                                    'Create Date : ${stringTimeToDateConvert(data.createDate!)}',
+                                                    'Created Date : ${stringTimeToDateConvert(data.createDate!)}',
                                                     style: GoogleFonts.poppins(
                                                       color: Colors.black
                                                           .withOpacity(0.4),
