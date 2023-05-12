@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../../../controller/Getx/web_controllers/generainstructions/general_instructions_controller.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
+import '../../../../../fonts/fonts.dart';
+import '../../../../widgets/Iconbackbutton.dart';
 
 class EditGeneralInstructions extends StatelessWidget {
   EditGeneralInstructions({super.key, required this.schoolId});
@@ -15,38 +18,94 @@ class EditGeneralInstructions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     generalInstructionsController.getInstruction(schoolId);
+    var screenSize=MediaQuery.of(context).size;
     return Scaffold(
         ///backgroundColor: adminePrimayColor,
-        appBar: AppBar(
-            backgroundColor: adminePrimayColor,
-            title: const Center(
-              child: Text(
-                'Edit Instruction',
-                style: TextStyle(color: cWhite),
+        // appBar: AppBar(
+        //     backgroundColor: adminePrimayColor,
+        //     title: const Center(
+        //       child: Text(
+        //         'Edit Instruction',
+        //         style: TextStyle(color: cWhite),
+        //       ),
+        //     )),
+        body: 
+        SizedBox(
+          height: screenSize.height,
+          child: SingleChildScrollView(
+            child:
+               Row(
+                 children: [
+                   Container(
+                    color: adminePrimayColor,
+                    //height: screenSize.height,
+                    width: screenSize.width * 1 / 2,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        IconButtonBackWidget(color: cWhite),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Hi Admin ',
+                              style: ralewayStyle.copyWith(
+                                fontSize: 48.0,
+                                color: AppColors.whiteColor,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                            SizedBox(
+                              height: screenSize.width / 20,
+                            ),
+                            Text(
+                              'Edit Instruction',
+                              style: ralewayStyle.copyWith(
+                                fontSize: 25.0,
+                                color: AppColors.whiteColor,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                            SizedBox(
+                              height: screenSize.width / 5,
+                              width: screenSize.width / 2,
+                              child: LottieBuilder.network(
+                                  'https://assets4.lottiefiles.com/packages/lf20_HYpftP1320.json'),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
               ),
-            )),
-        body: Obx(() {
-          return generalInstructionsController.isLoading.value
-              ? const Center(
-                  child: CircularProgressIndicator(),
-                )
-              : ListView.separated(
-                  itemCount:
-                      generalInstructionsController.listOfGeneralIModel.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return GInstructionListTileWidget(
-                      generalInstructionsController:
-                          generalInstructionsController,
-                      schoolId: schoolId,
-                      index: index,
-                    );
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const Divider();
-                  },
-                );
-        }));
+                 
+              Obx(() {
+                return generalInstructionsController.isLoading.value
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : ListView.builder(
+                         itemCount: 
+                            generalInstructionsController.listOfGeneralIModel.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return 
+                              GInstructionListTileWidget(
+                                    generalInstructionsController:
+                                        generalInstructionsController,
+                                    schoolId: schoolId,
+                                    index: index,
+                              );
+                        },
+                       
+                      );
+              }),
+              ],
+               ),
+            
+          ),
+        ));
   }
 }
 
@@ -65,7 +124,7 @@ class GInstructionListTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding:    const EdgeInsets.all(10.0),
       child: ListTile(
         shape:  RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(5.w))),

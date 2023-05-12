@@ -190,7 +190,7 @@ class _AddAchievementsState extends State<AddAchievements> {
                               const NetworkImage('https://via.placeholder.com/150'),
                           backgroundColor: const Color.fromARGB(241, 54, 225, 248),
                         ): CircleAvatar(
-                          radius: 60.w,
+                          radius: 80.w,
                           backgroundImage: MemoryImage(_file!)
                               
                         ) ,
@@ -198,7 +198,7 @@ class _AddAchievementsState extends State<AddAchievements> {
                       Padding(
                         padding: EdgeInsets.only(
                           left: 120.w,
-                          top: 170.h,
+                          top: 170.w,
                         ),
                         child: InkWell(
                           onTap: () async {
@@ -219,9 +219,9 @@ class _AddAchievementsState extends State<AddAchievements> {
                               color: Color.fromARGB(255, 0, 0, 0),
                             ),
                             alignment: Alignment.center,
-                            child: const Icon(
-                              Icons.camera_alt_outlined,
-                              color: Color.fromARGB(255, 156, 20, 20),
+                            child:  Icon(
+                              Icons.camera_alt_outlined,size: 22.w,
+                              color: const Color.fromARGB(255, 156, 20, 20),
                             ),
                           ),
                         ),
@@ -275,12 +275,12 @@ class _AddAchievementsState extends State<AddAchievements> {
                                   fontSize: 18,
                                   color: Colors.black,
                                 ),
-                                icon: const Padding(
+                                icon:  Padding(
                                   padding: EdgeInsets.all(
-                                    13,
+                                    13.w,
                                   ),
                                   child: Icon(Icons.arrow_drop_down,
-                                      size: 18, color: Colors.grey),
+                                      size: 18.w, color: Colors.grey),
                                 ),
                                 isExpanded: true,
                                 items: snapshot.data?.docs.map(
@@ -348,25 +348,25 @@ class _AddAchievementsState extends State<AddAchievements> {
                                   hint: Padding(
                                       padding: const EdgeInsets.all(10.0),
                                       child: (studentListValue == null)
-                                          ? const Text(
+                                          ?  Text(
                                               "Select Students",
                                               style: TextStyle(
-                                                  color: Color.fromARGB(
+                                                  color: const Color.fromARGB(
                                                       255, 0, 0, 0),
-                                                  fontSize: 18),
+                                                  fontSize: 18.w),
                                             )
                                           : Text(studentListValue?['studentName'])),
                                   underline: const SizedBox(),
-                                  style: const TextStyle(
-                                    fontSize: 18,
+                                  style:  TextStyle(
+                                    fontSize: 18.w,
                                     color: Colors.black,
                                   ),
-                                  icon: const Padding(
+                                  icon:  Padding(
                                     padding: EdgeInsets.all(
-                                      13,
+                                      13.w,
                                     ),
                                     child: Icon(Icons.arrow_drop_down,
-                                        size: 18, color: Colors.grey),
+                                        size: 18.w, color: Colors.grey),
                                   ),
                                   isExpanded: true,
                                   items: snapshot.data?.docs.map(
@@ -475,7 +475,7 @@ class _AddAchievementsState extends State<AddAchievements> {
                     height: size.width / 38,
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(10),
+                    padding:  EdgeInsets.all(10.w),
                     child: (InkWell(
                       onTap: () async{
                         

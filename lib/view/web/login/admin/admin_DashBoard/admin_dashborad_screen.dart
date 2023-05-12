@@ -371,10 +371,11 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                         child: ListView(
                           children: [
                             
-                            Padding(
-                              padding:  EdgeInsets.only(left: 60.w,top: 20.w),
-                              child: GoogleMonstserratWidgets(text: 'DuJo',fontsize: 14.w,color: cWhite,fontWeight: FontWeight.w600),
-                            ),
+                           Container(
+                            margin: EdgeInsets.only(top: 20.h),
+                            height: 30.h,
+                            width: 80.w,
+                            child: Image.asset('assets/images/dujon.png')),
                             Row(
                               children: [
                                 IconButton(
@@ -382,10 +383,10 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                     Navigator.pop(context);
                                   },
                                   icon:
-                                      const Icon(Icons.arrow_back, color: cred),
+                                       Icon(Icons.arrow_back, color: cred,size: 22.w),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.all(20),
+                                  padding:  EdgeInsets.all(20.w),
                                   child: Text(
                                     'Admin Dashboard',
                                     style: GoogleFonts.poppins(
@@ -397,7 +398,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                               ],
                             ),
                             Padding(
-                              padding: const EdgeInsets.all(20.0),
+                              padding:  EdgeInsets.all(20.0.w),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
@@ -420,7 +421,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                 itemCount: viewListNames.length,
                                 itemBuilder: (context, index) {
                                   return Padding(
-                                    padding: const EdgeInsets.all(20.0),
+                                    padding:  EdgeInsets.all(20.0.w),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
@@ -430,8 +431,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                           width: 15.w,
                                           height: 15.w,
                                         ),
-                                        const SizedBox(
-                                          width: 10,
+                                         SizedBox(
+                                          width: 10.w,
                                         ),
                                         GestureDetector(
                                           onTap: () {

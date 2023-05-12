@@ -248,53 +248,57 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
               width: screenSize.width * 1 / 2,
               child: Column(children: [
                
-                Stack(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: screenSize.width / 30),
-                      child: (_file == null)
-                          ?  CircleAvatar(
-                              radius: 80.w,
-                              backgroundImage: const NetworkImage(
-                                  'https://via.placeholder.com/150'),
-                              backgroundColor:
-                                  const Color.fromARGB(241, 54, 225, 248),
-                            )
-                          : CircleAvatar(
-                              radius: 80.w, backgroundImage: MemoryImage(_file!)),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 120.w,
-                        top: 160.h,
+                SizedBox(
+                 // height: 200,
+                  child: Stack(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: screenSize.width / 30),
+                        child: (_file == null)
+                            ?  CircleAvatar(
+                                radius: 80.w,
+                                backgroundImage: const NetworkImage(
+                                    'https://via.placeholder.com/150'),
+                                backgroundColor:
+                                    const Color.fromARGB(241, 54, 225, 248),
+                              )
+                            : CircleAvatar(
+                                radius: 80.w, backgroundImage: MemoryImage(_file!)),
                       ),
-                      child: InkWell(
-                        onTap: () async {
-                          FilePickerResult? result = await FilePicker.platform
-                              .pickFiles(type: FileType.image);
-                          if (result != null) {
-                            file = result.files.first.bytes;
-                            setState(() {
-                              _file = file;
-                            });
-                          }
-                        },
-                        child: Container(
-                          height: screenSize.width / 40,
-                          width: screenSize.width / 40,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Color.fromARGB(255, 82, 196, 173),
-                          ),
-                          alignment: Alignment.center,
-                          child:  Icon(
-                            Icons.camera_alt_outlined,
-                            color: Color.fromARGB(255, 156, 20, 20),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 120.w,
+                          top: 160.w,
+                        ),
+                        child: InkWell(
+                          onTap: () async {
+                            FilePickerResult? result = await FilePicker.platform
+                                .pickFiles(type: FileType.image);
+                            if (result != null) {
+                              file = result.files.first.bytes;
+                              setState(() {
+                                _file = file;
+                              });
+                            }
+                          },
+                          child: Container(
+                            height: screenSize.width / 40,
+                            width: screenSize.width / 40,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Color.fromARGB(255, 82, 196, 173),
+                            ),
+                            alignment: Alignment.center,
+                            child:  Icon(
+                              Icons.camera_alt_outlined,
+                              color: Color.fromARGB(255, 156, 20, 20),
+                              size: 22.w,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 sizedBoxH20,
                  Padding(
@@ -332,25 +336,25 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                               hint: Padding(
                                   padding: const EdgeInsets.all(10.0),
                                   child: (classListValue == null)
-                                      ? const Text(
+                                      ?  Text(
                                           "Select Class",
                                           style: TextStyle(
                                               color:
                                                   Color.fromARGB(255, 0, 0, 0),
-                                              fontSize: 18),
+                                              fontSize: 18.w),
                                         )
                                       : Text(classListValue?['className'])),
-                              underline: const SizedBox(),
-                              style: const TextStyle(
-                                fontSize: 18,
+                              underline:  SizedBox(),
+                              style:  TextStyle(
+                                fontSize: 18.w,
                                 color: Colors.black,
                               ),
-                              icon: const Padding(
+                              icon:  Padding(
                                 padding: EdgeInsets.all(
-                                  13,
+                                  13.w,
                                 ),
                                 child: Icon(Icons.arrow_drop_down,
-                                    size: 18, color: Colors.grey),
+                                    size: 18.w, color: Colors.grey),
                               ),
                               isExpanded: true,
                               items: snapshot.data?.docs.map(
@@ -423,27 +427,27 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                             ),
                             child: DropdownButton(
                                 hint: Padding(
-                                    padding: const EdgeInsets.all(10.0),
+                                    padding:  EdgeInsets.all(10.0.w),
                                     child: (studentListValue == null)
-                                        ? const Text(
+                                        ?  Text(
                                             "Select Students",
                                             style: TextStyle(
                                                 color: Color.fromARGB(
                                                     255, 0, 0, 0),
-                                                fontSize: 18),
+                                                fontSize: 18.w),
                                           )
                                         : Text(studentListValue?['studentName'])),
-                                underline: const SizedBox(),
-                                style: const TextStyle(
-                                  fontSize: 18,
+                                underline:  SizedBox(),
+                                style:  TextStyle(
+                                  fontSize: 18.w,
                                   color: Colors.black,
                                 ),
-                                icon: const Padding(
+                                icon:  Padding(
                                   padding: EdgeInsets.all(
-                                    13,
+                                    13.w,
                                   ),
                                   child: Icon(Icons.arrow_drop_down,
-                                      size: 18, color: Colors.grey),
+                                      size: 18.w, color: Colors.grey),
                                 ),
                                 isExpanded: true,
                                 items: snapshot.data?.docs.map(
@@ -557,7 +561,7 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                   height: screenSize.width / 75,
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(10),
+                  padding:  EdgeInsets.all(10.w),
                   child: (InkWell(
                     onTap: ()async  {
                        try {
@@ -595,7 +599,7 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                         height: screenSize.width * 1 / 20,
                         width: screenSize.width * 1 / 5,
                         //color: Colors.red,
-                        child:(docLoading == true)? const Center(child: CircularProgressIndicator(),) : CustomContainer2(
+                        child:(docLoading == true)?  Center(child: CircularProgressIndicator(),) : CustomContainer2(
                           text: 'Upload Document',
                           onTap: ()async {
                            
@@ -610,15 +614,15 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                 (pickedFile == null)
                     ? const SizedBox()
                     : Padding(
-                        padding: const EdgeInsets.all(10),
+                        padding:  EdgeInsets.all(10.w),
                         child: Text(
                           pickedFile!.name,
-                          style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+                          style:  TextStyle(
+                              fontSize: 20.w, fontWeight: FontWeight.bold),
                         ),
                       ),
                 Padding(
-                  padding: const EdgeInsets.all(10),
+                  padding:  EdgeInsets.all(10.w),
                   child: (InkWell(
                     onTap: () {
                       if (_formKey.currentState!.validate()) {
@@ -692,8 +696,8 @@ class CustomContainer1 extends StatelessWidget {
             child: Center(
               child: Text(
                 text,
-                style: const TextStyle(
-                    fontSize: 25, color: Color.fromARGB(255, 251, 250, 250)),
+                style:  TextStyle(
+                    fontSize: 25.w, color: Color.fromARGB(255, 251, 250, 250)),
               ),
             ),
           ),
@@ -723,11 +727,11 @@ class CustomContainer2 extends StatelessWidget {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding:  EdgeInsets.all(8.0.w),
         child: InkWell(
           child: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(18),
+              borderRadius: BorderRadius.circular(18.w  ),
               //border: Border.all(width: 1),
               gradient: LinearGradient(
                   colors: containerColor1[9],
@@ -737,8 +741,8 @@ class CustomContainer2 extends StatelessWidget {
             child: Center(
               child: Text(
                 text,
-                style: const TextStyle(
-                    fontSize: 25, color: Color.fromARGB(255, 251, 250, 250)),
+                style:  TextStyle(
+                    fontSize: 25.w, color: Color.fromARGB(255, 251, 250, 250)),
               ),
             ),
           ),

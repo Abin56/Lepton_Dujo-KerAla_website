@@ -7,7 +7,6 @@ import '../../../../controller/text_form_hide/password_filed.dart';
 import '../../../colors/colors.dart';
 import '../../../constant/constant.dart';
 import '../../../fonts/fonts.dart';
-import '../../../icons/icons.dart';
 import '../../widgets/responsive.dart';
 
 class TeacherLoginScreen extends StatelessWidget {
@@ -133,11 +132,7 @@ class TeacherLoginScreen extends StatelessWidget {
                           ),
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            prefixIcon: IconButton(
-                              onPressed: () {},
-                              icon: Image.asset(AppIcons.emailIcon),
-                            ),
-                              
+                            prefixIcon: const Icon(Icons.mail),
                             contentPadding: const EdgeInsets.only(top: 16.0),
                             hintText: 'Enter ID',
                             hintStyle: ralewayStyle.copyWith(
@@ -193,10 +188,7 @@ class TeacherLoginScreen extends StatelessWidget {
                                                             .toggleObscureSecond();
                                                       },
                                                     ),
-                            prefixIcon: IconButton(
-                              onPressed: () {},
-                              icon: Image.asset(AppIcons.lockIcon),
-                            ),
+                            prefixIcon:  const Icon(Icons.lock),
                             contentPadding: const EdgeInsets.only(top: 16.0),
                             hintText: 'Enter Password',
                             hintStyle: ralewayStyle.copyWith(

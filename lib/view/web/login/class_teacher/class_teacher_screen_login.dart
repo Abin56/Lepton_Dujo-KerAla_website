@@ -12,7 +12,6 @@ import '../../../../controller/text_form_hide/password_filed.dart';
 import '../../../colors/colors.dart';
 import '../../../constant/constant.dart';
 import '../../../fonts/fonts.dart';
-import '../../../icons/icons.dart';
 
 class ClassTeacherLoginScreen extends StatelessWidget {
   final _hideGetxController = Get.put(PasswordField());
@@ -144,11 +143,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                             ),
                             decoration: InputDecoration(
                               border: InputBorder.none,
-                              prefixIcon: IconButton(
-                                onPressed: () {},
-                                icon: Image.asset(AppIcons.emailIcon),
-                              ),
-                              
+                              prefixIcon: const Icon(Icons.mail),
                               contentPadding: const EdgeInsets.only(top: 16.0),
                               hintText: 'Email',
                               hintStyle: ralewayStyle.copyWith(
@@ -204,10 +199,7 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                                   _hideGetxController.toggleObscureSecond();
                                 },
                               ),
-                              prefixIcon: IconButton(
-                                onPressed: () {},
-                                icon: Image.asset(AppIcons.lockIcon),
-                              ),
+                              prefixIcon: const Icon(Icons.lock),
                               contentPadding: const EdgeInsets.only(top: 16.0),
                               hintText: 'Enter Password',
                               hintStyle: ralewayStyle.copyWith(

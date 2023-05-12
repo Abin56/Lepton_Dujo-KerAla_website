@@ -399,17 +399,18 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                             child: Column(
                               children: [
                                // sizedBoxH20,
-                                Padding(
-                                  padding:  EdgeInsets.only(top: 20.w),
-                                  child: GoogleMonstserratWidgets(text: 'DuJo',fontsize: 14.w,color: cWhite,fontWeight: FontWeight.w600),
-                                ),
+                                 Container(
+                            margin: EdgeInsets.only(top: 20.h),
+                            height: 30.h,
+                            width: 80.w,
+                            child: Image.asset('assets/images/dujon.png')),
                                 Row(
                                   children: [
                                     IconButtonBackWidget(color: Colors.red),
                                     FittedBox(
                                       child: 
                                           Padding( 
-                                            padding: const EdgeInsets.all(20),
+                                            padding:  EdgeInsets.all(20.w),
                                             child: Text(
                                               'Teacher Dashboard',
                                               style: GoogleFonts.poppins(
