@@ -88,7 +88,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'Food and Beverages',
     'Exam Notifications',
     'Alumni Associations',
-    'Fees in Classwise',
+    'Fees in Classwise', 
     'Non-Teaching Staffs',
     // 'Generate TC',
     // 'Generate Summary',
@@ -735,7 +735,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                     },
                                                     child: const Text("Cancel")),
                                                 TextButton(
-                                                  child: const Text('ok'),
+                                                  child: const Text('Ok'),
                                                   onPressed: () async {
                                                     log("school id${Get.find<AdminLoginScreenController>().schoolID}");
                                                     log("batch year${Get.find<GetFireBaseData>().bYear.value}");

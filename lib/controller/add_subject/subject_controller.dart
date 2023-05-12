@@ -58,13 +58,13 @@ class SubjectController extends GetxController {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('cancel'),
+              child: const Text('Cancel'),
               onPressed: () async {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: const Text('ok'),
+              child: const Text('Ok'),
               onPressed: () async {
                 await firebaseFirestore
                     .collection("classes")
@@ -114,13 +114,13 @@ class SubjectController extends GetxController {
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('cancel'),
+                child: const Text('Cancel'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
               TextButton(
-                child: const Text('ok'),
+                child: const Text('Ok'),
                 onPressed: () async {
                   log(schoolListValue!['docid']);
                   log(classID);
@@ -190,13 +190,13 @@ class SubjectController extends GetxController {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('cancel'),
+              child: const Text('Cancel'),
               onPressed: () async {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: const Text('ok'),
+              child: const Text('Ok'),
               onPressed: () async {
                 await firebaseFirestore
                     .collection(Get.find<GetFireBaseData>().bYear.value)

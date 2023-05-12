@@ -149,11 +149,7 @@ class AdminLoginScreen extends StatelessWidget {
                             ),
                             decoration: InputDecoration(
                               border: InputBorder.none,
-                              prefixIcon: IconButton(
-                                onPressed: () {},
-                                icon: Image.asset(AppIcons.emailIcon),
-                              ),
-                              
+                              prefixIcon: Icon(Icons.mail),
                               contentPadding: const EdgeInsets.only(top: 16.0),
                               hintText: 'Enter your ID',
                               hintStyle: ralewayStyle.copyWith(

@@ -975,7 +975,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                               ),
                               actions: <Widget>[
                                 TextButton(
-                                  child: const Text('ok'),
+                                  child: const Text('Ok'),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
@@ -987,7 +987,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
               },
             ),
             TextButton(
-              child: const Text('cancel'),
+              child: const Text('Cancel'),
               onPressed: () {
                 Navigator.pop(context);
               },

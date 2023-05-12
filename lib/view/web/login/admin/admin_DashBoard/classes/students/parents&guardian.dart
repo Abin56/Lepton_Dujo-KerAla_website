@@ -34,7 +34,7 @@ Future<void> getParentDatas(
                           onTap: () {
                             Navigator.pop(context);
                           },
-                          child: const Text('ok')),
+                          child: const Text('Ok')),
                     ),
                   ],
                   title: const Text('Guardian Info'),
@@ -131,7 +131,7 @@ Future<void> getParentDatas(
                                                   child: const Padding(
                                                       padding:
                                                           EdgeInsets.all(8.0),
-                                                      child: Text('cancel')),
+                                                      child: Text('Cancel')),
                                                 ),
                                               ],
                                               title:
@@ -233,7 +233,7 @@ Future<void> getGuardianDatas(
                           onTap: () {
                             Navigator.pop(context);
                           },
-                          child: const Text('ok')),
+                          child: const Text('Ok')),
                     ),
                   ],
                   title: const Text('Parents Info'),
@@ -307,7 +307,7 @@ Future<void> getGuardianDatas(
                                                   child: const Padding(
                                                       padding:
                                                           EdgeInsets.all(8.0),
-                                                      child: Text('cancel')),
+                                                      child: Text('Cancel')),
                                                 ),
                                               ],
                                               title:

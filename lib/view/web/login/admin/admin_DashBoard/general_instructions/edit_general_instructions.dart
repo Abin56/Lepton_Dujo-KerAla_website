@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../controller/Getx/web_controllers/generainstructions/general_instructions_controller.dart';
@@ -15,7 +16,7 @@ class EditGeneralInstructions extends StatelessWidget {
   Widget build(BuildContext context) {
     generalInstructionsController.getInstruction(schoolId);
     return Scaffold(
-        backgroundColor: adminePrimayColor,
+        ///backgroundColor: adminePrimayColor,
         appBar: AppBar(
             backgroundColor: adminePrimayColor,
             title: const Center(
@@ -66,8 +67,8 @@ class GInstructionListTileWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: ListTile(
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10))),
+        shape:  RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(5.w))),
         contentPadding: const EdgeInsets.all(10),
         tileColor: cWhite,
         leading: Text((index + 1).toString()),
@@ -77,41 +78,6 @@ class GInstructionListTileWidget extends StatelessWidget {
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            IconButton(
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text('Confirm Delete'),
-                      content: const Text(
-                          'Are you sure you want to delete this instruction'),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('Cancel'),
-                        ),
-                        TextButton(
-                          onPressed: () async {
-                            generalInstructionsController.removeInstruction(
-                              generalInstructionsController
-                                  .listOfGeneralIModel[index].instructionId,
-                              schoolId,
-                            );
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('Remove'),
-                        )
-                      ],
-                    );
-                  },
-                );
-              },
-              icon: const Icon(Icons.delete),
-            ),
-            sizedBoxw10,
             IconButton(
               onPressed: () {
                 generalInstructionsController.textEditingController.text =
@@ -158,12 +124,49 @@ class GInstructionListTileWidget extends StatelessWidget {
                 );
               },
               icon: const Icon(
-                Icons.edit,
+                Icons.edit,color: cgreen,
               ),
-            )
+            ),
+            sizedBoxw10,
+                   IconButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Confirm Delete'),
+                      content: const Text(
+                          'Are you sure you want to delete this instruction'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('Cancel'),
+                        ),
+                        TextButton(
+                          onPressed: () async {
+                            generalInstructionsController.removeInstruction(
+                              generalInstructionsController
+                                  .listOfGeneralIModel[index].instructionId,
+                              schoolId,
+                            );
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('Remove'),
+                        )
+                      ],
+                    );
+                  },
+                );
+              },
+              icon: const Icon(Icons.delete,color: cred),
+            ),
           ],
         ),
       ),
     );
   }
 }
+
+
