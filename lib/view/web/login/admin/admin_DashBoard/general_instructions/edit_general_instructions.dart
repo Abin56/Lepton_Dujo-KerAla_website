@@ -30,81 +30,76 @@ class EditGeneralInstructions extends StatelessWidget {
         //       ),
         //     )),
         body: 
-        SizedBox(
-          height: screenSize.height,
-          child: SingleChildScrollView(
-            child:
-               Row(
-                 children: [
-                   Container(
-                    color: adminePrimayColor,
-                    //height: screenSize.height,
-                    width: screenSize.width * 1 / 2,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        IconButtonBackWidget(color: cWhite),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Hi Admin ',
-                              style: ralewayStyle.copyWith(
-                                fontSize: 48.0,
-                                color: AppColors.whiteColor,
-                                fontWeight: FontWeight.w800,
-                              ),
-                            ),
-                            SizedBox(
-                              height: screenSize.width / 20,
-                            ),
-                            Text(
-                              'Edit Instruction',
-                              style: ralewayStyle.copyWith(
-                                fontSize: 25.0,
-                                color: AppColors.whiteColor,
-                                fontWeight: FontWeight.w800,
-                              ),
-                            ),
-                            SizedBox(
-                              height: screenSize.width / 5,
-                              width: screenSize.width / 2,
-                              child: LottieBuilder.network(
-                                  'https://assets4.lottiefiles.com/packages/lf20_HYpftP1320.json'),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-              ),
-                 
-              Obx(() {
-                return generalInstructionsController.isLoading.value
-                    ? const Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : ListView.builder(
-                         itemCount: 
-                            generalInstructionsController.listOfGeneralIModel.length,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return 
-                              GInstructionListTileWidget(
-                                    generalInstructionsController:
-                                        generalInstructionsController,
-                                    schoolId: schoolId,
-                                    index: index,
-                              );
-                        },
-                       
-                      );
-              }),
-              ],
-               ),
-            
-          ),
+        Row(
+          children: [
+            Container(
+             color: adminePrimayColor,
+             height: screenSize.height,
+             width: screenSize.width * 1 / 2,
+             child: Column(
+               crossAxisAlignment: CrossAxisAlignment.start,
+               mainAxisAlignment: MainAxisAlignment.start,
+               children: [
+                 IconButtonBackWidget(color: cWhite),
+                 Column(
+                   mainAxisAlignment: MainAxisAlignment.center,
+                   crossAxisAlignment: CrossAxisAlignment.center,
+                   children: [
+                     Text(
+                       'Hi Admin ',
+                       style: ralewayStyle.copyWith(
+                         fontSize: 48.0,
+                         color: AppColors.whiteColor,
+                         fontWeight: FontWeight.w800,
+                       ),
+                     ),
+                     SizedBox(
+                       height: screenSize.width / 20,
+                     ),
+                     Text(
+                       'Edit Instruction',
+                       style: ralewayStyle.copyWith(
+                         fontSize: 25.0,
+                         color: AppColors.whiteColor,
+                         fontWeight: FontWeight.w800,
+                       ),
+                     ),
+                     SizedBox(
+                       height: screenSize.width / 5,
+                       width: screenSize.width / 2,
+                       child: LottieBuilder.network(
+                           'https://assets4.lottiefiles.com/packages/lf20_HYpftP1320.json'),
+                     )
+                   ],
+                 ),
+               ],
+             ),
+            ),
+          
+            Obx(() {
+         return generalInstructionsController.isLoading.value
+             ? const Center(
+                 child: CircularProgressIndicator(),
+               )
+             : Expanded(
+               child: ListView.builder(
+                    itemCount: 
+                       generalInstructionsController.listOfGeneralIModel.length,
+                   shrinkWrap: true,
+                   itemBuilder: (context, index) {
+                     return 
+                         GInstructionListTileWidget(
+                               generalInstructionsController:
+                                   generalInstructionsController,
+                               schoolId: schoolId,
+                               index: index,
+                         );
+                   },
+                  
+                 ),
+             );
+            }),
+            ],
         ));
   }
 }

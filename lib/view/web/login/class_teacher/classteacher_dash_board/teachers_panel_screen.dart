@@ -410,9 +410,9 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                     FittedBox(
                                       child: 
                                           Padding( 
-                                            padding:  EdgeInsets.all(20.w),
+                                            padding:  EdgeInsets.all(17.w),
                                             child: Text(
-                                              'Teacher Dashboard',
+                                              'Classteacher Dashboard',
                                               style: GoogleFonts.poppins(
                                                   color: Colors.red,
                                                   fontWeight: FontWeight.w800,
