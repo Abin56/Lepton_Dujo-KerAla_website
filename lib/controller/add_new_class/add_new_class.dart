@@ -63,13 +63,13 @@ class AddSchoolClassController extends GetxController {
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('cancel'),
+                child: const Text('Cancel'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
               TextButton(
-                child: const Text('ok'),
+                child: const Text('Ok'),
                 onPressed: () async {
                   if (updateFormkey.currentState!.validate()) {
                     firebaseFirestore.collection("classes").doc(docid).update({
@@ -112,13 +112,13 @@ class AddSchoolClassController extends GetxController {
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('cancel'),
+                child: const Text('Cancel'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
               TextButton(
-                child: const Text('ok'),
+                child: const Text('Ok'),
                 onPressed: () async {
                   firebaseFirestore
                       .collection("classes")
@@ -147,7 +147,7 @@ class AddSchoolClassController extends GetxController {
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('ok'),
+                child: const Text('Ok'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -176,13 +176,13 @@ class AddSchoolClassController extends GetxController {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('cancel'),
+              child: const Text('Cancel'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: const Text('ok'),
+              child: const Text('Ok'),
               onPressed: () async {
                 firebaseFirestore
                     .collection(Get.find<GetFireBaseData>().bYear.value)
@@ -224,13 +224,13 @@ class AddSchoolClassController extends GetxController {
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('cancel'),
+                child: const Text('Cancel'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
               TextButton(
-                child: const Text('ok'),
+                child: const Text('Ok'),
                 onPressed: () async {
                   firebaseFirestore
                       .collection(Get.find<GetFireBaseData>().bYear.value)
@@ -261,7 +261,7 @@ class AddSchoolClassController extends GetxController {
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('ok'),
+                child: const Text('Ok'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

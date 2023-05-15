@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
@@ -211,7 +213,7 @@ class _NonTeachingLoginState extends State<NonTeachingLogin> {
                                     textStyle: const TextStyle(fontSize: 17),
                                   ),
                                   onPressed: () async {
-                                    bool? result = formKey.currentState?.validate();
+                                   if (formKey.currentState?.validate()??false){
                                 
                                     if (staffNameController.text != '' &&
                                         employeeIDController.text != '' &&
@@ -256,6 +258,7 @@ class _NonTeachingLoginState extends State<NonTeachingLogin> {
                                       print(validateEmail('hdk'));
                                     }
                                     clearStaffFunction();
+                                   }
                                   },
                                   child: const Text('Create'),
                                 ),

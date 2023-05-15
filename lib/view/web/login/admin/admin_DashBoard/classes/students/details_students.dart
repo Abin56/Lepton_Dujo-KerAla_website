@@ -628,7 +628,7 @@ class StudentsDetails extends StatelessWidget {
                                                                           context));
                                                             },
                                                             child: const Text(
-                                                                'ok')),
+                                                                'Ok')),
                                                       ),
                                                       Padding(
                                                         padding:
@@ -761,13 +761,13 @@ class _GenrateTcState extends State<GenrateTc> {
                     ),
                     actions: <Widget>[
                       TextButton(
-                        child: const Text('cancel'),
+                        child: const Text('Cancel'),
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
                       ),
                       TextButton(
-                        child: const Text('ok'),
+                        child: const Text('Ok'),
                         onPressed: () async {
                           Navigator.push(context, MaterialPageRoute(
                             builder: (context) {
@@ -799,7 +799,7 @@ class _GenrateTcState extends State<GenrateTc> {
                       image: DecorationImage(
                           image: AssetImage('assets/images/work.png'))),
                 ),
-                const Text("TC Genrate ",
+                const Text(" Genrate TC",
                     style: TextStyle(fontWeight: FontWeight.bold)),
               ],
             ),

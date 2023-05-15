@@ -98,7 +98,7 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
                                                     },
                                                     child: Text("Cancel")),
                                                 TextButton(
-                                                  child: const Text('ok'),
+                                                  child: const Text('Ok'),
                                                   onPressed: () async {
                                                     if (widget.schoolID ==
                                                         FirebaseAuth.instance
@@ -152,7 +152,7 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
                                                               TextButton(
                                                                 child:
                                                                     const Text(
-                                                                        'ok'),
+                                                                        'Ok'),
                                                                 onPressed: () {
                                                                   Navigator.of(
                                                                           context)

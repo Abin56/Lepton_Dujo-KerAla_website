@@ -5,6 +5,7 @@ import 'dart:html' as html;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
+import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/list_of_classes.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_protection_group/students_proctection_group.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/teacher_section/add_teacher.dart';
@@ -31,6 +32,7 @@ import 'admin_notice/add_new_notices.dart';
 import 'admin_notice/admin_notice_new_ui/admin_notice_show_new.dart';
 import 'admin_pta/admin_pta_screen.dart';
 import 'all_Students/all_students_view_Screen.dart';
+import 'bus_Route/bus_route.dart';
 import 'classes/add_class.dart';
 import 'create_Admin/add_new_admin.dart';
 import 'events/events_screen.dart';
@@ -39,7 +41,6 @@ import 'general_instructions/creation_general_instruction_.dart';
 import 'login_Register_history/date_wise.dart';
 import 'mothers_pta/mothers_pta_screen.dart';
 import 'non_Teaching_staff/non_teaching_staff.dart';
-import 'sampoorna/sampoorna_home.dart';
 
 class AdminDashBoardPage extends StatefulWidget {
   AdminDashBoardPage(
@@ -88,11 +89,11 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'Food and Beverages',
     'Exam Notifications',
     'Alumni Associations',
-    'Fees in Classwise',
+    'Fees in Classwise', 
     'Non-Teaching Staffs',
     // 'Generate TC',
     // 'Generate Summary',
-    'Sampoorna'
+    //r'Sampoorna'
   ];
 
   List<String> dashboardImagesList = [
@@ -122,7 +123,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'assets/images/steward.png',
     // 'assets/images/file-transfer.png',
     // 'assets/images/report.png',
-    'assets/images/folders.png',
+    //'assets/images/folders.png',
   ];
 
   List<String> viewListNames = [
@@ -171,8 +172,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       Achievements(schoolID: widget.schoolID), //11-Achievements
       StudentProtectionGroup(), //12-Students Protection Group
       AdminScholarships(schoolID: widget.schoolID), //13-ScholarShip
-      //BusRoute(),
-      const UnderMaintanceScreen(), //14-Bus Route
+     
+       BusRoute(), //14-Bus Route
       const UnderMaintanceScreen(), //15-Student Summary
       const UnderMaintanceScreen(), //16-Research and development
       const UnderMaintanceScreen(), //17-School Calendar
@@ -187,7 +188,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       NonTeachingLogin(schoolID: widget.schoolID),
       // const UnderMaintanceScreen(), //11
       // const UnderMaintanceScreen(),
-      SampoornaHomeScreen(schoolId: widget.schoolID, studentId: ''), //13
+     // SampoornaHomeScreen(schoolId: widget.schoolID, studentId: ''), //13
     ];
     List<Widget> drawerPages = [
       AllStudentList(),
@@ -370,6 +371,12 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                         color: adminePrimayColor,
                         child: ListView(
                           children: [
+                            
+                           Container(
+                            margin: EdgeInsets.only(top: 20.h),
+                            height: 30.h,
+                            width: 80.w,
+                            child: Image.asset('assets/images/dujon.png')),
                             Row(
                               children: [
                                 IconButton(
@@ -377,22 +384,22 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                     Navigator.pop(context);
                                   },
                                   icon:
-                                      const Icon(Icons.arrow_back, color: cred),
+                                       Icon(Icons.arrow_back, color: cred,size: 22.w),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.all(20),
+                                  padding:  EdgeInsets.all(20.w),
                                   child: Text(
                                     'Admin Dashboard',
                                     style: GoogleFonts.poppins(
                                         color: Colors.red,
                                         fontWeight: FontWeight.w800,
-                                        fontSize: 15.h),
+                                        fontSize: 15.w),
                                   ),
                                 ),
                               ],
                             ),
                             Padding(
-                              padding: const EdgeInsets.all(20.0),
+                              padding:  EdgeInsets.all(20.0.w),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
@@ -415,7 +422,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                 itemCount: viewListNames.length,
                                 itemBuilder: (context, index) {
                                   return Padding(
-                                    padding: const EdgeInsets.all(20.0),
+                                    padding:  EdgeInsets.all(20.0.w),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
@@ -425,8 +432,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                           width: 15.w,
                                           height: 15.w,
                                         ),
-                                        const SizedBox(
-                                          width: 10,
+                                         SizedBox(
+                                          width: 10.w,
                                         ),
                                         GestureDetector(
                                           onTap: () {
@@ -704,77 +711,82 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                 const SizedBox(
                                   width: 10,
                                 ),
-                                IconButton(
-                                  onPressed: () async {
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible:
-                                          false, // user must tap button!
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: const Text('Message'),
-                                          content: SingleChildScrollView(
-                                            child: ListBody(
-                                              children: const <Widget>[
-                                                Text(
-                                                    'Are you sure you want to logout?')
-                                              ],
-                                            ),
-                                          ),
-                                          actions: <Widget>[
-                                            TextButton(
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                                child: const Text("Cancel")),
-                                            TextButton(
-                                              child: const Text('ok'),
-                                              onPressed: () async {
-                                                log("school id${Get.find<AdminLoginScreenController>().schoolID}");
-                                                log("batch year${Get.find<GetFireBaseData>().bYear.value}");
-                                                log("dateee${LoginTimeIDSavingClass.date}");
-                                                log("idddddddd${LoginTimeIDSavingClass.id.toString()}");
-                                                await FirebaseFirestore.instance
-                                                    .collection(
-                                                        "SchoolListCollection")
-                                                    .doc(Get.find<AdminLoginScreenController>()
-                                                        .schoolID)
-                                                    .collection(Get.find<
-                                                            GetFireBaseData>()
-                                                        .bYear
-                                                        .value)
-                                                    .doc(Get.find<
-                                                            GetFireBaseData>()
-                                                        .bYear
-                                                        .value)
-                                                    .collection("LoginHistory")
-                                                    .doc(LoginTimeIDSavingClass
-                                                        .date)
-                                                    .collection(
-                                                        LoginTimeIDSavingClass
-                                                            .date)
-                                                    .doc(LoginTimeIDSavingClass
-                                                        .id)
-                                                    .set(
-                                                        {
-                                                      'logOutTime':
-                                                          DateTime.now()
-                                                              .toString(),
+                                Row(
+                                  children: [
+                                    IconButton(
+                                      onPressed: () async {
+                                        showDialog(
+                                          context: context,
+                                          barrierDismissible:
+                                              false, // user must tap button!
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: const Text('Message'),
+                                              content: SingleChildScrollView(
+                                                child: ListBody(
+                                                  children: const <Widget>[
+                                                    Text(
+                                                        'Are you sure you want to logout?')
+                                                  ],
+                                                ),
+                                              ),
+                                              actions: <Widget>[
+                                                TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context).pop();
                                                     },
-                                                        SetOptions(
-                                                            merge: true)).then(
-                                                        (value) => html
-                                                            .window.location
-                                                            .reload());
-                                              },
-                                            ),
-                                          ],
+                                                    child: const Text("Cancel")),
+                                                TextButton(
+                                                  child: const Text('Ok'),
+                                                  onPressed: () async {
+                                                    log("school id${Get.find<AdminLoginScreenController>().schoolID}");
+                                                    log("batch year${Get.find<GetFireBaseData>().bYear.value}");
+                                                    log("dateee${LoginTimeIDSavingClass.date}");
+                                                    log("idddddddd${LoginTimeIDSavingClass.id.toString()}");
+                                                    await FirebaseFirestore.instance
+                                                        .collection(
+                                                            "SchoolListCollection")
+                                                        .doc(Get.find<AdminLoginScreenController>()
+                                                            .schoolID)
+                                                        .collection(Get.find<
+                                                                GetFireBaseData>()
+                                                            .bYear
+                                                            .value)
+                                                        .doc(Get.find<
+                                                                GetFireBaseData>()
+                                                            .bYear
+                                                            .value)
+                                                        .collection("LoginHistory")
+                                                        .doc(LoginTimeIDSavingClass
+                                                            .date)
+                                                        .collection(
+                                                            LoginTimeIDSavingClass
+                                                                .date)
+                                                        .doc(LoginTimeIDSavingClass
+                                                            .id)
+                                                        .set(
+                                                            {
+                                                          'logOutTime':
+                                                              DateTime.now()
+                                                                  .toString(),
+                                                        },
+                                                            SetOptions(
+                                                                merge: true)).then(
+                                                            (value) => html
+                                                                .window.location
+                                                                .reload());
+                                                  },
+                                                ),
+                                              ],
+                                            );
+                                          },
                                         );
                                       },
-                                    );
-                                  },
-                                  icon: const Icon(Icons.logout_outlined),
-                                )
+                                      icon: const Icon(Icons.logout_outlined),
+                                    ),
+                                GoogleMonstserratWidgets(fontsize: 13.w,text: 'logout',)
+                                 ],
+                                ),
                               ],
                             ),
                           ),

@@ -11,12 +11,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
-import '../../../../../../model/guardian/guardian_model.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
-import '../../../../widgets/drop_DownList/get_classes.dart';
 import '../../../../widgets/drop_DownList/get_students.dart';
 
 class AddGuardian extends StatelessWidget {
