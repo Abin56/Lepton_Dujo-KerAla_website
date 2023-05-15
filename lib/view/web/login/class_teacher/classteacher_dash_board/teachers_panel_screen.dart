@@ -372,9 +372,12 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                 .update({
                                               'classID':
                                                   classIDListValue['docid']
-                                            }).then((value) => html
+                                            }).then((value) {
+                                              showToast(msg: 'Class activated Please Login again');
+                                               html
                                                     .window.location
-                                                    .reload());
+                                                    .reload();
+                                            });
                                           },
                                           child: Text(
                                             'Set Class',
@@ -532,8 +535,8 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                           MaterialButton(
                                                               color:
                                                                   Colors.green,
-                                                              onPressed: () {
-                                                                () async {
+                                                              onPressed: ()async {
+                                                                 log("working");
                                                                   await FirebaseFirestore
                                                                       .instance
                                                                       .collection(
@@ -549,14 +552,13 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                                           .uid)
                                                                       .update({
                                                                     'classID':
-                                                                        classIDListValue[
+                                                                        classIDListValue![
                                                                             'docid']
                                                                   }).then((value) async {
                                                                     await getFireBaseData
                                                                         .getTeacherClassRoll();
                                                                     log("message");
                                                                   });
-                                                                };
                                                               },
                                                               child: Text(
                                                                 'Set Class',
