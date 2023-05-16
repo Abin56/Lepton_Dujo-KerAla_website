@@ -113,6 +113,7 @@ class HomeP extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
+                    // fgkjsdl;fjal;dfjs
                     //color: cBlue,
                     width: 400.w,
                     child: Row(
