@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dujo_kerala_website/model/class_teacher/add_subject/add_subjects.dart';
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';

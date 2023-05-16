@@ -20,7 +20,7 @@ class _FamilyPolicyScreenState extends State<FamilyPolicyScreen> {
       body: SingleChildScrollView(
         child: Center(
           child: SizedBox(
-            width: screenSize.width * 1 / 2,
+            width: screenSize.width * 1 / 4,
             child: Column(
               children: [
                 Image.network(
