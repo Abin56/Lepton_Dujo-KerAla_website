@@ -138,7 +138,7 @@ String? checkFieldEmailIsValid(String? fieldContent) {
   if (result) {
     return null;
   } else {
-    return "Email is not valid";
+    return "Please enter a valid email";
   }
 }
 
