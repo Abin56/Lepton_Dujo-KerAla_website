@@ -105,41 +105,37 @@ class AdminLoginScreenController extends GetxController {
                     content: SingleChildScrollView(
                       child: ListBody(
                         children: <Widget>[
-                          Expanded(
-                            child: TextFormField(
-                              validator: (value) {
-                                if (applynewBatchYearContoller.text.isEmpty) {
-                                  return 'Invalid';
-                                } else {
-                                  return null;
-                                }
-                              },
-                              controller: applynewBatchYearContoller,
-                              readOnly: true,
-                              onTap: () => _selectDate(context),
-                              decoration: const InputDecoration(
-                                labelText: 'DD-MM-YYYY',
-                                border: OutlineInputBorder(),
-                              ),
+                          TextFormField(
+                            validator: (value) {
+                              if (applynewBatchYearContoller.text.isEmpty) {
+                                return 'Invalid';
+                              } else {
+                                return null;
+                              }
+                            },
+                            controller: applynewBatchYearContoller,
+                            readOnly: true,
+                            onTap: () => _selectDate(context),
+                            decoration: const InputDecoration(
+                              labelText: 'DD-MM-YYYY',
+                              border: OutlineInputBorder(),
                             ),
                           ),
                           const Icon(Icons.arrow_downward_outlined),
-                          Expanded(
-                            child: TextFormField(
-                              controller: selectedToDaterContoller,
-                              validator: (value) {
-                                if (selectedToDaterContoller.text.isEmpty) {
-                                  return 'Invalid';
-                                } else {
-                                  return null;
-                                }
-                              },
-                              readOnly: true,
-                              onTap: () => _selectToDate(context),
-                              decoration: const InputDecoration(
-                                labelText: 'To',
-                                border: OutlineInputBorder(),
-                              ),
+                          TextFormField(
+                            controller: selectedToDaterContoller,
+                            validator: (value) {
+                              if (selectedToDaterContoller.text.isEmpty) {
+                                return 'Invalid';
+                              } else {
+                                return null;
+                              }
+                            },
+                            readOnly: true,
+                            onTap: () => _selectToDate(context),
+                            decoration: const InputDecoration(
+                              labelText: 'To',
+                              border: OutlineInputBorder(),
                             ),
                           ),
                         ],
@@ -168,7 +164,10 @@ class AdminLoginScreenController extends GetxController {
                                 'batchYear':
                                     "${applynewBatchYearContoller.text.trim()}-${selectedToDaterContoller.text.trim()}"
                               }, SetOptions(merge: true)).then(
-                                  (value) => html.window.location.reload());
+                                  (value) {
+                                    showToast(msg: 'Batch Added Successfully Please Login again');
+                                    html.window.location.reload();
+                                  });
                             });
                           }
                         },

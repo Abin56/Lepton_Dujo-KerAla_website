@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
-import '../../view/web/widgets/drop_DownList/get_classes.dart';
 import '../admin_login_screen/admin_login_screen_controller.dart';
 
 class GetFireBaseData extends GetxController {
@@ -24,8 +23,8 @@ class GetFireBaseData extends GetxController {
         .collection("SchoolListCollection")
         .doc(Get.find<AdminLoginScreenController>().schoolID)
         .get();
-    bYear.value = vari.data()!['batchYear'];
-    log('getx data >>>>>>>>>>>>>>>>>${bYear}');
+    bYear.value = vari.data()?['batchYear'];
+    log('getx data >>>>>>>>>>>>>>>>>$bYear');
   }
 
   Future<void> getTeacherClassRoll() async {
@@ -36,7 +35,7 @@ class GetFireBaseData extends GetxController {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
     getTeacherClassRole.value = vari.data()!['classID'];
-    log('getx data >>>>>>>>>>>>>>>>>${bYear}');
+    log('getx data >>>>>>>>>>>>>>>>>$bYear');
   }
 
   Future<void> getTeacherDetail(String teacherID) async {
