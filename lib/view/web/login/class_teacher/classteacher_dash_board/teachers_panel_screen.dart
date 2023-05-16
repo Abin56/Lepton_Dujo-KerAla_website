@@ -21,6 +21,7 @@ import '../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../model/teacher/teacher_model.dart';
 import '../../../../colors/colors.dart';
 import '../../../../constant/constant.dart';
+import '../../../../fonts/google_monstre.dart';
 import '../../../widgets/button_container_widget.dart';
 import '../../../widgets/drop_DownList/get_batchYear.dart';
 import '../../../widgets/drop_DownList/get_classList.dart';
@@ -400,21 +401,28 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                             color: adminePrimayColor,
                             child: Column(
                               children: [
-                                sizedBoxH20,
+                               // sizedBoxH20,
+                                 Container(
+                            margin: EdgeInsets.only(top: 20.h),
+                            height: 30.h,
+                            width: 80.w,
+                            child: Image.asset('assets/images/dujon.png')),
                                 Row(
                                   children: [
                                     IconButtonBackWidget(color: Colors.red),
                                     FittedBox(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(20),
-                                        child: Text(
-                                          'Teacher Dashboard',
-                                          style: GoogleFonts.poppins(
-                                              color: Colors.red,
-                                              fontWeight: FontWeight.w800,
-                                              fontSize: 13.h),
-                                        ),
-                                      ),
+                                      child: 
+                                          Padding( 
+                                            padding:  EdgeInsets.all(17.w),
+                                            child: Text(
+                                              'Classteacher Dashboard',
+                                              style: GoogleFonts.poppins(
+                                                  color: Colors.red,
+                                                  fontWeight: FontWeight.w800,
+                                                  fontSize: 13.h),
+                                            ),
+                                          ),
+                                        
                                     ),
                                   ],
                                 ),
@@ -475,7 +483,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                     EdgeInsets.only(right: 30.0.w, left: 30.w),
                                 child: Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceAround,
                                   children: [
                                     Text(
                                       Get.find<AdminLoginScreenController>()
@@ -828,7 +836,9 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                         const SizedBox(
                                           width: 10,
                                         ),
-                                        const Icon(Icons.logout_outlined)
+                                        const Icon(Icons.logout_outlined),
+                                        GoogleMonstserratWidgets(text: 'logout', fontsize: 13.w
+                                        ),
                                       ],
                                     )
                                   ],
@@ -968,7 +978,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                               ),
                               actions: <Widget>[
                                 TextButton(
-                                  child: const Text('ok'),
+                                  child: const Text('Ok'),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
@@ -980,7 +990,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
               },
             ),
             TextButton(
-              child: const Text('cancel'),
+              child: const Text('Cancel'),
               onPressed: () {
                 Navigator.pop(context);
               },

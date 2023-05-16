@@ -184,7 +184,7 @@ class ClassesDeatils extends StatelessWidget {
                                   ),
                                   actions: <Widget>[
                                     TextButton(
-                                      child: const Text('ok'),
+                                      child: const Text('Ok'),
                                       onPressed: () async {
                                         FirebaseFirestore.instance
                                             .collection("SchoolListCollection")
@@ -208,7 +208,7 @@ class ClassesDeatils extends StatelessWidget {
                                       },
                                     ),
                                     TextButton(
-                                      child: const Text('cancel'),
+                                      child: const Text('Cancel'),
                                       onPressed: () {
                                         Navigator.of(context).pop();
                                       },
@@ -435,7 +435,7 @@ class ClassesDeatils extends StatelessWidget {
                                                                             Widget>[
                                                                           TextButton(
                                                                             child:
-                                                                                const Text('ok'),
+                                                                                const Text('Ok'),
                                                                             onPressed:
                                                                                 () {
                                                                               Navigator.of(context).pop();
@@ -541,7 +541,7 @@ class ClassesDeatils extends StatelessWidget {
                                               ),
                                               actions: <Widget>[
                                                 TextButton(
-                                                  child: const Text('ok'),
+                                                  child: const Text('Ok'),
                                                   onPressed: () {
                                                     Navigator.of(context).pop();
                                                   },
@@ -572,7 +572,7 @@ class ClassesDeatils extends StatelessWidget {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('cancel'),
+              child: const Text('Cancel'),
               onPressed: () {
                 Navigator.of(context).pop();
               },

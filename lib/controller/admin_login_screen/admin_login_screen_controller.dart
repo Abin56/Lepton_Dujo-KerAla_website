@@ -147,7 +147,7 @@ class AdminLoginScreenController extends GetxController {
                     ),
                     actions: <Widget>[
                       TextButton(
-                        child: const Text('cancel'),
+                        child: const Text('Cancel'),
                         onPressed: () async {
                           Navigator.of(context).pop();
                         },
@@ -197,7 +197,7 @@ class AdminLoginScreenController extends GetxController {
                 ),
                 actions: <Widget>[
                   TextButton(
-                    child: const Text('ok'),
+                    child: const Text('Ok'),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
@@ -271,7 +271,7 @@ class AdminLoginScreenController extends GetxController {
           return Form(
             key: _forgetFormkey,
             child: AlertDialog(
-              title: const Text('Change Password ?'),
+              title: const Text('Reset your password ?'),
               content: SingleChildScrollView(
                 child: ListBody(
                   children: <Widget>[
@@ -294,13 +294,13 @@ class AdminLoginScreenController extends GetxController {
               ),
               actions: <Widget>[
                 TextButton(
-                  child: const Text('cancel'),
+                  child: const Text('Cancel'),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
                 ),
                 TextButton(
-                  child: const Text('ok'),
+                  child: const Text('Ok'),
                   onPressed: () async {
                     if (_forgetFormkey.currentState!.validate()) {
                       FirebaseAuth.instance
@@ -327,7 +327,7 @@ class AdminLoginScreenController extends GetxController {
                               ),
                               actions: <Widget>[
                                 TextButton(
-                                  child: const Text('ok'),
+                                  child: const Text('Ok'),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },

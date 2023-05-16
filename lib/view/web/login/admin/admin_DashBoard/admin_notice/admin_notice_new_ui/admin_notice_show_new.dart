@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -52,13 +53,13 @@ class NoticeDisplay extends StatelessWidget {
                             ),
                           )
                         : Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(),
+                            decoration: const BoxDecoration(
+                            //  border: Border.all(),
                               // color: const Color(0xFFE1F8DC),
                             ),
                             width: screenSize.width * 0.4,
                             child: Padding(
-                              padding: const EdgeInsets.all(16.0),
+                              padding:  EdgeInsets.only(left: 60.w,right: 60),
                               child: ListView(
                                 shrinkWrap: true,
                                 children: <Widget>[
@@ -111,7 +112,7 @@ class NoticeDisplay extends StatelessWidget {
                                   if (adminNoticeController
                                           .adminNoticeModelData.value ==
                                       null)
-                                    const SizedBox()
+                                   const SizedBox()
                                   else
                                     Row(
                                       mainAxisAlignment:
@@ -266,7 +267,8 @@ class NoticePageElevatedButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return SizedBox(
-      width: width * 0.1,
+     width: 70.w,
+      height: 40.w,
       child: ElevatedButton(
         onPressed: function,
         style: ElevatedButton.styleFrom(
@@ -275,7 +277,7 @@ class NoticePageElevatedButtonWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(12), // <-- Radius
           ),
         ),
-        child: NoticeTextWidget(title: title),
+        child: Text(title, style: const TextStyle(color: cWhite)),
       ),
     );
   }
@@ -395,16 +397,16 @@ class NoticeCardWidget extends StatelessWidget {
         height: screenSize.width * .14,
         width: screenSize.width * .17,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(),
+            borderRadius: BorderRadius.circular(5.w),
+           // border: Border.all(),
             color: Colors.white,
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 5,
-                blurRadius: 7,
-                offset: const Offset(0, 3),
-              ),
+              color: const Color.fromARGB(211, 122, 117, 117).withOpacity(0.5),
+              spreadRadius: 10,
+              blurRadius: 10,
+              offset: const Offset(0, 3),
+            ),
             ]),
         child: Padding(
           padding: const EdgeInsets.all(16.0),

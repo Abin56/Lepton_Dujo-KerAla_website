@@ -290,7 +290,7 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
                   );
                 } else {
                   return TextButton(
-                    child: const Text('ok'),
+                    child: const Text('Ok'),
                     onPressed: () {
                       Get.to(GenrateTC(
                           sno: sController.text.trim(),

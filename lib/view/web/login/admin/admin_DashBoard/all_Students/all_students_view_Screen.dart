@@ -204,7 +204,7 @@ class _AllStudentListState extends State<AllStudentList> {
                                                     ),
 
                                                     Text(
-                                                      'Create Date : ${stringTimeToDateConvert(data.createDate ?? "")}',
+                                                      'Created Date : ${stringTimeToDateConvert(data.createDate ?? "")}',
                                                       style:
                                                           GoogleFonts.poppins(
                                                         color: Colors.black

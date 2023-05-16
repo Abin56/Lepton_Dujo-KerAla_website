@@ -83,7 +83,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                             //  color: Color.fromARGB(255, 63, 181, 102),
                             child: Center(
                               child: GoogleMonstserratWidgets(
-                                  text: 'ClassName',
+                                  text: 'Class Name',
                                   fontsize: 12.w,
                                   color: cWhite,
                                   fontWeight: FontWeight.bold),
@@ -98,7 +98,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                             width: screenSize.width * 0.28,
                             child: Center(
                               child: GoogleMonstserratWidgets(
-                                text: 'ClassTeacherName',
+                                text: 'Classteacher Name',
                                 fontsize: 15.w,
                                 color: cWhite,
                                 fontWeight: FontWeight.w500,

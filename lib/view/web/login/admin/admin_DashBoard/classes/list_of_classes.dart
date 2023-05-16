@@ -8,7 +8,6 @@ import '../../../../../../controller/admin_login_screen/admin_login_screen_contr
 import '../../../../../../controller/class_list/class_list_model.dart';
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../model/add_class/add_new_class.dart';
-
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
 import 'details_ofClasses.dart';
@@ -151,7 +150,7 @@ class _ListOfClassesScreenState extends State<ListOfClassesScreen> {
                                                   ),
                                                   sizedBoxH10,
                                                   // Text(
-                                                  //   'Create Date : ${stringTimeToDateConvert(data.)}',
+                                                  //   'Created Date : ${stringTimeToDateConvert(data.)}',
                                                   //   style: GoogleFonts.poppins(
                                                   //     color: Colors.black
                                                   //         .withOpacity(0.4),

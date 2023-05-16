@@ -356,7 +356,7 @@ class ManageTeachersController extends GetxController {
               },
             ),
             TextButton(
-              child: const Text('ok'),
+              child: const Text('Ok'),
               onPressed: () async {
                 await firebaseFirestore
                     .collection(Get.find<GetFireBaseData>().bYear.value)
