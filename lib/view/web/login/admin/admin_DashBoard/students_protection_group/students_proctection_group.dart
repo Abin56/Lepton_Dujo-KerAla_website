@@ -119,7 +119,7 @@ class StudentProtectionGroup extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Members In PTA',
+                          Text('Members In Group',
                               style: GoogleFonts.oswald(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,

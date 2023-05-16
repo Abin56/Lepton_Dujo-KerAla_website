@@ -7,7 +7,6 @@ import '../../../../controller/text_form_hide/password_filed.dart';
 import '../../../colors/colors.dart';
 import '../../../constant/constant.dart';
 import '../../../fonts/fonts.dart';
-import '../../../icons/icons.dart';
 import '../../widgets/responsive.dart';
 
 class TeacherLoginScreen extends StatelessWidget {
@@ -124,10 +123,8 @@ class TeacherLoginScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(16.0),
                           color: AppColors.whiteColor,
                         ),
-                        child: Obx(() => TextFormField(
+                        child:  TextFormField(
                         //  controller: TextEditingController. teacheridController,
-                            obscureText:
-                                _hideGetxController.isObscurefirst.value,
                           style: ralewayStyle.copyWith(
                             fontWeight: FontWeight.w400,
                             color: cBlack,
@@ -135,19 +132,7 @@ class TeacherLoginScreen extends StatelessWidget {
                           ),
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            prefixIcon: IconButton(
-                              onPressed: () {},
-                              icon: Image.asset(AppIcons.emailIcon),
-                            ),
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                    _hideGetxController.isObscurefirst.value
-                                        ? Icons.visibility_off
-                                        : Icons.visibility),
-                                onPressed: () {
-                                  _hideGetxController.toggleObscureFirst();
-                                },
-                              ),
+                            prefixIcon: const Icon(Icons.mail),
                             contentPadding: const EdgeInsets.only(top: 16.0),
                             hintText: 'Enter ID',
                             hintStyle: ralewayStyle.copyWith(
@@ -157,7 +142,7 @@ class TeacherLoginScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        ),
+                        
                       ),
                       SizedBox(height: height * 0.014),
                       Padding(
@@ -203,10 +188,7 @@ class TeacherLoginScreen extends StatelessWidget {
                                                             .toggleObscureSecond();
                                                       },
                                                     ),
-                            prefixIcon: IconButton(
-                              onPressed: () {},
-                              icon: Image.asset(AppIcons.lockIcon),
-                            ),
+                            prefixIcon:  const Icon(Icons.lock),
                             contentPadding: const EdgeInsets.only(top: 16.0),
                             hintText: 'Enter Password',
                             hintStyle: ralewayStyle.copyWith(
@@ -225,7 +207,7 @@ class TeacherLoginScreen extends StatelessWidget {
                             // adminLoginScreenController.forgetPassWord(context);
                           },
                           child: Text(
-                            'Forgot Password?/ Reset Password ?',
+                            'Forgot Password ?',
                             style: ralewayStyle.copyWith(
                               fontSize: 14.0,
                               color: cWhite,

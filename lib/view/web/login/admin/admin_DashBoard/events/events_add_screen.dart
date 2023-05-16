@@ -1,10 +1,13 @@
+
+
+
+
 // ignore_for_file: sort_child_properties_last
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/controller/get_firebase-data/get_firebase_data.dart';
 import 'package:dujo_kerala_website/view/fonts/fonts.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -85,7 +88,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                                   ),
                               
                                   
-                                  Container(
+                                  SizedBox(
                                     height: 300,
                                     width:screenSize.width/2,
                                     child: LottieBuilder.network(
@@ -107,11 +110,11 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                     child: Column(children: [
                       
                       Padding(
-                        padding: EdgeInsets.only(top: 80, bottom: 10,left: 100,right: 100),
+                        padding: const EdgeInsets.only(top: 80, bottom: 10,left: 100,right: 100),
                         child: TextFormField(
                            validator: checkFieldEmpty,
                           controller: dateController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: 'Date',
                           ),
@@ -119,11 +122,11 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                       ),
     
                        Padding(
-                         padding: EdgeInsets.only(top: 10, bottom: 10,left: 100,right: 100),
+                         padding: const EdgeInsets.only(top: 10, bottom: 10,left: 100,right: 100),
                         child: TextFormField(
                            validator: checkFieldEmpty,
                            controller: headingController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: 'Heading',
                           ),
@@ -134,11 +137,11 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                       //   height: 10,
                       // ), 
                          Padding(
-                         padding: EdgeInsets.only(top: 10, bottom: 10,left: 100,right: 100),
+                         padding: const EdgeInsets.only(top: 10, bottom: 10,left: 100,right: 100),
                         child: TextFormField(
                            validator: checkFieldEmpty,
                            controller: venueController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: 'Venue',
                           ),
@@ -146,13 +149,13 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                       ),
                       
                       Padding(
-                         padding: EdgeInsets.only(top: 10, bottom: 10,left: 100,right: 100),
+                         padding: const EdgeInsets.only(top: 10, bottom: 10,left: 100,right: 100),
                         child: TextFormField(
                           textAlign: TextAlign.start,
                            validator: checkFieldEmpty,
                            controller: descriptionController,
                            maxLines: 5,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             
                             labelText: 'Description',
@@ -163,18 +166,18 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                         ),
                       ),
                         Padding(
-                        padding: EdgeInsets.only(top: 10, bottom: 10,left: 100,right: 100),
+                        padding: const EdgeInsets.only(top: 10, bottom: 10,left: 100,right: 100),
                         child: TextFormField(
                            validator: checkFieldEmpty,
                            controller: signedByController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: 'Signed by',
                           ),
                         ),
                       ),
     
-                      SizedBox(height: 30,), 
+                      const SizedBox(height: 30,), 
     
                     
                       //  InkWell(
@@ -202,7 +205,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                                 borderRadius: BorderRadius.circular(14)),
                             child: TextButton(
                               style: TextButton.styleFrom(
-                                foregroundColor: Color.fromARGB(255, 255, 255, 255),
+                                foregroundColor: const Color.fromARGB(255, 255, 255, 255),
                                 padding: const EdgeInsets.all(9.0),
                                 textStyle: const TextStyle(fontSize: 17),
                               ),
@@ -218,6 +221,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                                 setState(() {
                                     widget.loadingStatus = false;
                                 }); 
+                                clearEventFunction();
                                 
                                 
                                 // showToast(msg: 'New Event Added!');
@@ -241,7 +245,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                               child: const Text('Upload Events'), 
     
                             ),
-                          ) : Center(child: CircularProgressIndicator(),),
+                          ) : const Center(child: CircularProgressIndicator(),),
                       
                     ]),
                   ),
@@ -253,4 +257,12 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
     ),
     );
 }
+void clearEventFunction() {
+    headingController.clear();
+    dateController.clear();
+    descriptionController.clear();
+    venueController.clear();
+    signedByController.clear();
+  
+  }
 }

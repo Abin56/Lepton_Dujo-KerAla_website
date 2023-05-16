@@ -105,6 +105,7 @@ class AddParent extends StatelessWidget {
                                 ),
                               ),
                               onPressed: () async {
+                                if (formKey.currentState!.validate()){
                                 parentController.addParent(
                                     parentNameController,
                                     parentPhoneNumberController,
@@ -112,6 +113,8 @@ class AddParent extends StatelessWidget {
                                     Get.find<GetFireBaseData>()
                                         .getTeacherClassRole
                                         .value);
+                                        
+                                }
                               },
                               child: const Text("Add Parent"),
                             ),
@@ -127,6 +130,7 @@ class AddParent extends StatelessWidget {
     );
   }
 }
+
 
 class AddParentWidget extends StatelessWidget {
   AddParentWidget({

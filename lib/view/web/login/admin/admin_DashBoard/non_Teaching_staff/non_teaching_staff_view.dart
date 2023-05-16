@@ -1,16 +1,14 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:dujo_kerala_website/controller/teachersList/teachers_list.dart';
-// import 'package:dujo_kerala_website/model/profileextraDetails/teacher_extra_profile.dart';
 // import 'package:dujo_kerala_website/view/colors/colors.dart';
 // import 'package:dujo_kerala_website/view/constant/constant.dart';
-// import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/teacher_section/teacherDetails.dart';
+
 // import 'package:flutter/material.dart';
-// import 'package:flutter/src/widgets/framework.dart';
-// import 'package:flutter/src/widgets/placeholder.dart';
-// import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 // import 'package:get/get.dart';
 // import 'package:google_fonts/google_fonts.dart';
 // import 'package:lottie/lottie.dart';
+
+// import '../../../../../../model/profileextraDetails/nts_profile.dart';
 
 // class NonTeachingStaffView extends StatelessWidget {
 //   String schoolID;

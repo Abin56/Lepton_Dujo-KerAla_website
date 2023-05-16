@@ -32,7 +32,8 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
 
   Future<void>addFoodandBeveragesToCollection(String day, FoodModel model)async{
    FirebaseFirestore.instance.collection('SchoolListCollection').doc(widget.schoolID).collection(Get.find<GetFireBaseData>().bYear.value).doc(Get.find<GetFireBaseData>().bYear.value).collection('FoodAndBeverages').doc(day).set(model.toJson()) 
-   .then((value) => showDialog(context: context, builder: ((context) {
+   .then((value) => showDialog(barrierDismissible: false,
+    context: context, builder: ((context) {
      return AlertDialog(
       title: Text('Food and Beverages'), 
       content: Text('Food items for ${day} succesfully added!'), 

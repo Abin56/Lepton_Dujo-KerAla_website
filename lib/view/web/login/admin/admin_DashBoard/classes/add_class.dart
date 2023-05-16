@@ -1,6 +1,10 @@
+
+
+
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/controller/add_new_class/add_new_class.dart';
 import 'package:dujo_kerala_website/model/add_class/add_new_class.dart';
@@ -11,12 +15,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
-
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
-
 import '../../../../widgets/drop_DownList/schoolDropDownList.dart';
 
 
@@ -41,7 +42,7 @@ class AddClassesSectionScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Row(
             children: [
-              Container(
+              SizedBox(
                 height: screenSize.height,
                 width: screenSize.width * 1 / 2,
                 // ignore: sort_child_properties_last
@@ -65,8 +66,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                           width: 40.w,
                         ),
                         GoogleMonstserratWidgets(
-                          text: Get.find<GetFireBaseData>().bYear.value +
-                              ' -Class Teacher Pannel', ////changed normal text to original batch year
+                          text: '${Get.find<GetFireBaseData>().bYear.value} -Class Teacher Pannel', ////changed normal text to original batch year
                           //'2023 -2024 batch',
                           fontsize: 17.w,
                           color: cWhite,
@@ -78,12 +78,12 @@ class AddClassesSectionScreen extends StatelessWidget {
                       children: [
                         Padding(
                           padding: EdgeInsets.only(left: 10.w),
-                          child: Container(
+                          child: SizedBox(
                             width: screenSize.width * 0.062,
                             //  color: Color.fromARGB(255, 63, 181, 102),
                             child: Center(
                               child: GoogleMonstserratWidgets(
-                                  text: 'ClassName',
+                                  text: 'Class Name',
                                   fontsize: 12.w,
                                   color: cWhite,
                                   fontWeight: FontWeight.bold),
@@ -98,7 +98,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                             width: screenSize.width * 0.28,
                             child: Center(
                               child: GoogleMonstserratWidgets(
-                                text: 'ClassTeacherName',
+                                text: 'Classteacher Name',
                                 fontsize: 15.w,
                                 color: cWhite,
                                 fontWeight: FontWeight.w500,
@@ -106,7 +106,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Container(
+                        SizedBox(
                             // color: Colors.amber,
                             width: screenSize.width * 0.06,
                             child: Center(
@@ -116,7 +116,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                                   color: cWhite,
                                   fontWeight: FontWeight.w600),
                             )),
-                        Container(
+                        SizedBox(
                           width: screenSize.width * 0.03,
                           child: Center(
                             child: GoogleMonstserratWidgets(
@@ -174,7 +174,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                                               Padding(
                                                 padding:
                                                     EdgeInsets.only(left: 10.w),
-                                                child: Container(
+                                                child: SizedBox(
                                                   width:
                                                       screenSize.width * 0.05,
                                                   //  color: Color.fromARGB(255, 63, 181, 102),
@@ -228,7 +228,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                                                                         'docid'],
                                                                     context);
                                                           },
-                                                          child: Container(
+                                                          child: SizedBox(
                                                             // color: Colors.amber,
                                                             width: screenSize
                                                                     .width *
@@ -257,7 +257,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                                                                         'docid'],
                                                                     context);
                                                           },
-                                                          child: Container(
+                                                          child: SizedBox(
                                                             width: screenSize
                                                                     .width *
                                                                 0.03,
@@ -275,7 +275,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                                                                       .edit)),
                                                             ),
                                                           )),
-                                                  Container(
+                                                  SizedBox(
                                                     width:
                                                         screenSize.width * 0.03,
                                                     child: Center(
@@ -330,8 +330,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                     child: Column(children: [
                       sizedBoxH30,
                        GoogleMonstserratWidgets(
-                          text: Get.find<GetFireBaseData>().bYear.value +
-                              ' -Class List', ////changed normal text to original batch year
+                          text: '${Get.find<GetFireBaseData>().bYear.value} -Class List', ////changed normal text to original batch year
                           //'2023 -2024 batch',
                           fontsize: 17.w,
                           color: cBlack,
@@ -341,7 +340,13 @@ class AddClassesSectionScreen extends StatelessWidget {
                         child: Padding(
                           padding: EdgeInsets.all(20.w),
                           child: TextFormField(
-                            validator: checkFieldEmpty,
+                          validator: (value) {
+                                if (classNameController.text.isEmpty) {
+                                  return 'Invalid';
+                                } else {
+                                  return null;
+                                }
+                              },
                             controller: classNameController,
                             // ignore: prefer_const_constructors
                             decoration: InputDecoration(
@@ -361,8 +366,12 @@ class AddClassesSectionScreen extends StatelessWidget {
                                 BorderRadius.all(Radius.circular(15))),
                         child: TextButton.icon(
                             onPressed: () async {
+                               if (formKey.currentState!.validate()) {
                               addSchoolClassController
                                   .addNewClassFunction(classNameController);
+                                  showToast(msg: 'Class added');
+                               }
+                               classNameController.clear();
                             },
                             icon: const Icon(Icons.add, color: cWhite),
                             label: GoogleMonstserratWidgets(
@@ -435,6 +444,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                                                         snapshots.data!
                                                                 .docs[index]
                                                             ['docid']);
+                                                            showToast(msg: 'Added to Panel');
                                               },
                                               child: Container(
                                                 decoration: BoxDecoration(

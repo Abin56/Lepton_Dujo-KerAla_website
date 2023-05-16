@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,7 @@ import '../../../../../../../controller/get_firebase-data/get_firebase_data.dart
 import '../../../../../../../controller/students_list/students_list.dart';
 import '../../../../../../../model/create_classModel/add_student_model.dart';
 import '../../../../../../constant/constant.dart';
+import '../../../../../widgets/Iconbackbutton.dart';
 import 'details_students.dart';
 
 class ListOfStudents extends StatefulWidget {
@@ -66,15 +68,20 @@ class _ListOfStudentsState extends State<ListOfStudents> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 sizedBoxH10,
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "C L A S S : ${widget.className}",
-                    style: GoogleFonts.montserrat(
-                        color: const Color.fromRGBO(158, 158, 158, 1),
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold),
-                  ),
+                Row(
+                  children: [
+                    IconButtonBackWidget(color: cBlack),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "C L A S S : ${widget.className}",
+                        style: GoogleFonts.montserrat(
+                            color: const Color.fromRGBO(158, 158, 158, 1),
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
                 ),
                 sizedBoxH20,
                 Expanded(
@@ -158,19 +165,19 @@ class _ListOfStudentsState extends State<ListOfStudents> {
                                                                         'https://assets4.lottiefiles.com/packages/lf20_u7yrcwlk.json'),
                                                       )),
                                                   sizedBoxH10,
-                                                  Text(
-                                                    "S T U D E N T ${index + 1}",
-                                                    style:
-                                                        GoogleFonts.montserrat(
-                                                            color: Colors.grey,
-                                                            fontSize: 18,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                  ),
+                                                  // Text(
+                                                  //   "S T U D E N T ${index + 1}",
+                                                  //   style:
+                                                  //       GoogleFonts.montserrat(
+                                                  //           color: Colors.grey,
+                                                  //           fontSize: 18,
+                                                  //           fontWeight:
+                                                  //               FontWeight
+                                                  //                   .bold),
+                                                  // ),
                                                   sizedBoxH10,
                                                   Text(
-                                                    'Create Date : ${stringTimeToDateConvert(data.createDate!)}',
+                                                    'Created Date : ${stringTimeToDateConvert(data.createDate!)}',
                                                     style: GoogleFonts.poppins(
                                                       color: Colors.black
                                                           .withOpacity(0.4),

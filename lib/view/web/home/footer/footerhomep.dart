@@ -1,3 +1,6 @@
+// ignore_for_file: must_be_immutable, unused_local_variable
+
+import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/web/home/family_policy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,15 +13,15 @@ import 'email/mailsender.dart';
 import 'hover-text/hovertext.dart';
 
 class FooterHomeP extends StatelessWidget {
-   FooterHomeP({super.key});
+  FooterHomeP({super.key});
 
-  TextStyle k = GoogleFonts.poppins();
+  TextStyle k = GoogleFonts.poppins(fontSize: 14.w);
 
   @override
   Widget build(BuildContext context) {
-     var screenSize =MediaQuery.of(context).size;
+    var screenSize = MediaQuery.of(context).size;
     return Container(
-      height: 680,
+      height: 680.w,
       width: double.infinity,
       color: Colors.transparent,
       child: Column(
@@ -26,7 +29,7 @@ class FooterHomeP extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 400,
+            height: 400.w,
             width: double.infinity,
             color: Colors.transparent,
             child: Padding(
@@ -36,7 +39,7 @@ class FooterHomeP extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: 200,
+                    height: 200.w,
                     width: double.infinity,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -47,7 +50,11 @@ class FooterHomeP extends StatelessWidget {
                           children: [
                             Text(
                               'Lepton DuJo',
-                              style: GoogleFonts.poppins(fontSize: 25, fontWeight: FontWeight.bold, color: const Color.fromRGBO(103, 53, 107, 1),),
+                              style: GoogleFonts.poppins(
+                                fontSize: 25.w,
+                                fontWeight: FontWeight.bold,
+                                color: const Color.fromRGBO(103, 53, 107, 1),
+                              ),
                             ),
                             OnHoverText(
                               builder: (isHoverd) {
@@ -57,8 +64,7 @@ class FooterHomeP extends StatelessWidget {
                                     width: 160.w,
                                     child: Text(
                                       'Who We Are',
-                                      style:
-                                          k,
+                                      style: k,
                                     ));
                               },
                             ),
@@ -70,21 +76,20 @@ class FooterHomeP extends StatelessWidget {
                                     width: 160.w,
                                     child: Text(
                                       'Why choose us',
-                                      style:
-                                          k,
+                                      style: k,
                                     ));
                               },
                             ),
                             OnHoverText(
                               builder: (isHoverd) {
-                                final color =
-                                    isHoverd ? const Color.fromARGB(255, 168, 15, 4) : Colors.black;
+                                final color = isHoverd
+                                    ? const Color.fromARGB(255, 168, 15, 4)
+                                    : Colors.black;
                                 return SizedBox(
-                                    width: 180,
+                                    width: 180.w,
                                     child: Text(
                                       'Lepton DuJo For Business',
-                                      style:
-                                          k,
+                                      style: k,
                                     ));
                               },
                             ),
@@ -96,8 +101,7 @@ class FooterHomeP extends StatelessWidget {
                                     width: 160.w,
                                     child: Text(
                                       'Affiliates',
-                                      style:
-                                          k,
+                                      style: k,
                                     ));
                               },
                             ),
@@ -106,50 +110,50 @@ class FooterHomeP extends StatelessWidget {
                                 final color =
                                     isHoverd ? Colors.orange : Colors.black;
                                 return SizedBox(
-                                    width: 160.w,
+                                    width: 165.w,
                                     child: Text(
                                       'Careers',
-                                      style:
-                                          k,
+                                      style: k,
                                     ));
                               },
                             ),
-                            OnHoverText(
+                              OnHoverText(
                               builder: (isHoverd) {
                                 final color =
                                     isHoverd ? Colors.orange : Colors.black;
                                 return SizedBox(
-                                    width: 160.w,
+                                  
+                                    width: 100,
                                     child: Text(
                                       'News',
-                                      style:
-                                          k,
+                                    style: k,
                                     ));
                               },
                             ),
-
-                             GestureDetector(
+                            GestureDetector(
                               onTap: () {
                                 //  Navigator.push(context, MaterialPageRoute(builder: ((context) =>RequestedSchoolsApproval())));
-                                      Navigator.push(context, MaterialPageRoute(builder: ((context) =>LeptonAdminLoginScreen())));
-                                
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: ((context) =>
+                                            LeptonAdminLoginScreen())));
                               },
-
-                               child: OnHoverText(
+                              child: OnHoverText(
                                 builder: (isHoverd) {
-                                  final color =
-                                      isHoverd ? const Color.fromARGB(255, 255, 0, 0) : Colors.black;
+                                  final color = isHoverd
+                                      ? const Color.fromARGB(255, 255, 0, 0)
+                                      : Colors.black;
                                   return SizedBox(
                                       width: 160.w,
-                                      
                                       child: Text(
                                         'Super Admin',
-                                        style:
-                                            TextStyle(fontSize: 18, color: color),
+                                        style: TextStyle(
+                                            fontSize: 18.w, color: color),
                                       ));
                                 },
-                                                         ),
-                             ),
+                              ),
+                            ),
                           ],
                         ),
                         Column(
@@ -158,7 +162,11 @@ class FooterHomeP extends StatelessWidget {
                           children: [
                             Text(
                               'Connect',
-                              style: GoogleFonts.poppins(fontSize: 25, fontWeight: FontWeight.bold, color: const Color.fromRGBO(103, 53, 107, 1),),
+                              style: GoogleFonts.poppins(
+                                fontSize: 25.w,
+                                fontWeight: FontWeight.bold,
+                                color: const Color.fromRGBO(103, 53, 107, 1),
+                              ),
                             ),
                             OnHoverText(
                               builder: (isHoverd) {
@@ -168,8 +176,7 @@ class FooterHomeP extends StatelessWidget {
                                     width: 160.w,
                                     child: Text(
                                       'Blog',
-                                      style:
-                                          k,
+                                      style: k,
                                     ));
                               },
                             ),
@@ -179,16 +186,17 @@ class FooterHomeP extends StatelessWidget {
                                     isHoverd ? Colors.orange : Colors.black;
                                 return GestureDetector(
                                   onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                      return const  CondactusUserScreen();
-                                    },));
+                                    Navigator.push(context, MaterialPageRoute(
+                                      builder: (context) {
+                                        return const CondactusUserScreen();
+                                      },
+                                    ));
                                   },
                                   child: SizedBox(
                                       width: 160.w,
                                       child: Text(
                                         'Contact US',
-                                        style:
-                                            k,
+                                        style: k,
                                       )),
                                 );
                               },
@@ -201,8 +209,7 @@ class FooterHomeP extends StatelessWidget {
                                     width: 160.w,
                                     child: Text(
                                       'Help Center',
-                                      style:
-                                          k,
+                                      style: k,
                                     ));
                               },
                             ),
@@ -214,8 +221,7 @@ class FooterHomeP extends StatelessWidget {
                                     width: 160.w,
                                     child: Text(
                                       'Security',
-                                      style:
-                                          k,
+                                      style: k,
                                     ));
                               },
                             ),
@@ -227,11 +233,19 @@ class FooterHomeP extends StatelessWidget {
                           children: [
                             Text(
                               'Legal',
-                              style: GoogleFonts.poppins(fontSize: 25, fontWeight: FontWeight.bold,color: const Color.fromRGBO(103, 53, 107, 1),),
+                              style: GoogleFonts.poppins(
+                                fontSize: 25.w,
+                                fontWeight: FontWeight.bold,
+                                color: const Color.fromRGBO(103, 53, 107, 1),
+                              ),
                             ),
                             GestureDetector(
                               onTap: () {
-                                 Navigator.push(context, MaterialPageRoute(builder:((context) =>const TermsAndConditions())));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: ((context) =>
+                                            const TermsAndConditions())));
                               },
                               child: OnHoverText(
                                 builder: (isHoverd) {
@@ -241,15 +255,15 @@ class FooterHomeP extends StatelessWidget {
                                       width: 160.w,
                                       child: Text(
                                         'Terms & Conditions',
-                                        style:
-                                            k,
+                                        style: k,
                                       ));
                                 },
                               ),
                             ),
                             GestureDetector(
                               onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder:((context) => const PrivacyPolicy())));
+                                Navigator.pushNamed(
+                                    context, PrivacyPolicy.route);
                               },
                               child: OnHoverText(
                                 builder: (isHoverd) {
@@ -259,15 +273,18 @@ class FooterHomeP extends StatelessWidget {
                                       width: 160.w,
                                       child: Text(
                                         'Privacy Policy',
-                                        style:
-                                            k,
+                                        style: k,
                                       ));
                                 },
                               ),
                             ),
-                              GestureDetector(
+                            GestureDetector(
                               onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder:((context) => const FamilyPolicyScreen())));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: ((context) =>
+                                            const FamilyPolicyScreen())));
                               },
                               child: OnHoverText(
                                 builder: (isHoverd) {
@@ -277,8 +294,7 @@ class FooterHomeP extends StatelessWidget {
                                       width: 160.w,
                                       child: Text(
                                         'Family Policy',
-                                        style:
-                                            k,
+                                        style: k,
                                       ));
                                 },
                               ),
@@ -291,8 +307,7 @@ class FooterHomeP extends StatelessWidget {
                                     width: 160.w,
                                     child: Text(
                                       'Trademark Policy',
-                                      style:
-                                          k,
+                                      style: k,
                                     ));
                               },
                             ),
@@ -304,59 +319,62 @@ class FooterHomeP extends StatelessWidget {
                                     width: 160.w,
                                     child: Text(
                                       'Cancellation Policy',
-                                      style:
-                                          k,
+                                      style: k,
                                     ));
                               },
                             ),
                           ],
                         ),
+
                         Column(
-                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            
-                            Text(
-                              "Address", 
-                              style:
-                                  GoogleFonts.poppins(fontSize: 25, fontWeight: FontWeight.bold,color: const Color.fromRGBO(103, 53, 107, 1),),
-                            ),
-                            Row(
-                              children: [
-                                 const Icon(Icons.map_outlined,color: Color.fromARGB(255, 4, 124, 4)),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Lepton Plus Communications(OPC) Pvt.Ltd, 5th Floor', style: k,),
-                                    Text('Karimpanal Statue Avenue,G.H. Road, Statue', style: k,),
-                                    Text('Thiruvananthapuram-695001. Kerala , India', style: k,),
-                             ],
-                             ),
-                             ],
-                            ),
-                            
-                        
-                             Row(
-                              children: [
-                                const Icon(Icons.phone,color: Colors.blue),
-                                Text('	+91 471 4053483	', style: k,),
-                              ],
-                            ),
-                           
-                            Row(
-                              children: [
-                                const Icon(Icons.phone_android),
-                                Text('	+91 97469 66651 | +91 97463 66651', style: k,),
-                              ],
-                            ),
-                             Row(
-                              children: [
-                                const Icon(Icons.mail_outline_sharp,color: Colors.red),
-                                Text('info@leptoncommunications.com,''\n leptoncommunications@gmail.com', style: k,),
-                              ],
-                            ),
-                          ],
-                        )
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Address",
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 20.w,
+                                      fontWeight: FontWeight.bold)),
+                              Row(
+                                children: [
+                                   const Icon(Icons.location_on),
+                                  Text(
+                                    ' Lepton Plus Communications OPC) Pvt.Ltd'
+                                    '\n   5th Floor ,Karimpanal Statue Avenue ,G.H. Road, ',
+                                    style: k,
+                                  ),
+                                ],
+                              ),
+                              Text(
+                                '          Statue ,Thiruvananthapuram-695001. Kerala , India',
+                                style: k,
+                              ),
+                              Row(
+                                children: [
+                                   const Icon(Icons.phone),
+                                  Text(
+                                    ' +91 97469 66651 | +91 97463 66651 | +91 471 4053483	',
+                                    style: k,
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                   const Icon(Icons.mail),
+                                  Text(
+                                    ' info@leptoncommunications.com,',
+                                    style: k,
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                   const Icon(Icons.mail),
+                                  Text(' leptoncommunications@gmail.com', style: k),
+                                ],
+                              ),
+                            ]),
+
+                    
                       ],
                     ),
                   )
@@ -369,16 +387,16 @@ class FooterHomeP extends StatelessWidget {
             color: Color(0xFF26A69A),
           ),
           SizedBox(
-            height: 200,
+            height: 200.w,
             width: double.infinity,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding:  EdgeInsets.all(8.0.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
-                    height: 200,
-                    width: 300,
+                    height: 200.w,
+                    width: 300.w,
                     decoration: const BoxDecoration(
                         image: DecorationImage(
                             image: NetworkImage(
@@ -386,7 +404,8 @@ class FooterHomeP extends StatelessWidget {
                   ),
                   Text(
                     'Lepton Plus Communications is a customer oriented company offering digital solutions in Healthcare, E-Commerce Applications,\nHome Automation and Social Networking. We are committed to providing high end sustainable products and services that\nenhances the quality of life',
-                 style:  GoogleFonts.poppins(color: const Color.fromRGBO(255, 255, 255, 1)),
+                    style: GoogleFonts.poppins(
+                        color: cBlack),
                   )
                 ],
               ),
@@ -394,14 +413,17 @@ class FooterHomeP extends StatelessWidget {
           ),
           Container(
             color: Colors.black,
-            height: 60,
+            height: 60.w,
             width: double.infinity,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   "Copyright ©️ All rights reserved | by LeptonCommunications",
-                  style: GoogleFonts.poppins(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.white),
+                  style: GoogleFonts.poppins(
+                      fontSize: 15.w,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white),
                 ),
               ],
             ),

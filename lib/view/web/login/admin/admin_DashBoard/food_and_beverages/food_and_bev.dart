@@ -2,10 +2,7 @@
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-
 
 import '../../../../../colors/colors.dart';
 import '../../../../../fonts/fonts.dart';
@@ -37,7 +34,7 @@ class _FoodBeveragesState extends State<FoodBeverages> {
                  child: Row(
                    children: [ 
                     Container(
-                           color: Color.fromARGB(255, 12, 34, 133),
+                           color: const Color.fromARGB(255, 12, 34, 133),
                            height: screenSize.height,
                           width: screenSize.width * 1 / 2,
                             child: Column(
@@ -82,7 +79,7 @@ class _FoodBeveragesState extends State<FoodBeverages> {
                     ),                            
                         Padding(
                             padding:  EdgeInsets.only(left: 140.w,),
-                            child: Container(
+                            child: SizedBox(
                               height: screenSize.height * 1 /1 ,
                                width: screenSize.width * 1 / 3,
                               child: SingleChildScrollView(
@@ -102,7 +99,7 @@ class _FoodBeveragesState extends State<FoodBeverages> {
                                                        builder: (context) => CreateFoodMenu(schoolID: widget.schoolID),
                                                      ));
                                                },
-                                               child: Container(
+                                               child: SizedBox(
                                                    height: screenSize.width * 1 / 15,
                                                    width: screenSize.width * 1 / 3,
                                                    child: CustomContainer(
@@ -117,10 +114,10 @@ class _FoodBeveragesState extends State<FoodBeverages> {
                                                  Navigator.push(
                                                      context,
                                                      MaterialPageRoute(
-                                                       builder: (context) => FoodTimeTableMenu(),
+                                                       builder: (context) => const FoodTimeTableMenu(),
                                                      ));
                                                },
-                                               child: Container(
+                                               child: SizedBox(
                                                    height: screenSize.width * 1 / 15,
                                                    width: screenSize.width * 1 / 3,
                                                    child: CustomContainer(
@@ -128,24 +125,7 @@ class _FoodBeveragesState extends State<FoodBeverages> {
                                                      onTap: () {},
                                                    )),
                                              ))),
-                                         Padding(
-                                             padding: const EdgeInsets.all(10),
-                                             child: (InkWell(
-                                               // onTap: () {
-                                               //   Navigator.push(
-                                               //       context,
-                                               //       MaterialPageRoute(
-                                               //         builder: (context) => AdminTeacherList(),
-                                               //       ));
-                                               // },
-                                               child: Container(
-                                                   height: screenSize.width * 1 / 15,
-                                                   width: screenSize.width * 1 / 3,
-                                                   child: CustomContainer(
-                                                     text: 'Create Food Commities',
-                                                     onTap: () {},
-                                                   )),
-                                             ))),
+                                       
                                         
                                        ],
                                      ),

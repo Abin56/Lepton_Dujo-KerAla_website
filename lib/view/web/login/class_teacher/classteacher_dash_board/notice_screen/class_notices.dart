@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -27,8 +28,8 @@ class ClassNoticeTeacher extends StatelessWidget {
     Size screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(backgroundColor: adminePrimayColor,
+        appBar: AppBar(
+            backgroundColor: adminePrimayColor,
             title: GestureDetector(
                 onTap: () {
                   Navigator.of(context)
@@ -102,7 +103,7 @@ class ClassNoticeTeacher extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
-                                        Flexible(
+                                        Expanded(
                                           child: NoticePageElevatedButtonWidget(
                                               title: 'Edit',
                                               function: () {
@@ -247,18 +248,19 @@ class NoticePageElevatedButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return SizedBox(
-      width: width * 0.3,
+      width: 70.w,
+      height: 40.w,
       child: ElevatedButton(
         onPressed: function,
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.white,
+          backgroundColor: adminePrimayColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12), // <-- Radius
           ),
         ),
         child: ClassTeacherNoticeCard(
           title: title,
-          color: cBlack,
+          color: cWhite,
         ),
       ),
     );
@@ -359,9 +361,17 @@ class ClassTeacherNoticeCardWidget extends StatelessWidget {
         height: screenSize.width * .14,
         width: screenSize.width * .17,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(),
-        ),
+         borderRadius: BorderRadius.circular(5.w),
+           // border: Border.all(),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+              color: const Color.fromARGB(211, 122, 117, 117).withOpacity(0.5),
+              spreadRadius: 10,
+              blurRadius: 10,
+              offset: const Offset(0, 3),
+            ),
+            ]),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: SingleChildScrollView(

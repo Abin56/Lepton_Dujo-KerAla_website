@@ -138,7 +138,7 @@ String? checkFieldEmailIsValid(String? fieldContent) {
   if (result) {
     return null;
   } else {
-    return "Email is not valid";
+    return "Please enter a valid email";
   }
 }
 
@@ -146,9 +146,9 @@ String? checkFieldPhoneNumberIsValid(String? fieldContent) {
   if (fieldContent == null || fieldContent.isEmpty) {
     return 'Field is mandatory';
   }
-  if (fieldContent.length <= 10) {
-    return 'Please enter 10 digit number';
-  }
+  // if (fieldContent.length <= 10) {
+  //   return 'Please enter 10 digit number';
+  // }
   if (RegExp(r'^\d{10}$').hasMatch(fieldContent)) {
     return null;
   } else {

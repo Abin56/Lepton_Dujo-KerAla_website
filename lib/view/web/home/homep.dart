@@ -7,11 +7,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../fonts/google_monstre.dart';
-import '../login/loginscreen.dart';
+import '../../../utils/responsive.dart';
 import '../widgets/drop_DownList/schoolDropDownList.dart';
 import '../widgets/sample/under_maintance.dart';
-import 'create_school/create_school.dart';
 import 'footer/footerhomep.dart';
 
 class HomeP extends StatelessWidget {
@@ -100,7 +98,11 @@ class HomeP extends StatelessWidget {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: ListView(children: [
+        body: ResponsiveWidget.isSmallScreen(context)
+          ?
+          const UnderMaintanceScreen():
+        
+         ListView(children: [
           Padding(
             padding: EdgeInsets.only(right: 80.0.w, left: 80.w),
             child: SizedBox(
@@ -111,6 +113,7 @@ class HomeP extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
+                    // fgkjsdl;fjal;dfjs
                     //color: cBlue,
                     width: 400.w,
                     child: Row(
@@ -200,7 +203,7 @@ class HomeP extends StatelessWidget {
                                               ),
                                               actions: <Widget>[
                                                 TextButton(
-                                                  child: const Text('ok'),
+                                                  child: const Text('Ok'),
                                                   onPressed: () {
                                                     Navigator.of(context).pop();
                                                   },
@@ -320,7 +323,7 @@ class HomeP extends StatelessWidget {
                     //  / mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
+                        SizedBox(
                           width: 180.w,
                           child: Image.asset(
                             'assets/images/leptdujo.png',
@@ -368,49 +371,49 @@ class HomeP extends StatelessWidget {
                         )
                       ],
                     ),
-                    SizedBox(
-                      width: 600.w,
-                      child: ShaderMask(
-                        shaderCallback: (rect) {
-                          return const LinearGradient(
-                            begin: Alignment.center,
-                            end: Alignment.bottomCenter,
-                            colors: [adminePrimayColor, Colors.transparent],
-                          ).createShader(
-                              Rect.fromLTRB(0, 0, rect.width, rect.height));
-                        },
-                        blendMode: BlendMode.dstIn,
-                        child: Stack(
-                          children: [
-                            Transform.rotate(
-                              angle: 0,
-                              child: Positioned(
-                                  left: -100,
-                                  child: Image.network(
-                                    'https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/homeimages%2Fboy.png?alt=media&token=1532405b-4043-417f-bdcf-071b6cb54653',
-                                    width: 300.w,
-                                    height: 300.h,
-                                  )),
-                            ),
-                            Positioned(
-                                left: 210,
-                                child: Image.network(
-                                  'https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/homeimages%2Fpngegg.png?alt=media&token=9f946c64-53d3-41c7-ba31-5c4156308e27',
-                                  width: 400.w,
-                                  height: 400.h,
-                                )),
-                            Positioned(
-                                left: 100,
-                                child: Image.network(
-                                  'https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/homeimages%2Fgirl.png?alt=media&token=e9bd460a-e3f8-411b-bdb9-7be1258490b7',
-                                  width: 400.w,
-                                  height: 400.h,
-                                  fit: BoxFit.contain,
-                                )),
-                          ],
-                        ),
-                      ),
-                    )
+                    // SizedBox(
+                    //   width: 600.w,
+                    //   child: ShaderMask(
+                    //     shaderCallback: (rect) {
+                    //       return const LinearGradient(
+                    //         begin: Alignment.center,
+                    //         end: Alignment.bottomCenter,
+                    //         colors: [adminePrimayColor, Colors.transparent],
+                    //       ).createShader(
+                    //           Rect.fromLTRB(0, 0, rect.width, rect.height));
+                    //     },
+                    //     blendMode: BlendMode.dstIn,
+                    //     child: Stack(
+                    //       children: [
+                    //         Transform.rotate(
+                    //           angle: 0,
+                    //           child: Positioned(
+                    //               left: -100,
+                    //               child: Image.network(
+                    //                 'https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/homeimages%2Fboy.png?alt=media&token=1532405b-4043-417f-bdcf-071b6cb54653',
+                    //                 width: 300.w,
+                    //                 height: 300.h,
+                    //               )),
+                    //         ),
+                    //         Positioned(
+                    //             left: 210,
+                    //             child: Image.network(
+                    //               'https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/homeimages%2Fpngegg.png?alt=media&token=9f946c64-53d3-41c7-ba31-5c4156308e27',
+                    //               width: 400.w,
+                    //               height: 400.h,
+                    //             )),
+                    //         Positioned(
+                    //             left: 100,
+                    //             child: Image.network(
+                    //               'https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/homeimages%2Fgirl.png?alt=media&token=e9bd460a-e3f8-411b-bdb9-7be1258490b7',
+                    //               width: 400.w,
+                    //               height: 400.h,
+                    //               fit: BoxFit.contain,
+                    //             )),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // )
                   ]),
             ),
           ),

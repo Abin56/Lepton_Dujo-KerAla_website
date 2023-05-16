@@ -1,4 +1,5 @@
 import 'package:dujo_kerala_website/view/web/home/homep.dart';
+import 'package:dujo_kerala_website/view/web/home/privacypolicy.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,15 +33,20 @@ class MyApp extends StatelessWidget {
         designSize: const Size(1536, 792),
         builder: (context, child) {
           return GetMaterialApp(
-              title: 'DuJo Web',
+              routes: {
+                PrivacyPolicy.route: (context) => const PrivacyPolicy(),
+              },
+              title: 'DuJo',
               debugShowCheckedModeBanner: false,
               theme: ThemeData(
                 primaryColor: const Color(0xFF02BB9F),
                 primaryColorDark: const Color(0xFF167F67),
                 // ignore: deprecated_member_use
-                accentColor: const Color(0xFF02BB9F),
+                // accentColor: const Color(0xFF02BB9F),
               ),
-              home: HomeP());
+              home:
+                  // HomwPageTwo()
+                  HomeP());
         });
   }
 }

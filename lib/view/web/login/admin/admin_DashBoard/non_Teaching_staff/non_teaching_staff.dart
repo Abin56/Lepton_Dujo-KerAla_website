@@ -1,7 +1,8 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
@@ -191,7 +192,7 @@ class _NonTeachingLoginState extends State<NonTeachingLogin> {
                         textEditingController: phoneNumberController,
                         icon: Icons.phone,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       Padding(
@@ -207,12 +208,12 @@ class _NonTeachingLoginState extends State<NonTeachingLogin> {
                                 child: TextButton(
                                   style: TextButton.styleFrom(
                                     foregroundColor:
-                                        Color.fromARGB(255, 255, 255, 255),
+                                        const Color.fromARGB(255, 255, 255, 255),
                                     padding: const EdgeInsets.all(9.0),
                                     textStyle: const TextStyle(fontSize: 17),
                                   ),
                                   onPressed: () async {
-                                    bool? result = formKey.currentState?.validate();
+                                   if (formKey.currentState?.validate()??false){
                                 
                                     if (staffNameController.text != '' &&
                                         employeeIDController.text != '' &&
@@ -256,11 +257,13 @@ class _NonTeachingLoginState extends State<NonTeachingLogin> {
                                       showToast(msg: 'Fill all the field details!');
                                       print(validateEmail('hdk'));
                                     }
+                                    clearStaffFunction();
+                                   }
                                   },
                                   child: const Text('Create'),
                                 ),
                               )
-                            : Center(
+                            : const Center(
                                 child: CircularProgressIndicator(),
                               ),
                       ),
@@ -271,6 +274,22 @@ class _NonTeachingLoginState extends State<NonTeachingLogin> {
         ],
       ),
     );
+  }
+  void clearStaffFunction(){
+    staffNameController.clear();
+    employeeIDController.clear();
+    designationController.clear();
+    houseNameController.clear();
+    houseNoConttroller.clear();
+    streetNameController.clear();
+    placeController.clear();
+    districtController.clear();
+    stateController.clear();
+    pincodeController.clear();
+    emailController.clear();
+    phoneNumberController.clear();
+    houseNoConttroller.clear();
+
   }
 }
 
@@ -298,7 +317,7 @@ class NonTeachingStaffTextFormFieldWidget extends StatelessWidget {
         decoration: InputDecoration(
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
           icon:  Icon(icon,
-            color: Color.fromARGB(221, 28, 9, 110),
+            color: const Color.fromARGB(221, 28, 9, 110),
           ),
           labelText: labelText,
         ),

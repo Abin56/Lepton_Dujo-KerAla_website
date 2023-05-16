@@ -63,7 +63,7 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
             ],
           )),
       content: SizedBox(
-        width: 600,
+        width: 650.w,
         child: ListView(
           children: [
             Row(
@@ -183,7 +183,7 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
                           Student_Info_Elevated_button_Widget(
                             text: 'Shift Class',
                             onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => UnderMaintanceScreen(),));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => const UnderMaintanceScreen(),));
                             },
                           ),
                           sizedBoxH20,
@@ -290,7 +290,7 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
                   );
                 } else {
                   return TextButton(
-                    child: const Text('ok'),
+                    child: const Text('Ok'),
                     onPressed: () {
                       Get.to(GenrateTC(
                           sno: sController.text.trim(),

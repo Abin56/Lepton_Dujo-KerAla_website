@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/colors/colors.dart';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -30,7 +30,7 @@ class MeetingDisplay extends StatelessWidget {
           backgroundColor: adminePrimayColor,
           title: const Text("Meetings List"),
         ),
-        // backgroundColor: const Color(0xFFF7D8BA),
+        // backgroundColor: const Color.fromARGB(255, 252, 132, 12),
         body: SafeArea(
           child: Row(
             children: [
@@ -56,6 +56,7 @@ class MeetingDisplay extends StatelessWidget {
                         : Container(
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
+                              //color: adminePrimayColor,
                               border: Border.all(),
                             ),
                             width: screenSize.width * 0.4,
@@ -238,7 +239,8 @@ class NoticePageElevatedButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return SizedBox(
-      width: width * 0.1,
+      width: 70.w,
+      height: 40.w,
       child: ElevatedButton(
         onPressed: function,
         style: ElevatedButton.styleFrom(
@@ -247,7 +249,7 @@ class NoticePageElevatedButtonWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(12), // <-- Radius
           ),
         ),
-        child: NoticeTextWidget(title: title),
+        child: Text(title, style: const TextStyle(color: cWhite)),
       ),
     );
   }
@@ -274,75 +276,80 @@ class DataTableWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DataTable(columns: <DataColumn>[
-      const DataColumn(
-        label: NoticeTextWidget(title: 'Heading'),
-      ),
-      DataColumn(
-        label: NoticeTextWidget(title: heading),
-      ),
-    ], rows: <DataRow>[
-      DataRow(
-        cells: <DataCell>[
-          const DataCell(
-            NoticeTextWidget(title: 'Category of Meeting'),
+    return DataTable(
+        // decoration: const BoxDecoration(color: cred),
+        columns: <DataColumn>[
+          const DataColumn(
+            label: NoticeTextWidget(title: 'Heading'),
           ),
-          DataCell(
-            NoticeTextWidget(title: categoryOfMeeting),
+          DataColumn(
+            label: NoticeTextWidget(title: heading),
           ),
         ],
-      ),
-      DataRow(
-        cells: <DataCell>[
-          const DataCell(
-            NoticeTextWidget(title: 'Date'),
+        rows: <DataRow>[
+          DataRow(
+            cells: <DataCell>[
+              const DataCell(
+                NoticeTextWidget(title: 'Category of Meeting'),
+              ),
+              DataCell(
+                NoticeTextWidget(title: categoryOfMeeting),
+              ),
+            ],
           ),
-          DataCell(
-            NoticeTextWidget(title: date),
+          DataRow(
+            cells: <DataCell>[
+              const DataCell(
+                NoticeTextWidget(title: 'Date'),
+              ),
+              DataCell(
+                NoticeTextWidget(title: date),
+              ),
+            ],
           ),
-        ],
-      ),
-      DataRow(
-        cells: <DataCell>[
-          const DataCell(
-            NoticeTextWidget(title: 'Expected Members'),
+          DataRow(
+            cells: <DataCell>[
+              const DataCell(
+                NoticeTextWidget(title: 'Expected Members'),
+              ),
+              DataCell(
+                NoticeTextWidget(title: membersToBeExpected),
+              ),
+            ],
           ),
-          DataCell(
-            NoticeTextWidget(title: membersToBeExpected),
+          DataRow(
+            cells: <DataCell>[
+              const DataCell(
+                NoticeTextWidget(title: 'Special Guest'),
+              ),
+              DataCell(
+                NoticeTextWidget(title: specialGuest),
+              ),
+            ],
           ),
-        ],
-      ),
-      DataRow(
-        cells: <DataCell>[
-          const DataCell(
-            NoticeTextWidget(title: 'Special Guest'),
+          DataRow(
+            cells: <DataCell>[
+              const DataCell(
+                NoticeTextWidget(title: 'Time'),
+              ),
+              DataCell(
+                NoticeTextWidget(title: time),
+              ),
+            ],
           ),
-          DataCell(
-            NoticeTextWidget(title: specialGuest),
+          DataRow(
+            cells: <DataCell>[
+              const DataCell(
+                NoticeTextWidget(title: 'Venue'),
+              ),
+              DataCell(
+                NoticeTextWidget(
+                  title: venue,
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-      DataRow(
-        cells: <DataCell>[
-          const DataCell(
-            NoticeTextWidget(title: 'Time'),
-          ),
-          DataCell(
-            NoticeTextWidget(title: time),
-          ),
-        ],
-      ),
-      DataRow(
-        cells: <DataCell>[
-          const DataCell(
-            NoticeTextWidget(title: 'Venue'),
-          ),
-          DataCell(
-            NoticeTextWidget(title: venue),
-          ),
-        ],
-      ),
-    ]);
+        ]);
   }
 }
 
@@ -367,8 +374,17 @@ class MeetingCardWidget extends StatelessWidget {
         height: screenSize.width * .14,
         width: screenSize.width * .17,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(),
+          color: cWhite,
+          borderRadius: BorderRadius.circular(5.w),
+          boxShadow: [
+            BoxShadow(
+              color: const Color.fromARGB(211, 122, 117, 117).withOpacity(0.5),
+              spreadRadius: 10,
+              blurRadius: 10,
+              offset: const Offset(0, 3),
+            ),
+          ],
+          //border: Border.all(),
           // color: const Color(0xFFFEF8DD),
         ),
         child: Padding(
@@ -410,7 +426,7 @@ class NoticeTextWidget extends StatelessWidget {
         title,
         style: GoogleFonts.sansita(
           fontSize: fontSize,
-          color: Colors.black,
+          color: cBlack,
         ),
         overflow: TextOverflow.ellipsis,
       ),

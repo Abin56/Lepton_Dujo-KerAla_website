@@ -35,9 +35,9 @@ class AddAchievements extends StatefulWidget {
 }
 
 class _AddAchievementsState extends State<AddAchievements> {
+
   Future getImage() async {
-    final pickedFile =
-        await ImagePicker().getImage(source: ImageSource.gallery);
+    final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
     File image;
 
     setState(() {
@@ -48,7 +48,6 @@ class _AddAchievementsState extends State<AddAchievements> {
       }
     });
   }
-
   QueryDocumentSnapshot<Map<String, dynamic>>? classListValue;
   QueryDocumentSnapshot<Map<String, dynamic>>? studentListValue;
   final FirebaseStorage _storage = FirebaseStorage.instance;
@@ -56,6 +55,8 @@ class _AddAchievementsState extends State<AddAchievements> {
   Uint8List? file;
   bool loadingStatus = false;
   String studentID = '';
+
+
 
   TextEditingController achievementController = TextEditingController();
   TextEditingController dateController = TextEditingController();
@@ -87,7 +88,7 @@ class _AddAchievementsState extends State<AddAchievements> {
           dateofAchievement: dateController.text,
           description: descriptionController.text,
           achievement: achievementController.text,
-          admissionNumber: admissionNumberController.text,
+          admissionNumber: admissionNumberController.text, 
           studentID: studentID);
 
       FirebaseFirestore.instance //d4srOy0ovzUPBmZs3CBFRoOImIU2
@@ -117,13 +118,15 @@ class _AddAchievementsState extends State<AddAchievements> {
     }
   }
 
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       //backgroundColor: Color.fromARGB(255, 27, 95, 88),
-
+      
       body: SingleChildScrollView(
         child: Row(
           children: [
@@ -174,317 +177,323 @@ class _AddAchievementsState extends State<AddAchievements> {
               color: Colors.white,
               height: size.height * 1.4,
               width: size.width * 1 / 2,
-              child: Column(children: [
-                Padding(
-                  padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.01),
-                  child: StreamBuilder(
-                      stream: FirebaseFirestore.instance
-                          .collection('SchoolListCollection')
-                          .doc(Get.find<AdminLoginScreenController>().schoolID)
-                          .collection('classes')
-                          .snapshots(),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const Center(
-                              child: CircularProgressIndicator());
-                        }
-
-                        //
-                        //    if(snapshot.hasData){
-                        // return Text(snapshot.data!.docs[0]['className']);
-                        // }
-                        return Container(
-                          height: screenSize.width * 1 / 30,
-                          width: screenSize.width * 0.30,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                                color:
-                                    const Color.fromARGB(255, 238, 238, 238)),
-                            borderRadius: BorderRadius.circular(13),
+              child:
+               Form(key: formKey,
+                 child: Column(children: [
+                   Stack(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: size.width / 30),
+                        child:(_file == null)? CircleAvatar(
+                          radius: 80.w,
+                          backgroundImage:
+                              const NetworkImage('https://via.placeholder.com/150'),
+                          backgroundColor: const Color.fromARGB(241, 54, 225, 248),
+                        ): CircleAvatar(
+                          radius: 80.w,
+                          backgroundImage: MemoryImage(_file!)
+                              
+                        ) ,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 120.w,
+                          top: 170.w,
+                        ),
+                        child: InkWell(
+                          onTap: () async {
+                            FilePickerResult? result = await FilePicker.platform
+                                .pickFiles(type: FileType.image);
+                            if (result != null) {
+                              file = result.files.first.bytes;
+                              setState(() {
+                                _file = file;
+                              });
+                            }
+                          },
+                          child: Container(
+                            height: size.width / 40,
+                            width: size.width / 40,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Color.fromARGB(255, 0, 0, 0),
+                            ),
+                            alignment: Alignment.center,
+                            child:  Icon(
+                              Icons.camera_alt_outlined,size: 22.w,
+                              color: const Color.fromARGB(255, 156, 20, 20),
+                            ),
                           ),
-                          child: DropdownButton(
-                              hint: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: (classListValue == null)
-                                      ? const Text(
-                                          "Select Class",
-                                          style: TextStyle(
-                                              color:
-                                                  Color.fromARGB(255, 0, 0, 0),
-                                              fontSize: 18),
-                                        )
-                                      : Text(classListValue?['className'])),
-                              underline: const SizedBox(),
-                              style: const TextStyle(
-                                fontSize: 18,
-                                color: Colors.black,
-                              ),
-                              icon: const Padding(
-                                padding: EdgeInsets.all(
-                                  13,
-                                ),
-                                child: Icon(Icons.arrow_drop_down,
-                                    size: 18, color: Colors.grey),
-                              ),
-                              isExpanded: true,
-                              items: snapshot.data?.docs.map(
-                                (val) {
-                                  return DropdownMenuItem(
-                                    value: val["docid"],
-                                    child: Text(val["className"]),
-                                  );
-                                },
-                              ).toList(),
-                              onChanged: (val) {
-                                QueryDocumentSnapshot<Map<String, dynamic>>?
-                                    categoryIDObject = snapshot.data?.docs
-                                        .where((element) =>
-                                            element["docid"] == val.toString())
-                                        .toList()
-                                        .first;
-                                log(categoryIDObject?['docid']);
-
-                                setState(
-                                  () {
-                                    classListValue = categoryIDObject;
-                                  },
-                                );
-                                log(classListValue?['docid']);
-                              }),
-                        );
-                      }),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                (classListValue == null)
-                    ? const SizedBox()
-                    : StreamBuilder(
+                        ),
+                      ),
+                    ],
+                  ),
+                  sizedBoxH20,
+                    Text('+ Upload photo',style: TextStyle(color: adminePrimayColor,fontSize: 13.w),),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height * 0.01),
+                    child: StreamBuilder(
                         stream: FirebaseFirestore.instance
                             .collection('SchoolListCollection')
-                            .doc(widget.schoolID)
-                            .collection(Get.find<GetFireBaseData>().bYear.value)
-                            .doc(Get.find<GetFireBaseData>().bYear.value)
+                            .doc(Get.find<AdminLoginScreenController>().schoolID)
                             .collection('classes')
-                            .doc(classListValue?['docid'])
-                            .collection('Students')
                             .snapshots(),
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
-                            return const Center(
-                                child: CircularProgressIndicator());
-                          }
+                            return const Center(child: CircularProgressIndicator());
+                          } 
+               
+                      //
+                      //    if(snapshot.hasData){
+                           // return Text(snapshot.data!.docs[0]['className']);
+                         // }
                           return Container(
                             height: screenSize.width * 1 / 30,
                             width: screenSize.width * 0.30,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               border: Border.all(
-                                  color:
-                                      const Color.fromARGB(255, 238, 238, 238)),
+                                  color: const Color.fromARGB(255, 238, 238, 238)),
                               borderRadius: BorderRadius.circular(13),
                             ),
                             child: DropdownButton(
                                 hint: Padding(
                                     padding: const EdgeInsets.all(10.0),
-                                    child: (studentListValue == null)
+                                    child: (classListValue == null)
                                         ? const Text(
-                                            "Select Students",
+                                            "Select Class",
                                             style: TextStyle(
-                                                color: Color.fromARGB(
-                                                    255, 0, 0, 0),
+                                                color:
+                                                    Color.fromARGB(255, 0, 0, 0),
                                                 fontSize: 18),
                                           )
-                                        : Text(
-                                            studentListValue?['studentName'])),
+                                        : Text(classListValue?['className'])),
                                 underline: const SizedBox(),
                                 style: const TextStyle(
                                   fontSize: 18,
                                   color: Colors.black,
                                 ),
-                                icon: const Padding(
+                                icon:  Padding(
                                   padding: EdgeInsets.all(
-                                    13,
+                                    13.w,
                                   ),
                                   child: Icon(Icons.arrow_drop_down,
-                                      size: 18, color: Colors.grey),
+                                      size: 18.w, color: Colors.grey),
                                 ),
                                 isExpanded: true,
                                 items: snapshot.data?.docs.map(
                                   (val) {
                                     return DropdownMenuItem(
                                       value: val["docid"],
-                                      child: Text(val["studentName"]),
+                                      child: Text(val["className"]),
                                     );
                                   },
                                 ).toList(),
                                 onChanged: (val) {
-                                  var categoryIDObject = snapshot.data?.docs
-                                      .where((element) =>
-                                          element["docid"] == val.toString())
+                                   QueryDocumentSnapshot<Map<String, dynamic>>? categoryIDObject = snapshot.data?.docs
+                                      .where(
+                                          (element) => element["docid"] == val.toString())
                                       .toList()
                                       .first;
-
+                                 log(categoryIDObject?['docid']);
+                          
                                   setState(
                                     () {
-                                      studentListValue = categoryIDObject;
-                                      studentID = studentListValue?['docid'];
-                                    },
-                                  );
-                                  log(studentListValue?['docid']);
+                          
+                                       classListValue = categoryIDObject; 
+                                       
+                                    }, 
+               
+                             
+                                    
+                                  ); 
+                                  log(classListValue?['docid']);
                                 }),
                           );
                         }),
-                Stack(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: size.width / 30),
-                      child: (_file == null)
-                          ? CircleAvatar(
-                              radius: 80.w,
-                              backgroundImage: const NetworkImage(
-                                  'https://via.placeholder.com/150'),
-                              backgroundColor:
-                                  const Color.fromARGB(241, 54, 225, 248),
-                            )
-                          : CircleAvatar(
-                              radius: 60.w,
-                              backgroundImage: MemoryImage(_file!)),
+                  ),
+               
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  (classListValue == null)
+                      ? const SizedBox()
+                      : StreamBuilder(
+                          stream: FirebaseFirestore.instance
+                              .collection('SchoolListCollection')
+                              .doc(widget.schoolID)
+                              .collection(Get.find<GetFireBaseData>().bYear.value)
+                              .doc(Get.find<GetFireBaseData>().bYear.value)
+                              .collection('classes')
+                              .doc(classListValue?['docid'])
+                              .collection('Students')
+                              .snapshots(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Center(child: CircularProgressIndicator());
+                            }
+                            return Container(
+                              height: screenSize.width * 1 / 30,
+                              width: screenSize.width * 0.30,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(
+                                    color: const Color.fromARGB(255, 238, 238, 238)),
+                                borderRadius: BorderRadius.circular(13),
+                              ),
+                              child: DropdownButton(
+                                  hint: Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: (studentListValue == null)
+                                          ?  Text(
+                                              "Select Students",
+                                              style: TextStyle(
+                                                  color: const Color.fromARGB(
+                                                      255, 0, 0, 0),
+                                                  fontSize: 18.w),
+                                            )
+                                          : Text(studentListValue?['studentName'])),
+                                  underline: const SizedBox(),
+                                  style:  TextStyle(
+                                    fontSize: 18.w,
+                                    color: Colors.black,
+                                  ),
+                                  icon:  Padding(
+                                    padding: EdgeInsets.all(
+                                      13.w,
+                                    ),
+                                    child: Icon(Icons.arrow_drop_down,
+                                        size: 18.w, color: Colors.grey),
+                                  ),
+                                  isExpanded: true,
+                                  items: snapshot.data?.docs.map(
+                                    (val) {
+                                      return DropdownMenuItem(
+                                        value: val["docid"],
+                                        child: Text(val["studentName"]),
+                                      );
+                                    },
+                                  ).toList(),
+                                  onChanged: (val) {
+                                    var categoryIDObject = snapshot.data?.docs
+                                        .where((element) => element["docid"] == val.toString())
+                                        .toList()
+                                        .first;
+               
+                                    setState(
+                                      () {
+                                        studentListValue = categoryIDObject; 
+                                        studentID = studentListValue?['docid'];
+                                      },
+                                    ); 
+                                    log(studentListValue?['docid']);
+                                  }),
+                            );
+                          }),
+                 
+                
+                  Padding(
+                    padding: const EdgeInsets.only(left: 80, right: 80, top: 20),
+                    child: TextFormField(
+                      controller: dateController,
+                      decoration: const InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
+                          icon: Icon(Icons.calendar_today, color: Colors.blue),
+                          labelText: "Enter Date"),
+                      readOnly: true,
+                      onTap: () async {
+                        DateTime? pickedDate = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(2101));
+               
+                        if (pickedDate != null) {
+                          print(pickedDate);
+                          String formattedDate =
+                              DateFormat('yyyy-MM-dd').format(pickedDate);
+                          print(formattedDate);
+               
+                          setState(() {
+                            dateController.text = formattedDate;
+                          });
+                        } else {
+                          print("Date is not selected");
+                        }
+                      },
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 120.w,
-                        top: 170.h,
-                      ),
-                      child: InkWell(
-                        onTap: () async {
-                          FilePickerResult? result = await FilePicker.platform
-                              .pickFiles(type: FileType.image);
-                          if (result != null) {
-                            file = result.files.first.bytes;
-                            setState(() {
-                              _file = file;
-                            });
-                          }
-                        },
-                        child: Container(
-                          height: size.width / 40,
-                          width: size.width / 40,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Color.fromARGB(255, 0, 0, 0),
-                          ),
-                          alignment: Alignment.center,
-                          child: Icon(
-                            Icons.camera_alt_outlined,
-                            color: Color.fromARGB(255, 156, 20, 20),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                sizedBoxH20,
-                const Text(
-                  '+ Upload photo',
-                  style: TextStyle(color: adminePrimayColor),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 80, right: 80, top: 20),
-                  child: TextField(
-                    controller: dateController,
-                    decoration: const InputDecoration(
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 80, right: 80, top: 20),
+                    child: TextFormField(
+                      validator: checkFieldEmpty,
+                      controller: admissionNumberController,
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20))),
-                        icon: Icon(Icons.calendar_today, color: Colors.blue),
-                        labelText: "Enter Date"),
-                    readOnly: true,
-                    onTap: () async {
-                      DateTime? pickedDate = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(2101));
-
-                      if (pickedDate != null) {
-                        print(pickedDate);
-                        String formattedDate =
-                            DateFormat('yyyy-MM-dd').format(pickedDate);
-                        print(formattedDate);
-
-                        setState(() {
-                          dateController.text = formattedDate;
-                        });
-                      } else {
-                        print("Date is not selected");
-                      }
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 80, right: 80, top: 20),
-                  child: TextField(
-                    controller: admissionNumberController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                      icon:
-                          Icon(Icons.format_list_numbered, color: Colors.blue),
-                      labelText: 'ADMISSION NUMBER',
+                            borderRadius: BorderRadius.all(Radius.circular(20))),
+                        icon:
+                            Icon(Icons.format_list_numbered, color: Colors.blue),
+                        labelText: 'ADMISSION NUMBER',
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 80, right: 80, top: 20),
-                  child: TextField(
-                    controller: achievementController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                      icon:
-                          Icon(Icons.card_membership_sharp, color: Colors.blue),
-                      labelText: 'ACHIEVEMENT HEAD',
+                  Padding(
+                    padding: const EdgeInsets.only(left: 80, right: 80, top: 20),
+                    child: TextFormField(
+                      validator: checkFieldEmpty,
+                      controller: achievementController,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(20))),
+                        icon:
+                            Icon(Icons.card_membership_sharp, color: Colors.blue),
+                        labelText: 'ACHIEVEMENT HEAD',
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 80, right: 80, top: 20),
-                  child: TextField(
-                    controller: descriptionController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                      icon: Icon(Icons.note_alt_outlined, color: Colors.blue),
-                      labelText: 'DESCRIPTION',
+                  Padding(
+                    padding: const EdgeInsets.only(left: 80, right: 80, top: 20),
+                    child: TextFormField(
+                      validator: checkFieldEmpty,
+                      controller: descriptionController,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(20))),
+                        icon: Icon(Icons.note_alt_outlined, color: Colors.blue),
+                        labelText: 'DESCRIPTION',
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: size.width / 38,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: (InkWell(
-                    onTap: () async {
-                      await uploadImageToStorage(file).then(
-                          (value) => showToast(msg: 'New Achievement Added!'));
-                      achievementController.clear();
-                      dateController.clear();
-                      descriptionController.clear();
-                      admissionNumberController.clear();
-                    },
-                    child: CreateContainerWidget(
-                      text: 'Create',
-                      fontSize: 20.w,
-                    ),
-                  )),
-                ),
-              ]),
+                             
+                             
+                  SizedBox(
+                    height: size.width / 38,
+                  ),
+                  Padding(
+                    padding:  EdgeInsets.all(10.w),
+                    child: (InkWell(
+                      onTap: () async{
+                        
+                        if (formKey.currentState!.validate()){
+                   // formKey.currentState!.validate();
+                        
+                       await uploadImageToStorage(file).then((value) => showToast(msg: 'New Achievement Added!'));
+                        achievementController.clear();
+                        dateController.clear();
+                        descriptionController.clear();
+                        admissionNumberController.clear();
+                        }
+                      },
+                      child: CreateContainerWidget(text: 'Create',fontSize: 20.w,),
+                    )),
+                  ),
+                             ]),
+               ),
             )
           ],
         ),
@@ -492,3 +501,7 @@ class _AddAchievementsState extends State<AddAchievements> {
     );
   }
 }
+
+
+
+

@@ -124,7 +124,7 @@ class ListOfSchoolTeachers extends StatelessWidget {
                                                     ),
                                                     sizedBoxH10,
                                                     Text(
-                                                      'Create Date : ${stringTimeToDateConvert(data.createdAt!)}',
+                                                      'Created Date : ${stringTimeToDateConvert(data.createdAt!)}',
                                                       style:
                                                           GoogleFonts.poppins(
                                                         color: Colors.black

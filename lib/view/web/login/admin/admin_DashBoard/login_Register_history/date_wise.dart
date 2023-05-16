@@ -100,7 +100,7 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
                                                     child:
                                                         const Text("Cancel")),
                                                 TextButton(
-                                                  child: const Text('ok'),
+                                                  child: const Text('Ok'),
                                                   onPressed: () async {
                                                     if (widget.schoolID ==
                                                         FirebaseAuth.instance
@@ -142,7 +142,7 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
                                                             context) {
                                                           return AlertDialog(
                                                             title: const Text(
-                                                                'Wrong password'),
+                                                                'You Are Not a MainAdmin'),
                                                             content:
                                                                 SingleChildScrollView(
                                                               child: ListBody(
@@ -154,7 +154,7 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
                                                               TextButton(
                                                                 child:
                                                                     const Text(
-                                                                        'ok'),
+                                                                        'Ok'),
                                                                 onPressed: () {
                                                                   Navigator.of(
                                                                           context)

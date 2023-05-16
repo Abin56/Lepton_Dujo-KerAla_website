@@ -23,8 +23,9 @@ class ClassTeacherCreateEventsPage extends StatelessWidget {
     // teacherEventController.clearControllers();
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: adminePrimayColor,
           title: const Text('Create New Events'),
-          iconTheme: const IconThemeData(color: cBlack),
+          iconTheme: const IconThemeData(color: cWhite),
         ),
         body: ListView(children: [
           Row(

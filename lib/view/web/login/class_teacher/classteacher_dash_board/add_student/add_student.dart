@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+
 import '../../../../../../controller/Getx/class_teacher/teacher_add_student_controller/teacher_add_student_controller.dart';
 
 class AddStudentFromClassTeacher extends StatelessWidget {
@@ -126,33 +127,31 @@ class AddStudentFromClassTeacher extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                left: 50.w, right: 50.w, top: 30.h),
-                            child: SizedBox(
-                              height: 60.h,
-                              width: 250.w,
-                              child: Obx(() => ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: adminePrimayColor,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: 50.w, right: 50.w, top: 30.h),
+                          child: SizedBox(
+                            height: 60.h,
+                            width: 250.w,
+                            child: Obx(() => ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: adminePrimayColor,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
                                     ),
-                                    onPressed: () async {
-                                      if (formKey.currentState?.validate() ??
-                                          false) {
-                                        teacherAddStudentController
-                                            .createStudent();
-                                      }
-                                    },
-                                    child: teacherAddStudentController
-                                            .isLoading.value
-                                        ? circularProgressIndicator
-                                        : const Text("Create"),
-                                  )),
-                            ),
+                                  ),
+                                  onPressed: () async {
+                                    if (formKey.currentState?.validate() ??
+                                        false) {
+                                      teacherAddStudentController
+                                          .createStudent();
+                                    }
+                                  },
+                                  child: teacherAddStudentController
+                                          .isLoading.value
+                                      ? circularProgressIndicator
+                                      : const Text("Create"),
+                                )),
                           ),
                         ),
                       ]),
