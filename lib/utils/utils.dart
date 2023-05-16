@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
+final FirebaseAuth _auth = FirebaseAuth.instance;
 Future<String> dateTimePicker(BuildContext context) async {
   DateTime? dateTime = await showDatePicker(
       context: context,
@@ -73,5 +74,14 @@ void handleFirebaseError(FirebaseAuthException error) {
     default:
       showToast(msg: 'Something went wrong');
       break;
+  }
+}
+
+Future<void> resetPassword(String email) async {
+  try {
+    await _auth.sendPasswordResetEmail(email: email);
+    showToast(msg: "Password verification email sent to your email address.");
+  } catch (e) {
+    log('Error sending password reset email: $e');
   }
 }
