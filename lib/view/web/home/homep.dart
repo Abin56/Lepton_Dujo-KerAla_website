@@ -7,7 +7,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../utils/responsive.dart';
 import '../widgets/drop_DownList/schoolDropDownList.dart';
+import '../widgets/sample/under_maintance.dart';
 import 'footer/footerhomep.dart';
 
 class HomeP extends StatelessWidget {
@@ -96,7 +98,11 @@ class HomeP extends StatelessWidget {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: ListView(children: [
+        body: ResponsiveWidget.isSmallScreen(context)
+          ?
+          const UnderMaintanceScreen():
+        
+         ListView(children: [
           Padding(
             padding: EdgeInsets.only(right: 80.0.w, left: 80.w),
             child: SizedBox(

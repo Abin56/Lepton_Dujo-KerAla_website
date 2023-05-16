@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable, unused_element
 
 import 'package:dujo_kerala_website/view/web/home/footer/footerhomep.dart';
+import 'package:dujo_kerala_website/view/web/widgets/sample/under_maintance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -94,13 +95,7 @@ class HomwPageTwo extends StatelessWidget {
         child:
         ResponsiveWidget.isSmallScreen(context)
           ?
-          Center(
-            child: Text("This site is under construction",
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.red
-            ),),
-          )
+          UnderMaintanceScreen()
   //       SingleChildScrollView(
   //         child: Column(
   //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,       

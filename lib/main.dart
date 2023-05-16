@@ -1,4 +1,5 @@
 import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/homepage_mob.dart';
+import 'package:dujo_kerala_website/view/web/home/homep.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,8 +42,8 @@ class MyApp extends StatelessWidget {
                 accentColor: const Color(0xFF02BB9F),
               ),
               home: 
-              HomwPageTwo()
-             // HomeP()
+              // HomwPageTwo()
+             HomeP()
               );
         });
   }
