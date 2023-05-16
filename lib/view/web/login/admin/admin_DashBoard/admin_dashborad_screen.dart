@@ -479,231 +479,234 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                 SizedBox(
                                   width: screenSize.height / 12,
                                 ),
-                                Text('Batch Year ${getFireBaseData.bYear}'),
-                                IconButton(
-                                    onPressed: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            title:
-                                                const Text('Change Batch Year'),
-                                            content: SingleChildScrollView(
-                                              child: ListBody(
-                                                children: <Widget>[
-                                                  GetBatchYearListDropDownButton(
-                                                    schoolID: widget.schoolID,
-                                                  ),
-                                                ],
+                                 Text('Batch Year ${getFireBaseData.bYear}'),
+                                Tooltip(
+                                  message: "Change/add batch year",
+                                  child: IconButton(
+                                      onPressed: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title:
+                                                  const Text('Change Batch Year'),
+                                              content: SingleChildScrollView(
+                                                child: ListBody(
+                                                  children: <Widget>[
+                                                    GetBatchYearListDropDownButton(
+                                                      schoolID: widget.schoolID,
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                            actions: <Widget>[
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(20.0),
-                                                child: MaterialButton(
-                                                    color: Colors.red,
-                                                    onPressed: () {
-                                                      Navigator.pop(context);
-                                                    },
-                                                    child: Text(
-                                                      'Cancel',
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                              color:
-                                                                  Colors.white),
-                                                    )),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(20.0),
-                                                child: MaterialButton(
-                                                    color: Colors.blue,
-                                                    onPressed: () {
-                                                      FirebaseFirestore.instance
-                                                          .collection(
-                                                              "SchoolListCollection")
-                                                          .doc(widget.schoolID)
-                                                          .set(
-                                                              {
-                                                            'batchYear':
-                                                                schoolBatchYearListValue![
-                                                                    'id']
-                                                          },
-                                                              SetOptions(
-                                                                  merge:
-                                                                      true)).then(
-                                                              (value) async {
-                                                        await getFireBaseData
-                                                            .getBatchYearId();
-                                                        Navigator
-                                                            .pushReplacement(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) {
-                                                              return AdminDashBoardPage(
-                                                                  loginTime:
-                                                                      LoginTimeIDSavingClass
-                                                                          .id,
-                                                                  schoolID: widget
-                                                                      .schoolID);
-                                                            },
-                                                          ),
-                                                        );
-                                                      });
-                                                    },
-                                                    child: Text(
-                                                      'Set BatchYear',
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                              color:
-                                                                  Colors.white),
-                                                    )),
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  FirebaseFirestore.instance
-                                                      .collection(
-                                                          "SchoolListCollection")
-                                                      .doc(widget.schoolID)
-                                                      .set(
-                                                          {
-                                                        'batchYear':
-                                                            schoolBatchYearListValue![
-                                                                'id']
+                                              actions: <Widget>[
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(20.0),
+                                                  child: MaterialButton(
+                                                      color: Colors.red,
+                                                      onPressed: () {
+                                                        Navigator.pop(context);
                                                       },
-                                                          SetOptions(
-                                                              merge:
-                                                                  true)).then(
-                                                          (value) async {
-                                                    await getFireBaseData
-                                                        .getBatchYearId();
-                                                    Navigator.pushReplacement(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) {
-                                                          return AdminDashBoardPage(
-                                                              loginTime:
-                                                                  LoginTimeIDSavingClass
-                                                                      .id,
-                                                              schoolID: widget
-                                                                  .schoolID);
-                                                        },
-                                                      ),
-                                                    );
-                                                  });
-                                                },
-                                                child: MaterialButton(
-                                                    color: Colors.green,
-                                                    onPressed: () {
-                                                      showDialog(
-                                                        context: context,
-                                                        builder: (BuildContext
-                                                            context) {
-                                                          return AlertDialog(
-                                                            title: const Text(
-                                                                'Add BatchYear'),
-                                                            content:
-                                                                SingleChildScrollView(
-                                                              child: ListBody(
-                                                                children: <
-                                                                    Widget>[
-                                                                  TextFormField(
-                                                                      controller:
-                                                                    applynewBatchYearContoller,
-                                                                      readOnly:
-                                                                    true,
-                                                                      onTap: () =>
-                                                                    _selectDate(
-                                                                        context),
-                                                                      decoration:
-                                                                    const InputDecoration(
-                                                                  labelText:
-                                                                      'DD-MM-YYYY',
-                                                                  border:
-                                                                      OutlineInputBorder(),
-                                                                      ),
-                                                                    ),
-                                                                  const Icon(Icons
-                                                                      .arrow_downward_outlined),
-                                                                  TextFormField(
-                                                                      controller:
-                                                                    selectedToDaterContoller,
-                                                                      readOnly:
-                                                                    true,
-                                                                      onTap: () =>
-                                                                    _selectToDate(
-                                                                        context),
-                                                                      decoration:
-                                                                    const InputDecoration(
-                                                                  labelText:
-                                                                      'To',
-                                                                  border:
-                                                                      OutlineInputBorder(),
-                                                                      ),
-                                                                    ),
-                                                                ],
-                                                              ),
+                                                      child: Text(
+                                                        'Cancel',
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                                color:
+                                                                    Colors.white),
+                                                      )),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(20.0),
+                                                  child: MaterialButton(
+                                                      color: Colors.blue,
+                                                      onPressed: () {
+                                                        FirebaseFirestore.instance
+                                                            .collection(
+                                                                "SchoolListCollection")
+                                                            .doc(widget.schoolID)
+                                                            .set(
+                                                                {
+                                                              'batchYear':
+                                                                  schoolBatchYearListValue![
+                                                                      'id']
+                                                            },
+                                                                SetOptions(
+                                                                    merge:
+                                                                        true)).then(
+                                                                (value) async {
+                                                          await getFireBaseData
+                                                              .getBatchYearId();
+                                                          Navigator
+                                                              .pushReplacement(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder: (context) {
+                                                                return AdminDashBoardPage(
+                                                                    loginTime:
+                                                                        LoginTimeIDSavingClass
+                                                                            .id,
+                                                                    schoolID: widget
+                                                                        .schoolID);
+                                                              },
                                                             ),
-                                                            actions: <Widget>[
-                                                              TextButton(
-                                                                child: const Text(
-                                                                    'Cancel'),
-                                                                onPressed:
-                                                                    () async {
-                                                                  Navigator.of(
-                                                                          context)
-                                                                      .pop();
-                                                                },
-                                                              ),
-                                                              TextButton(
-                                                                child: const Text(
-                                                                    'Create'),
-                                                                onPressed:
-                                                                    () async {
-                                                                  await FirebaseFirestore
-                                                                      .instance
-                                                                      .collection(
-                                                                          "SchoolListCollection")
-                                                                      .doc(Get.find<
-                                                                              AdminLoginScreenController>()
-                                                                          .schoolID)
-                                                                      .collection(
-                                                                          "BatchYear")
-                                                                      .doc(
-                                                                          '${applynewBatchYearContoller.text.trim()}-${selectedToDaterContoller.text.trim()}')
-                                                                      .set({
-                                                                    'id':
-                                                                        '${applynewBatchYearContoller.text.trim()}-${selectedToDaterContoller.text.trim()}'
-                                                                  }).then((value) {
-                                                                    Navigator.of(
-                                                                            context)
-                                                                        .pop();
-                                                                    Navigator.of(
-                                                                            context)
-                                                                        .pop();
-                                                                  });
-                                                                },
-                                                              ),
-                                                            ],
                                                           );
+                                                        });
+                                                      },
+                                                      child: Text(
+                                                        'Set BatchYear',
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                                color:
+                                                                    Colors.white),
+                                                      )),
+                                                ),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    FirebaseFirestore.instance
+                                                        .collection(
+                                                            "SchoolListCollection")
+                                                        .doc(widget.schoolID)
+                                                        .set(
+                                                            {
+                                                          'batchYear':
+                                                              schoolBatchYearListValue![
+                                                                  'id']
                                                         },
+                                                            SetOptions(
+                                                                merge:
+                                                                    true)).then(
+                                                            (value) async {
+                                                      await getFireBaseData
+                                                          .getBatchYearId();
+                                                      Navigator.pushReplacement(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) {
+                                                            return AdminDashBoardPage(
+                                                                loginTime:
+                                                                    LoginTimeIDSavingClass
+                                                                        .id,
+                                                                schoolID: widget
+                                                                    .schoolID);
+                                                          },
+                                                        ),
                                                       );
-                                                    },
-                                                    child: Text(
-                                                      'Add Batch Year',
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                              color:
-                                                                  Colors.white),
-                                                    )),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                    },
-                                    icon: const Icon(Icons.replay_outlined)),
+                                                    });
+                                                  },
+                                                  child: MaterialButton(
+                                                      color: Colors.green,
+                                                      onPressed: () {
+                                                        showDialog(
+                                                          context: context,
+                                                          builder: (BuildContext
+                                                              context) {
+                                                            return AlertDialog(
+                                                              title: const Text(
+                                                                  'Add BatchYear'),
+                                                              content:
+                                                                  SingleChildScrollView(
+                                                                child: ListBody(
+                                                                  children: <
+                                                                      Widget>[
+                                                                    TextFormField(
+                                                                        controller:
+                                                                      applynewBatchYearContoller,
+                                                                        readOnly:
+                                                                      true,
+                                                                        onTap: () =>
+                                                                      _selectDate(
+                                                                          context),
+                                                                        decoration:
+                                                                      const InputDecoration(
+                                                                    labelText:
+                                                                        'DD-MM-YYYY',
+                                                                    border:
+                                                                        OutlineInputBorder(),
+                                                                        ),
+                                                                      ),
+                                                                    const Icon(Icons
+                                                                        .arrow_downward_outlined),
+                                                                    TextFormField(
+                                                                        controller:
+                                                                      selectedToDaterContoller,
+                                                                        readOnly:
+                                                                      true,
+                                                                        onTap: () =>
+                                                                      _selectToDate(
+                                                                          context),
+                                                                        decoration:
+                                                                      const InputDecoration(
+                                                                    labelText:
+                                                                        'To',
+                                                                    border:
+                                                                        OutlineInputBorder(),
+                                                                        ),
+                                                                      ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              actions: <Widget>[
+                                                                TextButton(
+                                                                  child: const Text(
+                                                                      'Cancel'),
+                                                                  onPressed:
+                                                                      () async {
+                                                                    Navigator.of(
+                                                                            context)
+                                                                        .pop();
+                                                                  },
+                                                                ),
+                                                                TextButton(
+                                                                  child: const Text(
+                                                                      'Create'),
+                                                                  onPressed:
+                                                                      () async {
+                                                                    await FirebaseFirestore
+                                                                        .instance
+                                                                        .collection(
+                                                                            "SchoolListCollection")
+                                                                        .doc(Get.find<
+                                                                                AdminLoginScreenController>()
+                                                                            .schoolID)
+                                                                        .collection(
+                                                                            "BatchYear")
+                                                                        .doc(
+                                                                            '${applynewBatchYearContoller.text.trim()}-${selectedToDaterContoller.text.trim()}')
+                                                                        .set({
+                                                                      'id':
+                                                                          '${applynewBatchYearContoller.text.trim()}-${selectedToDaterContoller.text.trim()}'
+                                                                    }).then((value) {
+                                                                      Navigator.of(
+                                                                              context)
+                                                                          .pop();
+                                                                      Navigator.of(
+                                                                              context)
+                                                                          .pop();
+                                                                    });
+                                                                  },
+                                                                ),
+                                                              ],
+                                                            );
+                                                          },
+                                                        );
+                                                      },
+                                                      child: Text(
+                                                        'Add Batch Year',
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                                color:
+                                                                    Colors.white),
+                                                      )),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      },
+                                      icon: const Icon(Icons.replay_outlined)),
+                                ),
                                 const CircleAvatar(
                                   backgroundImage: AssetImage(
                                       'assets/images/icons8-teachers-64.png'),
@@ -782,7 +785,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                           },
                                         );
                                       },
-                                      icon: const Icon(Icons.logout_outlined),
+                                      icon: const Tooltip(message: "Logout",child: Icon(Icons.logout_outlined,)),
                                     ),
                                 GoogleMonstserratWidgets(fontsize: 13.w,text: 'logout',)
                                  ],

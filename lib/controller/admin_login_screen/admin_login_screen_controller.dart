@@ -271,7 +271,7 @@ class AdminLoginScreenController extends GetxController {
           return Form(
             key: _forgetFormkey,
             child: AlertDialog(
-              title: const Text('Change Password ?'),
+              title: const Text('Reset your password ?'),
               content: SingleChildScrollView(
                 child: ListBody(
                   children: <Widget>[

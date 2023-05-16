@@ -1,6 +1,10 @@
+// ignore_for_file: must_be_immutable, unused_element
+
+import 'package:dujo_kerala_website/view/web/home/footer/footerhomep.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../utils/responsive.dart';
 import '../../../view/colors/colors.dart';
@@ -15,14 +19,72 @@ import '../../../view/web/login/loginscreen.dart';
 import '../../../view/web/widgets/drop_DownList/schoolDropDownList.dart';
 
 
-class HomwPageTwo extends StatefulWidget {
-  const HomwPageTwo({Key? key}) : super(key: key);
+class HomwPageTwo extends StatelessWidget {
+   HomwPageTwo({Key? key}) : super(key: key);
+    final Uri _faceBookUrl =
+      Uri.parse('https://www.facebook.com/profile.php?id=100091062978371');
+  final Uri _twitterUrl = Uri.parse('https://twitter.com/LeptonDujo');
+  final Uri _instaUrl = Uri.parse('https://www.instagram.com/leptondujo/');
+  final Uri _utubeUrl =
+      Uri.parse('https://www.youtube.com/@LEPTONDUJO/featured');
+  final Uri _leptonUrl = Uri.parse('http://www.leptoncommunications.com');
 
-  @override
-  State<HomwPageTwo> createState() => _HomwPageTwoState();
-}
+  Future<void> _launchFacebookUrl() async {
+    if (!await launchUrl(_faceBookUrl)) {
+      throw 'Could not launch $_faceBookUrl';
+    }
+  }
 
-class _HomwPageTwoState extends State<HomwPageTwo> {
+  Future<void> _launchTwitterUrl() async {
+    if (!await launchUrl(_twitterUrl)) {
+      throw 'Could not launch $_twitterUrl';
+    }
+  }
+
+  Future<void> _launchyouTubeUrl() async {
+    if (!await launchUrl(_utubeUrl)) {
+      throw 'Could not launch $_utubeUrl';
+    }
+  }
+
+  Future<void> _launchInstaUrl() async {
+    if (!await launchUrl(_instaUrl)) {
+      throw 'Could not launch $_instaUrl';
+    }
+  }
+
+  Future<void> _launchleptonUrl() async {
+    if (!await launchUrl(_leptonUrl)) {
+      throw 'Could not launch $_leptonUrl';
+    }
+  }
+
+
+  List<String> containerNames = [
+    'Aided Schools',
+    'Unaided Schoools',
+    'Government Schools',
+    'Aided Colleges',
+    'Unaided Colleges',
+    'Government Colleges',
+    'Engineering',
+    'Medical',
+    'Others'
+  ];
+
+  List<String> lottieFiles = [
+    'https://assets7.lottiefiles.com/private_files/lf30_CrFtpW.json',
+    'https://assets7.lottiefiles.com/private_files/lf30_c3gZyd.json',
+    'https://assets7.lottiefiles.com/private_files/lf30_G9r0Hr.json',
+    'https://assets4.lottiefiles.com/private_files/lf30_pkxipgnh.json',
+    'https://assets4.lottiefiles.com/private_files/lf30_pkxipgnh.json',
+    'https://assets4.lottiefiles.com/private_files/lf30_pkxipgnh.json',
+    'https://assets5.lottiefiles.com/packages/lf20_geumvtzy.json',
+    'https://assets8.lottiefiles.com/packages/lf20_ibbakwps.json',
+    'https://assets1.lottiefiles.com/packages/lf20_DkWbCBx3kE.json'
+  ];
+
+
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
@@ -32,875 +94,979 @@ class _HomwPageTwoState extends State<HomwPageTwo> {
         child:
         ResponsiveWidget.isSmallScreen(context)
           ?
-        SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 28.0),
-                child: Stack(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Icon(
-                            Icons.menu,size: 35,  // add custom icons also
-                          ),
-                        ),
-                        const SizedBox(width: 30,),
-                        Container(
+          Center(
+            child: Text("This site is under construction",
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.red
+            ),),
+          )
+  //       SingleChildScrollView(
+  //         child: Column(
+  //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,       
+  //           children: [
+  //             Padding(
+  //               padding:  EdgeInsets.only(top: 5.0.h),
+  //               child: Stack(
+  //                 children: [
+  //                   Row(
+  //                     mainAxisAlignment: MainAxisAlignment.start,
+  //                     children: [
+  //                        Padding(
+  //                         padding: EdgeInsets.all(0.0.h),
+  //                         child: const Icon(
+  //                           Icons.menu,size: 35,  // add custom icons also
+  //                         ),
+  //                       ),
+  //                        SizedBox(width: 30.h,),
+  //                       Container(
 
-                          child: Image.asset("assets/images/leptdujo.png",height: 100,width: 100,),
-                        ),
+  //                         child: Image.asset("assets/images/leptdujo.png",height: 100.h,width: 100.h,),
+  //                       ),
 
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Stack(
-                children: [
+  //                     ],
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //             Stack(
+  //               children: [
 
-                  Container(
-                      height: screenSize.height*3.13,
-                      width: screenSize.width,
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [Colors.white,Colors.blue ],
-                        )
-                      ),
-                      child: Column(
-                        children: [
-                          Stack(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(left: 45,
-                                top: screenSize.height*0.35),
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.white,width: 1),
-                                  color: Colors.transparent,
-                                  borderRadius: const BorderRadius.all(Radius.circular(5))
-                                ),
-                                  height: screenSize.height*0.25,
-                                  width: screenSize.width*0.75,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Center(
-                                        child: Container(
-                                          child: Text(
-                                            "Watch and Guide, \n"
-                                                "Let Them Study !",
-                                            style:
-                                            TextStyle(
-                                                fontSize: screenSize.width*0.075),
-                                          ),
-                                        ),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            child: Image.asset("assets/images/dujon.png",height: 100,width: 100,),
-                                          ),
-                                          const SizedBox(width: 5,),
-                                          Padding(
-                                            padding: const EdgeInsets.all(10.0),
-                                            child: Text(
-                                              "Schools",style:
-                                              TextStyle(color: Colors.orange,
-                                              fontSize: screenSize.height*0.03),  // add custom icons also
-                                            ),
-                                          ),
+  //                 Container(
+  //                     height: screenSize.height*4.2,
+  //                     width: screenSize.width,
+  //                     decoration: const BoxDecoration(
+  //                       gradient: LinearGradient(
+  //                         begin: Alignment.topCenter,
+  //                         end: Alignment.bottomCenter,
+  //                         colors: [Colors.white,Colors.blue ],
+  //                       )
+  //                     ),
+  //                     child: Column(
+  //                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //                       children: [
+  //                         Stack(
+  //                           children: [
+  //                             Container(
+  //                               margin: EdgeInsets.only(
+  //                                 left: 20.h,
+  //                               top: 70.h),
+  //                               decoration: BoxDecoration(
+  //                                 border: Border.all(color: Colors.white,width: 1),
+  //                                 color: Colors.white,
+  //                                 boxShadow: [
+  //                   BoxShadow(
+  //                     color: Colors.lightBlueAccent,
+  //                     offset: const Offset(
+  //                       5.0,
+  //                       5.0,
+  //                     ),
+  //                     blurRadius: 10.0,
+  //                     spreadRadius: 2.0,
+  //                   ), //BoxShadow
+  //                   BoxShadow(
+  //                     color: Colors.white,
+  //                     offset: const Offset(0.0, 0.0),
+  //                     blurRadius: 0.0,
+  //                     spreadRadius: 0.0,
+  //                   ), //BoxShadow
+  //                 ],//,
+  //                                 borderRadius: const BorderRadius.all(Radius.circular(5))
+  //                               ),
+  //                                 height: screenSize.height*0.28,
+  //                                 width: screenSize.width*0.75,
+  //                                 child: Column(
+  //                                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //                                   children: [
+  //                                     Center(
+  //                                       child: Container(
+  //                                         child: Text(
+  //                                           "Watch and Guide, \n"
+  //                                               "Let Them Study !",
+  //                                           style:
+  //                                           TextStyle(
+  //                                               fontSize: screenSize.height*0.055),
+  //                                         ),
+  //                                       ),
+  //                                     ),
+  //                                       Row(
+  //                                       mainAxisAlignment: MainAxisAlignment.center,
+  //                                       children: [
+  //                                         Container(
+  //                                           child: Image.asset("assets/images/dujon.png",height: 75.h,width: 75.h,),
+  //                                         ),
+  //                                         const SizedBox(width: 5,),
+  //                                         Padding(
+  //                                           padding:  EdgeInsets.all(1.h),
+  //                                           child: Text(
+  //                                             "Schools",style:
+  //                                             TextStyle(color: Colors.orange,
+  //                                             fontSize: screenSize.height*0.03),  // add custom icons also
+  //                                           ),
+  //                                         ),
 
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(left: 45,
-                                    top: screenSize.height*0.65),
-                                decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.black,width: 1),
-                                    color: Colors.blueGrey,
-                                    borderRadius: const BorderRadius.all(Radius.circular(5))
-                                ),
-                                height: screenSize.height*0.05,
-                                width: screenSize.width*0.5,
-                                child: Center(
-                                  child: Container(
-                                    child: Text(
-                                      "Create School Profile",
-                                      style:
-                                      TextStyle(
-                                          fontSize: screenSize.width*0.05),
-                                    ),
-                                  ),
-                                ),
+  //                                       ],
+  //                                     ),
+  //                                   ],
+  //                                 ),
+  //                             ),
+  //                             Container(
+  //                               margin: EdgeInsets.only(left: 20.h,
+  //                                   top: screenSize.height*0.47),
+  //                               decoration: BoxDecoration(
+  //                                   border: Border.all(color: Colors.black,width: 1),
+  //                                   color: Colors.blueGrey,
+  //                                   borderRadius: const BorderRadius.all(Radius.circular(5))
+  //                               ),
+  //                               height: screenSize.height*0.06,
+  //                               width: screenSize.height*0.4,
+  //                               child: Center(
+  //                                 child: Container(
+  //                                   child: Text(
+  //                                     "Create School Profile",
+  //                                     style:
+  //                                     TextStyle(
+  //                                       color: Colors.white,
+  //                                         fontSize: screenSize.width*0.03),
+  //                                   ),
+  //                                 ),
+  //                               ),
 
-                              ),
+  //                             ),
+                        
+  //                           ],
+  //                         ),
+  //                         Stack(
+  //                           children: [
+  //                             Container(
+  //                               margin: EdgeInsets.only(left: 20.h,
+  //                               top: 120.h),
+  //                               decoration: BoxDecoration(
+  //                                 border: Border.all(color: Colors.white,width: 1),
+  //                                 color: Colors.white,
+  //                                 boxShadow: [
+  //                   BoxShadow(
+  //                     color: Colors.lightBlueAccent,
+  //                     offset: const Offset(
+  //                       5.0,
+  //                       5.0,
+  //                     ),
+  //                     blurRadius: 10.0,
+  //                     spreadRadius: 2.0,
+  //                   ), //BoxShadow
+  //                   BoxShadow(
+  //                     color: Colors.white,
+  //                     offset: const Offset(0.0, 0.0),
+  //                     blurRadius: 0.0,
+  //                     spreadRadius: 0.0,
+  //                   ), //BoxShadow
+  //                 ],//,
+  //                                 borderRadius: const BorderRadius.all(Radius.circular(5))
+  //                               ),
+  //                                 height: screenSize.height*0.28,
+  //                                 width: screenSize.width*0.75,
+  //                                 child: Column(
+  //                                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //                                   children: [
+  //                                     Center(
+  //                                       child: Container(
+  //                                         child: Text(
+  //                                           "Keep going, \n"
+  //                                               "Let Them Study !",
+  //                                           style:
+  //                                           TextStyle(
+  //                                               fontSize: screenSize.height*0.055),
+  //                                         ),
+  //                                       ),
+  //                                     ),
+  //                                       Row(
+  //                                       mainAxisAlignment: MainAxisAlignment.center,
+  //                                       children: [
+  //                                         Container(
+  //                                           child: Image.asset("assets/images/dujon.png",height: 75.h,width: 75.h,),
+  //                                         ),
+  //                                         const SizedBox(width: 5,),
+  //                                         Padding(
+  //                                           padding:  EdgeInsets.all(1.h),
+  //                                           child: Text(
+  //                                             "Colleges",style:
+  //                                             TextStyle(color: Colors.orange,
+  //                                             fontSize: screenSize.height*0.03),  // add custom icons also
+  //                                           ),
+  //                                         ),
 
+  //                                       ],
+  //                                     ),
+  //                                   ],
+  //                                 ),
+  //                             ),
+  //                             Container(
+  //                               margin: EdgeInsets.only(left: 20.h,
+  //                                   top:300.h),
+  //                               decoration: BoxDecoration(
+  //                                   border: Border.all(color: Colors.black,width: 1),
+  //                                   color: Colors.blueGrey,
+  //                                   borderRadius: const BorderRadius.all(Radius.circular(5))
+  //                               ),
+  //                               height: screenSize.height*0.06,
+  //                               width: screenSize.height*0.4,
+  //                               child: Center(
+  //                                 child: Container(
+  //                                   child: Text(
+  //                                     "Create College Profile",
+  //                                     style:
+  //                                     TextStyle(
+  //                                       color: Colors.white,
+  //                                         fontSize: screenSize.width*0.03),
+  //                                   ),
+  //                                 ),
+  //                               ),
 
-//////////////////////////
+  //                             ),
 
-
-
-                              ShaderMask(
-                                shaderCallback: (rect) {
-                                  return const LinearGradient(
-                                    begin: Alignment.center,
-                                    end: Alignment.bottomCenter,
-                                    colors: [adminePrimayColor, Colors.transparent],
-                                  ).createShader(
-                                      Rect.fromLTRB(0, 0, rect.width, rect.height));
-                                },
-                                blendMode: BlendMode.dstIn,
-                                child: Stack(
-                                  children: [
-                                    Transform.rotate(
-                                      angle: 0,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(left: 45,top: 75),
-                                        child: Positioned(
-                                            left: -50,
-                                            child: Image.asset(
-                                                'assets/images/collage bg mob.png',
-                                                width: 150,
-                                                height: 250
-                                            )),
-                                      ),
-                                    ),
-
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          Stack(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(left: 45,
-                                    top: screenSize.height*0.35),
-                                decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.white,width: 1),
-                                    color: Colors.transparent,
-                                    borderRadius: const BorderRadius.all(Radius.circular(5))
-                                ),
-                                height: screenSize.height*0.25,
-                                width: screenSize.width*0.75,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Center(
-                                      child: Container(
-                                        child: Text(
-                                          "Keep going. We provide, \n"
-                                              "Everything you need !",
-                                          style:
-                                          TextStyle(
-                                              fontSize: screenSize.width*0.065),
-                                        ),
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                          child: Image.asset("assets/images/dujon.png",height: 100,width: 100,),
-                                        ),
-                                        const SizedBox(width: 5,),
-                                        Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: Text(
-                                            "Colleges",style:
-                                          TextStyle(color: Colors.orange,
-                                              fontSize: screenSize.height*0.03),  // add custom icons also
-                                          ),
-                                        ),
-
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(left: 45,
-                                    top: screenSize.height*0.65),
-                                decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.black,width: 1),
-                                    color: Colors.blueGrey,
-                                    borderRadius: const BorderRadius.all(Radius.circular(5))
-                                ),
-                                height: screenSize.height*0.05,
-                                width: screenSize.width*0.5,
-                                child: Center(
-                                  child: Container(
-                                    child: Text(
-                                      "Create College Profile",
-                                      style:
-                                      TextStyle(
-                                          fontSize: screenSize.width*0.05),
-                                    ),
-                                  ),
-                                ),
-
-                              ),
-
-                              ShaderMask(
-                                shaderCallback: (rect) {
-                                  return const LinearGradient(
-                                    begin: Alignment.center,
-                                    end: Alignment.bottomCenter,
-                                    colors: [adminePrimayColor, Colors.transparent],
-                                  ).createShader(
-                                      Rect.fromLTRB(0, 0, rect.width, rect.height));
-                                },
-                                blendMode: BlendMode.dstIn,
-                                child: Stack(
-                                  children: [
-                                    Transform.rotate(
-                                      angle: 0,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(left: 35,top: 75),
-                                        child: Positioned(
-                                            left: -50,
-                                            child: Image.asset(
-                                                'assets/images/women1.png',
-                                                width: 150,
-                                                height: 250
-                                            )),
-                                      ),
-                                    ),
-                                    
-                                   
-
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          Stack(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(left: 45,
-                                    top: screenSize.height*0.35),
-                                decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.white,width: 1),
-                                    color: Colors.transparent,
-                                    borderRadius: const BorderRadius.all(Radius.circular(5))
-                                ),
-                                height: screenSize.height*0.25,
-                                width: screenSize.width*0.75,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Center(
-                                      child: Container(
-                                        child: Text(
-                                          "Log on, \n"
-                                              "Feed Your Mind!\n"
-                                              "Chane the World!!",
-                                          style:
-                                          TextStyle(
-                                              fontSize: screenSize.width*0.065),
-                                        ),
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                          child: Image.asset("assets/images/dujon.png",height: 100,width: 100,),
-                                        ),
-                                        const SizedBox(width: 5,),
-                                        Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: Text(
-                                            "Professionals",style:
-                                          TextStyle(color: Colors.orange,
-                                              fontSize: screenSize.height*0.03),  // add custom icons also
-                                          ),
-                                        ),
-
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(left: 45,
-                                    top: screenSize.height*0.65),
-                                decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.black,width: 1),
-                                    color: Colors.blueGrey,
-                                    borderRadius: const BorderRadius.all(Radius.circular(5))
-                                ),
-                                height: screenSize.height*0.05,
-                                width: screenSize.width*0.5,
-                                child: Center(
-                                  child: Container(
-                                    child: Text(
-                                      "Create Your Profile",
-                                      style:
-                                      TextStyle(
-                                          fontSize: screenSize.width*0.05),
-                                    ),
-                                  ),
-                                ),
-
-                              ),
-
-                              ShaderMask(
-                                shaderCallback: (rect) {
-                                  return const LinearGradient(
-                                    begin: Alignment.center,
-                                    end: Alignment.bottomCenter,
-                                    colors: [adminePrimayColor, Colors.transparent],
-                                  ).createShader(
-                                      Rect.fromLTRB(0, 0, rect.width, rect.height));
-                                },
-                                blendMode: BlendMode.dstIn,
-                                child: Stack(
-                                  children: [
-
-                                    Transform.rotate(
-                                      angle: 0,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(left: 190,top: 58),
-                                        child: Positioned(
-                                            left: -50,
-                                            child: Image.asset(
-                                                'assets/images/women1.png',
-                                                width: 150,
-                                                height: 250
-                                            )),
-                                      ),
-                                    ),
-
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          Stack(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(left: 45,
-                                    top: screenSize.height*0.35),
-                                decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.white,width: 1),
-                                    color: Colors.transparent,
-                                    borderRadius: const BorderRadius.all(Radius.circular(5))
-                                ),
-                                height: screenSize.height*0.25,
-                                width: screenSize.width*0.75,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Center(
-                                      child: Container(
-                                        child: Text(
-                                          "It's in You,"
-                                              "  Awake! and \n"
-                                              "Chase Your Dream !",
-                                          style:
-                                          TextStyle(
-                                              fontSize: screenSize.width*0.065),
-                                        ),
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                          child: Image.asset("assets/images/dujon.png",height: 100,width: 100,),
-                                        ),
-                                        const SizedBox(width: 5,),
-                                        Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: Text(
-                                            "Competitions",style:
-                                          TextStyle(color: Colors.orange,
-                                              fontSize: screenSize.height*0.03),  // add custom icons also
-                                          ),
-                                        ),
-
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(left: 45,
-                                    top: screenSize.height*0.65),
-                                decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.black,width: 1),
-                                    color: Colors.blueGrey,
-                                    borderRadius: const BorderRadius.all(Radius.circular(5))
-                                ),
-                                height: screenSize.height*0.05,
-                                width: screenSize.width*0.6,
-                                child: Center(
-                                  child: Container(
-                                    child: Text(
-                                      "Create Institution Profile",
-                                      style:
-                                      TextStyle(
-                                          fontSize: screenSize.width*0.05),
-                                    ),
-                                  ),
-                                ),
-
-                              ),
-
-                              ShaderMask(
-                                shaderCallback: (rect) {
-                                  return const LinearGradient(
-                                    begin: Alignment.center,
-                                    end: Alignment.bottomCenter,
-                                    colors: [adminePrimayColor, Colors.transparent],
-                                  ).createShader(
-                                      Rect.fromLTRB(0, 0, rect.width, rect.height));
-                                },
-                                blendMode: BlendMode.dstIn,
-                                child: Stack(
-                                  children: [
-                                    Transform.rotate(
-                                      angle: 0,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(left: 35,top: 75),
-                                        child: Positioned(
-                                            left: -50,
-                                            child: Image.asset(
-                                                'assets/images/boy1.png',
-                                                width: 150,
-                                                height: 250
-                                            )),
-                                      ),
-                                    ),
-                                   
-                                  
-
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  Container(
-                    margin: EdgeInsets.only(top: screenSize.height*3.13-screenSize.height*0.2),
-                    alignment: Alignment.bottomCenter,
-                    color: adminScreencolor,
-                    height: screenSize.height*0.2,
-                    child:   Container(
-            height: 400,
-            width: double.infinity,
-            color: Colors.transparent,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 200,
-                    width: double.infinity,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Lepton DuJo',
-                              style: GoogleFonts.poppins(fontSize: 25, fontWeight: FontWeight.bold, color: const Color.fromRGBO(103, 53, 107, 1),),
-                            ),
-                            OnHoverText(
-                              builder: (isHoverd) {
-                                final color =
-                                    isHoverd ? Colors.orange : Colors.black;
-                                return SizedBox(
-                                    width: 160.w,
-                                    child: Text(
-                                      'Who We Are',
-                                      style:
-                                          k,
-                                    ));
-                              },
-                            ),
-                            OnHoverText(
-                              builder: (isHoverd) {
-                                final color =
-                                    isHoverd ? Colors.orange : Colors.black;
-                                return SizedBox(
-                                    width: 160.w,
-                                    child: Text(
-                                      'Why choose us',
-                                      style: k,
-                                    ));
-                              },
-                            ),
-                            OnHoverText(
-                              builder: (isHoverd) {
-                                final color = isHoverd
-                                    ? const Color.fromARGB(255, 168, 15, 4)
-                                    : Colors.black;
-                                return SizedBox(
-                                    width: 180,
-                                    child: Text(
-                                      'Lepton DuJo For Business',
-                                      style: k,
-                                    ));
-                              },
-                            ),
-                            OnHoverText(
-                              builder: (isHoverd) {
-                                final color =
-                                    isHoverd ? Colors.orange : Colors.black;
-                                return SizedBox(
-                                    width: 160.w,
-                                    child: Text(
-                                      'Affiliates',
-                                      style: k,
-                                    ));
-                              },
-                            ),
-                            OnHoverText(
-                              builder: (isHoverd) {
-                                final color =
-                                    isHoverd ? Colors.orange : Colors.black;
-                                return SizedBox(
-                                    width: 160.w,
-                                    child: Text(
-                                      'Careers',
-                                      style: k,
-                                    ));
-                              },
-                            ),
-                            OnHoverText(
-                              builder: (isHoverd) {
-                                final color =
-                                    isHoverd ? Colors.orange : Colors.black;
-                                return SizedBox(
-                                    width: 160.w,
-                                    child: Text(
-                                      'News',
-                                      style: k,
-                                    ));
-                              },
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                //  Navigator.push(context, MaterialPageRoute(builder: ((context) =>RequestedSchoolsApproval())));
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: ((context) =>
-                                            LeptonAdminLoginScreen())));
-                              },
-                              child: OnHoverText(
-                                builder: (isHoverd) {
-                                  final color = isHoverd
-                                      ? const Color.fromARGB(255, 255, 0, 0)
-                                      : Colors.black;
-                                  return SizedBox(
-                                      width: 160.w,
-                                      child: Text(
-                                        'Super Admin',
-                                        style: TextStyle(
-                                            fontSize: 18, color: color),
-                                      ));
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Connect',
-                              style: GoogleFonts.poppins(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                                color: const Color.fromRGBO(103, 53, 107, 1),
-                              ),
-                            ),
-                            OnHoverText(
-                              builder: (isHoverd) {
-                                final color =
-                                    isHoverd ? Colors.orange : Colors.black;
-                                return SizedBox(
-                                    width: 160.w,
-                                    child: Text(
-                                      'Blog',
-                                      style: k,
-                                    ));
-                              },
-                            ),
-                            OnHoverText(
-                              builder: (isHoverd) {
-                                final color =
-                                    isHoverd ? Colors.orange : Colors.black;
-                                return GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(
-                                      builder: (context) {
-                                        return const CondactusUserScreen();
-                                      },
-                                    ));
-                                  },
-                                  child: SizedBox(
-                                      width: 160.w,
-                                      child: Text(
-                                        'Contact US',
-                                        style: k,
-                                      )),
-                                );
-                              },
-                            ),
-                            OnHoverText(
-                              builder: (isHoverd) {
-                                final color =
-                                    isHoverd ? Colors.orange : Colors.black;
-                                return SizedBox(
-                                    width: 160.w,
-                                    child: Text(
-                                      'Help Center',
-                                      style: k,
-                                    ));
-                              },
-                            ),
-                            OnHoverText(
-                              builder: (isHoverd) {
-                                final color =
-                                    isHoverd ? Colors.orange : Colors.black;
-                                return SizedBox(
-                                    width: 160.w,
-                                    child: Text(
-                                      'Security',
-                                      style: k,
-                                    ));
-                              },
-                            ),
-                          ],
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Legal',
-                              style: GoogleFonts.poppins(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                                color: const Color.fromRGBO(103, 53, 107, 1),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: ((context) =>
-                                            const TermsAndConditions())));
-                              },
-                              child: OnHoverText(
-                                builder: (isHoverd) {
-                                  final color =
-                                      isHoverd ? Colors.orange : Colors.black;
-                                  return SizedBox(
-                                      width: 160.w,
-                                      child: Text(
-                                        'Terms & Conditions',
-                                        style: k,
-                                      ));
-                                },
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: ((context) =>
-                                            const PrivacyPolicy())));
-                              },
-                              child: OnHoverText(
-                                builder: (isHoverd) {
-                                  final color =
-                                      isHoverd ? Colors.orange : Colors.black;
-                                  return SizedBox(
-                                      width: 160.w,
-                                      child: Text(
-                                        'Privacy Policy',
-                                        style: k,
-                                      ));
-                                },
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: ((context) =>
-                                            const FamilyPolicyScreen())));
-                              },
-                              child: OnHoverText(
-                                builder: (isHoverd) {
-                                  final color =
-                                      isHoverd ? Colors.orange : Colors.black;
-                                  return SizedBox(
-                                      width: 160.w,
-                                      child: Text(
-                                        'Family Policy',
-                                        style: k,
-                                      ));
-                                },
-                              ),
-                            ),
-                            OnHoverText(
-                              builder: (isHoverd) {
-                                final color =
-                                    isHoverd ? Colors.orange : Colors.black;
-                                return SizedBox(
-                                    width: 160.w,
-                                    child: Text(
-                                      'Trademark Policy',
-                                      style: k,
-                                    ));
-                              },
-                            ),
-                            OnHoverText(
-                              builder: (isHoverd) {
-                                final color =
-                                    isHoverd ? Colors.orange : Colors.black;
-                                return SizedBox(
-                                    width: 160.w,
-                                    child: Text(
-                                      'Cancellation Policy',
-                                      style: k,
-                                    ));
-                              },
-                            ),
-                          ],
-                        ),
-
-                        Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Address",
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 20.w,
-                                      fontWeight: FontWeight.bold)),
-                              Text(
-                                'Lepton Plus Communications OPC) Pvt.Ltd'
-                                '\n5th Floor ,Karimpanal Statue Avenue ,G.H. Road, ',
-                                style: k,
-                              ),
-                              Text(
-                                'Statue ,Thiruvananthapuram-695001. Kerala , India',
-                                style: k,
-                              ),
-                              Text(
-                                '+91 97469 66651 | +91 97463 66651 | +91 471 4053483	',
-                                style: k,
-                              ),
-                              Text(
-                                'info@leptoncommunications.com,',
-                                style: k,
-                              ),
-                              Text('leptoncommunications@gmail.com', style: k),
-                            ]),
- ],
-                    ),
-                  ),
-              
-          const Divider(
-            thickness: 1,
-            color: Color(0xFF26A69A),
-          ),
-          SizedBox(
-            height: 200,
-            width: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    height: 200,
-                    width: 300,
-                    decoration: const BoxDecoration(
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                'https://firebasestorage.googleapis.com/v0/b/leptonscipro-31792.appspot.com/o/files%2Fimages%2FLepton-removebg-preview.png?alt=media&token=cb2cbd20-7630-4681-8857-f8b245018453'))),
-                  ),
-                  Text(
-                    'Lepton Plus Communications is a customer oriented company offering digital solutions in Healthcare, E-Commerce Applications,\nHome Automation and Social Networking. We are committed to providing high end sustainable products and services that\nenhances the quality of life',
-                    style: GoogleFonts.poppins(
-                        color: const Color.fromRGBO(255, 255, 255, 1)),
-                  )
-                ],
-              ),
-            ),
-          ),
-          Container(
-            color: Colors.black,
-            height: 60,
-            width: double.infinity,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Copyright ©️ All rights reserved | by LeptonCommunications",
-                  style: GoogleFonts.poppins(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white),
-                ),
-              ],
-            ),
-          ),
-            ],
-              ),
-            ),
-          ),
-        
-      
-    
-                  ),
-                  Container(
-                    color: Colors.blueAccent,
-                    margin: EdgeInsets.only(left: screenSize.width*0.1,top: screenSize.height*3.13-screenSize.width*0.5),
-                    height: screenSize.width*0.2,
-                    width: screenSize.width-screenSize.width*0.2,
-                  
-                  ),
-
-  ]),
-            ]
-  ),
-        )
-      
-
-      
-                  
-                
-              
             
-          
-        
+  //                           ],
+  //                         ),
+  //                         Stack(
+  //                           children: [
+  //                             Container(
+  //                               margin: EdgeInsets.only(
+  //                                 left: 20.h,
+  //                               top: 70.h),
+  //                               decoration: BoxDecoration(
+  //                                 border: Border.all(color: Colors.white,width: 1),
+  //                                 color: Colors.white,
+  //                                 boxShadow: [
+  //                   BoxShadow(
+  //                     color: Colors.blue,
+  //                     offset: const Offset(
+  //                       5.0,
+  //                       5.0,
+  //                     ),
+  //                     blurRadius: 10.0,
+  //                     spreadRadius: 2.0,
+  //                   ), //BoxShadow
+  //                   BoxShadow(
+  //                     color: Colors.blue,
+  //                     offset: const Offset(0.0, 0.0),
+  //                     blurRadius: 0.0,
+  //                     spreadRadius: 0.0,
+  //                   ), //BoxShadow
+  //                 ],//,
+  //                                 borderRadius: const BorderRadius.all(Radius.circular(5))
+  //                               ),
+  //                                 height: screenSize.height*0.28,
+  //                                 width: screenSize.width*0.75,
+  //                                 child: Column(
+  //                                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //                                   children: [
+  //                                     Center(
+  //                                       child: Container(
+  //                                         child: Text(
+  //                                           "Watch and Guide, \n"
+  //                                               "Let Them Study !",
+  //                                           style:
+  //                                           TextStyle(
+  //                                               fontSize: screenSize.height*0.055),
+  //                                         ),
+  //                                       ),
+  //                                     ),
+  //                                       Row(
+  //                                       mainAxisAlignment: MainAxisAlignment.center,
+  //                                       children: [
+  //                                         Container(
+  //                                           child: Image.asset("assets/images/dujon.png",height: 75.h,width: 75.h,),
+  //                                         ),
+  //                                         const SizedBox(width: 5,),
+  //                                         Padding(
+  //                                           padding:  EdgeInsets.all(1.h),
+  //                                           child: Text(
+  //                                             "Schools",style:
+  //                                             TextStyle(color: Colors.orange,
+  //                                             fontSize: screenSize.height*0.03),  // add custom icons also
+  //                                           ),
+  //                                         ),
+
+  //                                       ],
+  //                                     ),
+  //                                   ],
+  //                                 ),
+  //                             ),
+  //                             Container(
+  //                               margin: EdgeInsets.only(left: 20.h,
+  //                                   top: screenSize.height*0.47),
+  //                               decoration: BoxDecoration(
+  //                                   border: Border.all(color: Colors.black,width: 1),
+  //                                   color: Colors.blueGrey,
+  //                                   borderRadius: const BorderRadius.all(Radius.circular(5))
+  //                               ),
+  //                               height: screenSize.height*0.06,
+  //                               width: screenSize.height*0.4,
+  //                               child: Center(
+  //                                 child: Container(
+  //                                   child: Text(
+  //                                     "Create School Profile",
+  //                                     style:
+  //                                     TextStyle(
+  //                                       color: Colors.white,
+  //                                         fontSize: screenSize.width*0.03),
+  //                                   ),
+  //                                 ),
+  //                               ),
+
+  //                             ),
+                        
+  //                           ],
+  //                         ),
+  //                         Stack(
+  //                           children: [
+  //                             Container(
+  //                               margin: EdgeInsets.only(
+  //                                 left: 20.h,
+  //                               top: 70.h),
+  //                               decoration: BoxDecoration(
+  //                                 border: Border.all(color: Colors.white,width: 1),
+  //                                 color: Colors.white,
+  //                                 boxShadow: [
+  //                   BoxShadow(
+  //                     color: Colors.white60,
+  //                     offset: const Offset(
+  //                       5.0,
+  //                       5.0,
+  //                     ),
+  //                     blurRadius: 10.0,
+  //                     spreadRadius: 2.0,
+  //                   ), //BoxShadow
+  //                   BoxShadow(
+  //                     color: Colors.white,
+  //                     offset: const Offset(0.0, 0.0),
+  //                     blurRadius: 0.0,
+  //                     spreadRadius: 0.0,
+  //                   ), //BoxShadow
+  //                 ],//,
+  //                                 borderRadius: const BorderRadius.all(Radius.circular(5))
+  //                               ),
+  //                                 height: screenSize.height*0.28,
+  //                                 width: screenSize.width*0.75,
+  //                                 child: Column(
+  //                                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //                                   children: [
+  //                                     Center(
+  //                                       child: Container(
+  //                                         child: Text(
+  //                                           "Watch and Guide, \n"
+  //                                               "Let Them Study !",
+  //                                           style:
+  //                                           TextStyle(
+  //                                               fontSize: screenSize.height*0.055),
+  //                                         ),
+  //                                       ),
+  //                                     ),
+  //                                       Row(
+  //                                       mainAxisAlignment: MainAxisAlignment.center,
+  //                                       children: [
+  //                                         Container(
+  //                                           child: Image.asset("assets/images/dujon.png",height: 75.h,width: 75.h,),
+  //                                         ),
+  //                                         const SizedBox(width: 5,),
+  //                                         Padding(
+  //                                           padding:  EdgeInsets.all(1.h),
+  //                                           child: Text(
+  //                                             "Schools",style:
+  //                                             TextStyle(color: Colors.orange,
+  //                                             fontSize: screenSize.height*0.03),  // add custom icons also
+  //                                           ),
+  //                                         ),
+
+  //                                       ],
+  //                                     ),
+  //                                   ],
+  //                                 ),
+  //                             ),
+  //                             Container(
+  //                               margin: EdgeInsets.only(left: 20.h,
+  //                                   top: screenSize.height*0.47),
+  //                               decoration: BoxDecoration(
+  //                                   border: Border.all(color: Colors.black,width: 1),
+  //                                   color: Colors.blueGrey,
+  //                                   borderRadius: const BorderRadius.all(Radius.circular(5))
+  //                               ),
+  //                               height: screenSize.height*0.06,
+  //                               width: screenSize.height*0.4,
+  //                               child: Center(
+  //                                 child: Container(
+  //                                   child: Text(
+  //                                     "Create School Profile",
+  //                                     style:
+  //                                     TextStyle(
+  //                                       color: Colors.white,
+  //                                         fontSize: screenSize.width*0.03),
+  //                                   ),
+  //                                 ),
+  //                               ),
+
+  //                             ),
+                        
+  //                           ],
+  //                         ),
+  //                       ],
+  //                     ),
+  //                   ),
+  //                   Container(
+  //                               margin: EdgeInsets.only(top: 0.h),
+  //                               child:
+  //                             ShaderMask(
+  //                               shaderCallback: (rect) {
+  //                                 return const LinearGradient(
+  //                                   begin: Alignment.center,
+  //                                   end: Alignment.bottomCenter,
+  //                                   colors: [adminePrimayColor, Colors.transparent],
+  //                                 ).createShader(
+  //                                     Rect.fromLTRB(0, 0, rect.width, rect.height));
+  //                               },
+  //                               blendMode: BlendMode.dstIn,
+  //                               child: Stack(
+  //                                 children: [
+  //                                   Transform.rotate(
+  //                                     angle: 0,
+  //                                     child: Padding(
+  //                                       padding:  EdgeInsets.only(left: 75.h,top: 110.h ),
+  //                                       child: Positioned(
+  //                                           left: -50,
+  //                                           child: Image.asset(
+  //                                               'assets/images/boy.png',
+  //                                               width: 147.h,
+  //                                               height: 200.h
+  //                                           )),
+  //                                     ),
+  //                                   ),
+  //                                   Transform.rotate(
+  //                                     angle: 0,
+  //                                     child: Padding(
+  //                                       padding:  EdgeInsets.only(left: 600.w,top: 200.w),
+  //                                       child: Positioned(
+  //                                           left: -50,
+  //                                           child: Image.asset(
+  //                                               'assets/images/girl.png',
+  //                                               width: 140.h,
+  //                                               height: 250.h
+  //                                           )),
+  //                                     ),
+  //                                   ),
+  //                                   Transform.rotate(
+  //                                     angle: 0,
+  //                                     child: Padding(
+  //                                       padding:  EdgeInsets.only(left: 250.h,top: 87.h),
+  //                                       child: Positioned(
+  //                                           left: -50,
+  //                                           child: Image.asset(
+  //                                               'assets/images/pngegg.png',
+  //                                               width: 150.h,
+  //                                               height: 250.h
+  //                                           )),
+  //                                     ),
+  //                                   ),
+
+  //                                 ],
+  //                               ),
+  //                             ),
+  //                             ),
+  //                             Container(
+  //                               margin: EdgeInsets.only(top: 498.h),
+  //                               child: ShaderMask(
+  //                                 shaderCallback: (rect) {
+  //                                   return const LinearGradient(
+  //                                     begin: Alignment.center,
+  //                                     end: Alignment.bottomCenter,
+  //                                     colors: [adminePrimayColor, Colors.transparent],
+  //                                   ).createShader(
+  //                                       Rect.fromLTRB(0, 0, rect.width, rect.height));
+  //                                 },
+  //                                 blendMode: BlendMode.dstIn,
+  //                                 child: Stack(
+  //                                   children: [
+  //                                     Transform.rotate(
+  //                                       angle: 0,
+  //                                       child: Padding(
+  //                                         padding: const EdgeInsets.only(left: 135,top: 48),
+  //                                         child: Positioned(
+  //                                             left: -50,
+  //                                         child: Positioned(
+  //                                             left: -50,
+  //                                             child: Image.asset(
+  //                                                 'assets/images/collagemob.png.png',
+  //                                                 width: 300.h,
+  //                                                 height: 350
+  //                                           ) )),
+  //                                       ),
+  //                                     ),
+                                      
+                                     
+                              
+  //                                   ],
+  //                                 ),
+  //                               ),
+  //                             ),
+  //                             Container(
+  //                               margin: EdgeInsets.only(top: 1530.h),
+  //                               child: ShaderMask(
+  //                                 shaderCallback: (rect) {
+  //                                   return const LinearGradient(
+  //                                     begin: Alignment.center,
+  //                                     end: Alignment.bottomCenter,
+  //                                     colors: [adminePrimayColor, Colors.transparent],
+  //                                   ).createShader(
+  //                                       Rect.fromLTRB(0, 0, rect.width, rect.height));
+  //                                 },
+  //                                 blendMode: BlendMode.dstIn,
+  //                                 child: Stack(
+  //                                   children: [
+  //                                     Transform.rotate(
+  //                                       angle: 0,
+  //                                       child: Padding(
+  //                                         padding: const EdgeInsets.only(left: 100,top: 48),
+  //                                         child: Positioned(
+  //                                             left: -50,
+  //                                         child: Positioned(
+  //                                             left: -50,
+  //                                             child: Image.asset(
+  //                                                 'assets/images/boy1.png',
+  //                                                 width: 400.h,
+  //                                                 height: 300.h
+  //                                           ) )),
+  //                                       ),
+  //                                     ),
+                                      
+                                     
+                              
+  //                                   ],
+  //                                 ),
+  //                               ),
+  //                             ),
+  //                             Container(
+  //                               margin: EdgeInsets.only(top: 888),
+  //                               child: ShaderMask(
+  //                                 shaderCallback: (rect) {
+  //                                   return const LinearGradient(
+  //                                     begin: Alignment.center,
+  //                                     end: Alignment.bottomCenter,
+  //                                     colors: [adminePrimayColor, Colors.transparent],
+  //                                   ).createShader(
+  //                                       Rect.fromLTRB(0, 0, rect.width, rect.height));
+  //                                 },
+  //                                 blendMode: BlendMode.dstIn,
+  //                                 child: Stack(
+  //                                   children: [
+  //                                     Transform.rotate(
+  //                                       angle: 0,
+  //                                       child: Padding(
+  //                                         padding: const EdgeInsets.only(left: 130,top: 48),
+  //                                         child: Positioned(
+  //                                             left: -50,
+  //                                         child: Positioned(
+  //                                             left: -50,
+  //                                             child: Image.asset(
+  //                                                 'assets/images/women1.png',
+  //                                                 width: 300.h,
+  //                                                 height: 350
+  //                                           )  )),
+  //                                       ),
+  //                                     ),
+                                      
+                                     
+                              
+  //                                   ],
+  //                                 ),
+  //                               ),
+  //                             ),
+  //                 Container(
+  //                   margin: EdgeInsets.only(top: screenSize.height*4.2-screenSize.height*0.2),
+  //                   alignment: Alignment.bottomCenter,
+  //                   color: adminScreencolor,
+  //                   height: screenSize.height*0.3,
+  //                   child:   Container(
+  //           height: 600.w,
+  //           width: double.infinity,
+  //           color:cWhite,
+  //           // Colors.transparent,
+  //           child: Padding(
+  //             padding:  EdgeInsets.all(8.0.w),
+  //             child: Column(
+  //               mainAxisAlignment: MainAxisAlignment.start,
+  //               crossAxisAlignment: CrossAxisAlignment.start,
+  //               children: [
+  //                 SizedBox(
+  //                   height: 225.w,
+  //                   width: double.infinity,
+  //                   child: Row(
+  //                     mainAxisAlignment: MainAxisAlignment.spaceAround,
+  //                     children: [
+  //                       Column(
+  //                         mainAxisAlignment: MainAxisAlignment.spaceAround,
+  //                         crossAxisAlignment: CrossAxisAlignment.start,
+  //                         children: [
+  //                           Text(
+  //                             'Lepton DuJo',
+  //                             style: GoogleFonts.poppins(
+  //                               fontSize: 25.w, fontWeight: FontWeight.bold, color: const Color.fromRGBO(103, 53, 107, 1),),
+  //                           ),
+  //                           OnHoverText(
+  //                             builder: (isHoverd) {
+  //                               final color =
+  //                                   isHoverd ? Colors.orange : Colors.black;
+  //                               return SizedBox(
+  //                                   width: 160.w,
+  //                                   child: Text(
+  //                                     'Who We Are',
+  //                                     style:
+  //                                         k,
+  //                                   ));
+  //                             },
+  //                           ),
+  //                           OnHoverText(
+  //                             builder: (isHoverd) {
+  //                               final color =
+  //                                   isHoverd ? Colors.orange : Colors.black;
+  //                               return SizedBox(
+  //                                   width: 160.w,
+  //                                   child: Text(
+  //                                     'Why choose us',
+  //                                     style: k,
+  //                                   ));
+  //                             },
+  //                           ),
+  //                           OnHoverText(
+  //                             builder: (isHoverd) {
+  //                               final color = isHoverd
+  //                                   ? const Color.fromARGB(255, 168, 15, 4)
+  //                                   : Colors.black;
+  //                               return SizedBox(
+  //                                   width: 160.w,
+  //                                   child: Text(
+  //                                     'Lepton DuJo For Business',
+  //                                     style: k,
+  //                                   ));
+  //                             },
+  //                           ),
+  //                           OnHoverText(
+  //                             builder: (isHoverd) {
+  //                               final color =
+  //                                   isHoverd ? Colors.orange : Colors.black;
+  //                               return SizedBox(
+  //                                   width: 160.w,
+  //                                   child: Text(
+  //                                     'Affiliates',
+  //                                     style: k,
+  //                                   ));
+  //                             },
+  //                           ),
+  //                           OnHoverText(
+  //                             builder: (isHoverd) {
+  //                               final color =
+  //                                   isHoverd ? Colors.orange : Colors.black;
+  //                               return SizedBox(
+  //                                   width: 160.w,
+  //                                   child: Text(
+  //                                     'Careers',
+  //                                     style: k,
+  //                                   ));
+  //                             },
+  //                           ),
+  //                           OnHoverText(
+  //                             builder: (isHoverd) {
+  //                               final color =
+  //                                   isHoverd ? Colors.orange : Colors.black;
+  //                               return SizedBox(
+  //                                   width: 160.w,
+  //                                   child: Text(
+  //                                     'News',
+  //                                     style: k,
+  //                                   ));
+  //                             },
+  //                           ),
+  //                           GestureDetector(
+  //                             onTap: () {
+  //                               //  Navigator.push(context, MaterialPageRoute(builder: ((context) =>RequestedSchoolsApproval())));
+  //                               Navigator.push(
+  //                                   context,
+  //                                   MaterialPageRoute(
+  //                                       builder: ((context) =>
+  //                                           LeptonAdminLoginScreen())));
+  //                             },
+  //                             child: OnHoverText(
+  //                               builder: (isHoverd) {
+  //                                 final color = isHoverd
+  //                                     ? const Color.fromARGB(255, 255, 0, 0)
+  //                                     : Colors.black;
+  //                                 return SizedBox(
+  //                                     width: 130.w,
+  //                                     child: Text(
+  //                                       'Super Admin',
+  //                                       style: TextStyle(
+  //                                           fontSize: 18.w, color: color),
+  //                                     ));
+  //                               },
+  //                             ),
+  //                           ),
+  //                         ],
+  //                       ),
+  //                       Column(
+  //                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                         crossAxisAlignment: CrossAxisAlignment.start,
+  //                         children: [
+  //                           Text(
+  //                             'Connect',
+  //                             style: GoogleFonts.poppins(
+  //                               fontSize: 25.w,
+  //                               fontWeight: FontWeight.bold,
+  //                               color: const Color.fromRGBO(103, 53, 107, 1),
+  //                             ),
+  //                           ),
+  //                           OnHoverText(
+  //                             builder: (isHoverd) {
+  //                               final color =
+  //                                   isHoverd ? Colors.orange : Colors.black;
+  //                               return SizedBox(
+  //                                   width: 160.w,
+  //                                   child: Text(
+  //                                     'Blog',
+  //                                     style: k,
+  //                                   ));
+  //                             },
+  //                           ),
+  //                           OnHoverText(
+  //                             builder: (isHoverd) {
+  //                               final color =
+  //                                   isHoverd ? Colors.orange : Colors.black;
+  //                               return GestureDetector(
+  //                                 onTap: () {
+  //                                   Navigator.push(context, MaterialPageRoute(
+  //                                     builder: (context) {
+  //                                       return const CondactusUserScreen();
+  //                                     },
+  //                                   ));
+  //                                 },
+  //                                 child: SizedBox(
+  //                                     width: 160.w,
+  //                                     child: Text(
+  //                                       'Contact US',
+  //                                       style: k,
+  //                                     )),
+  //                               );
+  //                             },
+  //                           ),
+  //                           OnHoverText(
+  //                             builder: (isHoverd) {
+  //                               final color =
+  //                                   isHoverd ? Colors.orange : Colors.black;
+  //                               return SizedBox(
+  //                                   width: 160.w,
+  //                                   child: Text(
+  //                                     'Help Center',
+  //                                     style: k,
+  //                                   ));
+  //                             },
+  //                           ),
+  //                           OnHoverText(
+  //                             builder: (isHoverd) {
+  //                               final color =
+  //                                   isHoverd ? Colors.orange : Colors.black;
+  //                               return SizedBox(
+  //                                   width: 160.w,
+  //                                   child: Text(
+  //                                     'Security',
+  //                                     style: k,
+  //                                   ));
+  //                             },
+  //                           ),
+  //                         ],
+  //                       ),
+  //                       Column(
+  //                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                         crossAxisAlignment: CrossAxisAlignment.start,
+  //                         children: [
+  //                           Text(
+  //                             'Legal',
+  //                             style: GoogleFonts.poppins(
+  //                               fontSize: 25.w,
+  //                               fontWeight: FontWeight.bold,
+  //                               color: const Color.fromRGBO(103, 53, 107, 1),
+  //                             ),
+  //                           ),
+  //                           GestureDetector(
+  //                             onTap: () {
+  //                               Navigator.push(
+  //                                   context,
+  //                                   MaterialPageRoute(
+  //                                       builder: ((context) =>
+  //                                           const TermsAndConditions())));
+  //                             },
+  //                             child: OnHoverText(
+  //                               builder: (isHoverd) {
+  //                                 final color =
+  //                                     isHoverd ? Colors.orange : Colors.black;
+  //                                 return SizedBox(
+  //                                     width: 160.w,
+  //                                     child: Text(
+  //                                       'Terms & Conditions',
+  //                                       style: k,
+  //                                     ));
+  //                               },
+  //                             ),
+  //                           ),
+  //                           GestureDetector(
+  //                             onTap: () {
+  //                               Navigator.push(
+  //                                   context,
+  //                                   MaterialPageRoute(
+  //                                       builder: ((context) =>
+  //                                           const PrivacyPolicy())));
+  //                             },
+  //                             child: OnHoverText(
+  //                               builder: (isHoverd) {
+  //                                 final color =
+  //                                     isHoverd ? Colors.orange : Colors.black;
+  //                                 return SizedBox(
+  //                                     width: 160.w,
+  //                                     child: Text(
+  //                                       'Privacy Policy',
+  //                                       style: k,
+  //                                     ));
+  //                               },
+  //                             ),
+  //                           ),
+  //                           GestureDetector(
+  //                             onTap: () {
+  //                               Navigator.push(
+  //                                   context,
+  //                                   MaterialPageRoute(
+  //                                       builder: ((context) =>
+  //                                           const FamilyPolicyScreen())));
+  //                             },
+  //                             child: OnHoverText(
+  //                               builder: (isHoverd) {
+  //                                 final color =
+  //                                     isHoverd ? Colors.orange : Colors.black;
+  //                                 return SizedBox(
+  //                                     width: 160.w,
+  //                                     child: Text(
+  //                                       'Family Policy',
+  //                                       style: k,
+  //                                     ));
+  //                               },
+  //                             ),
+  //                           ),
+  //                           OnHoverText(
+  //                             builder: (isHoverd) {
+  //                               final color =
+  //                                   isHoverd ? Colors.orange : Colors.black;
+  //                               return SizedBox(
+  //                                   width: 160.w,
+  //                                   child: Text(
+  //                                     'Trademark Policy',
+  //                                     style: k,
+  //                                   ));
+  //                             },
+  //                           ),
+  //                           OnHoverText(
+  //                             builder: (isHoverd) {
+  //                               final color =
+  //                                   isHoverd ? Colors.orange : Colors.black;
+  //                               return SizedBox(
+  //                                   width: 160.w,
+  //                                   child: Text(
+  //                                     'Cancellation Policy',
+  //                                     style: k,
+  //                                   ));
+  //                             },
+  //                           ),
+  //                         ],
+  //                       ),
+
+  //                       Column(
+  //                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //                           crossAxisAlignment: CrossAxisAlignment.start,
+  //                           children: [
+  //                             Text("Address",
+  //                                 style: GoogleFonts.poppins(
+  //                                     fontSize: 20.w,
+  //                                     fontWeight: FontWeight.bold)),
+  //                             Text(
+  //                               'Lepton Plus Communications OPC) Pvt.Ltd'
+  //                               '\n5th Floor ,Karimpanal Statue Avenue ,G.H. Road, ',
+  //                               style: k,
+                                
+  //                             ),
+  //                             Text(
+  //                               'Statue ,Thiruvananthapuram-695001. Kerala , India',
+  //                               style: k,
+  //                             ),
+  //                             Text(
+  //                               '+91 97469 66651 | +91 97463 66651 | +91 471 4053483	',
+  //                               style: k,
+  //                             ),
+  //                             Text(
+  //                               'info@leptoncommunications.com,',
+  //                               style: k,
+  //                             ),
+  //                             Text('leptoncommunications@gmail.com', style: k),
+  //                           ]),
+  //                           ]),
+  //                 ),
+              
+  //          Divider(
+  //           thickness:  1.w,
+  //           color: const Color(0xFF26A69A),
+  //         ),
+  //         SizedBox(
+  //           height: 200.w,
+  //           width: double.infinity,
+  //           child: Row(
+  //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //             children: [
+  //               Container(
+  //                 height: 60.w,
+  //                 width: 200.w,
+  //                 decoration: const BoxDecoration(
+  //                     image: DecorationImage(
+  //                         image: NetworkImage(
+  //                             'https://firebasestorage.googleapis.com/v0/b/leptonscipro-31792.appspot.com/o/files%2Fimages%2FLepton-removebg-preview.png?alt=media&token=cb2cbd20-7630-4681-8857-f8b245018453'))),
+  //               ),
+  //               Text(
+  //                 'Lepton Plus Communications is a customer oriented company offering digital solutions in Healthcare, E-Commerce Applications,\nHome Automation and Social Networking. We are committed to providing high end sustainable products and services that\nenhances the quality of life',
+  //                 style: GoogleFonts.poppins(
+  //                    fontSize: 15.w,
+  //                     color: const Color.fromARGB(255, 0, 0, 0)),
+  //               )
+  //             ],
+  //           ),
+  //         ),
+  //         Container(
+  //           color: Colors.black,
+  //           height: 50.w,
+  //           width: double.infinity,
+  //           child: Row(
+  //             mainAxisAlignment: MainAxisAlignment.center,
+  //             children: [
+  //               Text(
+  //                 "Copyright ©️ All rights reserved | by LeptonCommunications",
+  //                 style: GoogleFonts.poppins(
+  //                     fontSize: 15.w,
+  //                     fontWeight: FontWeight.w500,
+  //                     color: Colors.white),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //           ],
+  //             ),
+  //           ),
+  //         ),
+  //      ),
+  // ]),
+  //  ]
+  // ),
+  //       )
         :
          Column(children: [
           Padding(
@@ -1139,7 +1305,7 @@ class _HomwPageTwoState extends State<HomwPageTwo> {
                           child: Text(
                             'Watch And Guide,\nLet Them Study',
                             style: GoogleFonts.montserrat(
-                              fontSize: 50.w,
+                              fontSize: 45.w,
                               fontWeight: FontWeight.bold,
                               color: adminePrimayColor,
                             ),
@@ -1232,12 +1398,13 @@ class _HomwPageTwoState extends State<HomwPageTwo> {
                   ),
                 ));
               })),
-            // const SizedBox(height: 100,),
-          //FooterHomeP()
+            const SizedBox(height: 100,),
+          FooterHomeP()
                ]),
             
     )
    );
  }
 }
-TextStyle k = GoogleFonts.poppins();
+
+TextStyle k = GoogleFonts.poppins(fontSize: 15.w,);
