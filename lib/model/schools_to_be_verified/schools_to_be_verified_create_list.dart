@@ -16,7 +16,7 @@ class SchoolsToBeVerified {
   String email;
   String postedDate;
   String schoolCode;
-
+  String? batchYear;
   bool verified;
   SchoolsToBeVerified({
     required this.schoolName,
@@ -29,12 +29,12 @@ class SchoolsToBeVerified {
     required this.email,
     required this.postedDate,
     required this.schoolCode,
+    this.batchYear,
     required this.verified,
   });
 
   SchoolsToBeVerified copyWith({
     String? schoolName,
-    String? uid,
     String? docid,
     String? district,
     String? place,
@@ -44,6 +44,7 @@ class SchoolsToBeVerified {
     String? email,
     String? postedDate,
     String? schoolCode,
+    String? batchYear,
     bool? verified,
   }) {
     return SchoolsToBeVerified(
@@ -57,6 +58,7 @@ class SchoolsToBeVerified {
       email: email ?? this.email,
       postedDate: postedDate ?? this.postedDate,
       schoolCode: schoolCode ?? this.schoolCode,
+      batchYear: batchYear ?? this.batchYear,
       verified: verified ?? this.verified,
     );
   }
@@ -73,6 +75,7 @@ class SchoolsToBeVerified {
       'email': email,
       'postedDate': postedDate,
       'schoolCode': schoolCode,
+      'batchYear': batchYear??'',
       'verified': verified,
     };
   }
@@ -89,52 +92,56 @@ class SchoolsToBeVerified {
       email: map['email'] as String,
       postedDate: map['postedDate'] as String,
       schoolCode: map['schoolCode'] as String,
+      batchYear: map['batchYear'] != null ? map['batchYear'] as String : null,
       verified: map['verified'] as bool,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory SchoolsToBeVerified.fromJson(String source) =>
-      SchoolsToBeVerified.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory SchoolsToBeVerified.fromJson(String source) => SchoolsToBeVerified.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'SchoolsToBeVerified(schoolName: $schoolName, docid: $docid, district: $district, place: $place, adminUserName: $adminUserName, password: $password, phoneNumber: $phoneNumber, email: $email, postedDate: $postedDate, schoolCode: $schoolCode, verified: $verified)';
+    return 'SchoolsToBeVerified(schoolName: $schoolName, docid: $docid, district: $district, place: $place, adminUserName: $adminUserName, password: $password, phoneNumber: $phoneNumber, email: $email, postedDate: $postedDate, schoolCode: $schoolCode, batchYear: $batchYear, verified: $verified)';
   }
 
   @override
   bool operator ==(covariant SchoolsToBeVerified other) {
     if (identical(this, other)) return true;
-
-    return other.schoolName == schoolName &&
-        other.docid == docid &&
-        other.district == district &&
-        other.place == place &&
-        other.adminUserName == adminUserName &&
-        other.password == password &&
-        other.phoneNumber == phoneNumber &&
-        other.email == email &&
-        other.postedDate == postedDate &&
-        other.schoolCode == schoolCode &&
-        other.verified == verified;
+  
+    return 
+      other.schoolName == schoolName &&
+      other.docid == docid &&
+      other.district == district &&
+      other.place == place &&
+      other.adminUserName == adminUserName &&
+      other.password == password &&
+      other.phoneNumber == phoneNumber &&
+      other.email == email &&
+      other.postedDate == postedDate &&
+      other.schoolCode == schoolCode &&
+      other.batchYear == batchYear &&
+      other.verified == verified;
   }
 
   @override
   int get hashCode {
     return schoolName.hashCode ^
-        docid.hashCode ^
-        district.hashCode ^
-        place.hashCode ^
-        adminUserName.hashCode ^
-        password.hashCode ^
-        phoneNumber.hashCode ^
-        email.hashCode ^
-        postedDate.hashCode ^
-        schoolCode.hashCode ^
-        verified.hashCode;
+      docid.hashCode ^
+      district.hashCode ^
+      place.hashCode ^
+      adminUserName.hashCode ^
+      password.hashCode ^
+      phoneNumber.hashCode ^
+      email.hashCode ^
+      postedDate.hashCode ^
+      schoolCode.hashCode ^
+      batchYear.hashCode ^
+      verified.hashCode;
   }
 }
+
 
 class AddRequestedSchoolsToFirebase {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
