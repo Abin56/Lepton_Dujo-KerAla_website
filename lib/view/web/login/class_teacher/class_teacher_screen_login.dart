@@ -1,13 +1,13 @@
 import 'dart:developer';
 
 import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
-import 'package:dujo_kerala_website/controller/class_teacher_login_screen/class_teacher_login.dart';
 import 'package:dujo_kerala_website/view/web/widgets/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../../../controller/class_teacher_login_screen/class_teacher_login_controller.dart';
 import '../../../../controller/text_form_hide/password_filed.dart';
 import '../../../colors/colors.dart';
 import '../../../constant/constant.dart';
@@ -132,28 +132,26 @@ class ClassTeacherLoginScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(16.0),
                           color: AppColors.whiteColor,
                         ),
-                        child:TextFormField(
-                            controller:
-                                classTeacherLoginController.emailController,
-                         
-                            style: ralewayStyle.copyWith(
+                        child: TextFormField(
+                          controller:
+                              classTeacherLoginController.emailController,
+                          style: ralewayStyle.copyWith(
+                            fontWeight: FontWeight.w400,
+                            color: cBlack,
+                            fontSize: 15.0,
+                          ),
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            prefixIcon: const Icon(Icons.mail),
+                            contentPadding: const EdgeInsets.only(top: 16.0),
+                            hintText: 'Email',
+                            hintStyle: ralewayStyle.copyWith(
                               fontWeight: FontWeight.w400,
-                              color: cBlack,
+                              color: AppColors.blueDarkColor.withOpacity(0.5),
                               fontSize: 15.0,
                             ),
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              prefixIcon: const Icon(Icons.mail),
-                              contentPadding: const EdgeInsets.only(top: 16.0),
-                              hintText: 'Email',
-                              hintStyle: ralewayStyle.copyWith(
-                                fontWeight: FontWeight.w400,
-                                color: AppColors.blueDarkColor.withOpacity(0.5),
-                                fontSize: 15.0,
-                              ),
-                            ),
                           ),
-                        
+                        ),
                       ),
                       SizedBox(height: height * 0.014),
                       Padding(

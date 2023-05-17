@@ -401,28 +401,27 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                             color: adminePrimayColor,
                             child: Column(
                               children: [
-                               // sizedBoxH20,
-                                 Container(
-                            margin: EdgeInsets.only(top: 20.h),
-                            height: 30.h,
-                            width: 80.w,
-                            child: Image.asset('assets/images/dujon.png')),
+                                // sizedBoxH20,
+                                Container(
+                                    margin: EdgeInsets.only(top: 20.h),
+                                    height: 30.h,
+                                    width: 80.w,
+                                    child:
+                                        Image.asset('assets/images/dujon.png')),
                                 Row(
                                   children: [
                                     IconButtonBackWidget(color: Colors.red),
                                     FittedBox(
-                                      child: 
-                                          Padding( 
-                                            padding:  EdgeInsets.all(17.w),
-                                            child: Text(
-                                              'Classteacher Dashboard',
-                                              style: GoogleFonts.poppins(
-                                                  color: Colors.red,
-                                                  fontWeight: FontWeight.w800,
-                                                  fontSize: 13.h),
-                                            ),
-                                          ),
-                                        
+                                      child: Padding(
+                                        padding: EdgeInsets.all(17.w),
+                                        child: Text(
+                                          'Classteacher Dashboard',
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.red,
+                                              fontWeight: FontWeight.w800,
+                                              fontSize: 13.h),
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -562,11 +561,15 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                                     'classID':
                                                                         classIDListValue![
                                                                             'docid']
-                                                                  }).then((value) async {
+                                                                  }).then(
+                                                                          (value) async {
                                                                     await getFireBaseData
                                                                         .getTeacherClassRoll();
                                                                         Navigator.pop(context);
                                                                     log("message");
+                                                                  }).catchError(
+                                                                          (e) {
+                                                                    log("#################${e.toString()}");
                                                                   });
                                                               },
                                                               child: Text(
@@ -839,8 +842,8 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                           width: 10,
                                         ),
                                         const Icon(Icons.logout_outlined),
-                                        GoogleMonstserratWidgets(text: 'logout', fontsize: 13.w
-                                        ),
+                                        GoogleMonstserratWidgets(
+                                            text: 'logout', fontsize: 13.w),
                                       ],
                                     )
                                   ],

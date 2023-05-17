@@ -262,11 +262,8 @@ class FooterHomeP extends StatelessWidget {
                             ),
                             GestureDetector(
                               onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: ((context) =>
-                                            const PrivacyPolicy())));
+                                Navigator.pushNamed(
+                                    context, PrivacyPolicy.route);
                               },
                               child: OnHoverText(
                                 builder: (isHoverd) {
