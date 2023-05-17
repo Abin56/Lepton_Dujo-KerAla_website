@@ -1,9 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../model/create_school_model/create_school_model.dart';
 import '../../model/schools_to_be_verified/schools_to_be_verified_create_list.dart';
 import '../../view/constant/constant.dart';
 
@@ -25,7 +22,6 @@ class AddNewSchoolController extends GetxController {
 
   TextEditingController designationController = TextEditingController();
   TextEditingController schoolCodeController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
   RxString countryValue = ''.obs;
   RxString stateValue = ''.obs;
   RxString cityValue = ''.obs;
@@ -36,7 +32,7 @@ class AddNewSchoolController extends GetxController {
         uuid.v1();
 
     try {
-      if (formKey.currentState!.validate() &&
+      if (
           conformpassController.text == adminPasswordController.text) {
         final schoolDetails = SchoolsToBeVerified(
             schoolCode: schoolCodeController.text.trim(),
