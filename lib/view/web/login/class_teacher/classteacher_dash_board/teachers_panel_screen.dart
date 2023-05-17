@@ -565,6 +565,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                                   }).then((value) async {
                                                                     await getFireBaseData
                                                                         .getTeacherClassRoll();
+                                                                        Navigator.pop(context);
                                                                     log("message");
                                                                   });
                                                               },
@@ -660,6 +661,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                                       (value) async {
                                                                 await getFireBaseData
                                                                     .getBatchYearId();
+                                                                    
                                                                 // ignore: use_build_context_synchronously
                                                                 Navigator
                                                                     .pushReplacement(
