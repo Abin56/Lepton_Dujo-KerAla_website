@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dujo_kerala_website/controller/school_approve/school_approve_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -30,10 +28,9 @@ class RequestedSchoolsListScreen extends StatelessWidget {
         );
       } else if (schoolApproveController.reqschools.isEmpty) {
         return const Center(
-          child: Text("No Datas Found"),
+          child: Scaffold(body: Center(child: Text("No Data Found"))),
         );
       } else {
-        log("${schoolApproveController.reqschools.length}");
         return Scaffold(
           body: SafeArea(
               child: Column(
@@ -85,7 +82,7 @@ class RequestedSchoolsListScreen extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Expanded(
+                                          Flexible(
                                             child: ButtonContainerWidget(
                                               curving: 10,
                                               colorindex: 0,
@@ -242,7 +239,7 @@ class RequestedSchoolsListScreen extends StatelessWidget {
                                               Flexible(
                                                 child: GestureDetector(
                                                   onTap: () async {
-                                                    schoolApproveController
+                                                    await schoolApproveController
                                                         .rejectSchoolList(
                                                             schoolApproveController
                                                                 .reqschools[

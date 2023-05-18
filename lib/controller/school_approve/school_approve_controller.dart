@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -13,12 +15,14 @@ class SchoolApproveController extends GetxController {
     try {
       isLoading.value = true;
       firebaseFirestore
+          .collection('RequestedSchools')
           .doc(schoolID)
           .delete()
-          .then((value) => fetchReqListSchools());
+          .then((value) async => await fetchReqListSchools());
       isLoading.value = false;
     } catch (e) {
       isLoading.value = false;
+      log(e.toString());
     }
   }
 
@@ -27,12 +31,14 @@ class SchoolApproveController extends GetxController {
       isLoading.value = true;
       final result =
           await firebaseFirestore.collection('RequestedSchools').get();
+
       reqschools = result.docs.map((e) {
         return SchoolsToBeVerified.fromMap(e.data());
       }).toList();
       isLoading.value = false;
     } catch (e) {
       isLoading.value = false;
+      log("<<<<<<<<<<<<${e.toString()}");
     }
   }
 
@@ -44,7 +50,7 @@ class SchoolApproveController extends GetxController {
           .doc(productModel.docid)
           .set(productModel.toMap());
     } on FirebaseException catch (e) {
-      print('Error ${e.message.toString()}');
+      log('Error ${e.message.toString()}');
     }
   }
 
@@ -67,7 +73,7 @@ class SchoolApproveController extends GetxController {
               .collection('RequestedSchools')
               .doc(approveModel.docid)
               .delete()
-              .then((value) {
+              .then((value) async {
             firebaseFirestore
                 .collection("SchoolListCollection")
                 .doc(uid)
@@ -77,15 +83,14 @@ class SchoolApproveController extends GetxController {
                             content: Text('Succesfully Approved!'),
                           )),
                     ));
+            await fetchReqListSchools();
+            isLoading.value = false;
           });
         });
       });
-
-      await fetchReqListSchools();
-      isLoading.value = false;
     } on FirebaseException catch (e) {
       isLoading.value = false;
-      print('Error ${e.message.toString()}');
+      log('Error ${e.message.toString()}');
     }
   }
 

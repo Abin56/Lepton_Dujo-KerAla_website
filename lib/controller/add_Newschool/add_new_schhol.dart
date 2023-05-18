@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,13 +29,13 @@ class AddNewSchoolController extends GetxController {
   RxString cityValue = ''.obs;
   RxString schoolID = ''.obs;
   Future<void> addNewSchool(BuildContext context) async {
+    log(cityValue.value);
     String uUID = schoolNameController.text.substring(0, 5) +
-        cityValue.substring(0, 5) +
+        cityValue.value.substring(0, 5) +
         uuid.v1();
 
     try {
-      if (
-          conformpassController.text == adminPasswordController.text) {
+      if (conformpassController.text == adminPasswordController.text) {
         final schoolDetails = SchoolsToBeVerified(
             schoolCode: schoolCodeController.text.trim(),
             schoolName: schoolNameController.text,
@@ -58,6 +60,8 @@ class AddNewSchoolController extends GetxController {
             clearFunction();
           });
         }
+      } else {
+        log("something error");
       }
     } catch (e) {
       showToast(msg: e.toString());
@@ -66,7 +70,8 @@ class AddNewSchoolController extends GetxController {
 
   void clearFunction() {
     schoolNameController.clear();
-
+    designationController.clear();
+    schoolCodeController.clear();
     schoolIDController.clear();
     placeController.clear();
     adminUserNameController.clear();
