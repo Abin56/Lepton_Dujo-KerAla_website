@@ -1,9 +1,10 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_constructors, prefer_adjacent_string_concatenation
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
-import 'package:dujo_kerala_website/view/web/widgets/icon_back.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../widgets/Iconbackbutton.dart';
 
 class ManageTeachers extends StatelessWidget {
   const ManageTeachers({super.key});
