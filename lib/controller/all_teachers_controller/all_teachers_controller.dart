@@ -67,7 +67,7 @@ class AllTeachersController extends GetxController {
                     Navigator.pop(context);
                   },
                   icon: const Icon(Icons.arrow_back)),
-              const Text('Alert'),
+              const Text('Teacher Details'),
             ],
           ),
           content: SingleChildScrollView(

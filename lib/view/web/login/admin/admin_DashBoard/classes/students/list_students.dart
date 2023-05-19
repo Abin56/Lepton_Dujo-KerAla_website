@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
+import '../../../../../../../controller/all_students_controller/all_students_controller.dart';
 import '../../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../../controller/students_list/students_list.dart';
 import '../../../../../../../model/create_classModel/add_student_model.dart';
@@ -33,6 +34,8 @@ class ListOfStudents extends StatefulWidget {
 }
 
 class _ListOfStudentsState extends State<ListOfStudents> {
+  AllStudentsController allStudentsController =
+      Get.put(AllStudentsController());
   final getxController = Get.put(StudentsProfileList());
 
   @override
@@ -111,9 +114,8 @@ class _ListOfStudentsState extends State<ListOfStudents> {
                             children: List.generate(
                               snapshot.data!.docs.length,
                               (int index) {
-                                AddStudentModel data =
-                                    AddStudentModel.fromMap(
-                                        snapshot.data!.docs[index].data());
+                                AddStudentModel data = AddStudentModel.fromMap(
+                                    snapshot.data!.docs[index].data());
                                 allData.add(data);
                                 return AnimationConfiguration.staggeredGrid(
                                   position: index,
@@ -127,8 +129,26 @@ class _ListOfStudentsState extends State<ListOfStudents> {
                                         padding: const EdgeInsets.all(8.0),
                                         child: GestureDetector(
                                           onTap: () async {
-                                            getxController.indexValue.value =
-                                                index;
+                                            allStudentsController
+                                                .getStudentsDetails(
+                                              context,
+                                              data.classID!,
+                                              data.profileImageUrl,
+                                              data.studentName,
+                                              data.studentemail,
+                                              data.parentPhoneNumber,
+                                              data.admissionNumber,
+                                              data.houseName,
+                                              data.place,
+                                              data.district,
+                                              data.gender,
+                                              data.alPhoneNumber,
+                                              data.bloodgroup ?? "",
+                                              data.docid!,
+                                            );
+                                            //////////////////////
+                                            //////
+                                            ///
                                           },
                                           child: SizedBox(
                                             height: 400,
@@ -142,8 +162,11 @@ class _ListOfStudentsState extends State<ListOfStudents> {
                                                   CircleAvatar(
                                                       radius: 60,
                                                       backgroundColor:
-                                                          const Color.fromARGB(255,
-                                                              210, 235, 255),
+                                                          const Color.fromARGB(
+                                                              255,
+                                                              210,
+                                                              235,
+                                                              255),
                                                       child: Container(
                                                         height: double.infinity,
                                                         width: double.infinity,
@@ -164,17 +187,6 @@ class _ListOfStudentsState extends State<ListOfStudents> {
                                                                     .network(
                                                                         'https://assets4.lottiefiles.com/packages/lf20_u7yrcwlk.json'),
                                                       )),
-                                                  sizedBoxH10,
-                                                  // Text(
-                                                  //   "S T U D E N T ${index + 1}",
-                                                  //   style:
-                                                  //       GoogleFonts.montserrat(
-                                                  //           color: Colors.grey,
-                                                  //           fontSize: 18,
-                                                  //           fontWeight:
-                                                  //               FontWeight
-                                                  //                   .bold),
-                                                  // ),
                                                   sizedBoxH10,
                                                   Text(
                                                     'Created Date : ${stringTimeToDateConvert(data.createDate!)}',
@@ -208,7 +220,6 @@ class _ListOfStudentsState extends State<ListOfStudents> {
                                                       fontSize: 12,
                                                     ),
                                                   ),
-                                                 
                                                 ],
                                               ),
                                             ),

@@ -119,7 +119,8 @@ class _ListOfClassesScreenState extends State<ListOfClassesScreen> {
                                             widget.allClassController.showclass(
                                                 context,
                                                 data.className,
-                                                data.docid);
+                                                data.docid,
+                                                );
                                           },
                                           child: SizedBox(
                                             height: 400,
@@ -155,14 +156,7 @@ class _ListOfClassesScreenState extends State<ListOfClassesScreen> {
                                                                     .bold),
                                                   ),
                                                   sizedBoxH10,
-                                                  // Text(
-                                                  //   'Created Date : ${stringTimeToDateConvert(data.)}',
-                                                  //   style: GoogleFonts.poppins(
-                                                  //     color: Colors.black
-                                                  //         .withOpacity(0.4),
-                                                  //     fontSize: 14,
-                                                  //   ),
-                                                  // ),
+                                        
                                                   sizedBoxH10,
                                                   Text(
                                                     "Class : ${data.className}",

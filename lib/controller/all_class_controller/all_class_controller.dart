@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/students/list_students.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../view/web/login/admin/admin_DashBoard/transfer_cretificate/tc_genrate.dart';
 import '../../view/web/widgets/button_container_widget.dart';
 import '../../view/web/widgets/drop_DownList/schoolDropDownList.dart';
 import '../admin_login_screen/admin_login_screen_controller.dart';
@@ -17,7 +19,7 @@ class AllClassController extends GetxController {
       .collection(Get.find<GetFireBaseData>().bYear.value)
       .doc(Get.find<GetFireBaseData>().bYear.value)
       .collection('classes');
-  showclass(BuildContext context, String className, String docid) async {
+  showclass(BuildContext context, String className, String docid,) async {
     return showDialog(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -36,8 +38,9 @@ class AllClassController extends GetxController {
                         children: [
                           Text('ClassName : $className'),
                           IconButton(
-                              onPressed: () async{
-                                await changeClassName(context,docid,className);
+                              onPressed: () async {
+                                await changeClassName(
+                                    context, docid, className);
                               },
                               icon: const Icon(
                                 Icons.edit,
@@ -54,8 +57,14 @@ class AllClassController extends GetxController {
                                   .collection('Students')
                                   .snapshots(),
                               builder: (context, snapshotss) {
-                                return Text(
-                                    'Total Students : ${snapshotss.data?.docs.length}');
+                                if (snapshotss.hasData) {
+                                  return Text(
+                                      'Total Students : ${snapshotss.data?.docs.length}');
+                                } else {
+                                  return Center(
+                                    child: circularProgressIndicator,
+                                  );
+                                }
                               }),
                         ],
                       ),
@@ -70,7 +79,40 @@ class AllClassController extends GetxController {
                               ))
                         ],
                       ),
+                      Center(
+                        child: GestureDetector(
+                          onTap: () async {
+                            Navigator.push(context, MaterialPageRoute(
+                              builder: (context) {
+                                return ListOfStudents(
+                                    classID: docid,
+                                    className: className,
+                                    schoolID:
+                                        Get.find<AdminLoginScreenController>()
+                                            .schoolID);
+                              },
+                            ));
+                          },
+                          child: ButtonContainerWidget(
+                            curving: 10,
+                            colorindex: 0,
+                            height: 30,
+                            width: 120,
+                            child: Center(
+                              child: Text(
+                                'View Students',
+                                style: GoogleFonts.poppins(
+                                    color: const Color.fromARGB(
+                                        255, 255, 254, 254),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                       sizedBoxH20,
+                
                       Center(
                         child: GestureDetector(
                           onTap: () async {
@@ -113,7 +155,7 @@ class AllClassController extends GetxController {
     );
   }
 
-  changeClassName(BuildContext context,String docid,String className) async {
+  changeClassName(BuildContext context, String docid, String className) async {
     TextEditingController classNameCOntroller = TextEditingController();
     final GlobalKey<FormState> updateFormkey = GlobalKey<FormState>();
     return showDialog(
@@ -147,9 +189,7 @@ class AllClassController extends GetxController {
                       }
                     },
                     controller: classNameCOntroller,
-                    decoration: InputDecoration(
-                      hintText: className
-                    ),
+                    decoration: InputDecoration(hintText: className),
                   )
                 ],
               ),
@@ -163,19 +203,18 @@ class AllClassController extends GetxController {
               ),
               TextButton(
                 child: const Text('ok'),
-                onPressed: () async{
-           if (updateFormkey.currentState!.validate()) {
-                 await  firebaseFirestore.doc(docid).update({
-                  'className':classNameCOntroller.text.trim()
-                }).then((value) {
-                    showToast(msg: "Class Name Changed");
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                  });
-             
-           }else{
-            return ;
-           }
+                onPressed: () async {
+                  if (updateFormkey.currentState!.validate()) {
+                    await firebaseFirestore.doc(docid).update({
+                      'className': classNameCOntroller.text.trim()
+                    }).then((value) {
+                      showToast(msg: "Class Name Changed");
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                    });
+                  } else {
+                    return;
+                  }
                 },
               ),
             ],
@@ -211,13 +250,10 @@ class AllClassController extends GetxController {
               TextButton(
                 child: const Text('Ok'),
                 onPressed: () async {
-                  firebaseFirestore
-                      .doc(docid)
-                      .delete()
-                      .then((value) {
-                        showToast(msg: "Removed Class");
-                        Navigator.of(context).pop();
-                      });
+                  firebaseFirestore.doc(docid).delete().then((value) {
+                    showToast(msg: "Removed Class");
+                    Navigator.of(context).pop();
+                  });
                 },
               ),
             ],
@@ -251,4 +287,6 @@ class AllClassController extends GetxController {
       );
     }
   }
+
 }
+
