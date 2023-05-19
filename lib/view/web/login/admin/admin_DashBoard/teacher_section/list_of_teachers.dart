@@ -21,14 +21,15 @@ class ListOfSchoolTeachers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      Future<void> _showSearch() async {
-    await showSearch(context: context, delegate: SearchTeachers());
-  }
+    Future<void> _showSearch() async {
+      await showSearch(context: context, delegate: SearchTeachers());
+    }
+
     List<TeacherModel> allData = [];
     int columnCount = 3;
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
-     var screenSize = MediaQuery.of(context).size;
+    var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
           title: const Text('Teachers List'),
@@ -59,7 +60,7 @@ class ListOfSchoolTeachers extends StatelessWidget {
                             fontSize: 30,
                             fontWeight: FontWeight.bold),
                       ),
-                        const Spacer(),
+                      const Spacer(),
                       InkWell(
                         child: Container(
                           width: screenSize.width * 0.2,
@@ -134,20 +135,20 @@ class ListOfSchoolTeachers extends StatelessWidget {
                                           onTap: () async {
                                             allTeachersController
                                                 .getTeacherDetails(
-                                                    context,
-                                                    data.imageUrl,
-                                                    data.teacherName,
-                                                    data.teacherEmail,
-                                                    data.teacherPhNo,
-                                                    data.employeeID,
-                                                    data.houseName,
-                                                    data.houseNumber,
-                                                    data.place,
-                                                    data.district,
-                                                    data.gender,
-                                                    data.altPhoneNo,
-                                                    data.docid!,
-                                                    );
+                                              context,
+                                              data.imageUrl,
+                                              data.teacherName,
+                                              data.teacherEmail,
+                                              data.teacherPhNo,
+                                              data.employeeID,
+                                              data.houseName,
+                                              data.houseNumber,
+                                              data.place,
+                                              data.district,
+                                              data.gender,
+                                              data.altPhoneNo,
+                                              data.docid!,
+                                            );
                                           },
                                           child: SizedBox(
                                             height: 400,

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,6 +8,7 @@ import '../../model/teacher/teacher_model.dart';
 import '../../view/constant/constant.dart';
 import '../../view/web/login/admin/admin_DashBoard/classes/details_ofClasses.dart';
 import '../../view/web/widgets/button_container_widget.dart';
+import '../../view/web/widgets/drop_DownList/schoolDropDownList.dart';
 import '../admin_login_screen/admin_login_screen_controller.dart';
 
 class AllTeachersController extends GetxController {
@@ -409,7 +411,8 @@ class AllTeachersController extends GetxController {
   }
 
   removeTeacher(BuildContext context, String teacherID) async {
-    return showDialog(
+    if (schoolListValue!['docid'] == FirebaseAuth.instance.currentUser!.uid) {
+          return showDialog(
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
@@ -452,5 +455,32 @@ class AllTeachersController extends GetxController {
         );
       },
     );
+    }else{
+            return showDialog(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Alert'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: const <Widget>[
+                  Text('Sorry you have no access to delete')
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('Ok'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
   }
 }
