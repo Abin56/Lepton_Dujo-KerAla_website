@@ -3,7 +3,6 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:dujo_kerala_website/controller/_add_exam/add_exam_controller.dart';
 import 'package:dujo_kerala_website/model/add_exam_model/add_exam_model.dart';
 import 'package:dujo_kerala_website/view/colors/colors.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/exam_notifications/exam_timetable.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -275,8 +274,53 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                         leading:
                                             const Icon(Icons.notification_add),
                                         tileColor: Colors.white,
-                                        onTap: () {
-                                
+                                        onTap: () async {
+                                          showDialog(
+                                            context: context,
+                                            barrierDismissible:
+                                                false, // user must tap button!
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                title: const Text('Alert'),
+                                                content: SingleChildScrollView(
+                                                  child: ListBody(
+                                                    children: const <Widget>[
+                                                      Text(
+                                                          'Do you want to remove ?')
+                                                    ],
+                                                  ),
+                                                ),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    child: const Text('ok'),
+                                                    onPressed: () async {
+                                                      await FirebaseFirestore
+                                                          .instance
+                                                          .collection(
+                                                              'SchoolListCollection')
+                                                          .doc(widget.schoolID)
+                                                          .collection(
+                                                              Get.find<
+                                                                      GetFireBaseData>()
+                                                                  .bYear
+                                                                  .value)
+                                                          .doc(Get.find<
+                                                                  GetFireBaseData>()
+                                                              .bYear
+                                                              .value)
+                                                          .collection(
+                                                              'Public Level')
+                                                          .doc(data.docid)
+                                                          .delete()
+                                                          .then((value) {
+                                                        Navigator.pop(context);
+                                                      });
+                                                    },
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
                                         },
                                         title: Text(
                                           data.examName,
@@ -340,7 +384,53 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                       leading:
                                           const Icon(Icons.notification_add),
                                       tileColor: Colors.white,
-                                      onTap: () {
+                                      onTap: () async {
+                                        showDialog(
+                                          context: context,
+                                          barrierDismissible:
+                                              false, // user must tap button!
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: const Text('Alert'),
+                                              content: SingleChildScrollView(
+                                                child: ListBody(
+                                                  children: const <Widget>[
+                                                    Text(
+                                                        'Do you want to remove ?')
+                                                  ],
+                                                ),
+                                              ),
+                                              actions: <Widget>[
+                                                TextButton(
+                                                  child: const Text('ok'),
+                                                  onPressed: () async {
+                                                    await FirebaseFirestore
+                                                        .instance
+                                                        .collection(
+                                                            'SchoolListCollection')
+                                                        .doc(widget.schoolID)
+                                                        .collection(
+                                                            Get.find<
+                                                                    GetFireBaseData>()
+                                                                .bYear
+                                                                .value)
+                                                        .doc(Get.find<
+                                                                GetFireBaseData>()
+                                                            .bYear
+                                                            .value)
+                                                        .collection(
+                                                            'State Level')
+                                                        .doc(data.docid)
+                                                        .delete()
+                                                        .then((value) {
+                                                      Navigator.pop(context);
+                                                    });
+                                                  },
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
                                       },
                                       title: Text(
                                         data.examName,
