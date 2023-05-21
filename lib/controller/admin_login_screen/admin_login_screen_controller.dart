@@ -302,13 +302,7 @@ class AdminLoginScreenController extends GetxController {
                       child: TextFormField(
                         decoration:
                             const InputDecoration(hintText: 'Enter your email'),
-                        validator: (value) {
-                          if (emailController.text.isEmpty) {
-                            return 'Invalid';
-                          } else {
-                            return null;
-                          }
-                        },
+                        validator: checkFieldEmailIsValid,
                         controller: emailController,
                       ),
                     )

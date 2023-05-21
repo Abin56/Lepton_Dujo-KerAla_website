@@ -1,5 +1,8 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:country_state_city_picker/country_state_city_picker.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
+import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -11,6 +14,7 @@ import '../../../fonts/fonts.dart';
 class SchoolProfile extends StatelessWidget {
   AddNewSchoolController addNewSchoolController =
       Get.put(AddNewSchoolController());
+  final _formKey = GlobalKey<FormState>();
 
   SchoolProfile({super.key});
 
@@ -19,10 +23,6 @@ class SchoolProfile extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       //backgroundColor: Color.fromARGB(255, 27, 95, 88),
-      appBar: AppBar(
-        title: const Text('School Profile'),
-        backgroundColor: adminePrimayColor,
-      ),
 
       body: ListView(children: [
         Row(
@@ -35,13 +35,33 @@ class SchoolProfile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    'Hi ! DuJo Welcomes you ',
-                    style: ralewayStyle.copyWith(
-                      fontSize: 48.0,
-                      color: AppColors.whiteColor,
-                      fontWeight: FontWeight.w800,
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: IconButtonBackWidget(
+                      color: cWhite,
                     ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Hi ! DuJo  ',
+                        style: ralewayStyle.copyWith(
+                          fontSize: 48.0,
+                          color: AppColors.whiteColor,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      Text(
+                        ' Welcomes you ',
+                        style: ralewayStyle.copyWith(
+                          fontSize: 35.0,
+                          color: AppColors.whiteColor,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(
                     height: size.width / 20,
@@ -54,11 +74,13 @@ class SchoolProfile extends StatelessWidget {
                       fontWeight: FontWeight.w800,
                     ),
                   ),
-                  SizedBox(
-                      height: size.width / 3,
-                      width: 800,
-                      child: LottieBuilder.asset(
-                          "assets/images/22462-campus-library-school-building-maison-mocca-animation.json")),
+                  Flexible(
+                    child: SizedBox(
+                        height: size.width / 3,
+                        width: 800,
+                        child: LottieBuilder.asset(
+                            "assets/images/22462-campus-library-school-building-maison-mocca-animation.json")),
+                  ),
                 ],
               ),
             ),
@@ -67,7 +89,7 @@ class SchoolProfile extends StatelessWidget {
               height: size.height,
               child: SingleChildScrollView(
                 child: Form(
-                  key: addNewSchoolController.formKey,
+                  key: _formKey,
                   child: Padding(
                     padding: EdgeInsets.only(
                         left: size.width / 10, right: size.width / 10),
@@ -91,14 +113,14 @@ class SchoolProfile extends StatelessWidget {
                             addNewSchoolController.schoolNameController,
                         function: checkFieldEmpty,
                         labelText: 'School Name',
-                        icon: Icons.phone,
+                        icon: Icons.school,
                       ),
                       SchoolTextFormFieldWidget(
                         textEditingController:
                             addNewSchoolController.schoolCodeController,
                         function: checkFieldEmpty,
                         labelText: 'School Code',
-                        icon: Icons.phone,
+                        icon: Icons.school_outlined,
                       ),
                       SchoolTextFormFieldWidget(
                         textEditingController:
@@ -114,28 +136,50 @@ class SchoolProfile extends StatelessWidget {
                         labelText: 'Admin Username',
                         icon: Icons.admin_panel_settings_outlined,
                       ),
-                      SchoolTextFormFieldWidget(
-                        textEditingController:
-                            addNewSchoolController.adminPasswordController,
-                        function: checkFieldPasswordIsValid,
-                        labelText: 'Password',
-                        icon: Icons.lock_outline_sharp,
+                      Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: TextFormField(
+                          obscureText: true,
+                          validator: checkFieldPasswordIsValid,
+                          controller:
+                              addNewSchoolController.adminPasswordController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            icon: Icon(
+                              Icons.lock_outline_sharp,
+                              color: const Color.fromARGB(221, 28, 9, 110),
+                            ),
+                            labelText: 'Password',
+                          ),
+                        ),
                       ),
-                            SchoolTextFormFieldWidget(
-                        textEditingController:
-                            addNewSchoolController.conformpassController,
-                        function: (d) {
-                          if (addNewSchoolController
-                                  .adminPasswordController.text ==
-                              addNewSchoolController
-                                  .conformpassController.text) {
-                            return null;
-                          } else {
-                            return 'Check Password';
-                          }
-                        },
-                        labelText: 'Confrom Password',
-                        icon: Icons.lock_outline_sharp,
+                      Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: TextFormField(
+                          obscureText: true,
+                          validator: (d) {
+                            if (addNewSchoolController
+                                    .adminPasswordController.text ==
+                                addNewSchoolController
+                                    .conformpassController.text) {
+                              return null;
+                            } else {
+                              return 'Check Password';
+                            }
+                          },
+                          controller:
+                              addNewSchoolController.conformpassController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            icon: Icon(
+                              Icons.lock_outline_sharp,
+                              color: const Color.fromARGB(221, 28, 9, 110),
+                            ),
+                            labelText: 'Confirm Password',
+                          ),
+                        ),
                       ),
                       SchoolTextFormFieldWidget(
                         textEditingController:
@@ -172,8 +216,10 @@ class SchoolProfile extends StatelessWidget {
                               ),
                             ),
                             onPressed: () async {
-                              await addNewSchoolController
-                                  .addNewSchool(context);
+                              if (_formKey.currentState!.validate()) {
+                                await addNewSchoolController
+                                    .addNewSchool(context);
+                              }
                             },
                             child: const Text("Create"),
                           ),
@@ -189,6 +235,8 @@ class SchoolProfile extends StatelessWidget {
       ]),
     );
   }
+
+
 }
 
 class SchoolTextFormFieldWidget extends StatelessWidget {
@@ -198,18 +246,21 @@ class SchoolTextFormFieldWidget extends StatelessWidget {
     required this.labelText,
     required this.function,
     required this.icon,
+    this.obscureText,
   });
 
   final TextEditingController textEditingController;
   final String labelText;
   final String? Function(String? fieldContent) function;
   IconData icon;
+  bool? obscureText;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15),
       child: TextFormField(
+        // obscureText: obscureText,
         validator: function,
         controller: textEditingController,
         decoration: InputDecoration(

@@ -1,9 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../model/create_school_model/create_school_model.dart';
 import '../../model/schools_to_be_verified/schools_to_be_verified_create_list.dart';
 import '../../view/constant/constant.dart';
 
@@ -25,19 +24,18 @@ class AddNewSchoolController extends GetxController {
 
   TextEditingController designationController = TextEditingController();
   TextEditingController schoolCodeController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
   RxString countryValue = ''.obs;
   RxString stateValue = ''.obs;
   RxString cityValue = ''.obs;
   RxString schoolID = ''.obs;
   Future<void> addNewSchool(BuildContext context) async {
+    log(cityValue.value);
     String uUID = schoolNameController.text.substring(0, 5) +
-        cityValue.substring(0, 5) +
+        cityValue.value.substring(0, 5) +
         uuid.v1();
 
     try {
-      if (formKey.currentState!.validate() &&
-          conformpassController.text == adminPasswordController.text) {
+      if (conformpassController.text == adminPasswordController.text) {
         final schoolDetails = SchoolsToBeVerified(
             schoolCode: schoolCodeController.text.trim(),
             schoolName: schoolNameController.text,
@@ -62,6 +60,8 @@ class AddNewSchoolController extends GetxController {
             clearFunction();
           });
         }
+      } else {
+        log("something error");
       }
     } catch (e) {
       showToast(msg: e.toString());
@@ -70,7 +70,8 @@ class AddNewSchoolController extends GetxController {
 
   void clearFunction() {
     schoolNameController.clear();
-
+    designationController.clear();
+    schoolCodeController.clear();
     schoolIDController.clear();
     placeController.clear();
     adminUserNameController.clear();
