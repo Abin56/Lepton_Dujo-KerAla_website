@@ -36,6 +36,7 @@ import 'bus_Route/bus_route.dart';
 import 'classes/add_class.dart';
 import 'create_Admin/add_new_admin.dart';
 import 'events/events_screen.dart';
+import 'exam_notifications/school_notifications.dart';
 import 'food_and_beverages/food_and_bev.dart';
 import 'general_instructions/creation_general_instruction_.dart';
 import 'login_Register_history/date_wise.dart';
@@ -181,7 +182,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       const UnderMaintanceScreen(), //9
       FoodBeverages(schoolID: widget.schoolID),
       //SelectType(schoolID: widget.schoolID),
-      const UnderMaintanceScreen(),
+     SchoolLevelNotifications(schoolID: widget.schoolID),
       //const AlumniAssocation(), //10
       const UnderMaintanceScreen(),
       const UnderMaintanceScreen(),

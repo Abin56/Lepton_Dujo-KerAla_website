@@ -1,15 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dropdown_search/dropdown_search.dart';
+import 'package:dujo_kerala_website/controller/_add_exam/add_exam_controller.dart';
+import 'package:dujo_kerala_website/model/add_exam_model/add_exam_model.dart';
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/exam_notifications/exam_timetable.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:group_radio_button/group_radio_button.dart';
+import 'package:intl/intl.dart';
 
+import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../constant/constant.dart';
 
 class SchoolLevelNotifications extends StatefulWidget {
+  AddExamController addExamController = Get.put(AddExamController());
   SchoolLevelNotifications({super.key, required this.schoolID});
 
   String schoolID;
@@ -22,6 +28,14 @@ class SchoolLevelNotifications extends StatefulWidget {
 final formKey = GlobalKey<FormState>();
 
 class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
+  DateTime? _selectedDateForApplyDate;
+  DateTime? _selectedFromDate;
+  DateTime? _selectedToDate;
+  final TextEditingController _applyleaveDateController =
+      TextEditingController();
+  final TextEditingController _applyFromDateController =
+      TextEditingController();
+  final TextEditingController _applyTODateController = TextEditingController();
   TextEditingController name = TextEditingController();
   TextEditingController date = TextEditingController();
   TextEditingController description = TextEditingController();
@@ -45,19 +59,12 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
 
   final int _stackIndex = 1;
 
-  String _singleValue = "Text alignment right";
+  final String _singleValue = "Text alignment right";
   @override
   Widget build(BuildContext context) {
+    String selectedLeaveType = '';
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-        // backgroundColor: adminePrimayColor,
-        // appBar: AppBar(
-        //   title: Text(
-        //     'Exam Notifications',
-        //     style: GoogleFonts.poppins(),
-        //   ),
-        //   backgroundColor: adminePrimayColor,
-        // ),
         body: Column(
       children: [
         HeadingContainer(screenSize: screenSize),
@@ -97,44 +104,24 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                             children: [
                                               Column(
                                                 children: [
-                                                  const Text(
-                                                    "Exam",
-                                                    style:
-                                                        TextStyle(fontSize: 18),
-                                                  ),
                                                   const Divider(),
-                                                  RadioButton(
-                                                    description: "Text ",
-                                                    value:
-                                                        "Text alignment right",
-                                                    groupValue: _singleValue,
-                                                    onChanged: (value) =>
-                                                        setState(
-                                                      () => _singleValue =
-                                                          value ?? '',
-                                                    ),
-                                                    activeColor: Colors.red,
-                                                    textStyle: const TextStyle(
-                                                      fontSize: 30,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      color: Colors.red,
-                                                    ),
-                                                  ),
-                                                  RadioButton(
-                                                    description: "Text",
-                                                    value:
-                                                        "Text alignment left",
-                                                    groupValue: _singleValue,
-                                                    fillColor: Colors.amber,
-                                                    onChanged: (value) =>
-                                                        setState(
-                                                      () => _singleValue =
-                                                          value ?? '',
-                                                    ),
-                                                    textPosition:
-                                                        RadioButtonTextPosition
-                                                            .left,
+                                                  sizedBoxH20,
+                                                  DropdownSearch<String>(
+                                                    selectedItem:
+                                                        'Select Exam Level',
+                                                    validator: (v) => v == null
+                                                        ? "required field"
+                                                        : null,
+                                                    items: const [
+                                                      "Public Level",
+                                                      "State Level",
+                                                    ],
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        selectedLeaveType =
+                                                            value!;
+                                                      });
+                                                    },
                                                   ),
                                                 ],
                                               ),
@@ -157,51 +144,29 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                                 height: 20.h,
                                               ),
                                               TextFormField(
-                                                  validator: checkFieldEmpty,
-                                                  controller: date,
-                                                  decoration: InputDecoration(
-                                                      border:
-                                                          const OutlineInputBorder(),
-                                                      labelText:
-                                                          'Date of Commencement of Exam',
-                                                      labelStyle: GoogleFonts
-                                                          .poppins()),
-                                                  style: GoogleFonts.poppins()),
-                                              SizedBox(
-                                                height: 20.h,
+                                                controller:
+                                                    _applyFromDateController,
+                                                readOnly: true,
+                                                onTap: () =>
+                                                    _selectFromDate(context),
+                                                decoration:
+                                                    const InputDecoration(
+                                                  labelText: 'From',
+                                                  border: OutlineInputBorder(),
+                                                ),
                                               ),
+                                              sizedBoxH10,
                                               TextFormField(
-                                                validator: checkFieldEmpty,
-                                                controller: description,
-                                                maxLines: 10,
-                                                decoration: InputDecoration(
-                                                    border:
-                                                        const OutlineInputBorder(),
-                                                    labelText: 'Description',
-                                                    alignLabelWithHint:
-                                                        true, // Align the label with the hint text
-                                                    contentPadding:
-                                                        EdgeInsets.only(
-                                                            top: 16.h,
-                                                            left: 10.w),
-                                                    labelStyle:
-                                                        GoogleFonts.poppins()),
-                                                style: GoogleFonts.poppins(),
-                                              ),
-                                              SizedBox(
-                                                height: 20.h,
-                                              ),
-                                              TextFormField(
-                                                validator: checkFieldEmpty,
-                                                controller: chaptersToCover,
-                                                decoration: InputDecoration(
-                                                    border:
-                                                        const OutlineInputBorder(),
-                                                    labelText:
-                                                        'Syllabus to cover',
-                                                    labelStyle:
-                                                        GoogleFonts.poppins()),
-                                                style: GoogleFonts.poppins(),
+                                                controller:
+                                                    _applyTODateController,
+                                                readOnly: true,
+                                                onTap: () =>
+                                                    _selectToDate(context),
+                                                decoration:
+                                                    const InputDecoration(
+                                                  labelText: 'To',
+                                                  border: OutlineInputBorder(),
+                                                ),
                                               ),
                                             ],
                                           ),
@@ -224,27 +189,20 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                           child: MaterialButton(
                                             color: Colors.green,
                                             onPressed: () async {
-                                              bool? result = formKey
-                                                  .currentState
-                                                  ?.validate();
-                                              if (name.text.isNotEmpty &&
-                                                  date.text.isNotEmpty &&
-                                                  description.text.isNotEmpty &&
-                                                  chaptersToCover
-                                                      .text.isNotEmpty) {
-                                                addExamNotifications();
-                                              } else {
-                                                print(
-                                                    'empty fields are not allowed!');
-                                              }
-
-                                              if (result == true) {
-                                                // check if form validation passed
-                                                showToast(
-                                                    msg:
-                                                        'Exam Notification successfully added ');
-                                              }
-                                              // clearFields();
+                                              await widget.addExamController
+                                                  .addExamtoSever(
+                                                      context,
+                                                      '',
+                                                      name.text.trim(),
+                                                      selectedLeaveType,
+                                                      _applyFromDateController
+                                                          .text
+                                                          .trim(),
+                                                      _applyTODateController
+                                                          .text
+                                                          .trim(),
+                                                      DateTime.now()
+                                                          .toString());
                                             },
                                             child: Text(
                                               'Add',
@@ -285,7 +243,10 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                             stream: FirebaseFirestore.instance
                                 .collection('SchoolListCollection')
                                 .doc(widget.schoolID)
-                                .collection('SchoolLevelExamNotifications')
+                                .collection(
+                                    Get.find<GetFireBaseData>().bYear.value)
+                                .doc(Get.find<GetFireBaseData>().bYear.value)
+                                .collection('Public Level')
                                 .snapshots(),
                             builder: ((context, snapshot) {
                               if (snapshot.connectionState ==
@@ -303,6 +264,9 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                 physics: const ClampingScrollPhysics(),
                                 itemCount: snapshot.data!.docs.length,
                                 itemBuilder: (context, index) {
+                                  final data = AddExamModel.fromMap(
+                                      snapshot.data!.docs[index].data());
+
                                   return Padding(
                                     padding: EdgeInsets.only(left: 8.h),
                                     child: Container(
@@ -312,25 +276,16 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                             const Icon(Icons.notification_add),
                                         tileColor: Colors.white,
                                         onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: ((context) =>
-                                                      ExamTimeTable())));
-
-                                          // Navigator.push(context, MaterialPageRoute(builder: ((context) => SchoolExamMainPage(sn: snapshot.data!.docs[index]))));
+                                
                                         },
                                         title: Text(
-                                          snapshot.data!.docs[index]
-                                              ['examName'],
+                                          data.examName,
                                           style: GoogleFonts.poppins(
                                               color: Colors.black,
                                               fontSize: 17.h),
                                         ),
                                         subtitle: Text(
-                                          'Date of examination: ' +
-                                              snapshot.data!.docs[index]
-                                                  ['examDate'],
+                                          data.startingDate,
                                           style: GoogleFonts.poppins(
                                               color: Colors.black,
                                               fontSize: 13.h),
@@ -356,7 +311,10 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                             stream: FirebaseFirestore.instance
                                 .collection('SchoolListCollection')
                                 .doc(widget.schoolID)
-                                .collection('SchoolLevelExamNotifications')
+                                .collection(
+                                    Get.find<GetFireBaseData>().bYear.value)
+                                .doc(Get.find<GetFireBaseData>().bYear.value)
+                                .collection('State Level')
                                 .snapshots(),
                             builder: ((context, snapshot) {
                               if (snapshot.connectionState ==
@@ -374,6 +332,8 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                 physics: const ClampingScrollPhysics(),
                                 itemCount: snapshot.data!.docs.length,
                                 itemBuilder: (context, index) {
+                                  final data = AddExamModel.fromMap(
+                                      snapshot.data!.docs[index].data());
                                   return Container(
                                     color: Colors.blueGrey,
                                     child: ListTile(
@@ -381,18 +341,15 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                           const Icon(Icons.notification_add),
                                       tileColor: Colors.white,
                                       onTap: () {
-                                        // Navigator.push(context, MaterialPageRoute(builder: ((context) => SchoolExamMainPage(sn: snapshot.data!.docs[index]))));
                                       },
                                       title: Text(
-                                        snapshot.data!.docs[index]['examName'],
+                                        data.examName,
                                         style: GoogleFonts.poppins(
                                             color: Colors.black,
                                             fontSize: 17.h),
                                       ),
                                       subtitle: Text(
-                                        'Date of examination: ' +
-                                            snapshot.data!.docs[index]
-                                                ['examDate'],
+                                        data.startingDate,
                                         style: GoogleFonts.poppins(
                                             color: Colors.black,
                                             fontSize: 13.h),
@@ -412,6 +369,64 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
         )
       ],
     ));
+  }
+
+  _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _selectedDateForApplyDate ?? DateTime.now(),
+      firstDate: DateTime(2023),
+      lastDate: DateTime(2100),
+    );
+    if (picked != null && picked != _selectedDateForApplyDate) {
+      setState(() {
+        _selectedDateForApplyDate = picked;
+        DateTime parseDate =
+            DateTime.parse(_selectedDateForApplyDate.toString());
+        final DateFormat formatter = DateFormat('dd-MM-yyyy');
+        String formatted = formatter.format(parseDate);
+
+        _applyleaveDateController.text = formatted.toString();
+      });
+    }
+  }
+
+  _selectFromDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _selectedFromDate ?? DateTime.now(),
+      firstDate: DateTime(2023),
+      lastDate: DateTime(2100),
+    );
+    if (picked != null && picked != _selectedFromDate) {
+      setState(() {
+        _selectedFromDate = picked;
+        DateTime parseDate = DateTime.parse(_selectedFromDate.toString());
+        final DateFormat formatter = DateFormat('dd-MM-yyyy');
+        String formatted = formatter.format(parseDate);
+
+        _applyFromDateController.text = formatted.toString();
+      });
+    }
+  }
+
+  _selectToDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _selectedToDate ?? DateTime.now(),
+      firstDate: DateTime(2023),
+      lastDate: DateTime(2100),
+    );
+    if (picked != null && picked != _selectedToDate) {
+      setState(() {
+        _selectedToDate = picked;
+        DateTime parseDate = DateTime.parse(_selectedToDate.toString());
+        final DateFormat formatter = DateFormat('dd-MM-yyyy');
+        String formatted = formatter.format(parseDate);
+
+        _applyTODateController.text = formatted.toString();
+      });
+    }
   }
 }
 

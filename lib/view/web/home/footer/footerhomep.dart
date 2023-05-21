@@ -345,7 +345,7 @@ class FooterHomeP extends StatelessWidget {
                                 ],
                               ),
                               Text(
-                                '          Statue ,Thiruvananthapuram-695001. Kerala , India',
+                                '         Statue ,Thiruvananthapuram-695001. Kerala , India',
                                 style: k,
                               ),
                               Row(
