@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 class IconButtonBackWidget extends StatelessWidget {
   Color? color;
-   IconButtonBackWidget({
+    IconButtonBackWidget({
     super.key,
     this.color,
   });

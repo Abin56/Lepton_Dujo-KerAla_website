@@ -9,7 +9,6 @@ import 'package:lottie/lottie.dart';
 
 import '../../../../../../controller/Getx/admin/shitft_class_controller/shift_class_controller.dart';
 import '../../../../../fonts/fonts.dart';
-import '../../../../widgets/Iconbackbutton.dart';
 
 class ShiftClassPage extends StatelessWidget {
   ShiftClassPage({super.key});
@@ -32,7 +31,14 @@ class ShiftClassPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              IconButtonBackWidget(color: cWhite),
+              IconButton(
+                onPressed: () {
+                  shiftClassController.clearData();
+                  Navigator.pop(context);
+                },
+                icon: Icon(Icons.arrow_back,
+                    color: Colors.white, size: 25.w, weight: 900),
+              ),
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -101,7 +107,7 @@ class ShiftClassPage extends StatelessWidget {
                         //borderRadius: BorderRadius.circular(13),
                       ),
                       child: FutureBuilder(
-                          future: shiftClassController.geOldClass(),
+                          future: shiftClassController.fetchOldClass(),
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
                               return Obx(() => DropdownButton(
@@ -161,6 +167,7 @@ class ShiftClassPage extends StatelessWidget {
                             child: MaterialButton(
                                 color: Colors.red,
                                 onPressed: () {
+                                  shiftClassController.clearData();
                                   Navigator.pop(context);
                                 },
                                 child: Text(
@@ -173,8 +180,7 @@ class ShiftClassPage extends StatelessWidget {
                               color: Colors.green,
                               onPressed: () {
                                 Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) =>
-                                      const ShiftClassStudents(),
+                                  builder: (context) => ShiftClassStudents(),
                                 ));
                               },
                               child: Text(
