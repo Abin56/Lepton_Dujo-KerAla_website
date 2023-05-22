@@ -120,7 +120,7 @@ class _ListOfClassesScreenState extends State<ListOfClassesScreen> {
                                                 context,
                                                 data.className,
                                                 data.docid,
-                                                );
+                                                data.classTeacherName!);
                                           },
                                           child: SizedBox(
                                             height: 400,
@@ -156,7 +156,6 @@ class _ListOfClassesScreenState extends State<ListOfClassesScreen> {
                                                                     .bold),
                                                   ),
                                                   sizedBoxH10,
-                                        
                                                   sizedBoxH10,
                                                   Text(
                                                     "Class : ${data.className}",

@@ -244,7 +244,7 @@ class AllStudentsController extends GetxController {
                           ),
                         ),
                       ),
-                        sizedBoxH20,
+                      sizedBoxH20,
                       Center(
                         child: GestureDetector(
                           onTap: () async {
@@ -417,6 +417,13 @@ class AllStudentsController extends GetxController {
                         .doc(studentID)
                         .update({
                       'studentName': nameController.text.trim()
+                    }).then((value) {
+                      FirebaseFirestore.instance
+                          .collection("SchoolListCollection")
+                          .doc(Get.find<AdminLoginScreenController>().schoolID)
+                          .collection('AllStudents')
+                          .doc(studentID)
+                          .update({'studentName': nameController.text.trim()});
                     }).then((value) {
                       showToast(msg: "Name Changed");
                       Navigator.of(context).pop();

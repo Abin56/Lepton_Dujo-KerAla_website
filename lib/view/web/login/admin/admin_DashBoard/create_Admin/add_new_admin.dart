@@ -55,7 +55,7 @@ class _AddNewAdminState extends State<AddNewAdmin> {
     var screenSize = MediaQuery.of(context).size;
     return Form(
         key: _formKey,
-        child: widget.schoolID == FirebaseAuth.instance.currentUser!.uid
+        child: widget.schoolID == TeacherLoginIDSaver.findUser
             ? Scaffold(
                 backgroundColor: const Color.fromARGB(255, 6, 71, 157),
                 body: SingleChildScrollView(
@@ -253,11 +253,15 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                   ),
                 ),
               )
-            : const Scaffold(
-              body: Center(
-                child: Text("Sorry you are not a main Admin",style: TextStyle(fontSize: 25),),
-              ),
-            ));
+            :  Scaffold(
+              appBar: AppBar(backgroundColor: Colors.transparent,),
+                body: Center(
+                  child: Text(
+                    "Sorry you are not a main Admin",
+                    style: TextStyle(fontSize: 25),
+                  ),
+                ),
+              ));
   }
 
   createNewAdmin(String username, String employeeID, String password,
@@ -291,7 +295,7 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                   emailController.clear(),
                   phoneNumberController.clear(),
                   confirmPasswordController.clear()
-                });
+                }).then((value) => Navigator.pop(context));
       });
     } catch (e) {
       log('Create admin  $e');

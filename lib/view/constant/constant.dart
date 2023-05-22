@@ -170,6 +170,7 @@ String? checkFieldPasswordIsValid(String? fieldContent) {
 class TeacherLoginIDSaver {
   static String id = '';
   static String teacherID = '';
+  static String  findUser ='';
 }
 
 Widget circularProgressIndicator = const Center(

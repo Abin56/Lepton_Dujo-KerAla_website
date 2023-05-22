@@ -291,6 +291,12 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                                   ),
                                                 ),
                                                 actions: <Widget>[
+                                                      TextButton(
+                                                    child: const Text('ok'),
+                                                    onPressed: () async {
+                                                            Navigator.pop(context);
+                                                    },
+                                                  ),
                                                   TextButton(
                                                     child: const Text('ok'),
                                                     onPressed: () async {

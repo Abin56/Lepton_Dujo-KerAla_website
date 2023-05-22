@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../view/web/login/admin/admin_DashBoard/transfer_cretificate/tc_genrate.dart';
 import '../../view/web/widgets/button_container_widget.dart';
 import '../../view/web/widgets/drop_DownList/schoolDropDownList.dart';
 import '../admin_login_screen/admin_login_screen_controller.dart';
@@ -19,7 +18,8 @@ class AllClassController extends GetxController {
       .collection(Get.find<GetFireBaseData>().bYear.value)
       .doc(Get.find<GetFireBaseData>().bYear.value)
       .collection('classes');
-  showclass(BuildContext context, String className, String docid,) async {
+  showclass(BuildContext context, String className, String docid,
+      String classInchargeTeacherName) async {
     return showDialog(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -70,15 +70,10 @@ class AllClassController extends GetxController {
                       ),
                       Row(
                         children: [
-                          const Text('ClassIncharge : '),
-                          IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.edit,
-                                color: Colors.green,
-                              ))
+                          Text('ClassIncharge : $classInchargeTeacherName'),
                         ],
                       ),
+                      sizedBoxH20,
                       Center(
                         child: GestureDetector(
                           onTap: () async {
@@ -112,7 +107,6 @@ class AllClassController extends GetxController {
                         ),
                       ),
                       sizedBoxH20,
-                
                       Center(
                         child: GestureDetector(
                           onTap: () async {
@@ -287,6 +281,4 @@ class AllClassController extends GetxController {
       );
     }
   }
-
 }
-
