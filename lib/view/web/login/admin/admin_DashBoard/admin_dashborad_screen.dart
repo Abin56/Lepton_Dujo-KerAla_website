@@ -386,15 +386,12 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                   icon:
                                        Icon(Icons.arrow_back, color: cred,size: 22.w),
                                 ),
-                                Padding(
-                                  padding:  EdgeInsets.all(20.w),
-                                  child: Text(
-                                    'Admin Dashboard',
-                                    style: GoogleFonts.poppins(
-                                        color: Colors.red,
-                                        fontWeight: FontWeight.w800,
-                                        fontSize: 15.w),
-                                  ),
+                                Text(
+                                  'Admin Dashboard',
+                                  style: GoogleFonts.poppins(
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 15.w),
                                 ),
                               ],
                             ),
@@ -403,14 +400,15 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  const Icon(
-                                    Icons.home,
+                                   Icon(
+                                    Icons.home,size: 25.w,
                                     color: Colors.white,
                                   ),
                                   Text(
                                     'Home',
                                     style: GoogleFonts.poppins(
                                         color: Colors.white,
+                                        fontSize: 15.w,
                                         fontWeight: FontWeight.w600),
                                   ),
                                 ],
@@ -448,7 +446,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                           },
                                           child: Text(
                                             viewListNames[index],
-                                            style: GoogleFonts.poppins(
+                                            style: GoogleFonts.poppins(fontSize: 15.w,
                                                 color: Colors.white),
                                           ),
                                         )
@@ -474,17 +472,21 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                   Get.find<AdminLoginScreenController>()
                                       .schoolName,
                                   style: GoogleFonts.poppins(
+                                    fontSize: 15.w,
                                       fontWeight: FontWeight.w500),
                                 ),
                                 SizedBox(
                                   width: screenSize.height / 12,
                                 ),
-                                 Text('Batch Year ${getFireBaseData.bYear}'),
+                                 Row(
+                                   children: [
+                                     Text('Batch Year ${getFireBaseData.bYear}',
+                                     style: TextStyle(fontSize: 15.w)),
+                                 SizedBox(width: 10.w,),
                                 Tooltip(
                                   message: "Change/add batch year",
-                                  child: IconButton(
-                                      onPressed: () {
-                                        showDialog(
+                                 child: GestureDetector(onTap: () {
+                                         showDialog(
                                           context: context,
                                           builder: (BuildContext context) {
                                             return AlertDialog(
@@ -704,13 +706,20 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                             );
                                           },
                                         );
-                                      },
-                                      icon: const Icon(Icons.replay_outlined)),
+                                 },
+                                   child: Container(
+                                                  height: 55.w,
+                                                  width: 50.w,
+                                                  decoration: const BoxDecoration(
+                                                      image: DecorationImage(
+                                                          image: AssetImage(
+                                                              'assets/images/shift.png'))),
+                                                ),
+                                 ),
                                 ),
-                                const CircleAvatar(
-                                  backgroundImage: AssetImage(
-                                      'assets/images/icons8-teachers-64.png'),
-                                ),
+                                  ],
+                                 ),
+                                
                                 const SizedBox(
                                   width: 10,
                                 ),
@@ -836,7 +845,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                 ),
                                                 Text(
                                                   dashboardNamesList[index],
-                                                  style: GoogleFonts.poppins(),
+                                                  style: GoogleFonts.poppins(fontSize: 16.w),
                                                 )
                                               ],
                                             )),
