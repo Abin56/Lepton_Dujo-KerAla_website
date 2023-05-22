@@ -1,6 +1,5 @@
 import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/homepage_mob.dart';
 import 'package:dujo_kerala_website/view/web/home/privacypolicy.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/exam_notifications/school_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,13 +9,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: const FirebaseOptions(
-        apiKey: "AIzaSyCvnr3tZft-N4oPk0g_StLM5-HaZYY2ws8",
-        authDomain: "dujo-kerala-schools-1a6c5.firebaseapp.com",
-        projectId: "dujo-kerala-schools-1a6c5",
-        storageBucket: "dujo-kerala-schools-1a6c5.appspot.com",
-        messagingSenderId: "1019389632971",
-        appId: "1:1019389632971:web:73f653f467a7d5dc06164e",
-        measurementId: "G-NBQ0J2X8HQ"),
+        apiKey: "AIzaSyBPaQ4Ga-d_wTd9pCiU_kMTllMeuVblSP0",
+        authDomain: "leptondujokerala.firebaseapp.com",
+        projectId: "leptondujokerala",
+        storageBucket: "leptondujokerala.appspot.com",
+        messagingSenderId: "512252187081",
+        appId: "1:512252187081:web:29a9843fc66f17bc6f5818",
+        measurementId: "G-QC6SR6TLE0"),
   );
   ScreenUtil.ensureScreenSize();
   runApp(const MyApp());
@@ -42,12 +41,10 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                 primaryColor: const Color(0xFF02BB9F),
                 primaryColorDark: const Color(0xFF167F67),
-
               ),
               home:
-                  HomwPageTwo()
-              
-                  );
+                  //const MobHomePage()
+                  HomwPageTwo());
         });
   }
 }
