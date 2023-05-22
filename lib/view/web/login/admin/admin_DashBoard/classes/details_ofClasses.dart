@@ -74,40 +74,7 @@ class ClassesDeatils extends StatelessWidget {
                       )
                     ],
                   ),
-                  // Padding(
-                  //   padding: const EdgeInsets.all(10),
-                  //   child: Row(
-                  //     children: [
-                  //       LottieBuilder.network(
-                  //         'https://assets10.lottiefiles.com/packages/lf20_sxoye5rr.json',
-                  //         height: 100,
-                  //       ),
-                  //       Text(
-                  //         " Total Male :  $noofMale",
-                  //         style: GoogleFonts.poppins(
-                  //             color: const Color.fromARGB(255, 11, 11, 11),
-                  //             fontSize: 20,
-                  //             fontWeight: FontWeight.bold),
-                  //       )
-                  //     ],
-                  //   ),
-                  // ),
-                  // sizedBoxH10,
-                  // Row(
-                  //   children: [
-                  //     LottieBuilder.network(
-                  //       'https://assets2.lottiefiles.com/packages/lf20_pt810qkq.json',
-                  //       height: 100,
-                  //     ),
-                  //     Text(
-                  //       " Total Female :  $noofFemale",
-                  //       style: GoogleFonts.poppins(
-                  //           color: const Color.fromARGB(255, 22, 22, 22),
-                  //           fontSize: 20,
-                  //           fontWeight: FontWeight.bold),
-                  //     )
-                  //   ],
-                  // ),
+  
                 ],
               )
             : Padding(

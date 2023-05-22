@@ -44,7 +44,6 @@ class AdminLoginScreenController extends GetxController {
 //>> Checking batch Yeard
 
         if (schoolID == value.user!.uid || result.docs.isNotEmpty) {
-
           if (Get.find<GetFireBaseData>().bYear.value.isNotEmpty) {
             LoginTimeIDSavingClass.emailId = schoolIdController.text.trim();
             // Login user
@@ -63,7 +62,10 @@ class AdminLoginScreenController extends GetxController {
                 .doc(Get.find<GetFireBaseData>().bYear.value)
                 .collection("LoginHistory")
                 .doc(LoginTimeIDSavingClass.date)
-                .set({'id': LoginTimeIDSavingClass.date,'docid':DateTime.now()}).then((value) {
+                .set({
+              'id': LoginTimeIDSavingClass.date,
+              'docid': DateTime.now()
+            }).then((value) {
               firebaseFirestore
                   .collection(Get.find<GetFireBaseData>().bYear.value)
                   .doc(Get.find<GetFireBaseData>().bYear.value)
@@ -73,14 +75,14 @@ class AdminLoginScreenController extends GetxController {
                   .doc(LoginTimeIDSavingClass.id)
                   .set(
                 {
-
                   'adminuser': LoginTimeIDSavingClass.emailId,
                   'loginTime': LoginTimeIDSavingClass.id
                 },
                 SetOptions(merge: true),
               ).then((value) {
-                          schoolIdController.clear();
-          passwordController.clear();
+                TeacherLoginIDSaver.findUser = FirebaseAuth.instance.currentUser!.uid;
+                schoolIdController.clear();
+                passwordController.clear();
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
                     return AdminDashBoardPage(
@@ -163,11 +165,34 @@ class AdminLoginScreenController extends GetxController {
                               await firebaseFirestore.set({
                                 'batchYear':
                                     "${applynewBatchYearContoller.text.trim()}-${selectedToDaterContoller.text.trim()}"
-                              }, SetOptions(merge: true)).then(
-                                  (value) {
-                                    showToast(msg: 'Batch Added Successfully Please Login again');
-                                    html.window.location.reload();
-                                  });
+                              }, SetOptions(merge: true)).then((value) {
+                                return showDialog(
+                                  context: context,
+                                  barrierDismissible:
+                                      false, // user must tap button!
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text('Message'),
+                                      content: SingleChildScrollView(
+                                        child: ListBody(
+                                          children: const <Widget>[
+                                            Text(
+                                                'Batch Added Successfully Please Login again')
+                                          ],
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: const Text('ok'),
+                                          onPressed: () {
+                                          html.window.location.reload();
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              });
                             });
                           }
                         },
@@ -278,13 +303,7 @@ class AdminLoginScreenController extends GetxController {
                       child: TextFormField(
                         decoration:
                             const InputDecoration(hintText: 'Enter your email'),
-                        validator: (value) {
-                          if (emailController.text.isEmpty) {
-                            return 'Invalid';
-                          } else {
-                            return null;
-                          }
-                        },
+                        validator: checkFieldEmailIsValid,
                         controller: emailController,
                       ),
                     )

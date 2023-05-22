@@ -1,30 +1,39 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/controller/all_teachers_controller/all_teachers_controller.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/teacher_section/search_teacher.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/teacher_section/teacherDetails.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../../../../controller/teachersList/teachers_list.dart';
 
+import '../../../../../../controller/teachersList/teachers_list.dart';
 import '../../../../../../model/teacher/teacher_model.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
 
-
 class ListOfSchoolTeachers extends StatelessWidget {
+  AllTeachersController allTeachersController =
+      Get.put(AllTeachersController());
   String schoolID;
   final getxController = Get.put(TeachersProfileList());
   ListOfSchoolTeachers({required this.schoolID, super.key});
 
   @override
   Widget build(BuildContext context) {
+    Future<void> _showSearch() async {
+      await showSearch(context: context, delegate: SearchTeachers());
+    }
+
     List<TeacherModel> allData = [];
     int columnCount = 3;
-    double _w = MediaQuery.of(context).size.width;
-    double _h = MediaQuery.of(context).size.height;
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
+    var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(title: Text('Teachers List'),
-      backgroundColor: adminePrimayColor),
+      appBar: AppBar(
+          title: const Text('Teachers List'),
+          backgroundColor: adminePrimayColor),
       body: SafeArea(
           child: StreamBuilder(
         stream: FirebaseFirestore.instance
@@ -42,12 +51,48 @@ class ListOfSchoolTeachers extends StatelessWidget {
                 sizedBoxH10,
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "T e a c h e r s List",
-                    style: GoogleFonts.montserrat(
-                        color: const Color.fromRGBO(158, 158, 158, 1),
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold),
+                  child: Row(
+                    children: [
+                      Text(
+                        "T e a c h e r s List",
+                        style: GoogleFonts.montserrat(
+                            color: const Color.fromRGBO(158, 158, 158, 1),
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      const Spacer(),
+                      InkWell(
+                        child: Container(
+                          width: screenSize.width * 0.2,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              border: Border.all(color: Colors.grey)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                IconButton(
+                                    onPressed: () {
+                                      _showSearch();
+                                    },
+                                    icon: const Icon(
+                                      Icons.search,
+                                      size: 19,
+                                    )),
+                                sizedBoxw10,
+                                Text(
+                                  "Search",
+                                  style: GoogleFonts.poppins(fontSize: 16),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        onTap: () {
+                          _showSearch();
+                        },
+                      )
+                    ],
                   ),
                 ),
                 sizedBoxH20,
@@ -68,14 +113,13 @@ class ListOfSchoolTeachers extends StatelessWidget {
                           child: GridView.count(
                             physics: const BouncingScrollPhysics(
                                 parent: AlwaysScrollableScrollPhysics()),
-                            padding: EdgeInsets.all(_w / 60),
+                            padding: EdgeInsets.all(w / 60),
                             crossAxisCount: columnCount,
                             children: List.generate(
                               snapshot.data!.docs.length,
                               (int index) {
-                                TeacherModel data =
-                                    TeacherModel.fromMap(
-                                        snapshot.data!.docs[index].data());
+                                TeacherModel data = TeacherModel.fromMap(
+                                    snapshot.data!.docs[index].data());
                                 allData.add(data);
                                 return AnimationConfiguration.staggeredGrid(
                                   position: index,
@@ -89,10 +133,24 @@ class ListOfSchoolTeachers extends StatelessWidget {
                                         padding: const EdgeInsets.all(8.0),
                                         child: GestureDetector(
                                           onTap: () async {
-                                            getxController.indexValue.value =
-                                                index;
+                                            allTeachersController
+                                                .getTeacherDetails(
+                                              context,
+                                              data.imageUrl,
+                                              data.teacherName,
+                                              data.teacherEmail,
+                                              data.teacherPhNo,
+                                              data.employeeID,
+                                              data.houseName,
+                                              data.houseNumber,
+                                              data.place,
+                                              data.district,
+                                              data.gender,
+                                              data.altPhoneNo,
+                                              data.docid!,
+                                            );
                                           },
-                                          child: Container(
+                                          child: SizedBox(
                                             height: 400,
                                             width: 400,
                                             child: Padding(
@@ -182,7 +240,7 @@ class ListOfSchoolTeachers extends StatelessWidget {
               ],
             );
           } else {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator.adaptive(),
             );
           }

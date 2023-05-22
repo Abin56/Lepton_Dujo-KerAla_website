@@ -1,6 +1,5 @@
 // ignore_for_file: file_names
 
-import 'package:dujo_kerala_website/view/web/login/teacher/teacher_login_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../colors/colors.dart';
@@ -59,27 +58,27 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(
-                        builder: (context) {
-                          return TeacherLoginScreen();
-                        },
-                      ));
-                    },
-                    child: ButtonContainerWidget(
-                        curving: 30,
-                        // ignore: sort_child_properties_last
-                        child: Center(
-                          child: Text(
-                            "Teacher Login",
-                            style: GoogleFont.subHeadTextStyle,
-                          ),
-                        ),
-                        colorindex: 0,
-                        height: screenSize.width/8,
-                        width: 400),
-                  ),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     Navigator.push(context, MaterialPageRoute(
+                  //       builder: (context) {
+                  //         return TeacherLoginScreen();
+                  //       },
+                  //     ));
+                  //   },
+                  //   child: ButtonContainerWidget(
+                  //       curving: 30,
+                  //       // ignore: sort_child_properties_last
+                  //       child: Center(
+                  //         child: Text(
+                  //           "Teacher Login",
+                  //           style: GoogleFont.subHeadTextStyle,
+                  //         ),
+                  //       ),
+                  //       colorindex: 0,
+                  //       height: screenSize.width/8,
+                  //       width: 400),
+                  // ),
                   GestureDetector(
                     onTap: () {
                       Navigator.push(context, MaterialPageRoute(

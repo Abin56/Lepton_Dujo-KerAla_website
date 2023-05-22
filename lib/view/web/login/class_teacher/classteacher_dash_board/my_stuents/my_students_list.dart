@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/controller/all_class_controller/all_class_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,7 +15,6 @@ import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../model/add_class/add_new_class.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
-import '../../../../widgets/Iconbackbutton.dart';
 import '../../../admin/admin_DashBoard/classes/details_ofClasses.dart';
 
 class MyStudentsListViewScreen extends StatefulWidget {
@@ -29,6 +29,7 @@ class MyStudentsListViewScreen extends StatefulWidget {
 }
 
 class _MyStudentsListViewScreenState extends State<MyStudentsListViewScreen> {
+  AllClassController allClassController = Get.put(AllClassController());
   List<SchoolClassesModel> allData = [];
   int columnCount = 3;
 
@@ -111,8 +112,11 @@ class _MyStudentsListViewScreenState extends State<MyStudentsListViewScreen> {
                                         padding: const EdgeInsets.all(8.0),
                                         child: GestureDetector(
                                           onTap: () async {
-                                            getxController.indexValue.value =
-                                                index;
+                                 allClassController.showclass(
+                                                context,
+                                                data.className,
+                                                data.docid,
+                                                data.classTeacherName!);
                                           },
                                           child: SizedBox(
                                             height: 400,

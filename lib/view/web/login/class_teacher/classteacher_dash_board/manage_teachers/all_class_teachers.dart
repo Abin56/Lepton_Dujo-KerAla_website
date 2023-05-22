@@ -186,12 +186,16 @@ class AllClassesListViewForTeacher extends StatelessWidget {
                                             width: screenSize.width * 0.07,
                                             child: TextButton.icon(
                                                 onPressed: () async {
+                                                  log('teachernameeee${  snapshot.data?.docs[index]
+                                                    ['teacherName']??""}');
                                                   manageTeachersController
                                                       .addSubjectsToTeacher(
                                                           context,
                                                           snapshot.data!
                                                                   .docs[index]
-                                                              ['docid']);
+                                                              ['docid'], 
+                                                              snapshot.data?.docs[index]
+                                                    ['teacherName']??"");
                                                 },
                                                 icon:
                                                      Icon(Icons.change_circle,size: 13.w),
@@ -383,6 +387,8 @@ class AllClassesListViewForTeacher extends StatelessWidget {
                                         fontWeight: FontWeight.w500),
                                     GestureDetector(
                                       onTap: () async {
+                                        log('sdsdsd${snapshot.data!.docs[index]
+                                                    ['teacherName']}');
                                         manageTeachersController
                                             .addteachersToClass(
                                                 snapshot.data!.docs[index]

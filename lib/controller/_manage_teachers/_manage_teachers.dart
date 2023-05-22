@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
@@ -32,7 +34,9 @@ class ManageTeachersController extends GetxController {
     });
   }
 
-  addSubjectsToTeacher(BuildContext context, String teacherid) async {
+  addSubjectsToTeacher(
+      BuildContext context, String teacherid, String teacherName) async {
+        log('teaCHER $teacherName');
     return showDialog(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -67,34 +71,40 @@ class ManageTeachersController extends GetxController {
                                 height: 40.w,
                                 child: Row(
                                   children: [
-                                    GoogleMonstserratWidgets(text: snap.data?.docs[index]['subjectName'],
-                                   fontsize: 15.w,fontWeight: FontWeight.w700),
-                                  IconButton(
-                                      onPressed: () async {
-                                        subjectlist[snap.data!.docs[index]
-                                            ['subjectName']!] = true;
-                                        firebaseFirestore
-                                            .collection(
-                                                Get.find<GetFireBaseData>()
-                                                    .bYear
-                                                    .value)
-                                            .doc(Get.find<GetFireBaseData>()
-                                                .bYear
-                                                .value)
-                                            .collection('classes')
-                                            .doc(Get.find<GetFireBaseData>()
-                                                .getTeacherClassRole
-                                                .value)
-                                            .collection('teachers')
-                                            .doc(teacherid)
-                                            .collection('teacherSubject')
-                                            .doc(
-                                                snap.data!.docs[index]['docid'])
-                                            .set({
-                                          'teacherdocid': teacherid,
-                                          'docid': snap.data!.docs[index]
-                                              ['docid'],
-                                          'subjectName': snap.data!.docs[index]['subjectName']
+                                    GoogleMonstserratWidgets(
+                                        text: snap.data?.docs[index]
+                                            ['subjectName'],
+                                        fontsize: 15.w,
+                                        fontWeight: FontWeight.w700),
+                                    IconButton(
+                                        onPressed: () async {
+                                          log("message$teacherName");
+                                          subjectlist[snap.data!.docs[index]
+                                              ['subjectName']!] = true;
+                                          firebaseFirestore
+                                              .collection(
+                                                  Get.find<GetFireBaseData>()
+                                                      .bYear
+                                                      .value)
+                                              .doc(Get.find<GetFireBaseData>()
+                                                  .bYear
+                                                  .value)
+                                              .collection('classes')
+                                              .doc(Get.find<GetFireBaseData>()
+                                                  .getTeacherClassRole
+                                                  .value)
+                                              .collection('teachers')
+                                              .doc(teacherid)
+                                              .collection('teacherSubject')
+                                              .doc(snap.data!.docs[index]
+                                                  ['docid'])
+                                              .set({
+                                            'teacherName': teacherName,
+                                            'teacherdocid': teacherid,
+                                            'docid': snap.data!.docs[index]
+                                                ['docid'],
+                                            'subjectName': snap.data!
+                                                .docs[index]['subjectName']
                                           }).then((value) {
                                             firebaseFirestore
                                                 .collection(
@@ -113,12 +123,16 @@ class ManageTeachersController extends GetxController {
                                                     ['docid'])
                                                 .set({
                                               'teacherId': teacherid,
-                                            },SetOptions(merge: true));
+                                               'teacherName': teacherName,
+                                            }, SetOptions(merge: true));
                                           }).then((value) {
                                             showToast(msg: 'Added');
                                           });
                                         },
-                                        icon: const Icon(Icons.add,color: cBlue,))
+                                        icon: const Icon(
+                                          Icons.add,
+                                          color: cBlue,
+                                        ))
                                   ],
                                 ),
                               ));
@@ -144,8 +158,11 @@ class ManageTeachersController extends GetxController {
                     color: cred,
                     child: Center(
                       child: TextButton(
-                        child: GoogleMonstserratWidgets(fontsize: 13.w,
-                         text: 'Cancel', color: cWhite,fontWeight: FontWeight.w700),
+                        child: GoogleMonstserratWidgets(
+                            fontsize: 13.w,
+                            text: 'Cancel',
+                            color: cWhite,
+                            fontWeight: FontWeight.w700),
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
@@ -156,8 +173,11 @@ class ManageTeachersController extends GetxController {
                     color: cgreen,
                     child: Center(
                       child: TextButton(
-                        child: GoogleMonstserratWidgets(text: 'Ok', fontsize: 13.w,
-                        color: cWhite,fontWeight: FontWeight.w700),
+                        child: GoogleMonstserratWidgets(
+                            text: 'Ok',
+                            fontsize: 13.w,
+                            color: cWhite,
+                            fontWeight: FontWeight.w700),
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
@@ -203,82 +223,96 @@ class ManageTeachersController extends GetxController {
                               height: 50.w,
                               child: Row(
                                 children: [
-                                  GoogleMonstserratWidgets(text: "${index + 1}", fontsize: 14.w),
-
-                                sizedBoxW20,
-                                GoogleMonstserratWidgets(text: snap.data!.docs[index]['subjectName'],
-                                fontsize: 14.w,fontWeight: FontWeight.w600),
-
-                                IconButton(
-                                    onPressed: () async {
-                                      return showDialog(
-                                        context: context,
-                                        barrierDismissible:
-                                            false, // user must tap button!
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            title: const Text('Alert'),
-                                            content: SingleChildScrollView(
-                                              child: ListBody(
-                                                children: const <Widget>[
-                                                  Text(
-                                                      'Once remove the access all data will be lost \n Are you sure ?')
-                                                ],
+                                  GoogleMonstserratWidgets(
+                                      text: "${index + 1}", fontsize: 14.w),
+                                  sizedBoxW20,
+                                  GoogleMonstserratWidgets(
+                                      text: snap.data!.docs[index]
+                                          ['subjectName'],
+                                      fontsize: 14.w,
+                                      fontWeight: FontWeight.w600),
+                                  IconButton(
+                                      onPressed: () async {
+                                        return showDialog(
+                                          context: context,
+                                          barrierDismissible:
+                                              false, // user must tap button!
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: const Text('Alert'),
+                                              content: SingleChildScrollView(
+                                                child: ListBody(
+                                                  children: const <Widget>[
+                                                    Text(
+                                                        'Once remove the access all data will be lost \n Are you sure ?')
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                            actions: <Widget>[
-                                              TextButton(
-                                                child:  GoogleMonstserratWidgets(text: 'Cancel', fontsize: 14.w),
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                              ),
+                                              actions: <Widget>[
+                                                TextButton(
+                                                  child:
+                                                      GoogleMonstserratWidgets(
+                                                          text: 'Cancel',
+                                                          fontsize: 14.w),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                ),
 
-
-                                              GestureDetector(onTap: () async {
+                                                GestureDetector(
+                                                  onTap: () async {
                                                     await firebaseFirestore
                                                         .collection(
-                                                            Get.find<
-                                                                  GetFireBaseData>()
-                                                          .bYear
-                                                          .value)
-                                                      .doc(Get.find<
-                                                              GetFireBaseData>()
-                                                          .bYear
-                                                          .value)
-                                                      .collection('classes')
-                                                      .doc(Get.find<
-                                                              GetFireBaseData>()
-                                                          .getTeacherClassRole
-                                                          .value)
-                                                      .collection('teachers')
-                                                      .doc(teacherid)
-                                                      .collection(
-                                                          'teacherSubject')
-                                                      .doc(snap.data!
-                                                          .docs[index]['docid'])
-                                                      .delete()
-                                                      .then((value) {
-                                                    showToast(msg: 'Removed');
-                                                    Navigator.of(context).pop();
-                                                  });
-                                                },
-                                                child: Container(child:
-                                                 GoogleMonstserratWidgets(
-                                                  text: 'Ok', fontsize: 14.w,color: cred,
-                                                  fontWeight: FontWeight.w600,)),
-                                              ),
-                                              // TextButton(
-                                              //   child: const Text('ok'),
-                                              //   onPressed: ()
-                                              // ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                    },
-                                    icon: const Icon(Icons.remove,color: cBlue,)),
-                                    GoogleMonstserratWidgets(text: 'Remove', fontsize: 13.w)
+                                                            Get.find<GetFireBaseData>()
+                                                                .bYear
+                                                                .value)
+                                                        .doc(
+                                                            Get.find<GetFireBaseData>()
+                                                                .bYear
+                                                                .value)
+                                                        .collection('classes')
+                                                        .doc(Get.find<
+                                                                GetFireBaseData>()
+                                                            .getTeacherClassRole
+                                                            .value)
+                                                        .collection('teachers')
+                                                        .doc(teacherid)
+                                                        .collection(
+                                                            'teacherSubject')
+                                                        .doc(snap.data!
+                                                                .docs[index]
+                                                            ['docid'])
+                                                        .delete()
+                                                        .then((value) {
+                                                      showToast(msg: 'Removed');
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    });
+                                                  },
+                                                  child: Container(
+                                                      child:
+                                                          GoogleMonstserratWidgets(
+                                                    text: 'Ok',
+                                                    fontsize: 14.w,
+                                                    color: cred,
+                                                    fontWeight: FontWeight.w600,
+                                                  )),
+                                                ),
+                                                // TextButton(
+                                                //   child: const Text('ok'),
+                                                //   onPressed: ()
+                                                // ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      },
+                                      icon: const Icon(
+                                        Icons.remove,
+                                        color: cBlue,
+                                      )),
+                                  GoogleMonstserratWidgets(
+                                      text: 'Remove', fontsize: 13.w)
                                 ],
                               ),
                             );
@@ -299,26 +333,30 @@ class ManageTeachersController extends GetxController {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-
                 Container(
                   color: cred,
                   child: Center(
                     child: TextButton(
-                      child: GoogleMonstserratWidgets(text: 'Cancel',
-                       fontsize: 13.w,color: cWhite,fontWeight: FontWeight.w600),
+                      child: GoogleMonstserratWidgets(
+                          text: 'Cancel',
+                          fontsize: 13.w,
+                          color: cWhite,
+                          fontWeight: FontWeight.w600),
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
                     ),
                   ),
                 ),
-
                 Container(
                   color: cgreen,
                   child: Center(
                     child: TextButton(
-                      child: GoogleMonstserratWidgets(text: 'Ok',
-                       fontsize: 13.w,color: cWhite,fontWeight: FontWeight.w600),
+                      child: GoogleMonstserratWidgets(
+                          text: 'Ok',
+                          fontsize: 13.w,
+                          color: cWhite,
+                          fontWeight: FontWeight.w600),
                       onPressed: () {
                         Navigator.of(context).pop();
                       },

@@ -1,11 +1,11 @@
 
 import 'package:dujo_kerala_website/view/colors/colors.dart';
-import 'package:dujo_kerala_website/view/web/widgets/icon_back.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../google_poppins_widget/google_poppins_widget.dart';
+import '../../../../widgets/Iconbackbutton.dart';
 
 class ExmNotification extends StatelessWidget {
   const ExmNotification({super.key});

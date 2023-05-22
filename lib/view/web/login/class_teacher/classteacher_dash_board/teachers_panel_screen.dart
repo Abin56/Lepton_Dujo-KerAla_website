@@ -69,11 +69,11 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
     'Add Guardian', //5
     'Chat with Parents', //6
     'Upload Time Table', //7
-    'Upload Progress Report', //8
+    //'Upload Progress Report', //8
     'Upload Events', //9
     'Upload Notice', //10
-    'Live Clasees', //11
-    'Recorded Classes' //12
+    //'Live Clasees', //11
+    //'Recorded Classes' //12
   ];
 
   List<String> dashboardImagesList = [
@@ -84,24 +84,24 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
     'assets/images/women.png', //5
     'assets/images/meetings.png', //6
     'assets/images/information.png', //7
-    'assets/images/report.png', //8
+    //'assets/images/report.png', //8
     'assets/images/events.png', //9
     'assets/images/notices.png', //10
-    'assets/images/video-conference.png', //11
-    'assets/images/elearning.png', //12
+    //'assets/images/video-conference.png',  //11
+    //'assets/images/elearning.png',  //12
   ];
 
   List<String> viewListNames = [
     'Events', //1
     'Notice', //2
-    'Students List',
-    'My Students', //3
+    'Students List',//3
+    'My Students', //4
   ];
   List<String> viewListImages = [
     'assets/images/events.png', //1
     'assets/images/notices.png', //2
     'assets/images/students.png', //3
-    'assets/images/students.png', //3
+    'assets/images/students.png', //4
   ];
 
   @override
@@ -138,12 +138,12 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
         schoolID: widget.schoolID,
       ),
 
-      const UnderMaintanceScreen(), //9
+      //const UnderMaintanceScreen(), //9
       ClassTeacherCreateEventsPage(), //6
 
       ClassTeacherCreateNoticePage(), //8
-      const UnderMaintanceScreen(), //9
-      const UnderMaintanceScreen(), //10/10
+      //const UnderMaintanceScreen(), //9
+      //const UnderMaintanceScreen(), //10/10
     ];
     List<Widget> drawerPages = [
       ClassEventsPageList(
@@ -403,14 +403,14 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                               children: [
                                 // sizedBoxH20,
                                 Container(
-                                    margin: EdgeInsets.only(top: 20.h),
-                                    height: 30.h,
+                                    margin: EdgeInsets.only(top: 20.w),
+                                    height: 30.w,
                                     width: 80.w,
                                     child:
                                         Image.asset('assets/images/dujon.png')),
                                 Row(
                                   children: [
-                                    IconButtonBackWidget(color: Colors.red),
+                                    IconButtonBackWidget(color: Colors.red,),
                                     FittedBox(
                                       child: Padding(
                                         padding: EdgeInsets.all(17.w),
@@ -419,7 +419,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                           style: GoogleFonts.poppins(
                                               color: Colors.red,
                                               fontWeight: FontWeight.w800,
-                                              fontSize: 13.h),
+                                              fontSize: 13.w),
                                         ),
                                       ),
                                     ),
@@ -565,6 +565,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                                           (value) async {
                                                                     await getFireBaseData
                                                                         .getTeacherClassRoll();
+                                                                        Navigator.pop(context);
                                                                     log("message");
                                                                   }).catchError(
                                                                           (e) {
@@ -663,6 +664,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                                       (value) async {
                                                                 await getFireBaseData
                                                                     .getBatchYearId();
+                                                                    
                                                                 // ignore: use_build_context_synchronously
                                                                 Navigator
                                                                     .pushReplacement(

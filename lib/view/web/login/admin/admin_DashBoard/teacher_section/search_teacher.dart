@@ -1,20 +1,17 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dujo_kerala_website/controller/search_student_controller/search_student.dart';
-import 'package:dujo_kerala_website/view/constant/constant.dart';
-import 'package:dujo_kerala_website/view/google_poppins_widget/google_poppins_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
-import '../../../../../../model/create_classModel/add_student_model.dart';
-import '../../../../../../ui team/sruthi/student_details_alert_box_widget.dart';
+import '../../../../../../controller/all_teachers_controller/all_teachers_controller.dart';
+import '../../../../../../model/teacher/teacher_model.dart';
+import '../../../../../constant/constant.dart';
+import '../../../../../google_poppins_widget/google_poppins_widget.dart';
 
-class SearchStuents extends SearchDelegate {
-  SearchStudentController searchStudentController =
-      Get.put(SearchStudentController());
+class SearchTeachers extends SearchDelegate {
+  AllTeachersController allTeachersController =
+      Get.put(AllTeachersController());
 
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -41,7 +38,7 @@ class SearchStuents extends SearchDelegate {
         stream: FirebaseFirestore.instance
             .collection("SchoolListCollection")
             .doc(Get.find<AdminLoginScreenController>().schoolID)
-            .collection("AllStudents")
+            .collection("Teachers")
             .snapshots(),
         builder: (context, snapshots) {
           var screenSize = MediaQuery.of(context).size;
@@ -50,7 +47,7 @@ class SearchStuents extends SearchDelegate {
               // backgroundColor: Colors.transparent,
               body: ListView.separated(
                   itemBuilder: (context, index) {
-                    AddStudentModel data = AddStudentModel.fromMap(
+                    TeacherModel data = TeacherModel.fromMap(
                         snapshots.data!.docs[index].data());
                     return Container(
                         decoration: BoxDecoration(
@@ -63,8 +60,21 @@ class SearchStuents extends SearchDelegate {
                           children: [
                             GestureDetector(
                                 onTap: () {
-                                  log(data.profileImageUrl ?? "");
-                                  _showlert(context, data);
+                                  allTeachersController.getTeacherDetails(
+                                    context,
+                                    data.imageUrl,
+                                    data.teacherName,
+                                    data.teacherEmail,
+                                    data.teacherPhNo,
+                                    data.employeeID,
+                                    data.houseName,
+                                    data.houseNumber,
+                                    data.place,
+                                    data.district,
+                                    data.gender,
+                                    data.altPhoneNo,
+                                    data.docid!,
+                                  );
                                 },
                                 child: const CircleAvatar(
                                   radius: 60,
@@ -77,23 +87,18 @@ class SearchStuents extends SearchDelegate {
                                 children: [
                                   // Text(snapshots.data!.docs[index]['id']),
                                   Text(
-                                    data.studentName!,
+                                    data.teacherName!,
                                     style: GoogleFonts.poppins(fontSize: 16),
                                   ),
                                   sizedBoxH10,
                                   Text(
-                                    'Admission No. :${data.admissionNumber}',
+                                    'Employe ID. :${data.employeeID}',
                                     style: GoogleFonts.poppins(fontSize: 12),
                                   ),
-                                  sizedBoxH10,
 
-                                  Text(
-                                    'Class & Division : ${data.classID}',
-                                    style: GoogleFonts.poppins(fontSize: 12),
-                                  ),
                                   sizedBoxH10,
                                   Text(
-                                    'Phone No :${data.guardianID}',
+                                    'Phone No :${data.teacherPhNo}',
                                     style: GoogleFonts.poppins(fontSize: 12),
                                   ),
                                 ],
@@ -117,13 +122,13 @@ class SearchStuents extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    final List<AddStudentModel> buildSuggestionList;
+    final List<TeacherModel> buildSuggestionList;
     if (query.isEmpty) {
-      buildSuggestionList = searchStudentController.searchStudent;
+      buildSuggestionList = allTeachersController.searchTeachers;
     } else {
-      buildSuggestionList = searchStudentController.searchStudent
+      buildSuggestionList = allTeachersController.searchTeachers
           .where((item) =>
-              item.studentName!.toLowerCase().contains(query.toLowerCase()))
+              item.teacherName!.toLowerCase().contains(query.toLowerCase()))
           .toList();
     }
     if (buildSuggestionList.isEmpty) {
@@ -138,9 +143,23 @@ class SearchStuents extends SearchDelegate {
 
               return GestureDetector(
                 onTap: () {
-                  final data = searchStudentController.searchStudent[index];
+                  final data = allTeachersController.searchTeachers[index];
 
-                  _showlert(context, data);
+                  allTeachersController.getTeacherDetails(
+                    context,
+                    data.imageUrl,
+                    data.teacherName,
+                    data.teacherEmail,
+                    data.teacherPhNo,
+                    data.employeeID,
+                    data.houseName,
+                    data.houseNumber,
+                    data.place,
+                    data.district,
+                    data.gender,
+                    data.altPhoneNo,
+                    data.docid!,
+                  );
                 },
                 child: Container(
                     decoration: BoxDecoration(
@@ -153,9 +172,7 @@ class SearchStuents extends SearchDelegate {
                         GestureDetector(
                             onTap: () {
                               final data =
-                                  searchStudentController.searchStudent[index];
-
-                              _showlert(context, data);
+                                  allTeachersController.searchTeachers[index];
                             },
                             child: const CircleAvatar(
                               radius: 60,
@@ -168,23 +185,19 @@ class SearchStuents extends SearchDelegate {
                             children: [
                               // Text(snapshots.data!.docs[index]['id']),
                               Text(
-                                buildSuggestionList[index].studentName!,
+                                buildSuggestionList[index].teacherName!,
                                 style: GoogleFonts.poppins(fontSize: 16),
                               ),
                               sizedBoxH10,
                               Text(
-                                'Admission No. :${buildSuggestionList[index].admissionNumber}',
+                                'Employee ID. :${buildSuggestionList[index].employeeID}',
                                 style: GoogleFonts.poppins(fontSize: 12),
                               ),
                               sizedBoxH10,
 
-                              Text(
-                                'Class & Division : ${buildSuggestionList[index].classID}',
-                                style: GoogleFonts.poppins(fontSize: 12),
-                              ),
                               sizedBoxH10,
                               Text(
-                                'Phone No :${buildSuggestionList[index].guardianID}',
+                                'Phone No :${buildSuggestionList[index].teacherPhNo}',
                                 style: GoogleFonts.poppins(fontSize: 12),
                               ),
                             ],
@@ -201,23 +214,4 @@ class SearchStuents extends SearchDelegate {
       );
     }
   }
-}
-
-void _showlert(BuildContext context, AddStudentModel data) {
-  showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (context) => Student_Details_AlertBox_Widget(
-            studentID: data.docid ?? "",
-            studentImage: data.profileImageUrl ?? "",
-            studentName: data.studentName ?? "",
-            studentClass: data.classID ?? "",
-            admissionNumber: data.admissionNumber ?? "",
-            studentGender: data.gender ?? "",
-            bloodGroup: data.bloodgroup ?? "",
-            studentEmail: data.studentemail ?? "",
-            houseName: data.houseName ?? "",
-            place: data.place ?? "",
-            district: data.district ?? "",
-          ));
 }

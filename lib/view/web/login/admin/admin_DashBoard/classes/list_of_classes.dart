@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/controller/all_class_controller/all_class_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
@@ -13,6 +14,7 @@ import '../../../../../constant/constant.dart';
 import 'details_ofClasses.dart';
 
 class ListOfClassesScreen extends StatefulWidget {
+  AllClassController allClassController = Get.put(AllClassController());
   String schoolID;
   String NoofStundents = '';
   String NoofMaleStundets = '';
@@ -43,7 +45,8 @@ class _ListOfClassesScreenState extends State<ListOfClassesScreen> {
     double h = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Classes List'), backgroundColor: adminePrimayColor),
+          title: const Text('Classes List'),
+          backgroundColor: adminePrimayColor),
       body: SafeArea(
           child: StreamBuilder(
         stream: FirebaseFirestore.instance
@@ -75,7 +78,7 @@ class _ListOfClassesScreenState extends State<ListOfClassesScreen> {
                   child: Row(
                     children: [
                       ClassesDeatils(
-                        width: 500,
+                          width: 500,
                           noofFemale: widget.NoofFemaleStudents,
                           noofMale: widget.NoofMaleStundets,
                           totalStudents: widget.NoofStundents,
@@ -97,8 +100,9 @@ class _ListOfClassesScreenState extends State<ListOfClassesScreen> {
                             children: List.generate(
                               snapshot.data!.docs.length,
                               (int index) {
-                                SchoolClassesModel data = SchoolClassesModel.fromMap(
-                                    snapshot.data!.docs[index].data());
+                                SchoolClassesModel data =
+                                    SchoolClassesModel.fromMap(
+                                        snapshot.data!.docs[index].data());
                                 allData.add(data);
                                 return AnimationConfiguration.staggeredGrid(
                                   position: index,
@@ -112,8 +116,11 @@ class _ListOfClassesScreenState extends State<ListOfClassesScreen> {
                                         padding: const EdgeInsets.all(8.0),
                                         child: GestureDetector(
                                           onTap: () async {
-                                            getxController.indexValue.value =
-                                                index;
+                                            widget.allClassController.showclass(
+                                                context,
+                                                data.className,
+                                                data.docid,
+                                                data.classTeacherName!);
                                           },
                                           child: SizedBox(
                                             height: 400,
@@ -149,14 +156,6 @@ class _ListOfClassesScreenState extends State<ListOfClassesScreen> {
                                                                     .bold),
                                                   ),
                                                   sizedBoxH10,
-                                                  // Text(
-                                                  //   'Created Date : ${stringTimeToDateConvert(data.)}',
-                                                  //   style: GoogleFonts.poppins(
-                                                  //     color: Colors.black
-                                                  //         .withOpacity(0.4),
-                                                  //     fontSize: 14,
-                                                  //   ),
-                                                  // ),
                                                   sizedBoxH10,
                                                   Text(
                                                     "Class : ${data.className}",
@@ -174,7 +173,6 @@ class _ListOfClassesScreenState extends State<ListOfClassesScreen> {
                                                       fontSize: 12,
                                                     ),
                                                   ),
-                                            
                                                 ],
                                               ),
                                             ),
