@@ -1,9 +1,10 @@
-import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/homepage_mob.dart';
 import 'package:dujo_kerala_website/view/web/home/privacypolicy.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
+import 'ui team/abin/responsive mob/_/_responsive_web.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
               ),
               home:
                   //const MobHomePage()
-                  HomwPageTwo());
+                  HomePageResponse());
         });
   }
 }

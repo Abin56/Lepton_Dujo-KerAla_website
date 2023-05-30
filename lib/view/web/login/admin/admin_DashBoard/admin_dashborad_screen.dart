@@ -80,7 +80,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'PTA',
     'Mother\'s PTA',
     'Achievements',
-    'Student Protection Group',
+    'School Protection Group',
     'Scholarship',
     'Bus Route',
     'Student Summary',

@@ -165,7 +165,10 @@ class AddRequestedSchoolsToFirebase {
                 child: ListBody(
                   children: const <Widget>[
                     Text(
-                        'Thank you for applying for an account. Your account is currently pending approval by the site administrator.In the meantime, a welcome message with further instructions has been sent to your e-mail address.'),
+                        "Thank you for applying for an account. Your account is currently pending approval \n"
+                        " by the site administrator. In the meantime, a welcome message with further\n"
+                        " instructions has been sent to your e-mail address. "
+                        ),
                   ],
                 ),
               ),

@@ -202,6 +202,12 @@ class SchoolProfile extends StatelessWidget {
                         labelText: 'Designation',
                         icon: Icons.person_4,
                       ),
+
+
+
+
+
+
                       Padding(
                         padding: const EdgeInsets.all(20),
                         child: SizedBox(
