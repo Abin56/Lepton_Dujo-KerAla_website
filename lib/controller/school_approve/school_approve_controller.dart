@@ -82,7 +82,14 @@ class SchoolApproveController extends GetxController {
                       builder: ((context) => const AlertDialog(
                             content: Text('Succesfully Approved!'),
                           )),
-                    ));
+                    )).then((value) {
+
+                          firebaseFirestore
+                .collection("SchoolListCollection")
+                .doc(uid).set({
+                  'deactive':false
+                },SetOptions(merge: true));
+                    });
             await fetchReqListSchools();
             isLoading.value = false;
           });

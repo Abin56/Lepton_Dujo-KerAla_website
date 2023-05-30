@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../colors/colors.dart';
 
 class PrivacyPolicy extends StatefulWidget {
-  const PrivacyPolicy({super.key});
+  const   PrivacyPolicy({super.key});
   static const String route = '/privacypolicy';
 
   @override

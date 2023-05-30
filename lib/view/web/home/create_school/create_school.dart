@@ -2,8 +2,10 @@
 
 import 'package:country_state_city_picker/country_state_city_picker.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
+import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -11,12 +13,46 @@ import '../../../../controller/add_Newschool/add_new_schhol.dart';
 import '../../../colors/colors.dart';
 import '../../../fonts/fonts.dart';
 
-class SchoolProfile extends StatelessWidget {
+class SchoolProfile extends StatefulWidget {
+  const SchoolProfile({super.key});
+   static const String route = '/createSchool';
+
+  @override
+  State<SchoolProfile> createState() => _SchoolProfileState();
+}
+
+class _SchoolProfileState extends State<SchoolProfile> {
   AddNewSchoolController addNewSchoolController =
       Get.put(AddNewSchoolController());
+
   final _formKey = GlobalKey<FormState>();
 
-  SchoolProfile({super.key});
+
+  List<Map> LeptonDujoGps = [
+    {"name": "Lepton Dujo Gps Tracker", "isChecked": false},
+   
+  ];
+  List<Map> LeptonDujoBiometric= [
+    {"name": "Lepton Dujo Biometric device", "isChecked": false},
+  ];
+    List<Map> LeptonDujoTerms= [
+    {"name": "I Agree ", "isChecked": false},
+  ];
+
+
+  late int selectedRadio;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedRadio = 0; // Set initial selected radio button
+  }
+
+  setSelectedRadio(int val) {
+    setState(() {
+      selectedRadio = val;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +66,7 @@ class SchoolProfile extends StatelessWidget {
             Container(
               color: adminePrimayColor,
               height: size.height,
-              width: size.width * 1 / 2,
+              width: 730.w,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -48,7 +84,7 @@ class SchoolProfile extends StatelessWidget {
                       Text(
                         'Hi ! DuJo  ',
                         style: ralewayStyle.copyWith(
-                          fontSize: 48.0,
+                          fontSize: 48.0.w,
                           color: AppColors.whiteColor,
                           fontWeight: FontWeight.w800,
                         ),
@@ -56,7 +92,7 @@ class SchoolProfile extends StatelessWidget {
                       Text(
                         ' Welcomes you ',
                         style: ralewayStyle.copyWith(
-                          fontSize: 35.0,
+                          fontSize: 35.0.w,
                           color: AppColors.whiteColor,
                           fontWeight: FontWeight.w800,
                         ),
@@ -69,7 +105,7 @@ class SchoolProfile extends StatelessWidget {
                   Text(
                     'Create New School',
                     style: ralewayStyle.copyWith(
-                      fontSize: 25.0,
+                      fontSize: 25.0.w,
                       color: AppColors.whiteColor,
                       fontWeight: FontWeight.w800,
                     ),
@@ -77,7 +113,8 @@ class SchoolProfile extends StatelessWidget {
                   Flexible(
                     child: SizedBox(
                         height: size.width / 3,
-                        width: 800,
+                        width: 700.w
+                        ,
                         child: LottieBuilder.asset(
                             "assets/images/22462-campus-library-school-building-maison-mocca-animation.json")),
                   ),
@@ -85,7 +122,7 @@ class SchoolProfile extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: size.width * 1 / 2,
+              width: 800.w,
               height: size.height,
               child: SingleChildScrollView(
                 child: Form(
@@ -202,12 +239,221 @@ class SchoolProfile extends StatelessWidget {
                         labelText: 'Designation',
                         icon: Icons.person_4,
                       ),
+                    
+                          SizedBox(
+                      width: 400.w,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          left: 40.w,
+                          //  right: 800,
+                        ),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                               GoogleMonstserratWidgets(text: 
+                                "Choose your School type :\n""(based on  students strength)",
+                             
+                              fontsize: 16.w,
+                              ),
+                              const SizedBox(height: 10),
+                              const Divider(),
+                              const SizedBox(height: 10),
 
+                              // The checkboxes will be here
 
+                              Column(
+                                children: [
+                                  RadioListTile(
+                                    value: 1,
+                                    
+                                    groupValue: selectedRadio,
+                                    onChanged: (val) {
+                                      setSelectedRadio(val!);
+                                    },
+                                    title: GoogleMonstserratWidgets(text: "Type A     " 'Below 100  '  "---    15,000",fontsize: 16.w),
+                                  ),
+                                  RadioListTile(
+                                    value: 2,
+                                    groupValue: selectedRadio,
+                                    onChanged: (val) {
+                                      setSelectedRadio(val!);
+                                    },  
+                                    title: GoogleMonstserratWidgets(text: "Type B     "   '100 to 200 '  "---    20,000",fontsize: 16.w,),
+                                  ),
+                                  RadioListTile(
+                                    value: 3,
+                                    groupValue: selectedRadio,
+                                    onChanged: (val) {
+                                      setSelectedRadio(val!);
+                                    },
+                                    title: GoogleMonstserratWidgets(text: "Type C      " '200 to 300 '  "---   25,000",fontsize: 16.w),
+                                  ),
+                                  RadioListTile(
+                                    value: 4,
+                                    groupValue: selectedRadio,
+                                    onChanged: (val) {
+                                      setSelectedRadio(val!);
+                                    },
+                                    title: GoogleMonstserratWidgets(text: "Type D    " '300 to 400 '  "---    30,000",fontsize: 16.w),
+                                  ),
+                                  RadioListTile(
+                                    value: 5,
+                                    groupValue: selectedRadio,
+                                    onChanged: (val) {
+                                      setSelectedRadio(val!);
+                                    },
+                                    title: GoogleMonstserratWidgets(text: "Type E     " '400 to 500 '  "---    35,000",fontsize: 16.w),
+                                  ),
+                                  RadioListTile(
+                                    value: 6,
+                                    groupValue: selectedRadio,
+                                    onChanged: (val) {
+                                      setSelectedRadio(val!);
+                                    },
+                                    title: GoogleMonstserratWidgets(text: "Type F     " '500 to 600 '  "---    55,000",fontsize: 16.w),
+                                  ),
+                                ],
+                              ),
+                              ////////////////////// radio button
+                              
+                            ]),
+                      ),
+                          ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  SizedBox(
+                                  //  color: cBlue,
+                                    height: 60.h,
+                                    width: 300.w,
+                                    child:  
+                                            Column(
+                                                  children: LeptonDujoGps.map((hobby) {
+                                                return CheckboxListTile(
 
+                                                    value: hobby["isChecked"],
+                                                    title: GoogleMonstserratWidgets(text: hobby["name"],fontsize: 16.w),
+                                                    onChanged: (newValue) {
+                                                      setState(() {
+                                                        hobby["isChecked"] = newValue;
+                                                      });
+                                                    });
+                                              }).toList()),
+                                        
 
+                                     //  SizedBox(height: 10),
+                                      //  const Divider(),
+                                      // const SizedBox(height: 10),
+                                      // Wrap(
+                                      //   children: availableHobbies.map((hobby) {
+                                      //     // bool   isCheckedValue  =;
+                                      //     if (hobby["isChecked"] == true) {
+                                      //       return Card(
+                                      //         elevation: 3,
+                                      //         color: Colors.amber,
+                                      //         child: Padding(
+                                      //           padding:  EdgeInsets.all(8.0.w),
+                                      //           child: Text(hobby["name"]),
+                                      //         ),
+                                      //       );
+                                      //     }
+                                      //     // ignore: avoid_print
+                                      //     print('isChecked');
+                                      //     return Container();
+                                      //   }).toList(),
+                                      // ),
+                                  ),
+                                   Padding(
+                                     padding: const EdgeInsets.all(8.0),
+                                     child: SizedBox(
+                                                                     //  color: cred,
+                                      width: 80.w,
+                                      height: 60.h,
+                                      child: TextFormField(
+                                        validator: checkFieldNumIsValid,
+                                        decoration: InputDecoration(
+                                          border: OutlineInputBorder(),
+                                          hintText: "1"),)),
+                                   ),
+                                         Container(
+                                    color: cred,
+                                    width: 80.w,
+                                    height: 55.h,
+                                    
+                                        ),
+                                ],
+                              ),
+                             //   TextFormField(decoration: InputDecoration(border: OutlineInputBorder(),labelText: "Number of tracker needed"),),
+                           Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  SizedBox(
+                                  //  color: cBlue,
+                                    height: 60.h,
+                                    width: 300.w,
+                                    child:   
+                                            Column(
+                                                  children: LeptonDujoBiometric.map((hobby) {
+                                                return CheckboxListTile(
 
+                                                    value: hobby["isChecked"],
+                                                    title: GoogleMonstserratWidgets(text: hobby["name"],fontsize: 16.w),
+                                                    onChanged: (newValue) {
+                                                      setState(() {
+                                                        hobby["isChecked"] = newValue;
+                                                      });
+                                                    });
+                                              }).toList()),
+                                  ),
+                                   Padding(
+                                     padding: const EdgeInsets.all(8.0),
+                                     child: SizedBox(
+                              //  color: cred,
+                                      width: 80.w,
+                                      height: 60.h,
+                                      child: TextFormField(
+                                        validator: checkFieldNumIsValid,
+                                        decoration: InputDecoration(
+                                          border: OutlineInputBorder(),
+                                          hintText: "1"),)),
+                                   ),
+                                         Container(
+                                    color: cred,
+                                    width: 80.w,
+                                    height: 55.h,
+                                    
+                                        ),
 
+                                ],
+                              ),
+
+                             
+                                        TextButton(
+                                    onPressed: () {
+                                    
+                                  },
+                                   child: GoogleMonstserratWidgets(text: 'Click here to agree the terms and conditions', fontsize: 14.w
+                                  )),
+                                  SizedBox(
+                                  //  color: cBlue,
+                                   height: 60.h,
+                                    width: 300.w,
+                                    child:   
+                                        Column(
+                                              children: LeptonDujoTerms.map((hobby) {
+                                            return CheckboxListTile(
+                                              
+                                                value: hobby["isChecked"],
+                                                title: GoogleMonstserratWidgets(text: hobby["name"],fontsize: 16.w),
+                                                onChanged: (newValue) {
+                                                  setState(() {
+                                                  
+                                                    hobby["isChecked"] = newValue;
+                                                  });
+                                                });
+                                          }).toList()),
+                                  ),
+                           
                       Padding(
                         padding: const EdgeInsets.all(20),
                         child: SizedBox(
@@ -222,9 +468,37 @@ class SchoolProfile extends StatelessWidget {
                               ),
                             ),
                             onPressed: () async {
-                              if (_formKey.currentState!.validate()) {
-                                await addNewSchoolController
-                                    .addNewSchool(context);
+                             
+                              List<String> gpsValues = [];
+                              for (Map<dynamic, dynamic> data
+                                  in LeptonDujoGps) {
+                                if (data["isChecked"] == true) {
+                                  gpsValues.add(data["name"]);
+                                  // ignore: avoid_print
+                                  print(gpsValues);
+                                }
+                                 List<String> BiometricValues = [];
+                              for (Map<dynamic, dynamic> data
+                                  in LeptonDujoGps) {
+                                if (data["isChecked"] == true) {
+                                  BiometricValues.add(data["name"]);
+                                  // ignore: avoid_print
+                                  print(BiometricValues);
+                                }
+                                List<String> TermsValues = [];
+                              for (Map<dynamic, dynamic> data
+                                  in LeptonDujoTerms) {
+                                if (data["isChecked"] == true) {
+                                  TermsValues.add(data["name"]);
+                                  // ignore: avoid_print
+                                  print(TermsValues);
+                                }
+                                if (_formKey.currentState!.validate()) {
+                                  await addNewSchoolController
+                                      .addNewSchool(context);
+                                }
+                                }
+                                  }
                               }
                             },
                             child: const Text("Create"),
@@ -241,8 +515,6 @@ class SchoolProfile extends StatelessWidget {
       ]),
     );
   }
-
-
 }
 
 class SchoolTextFormFieldWidget extends StatelessWidget {
@@ -277,7 +549,16 @@ class SchoolTextFormFieldWidget extends StatelessWidget {
           ),
           labelText: labelText,
         ),
-      ),
-    );
+),
+);
+}
+}
+String? checkFieldNumIsValid(String? fieldContent) {
+  if (fieldContent == null || fieldContent.isEmpty) {
+    return 'Field is mandatory';
   }
+  if (RegExp(r'[^0-9]').hasMatch(fieldContent)) {
+    return null;
+}
+  return null;
 }
