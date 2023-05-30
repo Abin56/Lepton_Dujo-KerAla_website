@@ -43,7 +43,7 @@ class AdminLoginScreen extends StatelessWidget {
             ResponsiveWidget.isSmallScreen(context)
                 ? const SizedBox()
                 : Expanded(
-                    child: Container(
+                    child: Container(                                             
                       height: height,
                       color: const Color.fromARGB(255, 74, 3, 107),
                       child: Column(

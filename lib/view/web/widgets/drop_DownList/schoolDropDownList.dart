@@ -23,7 +23,8 @@ class _GetSchoolListDropDownButtonState
   StreamBuilder<QuerySnapshot<Map<String, dynamic>>> dropDownButton() {
     return StreamBuilder(
         stream: FirebaseFirestore.instance
-            .collection("SchoolListCollection").orderBy('schoolName',descending: false)
+            .collection("SchoolListCollection")
+            .orderBy('schoolName', descending: false)
             .snapshots(),
         builder: (context,
             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
@@ -38,11 +39,13 @@ class _GetSchoolListDropDownButtonState
                   : Text(schoolListValue!["schoolName"]),
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.transparent, width: 0.5),
+                  borderSide:
+                      const BorderSide(color: Colors.transparent, width: 0.5),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 border: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.transparent, width: 0.5),
+                  borderSide:
+                      const BorderSide(color: Colors.transparent, width: 0.5),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 filled: true,

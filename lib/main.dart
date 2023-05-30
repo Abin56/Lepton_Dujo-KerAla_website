@@ -1,4 +1,5 @@
 import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/_responsive_web.dart';
+import 'package:dujo_kerala_website/view/web/home/create_school/create_school.dart';
 import 'package:dujo_kerala_website/view/web/home/privacypolicy.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
           return GetMaterialApp(
               routes: {
                 PrivacyPolicy.route: (context) => const PrivacyPolicy(),
+                SchoolProfile.route: (context) => const SchoolProfile(),
               },
               title: 'DuJo',
               debugShowCheckedModeBanner: false,
