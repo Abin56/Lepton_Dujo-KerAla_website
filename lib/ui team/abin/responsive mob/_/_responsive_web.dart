@@ -28,13 +28,12 @@ class HomePageResponse extends StatelessWidget {
       "application with student login,parent, \n"
       "teacher login";
 
-   Uri _faceBookUrl =
-   Uri.parse('https://www.facebook.com/profile.php?id=100091062978371');
-   Uri _twitterUrl = Uri.parse('https://twitter.com/LeptonDujo');
-   Uri _instaUrl = Uri.parse('https://www.instagram.com/leptondujo/');
-   Uri _utubeUrl =
-      Uri.parse('https://www.youtube.com/@LEPTONDUJO/featured');
-   Uri _leptonUrl = Uri.parse('http://www.leptoncommunications.com');
+  Uri _faceBookUrl =
+      Uri.parse('https://www.facebook.com/profile.php?id=100091062978371');
+  Uri _twitterUrl = Uri.parse('https://twitter.com/LeptonDujo');
+  Uri _instaUrl = Uri.parse('https://www.instagram.com/leptondujo/');
+  Uri _utubeUrl = Uri.parse('https://www.youtube.com/@LEPTONDUJO/featured');
+  Uri _leptonUrl = Uri.parse('http://www.leptoncommunications.com');
 
   Future<void> _launchFacebookUrl() async {
     if (!await launchUrl(_faceBookUrl)) {
@@ -800,13 +799,11 @@ class HomePageResponse extends StatelessWidget {
                     ),
                   ),
 
-                  
-
-                    sizedBoxH20,
+                  sizedBoxH20,
                   // const Divider(
                   //   color: cBlack,
                   // ),
-                 sizedBoxH20,
+                  sizedBoxH20,
                   FooterMob()
                 ],
               ),
@@ -878,7 +875,7 @@ class HomePageResponse extends StatelessWidget {
                           ],
                         ),
                       ),
-                     //SizedBox(width: 20.h),
+                      //SizedBox(width: 20.h),
                       //SizedBox(width: 20.h),
                       // SizedBox(width: 20.h),
                       // SizedBox(width: 20.h),
@@ -1036,13 +1033,9 @@ class HomePageResponse extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(
-                  right: 80.0.w,
-                  left: 80.w,
-                  top: 25.h
-                ),
+                padding: EdgeInsets.only(right: 80.0.w, left: 80.w, top: 25.h),
                 child: Container(
-                 // color: cWhite,
+                  // color: cWhite,
                   width: MediaQuery.of(context).size.width,
                   height: 600.h,
                   color: const Color(0xFF17BDB5),
@@ -1054,7 +1047,7 @@ class HomePageResponse extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
-                             // color: cBlue,
+                              // color: cBlue,
                               width: 140.w,
                               height: 100.h,
                               child: Image.asset(
@@ -1070,7 +1063,7 @@ class HomePageResponse extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.only(top: 85.h),
                               child: Container(
-                               // color: cred,
+                                // color: cred,
                                 child: Text(
                                   'Watch And Guide,\nLet Them Study',
                                   style: GoogleFonts.montserrat(
@@ -1081,22 +1074,19 @@ class HomePageResponse extends StatelessWidget {
                                 ),
                               ),
                             ),
-                             SizedBox(
+                            SizedBox(
                               height: 20.h,
                             ),
                             sizedBoxH20,
                             sizedBoxH20,
-                           // sizedBoxH20,
+                            // sizedBoxH20,
                             MaterialButton(
                               //padding: EdgeInsets.all(20),
                               height: 60.h,
                               minWidth: 250.w,
                               onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) {
-                                    return SchoolProfile();
-                                  },
-                                ));
+                                Navigator.pushNamed(
+                                    context, SchoolProfile.route);
                               },
                               color: adminePrimayColor,
                               child: Text(
@@ -1112,171 +1102,145 @@ class HomePageResponse extends StatelessWidget {
                       ]),
                 ),
               ),
-              
-              
+
               sizedBoxH100,
-               //sizedBoxH40,
+              //sizedBoxH40,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                TextContainerWidget(
-                text: 'DuJo SCHOOLS',
+                  TextContainerWidget(
+                    text: 'DuJo SCHOOLS',
+                    text1: "* Add Teacher Add classes Create and publish"
+                        "notice Create and share events info",
+                    text2:
+                        "* A web portal is therefore adding the school infra ",
+                    text3: "* Admin Login -   Add Teacher, Add classes,"
+                        "Create and Publish Notices, Add Pta Members"
+                        "Create and share events info,\n"
+                        "Mannage Meetings  Manage Recorded and Live Classes",
+                    text4: "* Admin Login -    Add Teacher, Add classes,"
+                        "Create and Publish Notices, Add  Pta Members\n"
+                        "Create and share events info, Mannage Meetings"
+                        "Manage Recorded and Live Classes",
+                    text5: "* Teacher Login -Manage Timetable, Manage Classes"
+                        "Create Teaching \n"
+                        " Notes, Share Exam results Upload Study Materials, Upload recorded classes"
+                        "Schedule and conduct Online Classes",
+                    text6: "* Student Login - View assigned homework"
+                        "View Schedule exam and \n"
+                        "test results, View notice"
+                        "View Bus route on google Maps, View timetable "
+                        "View Schedule events, View Progress report"
+                        "Attent \n"
+                        " Live and view recorded class",
+                    text7: "* Parent login - Live Attendance, Progress Report"
+                        "Live School bus tracking, Leave letter"
+                        "Exam Result, Events and notice , Chat with teachers",
+                    text8: '',
+                  ),
+                  SizedBox(
+                    width: 25.w,
+                  ),
+                  ImageContainerWidget(
+                    Imagename: 'Schoolsfin.png',
+                  )
+                ],
+              ),
 
-                text1:  "* Add Teacher Add classes Create and publish"
-                              "notice Create and share events info",
-
-                text2: "* A web portal is therefore adding the school infra ",
-
-                text3: "* Admin Login -   Add Teacher, Add classes,"
-                              "Create and Publish Notices, Add Pta Members"
-                              "Create and share events info,\n"
-                              "Mannage Meetings  Manage Recorded and Live Classes",
-
-                text4: "* Admin Login -    Add Teacher, Add classes,"
-                              "Create and Publish Notices, Add  Pta Members\n"
-                              "Create and share events info, Mannage Meetings"
-                              "Manage Recorded and Live Classes",
-
-                text5: "* Teacher Login -Manage Timetable, Manage Classes"
-                              "Create Teaching \n"
-                              " Notes, Share Exam results Upload Study Materials, Upload recorded classes"
-                             
-                              "Schedule and conduct Online Classes",
-
-                text6: "* Student Login - View assigned homework"
-                              "View Schedule exam and \n""test results, View notice"
-                              "View Bus route on google Maps, View timetable "
-                              "View Schedule events, View Progress report"
-                              "Attent \n"" Live and view recorded class",
-
-                text7:  "* Parent login - Live Attendance, Progress Report"
-                              "Live School bus tracking, Leave letter"
-                              "Exam Result, Events and notice , Chat with teachers",
-                text8: '', 
-                
-                ),
-                SizedBox(width: 25.w,),
-
-                ImageContainerWidget(Imagename: 'Schoolsfin.png',)
-              ],),
-
-                           sizedBoxH40,
-
-
-
-
-
+              sizedBoxH40,
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                   
-              
-
-                ImageContainerWidget(Imagename: 'college.png',),
-                  SizedBox(width: 25.w,),
-
-
-                TextContainerWidget(
-                  text: 'DuJo COLLEGES',
-                  text1:  "* All the collages affiliated to any university in kerala "
-                            "can register in DuJo colleges."
-                              ,
-                text2: "* Live classes and recorded classes  ",
-                text3: "* Add Teacher, Add classes, Create and publish\n"
-                              "notice Create and share events info",
-                text4: "* Intergrated CHAT GPT will help students to prepare\n"
-                              " assigenments and project",
-                              
-                text5: "*Study material upload.",
-
-                text6: "* Live doubt clearing.",
-                text7:  "",
-                text8: '', 
-                
-                )
-              ],),
-                           sizedBoxH40,
-
-
-
-
+                  ImageContainerWidget(
+                    Imagename: 'college.png',
+                  ),
+                  SizedBox(
+                    width: 25.w,
+                  ),
+                  TextContainerWidget(
+                    text: 'DuJo COLLEGES',
+                    text1:
+                        "* All the collages affiliated to any university in kerala "
+                        "can register in DuJo colleges.",
+                    text2: "* Live classes and recorded classes  ",
+                    text3: "* Add Teacher, Add classes, Create and publish\n"
+                        "notice Create and share events info",
+                    text4:
+                        "* Intergrated CHAT GPT will help students to prepare\n"
+                        " assigenments and project",
+                    text5: "*Study material upload.",
+                    text6: "* Live doubt clearing.",
+                    text7: "",
+                    text8: '',
+                  )
+                ],
+              ),
+              sizedBoxH40,
 
 /////////////////////////////////////////////////////////////////////////////////////
 
-              
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                TextContainerWidget(
-                  text: 'DuJo PROFESSIONALS',
-
-                  text1:  "* Any educationals profitionals can register their\n"
-                            " profile DuJo profitonails",
-
-                text2: "* Add Teacher Add classes Create and publish \n"
-                              "notice Create and share events info",
-
-                text3: "* Professionals can invites their students to \n"
-                              "join the app",
-
-                text4: "* Admin Login -   Add Teacher, Add classes,\n "
-                              "Create and Publish Notices, Add Pta Members\n"
-                              "Create and share events info, Mannage Meetings\n"
-                              "Manage Recorded and Live Classes\n",
-
-                text5: "* Live doubt clearing",
-
-                text6: "* Live mock tests",
-                text7:  "* Hybrid courses",
-                text8: 'Live courses', 
-                
-                ),
-                SizedBox(width: 25.w,),
-
-                ImageContainerWidget(Imagename: 'professional.png',)
-              ],),
-                           sizedBoxH40,
-
-
-
+                  TextContainerWidget(
+                    text: 'DuJo PROFESSIONALS',
+                    text1:
+                        "* Any educationals profitionals can register their\n"
+                        " profile DuJo profitonails",
+                    text2: "* Add Teacher Add classes Create and publish \n"
+                        "notice Create and share events info",
+                    text3: "* Professionals can invites their students to \n"
+                        "join the app",
+                    text4: "* Admin Login -   Add Teacher, Add classes,\n "
+                        "Create and Publish Notices, Add Pta Members\n"
+                        "Create and share events info, Mannage Meetings\n"
+                        "Manage Recorded and Live Classes\n",
+                    text5: "* Live doubt clearing",
+                    text6: "* Live mock tests",
+                    text7: "* Hybrid courses",
+                    text8: 'Live courses',
+                  ),
+                  SizedBox(
+                    width: 25.w,
+                  ),
+                  ImageContainerWidget(
+                    Imagename: 'professional.png',
+                  )
+                ],
+              ),
+              sizedBoxH40,
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  ImageContainerWidget(Imagename: 'intitute.png',),
-                    SizedBox(width: 25.w,),
-                TextContainerWidget(
+                  ImageContainerWidget(
+                    Imagename: 'intitute.png',
+                  ),
+                  SizedBox(
+                    width: 25.w,
+                  ),
+                  TextContainerWidget(
                     text: 'DuJo INSTITUTIONS',
+                    text1: "* Dujo is designed for coaching center \n"
+                        "and finishing schools",
+                    text2: "* Add Teacher Add classes Create and publish \n"
+                        "notice Create and share events info",
+                    text3: "* Live doubt clearing",
+                    text4: "* Live mock tests",
+                    text5: "* Hybrid courses",
+                    text6: "* Recorded courses",
+                    text7: "* Live courses",
+                    text8: '',
+                  ),
+                ],
+              ),
+              sizedBoxH40,
 
-                  text1:  "* Dujo is designed for coaching center \n"
-                            "and finishing schools",
-
-                text2: "* Add Teacher Add classes Create and publish \n"
-                              "notice Create and share events info",
-
-                text3: "* Live doubt clearing",
-
-                text4: "* Live mock tests",
-
-                text5: "* Hybrid courses",
-
-                text6: "* Recorded courses",
-
-                text7:  "* Live courses",
-                text8: '', 
-              
-                ),
-              
-
-                
-              ],),
-               sizedBoxH40,
-              
               FooterHomeP()
             ]),
     );
@@ -1285,7 +1249,7 @@ class HomePageResponse extends StatelessWidget {
 
 class ImageContainerWidget extends StatelessWidget {
   String Imagename;
-   ImageContainerWidget({
+  ImageContainerWidget({
     required this.Imagename,
     super.key,
   });
@@ -1293,82 +1257,111 @@ class ImageContainerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-         height: 460.h,
-    width: 550.w,
-   
-    decoration: BoxDecoration(
-    //  border: Border.all(),
-      // color: cWhite,
-       borderRadius: BorderRadius.all(
-        Radius.circular(10.w))),
-         child: Image.asset('assets/images/$Imagename',fit: BoxFit.cover),
+      height: 460.h,
+      width: 550.w,
+      decoration: BoxDecoration(
+          //  border: Border.all(),
+          // color: cWhite,
+          borderRadius: BorderRadius.all(Radius.circular(10.w))),
+      child: Image.asset('assets/images/$Imagename', fit: BoxFit.cover),
     );
   }
 }
 
 class TextContainerWidget extends StatelessWidget {
-   String text;
-   String text1;
-   String text2;
-   String text3 ;
-   String text4;
-   String text5;
-   String text6;
-   String text7;
-   String text8;
+  String text;
+  String text1;
+  String text2;
+  String text3;
+  String text4;
+  String text5;
+  String text6;
+  String text7;
+  String text8;
 
-   TextContainerWidget({
-    required this. text,
-    required this. text1,
-    required this. text2,
-    required this. text3,
-    required this. text4,
-    required this. text5,
-    required this. text6,
-    required this. text7,
-    required this. text8,
-
-
+  TextContainerWidget({
+    required this.text,
+    required this.text1,
+    required this.text2,
+    required this.text3,
+    required this.text4,
+    required this.text5,
+    required this.text6,
+    required this.text7,
+    required this.text8,
     super.key,
   });
-   
+
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: 25.w),
-     
-       height: 550.h,
-    width: 550.w,
-   
-    decoration: BoxDecoration(
-    //  border: Border.all(),
-      // color: cWhite,
-       borderRadius: BorderRadius.all(
-        Radius.circular(10.w))),
-        child: Column(
+      height: 550.h,
+      width: 550.w,
+      decoration: BoxDecoration(
+          //  border: Border.all(),
+          // color: cWhite,
+          borderRadius: BorderRadius.all(Radius.circular(10.w))),
+      child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             sizedBoxH10,
             sizedBoxH10,
-          GoogleMonstserratWidgets(text: text, fontsize: 18.w,fontWeight: FontWeight.w900,color: cWhite),
-          sizedBoxH10,
-          GoogleMonstserratWidgets(text: text1, fontsize: 15.w,fontWeight: FontWeight.w600,color: cWhite),
-          sizedBoxH10,
-          GoogleMonstserratWidgets(text: text2, fontsize: 15.w,fontWeight: FontWeight.w600,color: cWhite),
-          sizedBoxH10,
-          GoogleMonstserratWidgets(text: text3, fontsize: 15.w,fontWeight: FontWeight.w600,color: cWhite),
-          sizedBoxH10,
-          GoogleMonstserratWidgets(text: text4, fontsize: 15.w,fontWeight: FontWeight.w600,color: cWhite),
-          sizedBoxH10,
-          GoogleMonstserratWidgets(text: text5, fontsize: 15.w,fontWeight: FontWeight.w600,color: cWhite),
-          sizedBoxH10,
-          GoogleMonstserratWidgets(text: text6, fontsize: 15.w,fontWeight: FontWeight.w600,color: cWhite),
-          sizedBoxH10,
-          GoogleMonstserratWidgets(text: text7, fontsize: 15.w,fontWeight: FontWeight.w600,color: cWhite),
-          sizedBoxH10,
-          GoogleMonstserratWidgets(text: text8, fontsize: 15.w,fontWeight: FontWeight.w600,color: cWhite),
-        ]),
-        );
+            GoogleMonstserratWidgets(
+                text: text,
+                fontsize: 18.w,
+                fontWeight: FontWeight.w900,
+                color: cWhite),
+            sizedBoxH10,
+            GoogleMonstserratWidgets(
+                text: text1,
+                fontsize: 15.w,
+                fontWeight: FontWeight.w600,
+                color: cWhite),
+            sizedBoxH10,
+            GoogleMonstserratWidgets(
+                text: text2,
+                fontsize: 15.w,
+                fontWeight: FontWeight.w600,
+                color: cWhite),
+            sizedBoxH10,
+            GoogleMonstserratWidgets(
+                text: text3,
+                fontsize: 15.w,
+                fontWeight: FontWeight.w600,
+                color: cWhite),
+            sizedBoxH10,
+            GoogleMonstserratWidgets(
+                text: text4,
+                fontsize: 15.w,
+                fontWeight: FontWeight.w600,
+                color: cWhite),
+            sizedBoxH10,
+            GoogleMonstserratWidgets(
+                text: text5,
+                fontsize: 15.w,
+                fontWeight: FontWeight.w600,
+                color: cWhite),
+            sizedBoxH10,
+            GoogleMonstserratWidgets(
+                text: text6,
+                fontsize: 15.w,
+                fontWeight: FontWeight.w600,
+                color: cWhite),
+            sizedBoxH10,
+            GoogleMonstserratWidgets(
+                text: text7,
+                fontsize: 15.w,
+                fontWeight: FontWeight.w600,
+                color: cWhite),
+            sizedBoxH10,
+            GoogleMonstserratWidgets(
+                text: text8,
+                fontsize: 15.w,
+                fontWeight: FontWeight.w600,
+                color: cWhite),
+          ]),
+    );
   }
 }
