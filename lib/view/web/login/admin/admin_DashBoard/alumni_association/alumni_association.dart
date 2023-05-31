@@ -1,29 +1,29 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dujo_kerala_website/model/admin_models/student_protection_model/student_protection_model.dart';
 import 'package:dujo_kerala_website/view/colors/colors.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_protection_group/widgets/student_protection_dialogue_widget.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/alumni_association/widgets/alumni_association_card_widget.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/alumni_association/widgets/alumni_association_left_side_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../../../controller/Getx/admin/student_protection_controller/student_protection_controller.dart';
+import '../../../../../../controller/Getx/admin/alumni_association_controller/alumni_association_controller.dart';
 import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
+import '../../../../../../model/alumni_association_model/alumni_association_model.dart';
 import '../../../../../constant/constant.dart';
-import 'widgets/student_protection_card_widget.dart';
-import 'widgets/student_protection_left_side_widget.dart';
+import 'widgets/alumni_association_dialogue_widget.dart';
 
-class StudentProtectionGroup extends StatelessWidget {
-  StudentProtectionGroup({super.key});
+class AlumniAssociation extends StatelessWidget {
+  AlumniAssociation({super.key});
 
-  final StudentProtectionController studentProtectionController = Get.put(
-    StudentProtectionController(),
+  final AlumniController alumniController = Get.put(
+    AlumniController(),
   );
-  StudentProtectionGroupModel? headMasterModel;
-  StudentProtectionGroupModel? chairPersonModel;
-  StudentProtectionGroupModel? presidentModel;
-  StudentProtectionGroupModel? vicePresidentModel;
-  StudentProtectionGroupModel? representativeModel;
+  AlumniAssociationModel? headMasterModel;
+  AlumniAssociationModel? chairPersonModel;
+  AlumniAssociationModel? presidentModel;
+  AlumniAssociationModel? vicePresidentModel;
+  AlumniAssociationModel? representativeModel;
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +31,8 @@ class StudentProtectionGroup extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         tooltip: 'Add New Member',
         onPressed: () async {
-          studentProtectionController.clearField();
-          await createStudentProtectionDialogue(context);
+          alumniController.clearField();
+          await alumniCreateDialogue(context);
         },
         child: const Icon(
           Icons.add,
@@ -44,13 +44,13 @@ class StudentProtectionGroup extends StatelessWidget {
               .doc(Get.find<AdminLoginScreenController>().schoolID)
               .collection(Get.find<GetFireBaseData>().bYear.value)
               .doc(Get.find<GetFireBaseData>().bYear.value)
-              .collection('StudentProtection')
+              .collection('AlumniAssociation')
               .snapshots(),
           builder: (context, snapshot) {
             assigningValueToModel(snapshot);
             return Row(
               children: [
-                StudentProtectionLeftCardWidget(
+                AlumniAssociationLeftCardWidget(
                   headMasterModel: headMasterModel,
                   presidentModel: presidentModel,
                   vicePresidentModel: vicePresidentModel,
@@ -71,7 +71,7 @@ class StudentProtectionGroup extends StatelessWidget {
                                 .collection(
                                     Get.find<GetFireBaseData>().bYear.value)
                                 .doc(Get.find<GetFireBaseData>().bYear.value)
-                                .collection('StudentProtection')
+                                .collection('AlumniAssociation')
                                 .where(
                               "id",
                               whereNotIn: <String>[
@@ -92,7 +92,7 @@ class StudentProtectionGroup extends StatelessWidget {
                                   crossAxisCount: _getCrossAxisCount(context),
                                   children: List.generate(
                                     snapshot.data!.docs.length,
-                                    (index) => StudentProtectionCardWidet(
+                                    (index) => AlumniAssociationCardWidet(
                                       name: snapshot.data!.docs[index]
                                           .data()['name'],
                                       designation: snapshot.data!.docs[index]
@@ -167,31 +167,29 @@ class StudentProtectionGroup extends StatelessWidget {
               .firstWhereOrNull((element) => element.id == "representative");
 
       if (headMaster != null) {
-        headMasterModel =
-            StudentProtectionGroupModel.fromJson(headMaster.data());
+        headMasterModel = AlumniAssociationModel.fromMap(headMaster.data());
       }
       if (chairPerson != null) {
-        chairPersonModel =
-            StudentProtectionGroupModel.fromJson(chairPerson.data());
+        chairPersonModel = AlumniAssociationModel.fromMap(chairPerson.data());
       }
       if (president != null) {
-        presidentModel = StudentProtectionGroupModel.fromJson(president.data());
+        presidentModel = AlumniAssociationModel.fromMap(president.data());
       }
       if (vicePresident != null) {
         vicePresidentModel =
-            StudentProtectionGroupModel.fromJson(vicePresident.data());
+            AlumniAssociationModel.fromMap(vicePresident.data());
       }
 
       if (representative != null) {
         representativeModel =
-            StudentProtectionGroupModel.fromJson(representative.data());
+            AlumniAssociationModel.fromMap(representative.data());
       }
     }
   }
 }
 
-class StudentProtectionTextWidget extends StatelessWidget {
-  const StudentProtectionTextWidget({
+class AlumniAssociationTextWidget extends StatelessWidget {
+  const AlumniAssociationTextWidget({
     super.key,
     required this.title,
   });
@@ -201,7 +199,7 @@ class StudentProtectionTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return FittedBox(
       child: Text(
-        "MEMBER IN STUDENT PROTECTION GROUP",
+        "MEMBERS IN ALUMNI ASSOCIATION",
         style: GoogleFonts.alumniSans(
           fontSize: 18,
           fontWeight: FontWeight.bold,
