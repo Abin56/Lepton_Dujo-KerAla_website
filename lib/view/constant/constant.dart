@@ -175,6 +175,12 @@ class TeacherLoginIDSaver {
   static String teacherID = '';
   static String  findUser ='';
 }
+class TarifdetailSaver {
+  static int  index0 = 0;
+  static int index1 = 0;
+  static String   gpsprice ='';
+    static String   bioprice ='';
+}
 
 Widget circularProgressIndicator = const Center(
   child: CircularProgressIndicator(),
