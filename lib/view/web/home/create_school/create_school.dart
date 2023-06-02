@@ -28,6 +28,7 @@ class SchoolProfile extends StatefulWidget {
 }
 
 class _SchoolProfileState extends State<SchoolProfile> {
+  bool tarif = false;
   AddNewSchoolController addNewSchoolController =
       Get.put(AddNewSchoolController());
   TarifController tarifController = Get.put(TarifController());
@@ -202,6 +203,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                             ),
                                           );
                                         } else {
+                                          tarif = true;
                                           totalpayment =
                                               tarifController.price.value;
                                           double d = double.parse(
@@ -477,10 +479,10 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                                       color: Colors.red),
                                                 ),
                                               const SizedBox(height: 16),
-                                              ElevatedButton(
-                                                onPressed: _validateForm,
-                                                child: const Text('Submit'),
-                                              ),
+                                              // ElevatedButton(
+                                              //   onPressed: _validateForm,
+                                              //   child: const Text('Submit'),
+                                              // ),
                                             ],
                                           );
                                         }
@@ -635,16 +637,61 @@ class _SchoolProfileState extends State<SchoolProfile> {
                             ),
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
-                                await addNewSchoolController.addNewSchool(
-                                    context,
-                                    tarifController.maxstudents.value,
-                                    tarifController.selectedPlan.value,
-                                    tarifController.price.value,
-                                    gst.toString(),
-                                    totalpayment,
-                                    tarifController.additionalFeatures[0],
-                                    tarifController
-                                        .additionalFeatures[1]);
+                                if (tarif == false) {
+                                  return showDialog(
+                                    context: context,
+                                    barrierDismissible:
+                                        false, // user must tap button!
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: const Text('Alert'),
+                                        content: SingleChildScrollView(
+                                          child: ListBody(
+                                            children: const <Widget>[
+                                              Text(
+                                                  'Please Complete tarif section')
+                                            ],
+                                          ),
+                                        ),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            child: const Text('ok'),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                  ///////////////////////////////////////////////////////////////////////////////////
+                                  /////////////////
+                                  /////////////////////////////
+                                  //////////////////////////////
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                  ///
+                                } else {
+                                  if (isChecked == true) {
+                                    await addNewSchoolController.addNewSchool(
+                                        context,
+                                        tarifController.maxstudents.value,
+                                        tarifController.selectedPlan.value,
+                                        tarifController.price.value,
+                                        gst.toString(),
+                                        totalpayment,
+                                        tarifController.additionalFeatures[0],
+                                        tarifController.additionalFeatures[1]);
+                                  } else {
+                                    showToast(msg: 'Please accept the terms and conditions');
+                                    return _validateForm();
+                                  }
+                                }
                               }
                             },
                             child: const Text("Create"),
