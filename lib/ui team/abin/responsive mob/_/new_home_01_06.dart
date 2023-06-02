@@ -1,9 +1,9 @@
 // ignore_for_file: prefer__fields, must_be_immutable, prefer_final_fields, prefer_const_constructors
 
+import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/FeatureTile.dart';
 import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/_drawer.dart';
+import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/footer_mob.dart';
 import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/footerhomep.dart';
-import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/mob_view.dart/feature_tile.dart';
-import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/mob_view.dart/mob_footer.dart';
 import 'package:dujo_kerala_website/utils/responsive.dart';
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
@@ -19,23 +19,25 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../../view/constant/constant.dart';
 import '../../../../../view/web/home/footer/hover-text/hovertext.dart';
 
+
 class HomePageImages extends StatelessWidget {
   HomePageImages({super.key});
 
   String _imageUrl =
       "https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/dujocolleges.jpeg?alt=media&token=0c3fa202-c59f-47bd-b997-88f3128e6871";
 
-  String _description =
-      "Any schools from Kerala can register on Lepton DuJo. Lepton Dujo\n"
+  String _description = "Any schools from Kerala can register on Lepton DuJo. Lepton Dujo\n"
       " is a mobile application with student login,parent,\n"
+
       "teacher login";
 
-  Uri _faceBookUrl =
-      Uri.parse('https://www.facebook.com/profile.php?id=100091062978371');
-  Uri _twitterUrl = Uri.parse('https://twitter.com/LeptonDujo');
-  Uri _instaUrl = Uri.parse('https://www.instagram.com/leptondujo/');
-  Uri _utubeUrl = Uri.parse('https://www.youtube.com/@LEPTONDUJO/featured');
-  Uri _leptonUrl = Uri.parse('http://www.leptoncommunications.com');
+   Uri _faceBookUrl =
+   Uri.parse('https://www.facebook.com/profile.php?id=100091062978371');
+   Uri _twitterUrl = Uri.parse('https://twitter.com/LeptonDujo');
+   Uri _instaUrl = Uri.parse('https://www.instagram.com/leptondujo/');
+   Uri _utubeUrl =
+      Uri.parse('https://www.youtube.com/@LEPTONDUJO/featured');
+   Uri _leptonUrl = Uri.parse('http://www.leptoncommunications.com');
 
   Future<void> _launchFacebookUrl() async {
     if (!await launchUrl(_faceBookUrl)) {
@@ -84,8 +86,8 @@ class HomePageImages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //  backgroundColor: const Color(0xFF17BDB5),
-      backgroundColor: cWhite,
+    //  backgroundColor: const Color(0xFF17BDB5),
+    backgroundColor: cWhite,
       body: ResponsiveWidget.isSmallScreen(context)
           ? SingleChildScrollView(
               child: Column(
@@ -131,7 +133,7 @@ class HomePageImages extends StatelessWidget {
                         title: _description,
                         topMargin: 475.0.h,
                       ),
-                      FeatureTile(
+                       FeatureTile(
                           topMargin: 350.0.h,
                           iconImageUrl: "web_port.png",
                           title:
@@ -141,6 +143,7 @@ class HomePageImages extends StatelessWidget {
                           iconImageUrl: "women1.png",
                           title: "Add Teacher Add classes Create and publish\n"
                               "notice Create and share events info"),
+                     
                       FeatureTile(
                           topMargin: 725.0.h,
                           iconImageUrl: "admin_login.png",
@@ -198,7 +201,7 @@ class HomePageImages extends StatelessWidget {
                       Column(
                         children: [
                           Container(
-                            margin: EdgeInsets.only(left: 340.h, top: 200.h),
+                            margin: EdgeInsets.only(left: 340.h, top:200.h),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
@@ -802,28 +805,20 @@ class HomePageImages extends StatelessWidget {
                     ),
                   ),
 
-                  sizedBoxH20,
+                  
+
+                    sizedBoxH20,
                   // const Divider(
                   //   color: cBlack,
                   // ),
-                  sizedBoxH20,
+                 sizedBoxH20,
                   FooterMob()
                 ],
               ),
             )
           :
 
-          //////////////////////////////////////// web
-          ///
-          ///
-          ///
-          ///
-          ///
-          ///
-          ///
-          ///
-          ///
-          ///
+
 
           ListView(children: [
               Padding(
@@ -836,15 +831,14 @@ class HomePageImages extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-                        // fgkjsdl;fjal;dfjs
-                        //color: cBlue,
+
                         width: 530.w,
                         child: Row(
-                          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          
                           children: [
                             Row(
                               children: [
-                                Icon(Icons.phone, size: 20.w),
+                                 Icon(Icons.phone,size: 20.w),
                                 SizedBox(
                                   width: 5.h,
                                 ),
@@ -861,7 +855,7 @@ class HomePageImages extends StatelessWidget {
                             SizedBox(width: 20.h),
                             Row(
                               children: [
-                                Icon(Icons.mail, size: 20.w),
+                                 Icon(Icons.mail,size: 20.w),
                                 SizedBox(
                                   width: 5.h,
                                 ),
@@ -875,111 +869,115 @@ class HomePageImages extends StatelessWidget {
                                 ),
                               ],
                             ),
-                          ],
+                               ],
                         ),
                       ),
-                      SizedBox(
-                        width: 5.h,
-                      ),
-                      SizedBox(
-                        width: 5.h,
-                      ),
-                      Expanded(
-                        child: SizedBox(
-                          width: 500.w,
-                          // color: cred,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
+                              SizedBox(
+                                  width: 5.h,
+                                ),  SizedBox(
+                                  width: 5.h,
+                                ),
+                                
+                            Expanded(
+                              child: SizedBox(
+                                width: 500.w,
+                               // color: cred,
+                                child: Row(
+                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                          showDialog(
+                                        context: context,
+                                        barrierDismissible:
+                                            false, // user must tap button!
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: const Text('School List'),
+                                            content: SingleChildScrollView(
+                                              child: ListBody(
+                                                children: const <Widget>[
+                                                  GetSchoolListDropDownButton()
+                                                ],
+                                                
+                                              ),
+                                            ),
+                                            actions: <Widget>[
+                                             
+                                              TextButton(
+                                                child: const Text('Cancel'),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                      },
+                                       child: OnHoverText(
+                              builder: (isHoverd) {
+                                final color =
+                                    isHoverd ? Color.fromARGB(255, 255, 255, 255) : Color.fromARGB(255, 245, 0, 0);
+                                return  ContainerDecrationTabs(text: 'Schools',);
+                              },
+                            ),
+                                       
+                                       
+                                     
+                                       
+                                       ),
+                                  
+                                
+                              
+                                // SizedBox(
+                                //     width: 5.h,
+                                //   ),
                               GestureDetector(
                                 onTap: () {
-                                  showDialog(
-                                    context: context,
-                                    barrierDismissible:
-                                        false, // user must tap button!
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        title: const Text('School List'),
-                                        content: SingleChildScrollView(
-                                          child: ListBody(
-                                            children: const <Widget>[
-                                              GetSchoolListDropDownButton()
-                                            ],
-                                          ),
-                                        ),
-                                        actions: <Widget>[
-                                          TextButton(
-                                            child: const Text('Cancel'),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
+                                   Navigator.push(context,
+                                                  MaterialPageRoute(
+                                                builder: (context) {
+                                                  return const UnderMaintanceScreen();
+                                                },
+                                              ));
                                 },
-                                child: OnHoverText(
-                                  builder: (isHoverd) {
-                                    final color = isHoverd
-                                        ? Color.fromARGB(255, 255, 255, 255)
-                                        : Color.fromARGB(255, 245, 0, 0);
-                                    return ContainerDecrationTabs(
-                                      text: 'Schools',
-                                    );
-                                  },
-                                ),
-                              ),
-
-                              // SizedBox(
-                              //     width: 5.h,
-                              //   ),
+                                child: ContainerDecrationTabs(text: 'Colleges')),
+                                // SizedBox(
+                                //     width: 5.h,
+                                //   ),
                               GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(
-                                      builder: (context) {
-                                        return const UnderMaintanceScreen();
-                                      },
-                                    ));
-                                  },
-                                  child:
-                                      ContainerDecrationTabs(text: 'Colleges')),
-                              // SizedBox(
-                              //     width: 5.h,
-                              //   ),
+                                onTap: () {
+                                    Navigator.push(context,
+                                                  MaterialPageRoute(
+                                                builder: (context) {
+                                                  return const UnderMaintanceScreen();
+                                                },
+                                              ));
+                                },
+                                child: ContainerDecrationTabs(text: 'Professionals',)),
+                                // SizedBox(
+                                //     width: 5.h,
+                                //   ),
                               GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(
-                                      builder: (context) {
-                                        return const UnderMaintanceScreen();
-                                      },
-                                    ));
-                                  },
-                                  child: ContainerDecrationTabs(
-                                    text: 'Professionals',
-                                  )),
-                              // SizedBox(
-                              //     width: 5.h,
-                              //   ),
-                              GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(
-                                      builder: (context) {
-                                        return const UnderMaintanceScreen();
-                                      },
-                                    ));
-                                  },
-                                  child: ContainerDecrationTabs(
-                                    text: 'Institutions',
-                                  )),
-                            ],
-                          ),
-                        ),
-                      ),
+                                onTap: () {
+                                  Navigator.push(context,
+                                                  MaterialPageRoute(
+                                                builder: (context) {
+                                                  return const UnderMaintanceScreen();
+                                                },
+                                              ));  
+                                },
+                                child: ContainerDecrationTabs(text: 'Institutions',)),
+                                                      ],
+                                                    ),
+                                                  ),
+                            ),
+                     
                       Padding(
                         padding: EdgeInsets.only(left: 200.w),
                         child: Container(
-                          //  color: cBlue,
+                        //  color: cBlue,
                           child: InkWell(
                             onTap: () {
                               showDialog(
@@ -1129,44 +1127,49 @@ class HomePageImages extends StatelessWidget {
                   ),
                 ),
               ),
-              Stack(children: [
-                SizedBox(
-                    height: 900.h,
-                    width: double.infinity,
-                    child: Image.asset(
-                      'assets/images/Web_bg.png',
-                      fit: BoxFit.fill,
-                    )),
-                Padding(
-                  padding:
-                      EdgeInsets.only(right: 80.0.w, left: 80.w, top: 25.h),
-                  child: SizedBox(
-                    // color: cWhite,
+              Stack(
+                children: [
+                  SizedBox(
+                 
+                  height: 900.h,
+                  width:double.infinity,
+                 
+                child:  Image.asset('assets/images/websiteHomepage.jpg',fit: BoxFit.fill,)
+                
+                  ),
+                  Padding(
+                    padding:  EdgeInsets.only( right: 80.0.w,
+                  left: 80.w,
+                  top: 25.h),
+                    child: SizedBox(
+                                   // color: cWhite,
                     width: MediaQuery.of(context).size.width,
-                    height: 600.h, //const Color(0xFF17BDB5),
+                    height: 600.h,//const Color(0xFF17BDB5),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Column(
+                            
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(
-                                // color: cBlue,
+                               // color: cBlue,
                                 width: 140.w,
                                 height: 100.h,
                                 child: Image.asset(
                                   'assets/images/leptdujo.png',
+                                  
                                   width: 170.h,
                                   height: 170.h,
                                 ),
                               ),
-
+                            
                               Padding(
                                 padding: EdgeInsets.only(top: 85.h),
                                 child: Container(
-                                  // color: cred,
+                                 // color: cred,
                                   child: Text(
-                                    "Watch And Guide,\n" "Let Them Study",
+                                    "Watch And Guide,\n""Let Them Study",
                                     style: GoogleFonts.montserrat(
                                       fontSize: 40.w,
                                       fontWeight: FontWeight.bold,
@@ -1175,19 +1178,18 @@ class HomePageImages extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              SizedBox(
+                               SizedBox(
                                 height: 20.h,
                               ),
                               sizedBoxH20,
                               sizedBoxH20,
-                              // sizedBoxH20,
+                             // sizedBoxH20,
                               MaterialButton(
                                 //padding: EdgeInsets.all(20),
                                 height: 60.h,
                                 minWidth: 250.w,
                                 onPressed: () {
-                                  Navigator.pushNamed(
-                                      context, SchoolProfile.route);
+                                  Navigator.pushNamed(context, SchoolProfile.route);
                                 },
                                 color: adminePrimayColor,
                                 child: Text(
@@ -1201,58 +1203,46 @@ class HomePageImages extends StatelessWidget {
                             ],
                           ),
                         ]),
+                                  ),
                   ),
-                ),
-              ]),
-              sizedBoxH20,
-              sizedBoxH20,
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  SizedBox(
-                      height: 800.h,
-                      width: double.infinity,
-                      child: Image(
-                        image: AssetImage(
-                          'assets/images/dujo_schools_image.png',
-                        ),
-                        fit: BoxFit.fill,
-                      )),
-                  sizedBoxH20,
-                  sizedBoxH20,
-                  SizedBox(
-                      height: 800.h,
-                      width: double.infinity,
-                      child: Image(
-                        image: AssetImage(
-                          'assets/images/dujo_colleges_image.png',
-                        ),
-                        fit: BoxFit.fill,
-                      )),
-                  sizedBoxH20,
-                  sizedBoxH20,
-                  SizedBox(
-                      height: 800.h,
-                      width: double.infinity,
-                      child: Image(
-                        image: AssetImage(
-                          'assets/images/dujo_professional_image.png',
-                        ),
-                        fit: BoxFit.fill,
-                      )),
-                  sizedBoxH20,
-                  sizedBoxH20,
-                  SizedBox(
-                      height: 800.h,
-                      width: double.infinity,
-                      child: Image(
-                        image: AssetImage(
-                          'assets/images/dujo_institutions_image.png',
-                        ),
-                        fit: BoxFit.fill,
-                      )),
-                ],
+                ]
               ),
+              
+              
+              sizedBoxH20,
+              sizedBoxH20,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SizedBox(
+                height: 800.h,
+                width: double.infinity,
+                child: Image(image: AssetImage('assets/images/dujo_schools_image.png',),fit: BoxFit.fill,)
+              ),
+           sizedBoxH20,
+           sizedBoxH20,
+
+           SizedBox(
+            height: 800.h,
+            width: double.infinity,
+            child: Image(image: AssetImage('assets/images/dujo_colleges_image.png',),fit: BoxFit.fill,)
+          ),
+          sizedBoxH20,
+          sizedBoxH20,
+           SizedBox(
+            height: 800.h,
+            width: double.infinity,
+            child: Image(image: AssetImage('assets/images/dujo_professional_image.png',),fit: BoxFit.fill,)
+          ),
+          sizedBoxH20,
+          sizedBoxH20,
+           SizedBox(
+            height: 800.h,
+            width: double.infinity,
+            child: Image(image: AssetImage('assets/images/dujo_institutions_image.png',),fit: BoxFit.fill,)
+          ),
+           ],
+          ),
               sizedBoxH100,
               FooterHomeP()
             ]),
@@ -1261,7 +1251,7 @@ class HomePageImages extends StatelessWidget {
 }
 
 class ContainerDecrationTabs extends StatelessWidget {
-  ContainerDecrationTabs({
+   ContainerDecrationTabs({
     required this.text,
     super.key,
   });
@@ -1270,26 +1260,24 @@ class ContainerDecrationTabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: 10.w, right: 10.w),
+      padding:  EdgeInsets.only(left: 10.w,right: 10.w),
       child: Container(
-          decoration: BoxDecoration(
-              color: Color.fromARGB(252, 18, 71, 170),
-              borderRadius: BorderRadius.all(Radius.circular(2.w))),
-          height: 25.h,
-          width: 95.w,
-          child: Center(
-              child: GoogleMonstserratWidgets(
-            text: text,
-            fontsize: 13.w,
-            color: cWhite,
-          ))),
+       decoration: BoxDecoration( color: Color.fromARGB(252, 18, 71, 170),
+       borderRadius: BorderRadius.all(Radius.circular(2.w))),
+       height: 25.h,
+       width: 95.w,
+       
+       child: 
+       Center(
+        child: GoogleMonstserratWidgets(
+          text: text, fontsize: 13.w,color: cWhite,))),
     );
   }
 }
 
 class ImageContainerWidget extends StatelessWidget {
   String Imagename;
-  ImageContainerWidget({
+   ImageContainerWidget({
     required this.Imagename,
     super.key,
   });
@@ -1297,111 +1285,82 @@ class ImageContainerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 460.h,
-      width: 550.w,
-      decoration: BoxDecoration(
-          //  border: Border.all(),
-          // color: cWhite,
-          borderRadius: BorderRadius.all(Radius.circular(10.w))),
-      child: Image.asset('assets/images/$Imagename', fit: BoxFit.fill),
+         height: 460.h,
+    width: 550.w,
+   
+    decoration: BoxDecoration(
+    //  border: Border.all(),
+      // color: cWhite,
+       borderRadius: BorderRadius.all(
+        Radius.circular(10.w))),
+         child: Image.asset('assets/images/$Imagename',fit: BoxFit.fill),
     );
   }
 }
 
 class TextContainerWidget extends StatelessWidget {
-  String text;
-  String text1;
-  String text2;
-  String text3;
-  String text4;
-  String text5;
-  String text6;
-  String text7;
-  String text8;
+   String text;
+   String text1;
+   String text2;
+   String text3 ;
+   String text4;
+   String text5;
+   String text6;
+   String text7;
+   String text8;
 
-  TextContainerWidget({
-    required this.text,
-    required this.text1,
-    required this.text2,
-    required this.text3,
-    required this.text4,
-    required this.text5,
-    required this.text6,
-    required this.text7,
-    required this.text8,
+   TextContainerWidget({
+    required this. text,
+    required this. text1,
+    required this. text2,
+    required this. text3,
+    required this. text4,
+    required this. text5,
+    required this. text6,
+    required this. text7,
+    required this. text8,
+
+
     super.key,
   });
-
+   
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: 25.w),
-      height: 550.h,
-      width: 550.w,
-      decoration: BoxDecoration(
-          //  border: Border.all(),
-          // color: cWhite,
-          borderRadius: BorderRadius.all(Radius.circular(10.w))),
-      child: Column(
+     
+       height: 550.h,
+    width: 550.w,
+   
+    decoration: BoxDecoration(
+    //  border: Border.all(),
+      // color: cWhite,
+       borderRadius: BorderRadius.all(
+        Radius.circular(10.w))),
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             sizedBoxH10,
             sizedBoxH10,
-            GoogleMonstserratWidgets(
-                text: text,
-                fontsize: 18.w,
-                fontWeight: FontWeight.w900,
-                color: cWhite),
-            sizedBoxH10,
-            GoogleMonstserratWidgets(
-                text: text1,
-                fontsize: 15.w,
-                fontWeight: FontWeight.w600,
-                color: cWhite),
-            sizedBoxH10,
-            GoogleMonstserratWidgets(
-                text: text2,
-                fontsize: 15.w,
-                fontWeight: FontWeight.w600,
-                color: cWhite),
-            sizedBoxH10,
-            GoogleMonstserratWidgets(
-                text: text3,
-                fontsize: 15.w,
-                fontWeight: FontWeight.w600,
-                color: cWhite),
-            sizedBoxH10,
-            GoogleMonstserratWidgets(
-                text: text4,
-                fontsize: 15.w,
-                fontWeight: FontWeight.w600,
-                color: cWhite),
-            sizedBoxH10,
-            GoogleMonstserratWidgets(
-                text: text5,
-                fontsize: 15.w,
-                fontWeight: FontWeight.w600,
-                color: cWhite),
-            sizedBoxH10,
-            GoogleMonstserratWidgets(
-                text: text6,
-                fontsize: 15.w,
-                fontWeight: FontWeight.w600,
-                color: cWhite),
-            sizedBoxH10,
-            GoogleMonstserratWidgets(
-                text: text7,
-                fontsize: 15.w,
-                fontWeight: FontWeight.w600,
-                color: cWhite),
-            sizedBoxH10,
-            GoogleMonstserratWidgets(
-                text: text8,
-                fontsize: 15.w,
-                fontWeight: FontWeight.w600,
-                color: cWhite),
-          ]),
-    );
-  }
+          GoogleMonstserratWidgets(text: text, fontsize: 18.w,fontWeight: FontWeight.w900,color: cWhite),
+          sizedBoxH10,
+          GoogleMonstserratWidgets(text: text1, fontsize: 15.w,fontWeight: FontWeight.w600,color: cWhite),
+          sizedBoxH10,
+          GoogleMonstserratWidgets(text: text2, fontsize: 15.w,fontWeight: FontWeight.w600,color: cWhite),
+          sizedBoxH10,
+          GoogleMonstserratWidgets(text: text3, fontsize: 15.w,fontWeight: FontWeight.w600,color: cWhite),
+          sizedBoxH10,
+          GoogleMonstserratWidgets(text: text4, fontsize: 15.w,fontWeight: FontWeight.w600,color: cWhite),
+          sizedBoxH10,
+          GoogleMonstserratWidgets(text: text5, fontsize: 15.w,fontWeight: FontWeight.w600,color: cWhite),
+          sizedBoxH10,
+          GoogleMonstserratWidgets(text: text6, fontsize: 15.w,fontWeight: FontWeight.w600,color: cWhite),
+          sizedBoxH10,
+          GoogleMonstserratWidgets(text: text7, fontsize: 15.w,fontWeight: FontWeight.w600,color: cWhite),
+          sizedBoxH10,
+          GoogleMonstserratWidgets(text: text8, fontsize: 15.w,fontWeight: FontWeight.w600,color: cWhite),
+        ]),
+);
+}
 }
