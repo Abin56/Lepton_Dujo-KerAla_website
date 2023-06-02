@@ -25,6 +25,8 @@ class _LeptonTarifScreenState extends State<LeptonTarifScreen> {
   @override
   Widget build(BuildContext context) {
     String totalpayment = '';
+    double gst = 0;
+    //total = totalpayment+(totalpayemt)*18/100
     return Center(
       child: Container(
         decoration: BoxDecoration(
@@ -101,6 +103,8 @@ class _LeptonTarifScreenState extends State<LeptonTarifScreen> {
                       );
                     } else {
                       totalpayment = tarifController.price.value;
+                      double d = double.parse(tarifController.price.value);
+                      gst = d+(d)*18/100;
 
                       // totalpayment = totalpayment +
                       //     tarifController.additionalFeatures[0].price +
@@ -113,6 +117,7 @@ class _LeptonTarifScreenState extends State<LeptonTarifScreen> {
                                 tarifController.additionalFeatures[0].price) +
                             int.parse(totalpayment);
                         totalpayment = result0.toString();
+                        gst = result0 + (result0) * 18 / 100;
                         // log("message$result0");
                         // log("Resuktsss${result0.toString()}");
                       }
@@ -123,9 +128,8 @@ class _LeptonTarifScreenState extends State<LeptonTarifScreen> {
                                 tarifController.additionalFeatures[1].price) +
                             int.parse(totalpayment);
                         totalpayment = result0.toString();
-               
+                        gst = result0 + (result0) * 18 / 100;
                       }
-
 
                       return Column(
                         children: [
@@ -311,12 +315,18 @@ class _LeptonTarifScreenState extends State<LeptonTarifScreen> {
                               const Spacer(),
                               GooglePoppinsWidgets(
                                 color: Colors.white,
-                                text: "Total Price  :  ₹ $totalpayment ",
+                                text: "Total  :  ₹ $totalpayment ",
                                 fontsize: 11,
                                 fontWeight: FontWeight.w400,
                               ),
                             ],
-                          )
+                          ),
+                          GooglePoppinsWidgets(
+                            color: Colors.white,
+                            text: "Total Price Including GST  :  ₹ $gst ",
+                            fontsize: 11,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ],
                       );
                     }
