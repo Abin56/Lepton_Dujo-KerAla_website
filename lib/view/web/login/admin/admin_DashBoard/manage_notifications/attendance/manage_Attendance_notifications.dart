@@ -17,32 +17,54 @@ class _ManageAttendanceNotificationsState extends State<ManageAttendanceNotifica
 
   TimeOfDay? selectedTime;
 
-  void addTimeToFirebase(){
-    FirebaseFirestore.instance.collection('SchoolListCollection').doc(Get.find<AdminLoginScreenController>().schoolID).collection('Notifications').doc('Attendance').set({
+  Future<void> addTimeToFirebase()async{
+    await FirebaseFirestore.instance.collection('SchoolListCollection').doc(Get.find<AdminLoginScreenController>().schoolID).collection('Notifications').doc('Attendance').set({
       'timeToDeliverAbsenceNotification' : timeController.text
-    });
+    }).then((value) => showDialog(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Attendance Notifications'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: const <Widget>[
+                  Text('Time Added !')
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('Ok'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },));
   }
 
-  Future<void>_selectTime(BuildContext context)async{
-    final TimeOfDay? pickedTime =  await showTimePicker(context: context, initialTime: selectedTime!); 
+  // Future<void>_selectTime(BuildContext context)async{
+  //   final TimeOfDay? pickedTime =  await showTimePicker(context: context, initialTime: selectedTime!); 
     
-    if(pickedTime!=null && pickedTime != selectedTime){
-      selectedTime = pickedTime;
-    } 
+  //   if(pickedTime!=null && pickedTime != selectedTime){
+  //     selectedTime = pickedTime;
+  //   } 
 
-    setState(() {
-     // String time = selectedTime.hour
-    // timeController.text =  time.toString();
-    });
+  //   setState(() {
+  //     String time = '${selectedTime!.hour}:${(selectedTime!.minute.toString().length == 1)? '0${selectedTime!.minute.toString()}': selectedTime!.minute}';
+  //    timeController.text =  time.toString();
+  //   });
 
     
-  }
+  // }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    selectedTime = TimeOfDay.now();
+    //selectedTime = TimeOfDay.now();
   }
 
   
@@ -57,9 +79,7 @@ class _ManageAttendanceNotificationsState extends State<ManageAttendanceNotifica
         children: [
           Row(
             children: [
-              IconButton(onPressed: (){
-                _selectTime(context);
-              }, icon: const Icon(Icons.timer_outlined)),
+              
               Expanded(
                 child: Container(
                 decoration: BoxDecoration(
@@ -73,7 +93,7 @@ class _ManageAttendanceNotificationsState extends State<ManageAttendanceNotifica
                     fillColor: Colors.white,
                     filled: true,
                     border: InputBorder.none,
-                    hintText: 'Time to deliver absence notification',
+                    hintText: 'Enter time (in hours) to wait before sending absence notifications to parents',
                     hintStyle:
                         TextStyle(color: Color.fromARGB(255, 168, 166, 166)),
                   ),
@@ -85,7 +105,7 @@ class _ManageAttendanceNotificationsState extends State<ManageAttendanceNotifica
 
     sizedBoxH10, 
     MaterialButton(onPressed: (){
-
+      addTimeToFirebase();
     }, 
     color: Colors.blue,
     child:  GoogleMonstserratWidgets(text: 'Add', fontsize: 15)
