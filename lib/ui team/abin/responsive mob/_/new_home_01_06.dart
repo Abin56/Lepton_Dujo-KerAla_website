@@ -1134,7 +1134,7 @@ class HomePageImages extends StatelessWidget {
                   height: 900.h,
                   width:double.infinity,
                  
-                child:  Image.asset('assets/images/Dujo_home_image.jpg',fit: BoxFit.fill,)
+                child:  Image.asset('assets/images/websiteHomepage.jpg',fit: BoxFit.fill,)
                 
                   ),
                   Padding(
