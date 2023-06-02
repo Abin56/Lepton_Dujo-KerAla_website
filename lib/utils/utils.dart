@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:dujo_kerala_website/view/constant/constant.dart';
+import 'package:excel/excel.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -84,4 +86,32 @@ Future<void> resetPassword(String email) async {
   } catch (e) {
     log('Error sending password reset email: $e');
   }
+}
+
+Future<Excel?> extractDataFromExcel() async {
+  /// Use FilePicker to pick files in Flutter Web
+  ///
+  try {
+    FilePickerResult? pickedFile = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['xlsx'],
+      allowMultiple: false,
+    );
+
+    /// file might be picked
+
+    if (pickedFile != null) {
+      Uint8List? bytes = pickedFile.files.single.bytes;
+      if (bytes != null) {
+        Excel excel = Excel.decodeBytes(bytes);
+
+        return excel;
+      }
+    }
+  } catch (e) {
+    showToast(msg: "Something went wrong");
+    return null;
+  }
+
+  return null;
 }

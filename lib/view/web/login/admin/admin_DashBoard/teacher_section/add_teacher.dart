@@ -1,9 +1,12 @@
 import 'package:dujo_kerala_website/controller/teacher_controller/teacher_controller.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
+import 'package:excel/excel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+
 import '../../../../../../model/teacher/teacher_model.dart';
+import '../../../../../../utils/utils.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
 import '../../../../../fonts/fonts.dart';
@@ -83,55 +86,108 @@ class AddTeacherSectionScreen extends StatelessWidget {
                             teacherController.employeeIDController,
                         validator: checkFieldEmpty,
                       ),
-                      Padding(
-                          padding: const EdgeInsets.only(
-                              top: 10, bottom: 10, left: 100, right: 100),
-                          child: SizedBox(
-                              height: 50,
-                              child: Obx(
-                                () => teacherController.isLoading.value
-                                    ? circularProgressIndicator
-                                    : ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: const Color.fromARGB(
-                                              255, 3, 39, 68),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
+                      Row(
+                        children: [
+                          Flexible(
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 10, bottom: 10, left: 100, right: 100),
+                              child: SizedBox(
+                                height: 50,
+                                child: Obx(
+                                  () => teacherController.isLoading.value
+                                      ? circularProgressIndicator
+                                      : ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor:
+                                                const Color.fromARGB(
+                                                    255, 3, 39, 68),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                            ),
                                           ),
+                                          onPressed: () async {
+                                            if (formKey.currentState
+                                                    ?.validate() ??
+                                                false) {
+                                              final teacher = TeacherModel(
+                                                  classID: '',
+                                                  docid: "",
+                                                  teacherName: teacherController
+                                                      .nameController.text,
+                                                  employeeID: teacherController
+                                                      .employeeIDController
+                                                      .text,
+                                                  createdAt:
+                                                      DateTime.now().toString(),
+                                                  teacherPhNo: teacherController
+                                                      .phoneNumberController
+                                                      .text,
+                                                  teacherEmail: "",
+                                                  altPhoneNo: '',
+                                                  district: '',
+                                                  gender: '',
+                                                  houseName: '',
+                                                  houseNumber: '',
+                                                  place: '',
+                                                  userRole: 'teacher',
+                                                  imageId: '',
+                                                  imageUrl: '');
+                                              teacherController
+                                                  .createNewTeacher(teacher);
+                                            }
+                                          },
+                                          child: const Text('Add Teacher'),
                                         ),
-                                        onPressed: () async {
-                                          if (formKey.currentState
-                                                  ?.validate() ??
-                                              false) {
-                                            final teacher = TeacherModel(
-                                              classID: '',
-                                                docid: "",
-                                                teacherName: teacherController
-                                                    .nameController.text,
-                                                employeeID: teacherController
-                                                    .employeeIDController.text,
-                                                createdAt:
-                                                    DateTime.now().toString(),
-                                                teacherPhNo: teacherController
-                                                    .phoneNumberController.text,
-                                                teacherEmail: "",
-                                                altPhoneNo: '',
-                                                district: '',
-                                                gender: '',
-                                                houseName: '',
-                                                houseNumber: '',
-                                                place: '',
-                                                userRole: 'teacher',
-                                                imageId: '',
-                                                imageUrl: '');
-                                            teacherController
-                                                .createNewTeacher(teacher);
-                                          }
-                                        },
-                                        child: const Text('Add Teacher'),
-                                      ),
-                              )))
+                                ),
+                              ),
+                            ),
+                          ),
+                          Flexible(
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 10, bottom: 10, left: 100, right: 100),
+                              child: SizedBox(
+                                height: 50,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        const Color.fromARGB(255, 3, 39, 68),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                  ),
+                                  onPressed: () async {
+                                    final result = await extractDataFromExcel();
+                                    if (result != null) {
+                                      if (result.tables.isNotEmpty) {
+                                        Sheet? table = result
+                                            .tables[result.tables.keys.first];
+
+                                        List<Data?>? firstRow = table?.rows[1];
+
+                                        teacherController.nameController.text =
+                                            firstRow?[0]?.value.toString() ??
+                                                "";
+                                        teacherController
+                                                .phoneNumberController.text =
+                                            firstRow?[1]?.value.toString() ??
+                                                "";
+                                        teacherController
+                                                .employeeIDController.text =
+                                            firstRow?[2]?.value.toString() ??
+                                                "";
+                                      }
+                                    }
+                                  },
+                                  child: const Text('Add Teacher From Excel'),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
                     ]),
               ),
             ),
