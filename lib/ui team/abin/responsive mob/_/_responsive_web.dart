@@ -1,6 +1,5 @@
 // ignore_for_file: prefer__fields, must_be_immutable, prefer_final_fields, prefer_const_constructors
 
-import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/footer_mob.dart';
 import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/footerhomep.dart';
 import 'package:dujo_kerala_website/utils/responsive.dart';
 import 'package:dujo_kerala_website/view/colors/colors.dart';
@@ -14,8 +13,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../view/constant/constant.dart';
-import 'FeatureTile.dart';
 import '_drawer.dart';
+import 'mob_view.dart/feature_tile.dart';
+import 'mob_view.dart/mob_footer.dart';
 
 class HomePageResponse extends StatelessWidget {
   HomePageResponse({super.key});
@@ -131,13 +131,13 @@ class HomePageResponse extends StatelessWidget {
                       FeatureTile(
                           topMargin: 575.h,
                           iconImageUrl: "women1.png",
-                          title: "Add Teacher Add classes Create and publish\n"
-                              "notice Create and share events info"),
+                          title: 'Add Teacher Add classes Create and publish \n'
+                              'notice Create and share events info'),
                       FeatureTile(
                           topMargin: 450.0.h,
                           iconImageUrl: "web_port.png",
                           title:
-                              "A web portal is therefore adding the school infra \n"),
+                              "A web portal is therefore adding the school infra"),
                       FeatureTile(
                           topMargin: 700.0.h,
                           iconImageUrl: "admin_login.png",
@@ -1111,10 +1111,10 @@ class HomePageResponse extends StatelessWidget {
                 children: [
                   TextContainerWidget(
                     text: 'DuJo SCHOOLS',
-                    text1: "* Add Teacher Add classes Create and publish"
-                        "notice Create and share events info",
-                    text2:
+                    text1:
                         "* A web portal is therefore adding the school infra ",
+                    text2: "* Add Teacher, Add classes, Create and publish,"
+                        "notice, Create and share events info",
                     text3: "* Admin Login -   Add Teacher, Add classes,"
                         "Create and Publish Notices, Add Pta Members"
                         "Create and share events info,\n"
@@ -1148,7 +1148,7 @@ class HomePageResponse extends StatelessWidget {
                 ],
               ),
 
-              sizedBoxH40,
+              sizedBoxH20,
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -1202,7 +1202,7 @@ class HomePageResponse extends StatelessWidget {
                     text5: "* Live doubt clearing",
                     text6: "* Live mock tests",
                     text7: "* Hybrid courses",
-                    text8: 'Live courses',
+                    text8: '* Live courses',
                   ),
                   SizedBox(
                     width: 25.w,

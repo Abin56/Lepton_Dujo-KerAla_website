@@ -41,6 +41,7 @@ import 'exam_notifications/school_notifications.dart';
 import 'food_and_beverages/food_and_bev.dart';
 import 'general_instructions/creation_general_instruction_.dart';
 import 'login_Register_history/date_wise.dart';
+import 'manage_notifications/main_screen_notifications.dart';
 import 'mothers_pta/mothers_pta_screen.dart';
 import 'non_Teaching_staff/non_teaching_staff.dart';
 
@@ -139,6 +140,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'Non-Teaching Staffs',
     'Login History',
     // 'Parents',
+    'Manage Notifications'
   ];
   List<String> viewListImages = [
     'assets/images/students.png',
@@ -149,7 +151,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'assets/images/meetings.png',
     'assets/images/interview.png',
     'assets/images/steward.png',
-    'assets/images/admin.png',
+    'assets/images/admin.png', 
+    'assets/images/notification.png'
   ];
 
   @override
@@ -207,7 +210,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       // NonTeachingStaffView(
       //   schoolID: widget.schoolID,
       // ),
-      DateWiseLoginScreen(schoolID: widget.schoolID),
+      DateWiseLoginScreen(schoolID: widget.schoolID), 
+      const MainScreenNotifications()
     ];
     var screenSize = MediaQuery.of(context).size;
 

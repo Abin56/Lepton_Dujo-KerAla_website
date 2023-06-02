@@ -1,5 +1,5 @@
-import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/_responsive_web.dart';
 import 'package:dujo_kerala_website/view/web/home/create_school/create_school.dart';
+import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/new_home_01_06.dart';
 import 'package:dujo_kerala_website/view/web/home/privacypolicy.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
         minTextAdapt: true,
         splitScreenMode: true,
+
         designSize: const Size(1536, 792),
         builder: (context, child) {
           return GetMaterialApp(
@@ -45,8 +46,9 @@ class MyApp extends StatelessWidget {
                 primaryColorDark: const Color(0xFF167F67),
               ),
               home:
+              HomePageImages());
                   //const MobHomePage()
-                  HomePageResponse());
+                //  HomePageResponse());
         });
   }
 }

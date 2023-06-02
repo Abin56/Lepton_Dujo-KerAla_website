@@ -7,6 +7,7 @@ import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:dujo_kerala_website/view/web/widgets/button_container_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../google_poppins_widget/google_poppins_widget.dart';
@@ -26,305 +27,307 @@ class _LeptonTarifScreenState extends State<LeptonTarifScreen> {
   Widget build(BuildContext context) {
     String totalpayment = '';
     return Center(
-      child: Container(
-        decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 71, 164, 235).withOpacity(0.1)),
-        height: 700,
-        width: 600,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              height: 600,
-              width: 550,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.black),
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Image.network(
-                        'https://firebasestorage.googleapis.com/v0/b/leptondujokerala.appspot.com/o/files%2FLepton%2Fleptonlogo.png?alt=media&token=2e71233e-58a5-42b7-abc7-b51e56774854',
-                        height: 100,
-                        width: 100,
-                      ),
-                      GoogleMonstserratWidgets(
-                        text: "Lepton Dujo Tarif",
-                        fontsize: 20,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 2,
-                      ),
-                    ],
-                  ),
-                  sizedBoxH20,
-                  GoogleMonstserratWidgets(
-                    text: "Choose your school type",
-                    fontsize: 20,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GooglePoppinsWidgets(
-                        color: Colors.grey,
-                        text: "*Based on student strength*",
-                        fontsize: 11,
-                      ),
-                    ],
-                  ),
-                  sizedBoxH20,
-                  SizedBox(
-                      height: 50,
-                      width: 400,
-                      child: Row(
-                        children: [
-                          GooglePoppinsWidgets(
-                            color: Colors.white,
-                            text: "Select Student Strenght :  ",
-                            fontsize: 11,
-                            fontWeight: FontWeight.w400,
-                          ),
-                          Expanded(child: GetTarifListDropDownButton()),
-                        ],
-                      )),
-                  sizedBoxH20,
-                  Obx(() {
-                    if (tarifController.price.value.isEmpty) {
-                      return Center(
-                        child: GooglePoppinsWidgets(
-                          color: Colors.white,
-                          text: "Select Plan ↑ ",
-                          fontsize: 11,
-                          fontWeight: FontWeight.w400,
+      child: Expanded(
+        child: Container(
+          decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 71, 164, 235).withOpacity(0.1)),
+          height: 700.h,
+          width: 600.w,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: 600.h,
+                width: 550.w,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black),
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Image.network(
+                          'https://firebasestorage.googleapis.com/v0/b/leptondujokerala.appspot.com/o/files%2FLepton%2Fleptonlogo.png?alt=media&token=2e71233e-58a5-42b7-abc7-b51e56774854',
+                          height: 100.h,
+                          width: 100.w,
                         ),
-                      );
-                    } else {
-                      totalpayment = tarifController.price.value;
-
-                      // totalpayment = totalpayment +
-                      //     tarifController.additionalFeatures[0].price +
-                      //     totalpayment +
-                      //     tarifController.additionalFeatures[1].price;
-
-                      if (tarifController
-                          .additionalFeatures[0].price.isNotEmpty) {
-                        int result0 = int.parse(
-                                tarifController.additionalFeatures[0].price) +
-                            int.parse(totalpayment);
-                        totalpayment = result0.toString();
-                        // log("message$result0");
-                        // log("Resuktsss${result0.toString()}");
-                      }
-
-                      if (tarifController
-                          .additionalFeatures[1].price.isNotEmpty) {
-                        int result0 = int.parse(
-                                tarifController.additionalFeatures[1].price) +
-                            int.parse(totalpayment);
-                        totalpayment = result0.toString();
-               
-                      }
-
-
-                      return Column(
-                        children: [
-                          GooglePoppinsWidgets(
-                            color: Colors.white,
-                            text:
-                                "Selected Plan : ${tarifController.selectedPlan.value} ",
-                            fontsize: 11,
-                            fontWeight: FontWeight.w400,
-                          ),
-                          GooglePoppinsWidgets(
-                            color: Colors.white,
-                            text:
-                                "Maximum Students: ${tarifController.maxstudents.value} ",
-                            fontsize: 11,
-                            fontWeight: FontWeight.w400,
-                          ),
-                          GooglePoppinsWidgets(
-                            color: Colors.white,
-                            text: "Price :  ${tarifController.price.value} INR",
-                            fontsize: 11,
-                            fontWeight: FontWeight.w400,
-                          ),
-                          GestureDetector(
-                            onTap: () async {
-                              return showDialog(
-                                context: context,
-                                barrierDismissible:
-                                    false, // user must tap button!
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    backgroundColor: const Color.fromARGB(
-                                        255, 141, 191, 232),
-                                    title: const Text('Dujo Features'),
-                                    content: SingleChildScrollView(
-                                      child: ListBody(
-                                        children: <Widget>[
-                                          GooglePoppinsWidgets(
-                                            text:
-                                                '''The above mentioned Tariff include following features\n
-• Digitalized infra of school
-• Live updates of attendance
-• List of classes
-• List of teachers
-• Notices and Events as notifications
-• Online payment facilities
-• Generate bill option
-• Recorded classes
-• Student login
-• Parent login
-• Admin login
-• Teacher login
-• Guardian Login
-• Generate TC
-• Generate student summary
-• Chat
-• Progress Report
-• Exam Notifications
-• PTA
-• Mother PTA
-• School Protection Group
-• Time Table
-• Live classes''',
-                                            fontsize: 15,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        child: const Text('ok'),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            },
-                            child: GooglePoppinsWidgets(
+                        GoogleMonstserratWidgets(
+                          text: "Lepton Dujo Tarif",
+                          fontsize: 20.w,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 2,
+                        ),
+                      ],
+                    ),
+                    sizedBoxH20,
+                    GoogleMonstserratWidgets(
+                      text: "Choose your school type",
+                      fontsize: 20.w,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GooglePoppinsWidgets(
+                          color: Colors.grey,
+                          text: "*Based on student strength*",
+                          fontsize: 11.w,
+                        ),
+                      ],
+                    ),
+                    sizedBoxH20,
+                    SizedBox(
+                        height: 50.h,
+                        width: 400.w,
+                        child: Row(
+                          children: [
+                            GooglePoppinsWidgets(
                               color: Colors.white,
-                              text: "View Features",
-                              fontsize: 15,
+                              text: "Select Student Strenght :  ",
+                              fontsize: 11,
                               fontWeight: FontWeight.w400,
                             ),
+                            Expanded(child: GetTarifListDropDownButton()),
+                          ],
+                        )),
+                    sizedBoxH20,
+                    Obx(() {
+                      if (tarifController.price.value.isEmpty) {
+                        return Center(
+                          child: GooglePoppinsWidgets(
+                            color: Colors.white,
+                            text: "Select Plan ↑ ",
+                            fontsize: 11.w,
+                            fontWeight: FontWeight.w400,
                           ),
-                          sizedBoxH20,
-                          GestureDetector(
-                            onTap: () async {
-                              selectcount(
-                                context,
-                              );
-                            },
-                            child: ButtonContainerWidget(
-                                curving: 10,
-                                colorindex: 0,
-                                height: 40,
-                                width: 200,
-                                child: Center(
-                                  child: GooglePoppinsWidgets(
-                                    color: Colors.amber,
-                                    text: "Add Aditional Featuers",
-                                    fontsize: 11,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                )),
-                          ),
-                          Obx(() => SizedBox(
-                                height: 100,
-                                child: tarifController
-                                        .additionalFeatures.isEmpty
-                                    ? const Text("Nodata")
-                                    : ListView.separated(
-                                        itemBuilder: (context, index) {
-                                          // log('TotalSum ===${tarifController.extraFeatureTotalPrice.value}');
-                                          return Column(
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  GooglePoppinsWidgets(
-                                                    text:
-                                                        "Product : ${tarifController.additionalFeatures[index].product}",
-                                                    fontsize: 12,
-                                                    color: Colors.white,
-                                                  ),
-                                                  sizedBoxW20,
-                                                  GooglePoppinsWidgets(
-                                                    text:
-                                                        "qty : ${tarifController.additionalFeatures[index].quantity}",
-                                                    fontsize: 11,
-                                                    color: Colors.white,
-                                                  ),
-                                                  sizedBoxW20,
-                                                  GooglePoppinsWidgets(
-                                                    text:
-                                                        "Price : ${tarifController.additionalFeatures[index].price}",
-                                                    fontsize: 11,
-                                                    color: Colors.white,
-                                                  ),
-                                                  const Spacer(),
-                                                  TextButton.icon(
-                                                      onPressed: () async {
-                                                        if (index == 0) {
-                                                          tarifController
-                                                                  .additionalFeatures[0] =
-                                                              TarifPurchaseModel(
-                                                                  quantity: 0,
-                                                                  totalamount:
-                                                                      0,
-                                                                  product: '',
-                                                                  price: '');
-                                                        } else {
-                                                          tarifController
-                                                                  .additionalFeatures[1] =
-                                                              TarifPurchaseModel(
-                                                                  quantity: 0,
-                                                                  totalamount:
-                                                                      0,
-                                                                  product: '',
-                                                                  price: '');
-                                                        }
-                                                      },
-                                                      icon: const Icon(
-                                                          Icons.delete),
-                                                      label:
-                                                          const Text('Remove'))
-                                                ],
-                                              ),
-                                              // Text(
-                                              //     "Total price :${tarifController.extraFeatureTotalPrice}"),
-                                            ],
-                                          );
-                                        },
-                                        separatorBuilder: (context, index) {
-                                          return const Divider();
-                                        },
-                                        itemCount: tarifController
-                                            .additionalFeatures.length),
-                              )),
-                          Row(
-                            children: [
-                              const Spacer(),
-                              GooglePoppinsWidgets(
-                                color: Colors.white,
-                                text: "Total Price  :  ₹ $totalpayment ",
-                                fontsize: 11,
+                        );
+                      } else {
+                        totalpayment = tarifController.price.value;
+      
+                        // totalpayment = totalpayment +
+                        //     tarifController.additionalFeatures[0].price +
+                        //     totalpayment +
+                        //     tarifController.additionalFeatures[1].price;
+      
+                        if (tarifController
+                            .additionalFeatures[0].price.isNotEmpty) {
+                          int result0 = int.parse(
+                                  tarifController.additionalFeatures[0].price) +
+                              int.parse(totalpayment);
+                          totalpayment = result0.toString();
+                          // log("message$result0");
+                          // log("Resuktsss${result0.toString()}");
+                        }
+      
+                        if (tarifController
+                            .additionalFeatures[1].price.isNotEmpty) {
+                          int result0 = int.parse(
+                                  tarifController.additionalFeatures[1].price) +
+                              int.parse(totalpayment);
+                          totalpayment = result0.toString();
+                 
+                        }
+      
+      
+                        return Column(
+                          children: [
+                            GooglePoppinsWidgets(
+                              color: Colors.white,
+                              text:
+                                  "Selected Plan : ${tarifController.selectedPlan.value} ",
+                              fontsize: 11,
+                              fontWeight: FontWeight.w400,
+                            ),
+                            GooglePoppinsWidgets(
+                              color: Colors.white,
+                              text:
+                                  "Maximum Students: ${tarifController.maxstudents.value} ",
+                              fontsize: 11,
+                              fontWeight: FontWeight.w400,
+                            ),
+                            GooglePoppinsWidgets(
+                              color: Colors.white,
+                              text: "Price :  ${tarifController.price.value} INR",
+                              fontsize: 11,
+                              fontWeight: FontWeight.w400,
+                            ),
+                            GestureDetector(
+                              onTap: () async {
+                                return showDialog(
+                                  context: context,
+                                  barrierDismissible:
+                                      false, // user must tap button!
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      backgroundColor: const Color.fromARGB(
+                                          255, 141, 191, 232),
+                                      title: const Text('Dujo Features'),
+                                      content: SingleChildScrollView(
+                                        child: ListBody(
+                                          children: <Widget>[
+                                            GooglePoppinsWidgets(
+                                              text:
+                                                  '''The above mentioned Tariff include following features\n
+      • Digitalized infra of school
+      • Live updates of attendance
+      • List of classes
+      • List of teachers
+      • Notices and Events as notifications
+      • Online payment facilities
+      • Generate bill option
+      • Recorded classes
+      • Student login
+      • Parent login
+      • Admin login
+      • Teacher login
+      • Guardian Login
+      • Generate TC
+      • Generate student summary
+      • Chat
+      • Progress Report
+      • Exam Notifications
+      • PTA
+      • Mother PTA
+      • School Protection Group
+      • Time Table
+      • Live classes''',
+                                              fontsize: 15,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: const Text('ok'),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                              child: GooglePoppinsWidgets(
+                                color: const Color.fromRGBO(255, 255, 255, 1),
+                                text: "View Features",
+                                fontsize: 15.w,
                                 fontWeight: FontWeight.w400,
                               ),
-                            ],
-                          )
-                        ],
-                      );
-                    }
-                  }),
-                ],
-              ),
-            )
-          ],
+                            ),
+                            sizedBoxH20,
+                            GestureDetector(
+                              onTap: () async {
+                                selectcount(
+                                  context,
+                                );
+                              },
+                              child: ButtonContainerWidget(
+                                  curving: 10,
+                                  colorindex: 0,
+                                  height: 40.h,
+                                  width: 200.w,
+                                  child: Center(
+                                    child: GooglePoppinsWidgets(
+                                      color: Colors.amber,
+                                      text: "Add Aditional Featuers",
+                                      fontsize: 11,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )),
+                            ),
+                            Obx(() => SizedBox(
+                                  height: 100.w,
+                                  child: tarifController
+                                          .additionalFeatures.isEmpty
+                                      ? const Text("Nodata")
+                                      : ListView.separated(
+                                          itemBuilder: (context, index) {
+                                            // log('TotalSum ===${tarifController.extraFeatureTotalPrice.value}');
+                                            return Column(
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    GooglePoppinsWidgets(
+                                                      text:
+                                                          "Product : ${tarifController.additionalFeatures[index].product}",
+                                                      fontsize: 12,
+                                                      color: Colors.white,
+                                                    ),
+                                                    sizedBoxW20,
+                                                    GooglePoppinsWidgets(
+                                                      text:
+                                                          "qty : ${tarifController.additionalFeatures[index].quantity}",
+                                                      fontsize: 11.w,
+                                                      color: Colors.white,
+                                                    ),
+                                                    sizedBoxW20,
+                                                    GooglePoppinsWidgets(
+                                                      text:
+                                                          "Price : ${tarifController.additionalFeatures[index].price}",
+                                                      fontsize: 11.w,
+                                                      color: Colors.white,
+                                                    ),
+                                                    const Spacer(),
+                                                    TextButton.icon(
+                                                        onPressed: () async {
+                                                          if (index == 0) {
+                                                            tarifController
+                                                                    .additionalFeatures[0] =
+                                                                TarifPurchaseModel(
+                                                                    quantity: 0,
+                                                                    totalamount:
+                                                                        0,
+                                                                    product: '',
+                                                                    price: '');
+                                                          } else {
+                                                            tarifController
+                                                                    .additionalFeatures[1] =
+                                                                TarifPurchaseModel(
+                                                                    quantity: 0,
+                                                                    totalamount:
+                                                                        0,
+                                                                    product: '',
+                                                                    price: '');
+                                                          }
+                                                        },
+                                                        icon: const Icon(
+                                                            Icons.delete),
+                                                        label:
+                                                            const Text('Remove'))
+                                                  ],
+                                                ),
+                                                // Text(
+                                                //     "Total price :${tarifController.extraFeatureTotalPrice}"),
+                                              ],
+                                            );
+                                          },
+                                          separatorBuilder: (context, index) {
+                                            return const Divider();
+                                          },
+                                          itemCount: tarifController
+                                              .additionalFeatures.length),
+                                )),
+                            Row(
+                              children: [
+                                const Spacer(),
+                                GooglePoppinsWidgets(
+                                  color: Colors.white,
+                                  text: "Total Price  :  ₹ $totalpayment ",
+                                  fontsize: 11.w,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ],
+                            )
+                          ],
+                        );
+                      }
+                    }),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -343,8 +346,8 @@ class _LeptonTarifScreenState extends State<LeptonTarifScreen> {
             child: ListBody(
               children: <Widget>[
                 SizedBox(
-                  height: 400,
-                  width: 400,
+                  height: 400.h,
+                  width: 400.w,
                   child: StreamBuilder(
                       stream: FirebaseFirestore.instance
                           .collection("DujoAditionalFeatures")
@@ -356,13 +359,13 @@ class _LeptonTarifScreenState extends State<LeptonTarifScreen> {
                           return ListView.separated(
                               itemBuilder: (context, index) {
                                 return SizedBox(
-                                  height: 40,
+                                  height: 40.h,
                                   child: Row(
                                     children: [
                                       GooglePoppinsWidgets(
                                         text:
                                             "${snapss.data?.docs[index]['deviceName'] ?? ''}",
-                                        fontsize: 16,
+                                        fontsize: 16.h,
                                         fontWeight: FontWeight.bold,
                                       ),
                                       TextButton.icon(
