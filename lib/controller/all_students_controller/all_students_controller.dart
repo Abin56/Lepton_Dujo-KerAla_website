@@ -10,6 +10,7 @@ import '../../ui team/sruthi/guardianInfo_alert_box.dart';
 import '../../ui team/sruthi/parent_guardian_alert_box_widget.dart';
 import '../../view/constant/constant.dart';
 import '../../view/web/login/admin/admin_DashBoard/classes/details_ofClasses.dart';
+import '../../view/web/login/admin/admin_DashBoard/sampoorna/sampoorna_home.dart';
 import '../../view/web/login/admin/admin_DashBoard/transfer_cretificate/tc_genrate.dart';
 import '../../view/web/widgets/button_container_widget.dart';
 import '../../view/web/widgets/drop_DownList/schoolDropDownList.dart';
@@ -222,29 +223,59 @@ class AllStudentsController extends GetxController {
                       ),
                       sizedBoxH20,
                       Center(
-                        child: GestureDetector(
-                          onTap: () async {
-                            genrateTc(context, docid, studentName!);
-                          },
-                          child: ButtonContainerWidget(
-                            curving: 5,
-                            colorindex: 0,
-                            height: 30,
-                            width: 120,
-                            child: Center(
-                              child: Text(
-                                'Genrate TC',
-                                style: GoogleFonts.poppins(
-                                    color: const Color.fromARGB(
-                                        255, 255, 254, 254),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600),
+                        child: Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () async {
+                                genrateTc(context, docid, studentName!);
+                              },
+                              child: ButtonContainerWidget(
+                                curving: 5,
+                                colorindex: 0,
+                                height: 30,
+                                width: 120,
+                                child: Center(
+                                  child: Text(
+                                    'Genrate TC',
+                                    style: GoogleFonts.poppins(
+                                        color: const Color.fromARGB(
+                                            255, 255, 254, 254),
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
+                            GestureDetector(
+                              onTap: () async {
+                                Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) {
+                                    return SampoornaHomeScreen(
+                                        schoolId: schoolListValue!['docid'],
+                                        studentId: docid);
+                                  },
+                                ));
+                              },
+                              child: ButtonContainerWidget(
+                                curving: 5,
+                                colorindex: 0,
+                                height: 30,
+                                width: 120,
+                                child: Center(
+                                  child: Text(
+                                    'Genrate Sampoorna',
+                                    style: GoogleFonts.poppins(
+                                        color: const Color.fromARGB(
+                                            255, 255, 254, 254),
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      sizedBoxH20,
                       Center(
                         child: GestureDetector(
                           onTap: () async {
