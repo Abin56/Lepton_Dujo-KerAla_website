@@ -23,7 +23,7 @@ class After7DaysPaymentScreen extends StatelessWidget {
           Center(
             child: GooglePoppinsWidgets(
                 text:
-                    " 7Days trial periods are over. Hereafter payment scheme will be enabled!",
+                    " 7 Days trial periods are over. Hereafter payment scheme will be enabled!",
                 fontsize: 20),
           ),
           sizedBoxH20,

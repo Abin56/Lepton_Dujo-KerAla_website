@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../model/schools_to_be_verified/schools_to_be_verified_create_list.dart';
+import '../../model/tarif_purchase_model/tarif_purchase_model.dart';
 import '../../view/constant/constant.dart';
 
 class AddNewSchoolController extends GetxController {
@@ -28,7 +29,16 @@ class AddNewSchoolController extends GetxController {
   RxString stateValue = ''.obs;
   RxString cityValue = ''.obs;
   RxString schoolID = ''.obs;
-  Future<void> addNewSchool(BuildContext context) async {
+  Future<void> addNewSchool(
+    BuildContext context,
+    String maximumStudents,
+    String selectedPlan,
+    String selectedPlanprice,
+    String totalPriceincludegst,
+    String totalprice,
+    TarifPurchaseModel? tarifPurchaseModelindex0,
+    TarifPurchaseModel? tarifPurchaseModelindex1,
+  ) async {
     log(cityValue.value);
     String uUID = schoolNameController.text.substring(0, 5) +
         cityValue.value.substring(0, 5) +
@@ -37,6 +47,14 @@ class AddNewSchoolController extends GetxController {
     try {
       if (conformpassController.text == adminPasswordController.text) {
         final schoolDetails = SchoolsToBeVerified(
+            maximumStudents: maximumStudents,
+            selectedPlan: selectedPlan,
+            selectedPlanprice: selectedPlanprice,
+            totalPriceincludegst: totalPriceincludegst,
+            totalprice: totalprice,
+       
+            tarifPurchaseModelindex0: tarifPurchaseModelindex0,
+            tarifPurchaseModelindex1: tarifPurchaseModelindex1,
             schoolCode: schoolCodeController.text.trim(),
             schoolName: schoolNameController.text,
             docid: uUID,

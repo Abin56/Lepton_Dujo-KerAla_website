@@ -3,8 +3,11 @@ import 'dart:convert';
 import 'dart:html' as html;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/new_home_01_06.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
+import '../tarif_purchase_model/tarif_purchase_model.dart';
 
 class SchoolsToBeVerified {
   String schoolName;
@@ -19,6 +22,13 @@ class SchoolsToBeVerified {
   String schoolCode;
   String? batchYear;
   bool verified;
+  String selectedPlan;
+  String maximumStudents;
+  String selectedPlanprice;
+  String totalprice;
+  String totalPriceincludegst;
+  TarifPurchaseModel ? tarifPurchaseModelindex0;
+  TarifPurchaseModel ? tarifPurchaseModelindex1;
   SchoolsToBeVerified({
     required this.schoolName,
     required this.docid,
@@ -32,7 +42,15 @@ class SchoolsToBeVerified {
     required this.schoolCode,
     this.batchYear,
     required this.verified,
+    required this.selectedPlan,
+    required this.maximumStudents,
+    required this.selectedPlanprice,
+    required this.totalprice,
+    required this.totalPriceincludegst,
+    this.tarifPurchaseModelindex0,
+    this.tarifPurchaseModelindex1,
   });
+
 
   SchoolsToBeVerified copyWith({
     String? schoolName,
@@ -47,6 +65,13 @@ class SchoolsToBeVerified {
     String? schoolCode,
     String? batchYear,
     bool? verified,
+    String? selectedPlan,
+    String? maximumStudents,
+    String? selectedPlanprice,
+    String? totalprice,
+    String? totalPriceincludegst,
+    TarifPurchaseModel ? tarifPurchaseModelindex0,
+    TarifPurchaseModel ? tarifPurchaseModelindex1,
   }) {
     return SchoolsToBeVerified(
       schoolName: schoolName ?? this.schoolName,
@@ -61,6 +86,13 @@ class SchoolsToBeVerified {
       schoolCode: schoolCode ?? this.schoolCode,
       batchYear: batchYear ?? this.batchYear,
       verified: verified ?? this.verified,
+      selectedPlan: selectedPlan ?? this.selectedPlan,
+      maximumStudents: maximumStudents ?? this.maximumStudents,
+      selectedPlanprice: selectedPlanprice ?? this.selectedPlanprice,
+      totalprice: totalprice ?? this.totalprice,
+      totalPriceincludegst: totalPriceincludegst ?? this.totalPriceincludegst,
+      tarifPurchaseModelindex0: tarifPurchaseModelindex0 ?? this.tarifPurchaseModelindex0,
+      tarifPurchaseModelindex1: tarifPurchaseModelindex1 ?? this.tarifPurchaseModelindex1,
     );
   }
 
@@ -76,8 +108,15 @@ class SchoolsToBeVerified {
       'email': email,
       'postedDate': postedDate,
       'schoolCode': schoolCode,
-      'batchYear': batchYear??'',
+      'batchYear': batchYear,
       'verified': verified,
+      'selectedPlan': selectedPlan,
+      'maximumStudents': maximumStudents,
+      'selectedPlanprice': selectedPlanprice,
+      'totalprice': totalprice,
+      'totalPriceincludegst': totalPriceincludegst,
+      'tarifPurchaseModelindex0': tarifPurchaseModelindex0?.toMap(),
+      'tarifPurchaseModelindex1': tarifPurchaseModelindex1?.toMap(),
     };
   }
 
@@ -95,6 +134,13 @@ class SchoolsToBeVerified {
       schoolCode: map['schoolCode'] as String,
       batchYear: map['batchYear'] != null ? map['batchYear'] as String : null,
       verified: map['verified'] as bool,
+      selectedPlan: map['selectedPlan'] as String,
+      maximumStudents: map['maximumStudents'] as String,
+      selectedPlanprice: map['selectedPlanprice'] as String,
+      totalprice: map['totalprice'] as String,
+      totalPriceincludegst: map['totalPriceincludegst'] as String,
+      tarifPurchaseModelindex0: map['tarifPurchaseModelindex0'] != null ? TarifPurchaseModel .fromMap(map['tarifPurchaseModelindex0'] as Map<String,dynamic>) : null,
+      tarifPurchaseModelindex1: map['tarifPurchaseModelindex1'] != null ? TarifPurchaseModel .fromMap(map['tarifPurchaseModelindex1'] as Map<String,dynamic>) : null,
     );
   }
 
@@ -104,7 +150,7 @@ class SchoolsToBeVerified {
 
   @override
   String toString() {
-    return 'SchoolsToBeVerified(schoolName: $schoolName, docid: $docid, district: $district, place: $place, adminUserName: $adminUserName, password: $password, phoneNumber: $phoneNumber, email: $email, postedDate: $postedDate, schoolCode: $schoolCode, batchYear: $batchYear, verified: $verified)';
+    return 'SchoolsToBeVerified(schoolName: $schoolName, docid: $docid, district: $district, place: $place, adminUserName: $adminUserName, password: $password, phoneNumber: $phoneNumber, email: $email, postedDate: $postedDate, schoolCode: $schoolCode, batchYear: $batchYear, verified: $verified, selectedPlan: $selectedPlan, maximumStudents: $maximumStudents, selectedPlanprice: $selectedPlanprice, totalprice: $totalprice, totalPriceincludegst: $totalPriceincludegst, tarifPurchaseModelindex0: $tarifPurchaseModelindex0, tarifPurchaseModelindex1: $tarifPurchaseModelindex1)';
   }
 
   @override
@@ -123,7 +169,14 @@ class SchoolsToBeVerified {
       other.postedDate == postedDate &&
       other.schoolCode == schoolCode &&
       other.batchYear == batchYear &&
-      other.verified == verified;
+      other.verified == verified &&
+      other.selectedPlan == selectedPlan &&
+      other.maximumStudents == maximumStudents &&
+      other.selectedPlanprice == selectedPlanprice &&
+      other.totalprice == totalprice &&
+      other.totalPriceincludegst == totalPriceincludegst &&
+      other.tarifPurchaseModelindex0 == tarifPurchaseModelindex0 &&
+      other.tarifPurchaseModelindex1 == tarifPurchaseModelindex1;
   }
 
   @override
@@ -139,7 +192,14 @@ class SchoolsToBeVerified {
       postedDate.hashCode ^
       schoolCode.hashCode ^
       batchYear.hashCode ^
-      verified.hashCode;
+      verified.hashCode ^
+      selectedPlan.hashCode ^
+      maximumStudents.hashCode ^
+      selectedPlanprice.hashCode ^
+      totalprice.hashCode ^
+      totalPriceincludegst.hashCode ^
+      tarifPurchaseModelindex0.hashCode ^
+      tarifPurchaseModelindex1.hashCode;
   }
 }
 
@@ -175,7 +235,11 @@ class AddRequestedSchoolsToFirebase {
               actions: <Widget>[
                 TextButton(
                   child: const Text('OK'),
-                  onPressed: () {
+                  onPressed: ()async {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      return HomePageImages();
+                    },));
+                    await Future.delayed(const Duration(milliseconds: 500));
                     html.window.location.reload();
 
 

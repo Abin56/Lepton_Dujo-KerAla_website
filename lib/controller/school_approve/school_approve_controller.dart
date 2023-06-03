@@ -77,19 +77,26 @@ class SchoolApproveController extends GetxController {
             firebaseFirestore
                 .collection("SchoolListCollection")
                 .doc(uid)
-                .update({'docid': uid}).then((value) => showDialog(
+                .update({'docid': uid})
+                .then((value) {
+                  firebaseFirestore
+                      .collection("SchoolListCollection")
+                      .doc(uid)
+                      .set({'createDate': DateTime.now()},
+                          SetOptions(merge: true));
+                })
+                .then((value) => showDialog(
                       context: context,
                       builder: ((context) => const AlertDialog(
                             content: Text('Succesfully Approved!'),
                           )),
-                    )).then((value) {
-
-                          firebaseFirestore
-                .collection("SchoolListCollection")
-                .doc(uid).set({
-                  'deactive':false
-                },SetOptions(merge: true));
-                    });
+                    ))
+                .then((value) {
+                  firebaseFirestore
+                      .collection("SchoolListCollection")
+                      .doc(uid)
+                      .set({'deactive': false}, SetOptions(merge: true));
+                });
             await fetchReqListSchools();
             isLoading.value = false;
           });
