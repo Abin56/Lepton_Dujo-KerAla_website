@@ -561,7 +561,7 @@ class HeadingContainer extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.only(top: 18.h, bottom: 10.h),
               child: Text(
-                "School level Exam",
+                "state level Exam",
                 style: TextStyle(color: Colors.black, fontSize: 25.h),
               ),
             ),
@@ -574,7 +574,7 @@ class HeadingContainer extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.only(top: 18.h, bottom: 10.h),
               child: Text(
-                "Public Exam",
+                "Public level Exam",
                 style: TextStyle(fontSize: 25.h),
               ),
             ),

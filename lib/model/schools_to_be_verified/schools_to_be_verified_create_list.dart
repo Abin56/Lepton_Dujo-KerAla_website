@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:html' as html;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/new_home_01_06.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -234,7 +235,11 @@ class AddRequestedSchoolsToFirebase {
               actions: <Widget>[
                 TextButton(
                   child: const Text('OK'),
-                  onPressed: () {
+                  onPressed: ()async {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      return HomePageImages();
+                    },));
+                    await Future.delayed(const Duration(milliseconds: 500));
                     html.window.location.reload();
 
 
