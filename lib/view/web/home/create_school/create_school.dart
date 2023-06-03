@@ -129,7 +129,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
                       width: 800.w,
                       child: Center(
                         child: Padding(
-                          padding:  EdgeInsets.all(10.w),
+                          padding: EdgeInsets.all(10.w),
                           child: Container(
                             decoration: BoxDecoration(
                                 // color: const Color.fromARGB(255, 71, 164, 235)
@@ -184,8 +184,8 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                                 MainAxisAlignment.center,
                                             children: [
                                               GooglePoppinsWidgets(
-                                                color:
-                                                    Color.fromARGB(255, 0, 0, 0),
+                                                color: Color.fromARGB(
+                                                    255, 0, 0, 0),
                                                 text:
                                                     "* Based on student strength *",
                                                 fontsize: 15.w,
@@ -232,12 +232,12 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                             double d = double.parse(
                                                 tarifController.price.value);
                                             gst = d + (d) * 18 / 100;
-                        
+
                                             // totalpayment = totalpayment +
                                             //     tarifController.additionalFeatures[0].price +
                                             //     totalpayment +
                                             //     tarifController.additionalFeatures[1].price;
-                        
+
                                             if (tarifController
                                                 .additionalFeatures[0]
                                                 .price
@@ -248,12 +248,12 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                                           .price) +
                                                   int.parse(totalpayment);
                                               totalpayment = result0.toString();
-                                              gst =
-                                                  result0 + (result0) * 18 / 100;
+                                              gst = result0 +
+                                                  (result0) * 18 / 100;
                                               // log("message$result0");
                                               // log("Resuktsss${result0.toString()}");
                                             }
-                        
+
                                             if (tarifController
                                                 .additionalFeatures[1]
                                                 .price
@@ -264,10 +264,10 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                                           .price) +
                                                   int.parse(totalpayment);
                                               totalpayment = result0.toString();
-                                              gst =
-                                                  result0 + (result0) * 18 / 100;
+                                              gst = result0 +
+                                                  (result0) * 18 / 100;
                                             }
-                        
+
                                             return Column(
                                               // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                               children: [
@@ -298,15 +298,15 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                                 ),
                                                 sizedBoxH10,
                                                 sizedBoxH10,
-                                                
+
                                                 GestureDetector(
                                                   onTap: () async {
                                                     return showDialog(
                                                       context: context,
                                                       barrierDismissible:
                                                           false, // user must tap button!
-                                                      builder:
-                                                          (BuildContext context) {
+                                                      builder: (BuildContext
+                                                          context) {
                                                         return AlertDialog(
                                                           backgroundColor:
                                                               Color.fromARGB(
@@ -316,34 +316,36 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                                           content:
                                                               SingleChildScrollView(
                                                             child: ListBody(
-                                                              children: <Widget>[
+                                                              children: <
+                                                                  Widget>[
                                                                 GooglePoppinsWidgets(
                                                                   text:
                                                                       '''The above mentioned Tariff include following features\n
-                                • Digitalized infra of school
-                                • Live updates of attendance
-                                • List of classes
-                                • List of teachers
-                                • Notices and Events as notifications
-                                • Online payment facilities
-                                • Generate bill option
-                                • Recorded classes
-                                • Student login
-                                • Parent login
-                                • Admin login
-                                • Teacher login
-                                • Guardian Login
-                                • Generate TC
-                                • Generate student summary
-                                • Chat
-                                • Progress Report
-                                • Exam Notifications
-                                • PTA
-                                • Mother PTA
-                                • School Protection Group
-                                • Time Table
-                                • Live classes''',
-                                                                  fontsize: 16.w,
+• Digitalized infra of school
+• Live updates of attendance
+• List of classes
+• List of teachers
+• Notices and Events as notifications
+• Online payment facilities
+• Generate bill option
+• Recorded classes
+• Student login
+• Parent login
+• Admin login
+• Teacher login
+• Guardian Login
+• Generate TC
+• Generate student summary
+• Chat
+• Progress Report
+• Exam Notifications
+• PTA
+• Mother PTA
+• School Protection Group
+• Time Table
+• Live classes''',
+                                                                  fontsize:
+                                                                      16.w,
                                                                   color: cWhite,
                                                                 ),
                                                               ],
@@ -366,9 +368,11 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                                   },
                                                   child: Row(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.center,
+                                                        CrossAxisAlignment
+                                                            .center,
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment.center,
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
                                                       GooglePoppinsWidgets(
                                                         color: Colors.blue,
@@ -408,87 +412,86 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                                         ),
                                                       )),
                                                 ),
-                                                  sizedBoxH20,
+                                                sizedBoxH20,
                                                 Obx(() => Padding(
-                                                  padding:  EdgeInsets.only(left: 25.w),
-                                                  child: SizedBox(
+                                                      padding: EdgeInsets.only(
+                                                          left: 25.w),
+                                                      child: SizedBox(
                                                         height: 100.h,
                                                         child: tarifController
                                                                 .additionalFeatures
                                                                 .isEmpty
-                                                            ?  GoogleMonstserratWidgets(text: "Nodata",fontsize: 12.w,)
-                                                            : ListView.separated(
-                                                                itemBuilder:
-                                                                    (context,
-                                                                        index) {
-                                                                  return Column(
-                                                                    children: [
-                                                                      Row(
+                                                            ? GoogleMonstserratWidgets(
+                                                                text: "Nodata",
+                                                                fontsize: 12.w,
+                                                              )
+                                                            : ListView
+                                                                .separated(
+                                                                    itemBuilder:
+                                                                        (context,
+                                                                            index) {
+                                                                      return Column(
                                                                         children: [
-                                                                          GooglePoppinsWidgets(
-                                                                            text:
-                                                                                "Product : ${tarifController.additionalFeatures[index].product}",
-                                                                            fontsize:
-                                                                                13.w,
-                                                                            color: Colors
-                                                                                .black,
+                                                                          Row(
+                                                                            children: [
+                                                                              GooglePoppinsWidgets(
+                                                                                text: "Product : ${tarifController.additionalFeatures[index].product}",
+                                                                                fontsize: 13.w,
+                                                                                color: Colors.black,
                                                                                 fontWeight: FontWeight.w500,
+                                                                              ),
+                                                                              sizedBoxW20,
+                                                                              GooglePoppinsWidgets(
+                                                                                text: "qty : ${tarifController.additionalFeatures[index].quantity}",
+                                                                                fontsize: 13.w,
+                                                                                color: Colors.black,
+                                                                                fontWeight: FontWeight.w500,
+                                                                              ),
+                                                                              sizedBoxW20,
+                                                                              GooglePoppinsWidgets(
+                                                                                text: "Price : ${tarifController.additionalFeatures[index].price}",
+                                                                                fontsize: 12.w,
+                                                                                color: Colors.black,
+                                                                                fontWeight: FontWeight.w500,
+                                                                              ),
+                                                                              const Spacer(),
+                                                                              Padding(
+                                                                                padding: EdgeInsets.only(right: 20.w),
+                                                                                child: TextButton.icon(
+                                                                                    onPressed: () async {
+                                                                                      if (index == 0) {
+                                                                                        tarifController.additionalFeatures[0] = TarifPurchaseModel(quantity: 0, totalamount: 0, product: '', price: '');
+                                                                                      } else {
+                                                                                        tarifController.additionalFeatures[1] = TarifPurchaseModel(quantity: 0, totalamount: 0, product: '', price: '');
+                                                                                      }
+                                                                                    },
+                                                                                    icon: Icon(Icons.delete, color: cred, size: 25.w),
+                                                                                    label: GoogleMonstserratWidgets(
+                                                                                      text: 'Remove',
+                                                                                      fontsize: 12.w,
+                                                                                      color: cred,
+                                                                                    )),
+                                                                              )
+                                                                            ],
                                                                           ),
-                                                                          sizedBoxW20,
-                                                                          GooglePoppinsWidgets(
-                                                                            text:
-                                                                                "qty : ${tarifController.additionalFeatures[index].quantity}",
-                                                                            fontsize:
-                                                                                13.w,
-                                                                            color: Colors
-                                                                                .black,
-                                                                               fontWeight: FontWeight.w500,  
-                                                                          ),
-                                                                          sizedBoxW20,
-                                                                          GooglePoppinsWidgets(
-                                                                            text:
-                                                                                "Price : ${tarifController.additionalFeatures[index].price}",
-                                                                            fontsize:
-                                                                                12.w,
-                                                                            color: Colors
-                                                                                .black,
-                                                                                 fontWeight: FontWeight.w500,
-                                                                          ),
-                                                                          const Spacer(),
-                                                                          Padding(
-                                                                            padding:  EdgeInsets.only(right: 20.w),
-                                                                            child: TextButton.icon(
-                                                                                onPressed: () async {
-                                                                                  if (index ==
-                                                                                      0) {
-                                                                                    tarifController.additionalFeatures[0] = TarifPurchaseModel(quantity: 0, totalamount: 0, product: '', price: '');
-                                                                                  } else {
-                                                                                    tarifController.additionalFeatures[1] = TarifPurchaseModel(quantity: 0, totalamount: 0, product: '', price: '');
-                                                                                  }
-                                                                                },
-                                                                                icon:  Icon(Icons.delete,color: cred,size: 25.w),
-                                                                                label:  GoogleMonstserratWidgets(text: 'Remove',fontsize: 12.w,color: cred,)),
-                                                                          )
+                                                                          // Text(
+                                                                          //     "Total price :${tarifController.extraFeatureTotalPrice}"),
                                                                         ],
-                                                                      ),
-                                                                      // Text(
-                                                                      //     "Total price :${tarifController.extraFeatureTotalPrice}"),
-                                                                    ],
-                                                                  );
-                                                                },
-                                                                separatorBuilder:
-                                                                    (context,
-                                                                        index) {
-                                                                  return const Divider();
-                                                                },
-                                                                itemCount:
-                                                                    tarifController
+                                                                      );
+                                                                    },
+                                                                    separatorBuilder:
+                                                                        (context,
+                                                                            index) {
+                                                                      return const Divider();
+                                                                    },
+                                                                    itemCount: tarifController
                                                                         .additionalFeatures
                                                                         .length),
                                                       ),
-                                                )),
+                                                    )),
                                                 Padding(
-                                                  padding:  EdgeInsets.only(right: 25.w),
+                                                  padding: EdgeInsets.only(
+                                                      right: 25.w),
                                                   child: Row(
                                                     children: [
                                                       const Spacer(),
@@ -497,13 +500,15 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                                         text:
                                                             "Total  :  ₹ $totalpayment ",
                                                         fontsize: 15.w,
-                                                        fontWeight: FontWeight.w600,
+                                                        fontWeight:
+                                                            FontWeight.w600,
                                                       ),
                                                     ],
                                                   ),
                                                 ),
                                                 Padding(
-                                                   padding:  EdgeInsets.only(top: 15.w),
+                                                  padding: EdgeInsets.only(
+                                                      top: 15.w),
                                                   child: GooglePoppinsWidgets(
                                                     color: Colors.black,
                                                     text:
@@ -518,19 +523,30 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                                       showTermsandCondition(
                                                           context);
                                                     },
-                                                    child:  Padding(
-                                                      padding:  EdgeInsets.only(top: 15.w),
-                                                      child: GoogleMonstserratWidgets(text: 
-                                                          'View terms and conditions',color: cBlue,fontsize: 14.w,fontWeight: FontWeight.w500,),
+                                                    child: Padding(
+                                                      padding: EdgeInsets.only(
+                                                          top: 15.w),
+                                                      child:
+                                                          GoogleMonstserratWidgets(
+                                                        text:
+                                                            'View terms and conditions',
+                                                        color: cBlue,
+                                                        fontsize: 14.w,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
                                                     )),
-                                                    sizedBoxH10,
+                                                sizedBoxH10,
                                                 Padding(
-                                                  padding:  EdgeInsets.only(left: 50.w,right: 50.w),
-
+                                                  padding: EdgeInsets.only(
+                                                      left: 50.w, right: 50.w),
                                                   child: CheckboxListTile(
-                                                    title:  GoogleMonstserratWidgets(text: 
-                                                        'I agree to the terms and conditions',
-                                                        fontsize: 15.w,fontWeight: FontWeight.w600),
+                                                    title: GoogleMonstserratWidgets(
+                                                        text:
+                                                            'I agree to the terms and conditions',
+                                                        fontsize: 15.w,
+                                                        fontWeight:
+                                                            FontWeight.w600),
                                                     value: isChecked,
                                                     onChanged: (value) {
                                                       setState(() {
@@ -545,7 +561,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                                     style: TextStyle(
                                                         color: Colors.red),
                                                   ),
-                                                 SizedBox(height: 16.h),
+                                                SizedBox(height: 16.h),
                                                 // ElevatedButton(
                                                 //   onPressed: _validateForm,
                                                 //   child: const Text('Submit'),
@@ -746,15 +762,47 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                   ///
                                 } else {
                                   if (isChecked == true) {
-                                    await addNewSchoolController.addNewSchool(
-                                        context,
-                                        tarifController.maxstudents.value,
-                                        tarifController.selectedPlan.value,
-                                        tarifController.price.value,
-                                        gst.toString(),
-                                        totalpayment,
-                                        tarifController.additionalFeatures[0],
-                                        tarifController.additionalFeatures[1]);
+                                    return showDialog(
+                                      context: context,
+                                      barrierDismissible:
+                                          false, // user must tap button!
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: const Text('Alert'),
+                                          content: SingleChildScrollView(
+                                            child: ListBody(
+                                              children: const <Widget>[
+                                                Text(
+                                                    'You are ready to use 7 days free trial')
+                                              ],
+                                            ),
+                                          ),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              child: const Text('ok'),
+                                              onPressed: () async {
+                                                await addNewSchoolController
+                                                    .addNewSchool(
+                                                        context,
+                                                        tarifController
+                                                            .maxstudents.value,
+                                                        tarifController
+                                                            .selectedPlan.value,
+                                                        tarifController
+                                                            .price.value,
+                                                        gst.toString(),
+                                                        totalpayment,
+                                                        tarifController
+                                                                .additionalFeatures[
+                                                            0],
+                                                        tarifController
+                                                            .additionalFeatures[1]);
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
                                   } else {
                                     showToast(
                                         msg:
@@ -787,7 +835,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title:  GooglePoppinsWidgets(text: 'ProductName',fontsize: 15.w),
+          title: GooglePoppinsWidgets(text: 'ProductName', fontsize: 15.w),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
@@ -824,8 +872,12 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                                     ['price'],
                                                 index);
                                           },
-                                          icon:  Icon(Icons.add,color: cBlue,size: 25.w),
-                                          label:  GooglePoppinsWidgets(text: "Add",fontsize: 15.w,))
+                                          icon: Icon(Icons.add,
+                                              color: cBlue, size: 25.w),
+                                          label: GooglePoppinsWidgets(
+                                            text: "Add",
+                                            fontsize: 15.w,
+                                          ))
                                     ],
                                   ),
                                 );
@@ -865,14 +917,15 @@ class _SchoolProfileState extends State<SchoolProfile> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: GooglePoppinsWidgets(text: productName,fontsize: 15.w),
+          title: GooglePoppinsWidgets(text: productName, fontsize: 15.w),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                GooglePoppinsWidgets(text: productName,fontsize: 15.w),
+                GooglePoppinsWidgets(text: productName, fontsize: 15.w),
                 Row(
                   children: [
-                     GooglePoppinsWidgets(text: 'Select quantity :: ',fontsize: 14.w),
+                    GooglePoppinsWidgets(
+                        text: 'Select quantity :: ', fontsize: 14.w),
                     IconButton(
                         onPressed: () async {
                           final pricedata = int.parse(productPrice);
@@ -893,7 +946,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
                             }
                           }
                         },
-                        icon:  Icon(Icons.remove,color: cred,size: 25.w)),
+                        icon: Icon(Icons.remove, color: cred, size: 25.w)),
                     ////
                     index == 0
                         ? Obx(
@@ -907,7 +960,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
                             ),
                           ),
 
-                          sizedBoxw10,
+                    sizedBoxw10,
                     /////
                     IconButton(
                         onPressed: () async {
@@ -923,7 +976,11 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                     tarifController.counnterIndex1.value;
                           }
                         },
-                        icon:  Icon(Icons.add,color: cBlue,size: 25.w,)),
+                        icon: Icon(
+                          Icons.add,
+                          color: cBlue,
+                          size: 25.w,
+                        )),
                   ],
                 ),
                 Obx(() {
@@ -932,25 +989,34 @@ class _SchoolProfileState extends State<SchoolProfile> {
                   return SizedBox(
                       height: 50,
                       child: index == 0
-                          ? GooglePoppinsWidgets(fontsize: 12.w,
-                              text: "Total Price :: ${tarifController.extraFeature1Total.value}")
-                          : GooglePoppinsWidgets(fontsize: 12.w,
-                             text:  "Total Price :: ${tarifController.extraFeature2Total.value}"));
+                          ? GooglePoppinsWidgets(
+                              fontsize: 12.w,
+                              text:
+                                  "Total Price :: ${tarifController.extraFeature1Total.value}")
+                          : GooglePoppinsWidgets(
+                              fontsize: 12.w,
+                              text:
+                                  "Total Price :: ${tarifController.extraFeature2Total.value}"));
                 }),
               ],
             ),
           ),
           actions: <Widget>[
             TextButton(
-              child:  GooglePoppinsWidgets(text: 'Cancel',fontsize: 15.w,color: cred,fontWeight: FontWeight.w500),
+              child: GooglePoppinsWidgets(
+                  text: 'Cancel',
+                  fontsize: 15.w,
+                  color: cred,
+                  fontWeight: FontWeight.w500),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             sizedBoxw100,
             TextButton(
-              child:  GooglePoppinsWidgets(text: 'Confirm',fontsize: 15.w,fontWeight: FontWeight.w500),
-              onPressed: () {
+              child: GooglePoppinsWidgets(
+                  text: 'Confirm', fontsize: 15.w, fontWeight: FontWeight.w500),
+              onPressed: () async {
                 if (index == 0) {
                   TarifPurchaseModel tarifPurchaseModelindex0 =
                       TarifPurchaseModel(
@@ -960,6 +1026,9 @@ class _SchoolProfileState extends State<SchoolProfile> {
                           price: tarifController.extraFeature1Total.toString());
                   tarifController.additionalFeatures[0] =
                       tarifPurchaseModelindex0;
+                  await Future.delayed(Duration(milliseconds: 200));
+                  Navigator.pop(context);
+                  Navigator.pop(context);
                 } else if (index == 1) {
                   TarifPurchaseModel tarifPurchaseModelindex1 =
                       TarifPurchaseModel(
@@ -969,6 +1038,9 @@ class _SchoolProfileState extends State<SchoolProfile> {
                           price: tarifController.extraFeature2Total.toString());
                   tarifController.additionalFeatures[1] =
                       tarifPurchaseModelindex1;
+                  await Future.delayed(Duration(milliseconds: 200));
+                  Navigator.pop(context);
+                  Navigator.pop(context);
                 }
               },
             ),
@@ -998,7 +1070,7 @@ class SchoolTextFormFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.all(15.w),
+      padding: EdgeInsets.all(15.w),
       child: TextFormField(
         // obscureText: obscureText,
         validator: function,
