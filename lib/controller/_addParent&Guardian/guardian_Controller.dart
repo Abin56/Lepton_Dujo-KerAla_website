@@ -1,7 +1,6 @@
 // ignore_for_file: file_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dujo_kerala_website/model/parent&guardian/parent_model.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,7 +25,8 @@ class GuardianController extends GetxController {
         studentID: studentDocID,
         createdate: DateTime.now().toString(),
         docid: uuid.v1());
-    firebaseFirestore.collection(Get.find<GetFireBaseData>().bYear.value)
+    firebaseFirestore
+        .collection(Get.find<GetFireBaseData>().bYear.value)
         .doc(Get.find<GetFireBaseData>().bYear.value)
         .collection("classes")
         .doc(classID)
@@ -34,9 +34,9 @@ class GuardianController extends GetxController {
         .doc(data.docid)
         .set(data.toMap())
         .then((value) {
-          guardianName.clear();
-          guardianPhoneNumber.clear();
-      
+      guardianName.clear();
+      guardianPhoneNumber.clear();
+
       showToast(msg: "Added");
     });
   }

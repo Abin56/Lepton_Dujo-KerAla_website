@@ -186,24 +186,7 @@ class AddStudentFromClassTeacher extends StatelessWidget {
                                 ),
                               ),
                               onPressed: () async {
-                                final result = await extractDataFromExcel();
-                                if (result != null) {
-                                  if (result.tables.isNotEmpty) {
-                                    Sheet? table =
-                                        result.tables[result.tables.keys.first];
-
-                                    List<Data?>? firstRow = table?.rows[1];
-                                    teacherAddStudentController
-                                            .studentNameController.text =
-                                        firstRow?[0]?.value.toString() ?? "";
-                                    teacherAddStudentController
-                                            .parentPhNoController.text =
-                                        firstRow?[1]?.value.toString() ?? "";
-                                    teacherAddStudentController
-                                            .addmissionNumberController.text =
-                                        firstRow?[2]?.value.toString() ?? "";
-                                  }
-                                }
+                                await teacherExcelFunction();
                               },
                               child: const Text("Create from Excel"),
                             ),
@@ -219,5 +202,40 @@ class AddStudentFromClassTeacher extends StatelessWidget {
         ),
       ]),
     );
+  }
+
+  Future<void> teacherExcelFunction() async {
+    //extract excel data
+    final result = await extractDataFromExcel();
+    teacherAddStudentController.isLoading.value = true;
+    if (result != null) {
+      if (result.tables.isNotEmpty) {
+        Sheet? table = result.tables[result.tables.keys.first];
+        if (table != null) {
+          for (int i = 1; i < table.maxRows; i++) {
+            List<Data?>? firstRow = table.rows[i];
+//fetching data from excel cells
+            if (firstRow[0]?.value != null &&
+                firstRow[1]?.value != null &&
+                firstRow[2]?.value != null) {
+              //creating objects and upload to firebase
+              teacherAddStudentController.createStudent(
+                  studentModel: AddStudentModel(
+                studentName: firstRow[0]?.value.toString(),
+                parentPhoneNumber: firstRow[1]?.value.toString(),
+                admissionNumber: firstRow[2]?.value.toString(),
+                classID: Get.find<GetFireBaseData>().classIDD.value,
+                createDate: DateTime.now().toString(),
+              ));
+            }
+          }
+          teacherAddStudentController.isLoading.value = false;
+        } else {
+          teacherAddStudentController.isLoading.value = false;
+          showToast(msg: 'Empty Sheet');
+        }
+      }
+    }
+    teacherAddStudentController.isLoading.value = false;
   }
 }

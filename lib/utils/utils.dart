@@ -107,11 +107,12 @@ Future<Excel?> extractDataFromExcel() async {
 
         return excel;
       }
+    } else {
+      showToast(msg: "Excel File Error");
     }
   } catch (e) {
     showToast(msg: "Something went wrong");
     return null;
   }
-
   return null;
 }

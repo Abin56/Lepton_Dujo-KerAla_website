@@ -112,28 +112,16 @@ class AddTeacherSectionScreen extends StatelessWidget {
                                                     ?.validate() ??
                                                 false) {
                                               final teacher = TeacherModel(
-                                                  classID: '',
-                                                  docid: "",
-                                                  teacherName: teacherController
-                                                      .nameController.text,
-                                                  employeeID: teacherController
-                                                      .employeeIDController
-                                                      .text,
-                                                  createdAt:
-                                                      DateTime.now().toString(),
-                                                  teacherPhNo: teacherController
-                                                      .phoneNumberController
-                                                      .text,
-                                                  teacherEmail: "",
-                                                  altPhoneNo: '',
-                                                  district: '',
-                                                  gender: '',
-                                                  houseName: '',
-                                                  houseNumber: '',
-                                                  place: '',
-                                                  userRole: 'teacher',
-                                                  imageId: '',
-                                                  imageUrl: '');
+                                                teacherName: teacherController
+                                                    .nameController.text,
+                                                employeeID: teacherController
+                                                    .employeeIDController.text,
+                                                createdAt:
+                                                    DateTime.now().toString(),
+                                                teacherPhNo: teacherController
+                                                    .phoneNumberController.text,
+                                                userRole: 'teacher',
+                                              );
                                               teacherController
                                                   .createNewTeacher(teacher);
                                             }
@@ -144,48 +132,35 @@ class AddTeacherSectionScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Flexible(
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 10, bottom: 10, left: 100, right: 100),
-                              child: SizedBox(
-                                height: 50,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor:
-                                        const Color.fromARGB(255, 3, 39, 68),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
+                          Obx(() => teacherController.isLoading.value
+                              ? circularProgressIndicator
+                              : Flexible(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 10,
+                                        bottom: 10,
+                                        left: 100,
+                                        right: 100),
+                                    child: SizedBox(
+                                      height: 50,
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: const Color.fromARGB(
+                                              255, 3, 39, 68),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
+                                        ),
+                                        onPressed: () async {
+                                          await teacherExcelFunction();
+                                        },
+                                        child: const Text(
+                                            'Add Teacher From Excel'),
+                                      ),
                                     ),
                                   ),
-                                  onPressed: () async {
-                                    final result = await extractDataFromExcel();
-                                    if (result != null) {
-                                      if (result.tables.isNotEmpty) {
-                                        Sheet? table = result
-                                            .tables[result.tables.keys.first];
-
-                                        List<Data?>? firstRow = table?.rows[1];
-
-                                        teacherController.nameController.text =
-                                            firstRow?[0]?.value.toString() ??
-                                                "";
-                                        teacherController
-                                                .phoneNumberController.text =
-                                            firstRow?[1]?.value.toString() ??
-                                                "";
-                                        teacherController
-                                                .employeeIDController.text =
-                                            firstRow?[2]?.value.toString() ??
-                                                "";
-                                      }
-                                    }
-                                  },
-                                  child: const Text('Add Teacher From Excel'),
-                                ),
-                              ),
-                            ),
-                          ),
+                                )),
                         ],
                       )
                     ]),
@@ -195,6 +170,40 @@ class AddTeacherSectionScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> teacherExcelFunction() async {
+    //extract excel data
+    final result = await extractDataFromExcel();
+    teacherController.isLoading.value = true;
+    if (result != null) {
+      if (result.tables.isNotEmpty) {
+        Sheet? table = result.tables[result.tables.keys.first];
+        if (table != null) {
+          for (int i = 1; i < table.maxRows; i++) {
+            List<Data?>? firstRow = table.rows[i];
+//fetching data from excel cells
+            if (firstRow[0]?.value != null &&
+                firstRow[1]?.value != null &&
+                firstRow[2]?.value != null) {
+              //creating objects and upload to firebase
+              teacherController.createNewTeacher(TeacherModel(
+                teacherName: firstRow[0]?.value.toString(),
+                employeeID: firstRow[1]?.value.toString(),
+                createdAt: DateTime.now().toString(),
+                teacherPhNo: firstRow[2]?.value.toString(),
+                userRole: 'teacher',
+              ));
+            }
+          }
+          teacherController.isLoading.value = false;
+        } else {
+          teacherController.isLoading.value = false;
+          showToast(msg: 'Empty Sheet');
+        }
+      }
+    }
+    teacherController.isLoading.value = false;
   }
 }
 
