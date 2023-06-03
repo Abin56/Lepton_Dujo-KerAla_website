@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable, unused_local_variable, prefer_final_fields
 
+import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/cancellation.dart';
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/web/home/family_policy.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ import '../../../../view/web/home/lepton_Admin/admin_panel_Screen.dart';
 import '../../../../view/web/home/privacypolicy.dart';
 import '../../../../view/web/home/terms _and_condition.dart';
 import 'mob_view.dart/careers.dart';
+import 'mob_view.dart/trademark.dart';
 import 'mob_view.dart/who_we_are.dart';
 import 'mob_view.dart/why_choose_us.dart';
 
@@ -340,8 +342,12 @@ class FooterHomeP extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.pushNamed(
-                                  context, PrivacyPolicy.route);
+                               Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: ((context) =>
+                                          const TrademarkAndPolicy())));
+                                  
                           },
                             child: OnHoverText(
                               builder: (isHoverd) {
@@ -358,8 +364,11 @@ class FooterHomeP extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                                Navigator.pushNamed(
-                                  context, PrivacyPolicy.route);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: ((context) =>
+                                          const CancellationPolicy()))); 
                             },
                             child: OnHoverText(
                               builder: (isHoverd) {
