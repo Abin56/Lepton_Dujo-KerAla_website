@@ -1,7 +1,9 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../controller/payment_tarif/checking_tarif_controller.dart';
@@ -34,11 +36,11 @@ class _GeClasseslListDropDownButtonState
           if (snapshot.hasData) {
             return DropdownButtonFormField(
               hint: leptonTarifListValue == null
-                  ? const Text(
+                  ?  GoogleMonstserratWidgets(text: 
                       "Select Strenght",
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          fontSize: 14),
+                      
+                          color: const Color.fromARGB(255, 0, 0, 0),
+                          fontsize: 14.w,
                     )
                   : Text(leptonTarifListValue!["noofstudents"]),
               decoration: const InputDecoration(

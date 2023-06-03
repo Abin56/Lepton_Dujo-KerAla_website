@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable, unused_local_variable
+// ignore_for_file: must_be_immutable, unused_local_variable, prefer_final_fields
 
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/web/home/family_policy.dart';
@@ -7,14 +7,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'mob_view.dart/careers.dart';
-import 'mob_view.dart/who_we_are.dart';
-import 'mob_view.dart/why_choose_us.dart';
+import '../../../../view/web/home/footer/hover-text/hovertext.dart';
 import '../../../../view/web/home/lepton_Admin/admin_panel_Screen.dart';
 import '../../../../view/web/home/privacypolicy.dart';
 import '../../../../view/web/home/terms _and_condition.dart';
-import '../../../../view/web/home/footer/email/mailsender.dart';
-import '../../../../view/web/home/footer/hover-text/hovertext.dart';
+import 'mob_view.dart/careers.dart';
+import 'mob_view.dart/who_we_are.dart';
+import 'mob_view.dart/why_choose_us.dart';
 
 class FooterHomeP extends StatelessWidget {
   FooterHomeP({super.key});
@@ -64,7 +63,7 @@ class FooterHomeP extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
+          SizedBox(
             //color: cWhite,
             height: 400.h,
             width: double.infinity,
@@ -86,7 +85,7 @@ class FooterHomeP extends StatelessWidget {
                           Text(
                             'Lepton DuJo',
                             style: GoogleFonts.poppins(
-                              fontSize: 25.h,
+                              fontSize: 25.w,
                               fontWeight: FontWeight.bold,
                               color: const Color.fromRGBO(103, 53, 107, 1),
                             ),
@@ -98,7 +97,7 @@ class FooterHomeP extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: ((context) =>
-                                          WhoWeAre())));
+                                          const WhoWeAre())));
                             },
                             child: OnHoverText(
                               builder: (isHoverd) {
@@ -120,7 +119,7 @@ class FooterHomeP extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: ((context) =>
-                                          WhyChooseUs())));
+                                          const WhyChooseUs())));
                             },
                             child: OnHoverText(
                               builder: (isHoverd) {
@@ -144,7 +143,7 @@ class FooterHomeP extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: ((context) =>
-                                          Careers())));
+                                          const Careers())));
                             },
                             child: OnHoverText(
                               builder: (isHoverd) {
@@ -193,7 +192,7 @@ class FooterHomeP extends StatelessWidget {
                           Text(
                             'Connect',
                             style: GoogleFonts.poppins(
-                              fontSize: 25.h,
+                              fontSize: 25.w,
                               fontWeight: FontWeight.bold,
                               color: const Color.fromRGBO(103, 53, 107, 1),
                             ),
@@ -379,8 +378,8 @@ class FooterHomeP extends StatelessWidget {
                       ),
 
                       Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text("Address",
                                 style: GoogleFonts.poppins(
@@ -390,21 +389,21 @@ class FooterHomeP extends StatelessWidget {
                               children: [
                                  const Icon(Icons.location_on),
                                 Text(
-                                  ' Lepton Plus Communications OPC) Pvt.Ltd'
-                                  '\n   5th Floor ,Karimpanal Statue Avenue ,G.H. Road, ',
+                                  ' Lepton Plus Communications (OPC) Pvt.Ltd'
+                                  '\n   5th Floor ,Karimpanal Statue Avenue ,G.H. Road,',
                                   style: k,
                                 ),
                               ],
                             ),
                             Text(
-                              '         Statue ,Thiruvananthapuram-695001. Kerala , India',
+                              '          Statue ,Thiruvananthapuram-695001. Kerala , India',
                               style: k,
                             ),
                             Row(
                               children: [
                                  const Icon(Icons.phone),
                                 Text(
-                                  ' +91 97469 66651 | +91 97463 66651 | +91 471 4053483	',
+                                  '+91 97469 66651 | +91 97463 66651 | +91 471 4053483',
                                   style: k,
                                 ),
                               ],

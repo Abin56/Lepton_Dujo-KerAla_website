@@ -1,9 +1,8 @@
 // ignore_for_file: prefer__fields, must_be_immutable, prefer_final_fields, prefer_const_constructors
 
-import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/FeatureTile.dart';
 import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/_drawer.dart';
-import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/footer_mob.dart';
 import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/footerhomep.dart';
+import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/mob_view.dart/mob_footer.dart';
 import 'package:dujo_kerala_website/utils/responsive.dart';
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
@@ -18,6 +17,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../view/constant/constant.dart';
 import '../../../../../view/web/home/footer/hover-text/hovertext.dart';
+import 'mob_view.dart/feature_tile.dart';
 
 
 class HomePageImages extends StatelessWidget {
@@ -252,7 +252,7 @@ class HomePageImages extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Image.asset(
-                                  "assets/images/attitude_girl 2.png",
+                                  "assets/images/dujo_schools_image.png",
                                   height: 250.h,
                                   width: 250.h,
                                 ),
@@ -332,7 +332,7 @@ class HomePageImages extends StatelessWidget {
                           // color: cBlue,
 
                           child: Image.asset(
-                            'assets/images/college.png',
+                            'assets/images/dujo_colleges_image.png',
                             fit: BoxFit.cover,
                           )),
 
@@ -498,7 +498,7 @@ class HomePageImages extends StatelessWidget {
                           child: Container(
                               color: cred,
                               child: Image.asset(
-                                'assets/images/intitute.png',
+                                'assets/images/dujo_institutions_image.png',
                                 fit: BoxFit.cover,
                               ))),
                       FeatureTile(
@@ -654,7 +654,7 @@ class HomePageImages extends StatelessWidget {
                       SizedBox(
                           height: 300.h,
                           width: double.infinity,
-                          child: Image.asset("assets/images/professional.png",
+                          child: Image.asset("assets/images/dujo_professional_image.png",
                               fit: BoxFit.cover)),
                       FeatureTile(
                         iconImageUrl: "professional.png",
@@ -821,26 +821,26 @@ class HomePageImages extends StatelessWidget {
 
 
           ListView(children: [
-              Padding(
-                padding: EdgeInsets.only(left: 55.w),
-                child: SizedBox(
-                  //
-                  height: 60.h,
-                  width: MediaQuery.of(context).size.width,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
-
-                        width: 530.w,
-                        child: Row(
+              Container(
+                color: Color.fromARGB(255, 240, 240, 240),
+                height: 60.h,
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                    //  color: cred,
+                      width: 470.w,
+                      child: Row(
           
-                          children: [
-                            Row(
+                        children: [
+                          Padding(
+                            padding:  EdgeInsets.only(left: 10.w),
+                            child: Row(
                               children: [
                                  Icon(Icons.phone,size: 20.w),
                                 SizedBox(
-                                  width: 5.h,
+                                  width: 5.w,
                                 ),
                                 Text(
                                   '+91 8891436651',
@@ -852,279 +852,274 @@ class HomePageImages extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(width: 20.h),
-                            Row(
-                              children: [
-                                 Icon(Icons.mail,size: 20.w),
-                                SizedBox(
-                                  width: 5.h,
-                                ),
-                                Text(
-                                  'leptondujo@gmail.com',
-                                  style: GoogleFonts.poppins(
-                                      // adminePrimayColor,
-                                      color: adminePrimayColor,
-                                      fontSize: 16.w,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ],
-                            ),
-                               ],
-                        ),
-                      ),
-                              SizedBox(
-                                  width: 5.h,
-                                ),  SizedBox(
-                                  width: 5.h,
-                                ),
-                                
-                            Expanded(
-                              child: SizedBox(
-                                width: 500.w,
-                               // color: cred,
-                                child: Row(
-                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                          showDialog(
-                                        context: context,
-                                        barrierDismissible:
-                                            false, // user must tap button!
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            title: const Text('School List'),
-                                            content: SingleChildScrollView(
-                                              child: ListBody(
-                                                children: const <Widget>[
-                                                  GetSchoolListDropDownButton()
-                                                ],
-                                                
-                                              ),
-                                            ),
-                                            actions: <Widget>[
-                                             
-                                              TextButton(
-                                                child: const Text('Cancel'),
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                      },
-                                       child: OnHoverText(
-                              builder: (isHoverd) {
-                                final color =
-                                    isHoverd ? Color.fromARGB(255, 255, 255, 255) : Color.fromARGB(255, 245, 0, 0);
-                                return  ContainerDecrationTabs(text: 'Schools',);
-                              },
-                            ),
-                                       
-                                       
-                                     
-                                       
-                                       ),
-                                  
-                                
-                              
-                                // SizedBox(
-                                //     width: 5.h,
-                                //   ),
-                              GestureDetector(
-                                onTap: () {
-                                   Navigator.push(context,
-                                                  MaterialPageRoute(
-                                                builder: (context) {
-                                                  return const UnderMaintanceScreen();
-                                                },
-                                              ));
-                                },
-                                child: ContainerDecrationTabs(text: 'Colleges')),
-                                // SizedBox(
-                                //     width: 5.h,
-                                //   ),
-                              GestureDetector(
-                                onTap: () {
-                                    Navigator.push(context,
-                                                  MaterialPageRoute(
-                                                builder: (context) {
-                                                  return const UnderMaintanceScreen();
-                                                },
-                                              ));
-                                },
-                                child: ContainerDecrationTabs(text: 'Professionals',)),
-                                // SizedBox(
-                                //     width: 5.h,
-                                //   ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(context,
-                                                  MaterialPageRoute(
-                                                builder: (context) {
-                                                  return const UnderMaintanceScreen();
-                                                },
-                                              ));  
-                                },
-                                child: ContainerDecrationTabs(text: 'Institutions',)),
-                                                      ],
-                                                    ),
-                                                  ),
-                            ),
-                     
-                      Padding(
-                        padding: EdgeInsets.only(left: 200.w),
-                        child: Container(
-                        //  color: cBlue,
-                          child: InkWell(
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                barrierDismissible:
-                                    false, // user must tap button!
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: const Text('Enter Your School ID'),
-                                    content: SingleChildScrollView(
-                                      child: ListBody(
-                                        children: const <Widget>[
-                                          GetSchoolListDropDownButton()
-                                        ],
-                                        // children: [
-                                        //   // TextFormField(
-                                        //   //   controller:schoolIdController,
-                                        //   // )
-                                        // ],
-                                      ),
-                                    ),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        child: const Text('Ok'),
-                                        onPressed: () async {
-                                          if (schoolListValue['docid'] ==
-                                              null) {
-                                            return showDialog(
-                                              context: context,
-                                              barrierDismissible:
-                                                  false, // user must tap button!
-                                              builder: (BuildContext context) {
-                                                return AlertDialog(
-                                                  title: const Text('Alert'),
-                                                  content:
-                                                      SingleChildScrollView(
-                                                    child: ListBody(
-                                                      children: const <Widget>[
-                                                        Text(
-                                                            'Sorry you have no access to delete')
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  actions: <Widget>[
-                                                    TextButton(
-                                                      child: const Text('Ok'),
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                          } else {
-                                            await Navigator.push(context,
-                                                MaterialPageRoute(
-                                              builder: (context) {
-                                                return const LoginScreen();
-                                              },
-                                            ));
-                                          }
-                                        },
-                                      ),
-                                      TextButton(
-                                        child: const Text('Cancel'),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            },
-                            child: Text(
-                              'Login',
-                              style: GoogleFonts.poppins(
-                                  fontSize: 18.w,
-                                  fontWeight: FontWeight.bold,
-                                  color: cred),
-                            ),
                           ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 40.w),
-                        child: Container(
-                          //  width: MediaQuery.of(context).size.hidth / 4,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          SizedBox(width: 20.h),
+                          Row(
                             children: [
-                              InkWell(
-                                onTap: () {
-                                  _launchFacebookUrl();
-                                },
-                                child: Image.asset(
-                                  'assets/images/frdd.png',
-                                  height: 25.h,
-                                  width: 38.w,
-                                  color: adminePrimayColor,
-                                  //Color(0xFF17BDB5),
-                                ),
+                               Icon(Icons.mail,size: 20.w),
+                              SizedBox(
+                                width: 5.h,
                               ),
-                              SizedBox(width: 10.w),
-                              InkWell(
-                                onTap: () {
-                                  _launchInstaUrl();
-                                },
-                                child: Image.asset(
-                                  'assets/images/instag.png',
-                                  height: 40.h,
-                                  width: 40.w,
-                                  color: adminePrimayColor,
-                                ),
+                              Text(
+                                'leptondujo@gmail.com',
+                                style: GoogleFonts.poppins(
+                                    // adminePrimayColor,
+                                    color: adminePrimayColor,
+                                    fontSize: 16.w,
+                                    fontWeight: FontWeight.w500),
                               ),
-                              SizedBox(width: 10.w),
-                              InkWell(
-                                onTap: () {
-                                  _launchTwitterUrl();
-                                },
-                                child: Image.asset(
-                                  'assets/images/twitt.png',
-                                  height: 29.h,
-                                  width: 30.w,
-                                  color: adminePrimayColor,
-                                ),
-                              ),
-                              SizedBox(width: 10.w),
-                              InkWell(
-                                onTap: () {
-                                  _launchyouTubeUrl();
-                                },
-                                child: Image.asset(
-                                  'assets/images/utube.png',
-                                  height: 28.h,
-                                  width: 28.w,
-                                  color: adminePrimayColor,
-                                ),
-                              )
                             ],
                           ),
+                             ],
+                      ),
+                    ),
+                            SizedBox(
+                                width: 90.w,
+                              ),
+
+                          SizedBox(
+                            width: 500.w,
+                           // color: cred,
+                            child: Row(
+                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                      showDialog(
+                                    context: context,
+                                    barrierDismissible:
+                                        false, // user must tap button!
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: const Text('School List'),
+                                        content: SingleChildScrollView(
+                                          child: ListBody(
+                                            children: const <Widget>[
+                                              GetSchoolListDropDownButton()
+                                            ],
+                                            
+                                          ),
+                                        ),
+                                        actions: <Widget>[
+                                         
+                                          TextButton(
+                                            child: const Text('Cancel'),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                  },
+                                   child: OnHoverText(
+                          builder: (isHoverd) {
+                            final color =
+                                isHoverd ? Color.fromARGB(255, 255, 255, 255) : Color.fromARGB(255, 245, 0, 0);
+                            return  ContainerDecrationTabs(text: 'Schools',);
+                          },
+                          ),
                         ),
-                      )
-                    ],
-                  ),
+                         SizedBox(
+                                width: 10.w,
+                              ),
+                          GestureDetector(
+                            onTap: () {
+                               Navigator.push(context,
+                                              MaterialPageRoute(
+                                            builder: (context) {
+                                              return const UnderMaintanceScreen();
+                                            },
+                                          ));
+                            },
+                            child: ContainerDecrationTabs(text: 'Colleges')),
+                            SizedBox(
+                                width: 10.w,
+                              ),
+                          GestureDetector(
+                            onTap: () {
+                                Navigator.push(context,
+                                              MaterialPageRoute(
+                                            builder: (context) {
+                                              return const UnderMaintanceScreen();
+                                            },
+                                          ));
+                            },
+                            child: ContainerDecrationTabs(text: 'Professionals',)),
+                            SizedBox(
+                                width: 10.w,
+                              ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(context,
+                                              MaterialPageRoute(
+                                            builder: (context) {
+                                              return const UnderMaintanceScreen();
+                                            },
+                                          ));  
+                            },
+                            child: ContainerDecrationTabs(text: 'Institutions',)),
+                                                  ],
+                                                ),
+                                              ),
+                   
+                    Padding(
+                      padding: EdgeInsets.only(left: 60.w),
+                      child: SizedBox(
+                        height: 30.h,
+                        width: 100.w,
+                      //  color: cBlue,
+                        child: InkWell(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              barrierDismissible:
+                                  false, // user must tap button!
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text('Enter Your School ID'),
+                                  content: SingleChildScrollView(
+                                    child: ListBody(
+                                      children: const <Widget>[
+                                        GetSchoolListDropDownButton()
+                                      ],
+                                      // children: [
+                                      //   // TextFormField(
+                                      //   //   controller:schoolIdController,
+                                      //   // )
+                                      // ],
+                                    ),
+                                  ),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: const Text('Ok'),
+                                      onPressed: () async {
+                                        if (schoolListValue['docid'] ==
+                                            null) {
+                                          return showDialog(
+                                            context: context,
+                                            barrierDismissible:
+                                                false, // user must tap button!
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                title: const Text('Alert'),
+                                                content:
+                                                    SingleChildScrollView(
+                                                  child: ListBody(
+                                                    children: const <Widget>[
+                                                      Text(
+                                                          'Sorry you have no access to delete')
+                                                    ],
+                                                  ),
+                                                ),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    child: const Text('Ok'),
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                        } else {
+                                          await Navigator.push(context,
+                                              MaterialPageRoute(
+                                            builder: (context) {
+                                              return const LoginScreen();
+                                            },
+                                          ));
+                                        }
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: const Text('Cancel'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          child: Image.asset('assets/images/login-button.png')
+                          
+                          // Text(
+                          //   'Login',
+                          //   style: GoogleFonts.poppins(
+                          //       fontSize: 18.w,
+                          //       fontWeight: FontWeight.bold,
+                          //       color: cred),
+                          // ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                                width: 40.w,
+                              ),
+
+                    Container(
+                      margin: EdgeInsets.only(right: 45.w),
+                      //  width: MediaQuery.of(context).size.hidth / 4,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              _launchFacebookUrl();
+                            },
+                            child: Image.asset(
+                              'assets/images/frdd.png',
+                              height: 25.h,
+                              width: 38.w,
+                              color: adminePrimayColor,
+                              //Color(0xFF17BDB5),
+                            ),
+                          ),
+                          SizedBox(width: 10.w),
+                          InkWell(
+                            onTap: () {
+                              _launchInstaUrl();
+                            },
+                            child: Image.asset(
+                              'assets/images/instag.png',
+                              height: 40.h,
+                              width: 40.w,
+                              color: adminePrimayColor,
+                            ),
+                          ),
+                          SizedBox(width: 10.w),
+                          InkWell(
+                            onTap: () {
+                              _launchTwitterUrl();
+                            },
+                            child: Image.asset(
+                              'assets/images/twitt.png',
+                              height: 29.h,
+                              width: 30.w,
+                              color: adminePrimayColor,
+                            ),
+                          ),
+                          SizedBox(width: 10.w),
+                          InkWell(
+                            onTap: () {
+                              _launchyouTubeUrl();
+                            },
+                            child: Image.asset(
+                              'assets/images/utube.png',
+                              height: 28.h,
+                              width: 28.w,
+                              color: adminePrimayColor,
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
                 ),
               ),
               Stack(

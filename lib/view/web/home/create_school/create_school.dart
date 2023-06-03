@@ -80,417 +80,485 @@ class _SchoolProfileState extends State<SchoolProfile> {
               width: 730.w,
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Hi ! DuJo  ',
-                        style: ralewayStyle.copyWith(
-                          fontSize: 30.0.w,
-                          color: AppColors.whiteColor,
-                          fontWeight: FontWeight.w800,
+                  Container(
+                    margin: EdgeInsets.only(top: 35.h),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        // SizedBox(
+                        //         height: ,
+                        //         ),
+
+                        Text(
+                          'Hi DuJo',
+                          style: ralewayStyle.copyWith(
+                            fontSize: 30.0.w,
+                            color: AppColors.whiteColor,
+                            fontWeight: FontWeight.w800,
+                          ),
                         ),
-                      ),
-                      Text(
-                        ' Welcomes you ',
-                        style: ralewayStyle.copyWith(
-                          fontSize: 23.0.w,
-                          color: AppColors.whiteColor,
-                          fontWeight: FontWeight.w800,
+                        Text(
+                          '    Welcomes you',
+                          style: ralewayStyle.copyWith(
+                            fontSize: 23.0.w,
+                            color: AppColors.whiteColor,
+                            fontWeight: FontWeight.w800,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: size.width / 20,
-                  ),
-                  Text(
-                    'Create New School',
-                    style: ralewayStyle.copyWith(
-                      fontSize: 25.0.w,
-                      color: AppColors.whiteColor,
-                      fontWeight: FontWeight.w800,
+                      ],
                     ),
                   ),
-                  //
-                  //
-                  //
-                  //
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(bottom: 25.h),
+                    child: Text(
+                      'Create New School',
+                      style: ralewayStyle.copyWith(
+                        fontSize: 25.0.w,
+                        color: AppColors.whiteColor,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ),
                   Flexible(
                     child: SizedBox(
-                      height: size.width / 3,
-                      width: 700.w,
+                      height: 890.h,
+                      width: 800.w,
                       child: Center(
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 71, 164, 235)
-                                  .withOpacity(0.1)),
-                          height: 800,
-                          width: 600,
-                          child: SingleChildScrollView(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  height: 790,
-                                  width: 550,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.black),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Image.network(
-                                            'https://firebasestorage.googleapis.com/v0/b/leptondujokerala.appspot.com/o/files%2FLepton%2Fleptonlogo.png?alt=media&token=2e71233e-58a5-42b7-abc7-b51e56774854',
-                                            height: 100,
-                                            width: 100,
-                                          ),
-                                          GoogleMonstserratWidgets(
-                                            text: "Lepton Dujo Tarif",
-                                            fontsize: 20,
-                                            fontWeight: FontWeight.bold,
-                                            letterSpacing: 2,
-                                          ),
-                                        ],
-                                      ),
-                                      sizedBoxH20,
-                                      GoogleMonstserratWidgets(
-                                        text: "Choose your school type",
-                                        fontsize: 20,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          GooglePoppinsWidgets(
-                                            color: Colors.grey,
-                                            text: "*Based on student strength*",
-                                            fontsize: 11,
-                                          ),
-                                        ],
-                                      ),
-                                      sizedBoxH20,
-                                      SizedBox(
-                                          height: 50,
-                                          width: 400,
-                                          child: Row(
-                                            children: [
-                                              GooglePoppinsWidgets(
-                                                color: Colors.white,
-                                                text:
-                                                    "Select Student Strenght :  ",
-                                                fontsize: 11,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                              Expanded(
-                                                  child:
-                                                      GetTarifListDropDownButton()),
-                                            ],
-                                          )),
-                                      sizedBoxH20,
-                                      Obx(() {
-                                        if (tarifController
-                                            .price.value.isEmpty) {
-                                          return Center(
-                                            child: GooglePoppinsWidgets(
-                                              color: Colors.white,
-                                              text: "Select Plan ↑ ",
-                                              fontsize: 11,
-                                              fontWeight: FontWeight.w400,
+                        child: Padding(
+                          padding:  EdgeInsets.all(10.w),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                // color: const Color.fromARGB(255, 71, 164, 235)
+                                //     .withOpacity(0.1)
+                                ),
+                            height: 880.h,
+                            width: 600.w,
+                            child: SingleChildScrollView(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    height: 870.h,
+                                    width: 550.w,
+                                    decoration: BoxDecoration(
+                                      color: cWhite,
+                                      border: Border.all(color: Colors.black),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Image.network(
+                                              'https://firebasestorage.googleapis.com/v0/b/leptondujokerala.appspot.com/o/files%2FLepton%2Fleptonlogo.png?alt=media&token=2e71233e-58a5-42b7-abc7-b51e56774854',
+                                              height: 100.h,
+                                              width: 100.w,
                                             ),
-                                          );
-                                        } else {
-                                          tarif = true;
-                                          totalpayment =
-                                              tarifController.price.value;
-                                          double d = double.parse(
-                                              tarifController.price.value);
-                                          gst = d + (d) * 18 / 100;
-
-                                          // totalpayment = totalpayment +
-                                          //     tarifController.additionalFeatures[0].price +
-                                          //     totalpayment +
-                                          //     tarifController.additionalFeatures[1].price;
-
-                                          if (tarifController
-                                              .additionalFeatures[0]
-                                              .price
-                                              .isNotEmpty) {
-                                            int result0 = int.parse(
-                                                    tarifController
-                                                        .additionalFeatures[0]
-                                                        .price) +
-                                                int.parse(totalpayment);
-                                            totalpayment = result0.toString();
-                                            gst =
-                                                result0 + (result0) * 18 / 100;
-                                            // log("message$result0");
-                                            // log("Resuktsss${result0.toString()}");
-                                          }
-
-                                          if (tarifController
-                                              .additionalFeatures[1]
-                                              .price
-                                              .isNotEmpty) {
-                                            int result0 = int.parse(
-                                                    tarifController
-                                                        .additionalFeatures[1]
-                                                        .price) +
-                                                int.parse(totalpayment);
-                                            totalpayment = result0.toString();
-                                            gst =
-                                                result0 + (result0) * 18 / 100;
-                                          }
-
-                                          return Column(
+                                            GoogleMonstserratWidgets(
+                                              text: "Lepton Dujo Tarif",
+                                              fontsize: 20.w,
+                                              color: cBlack,
+                                              fontWeight: FontWeight.bold,
+                                              letterSpacing: 2,
+                                            ),
+                                          ],
+                                        ),
+                                        sizedBoxH20,
+                                        GoogleMonstserratWidgets(
+                                          text: "Choose your school type",
+                                          fontsize: 20.w,
+                                          color: cBlack,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(top: 35.h),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               GooglePoppinsWidgets(
-                                                color: Colors.white,
+                                                color:
+                                                    Color.fromARGB(255, 0, 0, 0),
                                                 text:
-                                                    "Selected Plan : ${tarifController.selectedPlan.value} ",
-                                                fontsize: 11,
-                                                fontWeight: FontWeight.w400,
+                                                    "* Based on student strength *",
+                                                fontsize: 15.w,
+                                                fontWeight: FontWeight.w500,
                                               ),
-                                              GooglePoppinsWidgets(
-                                                color: Colors.white,
-                                                text:
-                                                    "Maximum Students: ${tarifController.maxstudents.value} ",
-                                                fontsize: 11,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                              GooglePoppinsWidgets(
-                                                color: Colors.white,
-                                                text:
-                                                    "Price :  ${tarifController.price.value} INR",
-                                                fontsize: 11,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                              GestureDetector(
-                                                onTap: () async {
-                                                  return showDialog(
-                                                    context: context,
-                                                    barrierDismissible:
-                                                        false, // user must tap button!
-                                                    builder:
-                                                        (BuildContext context) {
-                                                      return AlertDialog(
-                                                        backgroundColor:
-                                                            const Color
-                                                                    .fromARGB(
-                                                                255,
-                                                                141,
-                                                                191,
-                                                                232),
-                                                        title: const Text(
-                                                            'Dujo Features'),
-                                                        content:
-                                                            SingleChildScrollView(
-                                                          child: ListBody(
-                                                            children: <Widget>[
-                                                              GooglePoppinsWidgets(
-                                                                text:
-                                                                    '''The above mentioned Tariff include following features\n
-        • Digitalized infra of school
-        • Live updates of attendance
-        • List of classes
-        • List of teachers
-        • Notices and Events as notifications
-        • Online payment facilities
-        • Generate bill option
-        • Recorded classes
-        • Student login
-        • Parent login
-        • Admin login
-        • Teacher login
-        • Guardian Login
-        • Generate TC
-        • Generate student summary
-        • Chat
-        • Progress Report
-        • Exam Notifications
-        • PTA
-        • Mother PTA
-        • School Protection Group
-        • Time Table
-        • Live classes''',
-                                                                fontsize: 15,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        actions: <Widget>[
-                                                          TextButton(
-                                                            child: const Text(
-                                                                'ok'),
-                                                            onPressed: () {
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
-                                                            },
-                                                          ),
-                                                        ],
-                                                      );
-                                                    },
-                                                  );
-                                                },
-                                                child: GooglePoppinsWidgets(
-                                                  color: Colors.white,
-                                                  text: "View Features",
-                                                  fontsize: 15,
+                                            ],
+                                          ),
+                                        ),
+                                        sizedBoxH20,
+                                        SizedBox(
+                                            height: 70.h,
+                                            width: 450.w,
+                                            child: Row(
+                                              children: [
+                                                GooglePoppinsWidgets(
+                                                  color: cBlack,
+                                                  text:
+                                                      "Select Student Strenght :  ",
+                                                  fontsize: 15.w,
                                                   fontWeight: FontWeight.w400,
                                                 ),
+                                                sizedBoxw10,
+                                                Expanded(
+                                                    child:
+                                                        GetTarifListDropDownButton()),
+                                              ],
+                                            )),
+                                        sizedBoxH20,
+                                        Obx(() {
+                                          if (tarifController
+                                              .price.value.isEmpty) {
+                                            return Center(
+                                              child: GooglePoppinsWidgets(
+                                                color: cBlack,
+                                                text: "Select Plan ↑ ",
+                                                fontsize: 18.w,
+                                                fontWeight: FontWeight.w700,
                                               ),
-                                              sizedBoxH20,
-                                              GestureDetector(
-                                                onTap: () async {
-                                                  selectcount(
-                                                    context,
-                                                  );
-                                                },
-                                                child: ButtonContainerWidget(
-                                                    curving: 10,
-                                                    colorindex: 0,
-                                                    height: 40,
-                                                    width: 200,
-                                                    child: Center(
-                                                      child:
-                                                          GooglePoppinsWidgets(
-                                                        color: Colors.amber,
-                                                        text:
-                                                            "Add Aditional Featuers",
-                                                        fontsize: 11,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                    )),
-                                              ),
-                                              Obx(() => SizedBox(
-                                                    height: 100,
-                                                    child: tarifController
-                                                            .additionalFeatures
-                                                            .isEmpty
-                                                        ? const Text("Nodata")
-                                                        : ListView.separated(
-                                                            itemBuilder:
-                                                                (context,
-                                                                    index) {
-                                                              return Column(
-                                                                children: [
-                                                                  Row(
-                                                                    children: [
-                                                                      GooglePoppinsWidgets(
-                                                                        text:
-                                                                            "Product : ${tarifController.additionalFeatures[index].product}",
-                                                                        fontsize:
-                                                                            12,
-                                                                        color: Colors
-                                                                            .white,
-                                                                      ),
-                                                                      sizedBoxW20,
-                                                                      GooglePoppinsWidgets(
-                                                                        text:
-                                                                            "qty : ${tarifController.additionalFeatures[index].quantity}",
-                                                                        fontsize:
-                                                                            11,
-                                                                        color: Colors
-                                                                            .white,
-                                                                      ),
-                                                                      sizedBoxW20,
-                                                                      GooglePoppinsWidgets(
-                                                                        text:
-                                                                            "Price : ${tarifController.additionalFeatures[index].price}",
-                                                                        fontsize:
-                                                                            11,
-                                                                        color: Colors
-                                                                            .white,
-                                                                      ),
-                                                                      const Spacer(),
-                                                                      TextButton.icon(
-                                                                          onPressed: () async {
-                                                                            if (index ==
-                                                                                0) {
-                                                                              tarifController.additionalFeatures[0] = TarifPurchaseModel(quantity: 0, totalamount: 0, product: '', price: '');
-                                                                            } else {
-                                                                              tarifController.additionalFeatures[1] = TarifPurchaseModel(quantity: 0, totalamount: 0, product: '', price: '');
-                                                                            }
-                                                                          },
-                                                                          icon: const Icon(Icons.delete),
-                                                                          label: const Text('Remove'))
-                                                                    ],
-                                                                  ),
-                                                                  // Text(
-                                                                  //     "Total price :${tarifController.extraFeatureTotalPrice}"),
-                                                                ],
-                                                              );
-                                                            },
-                                                            separatorBuilder:
-                                                                (context,
-                                                                    index) {
-                                                              return const Divider();
-                                                            },
-                                                            itemCount:
-                                                                tarifController
-                                                                    .additionalFeatures
-                                                                    .length),
-                                                  )),
-                                              Row(
-                                                children: [
-                                                  const Spacer(),
-                                                  GooglePoppinsWidgets(
-                                                    color: Colors.white,
-                                                    text:
-                                                        "Total  :  ₹ $totalpayment ",
-                                                    fontsize: 11,
-                                                    fontWeight: FontWeight.w400,
-                                                  ),
-                                                ],
-                                              ),
-                                              GooglePoppinsWidgets(
-                                                color: Colors.white,
-                                                text:
-                                                    "Total Price Including GST  :  ₹ $gst ",
-                                                fontsize: 11,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                              GestureDetector(
-                                                  onTap: () {
-                                                    showTermsandCondition(
-                                                        context);
-                                                  },
-                                                  child: const Text(
-                                                      'view terms and conditions')),
-                                              CheckboxListTile(
-                                                title: const Text(
-                                                    'I agree to the terms and conditions'),
-                                                value: isChecked,
-                                                onChanged: (value) {
-                                                  setState(() {
-                                                    isChecked = value!;
-                                                  });
-                                                },
-                                              ),
-                                              if (showError && !isChecked)
-                                                const Text(
-                                                  'Please agree to the terms and conditions',
-                                                  style: TextStyle(
-                                                      color: Colors.red),
+                                            );
+                                          } else {
+                                            tarif = true;
+                                            totalpayment =
+                                                tarifController.price.value;
+                                            double d = double.parse(
+                                                tarifController.price.value);
+                                            gst = d + (d) * 18 / 100;
+                        
+                                            // totalpayment = totalpayment +
+                                            //     tarifController.additionalFeatures[0].price +
+                                            //     totalpayment +
+                                            //     tarifController.additionalFeatures[1].price;
+                        
+                                            if (tarifController
+                                                .additionalFeatures[0]
+                                                .price
+                                                .isNotEmpty) {
+                                              int result0 = int.parse(
+                                                      tarifController
+                                                          .additionalFeatures[0]
+                                                          .price) +
+                                                  int.parse(totalpayment);
+                                              totalpayment = result0.toString();
+                                              gst =
+                                                  result0 + (result0) * 18 / 100;
+                                              // log("message$result0");
+                                              // log("Resuktsss${result0.toString()}");
+                                            }
+                        
+                                            if (tarifController
+                                                .additionalFeatures[1]
+                                                .price
+                                                .isNotEmpty) {
+                                              int result0 = int.parse(
+                                                      tarifController
+                                                          .additionalFeatures[1]
+                                                          .price) +
+                                                  int.parse(totalpayment);
+                                              totalpayment = result0.toString();
+                                              gst =
+                                                  result0 + (result0) * 18 / 100;
+                                            }
+                        
+                                            return Column(
+                                              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                GooglePoppinsWidgets(
+                                                  color: cBlack,
+                                                  text:
+                                                      "Selected Plan : ${tarifController.selectedPlan.value} ",
+                                                  fontsize: 15.w,
+                                                  fontWeight: FontWeight.w400,
                                                 ),
-                                              const SizedBox(height: 16),
-                                              // ElevatedButton(
-                                              //   onPressed: _validateForm,
-                                              //   child: const Text('Submit'),
-                                              // ),
-                                            ],
-                                          );
-                                        }
-                                      }),
-                                    ],
-                                  ),
-                                )
-                              ],
+                                                sizedBoxH10,
+                                                sizedBoxH10,
+                                                GooglePoppinsWidgets(
+                                                  color: cBlack,
+                                                  text:
+                                                      "Maximum Students: ${tarifController.maxstudents.value} ",
+                                                  fontsize: 15.w,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                                sizedBoxH10,
+                                                sizedBoxH10, sizedBoxH10,
+                                                GooglePoppinsWidgets(
+                                                  color: Colors.black,
+                                                  text:
+                                                      "Price :  ${tarifController.price.value} INR",
+                                                  fontsize: 15.w,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                                sizedBoxH10,
+                                                sizedBoxH10,
+                                                
+                                                GestureDetector(
+                                                  onTap: () async {
+                                                    return showDialog(
+                                                      context: context,
+                                                      barrierDismissible:
+                                                          false, // user must tap button!
+                                                      builder:
+                                                          (BuildContext context) {
+                                                        return AlertDialog(
+                                                          backgroundColor:
+                                                              Color.fromARGB(
+                                                                  255, 0, 0, 0),
+                                                          title: const Text(
+                                                              'Dujo Features'),
+                                                          content:
+                                                              SingleChildScrollView(
+                                                            child: ListBody(
+                                                              children: <Widget>[
+                                                                GooglePoppinsWidgets(
+                                                                  text:
+                                                                      '''The above mentioned Tariff include following features\n
+                                • Digitalized infra of school
+                                • Live updates of attendance
+                                • List of classes
+                                • List of teachers
+                                • Notices and Events as notifications
+                                • Online payment facilities
+                                • Generate bill option
+                                • Recorded classes
+                                • Student login
+                                • Parent login
+                                • Admin login
+                                • Teacher login
+                                • Guardian Login
+                                • Generate TC
+                                • Generate student summary
+                                • Chat
+                                • Progress Report
+                                • Exam Notifications
+                                • PTA
+                                • Mother PTA
+                                • School Protection Group
+                                • Time Table
+                                • Live classes''',
+                                                                  fontsize: 16.w,
+                                                                  color: cWhite,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          actions: <Widget>[
+                                                            TextButton(
+                                                              child: const Text(
+                                                                  'Ok'),
+                                                              onPressed: () {
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                              },
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    );
+                                                  },
+                                                  child: Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.center,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.center,
+                                                    children: [
+                                                      GooglePoppinsWidgets(
+                                                        color: Colors.blue,
+                                                        text: "View Features ",
+                                                        fontsize: 16.w,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                      Icon(
+                                                        Icons.arrow_drop_down,
+                                                        color: cBlue,
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                                sizedBoxH20,
+                                                GestureDetector(
+                                                  onTap: () async {
+                                                    selectcount(
+                                                      context,
+                                                    );
+                                                  },
+                                                  child: ButtonContainerWidget(
+                                                      curving: 10,
+                                                      colorindex: 0,
+                                                      height: 43.h,
+                                                      width: 210.w,
+                                                      child: Center(
+                                                        child:
+                                                            GooglePoppinsWidgets(
+                                                          color: Colors.white,
+                                                          text:
+                                                              "Add Aditional Featuers",
+                                                          fontsize: 11.w,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      )),
+                                                ),
+                                                  sizedBoxH20,
+                                                Obx(() => Padding(
+                                                  padding:  EdgeInsets.only(left: 25.w),
+                                                  child: SizedBox(
+                                                        height: 100.h,
+                                                        child: tarifController
+                                                                .additionalFeatures
+                                                                .isEmpty
+                                                            ?  GoogleMonstserratWidgets(text: "Nodata",fontsize: 12.w,)
+                                                            : ListView.separated(
+                                                                itemBuilder:
+                                                                    (context,
+                                                                        index) {
+                                                                  return Column(
+                                                                    children: [
+                                                                      Row(
+                                                                        children: [
+                                                                          GooglePoppinsWidgets(
+                                                                            text:
+                                                                                "Product : ${tarifController.additionalFeatures[index].product}",
+                                                                            fontsize:
+                                                                                13.w,
+                                                                            color: Colors
+                                                                                .black,
+                                                                                fontWeight: FontWeight.w500,
+                                                                          ),
+                                                                          sizedBoxW20,
+                                                                          GooglePoppinsWidgets(
+                                                                            text:
+                                                                                "qty : ${tarifController.additionalFeatures[index].quantity}",
+                                                                            fontsize:
+                                                                                13.w,
+                                                                            color: Colors
+                                                                                .black,
+                                                                               fontWeight: FontWeight.w500,  
+                                                                          ),
+                                                                          sizedBoxW20,
+                                                                          GooglePoppinsWidgets(
+                                                                            text:
+                                                                                "Price : ${tarifController.additionalFeatures[index].price}",
+                                                                            fontsize:
+                                                                                12.w,
+                                                                            color: Colors
+                                                                                .black,
+                                                                                 fontWeight: FontWeight.w500,
+                                                                          ),
+                                                                          const Spacer(),
+                                                                          Padding(
+                                                                            padding:  EdgeInsets.only(right: 20.w),
+                                                                            child: TextButton.icon(
+                                                                                onPressed: () async {
+                                                                                  if (index ==
+                                                                                      0) {
+                                                                                    tarifController.additionalFeatures[0] = TarifPurchaseModel(quantity: 0, totalamount: 0, product: '', price: '');
+                                                                                  } else {
+                                                                                    tarifController.additionalFeatures[1] = TarifPurchaseModel(quantity: 0, totalamount: 0, product: '', price: '');
+                                                                                  }
+                                                                                },
+                                                                                icon:  Icon(Icons.delete,color: cred,size: 25.w),
+                                                                                label:  GoogleMonstserratWidgets(text: 'Remove',fontsize: 12.w,color: cred,)),
+                                                                          )
+                                                                        ],
+                                                                      ),
+                                                                      // Text(
+                                                                      //     "Total price :${tarifController.extraFeatureTotalPrice}"),
+                                                                    ],
+                                                                  );
+                                                                },
+                                                                separatorBuilder:
+                                                                    (context,
+                                                                        index) {
+                                                                  return const Divider();
+                                                                },
+                                                                itemCount:
+                                                                    tarifController
+                                                                        .additionalFeatures
+                                                                        .length),
+                                                      ),
+                                                )),
+                                                Padding(
+                                                  padding:  EdgeInsets.only(right: 25.w),
+                                                  child: Row(
+                                                    children: [
+                                                      const Spacer(),
+                                                      GooglePoppinsWidgets(
+                                                        color: Colors.black,
+                                                        text:
+                                                            "Total  :  ₹ $totalpayment ",
+                                                        fontsize: 15.w,
+                                                        fontWeight: FontWeight.w600,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Padding(
+                                                   padding:  EdgeInsets.only(top: 15.w),
+                                                  child: GooglePoppinsWidgets(
+                                                    color: Colors.black,
+                                                    text:
+                                                        "Total Price Including GST  :  ₹ $gst ",
+                                                    fontsize: 13.w,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                                sizedBoxH10,
+                                                GestureDetector(
+                                                    onTap: () {
+                                                      showTermsandCondition(
+                                                          context);
+                                                    },
+                                                    child:  Padding(
+                                                      padding:  EdgeInsets.only(top: 15.w),
+                                                      child: GoogleMonstserratWidgets(text: 
+                                                          'View terms and conditions',color: cBlue,fontsize: 14.w,fontWeight: FontWeight.w500,),
+                                                    )),
+                                                    sizedBoxH10,
+                                                Padding(
+                                                  padding:  EdgeInsets.only(left: 50.w,right: 50.w),
+
+                                                  child: CheckboxListTile(
+                                                    title:  GoogleMonstserratWidgets(text: 
+                                                        'I agree to the terms and conditions',
+                                                        fontsize: 15.w,fontWeight: FontWeight.w600),
+                                                    value: isChecked,
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        isChecked = value!;
+                                                      });
+                                                    },
+                                                  ),
+                                                ),
+                                                if (showError && !isChecked)
+                                                  const Text(
+                                                    'Please agree to the terms and conditions',
+                                                    style: TextStyle(
+                                                        color: Colors.red),
+                                                  ),
+                                                 SizedBox(height: 16.h),
+                                                // ElevatedButton(
+                                                //   onPressed: _validateForm,
+                                                //   child: const Text('Submit'),
+                                                // ),
+                                              ],
+                                            );
+                                          }
+                                        }),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -688,7 +756,9 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                         tarifController.additionalFeatures[0],
                                         tarifController.additionalFeatures[1]);
                                   } else {
-                                    showToast(msg: 'Please accept the terms and conditions');
+                                    showToast(
+                                        msg:
+                                            'Please accept the terms and conditions');
                                     return _validateForm();
                                   }
                                 }
@@ -717,13 +787,13 @@ class _SchoolProfileState extends State<SchoolProfile> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('productName'),
+          title:  GooglePoppinsWidgets(text: 'ProductName',fontsize: 15.w),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                 SizedBox(
-                  height: 400,
-                  width: 400,
+                  height: 410.h,
+                  width: 410.w,
                   child: StreamBuilder(
                       stream: FirebaseFirestore.instance
                           .collection("DujoAditionalFeatures")
@@ -735,13 +805,13 @@ class _SchoolProfileState extends State<SchoolProfile> {
                           return ListView.separated(
                               itemBuilder: (context, index) {
                                 return SizedBox(
-                                  height: 40,
+                                  height: 45.h,
                                   child: Row(
                                     children: [
                                       GooglePoppinsWidgets(
                                         text:
                                             "${snapss.data?.docs[index]['deviceName'] ?? ''}",
-                                        fontsize: 16,
+                                        fontsize: 16.w,
                                         fontWeight: FontWeight.bold,
                                       ),
                                       TextButton.icon(
@@ -754,8 +824,8 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                                     ['price'],
                                                 index);
                                           },
-                                          icon: const Icon(Icons.add),
-                                          label: const Text("Add"))
+                                          icon:  Icon(Icons.add,color: cBlue,size: 25.w),
+                                          label:  GooglePoppinsWidgets(text: "Add",fontsize: 15.w,))
                                     ],
                                   ),
                                 );
@@ -776,7 +846,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('ok'),
+              child: const Text('Ok'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -795,14 +865,14 @@ class _SchoolProfileState extends State<SchoolProfile> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(productName),
+          title: GooglePoppinsWidgets(text: productName,fontsize: 15.w),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text(productName),
+                GooglePoppinsWidgets(text: productName,fontsize: 15.w),
                 Row(
                   children: [
-                    const Text('Select quantity :: '),
+                     GooglePoppinsWidgets(text: 'Select quantity :: ',fontsize: 14.w),
                     IconButton(
                         onPressed: () async {
                           final pricedata = int.parse(productPrice);
@@ -823,7 +893,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
                             }
                           }
                         },
-                        icon: const Icon(Icons.remove)),
+                        icon:  Icon(Icons.remove,color: cred,size: 25.w)),
                     ////
                     index == 0
                         ? Obx(
@@ -837,6 +907,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
                             ),
                           ),
 
+                          sizedBoxw10,
                     /////
                     IconButton(
                         onPressed: () async {
@@ -852,7 +923,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                     tarifController.counnterIndex1.value;
                           }
                         },
-                        icon: const Icon(Icons.add)),
+                        icon:  Icon(Icons.add,color: cBlue,size: 25.w,)),
                   ],
                 ),
                 Obx(() {
@@ -861,23 +932,24 @@ class _SchoolProfileState extends State<SchoolProfile> {
                   return SizedBox(
                       height: 50,
                       child: index == 0
-                          ? Text(
-                              "Total Price :: ${tarifController.extraFeature1Total.value}")
-                          : Text(
-                              "Total Price :: ${tarifController.extraFeature2Total.value}"));
+                          ? GooglePoppinsWidgets(fontsize: 12.w,
+                              text: "Total Price :: ${tarifController.extraFeature1Total.value}")
+                          : GooglePoppinsWidgets(fontsize: 12.w,
+                             text:  "Total Price :: ${tarifController.extraFeature2Total.value}"));
                 }),
               ],
             ),
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('cancel'),
+              child:  GooglePoppinsWidgets(text: 'Cancel',fontsize: 15.w,color: cred,fontWeight: FontWeight.w500),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
+            sizedBoxw100,
             TextButton(
-              child: const Text('ok to conform'),
+              child:  GooglePoppinsWidgets(text: 'Confirm',fontsize: 15.w,fontWeight: FontWeight.w500),
               onPressed: () {
                 if (index == 0) {
                   TarifPurchaseModel tarifPurchaseModelindex0 =
@@ -926,7 +998,7 @@ class SchoolTextFormFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(15),
+      padding:  EdgeInsets.all(15.w),
       child: TextFormField(
         // obscureText: obscureText,
         validator: function,
@@ -960,7 +1032,7 @@ showTermsandCondition(BuildContext context) async {
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
       return SizedBox(
-        width: 300,
+        width: 300.w,
         child: AlertDialog(
           title: GooglePoppinsWidgets(
               text: 'Terms and Conditions',
@@ -1149,7 +1221,7 @@ showTermsandCondition(BuildContext context) async {
       EXPRESS OR IMPLIED, INCLUDING ANY WARRANTY OF
       MERCHANTABILITY OR FITNESS FOR ANY PARTICULAR PURPOSE.
       ''',
-                  fontsize: 12,
+                  fontsize: 15.w,
                   color: Colors.black.withOpacity(0.6),
                   fontWeight: FontWeight.w600,
                 )
@@ -1158,7 +1230,7 @@ showTermsandCondition(BuildContext context) async {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('ok'),
+              child: const Text('Ok'),
               onPressed: () {
                 Navigator.of(context).pop();
               },

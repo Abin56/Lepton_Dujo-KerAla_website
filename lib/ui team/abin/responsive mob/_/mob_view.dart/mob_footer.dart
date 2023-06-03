@@ -278,7 +278,7 @@ class FooterMob extends StatelessWidget {
                               children: [
                                   Icon(Icons.location_on,color: cWhite,size: 15.w),
                                 Text(
-                                  ' Lepton Plus Communications OPC) Pvt.Ltd'
+                                  ' Lepton Plus Communications (OPC) Pvt.Ltd'
                                   '\n   5th Floor ,Karimpanal Statue Avenue ,G.H. Road, ',
                                   style: f,
                                 ),
