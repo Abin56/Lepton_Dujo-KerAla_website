@@ -1,3 +1,4 @@
+import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -53,7 +54,7 @@ class FeatureTile extends StatelessWidget {
                   offset: Offset(0, 3),
                 ),
               ],
-              borderRadius:  BorderRadius.all(Radius.circular(0))),
+              borderRadius:  const BorderRadius.all(Radius.circular(0))),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -69,8 +70,8 @@ class FeatureTile extends StatelessWidget {
                 width: 20.h,
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(title, style: TextStyle(fontSize: 12.h )),
+                padding:  EdgeInsets.all(8.0.w),
+                child: GoogleMonstserratWidgets(text: title, fontsize: 12.h ),
               ),
             ],
           ),

@@ -26,10 +26,9 @@ class HomePageImages extends StatelessWidget {
   String _imageUrl =
       "https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/dujocolleges.jpeg?alt=media&token=0c3fa202-c59f-47bd-b997-88f3128e6871";
 
-  String _description = "Any schools from Kerala can register on Lepton DuJo. Lepton Dujo\n"
-      " is a mobile application with student login,parent,\n"
-
-      "teacher login";
+  String _description = "Any schools from Kerala can register on Lepton DuJo.\n"
+      "Lepton Dujo is a mobile application with student\n"
+      "login,  parent login, teacher login";
 
    Uri _faceBookUrl =
    Uri.parse('https://www.facebook.com/profile.php?id=100091062978371');
@@ -127,7 +126,7 @@ class HomePageImages extends StatelessWidget {
                       ),
                       Container(
                           margin: EdgeInsets.only(top: 95.h),
-                          child: Image.network(_imageUrl)),
+                          child: Image.asset("assets/images/dujo_schools_image.png",fit: BoxFit.cover,)),
                       FeatureTile(
                         iconImageUrl: "boy.png",
                         title: _description,
@@ -185,89 +184,89 @@ class HomePageImages extends StatelessWidget {
                       Column(
                         children: [
                           Container(
-                            margin: EdgeInsets.only(left: 10.h, top: 165.h),
+                            margin: EdgeInsets.only(left: 195.h, top: 285.h),
                             child: Text(
                               "Watch and Guide,\n"
                               "Let them study!",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontStyle: FontStyle.italic,
-                                  fontSize: 14.h,
-                                  color: cWhite),
+                                  fontSize: 13.h,
+                                  color: cBlack),
                             ),
                           )
                         ],
                       ),
-                      Column(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(left: 340.h, top:200.h),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Schools",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontStyle: FontStyle.italic,
-                                      fontSize: 20.h,
-                                      color: cWhite),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(left: 310.h, top: 170.h),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Image.asset(
-                                  "assets/images/dujo_logo.png",
-                                  height: 40.h,
-                                  width: 70.h,
-                                ),
-                                Text(
-                                  "",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w100,
-                                      fontStyle: FontStyle.italic,
-                                      fontSize: 25.h),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Container(
-                            height: 450.h,
-                            width: 450.h,
-                            margin: EdgeInsets.only(left: 2.h, top: 68.h),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Image.asset(
-                                  "assets/images/dujo_schools_image.png",
-                                  height: 250.h,
-                                  width: 250.h,
-                                ),
-                                Text(
-                                  "",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w100,
-                                      fontStyle: FontStyle.italic,
-                                      fontSize: 25.h),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                      // Column(
+                      //   children: [
+                      //     Container(
+                      //       margin: EdgeInsets.only(left: 340.h, top:200.h),
+                      //       child: Column(
+                      //         mainAxisAlignment: MainAxisAlignment.start,
+                      //         children: [
+                      //           Text(
+                      //             "Schools",
+                      //             style: TextStyle(
+                      //                 fontWeight: FontWeight.bold,
+                      //                 fontStyle: FontStyle.italic,
+                      //                 fontSize: 20.h,
+                      //                 color: cWhite),
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     )
+                      //   ],
+                      // ),
+                      // Column(
+                      //   children: [
+                      //     Container(
+                      //       margin: EdgeInsets.only(left: 310.h, top: 170.h),
+                      //       child: Column(
+                      //         mainAxisAlignment: MainAxisAlignment.start,
+                      //         children: [
+                      //           Image.asset(
+                      //             "assets/images/dujo_logo.png",
+                      //             height: 40.h,
+                      //             width: 70.h,
+                      //           ),
+                      //           Text(
+                      //             "",
+                      //             style: TextStyle(
+                      //                 fontWeight: FontWeight.w100,
+                      //                 fontStyle: FontStyle.italic,
+                      //                 fontSize: 25.h),
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
+                      // Column(
+                      //   children: [
+                      //     // Container(
+                      //     //   height: 450.h,
+                      //     //   width: 450.h,
+                      //     //   margin: EdgeInsets.only(left: 2.h, top: 68.h),
+                      //     //   child: Column(
+                      //     //     mainAxisAlignment: MainAxisAlignment.start,
+                      //     //     children: [
+                      //     //       Image.asset(
+                      //     //         "assets/images/dujo_schools_image.png",
+                      //     //         height: 250.h,
+                      //     //         width: 250.h,
+                      //     //       ),
+                      //     //       Text(
+                      //     //         "",
+                      //     //         style: TextStyle(
+                      //     //             fontWeight: FontWeight.w100,
+                      //     //             fontStyle: FontStyle.italic,
+                      //     //             fontSize: 25.h),
+                      //     //       ),
+                      //     //     ],
+                      //     //   ),
+                      //     // ),
+                      //   ],
+                      // ),
                     ],
                   ),
                   sizedBoxH10,
@@ -333,7 +332,7 @@ class HomePageImages extends StatelessWidget {
 
                           child: Image.asset(
                             'assets/images/dujo_colleges_image.png',
-                            fit: BoxFit.cover,
+                            fit: BoxFit.fill,
                           )),
 
                       ///////////////
@@ -378,63 +377,63 @@ class HomePageImages extends StatelessWidget {
                       Column(
                         children: [
                           Container(
-                            margin: EdgeInsets.only(left: 10.h, top: 12.h),
+                            margin: EdgeInsets.only(left: 195.h, top: 245.h),
                             child: Text(
                               "Keep Going, we provide\n"
                               "Everything you need",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontStyle: FontStyle.italic,
-                                  fontSize: 17.h,
-                                  color: cWhite),
+                                  fontSize: 14.h,
+                                  color: cBlack),
                             ),
                           )
                         ],
                       ),
-                      Column(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(left: 249.h, top: 42.h),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "DuJo Colleges",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontStyle: FontStyle.italic,
-                                      fontSize: 12.h,
-                                      color: cWhite),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(left: 208.h, top: 10.h),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Image.asset(
-                                  "assets/images/dujo_logo.png",
-                                  height: 40.h,
-                                  width: 70.h,
-                                ),
-                                Text(
-                                  "",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w100,
-                                      fontStyle: FontStyle.italic,
-                                      fontSize: 25.h),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                      // Column(
+                      //   children: [
+                      //     Container(
+                      //       margin: EdgeInsets.only(left: 249.h, top: 42.h),
+                      //       child: Column(
+                      //         mainAxisAlignment: MainAxisAlignment.start,
+                      //         children: [
+                      //           Text(
+                      //             "DuJo Colleges",
+                      //             style: TextStyle(
+                      //                 fontWeight: FontWeight.bold,
+                      //                 fontStyle: FontStyle.italic,
+                      //                 fontSize: 12.h,
+                      //                 color: cWhite),
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     )
+                      //   ],
+                      // ),
+                      // Column(
+                      //   children: [
+                      //     Container(
+                      //       margin: EdgeInsets.only(left: 208.h, top: 10.h),
+                      //       child: Column(
+                      //         mainAxisAlignment: MainAxisAlignment.start,
+                      //         children: [
+                      //           Image.asset(
+                      //             "assets/images/dujo_logo.png",
+                      //             height: 40.h,
+                      //             width: 70.h,
+                      //           ),
+                      //           Text(
+                      //             "",
+                      //             style: TextStyle(
+                      //                 fontWeight: FontWeight.w100,
+                      //                 fontStyle: FontStyle.italic,
+                      //                 fontSize: 25.h),
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
                     ],
                   ),
 
@@ -499,7 +498,7 @@ class HomePageImages extends StatelessWidget {
                               color: cred,
                               child: Image.asset(
                                 'assets/images/dujo_institutions_image.png',
-                                fit: BoxFit.cover,
+                                fit: BoxFit.fill,
                               ))),
                       FeatureTile(
                         iconImageUrl: "boy.png",
@@ -535,7 +534,7 @@ class HomePageImages extends StatelessWidget {
                       Column(
                         children: [
                           Container(
-                            margin: EdgeInsets.only(left: 10.h, top: 10.h),
+                            margin: EdgeInsets.only(left: 195.h, top: 245.h),
                             child: Text(
                               "Its in you, Awake\n"
                               " And chase your dream",
@@ -543,55 +542,55 @@ class HomePageImages extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                   fontStyle: FontStyle.italic,
                                   fontSize: 12.h,
-                                  color: cWhite),
+                                  color: cBlack),
                             ),
                           )
                         ],
                       ),
-                      Column(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(left: 305.h, top: 125.h),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "DuJo Institutions",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontStyle: FontStyle.italic,
-                                      fontSize: 12.h,
-                                      color: cWhite),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(left: 240.h, top: 98.h),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Image.asset(
-                                  "assets/images/dujo_logo.png",
-                                  height: 40.h,
-                                  width: 70.h,
-                                ),
-                                Text(
-                                  "",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w100,
-                                      fontStyle: FontStyle.italic,
-                                      fontSize: 25.h),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                      // Column(
+                      //   children: [
+                      //     Container(
+                      //       margin: EdgeInsets.only(left: 305.h, top: 125.h),
+                      //       child: Column(
+                      //         mainAxisAlignment: MainAxisAlignment.start,
+                      //         children: [
+                      //           Text(
+                      //             "DuJo Institutions",
+                      //             style: TextStyle(
+                      //                 fontWeight: FontWeight.bold,
+                      //                 fontStyle: FontStyle.italic,
+                      //                 fontSize: 12.h,
+                      //                 color: cWhite),
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     )
+                      //   ],
+                      // ),
+                      // Column(
+                      //   children: [
+                      //     Container(
+                      //       margin: EdgeInsets.only(left: 240.h, top: 98.h),
+                      //       child: Column(
+                      //         mainAxisAlignment: MainAxisAlignment.start,
+                      //         children: [
+                      //           Image.asset(
+                      //             "assets/images/dujo_logo.png",
+                      //             height: 40.h,
+                      //             width: 70.h,
+                      //           ),
+                      //           Text(
+                      //             "",
+                      //             style: TextStyle(
+                      //                 fontWeight: FontWeight.w100,
+                      //                 fontStyle: FontStyle.italic,
+                      //                 fontSize: 25.h),
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
                     ],
                   ),
 
@@ -655,7 +654,7 @@ class HomePageImages extends StatelessWidget {
                           height: 300.h,
                           width: double.infinity,
                           child: Image.asset("assets/images/dujo_professional_image.png",
-                              fit: BoxFit.cover)),
+                              fit: BoxFit.fill)),
                       FeatureTile(
                         iconImageUrl: "professional.png",
                         topMargin: 325.0.h,
@@ -697,63 +696,63 @@ class HomePageImages extends StatelessWidget {
                       Column(
                         children: [
                           Container(
-                            margin: EdgeInsets.only(left: 10.h, top: 110.h),
+                            margin: EdgeInsets.only(left: 195.h, top: 245.h),
                             child: Text(
                               "Logon, feed your mind\n"
                               "Change the world",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontStyle: FontStyle.italic,
-                                  fontSize: 25.h,
+                                  fontSize: 14.h,
                                   color: cBlack),
                             ),
                           )
                         ],
                       ),
-                      Column(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(left: 280.h, top: 64.h),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "DuJo Professionals",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontStyle: FontStyle.italic,
-                                      fontSize: 20.h,
-                                      color: cBlack),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(left: 235.h, top: 28.h),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Image.asset(
-                                  "assets/images/dujo_logo.png",
-                                  height: 40.h,
-                                  width: 70.h,
-                                ),
-                                Text(
-                                  "",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w100,
-                                      fontStyle: FontStyle.italic,
-                                      fontSize: 25.h),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                      // Column(
+                      //   children: [
+                      //     Container(
+                      //       margin: EdgeInsets.only(left: 280.h, top: 64.h),
+                      //       child: Column(
+                      //         mainAxisAlignment: MainAxisAlignment.start,
+                      //         children: [
+                      //           Text(
+                      //             "DuJo Professionals",
+                      //             style: TextStyle(
+                      //                 fontWeight: FontWeight.bold,
+                      //                 fontStyle: FontStyle.italic,
+                      //                 fontSize: 20.h,
+                      //                 color: cBlack),
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     )
+                      //   ],
+                      // ),
+                      // Column(
+                      //   children: [
+                      //     Container(
+                      //       margin: EdgeInsets.only(left: 235.h, top: 28.h),
+                      //       child: Column(
+                      //         mainAxisAlignment: MainAxisAlignment.start,
+                      //         children: [
+                      //           Image.asset(
+                      //             "assets/images/dujo_logo.png",
+                      //             height: 40.h,
+                      //             width: 70.h,
+                      //           ),
+                      //           Text(
+                      //             "",
+                      //             style: TextStyle(
+                      //                 fontWeight: FontWeight.w100,
+                      //                 fontStyle: FontStyle.italic,
+                      //                 fontSize: 25.h),
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
                     ],
                   ),
 
