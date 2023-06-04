@@ -36,6 +36,8 @@ class AddAchievements extends StatefulWidget {
 
 class _AddAchievementsState extends State<AddAchievements> {
 
+  String uid = const Uuid().v1();
+
   Future getImage() async {
     final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
     File image;
@@ -89,6 +91,7 @@ class _AddAchievementsState extends State<AddAchievements> {
           description: descriptionController.text,
           achievement: achievementController.text,
           admissionNumber: admissionNumberController.text, 
+          uid: uid,
           studentID: studentID);
 
       FirebaseFirestore.instance //d4srOy0ovzUPBmZs3CBFRoOImIU2
@@ -97,7 +100,7 @@ class _AddAchievementsState extends State<AddAchievements> {
           .collection(Get.find<GetFireBaseData>().bYear.value)
           .doc(Get.find<GetFireBaseData>().bYear.value)
           .collection('Achievements')
-          .doc()
+          .doc(modell.uid)
           .set(modell.toJson());
 
       setState(() {

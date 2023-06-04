@@ -51,7 +51,7 @@ class ExploreDrawer extends StatelessWidget {
                   InkWell(
                     onTap: () {},
                     child: Text(
-                      'Loq Out',
+                      'Log Out',
                       style: TextStyle(color: Colors.white, fontSize: 22),
                     ),
                   ),

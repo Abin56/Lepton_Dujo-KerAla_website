@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields
+
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

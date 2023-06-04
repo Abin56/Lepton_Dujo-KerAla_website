@@ -2,7 +2,9 @@ import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../fonts/google_monstre.dart';
 import '../widgets/Iconbackbutton.dart';
 
 class TermsAndConditions extends StatefulWidget {
@@ -19,7 +21,8 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
     return Scaffold(
       backgroundColor: adminePrimayColor,
       appBar: AppBar(iconTheme: IconThemeData(color: cWhite),
-      backgroundColor: adminePrimayColor),
+      backgroundColor: adminePrimayColor,
+       title: GoogleMonstserratWidgets(text: "Terms And Conditions", fontsize: 15.w,)),
       body:
       SingleChildScrollView(
         child: 

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../colors/colors.dart';
+import '../../fonts/google_monstre.dart';
 
 class PrivacyPolicy extends StatefulWidget {
   const   PrivacyPolicy({super.key});
@@ -18,7 +20,8 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
       backgroundColor: adminePrimayColor,
       appBar: AppBar(
           iconTheme: const IconThemeData(color: cWhite),
-          backgroundColor: adminePrimayColor),
+          backgroundColor: adminePrimayColor,
+           title: GoogleMonstserratWidgets(text: "Privacy Policy", fontsize: 15.w,)),
       body: SingleChildScrollView(
         child: Center(
           child: SizedBox(

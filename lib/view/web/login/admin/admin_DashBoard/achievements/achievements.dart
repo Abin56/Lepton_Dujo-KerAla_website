@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../../../colors/colors.dart';
 import '../../../../../fonts/fonts.dart';
@@ -16,6 +17,7 @@ class Achievements extends StatefulWidget {
   Achievements({super.key, required this.schoolID});
 
   String schoolID;
+  String uid = Uuid().v1();
 
   @override
   State<Achievements> createState() => _AchievementsState();

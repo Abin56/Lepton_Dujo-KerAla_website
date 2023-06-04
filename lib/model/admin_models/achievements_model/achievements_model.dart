@@ -18,6 +18,7 @@ class AchievementModel {
       required this.description,
       required this.achievement,
       required this.admissionNumber, 
+      required this.uid,
       required this.studentID
   });
 
@@ -27,6 +28,7 @@ class AchievementModel {
   String description;
   String achievement;
   String admissionNumber; 
+  String uid;
   String studentID;
 
   factory AchievementModel.fromJson(Map<String, dynamic> json) =>
@@ -37,7 +39,9 @@ class AchievementModel {
           description: json["description"],
           achievement: json["achievement"],
           admissionNumber: json["admissionNumber"], 
+          uid: json["uid"],
           studentID: json["studentID"],
+          
          );
 
   Map<String, dynamic> toJson() => {
@@ -47,6 +51,7 @@ class AchievementModel {
         "description": description,
         "achievement": achievement,
         "admissionNumber" : admissionNumber, 
+        "uid":uid,
         "studentID": studentID
       };
 }

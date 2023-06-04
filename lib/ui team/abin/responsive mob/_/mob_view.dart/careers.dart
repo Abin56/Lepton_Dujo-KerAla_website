@@ -1,4 +1,5 @@
 import 'package:dujo_kerala_website/view/colors/colors.dart';
+import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +20,8 @@ class Careers extends StatelessWidget {
             children: [
               IconButtonBackWidget(color: cWhite,),
               Center(
-                child: Container(
-                    height: 110,
+                child: SizedBox(
+                    height: 140.h,
                     width: 920.w,
                     // color: Colors.amber,
                     child:  GoogleMonstserratWidgets(text: "Are you a determined and friendly professional with an advanced"
@@ -36,9 +37,10 @@ class Careers extends StatelessWidget {
                 ),
                 ),
               ),
+              sizedBoxH20,
               Center(
-                child: Container(
-                  height: 240,
+                child: SizedBox(
+                  height: 240.h,
                   width: 900.w,
                   // color: Colors.blue,
                   child:  GoogleMonstserratWidgets(text: "Lepton Communications\n\n"
@@ -46,15 +48,16 @@ class Careers extends StatelessWidget {
                 "List of Vacancies\n"
                 "1) Flutter Developer\n"
                 "2)Marketing Professionals\n"
-                "3)Customer Care Executive\ \n"
+                "3)Customer Care Executive \n"
                 "4) Accountant Cum Secretary\n"
                 "5) IOT Engineers\n"
                 "6) HR proficiency",fontsize: 18.w,color: cWhite),
                 ),
               ),
+
               Center(
-                child: Container(
-                  height: 380,
+                child: SizedBox(
+                  height: 380.h,
                   width: 900.w,
                   // color: Colors.blue,
                   child:GoogleMonstserratWidgets(text:"FLUTTER DEVELOPER\n\n"
@@ -74,9 +77,10 @@ class Careers extends StatelessWidget {
               "14) Project manager :- 3+ yrs exp. , 6lk – 10 lk / annum",fontsize: 18.w,color: cWhite),
                 ),
               ),
+              sizedBoxH20,
               Center(
-                child: Container(
-                  height: 300,
+                child: SizedBox(
+                  height: 300.h,
                   width: 900.w,
                   child:GoogleMonstserratWidgets(text: "MARKETING PROFESSIONALS\n\n"
               "1) Level of experience\n"
@@ -91,9 +95,10 @@ class Careers extends StatelessWidget {
               "10) 15000 + / month + allowance",fontsize: 18.w,color: cWhite),
                 ),
               ),
+              sizedBoxH20,
               Center(
-                child: Container(
-                  height: 350,
+                child: SizedBox(
+                  height: 350.h,
                   width: 900.w,
                   child:GoogleMonstserratWidgets(text: "CUSTOMER CARE SERVICE\n\n"
               "1) Bachelor’s degree in business administration or related field\n"
@@ -112,8 +117,8 @@ class Careers extends StatelessWidget {
                 ),
               ),
               Center(
-                child: Container(
-                  height: 440,
+                child: SizedBox(
+                  height: 540.h,
                   width: 900.w,
                   child:GoogleMonstserratWidgets(text: "EMBEDDED SYSTEM ENGINEER\n\n"
               "1)Bachelor’s degree in computer engineering or science\n"
@@ -137,8 +142,8 @@ class Careers extends StatelessWidget {
                 ),
               ),
               Center(
-                child: Container(
-                  height: 400,
+                child: SizedBox(
+                  height: 400.h,
                   width: 900.w,
                   child:GoogleMonstserratWidgets(text: "ACCOUNTANT CUM SECRETRAY\n\n"
               "1) Bachelor’s degree in finance / accounting / commerce\n"
@@ -159,8 +164,8 @@ class Careers extends StatelessWidget {
                 ),
               ),
               Center(
-                child: Container(
-                  height: 160,
+                child: SizedBox(
+                  height: 160.h,
                   width: 900.w,
                   // color: Colors.amber,
                   child:GoogleMonstserratWidgets(text: "HR PROFICIENCY\n\n"

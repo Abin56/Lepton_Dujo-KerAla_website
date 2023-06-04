@@ -37,7 +37,7 @@ class _GeClasseslListDropDownButtonState
             return DropdownButtonFormField(
               hint: leptonTarifListValue == null
                   ?  GoogleMonstserratWidgets(text: 
-                      "Select Strenght",
+                      "Select strength",
                       
                           color: const Color.fromARGB(255, 0, 0, 0),
                           fontsize: 14.w,

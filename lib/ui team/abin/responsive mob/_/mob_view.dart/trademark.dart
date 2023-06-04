@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../view/colors/colors.dart';
 import '../../../../../view/fonts/google_monstre.dart';
-import '../../../../../view/web/widgets/Iconbackbutton.dart';
 
 
 
@@ -14,12 +13,14 @@ class TrademarkAndPolicy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(  title: GoogleMonstserratWidgets(text: "Trademark And Policy", fontsize: 15.w,),
+       backgroundColor: adminePrimayColor,),
       backgroundColor: adminePrimayColor,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          IconButtonBackWidget(color: cWhite),
+         // IconButtonBackWidget(color: cWhite),
           Center(
             child: Padding(
               padding:  EdgeInsets.only(left: 50.w,right: 50.w,top: 80.h),

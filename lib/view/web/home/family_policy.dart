@@ -1,4 +1,6 @@
+import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../colors/colors.dart';
 
@@ -14,13 +16,15 @@ class _FamilyPolicyScreenState extends State<FamilyPolicyScreen> {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
+
        backgroundColor: adminePrimayColor,
-      appBar: AppBar(iconTheme: IconThemeData(color: cWhite),
-      backgroundColor: adminePrimayColor),
+      appBar: AppBar(iconTheme: const IconThemeData(color: cWhite),
+      backgroundColor: adminePrimayColor,
+      title: GoogleMonstserratWidgets(text: "Family Policy", fontsize: 15.w,)),
       body: SingleChildScrollView(
         child: Center(
           child: SizedBox(
-            width: screenSize.width * 1 / 4,
+            width: screenSize.width * 1 / 2,
             child: Column(
               children: [
                 Image.network(

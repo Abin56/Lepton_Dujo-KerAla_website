@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/controller/get_firebase-data/get_firebase_data.dart';
+import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:dujo_kerala_website/view/fonts/fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,6 +15,11 @@ class AchievementsViewAndEdit extends StatelessWidget {
   AchievementsViewAndEdit({super.key, required this.schoolID});
 
   String schoolID;
+
+  TextEditingController studentNameEditController = TextEditingController();
+  TextEditingController dateEditController = TextEditingController();
+  TextEditingController admissionNumberEditController = TextEditingController();
+  TextEditingController achievementHeadEditController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +86,7 @@ class AchievementsViewAndEdit extends StatelessWidget {
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
+                  return const Center(child: CircularProgressIndicator());
                 }
 
                 return ListView.builder(
@@ -118,9 +124,9 @@ class AchievementsViewAndEdit extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Student Name: ' +
+                                    'Description: ' +
                                         snapshot.data!.docs[index]
-                                            ['studentName'],
+                                            ['description'],
                                     style: GoogleFonts.poppins(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w500),
@@ -148,8 +154,238 @@ class AchievementsViewAndEdit extends StatelessWidget {
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500),
                                   ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  Row(
+                                    children: [
+                                      MaterialButton(
+                                        onPressed: () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return AlertDialog(
+                                                  title: const Text(
+                                                      'Achievements'),
+                                                  content: Column(
+                                                    children: [
+                                                      TextFormField(
+                                                        controller:
+                                                            studentNameEditController,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          border: const OutlineInputBorder(
+                                                              borderRadius: BorderRadius
+                                                                  .all(Radius
+                                                                      .circular(
+                                                                          20))),
+                                                          hintText: snapshot
+                                                                  .data!
+                                                                  .docs[index]
+                                                              ['description'],
+                                                        ),
+                                                      ),
+                                                      sizedBoxH10,
+                                                      TextFormField(
+                                                        controller:
+                                                            dateEditController,
+                                                        decoration: InputDecoration(
+                                                            border: const OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            20))),
+                                                            hintText: snapshot
+                                                                    .data!
+                                                                    .docs[index]
+                                                                [
+                                                                'dateofAchievement']),
+                                                      ),
+                                                      sizedBoxH10,
+                                                      TextFormField(
+                                                        controller:
+                                                            admissionNumberEditController,
+                                                        decoration: InputDecoration(
+                                                            border: const OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            20))),
+                                                            hintText: snapshot
+                                                                    .data!
+                                                                    .docs[index]
+                                                                [
+                                                                'admissionNumber']),
+                                                      ),
+                                                      sizedBoxH10,
+                                                      TextFormField(
+                                                        controller:
+                                                            achievementHeadEditController,
+                                                        decoration: InputDecoration(
+                                                            border: const OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            20))),
+                                                            hintText: snapshot
+                                                                    .data!
+                                                                    .docs[index]
+                                                                [
+                                                                'achievement']),
+                                                      ),
+                                                      sizedBoxH10,
+                                                    ],
+                                                  ),
+                                                  actions: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              20.0),
+                                                      child: Row(
+                                                        children: [
+                                                          MaterialButton(
+                                                            onPressed:
+                                                                () async {
+                                                              await FirebaseFirestore
+                                                                  .instance
+                                                                  .collection(
+                                                                      'SchoolListCollection')
+                                                                  .doc(schoolID)
+                                                                  .collection(
+                                                                      Get.find<GetFireBaseData>()
+                                                                          .bYear
+                                                                          .value)
+                                                                  .doc(Get.find<
+                                                                          GetFireBaseData>()
+                                                                      .bYear
+                                                                      .value)
+                                                                  .collection(
+                                                                      'Achievements')
+                                                                  .doc(snapshot
+                                                                          .data!
+                                                                          .docs[
+                                                                      index]['uid'])
+                                                                  .set({
+                                                                'dateofAchievement': (dateEditController
+                                                                            .text ==
+                                                                        '')
+                                                                    ? snapshot
+                                                                            .data!
+                                                                            .docs[index]
+                                                                        [
+                                                                        'dateofAchievement']
+                                                                    : dateEditController
+                                                                        .text,
+                                                                'description': (studentNameEditController
+                                                                            .text ==
+                                                                        '')
+                                                                    ? snapshot
+                                                                            .data!
+                                                                            .docs[index]
+                                                                        [
+                                                                        'description']
+                                                                    : studentNameEditController
+                                                                        .text,
+                                                                'achievement': (achievementHeadEditController
+                                                                            .text ==
+                                                                        '')
+                                                                    ? snapshot
+                                                                            .data!
+                                                                            .docs[index]
+                                                                        [
+                                                                        'achievement']
+                                                                    : achievementHeadEditController
+                                                                        .text,
+                                                                'admissionNumber': (admissionNumberEditController
+                                                                            .text ==
+                                                                        '')
+                                                                    ? snapshot
+                                                                            .data!
+                                                                            .docs[index]
+                                                                        [
+                                                                        'admissionNumber']
+                                                                    : admissionNumberEditController
+                                                                        .text,
+                                                                'photoUrl': snapshot
+                                                                        .data!
+                                                                        .docs[index]
+                                                                    [
+                                                                    'photoUrl'],
+                                                                'studentID': snapshot
+                                                                        .data!
+                                                                        .docs[index]
+                                                                    [
+                                                                    'studentID'],
+                                                                'studentName': snapshot
+                                                                        .data!
+                                                                        .docs[index]
+                                                                    [
+                                                                    'studentName'],
+                                                                'uid': snapshot
+                                                                        .data!
+                                                                        .docs[
+                                                                    index]['uid'],
+                                                              });
+
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
+                                                            color: Colors.blue,
+                                                            child: const Text(
+                                                                'Edit'),
+                                                          ),
+                                                          sizedBoxW20,
+                                                          MaterialButton(
+                                                            onPressed: () {
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
+                                                            color: Colors.blue,
+                                                            child: const Text(
+                                                                'Cancel'),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    )
+                                                  ],
+                                                );
+                                              });
+                                        },
+                                        color: Colors.blue,
+                                        child: const Text(
+                                          'Edit',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 20,
+                                      ),
+                                      MaterialButton(
+                                        onPressed: () async {
+                                          await FirebaseFirestore.instance
+                                              .collection(
+                                                  'SchoolListCollection')
+                                              .doc(schoolID)
+                                              .collection(
+                                                  Get.find<GetFireBaseData>()
+                                                      .bYear
+                                                      .value)
+                                              .doc(Get.find<GetFireBaseData>()
+                                                  .bYear
+                                                  .value)
+                                              .collection('Achievements')
+                                              .doc(snapshot.data!.docs[index]
+                                                  ['uid']).delete();
+                                        },
+                                        color: Colors.red,
+                                        child: const Text('Delete',
+                                            style:
+                                                TextStyle(color: Colors.white)),
+                                      ),
+                                    ],
+                                  )
                                 ],
-                              )
+                              ),
                             ],
                           ),
                         ),
