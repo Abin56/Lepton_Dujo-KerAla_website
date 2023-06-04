@@ -1,10 +1,7 @@
-import 'dart:developer';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/controller/_addParent&Guardian/guardian_Controller.dart';
-import 'package:dujo_kerala_website/model/guardian/guardian_temp_to_firebase.dart';
 import 'package:dujo_kerala_website/view/fonts/fonts.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
+import 'package:excel/excel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
+import '../../../../../../utils/utils.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
 import '../../../../widgets/drop_DownList/get_students.dart';
@@ -90,7 +88,7 @@ class AddGuardian extends StatelessWidget {
           ),
           //right section
 
-          Container(
+          SizedBox(
             width: size.width / 2,
             height: size.height * 1.4,
             child: Padding(
@@ -145,7 +143,40 @@ class AddGuardian extends StatelessWidget {
                             child: const Text("Add Guardian"),
                           ),
                         ),
-                      )
+                      ),
+                      sizedBoxH20,
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: 50.w, bottom: 50.w, top: 30.w),
+                        child: SizedBox(
+                          width: 250.w,
+                          height: 60.h,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: adminePrimayColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                            onPressed: () async {
+                              final result = await extractDataFromExcel();
+                              if (result != null) {
+                                if (result.tables.isNotEmpty) {
+                                  Sheet? table =
+                                      result.tables[result.tables.keys.first];
+
+                                  List<Data?>? firstRow = table?.rows[1];
+                                  guardianNameController.text =
+                                      firstRow?[0]?.value.toString() ?? "";
+                                  guardianPhoneNoController.text =
+                                      firstRow?[1]?.value.toString() ?? "";
+                                }
+                              }
+                            },
+                            child: const Text("Upload From Excel"),
+                          ),
+                        ),
+                      ),
                     ]),
               ),
             ),
@@ -157,7 +188,7 @@ class AddGuardian extends StatelessWidget {
 }
 
 class AddGuardianWidget extends StatelessWidget {
-  AddGuardianWidget({
+  const AddGuardianWidget({
     super.key,
     required this.textEditingController,
     required this.function,

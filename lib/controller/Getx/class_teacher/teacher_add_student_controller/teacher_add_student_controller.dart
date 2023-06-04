@@ -17,16 +17,10 @@ class TeacherAddStudentController extends GetxController {
       .collection('SchoolListCollection')
       .doc(Get.find<AdminLoginScreenController>().schoolID);
 
-  Future<void> createStudent() async {
+  Future<void> createStudent({required studentModel}) async {
     try {
       isLoading.value = true;
-      final studentModel = AddStudentModel(
-        studentName: studentNameController.text,
-        parentPhoneNumber: parentPhNoController.text,
-        admissionNumber: addmissionNumberController.text,
-        classID: Get.find<GetFireBaseData>().classIDD.value,
-        createDate: DateTime.now().toString(),
-      );
+    
       await firebaseFirestore
           .collection(Get.find<GetFireBaseData>().bYear.value)
           .doc(Get.find<GetFireBaseData>().bYear.value)

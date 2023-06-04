@@ -4,13 +4,14 @@
 
 import 'dart:convert';
 
-SampoornaModel sampoornaModelFromJson(String str) =>
-    SampoornaModel.fromJson(json.decode(str));
+StudentProtectionGroupModel sampoornaModelFromJson(String str) =>
+    StudentProtectionGroupModel.fromJson(json.decode(str));
 
-String sampoornaModelToJson(SampoornaModel data) => json.encode(data.toJson());
+String sampoornaModelToJson(StudentProtectionGroupModel data) =>
+    json.encode(data.toJson());
 
-class SampoornaModel {
-  SampoornaModel({
+class StudentProtectionGroupModel {
+  StudentProtectionGroupModel({
     required this.id,
     required this.imageId,
     required this.imageUrl,
@@ -26,7 +27,8 @@ class SampoornaModel {
   String designation;
   String position;
 
-  factory SampoornaModel.fromJson(Map<String, dynamic> json) => SampoornaModel(
+  factory StudentProtectionGroupModel.fromJson(Map<String, dynamic> json) =>
+      StudentProtectionGroupModel(
         id: json["id"],
         imageId: json["imageId"],
         imageUrl: json["imageUrl"],

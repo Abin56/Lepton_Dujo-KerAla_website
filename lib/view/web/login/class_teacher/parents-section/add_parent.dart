@@ -1,11 +1,13 @@
 // ignore_for_file: sort_child_properties_last
-import 'dart:developer';
 import 'package:dujo_kerala_website/controller/_addParent&Guardian/parent_Controller.dart';
+import 'package:excel/excel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+
 import '../../../../../controller/get_firebase-data/get_firebase_data.dart';
+import '../../../../../utils/utils.dart';
 import '../../../../colors/colors.dart';
 import '../../../../constant/constant.dart';
 import '../../../../fonts/fonts.dart';
@@ -105,20 +107,48 @@ class AddParent extends StatelessWidget {
                                 ),
                               ),
                               onPressed: () async {
-                                if (formKey.currentState!.validate()){
-                                parentController.addParent(
-                                    parentNameController,
-                                    parentPhoneNumberController,
-                                    schoolStudentListValue!['docid'],
-                                    Get.find<GetFireBaseData>()
-                                        .getTeacherClassRole
-                                        .value);
-                                        
+                                if (formKey.currentState!.validate()) {
+                                  parentController.addParent(
+                                      parentNameController,
+                                      parentPhoneNumberController,
+                                      schoolStudentListValue!['docid'],
+                                      Get.find<GetFireBaseData>()
+                                          .getTeacherClassRole
+                                          .value);
                                 }
                               },
                               child: const Text("Add Parent"),
                             ),
-                          )
+                          ),
+                          sizedBoxH20,
+                          SizedBox(
+                            width: 250.w,
+                            height: 60.h,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: adminePrimayColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
+                              onPressed: () async {
+                                final result = await extractDataFromExcel();
+                                if (result != null) {
+                                  if (result.tables.isNotEmpty) {
+                                    Sheet? table =
+                                        result.tables[result.tables.keys.first];
+
+                                    List<Data?>? firstRow = table?.rows[1];
+                                    parentNameController.text =
+                                        firstRow?[0]?.value.toString() ?? "";
+                                    parentPhoneNumberController.text =
+                                        firstRow?[1]?.value.toString() ?? "";
+                                  }
+                                }
+                              },
+                              child: const Text("Upload Data From Excel"),
+                            ),
+                          ),
                         ]),
                   ),
                 ),
@@ -131,9 +161,8 @@ class AddParent extends StatelessWidget {
   }
 }
 
-
 class AddParentWidget extends StatelessWidget {
-  AddParentWidget({
+  const AddParentWidget({
     super.key,
     required this.textEditingController,
     required this.function,

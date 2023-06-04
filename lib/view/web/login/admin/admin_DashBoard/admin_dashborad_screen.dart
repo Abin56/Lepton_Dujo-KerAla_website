@@ -33,6 +33,7 @@ import 'admin_notice/add_new_notices.dart';
 import 'admin_notice/admin_notice_new_ui/admin_notice_show_new.dart';
 import 'admin_pta/admin_pta_screen.dart';
 import 'all_Students/all_students_view_Screen.dart';
+import 'alumni_association/alumni_association.dart';
 import 'bus_Route/bus_route.dart';
 import 'classes/add_class.dart';
 import 'create_Admin/add_new_admin.dart';
@@ -113,7 +114,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'assets/images/success.png',
     'assets/images/protection.png',
     'assets/images/graduation.png',
-    'assets/images/route.png',  
+    'assets/images/route.png',
     'assets/images/students.png',
     'assets/images/research-and-development.png',
     'assets/images/calendar.png',
@@ -186,9 +187,9 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       const UnderMaintanceScreen(), //9
       FoodBeverages(schoolID: widget.schoolID),
       //SelectType(schoolID: widget.schoolID),
-     SchoolLevelNotifications(schoolID: widget.schoolID),
+      SchoolLevelNotifications(schoolID: widget.schoolID),
       //const AlumniAssocation(), //10
-      const UnderMaintanceScreen(),
+      AlumniAssociation(),
       ShiftClassPage(),
       NonTeachingLogin(schoolID: widget.schoolID),
       // const UnderMaintanceScreen(), //11
