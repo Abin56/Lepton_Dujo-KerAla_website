@@ -136,7 +136,12 @@ class ShiftClassController {
             .collection('Students');
 
         for (var element in addStudentstoNewClassList) {
-          firebasePath.doc(element.docid).set(element.toMap());
+          firebasePath.doc(element.docid).set(element.toMap()).then((value) {
+            //updating AllStudent Data classId
+            fireStore
+            .collection('SchoolListCollection')
+            .doc(Get.find<AdminLoginScreenController>().schoolID).collection('AllStudents').doc(element.docid).update({"classID":newClassId.value});
+          });
         }
         isLoadingSubmit.value = false;
         showToast(msg: "Successfully Shifted");
