@@ -20,7 +20,7 @@ class SchoolsToBeVerified {
   String email;
   String postedDate;
   String schoolCode;
-  String? batchYear;
+  String batchYear;
   bool verified;
   String selectedPlan;
   String maximumStudents;
@@ -40,7 +40,7 @@ class SchoolsToBeVerified {
     required this.email,
     required this.postedDate,
     required this.schoolCode,
-    this.batchYear,
+   required this.batchYear,
     required this.verified,
     required this.selectedPlan,
     required this.maximumStudents,
@@ -132,7 +132,7 @@ class SchoolsToBeVerified {
       email: map['email'] as String,
       postedDate: map['postedDate'] as String,
       schoolCode: map['schoolCode'] as String,
-      batchYear: map['batchYear'] != null ? map['batchYear'] as String : null,
+      batchYear:  map['batchYear'] as String ,
       verified: map['verified'] as bool,
       selectedPlan: map['selectedPlan'] as String,
       maximumStudents: map['maximumStudents'] as String,

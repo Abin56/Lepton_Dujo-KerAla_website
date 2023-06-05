@@ -93,7 +93,7 @@ class _ManageAttendanceNotificationsState extends State<ManageAttendanceNotifica
                     fillColor: Colors.white,
                     filled: true,
                     border: InputBorder.none,
-                    hintText: 'Enter time (in hours) to wait before sending absence notifications to parents',
+                    hintText: 'Enter time (in minutes) to wait before sending absence notifications to parents',
                     hintStyle:
                         TextStyle(color: Color.fromARGB(255, 168, 166, 166)),
                   ),

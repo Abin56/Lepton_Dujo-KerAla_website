@@ -47,6 +47,8 @@ class AddNewSchoolController extends GetxController {
     try {
       if (conformpassController.text == adminPasswordController.text) {
         final schoolDetails = SchoolsToBeVerified(
+          //batch year changed to empty strign because null is created
+          batchYear: "",
             maximumStudents: maximumStudents,
             selectedPlan: selectedPlan,
             selectedPlanprice: selectedPlanprice,
