@@ -117,8 +117,7 @@ class AddGuardian extends StatelessWidget {
                       ),
                       sizedBoxH30,
                       Padding(
-                        padding: EdgeInsets.only(
-                            left: 50.w, bottom: 50.w, top: 30.w),
+                        padding: EdgeInsets.only(left: 50.w),
                         child: SizedBox(
                           width: 250.w,
                           height: 60.h,
@@ -144,10 +143,11 @@ class AddGuardian extends StatelessWidget {
                           ),
                         ),
                       ),
-                      sizedBoxH20,
+                      sizedBoxH10,
                       Padding(
                         padding: EdgeInsets.only(
-                            left: 50.w, bottom: 50.w, top: 30.w),
+                          left: 50.w,
+                        ),
                         child: SizedBox(
                           width: 250.w,
                           height: 60.h,
@@ -176,6 +176,16 @@ class AddGuardian extends StatelessWidget {
                             child: const Text("Upload From Excel"),
                           ),
                         ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 80.w),
+                        child: SizedBox(
+                            height: 60.h,
+                            width: 250.w,
+                            child: const Text(
+                              '(You can only use ".xlxs files")',
+                              style: TextStyle(fontSize: 12),
+                            )),
                       ),
                     ]),
               ),

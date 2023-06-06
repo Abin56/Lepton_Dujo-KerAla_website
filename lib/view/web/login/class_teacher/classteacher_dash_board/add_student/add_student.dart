@@ -1,7 +1,6 @@
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:dujo_kerala_website/view/fonts/fonts.dart';
-import 'package:excel/excel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -10,7 +9,6 @@ import 'package:lottie/lottie.dart';
 import '../../../../../../controller/Getx/class_teacher/teacher_add_student_controller/teacher_add_student_controller.dart';
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../model/create_classModel/add_student_model.dart';
-import '../../../../../../utils/utils.dart';
 
 class AddStudentFromClassTeacher extends StatelessWidget {
   final String schoolID;
@@ -186,11 +184,22 @@ class AddStudentFromClassTeacher extends StatelessWidget {
                                 ),
                               ),
                               onPressed: () async {
-                                await teacherExcelFunction();
+                                await teacherAddStudentController
+                                    .studentExcelFunction();
                               },
                               child: const Text("Create from Excel"),
                             ),
                           ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 80.w, right: 50.w),
+                          child: SizedBox(
+                              height: 60.h,
+                              width: 250.w,
+                              child: const Text(
+                                '(You can only use ".xlxs files)"',
+                                style: TextStyle(fontSize: 12),
+                              )),
                         ),
                       ]),
                     ),
@@ -202,40 +211,5 @@ class AddStudentFromClassTeacher extends StatelessWidget {
         ),
       ]),
     );
-  }
-
-  Future<void> teacherExcelFunction() async {
-    //extract excel data
-    final result = await extractDataFromExcel();
-    teacherAddStudentController.isLoading.value = true;
-    if (result != null) {
-      if (result.tables.isNotEmpty) {
-        Sheet? table = result.tables[result.tables.keys.first];
-        if (table != null) {
-          for (int i = 1; i < table.maxRows; i++) {
-            List<Data?>? firstRow = table.rows[i];
-//fetching data from excel cells
-            if (firstRow[0]?.value != null &&
-                firstRow[1]?.value != null &&
-                firstRow[2]?.value != null) {
-              //creating objects and upload to firebase
-              teacherAddStudentController.createStudent(
-                  studentModel: AddStudentModel(
-                studentName: firstRow[0]?.value.toString(),
-                parentPhoneNumber: firstRow[1]?.value.toString(),
-                admissionNumber: firstRow[2]?.value.toString(),
-                classID: Get.find<GetFireBaseData>().classIDD.value,
-                createDate: DateTime.now().toString(),
-              ));
-            }
-          }
-          teacherAddStudentController.isLoading.value = false;
-        } else {
-          teacherAddStudentController.isLoading.value = false;
-          showToast(msg: 'Empty Sheet');
-        }
-      }
-    }
-    teacherAddStudentController.isLoading.value = false;
   }
 }

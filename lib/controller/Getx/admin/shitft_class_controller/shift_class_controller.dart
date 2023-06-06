@@ -44,7 +44,6 @@ class ShiftClassController {
     }
   }
 
-//todo :add a condition dont need to fetch current batch id
 //fetch batch year
   Future<List<String>> fetchBatchDetails() async {
     try {

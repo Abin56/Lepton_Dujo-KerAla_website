@@ -1,12 +1,10 @@
 import 'package:dujo_kerala_website/controller/teacher_controller/teacher_controller.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
-import 'package:excel/excel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../../model/teacher/teacher_model.dart';
-import '../../../../../../utils/utils.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
 import '../../../../../fonts/fonts.dart';
@@ -153,7 +151,8 @@ class AddTeacherSectionScreen extends StatelessWidget {
                                           ),
                                         ),
                                         onPressed: () async {
-                                          await teacherExcelFunction();
+                                          await teacherController
+                                              .teacherExcelFunction();
                                         },
                                         child: const Text(
                                             'Add Teacher From Excel'),
@@ -170,40 +169,6 @@ class AddTeacherSectionScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Future<void> teacherExcelFunction() async {
-    //extract excel data
-    final result = await extractDataFromExcel();
-    teacherController.isLoading.value = true;
-    if (result != null) {
-      if (result.tables.isNotEmpty) {
-        Sheet? table = result.tables[result.tables.keys.first];
-        if (table != null) {
-          for (int i = 1; i < table.maxRows; i++) {
-            List<Data?>? firstRow = table.rows[i];
-//fetching data from excel cells
-            if (firstRow[0]?.value != null &&
-                firstRow[1]?.value != null &&
-                firstRow[2]?.value != null) {
-              //creating objects and upload to firebase
-              teacherController.createNewTeacher(TeacherModel(
-                teacherName: firstRow[0]?.value.toString(),
-                employeeID: firstRow[1]?.value.toString(),
-                createdAt: DateTime.now().toString(),
-                teacherPhNo: firstRow[2]?.value.toString(),
-                userRole: 'teacher',
-              ));
-            }
-          }
-          teacherController.isLoading.value = false;
-        } else {
-          teacherController.isLoading.value = false;
-          showToast(msg: 'Empty Sheet');
-        }
-      }
-    }
-    teacherController.isLoading.value = false;
   }
 }
 

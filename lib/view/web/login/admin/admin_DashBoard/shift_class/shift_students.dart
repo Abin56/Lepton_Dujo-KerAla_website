@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:flutter/material.dart';
@@ -354,7 +356,51 @@ class ShiftClassStudents extends StatelessWidget {
                                         "Shift Selected Students to new class");
                               },
                             ),
-                          )
+                          ),
+                          sizedBoxH10,
+                          FutureBuilder(
+                              future: shiftClassController.getAllStudents(),
+                              builder: (context, snapshot) {
+                                return ElevatedButton(
+                                  onPressed: () async {
+                                    if (shiftClassController
+                                            .addStudentstoNewClassList.length !=
+                                        snapshot.data?.length) {
+                                      shiftClassController.isLoading.value =
+                                          true;
+                                      shiftClassController
+                                          .addStudentstoNewClassList
+                                          .value = snapshot.data!;
+                                      shiftClassController.isLoading.value =
+                                          false;
+                                    } else {
+                                      shiftClassController
+                                          .addStudentstoNewClassList.value = [];
+                                      shiftClassController
+                                          .addStudentstoNewClassList
+                                          .refresh();
+                                    }
+                                    log(shiftClassController
+                                        .addStudentstoNewClassList.length
+                                        .toString());
+                                  },
+                                  child: Obx(
+                                    () {
+                                      return shiftClassController
+                                              .isLoadingSubmit.value
+                                          ? circularProgressIndicator
+                                          : shiftClassController
+                                                      .addStudentstoNewClassList
+                                                      .length !=
+                                                  snapshot.data?.length
+                                              ? const Text(
+                                                  "Select All Students")
+                                              : const Text(
+                                                  "Remove All Students");
+                                    },
+                                  ),
+                                );
+                              }),
                         ],
                       ),
                     )),

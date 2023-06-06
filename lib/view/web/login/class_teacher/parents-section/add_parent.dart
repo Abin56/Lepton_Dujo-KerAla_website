@@ -149,6 +149,16 @@ class AddParent extends StatelessWidget {
                               child: const Text("Upload Data From Excel"),
                             ),
                           ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 80.w, right: 50.w),
+                            child: SizedBox(
+                                height: 60.h,
+                                width: 250.w,
+                                child: const Text(
+                                  '(You can only use ".xlxs files)"',
+                                  style: TextStyle(fontSize: 12),
+                                )),
+                          ),
                         ]),
                   ),
                 ),
