@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:flutter/material.dart';
@@ -380,9 +378,6 @@ class ShiftClassStudents extends StatelessWidget {
                                           .addStudentstoNewClassList
                                           .refresh();
                                     }
-                                    log(shiftClassController
-                                        .addStudentstoNewClassList.length
-                                        .toString());
                                   },
                                   child: Obx(
                                     () {
