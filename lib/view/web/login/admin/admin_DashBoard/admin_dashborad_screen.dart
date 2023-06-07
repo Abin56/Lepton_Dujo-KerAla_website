@@ -95,6 +95,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'Alumni Associations',
     'Shift Class',
     'Non-Teaching Staffs',
+    
     // 'Generate TC',
     // 'Generate Summary',
     //r'Sampoorna'
