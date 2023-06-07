@@ -3,7 +3,7 @@ import 'dart:convert';
 
 class StudentAttendanceModel {
   String Date;
-  String present;
+  bool present;
   String studentName;
   String uid;
   StudentAttendanceModel({
@@ -15,7 +15,7 @@ class StudentAttendanceModel {
 
   StudentAttendanceModel copyWith({
     String? Date,
-    String? present,
+    bool? present,
     String? studentName,
     String? uid,
   }) {
@@ -39,7 +39,7 @@ class StudentAttendanceModel {
   factory StudentAttendanceModel.fromMap(Map<String, dynamic> map) {
     return StudentAttendanceModel(
       Date: map['Date'] as String,
-      present: map['present'] as String,
+      present: map['present'] as bool,
       studentName: map['studentName'] as String,
       uid: map['uid'] as String,
     );
@@ -47,7 +47,9 @@ class StudentAttendanceModel {
 
   String toJson() => json.encode(toMap());
 
-  factory StudentAttendanceModel.fromJson(String source) => StudentAttendanceModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory StudentAttendanceModel.fromJson(String source) =>
+      StudentAttendanceModel.fromMap(
+          json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -57,19 +59,18 @@ class StudentAttendanceModel {
   @override
   bool operator ==(covariant StudentAttendanceModel other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.Date == Date &&
-      other.present == present &&
-      other.studentName == studentName &&
-      other.uid == uid;
+
+    return other.Date == Date &&
+        other.present == present &&
+        other.studentName == studentName &&
+        other.uid == uid;
   }
 
   @override
   int get hashCode {
     return Date.hashCode ^
-      present.hashCode ^
-      studentName.hashCode ^
-      uid.hashCode;
+        present.hashCode ^
+        studentName.hashCode ^
+        uid.hashCode;
   }
 }

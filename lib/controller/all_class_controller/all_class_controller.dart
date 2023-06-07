@@ -1,11 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
+import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/students/list_students.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../view/web/login/admin/admin_DashBoard/classes/students_attendance/students_attendance_page.dart';
 import '../../view/web/widgets/button_container_widget.dart';
 import '../../view/web/widgets/drop_DownList/schoolDropDownList.dart';
 import '../admin_login_screen/admin_login_screen_controller.dart';
@@ -30,107 +34,248 @@ class AllClassController extends GetxController {
             child: ListBody(
               children: <Widget>[
                 SizedBox(
-                  width: 300,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Text('ClassName : $className'),
-                          IconButton(
-                              onPressed: () async {
-                                await changeClassName(
-                                    context, docid, className);
-                              },
-                              icon: const Icon(
-                                Icons.edit,
-                                color: Colors.green,
-                              ))
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          StreamBuilder(
-                              stream: firebaseFirestore
-                                  .doc(docid)
-                                  .collection('Students')
-                                  .snapshots(),
-                              builder: (context, snapshotss) {
-                                if (snapshotss.hasData) {
-                                  return Text(
-                                      'Total Students : ${snapshotss.data?.docs.length}');
-                                } else {
-                                  return Center(
-                                    child: circularProgressIndicator,
-                                  );
-                                }
-                              }),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text('ClassIncharge : $classInchargeTeacherName'),
-                        ],
-                      ),
-                      sizedBoxH20,
-                      Center(
-                        child: GestureDetector(
-                          onTap: () async {
-                            Navigator.push(context, MaterialPageRoute(
-                              builder: (context) {
-                                return ListOfStudents(
-                                    classID: docid,
-                                    className: className,
-                                    schoolID:
-                                        Get.find<AdminLoginScreenController>()
-                                            .schoolID);
-                              },
-                            ));
-                          },
-                          child: ButtonContainerWidget(
-                            curving: 10,
-                            colorindex: 0,
-                            height: 30,
-                            width: 120,
-                            child: Center(
-                              child: Text(
-                                'View Students',
-                                style: GoogleFonts.poppins(
-                                    color: const Color.fromARGB(
-                                        255, 255, 254, 254),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600),
+                  width: 420.w,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          width: 250.w,
+                          height: 150.h,
+                          // color: Colors.red,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Row(
+                                //  mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  GoogleMonstserratWidgets(
+                                      text: 'ClassName : $className',
+                                      fontsize: 14.w),
+                                  IconButton(
+                                      onPressed: () async {
+                                        await changeClassName(
+                                            context, docid, className);
+                                      },
+                                      icon: Icon(
+                                        Icons.edit,
+                                        color: Colors.green,
+                                        size: 30.w,
+                                      )),
+                                  IconButton(
+                                      onPressed: () async {
+                                        deleteBatchClasses(context, docid);
+                                      },
+                                      icon: Icon(
+                                        Icons.delete,
+                                        color: Colors.red,
+                                        size: 30.w,
+                                      ))
+                                ],
                               ),
-                            ),
+                              Row(
+                                // mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  StreamBuilder(
+                                      stream: firebaseFirestore
+                                          .doc(docid)
+                                          .collection('Students')
+                                          .snapshots(),
+                                      builder: (context, snapshotss) {
+                                        if (snapshotss.hasData) {
+                                          return GoogleMonstserratWidgets(
+                                            text:
+                                                'Total Students : ${snapshotss.data?.docs.length}',
+                                            fontsize: 15.w,
+                                          );
+                                        } else {
+                                          return Center(
+                                            child: circularProgressIndicator,
+                                          );
+                                        }
+                                      }),
+                                ],
+                              ),
+                              sizedBoxH10,
+                              Row(
+                                //mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  GoogleMonstserratWidgets(
+                                      text:
+                                          'ClassIncharge : $classInchargeTeacherName',
+                                      fontsize: 15.w),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
-                      ),
-                      sizedBoxH20,
-                      Center(
-                        child: GestureDetector(
-                          onTap: () async {
-                            deleteBatchClasses(context, docid);
-                          },
-                          child: ButtonContainerWidget(
-                            curving: 10,
-                            colorindex: 6,
-                            height: 30,
-                            width: 120,
-                            child: Center(
-                              child: Text(
-                                'Remove Class',
-                                style: GoogleFonts.poppins(
-                                    color: const Color.fromARGB(
-                                        255, 255, 254, 254),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600),
-                              ),
+                        sizedBoxH20,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Column(
+                              children: [
+                                GestureDetector(
+                                  onTap: () async {
+                                    Navigator.push(context, MaterialPageRoute(
+                                      builder: (context) {
+                                        return ListOfStudents(
+                                            classID: docid,
+                                            className: className,
+                                            schoolID: Get.find<
+                                                    AdminLoginScreenController>()
+                                                .schoolID);
+                                      },
+                                    ));
+                                  },
+                                  child: ButtonContainerWidget(
+                                    curving: 10,
+                                    colorindex: 0,
+                                    height: 30.h,
+                                    width: 120.w,
+                                    child: Center(
+                                      child: Text(
+                                        'View Students',
+                                        style: GoogleFonts.montserrat(
+                                            color: const Color.fromARGB(
+                                                255, 255, 254, 254),
+                                            fontSize: 14.w,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                sizedBoxH20,
+                                GestureDetector(
+                                  onTap: () async {},
+                                  child: ButtonContainerWidget(
+                                    curving: 10,
+                                    colorindex: 0,
+                                    height: 30.h,
+                                    width: 120.w,
+                                    child: Center(
+                                      child: Text(
+                                        'TimeTable',
+                                        style: GoogleFonts.montserrat(
+                                            color: const Color.fromARGB(
+                                                255, 255, 254, 254),
+                                            fontSize: 14.w,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
+                            sizedBoxw20,
+                            Column(
+                              children: [
+                                GestureDetector(
+                                  onTap: () async {
+                                    Navigator.push(context, MaterialPageRoute(
+                                      builder: (context) {
+                                        return const AttendancePage();
+                                      },
+                                    ));
+                                  },
+                                  child: ButtonContainerWidget(
+                                    curving: 10,
+                                    colorindex: 0,
+                                    height: 30.h,
+                                    width: 120.w,
+                                    child: Center(
+                                      child: Text(
+                                        'Attendance',
+                                        style: GoogleFonts.montserrat(
+                                            color: const Color.fromARGB(
+                                                255, 255, 254, 254),
+                                            fontSize: 14.w,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                sizedBoxH20,
+                                GestureDetector(
+                                  onTap: () async {},
+                                  child: ButtonContainerWidget(
+                                    curving: 10,
+                                    colorindex: 0,
+                                    height: 30.h,
+                                    width: 120.w,
+                                    child: Center(
+                                      child: Text(
+                                        'Exam Results',
+                                        style: GoogleFonts.montserrat(
+                                            color: const Color.fromARGB(
+                                                255, 255, 254, 254),
+                                            fontSize: 14.w,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            sizedBoxw20,
+                            Column(
+                              children: [
+                                GestureDetector(
+                                  onTap: () async {
+                                    Navigator.push(context, MaterialPageRoute(
+                                      builder: (context) {
+                                        return ListOfStudents(
+                                            classID: docid,
+                                            className: className,
+                                            schoolID: Get.find<
+                                                    AdminLoginScreenController>()
+                                                .schoolID);
+                                      },
+                                    ));
+                                  },
+                                  child: ButtonContainerWidget(
+                                    curving: 10,
+                                    colorindex: 0,
+                                    height: 30.h,
+                                    width: 120.w,
+                                    child: Center(
+                                      child: Text(
+                                        'Teacher',
+                                        style: GoogleFonts.montserrat(
+                                            color: const Color.fromARGB(
+                                                255, 255, 254, 254),
+                                            fontSize: 14.w,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                sizedBoxH20,
+                                GestureDetector(
+                                  onTap: () async {},
+                                  child: ButtonContainerWidget(
+                                    curving: 10,
+                                    colorindex: 0,
+                                    height: 30.h,
+                                    width: 120.w,
+                                    child: Center(
+                                      child: Text(
+                                        'Subject',
+                                        style: GoogleFonts.montserrat(
+                                            color: const Color.fromARGB(
+                                                255, 255, 254, 254),
+                                            fontSize: 14.w,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 )
               ],
@@ -138,7 +283,11 @@ class AllClassController extends GetxController {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('ok'),
+              child: GoogleMonstserratWidgets(
+                  text: 'Ok',
+                  fontsize: 15.w,
+                  color: cBlue,
+                  fontWeight: FontWeight.w500),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -190,13 +339,13 @@ class AllClassController extends GetxController {
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('cancel'),
+                child: GoogleMonstserratWidgets(text: 'cancel', fontsize: 14.w),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
               TextButton(
-                child: const Text('ok'),
+                child: GoogleMonstserratWidgets(text: 'ok', fontsize: 14.w),
                 onPressed: () async {
                   if (updateFormkey.currentState!.validate()) {
                     await firebaseFirestore.doc(docid).update({
@@ -225,24 +374,27 @@ class AllClassController extends GetxController {
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('Alert'),
+            title: GoogleMonstserratWidgets(text: 'Alert', fontsize: 14.w),
             content: SingleChildScrollView(
               child: ListBody(
-                children: const <Widget>[
-                  Text(
-                      'Once you delete a class all data will be lost \n Are you sure ?')
+                children: <Widget>[
+                  GoogleMonstserratWidgets(
+                    text:
+                        'Once you delete a class all data will be lost \n Are you sure ?',
+                    fontsize: 14.w,
+                  )
                 ],
               ),
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('Cancel'),
+                child: GoogleMonstserratWidgets(text: 'Cancel', fontsize: 14.w),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
               TextButton(
-                child: const Text('Ok'),
+                child: GoogleMonstserratWidgets(text: 'Ok', fontsize: 14.w),
                 onPressed: () async {
                   firebaseFirestore.doc(docid).delete().then((value) {
                     showToast(msg: "Removed Class");
@@ -263,14 +415,17 @@ class AllClassController extends GetxController {
             title: const Text('Alert'),
             content: SingleChildScrollView(
               child: ListBody(
-                children: const <Widget>[
-                  Text('Sorry you have no access to delete')
+                children: <Widget>[
+                  GoogleMonstserratWidgets(
+                    text: 'Sorry you have no access to delete',
+                    fontsize: 14.w,
+                  )
                 ],
               ),
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('Ok'),
+                child: GoogleMonstserratWidgets(text: 'Ok', fontsize: 14.w),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
