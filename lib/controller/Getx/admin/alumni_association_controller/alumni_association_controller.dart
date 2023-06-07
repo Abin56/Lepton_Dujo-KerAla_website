@@ -124,7 +124,7 @@ class AlumniController extends GetxController {
         isLoadingDialogue.value = false;
       } catch (e) {
         isLoadingDialogue.value = false;
-        showToast(msg: e.toString());
+        showToast(msg: "Something Went Wrong");
       }
     } else {
       showToast(msg: 'All Fields Are Mandatory');

@@ -1,7 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottie/lottie.dart';
 
 import '../../../../colors/colors.dart';
 import '../../../../constant/constant.dart';
@@ -269,9 +267,9 @@ void errorBox(context, e) {
   showDialog(
       context: context,
       builder: (context) {
-        return AlertDialog(
-          title: const Text("Error"),
-          content: Text(e.toString()),
+        return const AlertDialog(
+          title: Text("Error"),
+          content: Text( "Something Went Wrong"),
         );
       });
 }

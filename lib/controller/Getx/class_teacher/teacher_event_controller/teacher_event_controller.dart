@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../../model/class_teacher/class_teacher_event_model.dart';
 import '../../../../view/constant/constant.dart';
 import '../../../admin_login_screen/admin_login_screen_controller.dart';
@@ -84,9 +85,7 @@ class TeacherEventController extends GetxController {
       }
     } catch (e) {
       isLoading.value = false;
-      showToast(
-        msg: e.toString(),
-      );
+     showToast(msg: "Something Went Wrong");
     }
   }
 
@@ -109,7 +108,7 @@ class TeacherEventController extends GetxController {
         Navigator.of(context).pop();
       }
     } catch (e) {
-      showToast(msg: e.toString());
+      showToast(msg: "Something Went Wrong");
     }
   }
 

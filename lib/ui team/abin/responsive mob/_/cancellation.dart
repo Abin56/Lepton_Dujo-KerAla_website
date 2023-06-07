@@ -13,7 +13,7 @@ class CancellationPolicy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(  title: GoogleMonstserratWidgets(text: "Cancellation Policy", fontsize: 15.w,),
+      appBar: AppBar(  title: GoogleMonstserratWidgets(text: "Refund Cancellation Policy", fontsize: 15.w,),
        backgroundColor: adminePrimayColor,),
       backgroundColor: adminePrimayColor,
       body: Column(

@@ -118,7 +118,7 @@ class GeneralInstructionsController extends GetxController {
           .toList();
       isLoading.value = false;
     } catch (e) {
-      showToast(msg: 'Failed to load data ${e.toString()}');
+      showToast(msg: "Something Went Wrong");
       isLoading.value = false;
     }
   }
