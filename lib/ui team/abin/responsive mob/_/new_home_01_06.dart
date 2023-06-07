@@ -9,7 +9,6 @@ import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:dujo_kerala_website/view/web/home/create_school/create_school.dart';
 import 'package:dujo_kerala_website/view/web/login/loginscreen.dart';
 import 'package:dujo_kerala_website/view/web/widgets/drop_DownList/schoolDropDownList.dart';
-import 'package:dujo_kerala_website/view/web/widgets/sample/under_maintance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -924,42 +923,42 @@ class HomePageImages extends StatelessWidget {
                          SizedBox(
                                 width: 10.w,
                               ),
-                          GestureDetector(
-                            onTap: () {
-                               Navigator.push(context,
-                                              MaterialPageRoute(
-                                            builder: (context) {
-                                              return const UnderMaintanceScreen();
-                                            },
-                                          ));
-                            },
-                            child: ContainerDecrationTabs(text: 'Colleges')),
-                            SizedBox(
-                                width: 10.w,
-                              ),
-                          GestureDetector(
-                            onTap: () {
-                                Navigator.push(context,
-                                              MaterialPageRoute(
-                                            builder: (context) {
-                                              return const UnderMaintanceScreen();
-                                            },
-                                          ));
-                            },
-                            child: ContainerDecrationTabs(text: 'Professionals',)),
-                            SizedBox(
-                                width: 10.w,
-                              ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(context,
-                                              MaterialPageRoute(
-                                            builder: (context) {
-                                              return const UnderMaintanceScreen();
-                                            },
-                                          ));  
-                            },
-                            child: ContainerDecrationTabs(text: 'Institutions',)),
+                          // GestureDetector(
+                          //   onTap: () {
+                          //      Navigator.push(context,
+                          //                     MaterialPageRoute(
+                          //                   builder: (context) {
+                          //                     return const UnderMaintanceScreen();
+                          //                   },
+                          //                 ));
+                          //   },
+                          //   child: ContainerDecrationTabs(text: 'Colleges')),
+                            // SizedBox(
+                            //     width: 10.w,
+                            //   ),
+                          // GestureDetector(
+                          //   onTap: () {
+                          //       Navigator.push(context,
+                          //                     MaterialPageRoute(
+                          //                   builder: (context) {
+                          //                     return const UnderMaintanceScreen();
+                          //                   },
+                          //                 ));
+                          //   },
+                          //   child: ContainerDecrationTabs(text: 'Professionals',)),
+                            // SizedBox(
+                            //     width: 10.w,
+                            //   ),
+                          // GestureDetector(
+                          //   onTap: () {
+                          //     Navigator.push(context,
+                          //                     MaterialPageRoute(
+                          //                   builder: (context) {
+                          //                     return const UnderMaintanceScreen();
+                          //                   },
+                          //                 ));  
+                          //   },
+                          //   child: ContainerDecrationTabs(text: 'Institutions',)),
                                                   ],
                                                 ),
                                               ),
@@ -1260,31 +1259,31 @@ class HomePageImages extends StatelessWidget {
                 width: double.infinity,
                 child: Image(image: AssetImage('assets/images/dujo_colleges_image.png',),fit: BoxFit.fill,)
           ),
-           InkWell(
-             onTap: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder:(context) => UnderMaintanceScreen(),
-                                              ),
-                                            );
-                                          },
-             child: Container(
-                                  margin: EdgeInsets.only(top: 690.h,left: 910.w),
-                                  height: 60.h,
-                                  width: 250.w,
-                                  color: adminePrimayColor,
-                                  child: Center(
-                                    child: Text(
-                                      'Create College Profile',
-                                      style: GoogleFonts.poppins(
-                                          color: Colors.white,
-                                          fontSize: 16.w,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ),
-                                ),
-           ),
+          //  InkWell(
+          //    onTap: () {
+          //                                   Navigator.push(
+          //                                     context,
+          //                                     MaterialPageRoute(
+          //                                       builder:(context) => UnderMaintanceScreen(),
+          //                                     ),
+          //                                   );
+          //                                 },
+          //    child: Container(
+          //                         margin: EdgeInsets.only(top: 690.h,left: 910.w),
+          //                         height: 60.h,
+          //                         width: 250.w,
+          //                         color: adminePrimayColor,
+          //                         child: Center(
+          //                           child: Text(
+          //                             'Create College Profile',
+          //                             style: GoogleFonts.poppins(
+          //                                 color: Colors.white,
+          //                                 fontSize: 16.w,
+          //                                 fontWeight: FontWeight.w500),
+          //                           ),
+          //                         ),
+          //                       ),
+          //  ),
              ],
            ),
           sizedBoxH20,
@@ -1296,31 +1295,31 @@ class HomePageImages extends StatelessWidget {
                 width: double.infinity,
                 child: Image(image: AssetImage('assets/images/dujo_professional_image.png',),fit: BoxFit.fill,)
           ),
-           InkWell(
-             onTap: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder:(context) => UnderMaintanceScreen(),
-                                              ),
-                                            );
-                                          },
-             child: Container(
-                                  margin: EdgeInsets.only(top: 690.h,left: 210.w),
-                                  height: 60.h,
-                                  width: 250.w,
-                                  color: adminePrimayColor,
-                                  child: Center(
-                                    child: Text(
-                                      'Create professional Profile',
-                                      style: GoogleFonts.poppins(
-                                          color: Colors.white,
-                                          fontSize: 16.w,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ),
-                                ),
-           ),
+          //  InkWell(
+          //    onTap: () {
+          //                                   Navigator.push(
+          //                                     context,
+          //                                     MaterialPageRoute(
+          //                                       builder:(context) => UnderMaintanceScreen(),
+          //                                     ),
+          //                                   );
+          //                                 },
+          //    child: Container(
+          //                         margin: EdgeInsets.only(top: 690.h,left: 210.w),
+          //                         height: 60.h,
+          //                         width: 250.w,
+          //                         color: adminePrimayColor,
+          //                         child: Center(
+          //                           child: Text(
+          //                             'Create professional Profile',
+          //                             style: GoogleFonts.poppins(
+          //                                 color: Colors.white,
+          //                                 fontSize: 16.w,
+          //                                 fontWeight: FontWeight.w500),
+          //                           ),
+          //                         ),
+          //                       ),
+          //  ),
              ],
            ),
           sizedBoxH20,
@@ -1332,32 +1331,32 @@ class HomePageImages extends StatelessWidget {
                 width: double.infinity,
                 child: Image(image: AssetImage('assets/images/dujo_institutions_image.png',),fit: BoxFit.fill,)
           ),
-           InkWell(
-             onTap: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder:(context) => UnderMaintanceScreen(),
-                                              ),
-                                            );
-                                          },
-             child: Container(
-                                 margin: EdgeInsets.only(top: 690.h,left: 210.w),
-                                  height: 60.h,
-                                  width: 250.w,
+          //  InkWell(
+          //    onTap: () {
+          //                                   Navigator.push(
+          //                                     context,
+          //                                     MaterialPageRoute(
+          //                                       builder:(context) => UnderMaintanceScreen(),
+          //                                     ),
+          //                                   );
+          //                                 },
+          //    child: Container(
+          //                        margin: EdgeInsets.only(top: 690.h,left: 210.w),
+          //                         height: 60.h,
+          //                         width: 250.w,
                                  
-                                  color: adminePrimayColor,
-                                  child: Center(
-                                    child: Text(
-                                      'Create institution Profile',
-                                      style: GoogleFonts.poppins(
-                                          color: Colors.white,
-                                          fontSize: 16.w,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ),
-                                ),
-           ),
+          //                         color: adminePrimayColor,
+          //                         child: Center(
+          //                           child: Text(
+          //                             'Create institution Profile',
+          //                             style: GoogleFonts.poppins(
+          //                                 color: Colors.white,
+          //                                 fontSize: 16.w,
+          //                                 fontWeight: FontWeight.w500),
+          //                           ),
+          //                         ),
+          //                       ),
+          //  ),
              ],
            ),
            ],

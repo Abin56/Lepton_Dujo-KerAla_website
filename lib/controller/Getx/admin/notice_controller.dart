@@ -215,7 +215,7 @@ class AdminNoticeController extends GetxController {
         Navigator.of(context).pop();
       }
     } catch (e) {
-      showToast(msg: e.toString());
+      showToast(msg: "Something Went Wrong");
     }
   }
 

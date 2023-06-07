@@ -365,7 +365,7 @@ class FooterHomeP extends StatelessWidget {
                           GestureDetector(
                             onTap: () {
                               Navigator.push(
-                                  context,
+                                  context,                                                                                                                                      
                                   MaterialPageRoute(
                                       builder: ((context) =>
                                           const CancellationPolicy()))); 
@@ -377,7 +377,7 @@ class FooterHomeP extends StatelessWidget {
                                 return SizedBox(
                                     width: 160.w,
                                     child: Text(
-                                      'Cancellation Policy',
+                                      'Refund and Cancellation Policy',
                                       style: k,
                                     ));
                               },

@@ -276,9 +276,9 @@ void errorBox(context, e) {
   showDialog(
       context: context,
       builder: (context) {
-        return AlertDialog(
-          title: const Text("Error"),
-          content: Text(e.toString()),
+        return const AlertDialog(
+          title: Text("Error"),
+          content: Text( "Something Went Wrong"),
         );
       });
 }

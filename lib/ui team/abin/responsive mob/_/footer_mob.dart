@@ -204,7 +204,7 @@ class FooterMob1 extends StatelessWidget {
                       SizedBox(
                           width: 80.h,
                           child: Text(
-                            'Cancellation Policy',
+                            'Refund and Cancellation Policy',
                             style: k,
                           )),
                     ],

@@ -102,7 +102,7 @@ String stringTimeToDateConvert(String date) {
     final DateTime dateFormat = DateTime.parse(date);
     return "${dateFormat.day}-${dateFormat.month}-${dateFormat.year}";
   } catch (e) {
-    showToast(msg: e.toString());
+    showToast(msg: "Something Went Wrong");
   }
   return '';
 }

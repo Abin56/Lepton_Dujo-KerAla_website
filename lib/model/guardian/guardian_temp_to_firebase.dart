@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/model/guardian/guardian_model.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
@@ -19,7 +17,7 @@ class AddTempGuardiansToFirebase {
           .doc()
           .set(guardianModel.toMap());
     } catch (e) {
-      showToast(msg: e.toString());
+      showToast(msg: "Something Went Wrong");
     }
   }
 }

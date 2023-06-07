@@ -112,7 +112,7 @@ class AdminMeetingController extends GetxController {
         Navigator.of(context).pop();
       }
     } catch (e) {
-      showToast(msg: e.toString());
+      showToast(msg: "Something Went Wrong");
       isLoading.value = false;
     }
   }

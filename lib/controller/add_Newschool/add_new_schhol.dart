@@ -84,7 +84,7 @@ class AddNewSchoolController extends GetxController {
         log("something error");
       }
     } catch (e) {
-      showToast(msg: e.toString());
+      showToast(msg: "Something Went Wrong");
     }
   }
 
