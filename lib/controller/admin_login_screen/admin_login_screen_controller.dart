@@ -80,7 +80,8 @@ class AdminLoginScreenController extends GetxController {
                 },
                 SetOptions(merge: true),
               ).then((value) {
-                TeacherLoginIDSaver.findUser = FirebaseAuth.instance.currentUser!.uid;
+                TeacherLoginIDSaver.findUser =
+                    FirebaseAuth.instance.currentUser!.uid;
                 schoolIdController.clear();
                 passwordController.clear();
                 Navigator.push(context, MaterialPageRoute(
@@ -185,7 +186,7 @@ class AdminLoginScreenController extends GetxController {
                                         TextButton(
                                           child: const Text('ok'),
                                           onPressed: () {
-                                          html.window.location.reload();
+                                            html.window.location.reload();
                                           },
                                         ),
                                       ],
