@@ -354,7 +354,48 @@ class ShiftClassStudents extends StatelessWidget {
                                         "Shift Selected Students to new class");
                               },
                             ),
-                          )
+                          ),
+                          sizedBoxH10,
+                          FutureBuilder(
+                              future: shiftClassController.getAllStudents(),
+                              builder: (context, snapshot) {
+                                return ElevatedButton(
+                                  onPressed: () async {
+                                    if (shiftClassController
+                                            .addStudentstoNewClassList.length !=
+                                        snapshot.data?.length) {
+                                      shiftClassController.isLoading.value =
+                                          true;
+                                      shiftClassController
+                                          .addStudentstoNewClassList
+                                          .value = snapshot.data!;
+                                      shiftClassController.isLoading.value =
+                                          false;
+                                    } else {
+                                      shiftClassController
+                                          .addStudentstoNewClassList.value = [];
+                                      shiftClassController
+                                          .addStudentstoNewClassList
+                                          .refresh();
+                                    }
+                                  },
+                                  child: Obx(
+                                    () {
+                                      return shiftClassController
+                                              .isLoadingSubmit.value
+                                          ? circularProgressIndicator
+                                          : shiftClassController
+                                                      .addStudentstoNewClassList
+                                                      .length !=
+                                                  snapshot.data?.length
+                                              ? const Text(
+                                                  "Select All Students")
+                                              : const Text(
+                                                  "Remove All Students");
+                                    },
+                                  ),
+                                );
+                              }),
                         ],
                       ),
                     )),

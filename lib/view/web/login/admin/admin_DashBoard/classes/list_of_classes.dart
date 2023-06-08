@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
+import '../../../../../../controller/attendance_controller/attendance_controller.dart';
 import '../../../../../../controller/class_list/class_list_model.dart';
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../model/add_class/add_new_class.dart';
@@ -28,6 +29,8 @@ class ListOfClassesScreen extends StatefulWidget {
 
 class _ListOfClassesScreenState extends State<ListOfClassesScreen> {
   final getxController = Get.put(ClassProfileList());
+  final AttendanceController attendanceController =
+      Get.put(AttendanceController());
 
   @override
   void initState() {
@@ -116,6 +119,8 @@ class _ListOfClassesScreenState extends State<ListOfClassesScreen> {
                                         padding: const EdgeInsets.all(8.0),
                                         child: GestureDetector(
                                           onTap: () async {
+                                            attendanceController.classId.value =
+                                                data.docid;
                                             widget.allClassController.showclass(
                                                 context,
                                                 data.className,
