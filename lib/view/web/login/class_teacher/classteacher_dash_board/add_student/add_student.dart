@@ -11,6 +11,7 @@ import '../../../../../../controller/Getx/class_teacher/teacher_add_student_cont
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../model/create_classModel/add_student_model.dart';
 import '../../../../../../utils/utils.dart';
+import '../../../../../fonts/google_monstre.dart';
 
 class AddStudentFromClassTeacher extends StatelessWidget {
   final String schoolID;
@@ -172,25 +173,31 @@ class AddStudentFromClassTeacher extends StatelessWidget {
                                 )),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: 50.w, right: 50.w, top: 30.h),
-                          child: SizedBox(
-                            height: 60.h,
-                            width: 250.w,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: adminePrimayColor,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
+                        Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  left: 50.w, right: 50.w, top: 30.h),
+                              child: SizedBox(
+                                height: 60.h,
+                                width: 250.w,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: adminePrimayColor,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                  ),
+                                  onPressed: () async {
+                                    await teacherExcelFunction();
+                                  },
+                                  child: const Text("Create from Excel"),
                                 ),
                               ),
-                              onPressed: () async {
-                                await teacherExcelFunction();
-                              },
-                              child: const Text("Create from Excel"),
                             ),
-                          ),
+                               GoogleMonstserratWidgets(text: "Please use .xlsx format", 
+                                                    fontsize: 12,fontWeight: FontWeight.w400,color: cred,)
+                          ],
                         ),
                       ]),
                     ),

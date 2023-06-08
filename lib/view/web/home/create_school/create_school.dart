@@ -626,7 +626,9 @@ class _SchoolProfileState extends State<SchoolProfile> {
                   child: Padding(
                     padding: EdgeInsets.only(
                         left: size.width / 10, right: size.width / 10),
-                    child: Column(children: [
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
                       Padding(
                         padding: const EdgeInsets.all(10),
                         child: SelectState(
@@ -648,6 +650,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
                         labelText: 'School Name',
                         icon: Icons.school,
                       ),
+                      SizedBox(height: 10.h,),
                       SchoolTextFormFieldWidget(
                         textEditingController:
                             addNewSchoolController.schoolCodeController,
@@ -655,6 +658,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
                         labelText: 'School Code',
                         icon: Icons.school_outlined,
                       ),
+                      SizedBox(height: 10.h,),
                       SchoolTextFormFieldWidget(
                         textEditingController:
                             addNewSchoolController.placeController,
@@ -662,6 +666,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
                         labelText: 'Place',
                         icon: Icons.place_outlined,
                       ),
+                      SizedBox(height: 10.h,),
                       SchoolTextFormFieldWidget(
                         textEditingController:
                             addNewSchoolController.adminUserNameController,
@@ -714,13 +719,23 @@ class _SchoolProfileState extends State<SchoolProfile> {
                           ),
                         ),
                       ),
-                      SchoolTextFormFieldWidget(
-                        textEditingController:
-                            addNewSchoolController.emailController,
-                        function: checkFieldEmailIsValid,
-                        labelText: 'Email',
-                        icon: Icons.mail_outline,
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SchoolTextFormFieldWidget(
+                            textEditingController:
+                                addNewSchoolController.emailController,
+                            function: checkFieldEmailIsValid,
+                            labelText: 'Enter Email',
+                            hintText: "Enter School's official Mail ID",
+                            icon: Icons.mail_outline,
+                          ),
+                            GooglePoppinsWidgets(
+                                                  text: "* You Can't Edit or Change this entry in future ", 
+                                                  fontsize: 13,color: cred,),
+                        ],
                       ),
+                    
                       SchoolTextFormFieldWidget(
                         textEditingController:
                             addNewSchoolController.phoneNumberController,
@@ -728,6 +743,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
                         labelText: 'Phone Number',
                         icon: Icons.phone,
                       ),
+                      SizedBox(height: 10.h,),
                       SchoolTextFormFieldWidget(
                         textEditingController:
                             addNewSchoolController.designationController,
@@ -735,6 +751,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
                         labelText: 'Designation',
                         icon: Icons.person_4,
                       ),
+                      SizedBox(height: 10.h,),
                       Padding(
                         padding: const EdgeInsets.all(20),
                         child: SizedBox(
@@ -1088,6 +1105,7 @@ class SchoolTextFormFieldWidget extends StatelessWidget {
     required this.function,
     required this.icon,
     this.obscureText,
+    this.hintText,
   });
 
   final TextEditingController textEditingController;
@@ -1095,11 +1113,12 @@ class SchoolTextFormFieldWidget extends StatelessWidget {
   final String? Function(String? fieldContent) function;
   IconData icon;
   bool? obscureText;
+  final String? hintText;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(15.w),
+       padding:  EdgeInsets.only(bottom: 5.w,left: 15.w,right: 15.w,top: 15.w),
       child: TextFormField(
         // obscureText: obscureText,
         validator: function,
@@ -1111,6 +1130,7 @@ class SchoolTextFormFieldWidget extends StatelessWidget {
             color: const Color.fromARGB(221, 28, 9, 110),
           ),
           labelText: labelText,
+          hintText: hintText,labelStyle: TextStyle(color: cBlack)
         ),
       ),
     );

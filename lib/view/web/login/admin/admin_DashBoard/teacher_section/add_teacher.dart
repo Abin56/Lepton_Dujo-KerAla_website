@@ -1,4 +1,7 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:dujo_kerala_website/controller/teacher_controller/teacher_controller.dart';
+import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:excel/excel.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +96,7 @@ class AddTeacherSectionScreen extends StatelessWidget {
                               padding: const EdgeInsets.only(
                                   top: 10, bottom: 10, left: 100, right: 100),
                               child: SizedBox(
-                                height: 50,
+                                height: 40,
                                 child: Obx(
                                   () => teacherController.isLoading.value
                                       ? circularProgressIndicator
@@ -137,27 +140,33 @@ class AddTeacherSectionScreen extends StatelessWidget {
                               : Flexible(
                                   child: Padding(
                                     padding: const EdgeInsets.only(
-                                        top: 10,
+                                        top: 20,
                                         bottom: 10,
-                                        left: 100,
-                                        right: 100),
-                                    child: SizedBox(
-                                      height: 50,
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: const Color.fromARGB(
-                                              255, 3, 39, 68),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
+                                        left: 60,
+                                        right: 60),
+                                    child: Column(
+                                      children: [
+                                        SizedBox(
+                                          height: 40,
+                                          child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor: const Color.fromARGB(
+                                                  255, 3, 39, 68),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                              ),
+                                            ),
+                                            onPressed: () async {
+                                              await teacherExcelFunction();
+                                            },
+                                            child: Text(
+                                               'Add Teacher From Excel'),
                                           ),
                                         ),
-                                        onPressed: () async {
-                                          await teacherExcelFunction();
-                                        },
-                                        child: const Text(
-                                            'Add Teacher From Excel'),
-                                      ),
+                                         GoogleMonstserratWidgets(text: "Please use .xlsx format", 
+                                                    fontsize: 12,fontWeight: FontWeight.w400,color: cred,)
+                                      ],
                                     ),
                                   ),
                                 )),
