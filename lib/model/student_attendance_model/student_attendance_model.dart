@@ -38,10 +38,10 @@ class StudentAttendanceModel {
 
   factory StudentAttendanceModel.fromMap(Map<String, dynamic> map) {
     return StudentAttendanceModel(
-      Date: map['Date'] as String,
-      present: map['present'] as bool,
-      studentName: map['studentName'] as String,
-      uid: map['uid'] as String,
+      Date: map['Date'] ?? "",
+      present: map['present'] ?? false,
+      studentName: map['studentName'] ?? "",
+      uid: map['uid'] ?? "",
     );
   }
 
