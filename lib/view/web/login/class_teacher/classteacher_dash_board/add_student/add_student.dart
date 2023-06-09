@@ -195,8 +195,13 @@ class AddStudentFromClassTeacher extends StatelessWidget {
                                 ),
                               ),
                             ),
-                               GoogleMonstserratWidgets(text: "Please use .xlsx format", 
-                                                    fontsize: 12,fontWeight: FontWeight.w400,color: cred,)
+                            sizedBoxH20,
+                            GoogleMonstserratWidgets(
+                              text: "* Please use .xlsx format",
+                              fontsize: 12.w,
+                              fontWeight: FontWeight.w500,
+                              color: cred,
+                            )
                           ],
                         ),
                       ]),

@@ -378,6 +378,9 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                   msg:
                                                       'Class activated Please Login again');
                                               html.window.location.reload();
+                                              showToast(
+                                                  msg:
+                                                      'Class activated Please Login again');
                                             });
                                           },
                                           child: Text(
@@ -415,7 +418,8 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                     ),
                                     FittedBox(
                                       child: Padding(
-                                        padding: EdgeInsets.only(left: 5.w,right: 15.w),
+                                        padding: EdgeInsets.only(
+                                            left: 5.w, right: 15.w),
                                         child: Text(
                                           'Classteacher Dashboard',
                                           style: GoogleFonts.poppins(
@@ -434,7 +438,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                       itemCount: viewListNames.length,
                                       itemBuilder: (context, index) {
                                         return Padding(
-                                          padding:  EdgeInsets.all(20.0.w),
+                                          padding: EdgeInsets.all(20.0.w),
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
@@ -444,7 +448,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                 width: 15.w,
                                                 height: 15.w,
                                               ),
-                                               SizedBox(
+                                              SizedBox(
                                                 width: 10.w,
                                               ),
                                               GestureDetector(
@@ -461,8 +465,8 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                 },
                                                 child: Text(
                                                   viewListNames[index],
-
-                                                  style: GoogleFonts.poppins(fontSize: 15.w      ,
+                                                  style: GoogleFonts.poppins(
+                                                      fontSize: 15.w,
                                                       color: Colors.white),
                                                 ),
                                               )
@@ -491,7 +495,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                       Get.find<AdminLoginScreenController>()
                                           .schoolName,
                                       style: GoogleFonts.poppins(
-                                        fontSize: 13.w,
+                                          fontSize: 13.w,
                                           fontWeight: FontWeight.w500),
                                     ),
                                     Obx(() {
@@ -505,9 +509,12 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                       } else {
                                         return Row(
                                           children: [
-                                            Text(Get.find<GetFireBaseData>()
-                                                .className
-                                                .value,style: TextStyle(fontSize: 15.w)),
+                                            Text(
+                                                Get.find<GetFireBaseData>()
+                                                    .className
+                                                    .value,
+                                                style:
+                                                    TextStyle(fontSize: 15.w)),
                                             IconButton(
                                                 onPressed: () async {
                                                   return showDialog(
@@ -517,8 +524,11 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                     builder:
                                                         (BuildContext context) {
                                                       return AlertDialog(
-                                                        title:  Text(
-                                                            "Set Your Class",style: TextStyle(fontSize: 15.w)),
+                                                        title: Text(
+                                                            "Set Your Class",
+                                                            style: TextStyle(
+                                                                fontSize:
+                                                                    15.w)),
                                                         content:
                                                             SingleChildScrollView(
                                                           child: ListBody(
@@ -606,7 +616,8 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                         // ),
                                         // kwidth20,
                                         Text(
-                                            'Batch Year ${getFireBaseData.bYear}',style: TextStyle(fontSize: 15.w)),
+                                            'Batch Year ${getFireBaseData.bYear}',
+                                            style: TextStyle(fontSize: 15.w)),
 
                                         GestureDetector(
                                           onTap: () async {
@@ -616,8 +627,10 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                   false, // user must tap button!
                                               builder: (BuildContext context) {
                                                 return AlertDialog(
-                                                  title:  Text(
-                                                      'Change Batch Year',style: TextStyle(fontSize: 15.w)),
+                                                  title: Text(
+                                                      'Change Batch Year',
+                                                      style: TextStyle(
+                                                          fontSize: 15.w)),
                                                   content:
                                                       SingleChildScrollView(
                                                     child: ListBody(
@@ -699,7 +712,8 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                             'Set BatchYear',
                                                             style: GoogleFonts
                                                                 .poppins(
-                                                                  fontSize: 15.w,
+                                                                    fontSize:
+                                                                        15.w,
                                                                     color: Colors
                                                                         .white),
                                                           )),
@@ -754,8 +768,11 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                                   (BuildContext
                                                                       context) {
                                                                 return AlertDialog(
-                                                                  title:  Text(
-                                                                      'Add BatchYear',style: TextStyle(fontSize: 15.w)),
+                                                                  title: Text(
+                                                                      'Add BatchYear',
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              15.w)),
                                                                   content:
                                                                       SingleChildScrollView(
                                                                     child:
@@ -851,7 +868,8 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                             );
                                           },
                                           child: Padding(
-                                            padding:  EdgeInsets.only(left  : 10.w),
+                                            padding:
+                                                EdgeInsets.only(left: 10.w),
                                             child: SizedBox(
                                               height: 30.h,
                                               width: 60.w,
@@ -861,7 +879,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                           ),
                                         ),
 
-                                         SizedBox(
+                                        SizedBox(
                                           width: 35.w,
                                         ),
 
@@ -931,8 +949,6 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                             ),
                                           ),
                                         ),
-
-                                        
                                       ],
                                     )
                                   ],
@@ -942,8 +958,8 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                             SizedBox(
                               height: screenSize.height - 60,
                               child: Padding(
-                                padding:  EdgeInsets.only(
-                                    right: 50.0.w, left: 50.w),
+                                padding:
+                                    EdgeInsets.only(right: 50.0.w, left: 50.w),
                                 child: GridView.count(
                                     crossAxisCount: 5,
                                     crossAxisSpacing: 4.0,
@@ -975,7 +991,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                     width: 50.w,
                                                     height: 50.w,
                                                   ),
-                                                   SizedBox(
+                                                  SizedBox(
                                                     height: 20.w,
                                                   ),
                                                   Text(

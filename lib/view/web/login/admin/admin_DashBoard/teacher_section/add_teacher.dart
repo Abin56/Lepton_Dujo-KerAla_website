@@ -146,12 +146,14 @@ class AddTeacherSectionScreen extends StatelessWidget {
                                         right: 60),
                                     child: Column(
                                       children: [
+                                        sizedBoxH30,
                                         SizedBox(
                                           height: 40,
                                           child: ElevatedButton(
                                             style: ElevatedButton.styleFrom(
-                                              backgroundColor: const Color.fromARGB(
-                                                  255, 3, 39, 68),
+                                              backgroundColor:
+                                                  const Color.fromARGB(
+                                                      255, 3, 39, 68),
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(20),
@@ -160,12 +162,17 @@ class AddTeacherSectionScreen extends StatelessWidget {
                                             onPressed: () async {
                                               await teacherExcelFunction();
                                             },
-                                            child: Text(
-                                               'Add Teacher From Excel'),
+                                            child:
+                                                Text('Add Teacher From Excel'),
                                           ),
                                         ),
-                                         GoogleMonstserratWidgets(text: "Please use .xlsx format", 
-                                                    fontsize: 12,fontWeight: FontWeight.w400,color: cred,)
+                                        sizedBoxH20,
+                                        GoogleMonstserratWidgets(
+                                          text: "* Please use .xlsx format",
+                                          fontsize: 12,
+                                          fontWeight: FontWeight.w500,
+                                          color: cred,
+                                        )
                                       ],
                                     ),
                                   ),

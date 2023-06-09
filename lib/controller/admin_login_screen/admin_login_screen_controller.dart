@@ -178,13 +178,13 @@ class AdminLoginScreenController extends GetxController {
                                         child: ListBody(
                                           children: const <Widget>[
                                             Text(
-                                                'Batch Added Successfully Please Login again')
+                                                'Batch Added Successfully, Please Login again.')
                                           ],
                                         ),
                                       ),
                                       actions: <Widget>[
                                         TextButton(
-                                          child: const Text('ok'),
+                                          child: const Text('Ok'),
                                           onPressed: () {
                                             html.window.location.reload();
                                           },

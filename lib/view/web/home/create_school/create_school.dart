@@ -785,7 +785,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                         ),
                                         actions: <Widget>[
                                           TextButton(
-                                            child: const Text('ok'),
+                                            child: const Text('OK'),
                                             onPressed: () {
                                               Navigator.of(context).pop();
                                             },
@@ -825,7 +825,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                           ),
                                           actions: <Widget>[
                                             TextButton(
-                                              child: const Text('ok'),
+                                              child: const Text('OK'),
                                               onPressed: () async {
                                                 await addNewSchoolController
                                                     .addNewSchool(
@@ -944,7 +944,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Ok'),
+              child: const Text('OK'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -1434,7 +1434,7 @@ showTermsandCondition(BuildContext context) async {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Ok'),
+              child: const Text('OK'),
               onPressed: () {
                 Navigator.of(context).pop();
               },

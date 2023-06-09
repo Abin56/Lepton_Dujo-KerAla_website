@@ -138,22 +138,29 @@ class AddParent extends StatelessWidget {
                                     final result = await extractDataFromExcel();
                                     if (result != null) {
                                       if (result.tables.isNotEmpty) {
-                                        Sheet? table =
-                                            result.tables[result.tables.keys.first];
+                                        Sheet? table = result
+                                            .tables[result.tables.keys.first];
 
                                         List<Data?>? firstRow = table?.rows[1];
                                         parentNameController.text =
-                                            firstRow?[0]?.value.toString() ?? "";
+                                            firstRow?[0]?.value.toString() ??
+                                                "";
                                         parentPhoneNumberController.text =
-                                            firstRow?[1]?.value.toString() ?? "";
+                                            firstRow?[1]?.value.toString() ??
+                                                "";
                                       }
                                     }
                                   },
                                   child: const Text("Upload Data From Excel"),
                                 ),
                               ),
-                                 GoogleMonstserratWidgets(text: "Please use .xlsx format", 
-                                                    fontsize: 12,fontWeight: FontWeight.w400,color: cred,)
+                              sizedBoxH20,
+                              GoogleMonstserratWidgets(
+                                text: "* Please use .xlsx format",
+                                fontsize: 12.w,
+                                fontWeight: FontWeight.w500,
+                                color: cred,
+                              )
                             ],
                           ),
                           // Padding(

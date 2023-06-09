@@ -345,7 +345,7 @@ class AllClassController extends GetxController {
                 },
               ),
               TextButton(
-                child: GoogleMonstserratWidgets(text: 'ok', fontsize: 14.w),
+                child: GoogleMonstserratWidgets(text: 'Ok', fontsize: 14.w),
                 onPressed: () async {
                   if (updateFormkey.currentState!.validate()) {
                     await firebaseFirestore.doc(docid).update({
