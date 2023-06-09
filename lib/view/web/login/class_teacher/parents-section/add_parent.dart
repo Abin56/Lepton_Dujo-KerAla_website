@@ -156,16 +156,16 @@ class AddParent extends StatelessWidget {
                                                     fontsize: 12,fontWeight: FontWeight.w400,color: cred,)
                             ],
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 80.w, right: 50.w),
-                            child: SizedBox(
-                                height: 60.h,
-                                width: 250.w,
-                                child: const Text(
-                                  '(You can only use ".xlxs files)"',
-                                  style: TextStyle(fontSize: 12),
-                                )),
-                          ),
+                          // Padding(
+                          //   padding: EdgeInsets.only(left: 80.w, right: 50.w),
+                          //   child: SizedBox(
+                          //       height: 60.h,
+                          //       width: 250.w,
+                          //       child: const Text(
+                          //         '(You can only use ".xlxs files)"',
+                          //         style: TextStyle(fontSize: 12),
+                          //       )),
+                          // ),
                         ]),
                   ),
                 ),

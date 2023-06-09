@@ -841,8 +841,52 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                         const SizedBox(
                                           width: 10,
                                         ),
-                                        const Icon(Icons.logout_outlined),
-                                        GoogleMonstserratWidgets(
+
+                                          IconButton(
+                                      onPressed: () async {
+                                        showDialog(
+                                          context: context,
+                                          barrierDismissible:
+                                              false, // user must tap button!
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: const Text('Message'),
+                                              content: SingleChildScrollView(
+                                                child: ListBody(
+                                                  children: const <Widget>[
+                                                    Text(
+                                                        'Are you sure you want to logout?')
+                                                  ],
+                                                ),
+                                              ),
+                                              actions: <Widget>[
+                                                TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child:
+                                                        const Text("Cancel")),
+                                                TextButton(
+                                                  child: const Text('Ok'),
+                                                  onPressed: () async {
+                                                    html
+                                                                .window.location
+                                                                .reload();
+                                                  },
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      },
+                                      icon: 
+                                         Icon(
+                                            Icons.logout_outlined,
+                                          )
+                                          
+                                    ),
+                                    GoogleMonstserratWidgets(
                                             text: 'logout', fontsize: 13.w),
                                       ],
                                     )
