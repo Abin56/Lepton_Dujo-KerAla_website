@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, prefer_const_constructors
 
 import 'dart:developer';
 import 'dart:html' as html;
@@ -488,9 +488,9 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                 Text('Batch Year ${getFireBaseData.bYear}'),
                                 Tooltip(
                                   message: "Change/add batch year",
-                                  child: IconButton(
-                                      onPressed: () {
-                                        showDialog(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      showDialog(
                                           context: context,
                                           builder: (BuildContext context) {
                                             return AlertDialog(
@@ -712,106 +712,121 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                             );
                                           },
                                         );
-                                      },
-                                      icon: const Icon(Icons.replay_outlined)),
-                                ),
-                                const CircleAvatar(
-                                  backgroundImage: AssetImage(
-                                      'assets/images/icons8-teachers-64.png'),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Row(
-                                  children: [
-                                    IconButton(
-                                      onPressed: () async {
-                                        showDialog(
-                                          context: context,
-                                          barrierDismissible:
-                                              false, // user must tap button!
-                                          builder: (BuildContext context) {
-                                            return AlertDialog(
-                                              title: const Text('Message'),
-                                              content: SingleChildScrollView(
-                                                child: ListBody(
-                                                  children: const <Widget>[
-                                                    Text(
-                                                        'Are you sure you want to logout?')
-                                                  ],
-                                                ),
-                                              ),
-                                              actions: <Widget>[
-                                                TextButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                    child:
-                                                        const Text("Cancel")),
-                                                TextButton(
-                                                  child: const Text('Ok'),
-                                                  onPressed: () async {
-                                                    log("school id${Get.find<AdminLoginScreenController>().schoolID}");
-                                                    log("batch year${Get.find<GetFireBaseData>().bYear.value}");
-                                                    log("dateee${LoginTimeIDSavingClass.date}");
-                                                    log("idddddddd${LoginTimeIDSavingClass.id.toString()}");
-                                                    await FirebaseFirestore
-                                                        .instance
-                                                        .collection(
-                                                            "SchoolListCollection")
-                                                        .doc(
-                                                            Get.find<AdminLoginScreenController>()
-                                                                .schoolID)
-                                                        .collection(
-                                                            Get.find<GetFireBaseData>()
-                                                                .bYear
-                                                                .value)
-                                                        .doc(
-                                                            Get.find<GetFireBaseData>()
-                                                                .bYear
-                                                                .value)
-                                                        .collection(
-                                                            "LoginHistory")
-                                                        .doc(
-                                                            LoginTimeIDSavingClass
-                                                                .date)
-                                                        .collection(
-                                                            LoginTimeIDSavingClass
-                                                                .date)
-                                                        .doc(
-                                                            LoginTimeIDSavingClass
-                                                                .id)
-                                                        .set(
-                                                            {
-                                                          'logOutTime':
-                                                              DateTime.now()
-                                                                  .toString(),
-                                                        },
-                                                            SetOptions(
-                                                                merge:
-                                                                    true)).then(
-                                                            (value) => html
-                                                                .window.location
-                                                                .reload());
-                                                  },
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                      },
-                                      icon: const Tooltip(
-                                          message: "Logout",
-                                          child: Icon(
-                                            Icons.logout_outlined,
-                                          )),
-                                    ),
-                                    GoogleMonstserratWidgets(
-                                      fontsize: 13.w,
-                                      text: 'logout',
+                                    },
+                                    child: SizedBox(
+                                      height: 30.h,
+                                      width: 60.w,
+                                      child: Image.asset("assets/images/Shiftbutton.png"),
                                     )
-                                  ],
+                                    )
+                                ),
+                                 SizedBox(
+                                  width: 8.w,
+                                ),
+                                GestureDetector(
+                                  onTap: () async {
+                                    showDialog(
+                                            context: context,
+                                            barrierDismissible:
+                                                false, // user must tap button!
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                title: const Text('Message'),
+                                                content: SingleChildScrollView(
+                                                  child: ListBody(
+                                                    children: const <Widget>[
+                                                      Text(
+                                                          'Are you sure you want to logout?')
+                                                    ],
+                                                  ),
+                                                ),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      child:
+                                                          const Text("Cancel")),
+                                                  TextButton(
+                                                    child: const Text('Ok'),
+                                                    onPressed: () async {
+                                                      log("school id${Get.find<AdminLoginScreenController>().schoolID}");
+                                                      log("batch year${Get.find<GetFireBaseData>().bYear.value}");
+                                                      log("dateee${LoginTimeIDSavingClass.date}");
+                                                      log("idddddddd${LoginTimeIDSavingClass.id.toString()}");
+                                                      await FirebaseFirestore
+                                                          .instance
+                                                          .collection(
+                                                              "SchoolListCollection")
+                                                          .doc(
+                                                              Get.find<AdminLoginScreenController>()
+                                                                  .schoolID)
+                                                          .collection(
+                                                              Get.find<GetFireBaseData>()
+                                                                  .bYear
+                                                                  .value)
+                                                          .doc(
+                                                              Get.find<GetFireBaseData>()
+                                                                  .bYear
+                                                                  .value)
+                                                          .collection(
+                                                              "LoginHistory")
+                                                          .doc(
+                                                              LoginTimeIDSavingClass
+                                                                  .date)
+                                                          .collection(
+                                                              LoginTimeIDSavingClass
+                                                                  .date)
+                                                          .doc(
+                                                              LoginTimeIDSavingClass
+                                                                  .id)
+                                                          .set(
+                                                              {
+                                                            'logOutTime':
+                                                                DateTime.now()
+                                                                    .toString(),
+                                                          },
+                                                              SetOptions(
+                                                                  merge:
+                                                                      true)).then(
+                                                              (value) => html
+                                                                  .window.location
+                                                                  .reload());
+                                                    },
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                  },
+                                  child: SizedBox(
+                                     height: 38.h,
+                                    width: 160.w, 
+                                  child:  Tooltip(  message: "Logout",
+                                    child: Row(
+                                      children: [
+                                        IconButton(
+                                          onPressed: ()  {
+                                            
+                                          },
+                                          icon:Icon(
+                                                Icons.logout_outlined,
+                                              ),
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(top: 5.h),
+                                          height: 20.h,
+
+                                          child: GoogleMonstserratWidgets(
+                                            fontsize: 15.w,
+                                            text: 'logout',
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  ),
                                 ),
                               ],
                             ),
