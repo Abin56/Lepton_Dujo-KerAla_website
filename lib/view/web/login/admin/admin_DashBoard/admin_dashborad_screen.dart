@@ -4,8 +4,10 @@ import 'dart:developer';
 import 'dart:html' as html;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/controller/Getx/class_teacher/teacher_add_student_controller/teacher_add_student_controller.dart';
 import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
 import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
+import 'package:dujo_kerala_website/view/google_poppins_widget/google_poppins_widget.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/list_of_classes.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/shift_class/shift_classpage.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_protection_group/students_proctection_group.dart';
@@ -19,11 +21,13 @@ import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../controller/get_firebase-data/get_firebase_data.dart';
+import '../../../../../model/create_classModel/add_student_model.dart';
 import '../../../../../model/loginHistory_model/login_history_model.dart';
 import '../../../../colors/colors.dart';
 import '../../../../constant/constant.dart';
 import '../../../widgets/button_container_widget.dart';
 import '../../../widgets/drop_DownList/get_batchYear.dart';
+import '../../../widgets/drop_DownList/get_classes.dart';
 import '../../../widgets/sample/under_maintance.dart';
 import 'Students_ScholarShip/student_scholarship.dart';
 import 'achievements/achievements.dart';
@@ -64,6 +68,8 @@ class AdminDashBoardPage extends StatefulWidget {
 }
 
 class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
+  TeacherAddStudentController teacherAddStudentController =
+      Get.put(TeacherAddStudentController());
   GetFireBaseData getFireBaseData = Get.put(GetFireBaseData());
   TextEditingController applynewBatchYearContoller = TextEditingController();
   TextEditingController selectedToDaterContoller = TextEditingController();
@@ -85,7 +91,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'School Protection\nGroup',
     'Scholarship',
     'Bus Route',
-    //'Student Summary',
+    'Student Summary',
     'Research and\nDevelopment',
     'School Calendar',
     'Video Conference',
@@ -95,9 +101,6 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'Alumni Associations',
     'Shift Class',
     'Non-Teaching Staffs',
-    // 'Generate TC',
-    // 'Generate Summary',
-    //r'Sampoorna'
   ];
 
   List<String> dashboardImagesList = [
@@ -125,9 +128,6 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'assets/images/alumni.png',
     'assets/images/exchange.png',
     'assets/images/steward.png',
-    // 'assets/images/file-transfer.png',
-    // 'assets/images/report.png',
-    //'assets/images/folders.png',
   ];
 
   List<String> viewListNames = [
@@ -141,7 +141,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'Non-Teaching Staffs',
     'Login History',
     // 'Parents',
-    'Manage Notifications'
+    'Manage Notifications',
+    'Dujo Cart',
   ];
   List<String> viewListImages = [
     'assets/images/students.png',
@@ -154,6 +155,9 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'assets/images/steward.png',
     'assets/images/admin.png',
     'assets/images/notification.png'
+    'assets/images/admin.png',
+    'assets/images/notification.png',
+    'assets/images/shoppincart.png',
   ];
 
   @override
@@ -462,6 +466,18 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                     ),
                                   );
                                 }),
+                            GestureDetector(
+                              onTap: () {
+                         print("object");
+                         addstudent(context);
+                              },
+                              child: GooglePoppinsWidgets(
+                                text: 'Add Student',
+                                fontsize: 15,
+                                color: cWhite,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
                           ],
                         )),
                     Container(
@@ -926,4 +942,84 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       });
     }
   }
+         addstudent(BuildContext context) async {
+                                  TextEditingController phoneNumberController =
+                                      TextEditingController();
+
+                                  TextEditingController studentNameController =
+                                      TextEditingController();
+                                  TextEditingController addmissionController =
+                                      TextEditingController();
+
+                                  return showDialog(
+                                    context: context,
+                                    barrierDismissible:
+                                        false, // user must tap button!
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: const Text('Add Student'),
+                                        content: SingleChildScrollView(
+                                          child: ListBody(
+                                            children: <Widget>[
+                                              GetClassesListDropDownButton(),
+                                              TextField(
+                                                controller:
+                                                    studentNameController,
+                                                decoration: const InputDecoration(
+                                                    hintText:
+                                                        'Enter StudentName'),
+                                              ),
+                                              TextField(
+                                                controller:
+                                                    phoneNumberController,
+                                                decoration: const InputDecoration(
+                                                    hintText:
+                                                        'Enter PhoneNumber'),
+                                              ),
+                                              TextField(
+                                                controller:
+                                                    addmissionController,
+                                                decoration: const InputDecoration(
+                                                    hintText:
+                                                        'Enter Admission Number'),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            child: const Text('Cancel'),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                          TextButton(
+                                            child: const Text('Add student'),
+                                            onPressed: () async {
+                                              log('class id${classesListValue!['docid']}');
+                                              teacherAddStudentController
+                                                  .admincreateStudent(
+                                                    classID:classesListValue!['docid'] ,
+                                                      studentModel:
+                                                          AddStudentModel(
+                                                studentName:
+                                                    studentNameController.text
+                                                        .trim(),
+                                                parentPhoneNumber:
+                                                    phoneNumberController.text
+                                                        .trim(),
+                                                admissionNumber:
+                                                    addmissionController.text
+                                                        .trim(),
+                                                classID: classesListValue!['docid'],
+                                                createDate:
+                                                    DateTime.now().toString(),
+                                              ));
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                }
 }
