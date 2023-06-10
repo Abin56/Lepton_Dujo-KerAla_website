@@ -47,6 +47,7 @@ import 'mothers_pta/mothers_pta_screen.dart';
 import 'non_Teaching_staff/non_teaching_staff.dart';
 
 class AdminDashBoardPage extends StatefulWidget {
+
   AdminDashBoardPage(
       {super.key,
       required this.schoolID,
@@ -64,6 +65,7 @@ class AdminDashBoardPage extends StatefulWidget {
 }
 
 class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
+
   GetFireBaseData getFireBaseData = Get.put(GetFireBaseData());
   TextEditingController applynewBatchYearContoller = TextEditingController();
   TextEditingController selectedToDaterContoller = TextEditingController();
@@ -95,10 +97,6 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'Alumni Associations',
     'Shift Class',
     'Non-Teaching Staffs',
-    
-    // 'Generate TC',
-    // 'Generate Summary',
-    //r'Sampoorna'
   ];
 
   List<String> dashboardImagesList = [
@@ -126,9 +124,6 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'assets/images/alumni.png',
     'assets/images/exchange.png',
     'assets/images/steward.png',
-    // 'assets/images/file-transfer.png',
-    // 'assets/images/report.png',
-    //'assets/images/folders.png',
   ];
 
   List<String> viewListNames = [
@@ -142,7 +137,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'Non-Teaching Staffs',
     'Login History',
     // 'Parents',
-    'Manage Notifications'
+    'Manage Notifications',
+    'Dujo Cart',
   ];
   List<String> viewListImages = [
     'assets/images/students.png',
@@ -153,8 +149,9 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'assets/images/meetings.png',
     'assets/images/interview.png',
     'assets/images/steward.png',
-    'assets/images/admin.png', 
-    'assets/images/notification.png'
+    'assets/images/admin.png',
+    'assets/images/notification.png',
+    'assets/images/shoppincart.png',
   ];
 
   @override
@@ -212,7 +209,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       // NonTeachingStaffView(
       //   schoolID: widget.schoolID,
       // ),
-      DateWiseLoginScreen(schoolID: widget.schoolID), 
+      DateWiseLoginScreen(schoolID: widget.schoolID),
       const MainScreenNotifications()
     ];
     var screenSize = MediaQuery.of(context).size;
