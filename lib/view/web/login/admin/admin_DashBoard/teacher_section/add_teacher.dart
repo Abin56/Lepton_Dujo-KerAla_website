@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:dujo_kerala_website/controller/teacher_controller/teacher_controller.dart';
-import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:excel/excel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -166,13 +166,15 @@ class AddTeacherSectionScreen extends StatelessWidget {
                                                 Text('Add Teacher From Excel'),
                                           ),
                                         ),
-                                        sizedBoxH20,
-                                        GoogleMonstserratWidgets(
-                                          text: "* Please use .xlsx format",
-                                          fontsize: 12,
-                                          fontWeight: FontWeight.w500,
-                                          color: cred,
-                                        )
+                                        sizedBoxH10,
+                                        Text(
+                                           "* Please use .xlsx format",
+                                           style: TextStyle(
+                                          fontSize: 13.w,
+                                          fontWeight: FontWeight.w600,
+                                          color: Color.fromARGB(255, 27, 106, 170)),
+                                          ),
+                                        
                                       ],
                                     ),
                                   ),

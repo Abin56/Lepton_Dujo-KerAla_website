@@ -335,13 +335,13 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                         ),
                                         actions: <Widget>[
                                           TextButton(
-                                            child: const Text('create'),
+                                            child: const Text('Create'),
                                             onPressed: () async {
                                               Navigator.of(context).pop();
                                             },
                                           ),
                                           TextButton(
-                                            child: const Text('create'),
+                                            child: const Text('Create'),
                                             onPressed: () async {
                                               await FirebaseFirestore.instance
                                                   .collection(

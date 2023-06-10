@@ -154,13 +154,14 @@ class AddParent extends StatelessWidget {
                                   child: const Text("Upload Data From Excel"),
                                 ),
                               ),
-                              sizedBoxH20,
-                              GoogleMonstserratWidgets(
-                                text: "* Please use .xlsx format",
-                                fontsize: 12.w,
-                                fontWeight: FontWeight.w500,
-                                color: cred,
-                              )
+                              sizedBoxH10,
+                                        Text(
+                                           "* Please use .xlsx format",
+                                           style: TextStyle(
+                                          fontSize: 13.w,
+                                          fontWeight: FontWeight.w600,
+                                          color: Color.fromARGB(255, 27, 106, 170)),
+                                          ),
                             ],
                           ),
                           // Padding(
