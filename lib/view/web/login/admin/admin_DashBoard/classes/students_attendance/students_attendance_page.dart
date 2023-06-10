@@ -1,4 +1,5 @@
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/students_attendance/student_month_wise_attendance_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,37 +8,53 @@ import '../../../../../../../model/attendance_date_model/attendance_date_model.d
 import '../../../../../../../model/attendance_subject_model/attendance_subject_model.dart';
 import '../../../../../../constant/constant.dart';
 
-class AttendancePage extends StatefulWidget {
-  const AttendancePage({super.key});
+class AttendancePage extends StatelessWidget {
+  AttendancePage({super.key});
+  final AttendanceController attendanceController =
+      Get.put(AttendanceController());
 
-  @override
-  State<AttendancePage> createState() => _AttendancePageState();
-}
-
-class _AttendancePageState extends State<AttendancePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Attendance Report")),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: <Widget>[
-            MonthSelectDropDownSearchWidget(
-              label: "Select Month",
-            ),
-            sizedBoxH10,
-            //select subject dropdown
-            DaySelectDropDownSearchWidget(label: "Select Day"),
-            sizedBoxH10,
+    return WillPopScope(
+      onWillPop: () {
+        attendanceController.classId.value = "";
+        attendanceController.dateId.value = "";
+        attendanceController.monthId.value = "";
+        attendanceController.subjectId.value = "";
+        return Future.value(true);
+      },
+      child: Scaffold(
+        appBar: AppBar(title: const Text("Attendance Report"), actions: [
+          TextButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => StudentMonthWiseAttendancePage()));
+              },
+              child: const Text(
+                "Month Wise",
+                style: TextStyle(color: Colors.white),
+              ))
+        ]),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: <Widget>[
+              MonthSelectDropDownSearchWidget(
+                label: "Select Month",
+              ),
+              sizedBoxH10,
+              //select subject dropdown
+              DaySelectDropDownSearchWidget(label: "Select Day"),
+              sizedBoxH10,
 
-            //select month dropdown
-            SubjectSelectDropDownSearchWidget(label: "Select Subject"),
-            sizedBoxH10,
+              //select month dropdown
+              SubjectSelectDropDownSearchWidget(label: "Select Subject"),
+              sizedBoxH10,
 
-            //show all students subject wise data
-            MonthWiseAttendanceWidget()
-          ],
+              //show all students subject wise data
+              DateWiseAttendanceWidget()
+            ],
+          ),
         ),
       ),
     );
@@ -300,7 +317,7 @@ class SubjectSelectDropDownSearchWidget extends StatelessWidget {
             dropdownSearchDecoration: InputDecoration(
                 labelText: label, border: const OutlineInputBorder())),
         itemAsString: (AttendanceSubjectModel u) => u.subject,
-        onChanged: (AttendanceSubjectModel? data) {
+        onChanged: (AttendanceSubjectModel? data) async {
           attendanceController.subjectId.value = data!.docid;
           attendanceController.getAllSubjectWiseAttendance();
         });

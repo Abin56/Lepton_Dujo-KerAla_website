@@ -174,7 +174,7 @@ class AllClassController extends GetxController {
                                   onTap: () async {
                                     Navigator.push(context, MaterialPageRoute(
                                       builder: (context) {
-                                        return const AttendancePage();
+                                        return AttendancePage();
                                       },
                                     ));
                                   },

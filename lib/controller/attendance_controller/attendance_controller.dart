@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/controller/get_firebase-data/get_firebase_data.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
@@ -16,7 +18,6 @@ class AttendanceController {
   RxString dateId = RxString("");
   RxString subjectId = RxString("");
   RxBool isLoading = RxBool(false);
-  Map<String, dynamic> allStudentDataMap = <String, dynamic>{};
 //fetching month attendance data month wise
   Future<List<String>> getAllAttendanceMonthWise() async {
     try {
@@ -35,6 +36,7 @@ class AttendanceController {
       return monthData;
     } catch (e) {
       showToast(msg: 'Something Went Wrong');
+      log(e.toString());
       return [];
     }
   }
@@ -62,6 +64,7 @@ class AttendanceController {
       return dateWiseAttendance;
     } catch (e) {
       showToast(msg: 'Something Went Wrong');
+      log(e.toString());
       return [];
     }
   }
@@ -93,6 +96,7 @@ class AttendanceController {
       return subjectWiseAttendance;
     } catch (e) {
       showToast(msg: 'Something Went Wrong ${e.toString()}');
+      log(e.toString());
       return [];
     }
   }
@@ -151,41 +155,12 @@ class AttendanceController {
     } catch (e) {
       isLoading.value = false;
       showToast(msg: "Something Went Wrong$e");
+      log(e.toString());
     }
   }
 
-//fetching all dates
-  Future<void> fetchPercentageWiseData() async {
-    try {
-      final List<AttendanceDateModel> data = await getAllAttendanceDateWise();
-      //creating a new map with that date
-      for (var i in data) {
-        allStudentDataMap.putIfAbsent(i.dDate, () => "");
-      }
-      //fetching all subjects with that data
-      allStudentDataMap.forEach((keyData, value) async {
-      final result=  await firebaseFirestore
-            .collection('SchoolListCollection')
-            .doc(Get.find<AdminLoginScreenController>().schoolID)
-            .collection(Get.find<GetFireBaseData>().bYear.value)
-            .doc(Get.find<GetFireBaseData>().bYear.value)
-            .collection('classes')
-            .doc(classId.value)
-            .collection('Attendence')
-            .doc(monthId.value)
-            .collection(monthId.value)
-            .doc(keyData)
-            .collection('Subjects')
-            .get();
-for (var i in result.docs) {
-        allStudentDataMap.putIfAbsent(keyData, () => {i.data()["docid"]:""});
-      }
-      //fetching all subjects wise student data
-      
 
-      });
-    } catch (e) {
-      showToast(msg: "Something Went Wrong");
-    }
-  }
+  //*************************************************** it for monthly*/
 }
+
+
