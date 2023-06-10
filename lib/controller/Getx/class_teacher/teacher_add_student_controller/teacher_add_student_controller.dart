@@ -49,4 +49,36 @@ class TeacherAddStudentController extends GetxController {
       isLoading.value = false;
     }
   }
+    Future<void> admincreateStudent({required studentModel ,required classID}) async {
+    try {
+      isLoading.value = true;
+    
+      await firebaseFirestore
+          .collection(Get.find<GetFireBaseData>().bYear.value)
+          .doc(Get.find<GetFireBaseData>().bYear.value)
+          .collection("classes")
+          .doc(classID)
+          .collection('TempStudents')
+          .add(studentModel.toMap())
+          .then((value) async {
+        await firebaseFirestore
+            .collection(Get.find<GetFireBaseData>().bYear.value)
+            .doc(Get.find<GetFireBaseData>().bYear.value)
+            .collection("classes")
+            .doc(classID)
+            .collection('TempStudents')
+            .doc(value.id)
+            .update({"docid": value.id});
+        studentNameController.clear();
+        parentPhNoController.clear();
+        addmissionNumberController.clear();
+      });
+
+      showToast(msg: "Successfully Created");
+      isLoading.value = false;
+    } catch (e) {
+      showToast(msg: 'Student Creation Failed');
+      isLoading.value = false;
+    }
+  }
 }

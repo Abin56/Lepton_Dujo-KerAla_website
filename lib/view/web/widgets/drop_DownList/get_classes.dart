@@ -10,10 +10,8 @@ import '../../../../controller/get_firebase-data/get_firebase_data.dart';
 var classesListValue;
 
 class GetClassesListDropDownButton extends StatefulWidget {
-  var schoolID;
-  var teacherID;
   GetClassesListDropDownButton(
-      {required this.schoolID, required this.teacherID, Key? key})
+      {  Key? key})
       : super(key: key);
 
   @override
@@ -25,7 +23,6 @@ class _GeClasseslListDropDownButtonState
     extends State<GetClassesListDropDownButton> {
   @override
   Widget build(BuildContext context) {
-    log('hhhh'+ widget.teacherID);
     return dropDownButton(); 
   }
 
