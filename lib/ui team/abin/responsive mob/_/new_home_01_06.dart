@@ -554,7 +554,7 @@ class HomePageImages extends StatelessWidget {
                       //         mainAxisAlignment: MainAxisAlignment.start,
                       //         children: [
                       //           Text(
-                      //             "DuJo Institutions",
+                      //             "DuJo    ",
                       //             style: TextStyle(
                       //                 fontWeight: FontWeight.bold,
                       //                 fontStyle: FontStyle.italic,

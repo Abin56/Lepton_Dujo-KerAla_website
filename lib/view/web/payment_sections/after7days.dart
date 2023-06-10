@@ -64,7 +64,7 @@ class After7DaysPaymentScreen extends StatelessWidget {
                               ),
                               actions: <Widget>[
                                 TextButton(
-                                  child: const Text('ok'),
+                                  child: const Text('Ok'),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
@@ -116,7 +116,7 @@ class After7DaysPaymentScreen extends StatelessWidget {
                             ),
                             actions: <Widget>[
                               TextButton(
-                                child: const Text('ok'),
+                                child: const Text('Ok'),
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },

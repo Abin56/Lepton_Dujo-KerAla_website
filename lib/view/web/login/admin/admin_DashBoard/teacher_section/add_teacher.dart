@@ -1,10 +1,15 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:dujo_kerala_website/controller/teacher_controller/teacher_controller.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
+import 'package:excel/excel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../../model/teacher/teacher_model.dart';
+import '../../../../../../utils/utils.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
 import '../../../../../fonts/fonts.dart';
@@ -91,7 +96,7 @@ class AddTeacherSectionScreen extends StatelessWidget {
                               padding: const EdgeInsets.only(
                                   top: 10, bottom: 10, left: 100, right: 100),
                               child: SizedBox(
-                                height: 50,
+                                height: 40,
                                 child: Obx(
                                   () => teacherController.isLoading.value
                                       ? circularProgressIndicator
@@ -135,28 +140,42 @@ class AddTeacherSectionScreen extends StatelessWidget {
                               : Flexible(
                                   child: Padding(
                                     padding: const EdgeInsets.only(
-                                        top: 10,
+                                        top: 20,
                                         bottom: 10,
-                                        left: 100,
-                                        right: 100),
-                                    child: SizedBox(
-                                      height: 50,
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: const Color.fromARGB(
-                                              255, 3, 39, 68),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
+                                        left: 60,
+                                        right: 60),
+                                    child: Column(
+                                      children: [
+                                        sizedBoxH30,
+                                        SizedBox(
+                                          height: 40,
+                                          child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor:
+                                                  const Color.fromARGB(
+                                                      255, 3, 39, 68),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                              ),
+                                            ),
+                                            onPressed: () async {
+                                              await teacherExcelFunction();
+                                            },
+                                            child:
+                                                Text('Add Teacher From Excel'),
                                           ),
                                         ),
-                                        onPressed: () async {
-                                          await teacherController
-                                              .teacherExcelFunction();
-                                        },
-                                        child: const Text(
-                                            'Add Teacher From Excel'),
-                                      ),
+                                        sizedBoxH10,
+                                        Text(
+                                           "* Please use .xlsx format",
+                                           style: TextStyle(
+                                          fontSize: 13.w,
+                                          fontWeight: FontWeight.w600,
+                                          color: Color.fromARGB(255, 27, 106, 170)),
+                                          ),
+                                        
+                                      ],
                                     ),
                                   ),
                                 )),
@@ -169,6 +188,40 @@ class AddTeacherSectionScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> teacherExcelFunction() async {
+    //extract excel data
+    final result = await extractDataFromExcel();
+    teacherController.isLoading.value = true;
+    if (result != null) {
+      if (result.tables.isNotEmpty) {
+        Sheet? table = result.tables[result.tables.keys.first];
+        if (table != null) {
+          for (int i = 1; i < table.maxRows; i++) {
+            List<Data?>? firstRow = table.rows[i];
+//fetching data from excel cells
+            if (firstRow[0]?.value != null &&
+                firstRow[1]?.value != null &&
+                firstRow[2]?.value != null) {
+              //creating objects and upload to firebase
+              teacherController.createNewTeacher(TeacherModel(
+                teacherName: firstRow[0]?.value.toString(),
+                employeeID: firstRow[1]?.value.toString(),
+                createdAt: DateTime.now().toString(),
+                teacherPhNo: firstRow[2]?.value.toString(),
+                userRole: 'teacher',
+              ));
+            }
+          }
+          teacherController.isLoading.value = false;
+        } else {
+          teacherController.isLoading.value = false;
+          showToast(msg: 'Empty Sheet');
+        }
+      }
+    }
+    teacherController.isLoading.value = false;
   }
 }
 

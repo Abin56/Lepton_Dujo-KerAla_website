@@ -292,13 +292,13 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                                 ),
                                                 actions: <Widget>[
                                                       TextButton(
-                                                    child: const Text('ok'),
+                                                    child: const Text('Ok'),
                                                     onPressed: () async {
                                                             Navigator.pop(context);
                                                     },
                                                   ),
                                                   TextButton(
-                                                    child: const Text('ok'),
+                                                    child: const Text('Ok'),
                                                     onPressed: () async {
                                                       await FirebaseFirestore
                                                           .instance
@@ -408,7 +408,7 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                               ),
                                               actions: <Widget>[
                                                 TextButton(
-                                                  child: const Text('ok'),
+                                                  child: const Text('Ok'),
                                                   onPressed: () async {
                                                     await FirebaseFirestore
                                                         .instance

@@ -12,6 +12,7 @@ import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../utils/utils.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
+import '../../../../../fonts/google_monstre.dart';
 import '../../../../widgets/drop_DownList/get_students.dart';
 
 class AddGuardian extends StatelessWidget {
@@ -117,7 +118,8 @@ class AddGuardian extends StatelessWidget {
                       ),
                       sizedBoxH30,
                       Padding(
-                        padding: EdgeInsets.only(left: 50.w),
+                        padding: EdgeInsets.only(
+                            left: 50.w, bottom: 10.w, top: 30.w),
                         child: SizedBox(
                           width: 250.w,
                           height: 60.h,
@@ -143,49 +145,51 @@ class AddGuardian extends StatelessWidget {
                           ),
                         ),
                       ),
-                      sizedBoxH10,
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: 50.w,
-                        ),
-                        child: SizedBox(
-                          width: 250.w,
-                          height: 60.h,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: adminePrimayColor,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
+                      sizedBoxH20,
+                      Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: 50.w, bottom: 10.w, top: 10.w),
+                            child: SizedBox(
+                              width: 250.w,
+                              height: 60.h,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: adminePrimayColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                ),
+                                onPressed: () async {
+                                  final result = await extractDataFromExcel();
+                                  if (result != null) {
+                                    if (result.tables.isNotEmpty) {
+                                      Sheet? table =
+                                          result.tables[result.tables.keys.first];
+
+                                      List<Data?>? firstRow = table?.rows[1];
+                                      guardianNameController.text =
+                                          firstRow?[0]?.value.toString() ?? "";
+                                      guardianPhoneNoController.text =
+                                          firstRow?[1]?.value.toString() ?? "";
+                                    }
+                                  }
+                                },
+                                child: const Text("Upload From Excel"),
                               ),
                             ),
-                            onPressed: () async {
-                              final result = await extractDataFromExcel();
-                              if (result != null) {
-                                if (result.tables.isNotEmpty) {
-                                  Sheet? table =
-                                      result.tables[result.tables.keys.first];
-
-                                  List<Data?>? firstRow = table?.rows[1];
-                                  guardianNameController.text =
-                                      firstRow?[0]?.value.toString() ?? "";
-                                  guardianPhoneNoController.text =
-                                      firstRow?[1]?.value.toString() ?? "";
-                                }
-                              }
-                            },
-                            child: const Text("Upload From Excel"),
                           ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 80.w),
-                        child: SizedBox(
-                            height: 60.h,
-                            width: 250.w,
-                            child: const Text(
-                              '(You can only use ".xlxs files")',
-                              style: TextStyle(fontSize: 12),
-                            )),
+                          sizedBoxH20,
+                            sizedBoxH10,
+                                        Text(
+                                           "* Please use .xlsx format",
+                                           style: TextStyle(
+                                          fontSize: 13.w,
+                                          fontWeight: FontWeight.w600,
+                                          color: Color.fromARGB(255, 27, 106, 170)),
+                                          ),
+                        ],
                       ),
                     ]),
               ),

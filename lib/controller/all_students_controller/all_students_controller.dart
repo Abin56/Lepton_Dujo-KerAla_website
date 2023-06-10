@@ -307,7 +307,7 @@ class AllStudentsController extends GetxController {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('ok'),
+              child: const Text('Ok'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -364,7 +364,7 @@ class AllStudentsController extends GetxController {
                 },
               ),
               TextButton(
-                child: const Text('ok'),
+                child: const Text('Ok'),
                 onPressed: () async {
                   if (updateFormkey.currentState!.validate()) {
                     await firebaseFirestore
@@ -438,7 +438,7 @@ class AllStudentsController extends GetxController {
                 },
               ),
               TextButton(
-                child: const Text('ok'),
+                child: const Text('Ok'),
                 onPressed: () async {
                   if (updateFormkey.currentState!.validate()) {
                     await firebaseFirestore
@@ -518,7 +518,7 @@ class AllStudentsController extends GetxController {
                 },
               ),
               TextButton(
-                child: const Text('ok'),
+                child: const Text('Ok'),
                 onPressed: () async {
                   if (updateFormkey.currentState!.validate()) {
                     await firebaseFirestore
@@ -578,7 +578,7 @@ class AllStudentsController extends GetxController {
                 },
               ),
               TextButton(
-                child: const Text('ok'),
+                child: const Text('Ok'),
                 onPressed: () {
                   firebaseFirestore
                       .collection('classes')

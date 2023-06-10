@@ -11,6 +11,7 @@ import '../../../../../utils/utils.dart';
 import '../../../../colors/colors.dart';
 import '../../../../constant/constant.dart';
 import '../../../../fonts/fonts.dart';
+import '../../../../fonts/google_monstre.dart';
 import '../../../widgets/Iconbackbutton.dart';
 import '../../../widgets/drop_DownList/get_students.dart';
 
@@ -121,44 +122,58 @@ class AddParent extends StatelessWidget {
                             ),
                           ),
                           sizedBoxH20,
-                          SizedBox(
-                            width: 250.w,
-                            height: 60.h,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: adminePrimayColor,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
+                          Column(
+                            children: [
+                              SizedBox(
+                                width: 250.w,
+                                height: 60.h,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: adminePrimayColor,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                  ),
+                                  onPressed: () async {
+                                    final result = await extractDataFromExcel();
+                                    if (result != null) {
+                                      if (result.tables.isNotEmpty) {
+                                        Sheet? table = result
+                                            .tables[result.tables.keys.first];
+
+                                        List<Data?>? firstRow = table?.rows[1];
+                                        parentNameController.text =
+                                            firstRow?[0]?.value.toString() ??
+                                                "";
+                                        parentPhoneNumberController.text =
+                                            firstRow?[1]?.value.toString() ??
+                                                "";
+                                      }
+                                    }
+                                  },
+                                  child: const Text("Upload Data From Excel"),
                                 ),
                               ),
-                              onPressed: () async {
-                                final result = await extractDataFromExcel();
-                                if (result != null) {
-                                  if (result.tables.isNotEmpty) {
-                                    Sheet? table =
-                                        result.tables[result.tables.keys.first];
-
-                                    List<Data?>? firstRow = table?.rows[1];
-                                    parentNameController.text =
-                                        firstRow?[0]?.value.toString() ?? "";
-                                    parentPhoneNumberController.text =
-                                        firstRow?[1]?.value.toString() ?? "";
-                                  }
-                                }
-                              },
-                              child: const Text("Upload Data From Excel"),
-                            ),
+                              sizedBoxH10,
+                                        Text(
+                                           "* Please use .xlsx format",
+                                           style: TextStyle(
+                                          fontSize: 13.w,
+                                          fontWeight: FontWeight.w600,
+                                          color: Color.fromARGB(255, 27, 106, 170)),
+                                          ),
+                            ],
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 80.w, right: 50.w),
-                            child: SizedBox(
-                                height: 60.h,
-                                width: 250.w,
-                                child: const Text(
-                                  '(You can only use ".xlxs files)"',
-                                  style: TextStyle(fontSize: 12),
-                                )),
-                          ),
+                          // Padding(
+                          //   padding: EdgeInsets.only(left: 80.w, right: 50.w),
+                          //   child: SizedBox(
+                          //       height: 60.h,
+                          //       width: 250.w,
+                          //       child: const Text(
+                          //         '(You can only use ".xlxs files)"',
+                          //         style: TextStyle(fontSize: 12),
+                          //       )),
+                          // ),
                         ]),
                   ),
                 ),

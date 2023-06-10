@@ -12,7 +12,6 @@ import '../../../../view/web/home/footer/hover-text/hovertext.dart';
 import '../../../../view/web/home/lepton_Admin/admin_panel_Screen.dart';
 import '../../../../view/web/home/privacypolicy.dart';
 import '../../../../view/web/home/terms _and_condition.dart';
-import 'mob_view.dart/careers.dart';
 import 'mob_view.dart/trademark.dart';
 import 'mob_view.dart/who_we_are.dart';
 import 'mob_view.dart/why_choose_us.dart';
@@ -138,28 +137,28 @@ class FooterHomeP extends StatelessWidget {
                           ),
                         
                        
-                          GestureDetector(
-                             onTap: () {
+                          // GestureDetector(
+                          //    onTap: () {
                               
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: ((context) =>
-                                          const Careers())));
-                            },
-                            child: OnHoverText(
-                              builder: (isHoverd) {
-                                final color =
-                                    isHoverd ? Colors.orange : Colors.black;
-                                return SizedBox(
-                                    width: 165.h,
-                                    child: Text(
-                                      'Careers',
-                                      style: k,
-                                    ));
-                              },
-                            ),
-                          ),
+                          //     Navigator.push(
+                          //         context,
+                          //         MaterialPageRoute(
+                          //             builder: ((context) =>
+                          //                 const Careers())));
+                          //   },
+                          //   child: OnHoverText(
+                          //     builder: (isHoverd) {
+                          //       final color =
+                          //           isHoverd ? Colors.orange : Colors.black;
+                          //       return SizedBox(
+                          //           width: 165.h,
+                          //           child: Text(
+                          //             'Careers',
+                          //             style: k,
+                          //           ));
+                          //     },
+                          //   ),
+                          // ),
                           
                           GestureDetector(
                             onTap: () {

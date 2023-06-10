@@ -194,7 +194,7 @@ class AllTeachersController extends GetxController {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('ok'),
+              child: const Text('Ok'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -251,7 +251,7 @@ class AllTeachersController extends GetxController {
                 },
               ),
               TextButton(
-                child: const Text('ok'),
+                child: const Text('Ok'),
                 onPressed: () async {
                   if (updateFormkey.currentState!.validate()) {
                     await firebaseFirestore.doc(teacherID).update({
@@ -320,7 +320,7 @@ class AllTeachersController extends GetxController {
                 },
               ),
               TextButton(
-                child: const Text('ok'),
+                child: const Text('Ok'),
                 onPressed: () async {
                   if (updateFormkey.currentState!.validate()) {
                     await firebaseFirestore.doc(teacherid).update({
@@ -388,7 +388,7 @@ class AllTeachersController extends GetxController {
                 },
               ),
               TextButton(
-                child: const Text('ok'),
+                child: const Text('Ok'),
                 onPressed: () async {
                   if (updateFormkey.currentState!.validate()) {
                     await firebaseFirestore.doc(teacherId).update({
@@ -443,7 +443,7 @@ class AllTeachersController extends GetxController {
               },
             ),
             TextButton(
-              child: const Text('ok'),
+              child: const Text('Ok'),
               onPressed: () {
                 firebaseFirestore.doc(teacherID).delete().then((value) {
                   showToast(msg: "Removed");
