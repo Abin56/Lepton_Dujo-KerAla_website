@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../model/admin_models/admin_notice_model/admin_notice_model.dart';
+import '../../../utils/utils.dart';
 import '../../../view/constant/constant.dart';
 
 class AdminNoticeController extends GetxController {
@@ -31,6 +32,11 @@ class AdminNoticeController extends GetxController {
   RxBool teacherCheckBox = false.obs;
   RxBool studentCheckBox = false.obs;
   RxBool guardianCheckBox = false.obs;
+  List<String> deviceTokenList = [];
+  List<String> parentsTokenList = [];
+
+  List<String> guardiansTokenList = [];
+  List<String> studentsTokenList = [];
   Rxn<AdminNoticeModel> adminNoticeModelData = Rxn<AdminNoticeModel>(null);
   CollectionReference<Map<String, dynamic>> firebaseFirestore =
       FirebaseFirestore.instance
@@ -79,7 +85,14 @@ class AdminNoticeController extends GetxController {
         final data = await firebaseFirestore.add(
           dataModel.toJson(),
         );
-        await firebaseFirestore.doc(data.id).update({"noticeId": data.id});
+        await firebaseFirestore
+            .doc(data.id)
+            .update({"noticeId": data.id}).then((value) async {
+          await parentsNotification();
+          await guardiansNotification();
+          await teacherNotification();
+          await studentsNotification();
+        });
         clearControllers();
 
         isLoading.value = false;
@@ -235,5 +248,145 @@ class AdminNoticeController extends GetxController {
     teacherCheckBox.value = false;
     studentCheckBox.value = false;
     guardianCheckBox.value = false;
+  }
+
+  Future<void> parentsNotification() async {
+    CollectionReference collectionRef = FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(AdminLoginScreenController().schoolID)
+        .collection(Get.find<GetFireBaseData>().bYear.value)
+        .doc(Get.find<GetFireBaseData>().bYear.value)
+        .collection('classes');
+    QuerySnapshot snapshot = await collectionRef.get();
+
+    for (DocumentSnapshot document in snapshot.docs) {
+      DocumentReference docref = document.reference;
+
+      CollectionReference pref = docref.collection('ParentCollection');
+
+      QuerySnapshot snap2 = await pref.get();
+
+      for (DocumentSnapshot doc in snap2.docs) {
+        final docData = doc.data() as Map<String, dynamic>;
+
+        if (docData['deviceToken'] != null) {
+          parentsTokenList.add(docData['deviceToken']);
+        }
+      }
+    }
+
+    for (var i = 0; i < parentsTokenList.length; i++) {
+      sendPushMessage(
+          parentsTokenList[i], 'New Notice added', 'Notice Notification');
+    }
+  }
+
+  Future<void> guardiansNotification() async {
+    CollectionReference collectionRef = FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(AdminLoginScreenController().schoolID)
+        .collection(Get.find<GetFireBaseData>().bYear.value)
+        .doc(Get.find<GetFireBaseData>().bYear.value)
+        .collection('classes');
+
+    QuerySnapshot snapshot = await collectionRef.get();
+
+    for (DocumentSnapshot document in snapshot.docs) {
+      DocumentReference docref = document.reference;
+
+      //  final documentData = document.data() as Map<String, dynamic>;
+
+      CollectionReference pref = docref.collection('GuardianCollection');
+
+      QuerySnapshot snap2 = await pref.get();
+
+      for (DocumentSnapshot doc in snap2.docs) {
+        final docData = doc.data() as Map<String, dynamic>;
+        if (docData['deviceToken'] != null) {
+          guardiansTokenList.add(docData['deviceToken']);
+        }
+      }
+    }
+
+    for (var i = 0; i < guardiansTokenList.length; i++) {
+      sendPushMessage(
+          guardiansTokenList[i], 'New Notice added', 'Notice Notification');
+    }
+  }
+
+  Future<void> teacherNotification() async {
+    final collectionRef = await FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(AdminLoginScreenController().schoolID)
+        .collection('Teachers')
+        .get();
+    for (DocumentSnapshot doc in collectionRef.docs) {
+      final docData = doc.data() as Map<String, dynamic>;
+      if (docData['deviceToken'] != null) {
+        studentsTokenList.add(docData['deviceToken']);
+      }
+    }
+
+    // QuerySnapshot snapshot = await collectionRef.get();
+
+    // for (DocumentSnapshot document in snapshot.docs) {
+    //   DocumentReference docref = document.reference;
+
+    //   //  final documentData = document.data() as Map<String, dynamic>;
+
+    //   CollectionReference pref = docref.collection('Teachers');
+
+    //   QuerySnapshot snap2 = await pref.get();
+
+    //   for (DocumentSnapshot doc in snap2.docs) {
+    //     final docData = doc.data() as Map<String, dynamic>;
+    //     if (docData['deviceToken'] != null) {
+    //       deviceTokenList.add(docData['deviceToken']);
+    //     }
+    //   }
+    // }
+
+    for (var i = 0; i < deviceTokenList.length; i++) {
+      sendPushMessage(
+          deviceTokenList[i], 'New Notice added', 'Notice Notification');
+    }
+  }
+
+  Future<void> studentsNotification() async {
+    final collectionRef = await FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(AdminLoginScreenController().schoolID)
+        .collection('AllStudents')
+        .get();
+    for (DocumentSnapshot doc in collectionRef.docs) {
+      final docData = doc.data() as Map<String, dynamic>;
+      if (docData['deviceToken'] != null) {
+        studentsTokenList.add(docData['deviceToken']);
+      }
+    }
+
+    // QuerySnapshot snapshot = await collectionRef.get();
+
+    // for (DocumentSnapshot document in snapshot.docs) {
+    //   DocumentReference docref = document.reference;
+
+    //   //  final documentData = document.data() as Map<String, dynamic>;
+
+    //   CollectionReference pref = docref.collection('Students');
+
+    //   QuerySnapshot snap2 = await pref.get();
+
+    //   for (DocumentSnapshot doc in snap2.docs) {
+    //     final docData = doc.data() as Map<String, dynamic>;
+    //     if (docData['deviceToken'] != null) {
+    //       studentsTokenList.add(docData['deviceToken']);
+    //     }
+    //   }
+    // }
+
+    for (var i = 0; i < studentsTokenList.length; i++) {
+      sendPushMessage(
+          studentsTokenList[i], 'New Notice added', 'Notice Notification');
+    }
   }
 }

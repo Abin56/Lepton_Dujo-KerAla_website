@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../model/admin_models/admin_meeting_model/admin_meeting_model.dart';
+import '../../../utils/utils.dart';
 import '../../../view/constant/constant.dart';
 import '../../admin_login_screen/admin_login_screen_controller.dart';
 import '../../get_firebase-data/get_firebase_data.dart';
@@ -28,6 +29,11 @@ class AdminMeetingController extends GetxController {
   RxBool guardianCheckBox = false.obs;
   RxBool isLoadingUpdate = false.obs;
   Rxn<AdminMeetingModel> adminMeetingModelData = Rxn<AdminMeetingModel>(null);
+  List<String> deviceTokenList = [];
+  List<String> parentsTokenList = [];
+
+  List<String> guardiansTokenList = [];
+  List<String> studentsTokenList = [];
 
   Future<void> addAdminMeeting(
       String schoolId, AdminMeetingModel adminMeeting) async {
@@ -50,7 +56,14 @@ class AdminMeetingController extends GetxController {
       final data = await firebaseFirestore.add(
         adminMeeting.toJson(),
       );
-      await firebaseFirestore.doc(data.id).update({"meetingId": data.id});
+      await firebaseFirestore
+          .doc(data.id)
+          .update({"meetingId": data.id}).then((value) async {
+        await parentsNotification();
+        await guardiansNotification();
+        await teacherNotification();
+        await studentsNotification();
+      });
       clearControllers();
       isLoading.value = false;
       showToast(msg: 'Meeting Created Successfully');
@@ -128,5 +141,152 @@ class AdminMeetingController extends GetxController {
     teacherCheckBox.value = false;
     studentCheckBox.value = false;
     guardianCheckBox.value = false;
+  }
+
+  Future<void> parentsNotification() async {
+    CollectionReference collectionRef = FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(AdminLoginScreenController().schoolID)
+        .collection(Get.find<GetFireBaseData>().bYear.value)
+        .doc(Get.find<GetFireBaseData>().bYear.value)
+        .collection('classes');
+    QuerySnapshot snapshot = await collectionRef.get();
+
+    for (DocumentSnapshot document in snapshot.docs) {
+      DocumentReference docref = document.reference;
+
+      CollectionReference pref = docref.collection('ParentCollection');
+
+      QuerySnapshot snap2 = await pref.get();
+
+      for (DocumentSnapshot doc in snap2.docs) {
+        final docData = doc.data() as Map<String, dynamic>;
+
+        parentsTokenList.add(docData['deviceToken']);
+      }
+    }
+
+    for (var i = 0; i < parentsTokenList.length; i++) {
+      sendPushMessage(
+          parentsTokenList[i], 'New Meeting added', 'Meeting Notification');
+    }
+  }
+
+  Future<void> guardiansNotification() async {
+    CollectionReference collectionRef = FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(AdminLoginScreenController().schoolID)
+        .collection(Get.find<GetFireBaseData>().bYear.value)
+        .doc(Get.find<GetFireBaseData>().bYear.value)
+        .collection('classes');
+
+    QuerySnapshot snapshot = await collectionRef.get();
+
+    for (DocumentSnapshot document in snapshot.docs) {
+      DocumentReference docref = document.reference;
+
+      //  final documentData = document.data() as Map<String, dynamic>;
+
+      CollectionReference pref = docref.collection('GuardianCollection');
+
+      QuerySnapshot snap2 = await pref.get();
+
+      for (DocumentSnapshot doc in snap2.docs) {
+        final docData = doc.data() as Map<String, dynamic>;
+
+        guardiansTokenList.add(docData['deviceToken']);
+      }
+    }
+
+    for (var i = 0; i < guardiansTokenList.length; i++) {
+      sendPushMessage(
+          guardiansTokenList[i], 'New Meeting added', 'Meeting Notification');
+    }
+  }
+
+  Future<void> teacherNotification() async {
+    final collectionRef = await FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(AdminLoginScreenController().schoolID)
+        .collection('Teachers')
+        .get();
+    for (DocumentSnapshot doc in collectionRef.docs) {
+      final docData = doc.data() as Map<String, dynamic>;
+      if (docData['deviceToken'] != null) {
+        studentsTokenList.add(docData['deviceToken']);
+      }
+    }
+    // CollectionReference collectionRef = FirebaseFirestore.instance
+    //     .collection('SchoolListCollection')
+    //     .doc(AdminLoginScreenController().schoolID)
+    //     .collection(Get.find<GetFireBaseData>().bYear.value)
+    //     .doc(Get.find<GetFireBaseData>().bYear.value)
+    //     .collection('classes');
+
+    // QuerySnapshot snapshot = await collectionRef.get();
+
+    // for (DocumentSnapshot document in snapshot.docs) {
+    //   DocumentReference docref = document.reference;
+
+    //   //  final documentData = document.data() as Map<String, dynamic>;
+
+    //   CollectionReference pref = docref.collection('Teachers');
+
+    //   QuerySnapshot snap2 = await pref.get();
+
+    //   for (DocumentSnapshot doc in snap2.docs) {
+    //     final docData = doc.data() as Map<String, dynamic>;
+
+    //     deviceTokenList.add(docData['deviceToken']);
+    //   }
+    // }
+
+    for (var i = 0; i < deviceTokenList.length; i++) {
+      sendPushMessage(
+          deviceTokenList[i], 'New Meeting added', 'Meeting Notification');
+    }
+  }
+
+  Future<void> studentsNotification() async {
+    final collectionRef = await FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(AdminLoginScreenController().schoolID)
+        .collection('AllStudents')
+        .get();
+    for (DocumentSnapshot doc in collectionRef.docs) {
+      final docData = doc.data() as Map<String, dynamic>;
+      if (docData['deviceToken'] != null) {
+        studentsTokenList.add(docData['deviceToken']);
+      }
+    }
+    // CollectionReference collectionRef = FirebaseFirestore.instance
+    //     .collection('SchoolListCollection')
+    //     .doc(AdminLoginScreenController().schoolID)
+    //     .collection(Get.find<GetFireBaseData>().bYear.value)
+    //     .doc(Get.find<GetFireBaseData>().bYear.value)
+    //     .collection('classes');
+
+    // QuerySnapshot snapshot = await collectionRef.get();
+
+    // for (DocumentSnapshot document in snapshot.docs) {
+    //   DocumentReference docref = document.reference;
+
+    //   //  final documentData = document.data() as Map<String, dynamic>;
+
+    //   CollectionReference pref = docref.collection('Students');
+
+    //   QuerySnapshot snap2 = await pref.get();
+
+    //   for (DocumentSnapshot doc in snap2.docs) {
+    //     final docData = doc.data() as Map<String, dynamic>;
+
+    //     studentsTokenList.add(docData['deviceToken']);
+    //   }
+    // }
+
+    for (var i = 0; i < studentsTokenList.length; i++) {
+      sendPushMessage(
+          studentsTokenList[i], 'New Meeting added', 'Meeting Notification');
+    }
   }
 }
