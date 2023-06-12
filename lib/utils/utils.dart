@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dujo_kerala_website/view/constant/constant.dart';
@@ -6,6 +7,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
@@ -115,4 +117,39 @@ Future<Excel?> extractDataFromExcel() async {
     return null;
   }
   return null;
+}
+
+Future<void> sendPushMessage(String token, String body, String title) async {
+  try {
+    final reponse = await http.post(
+      Uri.parse('https://fcm.googleapis.com/fcm/send'),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'Authorization':
+            'key=AAAAd0ScEck:APA91bELuwPRaLXrNxKTwj-z6EK-mCSPOon5WuZZAwkdklLhWvbi_NxXGtwHICE92vUzGJyE9xdOMU_-4ZPbWy8s2MuS_s-4nfcN_rZ1uBTOCMCcJ5aNS7rQHeUTXgYux54-n4eoYclp'
+      },
+      body: jsonEncode(
+        <String, dynamic>{
+          'priority': 'high',
+          'data': <String, dynamic>{
+            'click_action': 'FLUTTER_NOTIFICATION_CLICK',
+            'status': 'done',
+            'body': body,
+            'title': title,
+          },
+          "notification": <String, dynamic>{
+            'title': title,
+            'body': body,
+            'android_channel_id': 'high_importance_channel'
+          },
+          'to': token,
+        },
+      ),
+    );
+    print(reponse.body.toString());
+  } catch (e) {
+    if (kDebugMode) {
+      log("error push Notification");
+    }
+  }
 }
