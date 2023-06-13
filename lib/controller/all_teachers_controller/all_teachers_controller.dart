@@ -245,7 +245,7 @@ class AllTeachersController extends GetxController {
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('cancel'),
+                child: const Text('Cancel'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -314,7 +314,7 @@ class AllTeachersController extends GetxController {
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('cancel'),
+                child: const Text('Cancel'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -382,7 +382,7 @@ class AllTeachersController extends GetxController {
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('cancel'),
+                child: const Text('Cancel'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -437,7 +437,7 @@ class AllTeachersController extends GetxController {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('cancel'),
+              child: const Text('Cancel'),
               onPressed: () async {
                 Navigator.of(context).pop();
               },

@@ -277,7 +277,7 @@ class AdminNoticeController extends GetxController {
 
     for (var i = 0; i < parentsTokenList.length; i++) {
       sendPushMessage(
-          parentsTokenList[i], 'New Notice added', 'Notice Notification');
+          parentsTokenList[i], 'പുതിയ അറിയിപ്പ് ചേർത്തു', 'Notice Notification');
     }
   }
 

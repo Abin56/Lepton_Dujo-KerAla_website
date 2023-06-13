@@ -200,7 +200,7 @@ class _TimeTableScreenState extends State<TimeTableScreen> {
                       'sixthPeriodTeacher': wednesdayList[11].text
                     }, seventhPeriod: {
                       'seventhPeriod': wednesdayList[12].text,
-                      'seventhPeriodTeacher': tuesdayList[13].text
+                      'seventhPeriodTeacher': wednesdayList[13].text
                     }, dayName: 'Wednesday');
               
                     //thursday
@@ -224,7 +224,7 @@ class _TimeTableScreenState extends State<TimeTableScreen> {
                       'sixthPeriodTeacher': thursdayList[11].text
                     }, seventhPeriod: {
                       'seventhPeriod': thursdayList[12].text,
-                      'seventhPeriodTeacher': tuesdayList[13].text
+                      'seventhPeriodTeacher': thursdayList[13].text
                     }, dayName: 'Thursday');
               
                     //friday

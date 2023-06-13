@@ -732,7 +732,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
                           ),
                             GooglePoppinsWidgets(
                                                   text: "* You Can't Edit or Change this entry in future ", 
-                                                  fontsize: 13,color: cred,),
+                                                  fontsize: 13,color:  Color.fromARGB(255, 27, 106, 170),),
                         ],
                       ),
                     

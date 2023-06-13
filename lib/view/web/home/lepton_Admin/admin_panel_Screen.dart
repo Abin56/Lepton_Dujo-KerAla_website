@@ -40,7 +40,7 @@ class LeptonAdminLoginScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 ResponsiveWidget.isSmallScreen(context)
-                    ? const SizedBox()
+                    ?  const SizedBox()
                     : Expanded(
                         child: Container(
                           height: height,
@@ -57,14 +57,14 @@ class LeptonAdminLoginScreen extends StatelessWidget {
                                   Text(
                                     'Hi ! \n Admin',
                                     style: ralewayStyle.copyWith(
-                                      fontSize: 48.0,
+                                      fontSize: 45.0.w,
                                       color: AppColors.whiteColor,
                                       fontWeight: FontWeight.w800,
                                     ),
                                   ),
                                   sizedBoxH30,
                                   SizedBox(
-                                    height: 400.h,
+                                    height: 350.h,
                                     child: LottieBuilder.network(
                                         'https://assets10.lottiefiles.com/packages/lf20_q0vtqaxf.json'),
                                   )

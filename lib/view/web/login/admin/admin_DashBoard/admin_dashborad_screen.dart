@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously, prefer_const_constructors
+// ignore_for_file: use_build_context_synchronously
 
 import 'dart:developer';
 import 'dart:html' as html;
@@ -68,13 +68,14 @@ class AdminDashBoardPage extends StatefulWidget {
 }
 
 class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
-  TeacherAddStudentController teacherAddStudentController =
+  TeacherAddStudentController     teacherAddStudentController =
       Get.put(TeacherAddStudentController());
   GetFireBaseData getFireBaseData = Get.put(GetFireBaseData());
   TextEditingController applynewBatchYearContoller = TextEditingController();
   TextEditingController selectedToDaterContoller = TextEditingController();
   DateTime? _selectedDateForApplyDate;
   DateTime? _selectedToDate;
+  final _formKey =GlobalKey<FormState>();
 
   List<String> dashboardNamesList = [
     'Create Admin',
@@ -94,8 +95,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'Student Summary',
     'Research and\nDevelopment',
     'School Calendar',
-    'Video Conference',
-    //'Recorded Classes',
+    'Online Classes',
+    'Recorded Classes',
     'Food and Beverages',
     'Exam Notifications',
     'Alumni Associations',
@@ -118,11 +119,11 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'assets/images/protection.png',
     'assets/images/graduation.png',
     'assets/images/route.png',
-    //'assets/images/students.png',
+    'assets/images/students.png',
     'assets/images/research-and-development.png',
     'assets/images/calendar.png',
     'assets/images/elearning.png',
-    //'assets/images/video-conference.png',
+    'assets/images/video-conference.png',
     'assets/images/fast-food.png',
     'assets/images/exam.png',
     'assets/images/alumni.png',
@@ -154,8 +155,6 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'assets/images/interview.png',
     'assets/images/steward.png',
     'assets/images/admin.png',
-    'assets/images/notification.png'
-    'assets/images/admin.png',
     'assets/images/notification.png',
     'assets/images/shoppincart.png',
   ];
@@ -184,11 +183,11 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       AdminScholarships(schoolID: widget.schoolID), //13-ScholarShip
 
       BusRoute(), //14-Bus Route
-      //const UnderMaintanceScreen(), //15-Student Summary
+      const UnderMaintanceScreen(), //15-Student Summary
       const UnderMaintanceScreen(), //16-Research and development
       const UnderMaintanceScreen(), //17-School Calendar
       const UnderMaintanceScreen(), //8
-      //const UnderMaintanceScreen(), //9
+      const UnderMaintanceScreen(), //9
       FoodBeverages(schoolID: widget.schoolID),
       //SelectType(schoolID: widget.schoolID),
       SchoolLevelNotifications(schoolID: widget.schoolID),
@@ -339,13 +338,13 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                         ),
                                         actions: <Widget>[
                                           TextButton(
-                                            child: const Text('Create'),
+                                            child: const Text('create'),
                                             onPressed: () async {
                                               Navigator.of(context).pop();
                                             },
                                           ),
                                           TextButton(
-                                            child: const Text('Create'),
+                                            child: const Text('create'),
                                             onPressed: () async {
                                               await FirebaseFirestore.instance
                                                   .collection(
@@ -459,23 +458,37 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                           child: Text(
                                             viewListNames[index],
                                             style: GoogleFonts.poppins(
-                                                color: Colors.white),
+                                                color: Colors.white,fontSize: 14.w),
                                           ),
                                         )
                                       ],
                                     ),
                                   );
                                 }),
-                            GestureDetector(
-                              onTap: () {
-                         print("object");
-                         addstudent(context);
-                              },
-                              child: GooglePoppinsWidgets(
-                                text: 'Add Student',
-                                fontsize: 15,
-                                color: cWhite,
-                                fontWeight: FontWeight.w500,
+                            Container(
+                              margin: EdgeInsets.only(left: 25.w),
+                                width: 80.w,
+                                      height: 40.h,
+                              child: GestureDetector(
+                                onTap: () {
+                                                     print("object");
+                                                     addstudent(context);
+                                },
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+
+                                      width: 20.w,
+                                      height: 10.h,
+                                      child: Image.asset('assets/images/students.png')),
+                                    GooglePoppinsWidgets(
+                                      text: 'Add Student',
+                                      fontsize: 13.w,
+                                      color: cWhite,
+                                     // fontWeight: FontWeight.w500,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ],
@@ -484,7 +497,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                       color: Colors.white54,
                       width: screenSize.width * 5 / 6,
                       child: Column(children: [
-                        Container(
+                          Container(
                           color: Colors.white30,
                           height: 60.w,
                           child: Padding(
@@ -496,7 +509,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                   Get.find<AdminLoginScreenController>()
                                       .schoolName,
                                   style: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w500),
+                                      fontWeight: FontWeight.w500,fontSize: 14.w),
                                 ),
                                 SizedBox(
                                   width: screenSize.height / 12,
@@ -822,7 +835,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                         children: [
                                           IconButton(
                                             onPressed: () {},
-                                            icon: Icon(
+                                            icon: const Icon(
                                               Icons.logout_outlined,
                                             ),
                                           ),
@@ -885,7 +898,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                 ),
                                                 Text(
                                                   dashboardNamesList[index],
-                                                  style: GoogleFonts.poppins(),
+                                                  style: GoogleFonts.poppins(fontSize: 14.w),
                                                 )
                                               ],
                                             )),
@@ -959,31 +972,37 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                       return AlertDialog(
                                         title: const Text('Add Student'),
                                         content: SingleChildScrollView(
-                                          child: ListBody(
-                                            children: <Widget>[
-                                              GetClassesListDropDownButton(),
-                                              TextField(
-                                                controller:
-                                                    studentNameController,
-                                                decoration: const InputDecoration(
-                                                    hintText:
-                                                        'Enter StudentName'),
-                                              ),
-                                              TextField(
-                                                controller:
-                                                    phoneNumberController,
-                                                decoration: const InputDecoration(
-                                                    hintText:
-                                                        'Enter PhoneNumber'),
-                                              ),
-                                              TextField(
-                                                controller:
-                                                    addmissionController,
-                                                decoration: const InputDecoration(
-                                                    hintText:
-                                                        'Enter Admission Number'),
-                                              ),
-                                            ],
+                                          child: Form(
+                                            key: _formKey,
+                                            child: ListBody(
+                                              children: <Widget>[
+                                                GetClassesListDropDownButton(),
+                                                TextFormField(
+                                                  validator: checkFieldEmpty,
+                                                  controller:
+                                                      studentNameController,
+                                                  decoration: const InputDecoration(
+                                                      hintText:
+                                                          'Enter StudentName'),
+                                                ),
+                                                TextFormField(
+                                                  validator: checkFieldPhoneNumberIsValid,
+                                                  controller:
+                                                      phoneNumberController,
+                                                  decoration: const InputDecoration(
+                                                      hintText:
+                                                          'Enter PhoneNumber'),
+                                                ),
+                                                TextFormField(
+                                                  validator: checkFieldEmpty,
+                                                  controller:
+                                                      addmissionController,
+                                                  decoration: const InputDecoration(
+                                                      hintText:
+                                                          'Enter Admission Number'),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                         actions: <Widget>[
@@ -996,7 +1015,9 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                           TextButton(
                                             child: const Text('Add student'),
                                             onPressed: () async {
-                                              log('class id${classesListValue!['docid']}');
+
+                                              if(_formKey.currentState!.validate()){
+                                                log('class id${classesListValue!['docid']}');
                                               teacherAddStudentController
                                                   .admincreateStudent(
                                                     classID:classesListValue!['docid'] ,
@@ -1015,11 +1036,22 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                 createDate:
                                                     DateTime.now().toString(),
                                               ));
+                                               clearAdminAdd();
+                                              }
+                                             
                                             },
                                           ),
                                         ],
                                       );
                                     },
                                   );
+                                 
                                 }
+                                void clearAdminAdd() {
+                                  phoneNumberController .clear();
+                                  // studentNameController .clear();
+                                  // addmissionController .clear();
+                                }
+                                 
 }
+
