@@ -45,7 +45,7 @@ class AddNewNotices extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              'Hi ! Admin',
+                              'Hi! Admin',
                               style: ralewayStyle.copyWith(
                                 fontSize: 48.0,
                                 color: AppColors.whiteColor,
@@ -87,7 +87,7 @@ class AddNewNotices extends StatelessWidget {
                               padding: const EdgeInsets.all(25.0),
                               child: Column(children: [
                                 DateTimeTextField(
-                                  labelText: "Published Date",
+                                  labelText: "Published date",
                                   textEditingController: adminNoticeController
                                       .publishedDateController,
                                   function: () async {
@@ -143,12 +143,12 @@ class AddNewNotices extends StatelessWidget {
                                       .chiefGuestController,
                                   decoration: InputDecoration(
                                     border: const OutlineInputBorder(),
-                                    labelText: 'Chief Guest'.tr,
+                                    labelText: 'Chief guest'.tr,
                                   ),
                                 ),
                                 sizedBoxH20,
                                 DateTimeTextField(
-                                  labelText: "Date of Submission",
+                                  labelText: "Date of submission",
                                   textEditingController: adminNoticeController
                                       .dateOfSubmissionController,
                                   function: () async {
@@ -179,7 +179,7 @@ class AddNewNotices extends StatelessWidget {
                                       .customContentController,
                                   decoration: InputDecoration(
                                     border: const OutlineInputBorder(),
-                                    labelText: 'Custom Notice'.tr,
+                                    labelText: 'Custom notice'.tr,
                                   ),
                                 ),
                                 const SizedBox(
@@ -239,7 +239,7 @@ class AddNewNotices extends StatelessWidget {
                                   height: 30,
                                 ),
                                 adminNoticeController.signedImageUrl.isNotEmpty
-                                    ? const Text('Image Uploaded')
+                                    ? const Text('Image uploaded')
                                     : InkWell(
                                         onTap: () async {
                                           final result =
@@ -252,13 +252,13 @@ class AddNewNotices extends StatelessWidget {
                                         },
                                         child: SecondaryCreateButtonWidget(
                                           screenSize: screenSize,
-                                          text: 'Upload Sign'.tr,
+                                          text: 'Upload sign'.tr,
                                         )),
                                 const SizedBox(
                                   height: 30,
                                 ),
                                 adminNoticeController.imageUrl.isNotEmpty
-                                    ? const Text('Image Uploaded')
+                                    ? const Text('Image uploaded')
                                     : InkWell(
                                         onTap: () async {
                                           final result =
@@ -271,7 +271,7 @@ class AddNewNotices extends StatelessWidget {
                                         },
                                         child: SecondaryCreateButtonWidget(
                                             screenSize: screenSize,
-                                            text: 'Upload Notice'.tr),
+                                            text: 'Upload notice'.tr),
                                       ),
                                 const SizedBox(
                                   height: 30,

@@ -45,7 +45,7 @@ class AchievementsViewAndEdit extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Hi Admin ',
+                    'Hi! Admin ',
                     style: ralewayStyle.copyWith(
                       fontSize: 48.0,
                       color: Colors.white,
@@ -132,7 +132,7 @@ class AchievementsViewAndEdit extends StatelessWidget {
                                         fontWeight: FontWeight.w500),
                                   ),
                                   Text(
-                                    'Admission Number: ' +
+                                    'Admission number: ' +
                                         snapshot.data!.docs[index]
                                             ['admissionNumber'],
                                     style: GoogleFonts.poppins(
@@ -147,7 +147,7 @@ class AchievementsViewAndEdit extends StatelessWidget {
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500)),
                                   Text(
-                                    'Date Of Achievement: ' +
+                                    'Date Of achievement: ' +
                                         snapshot.data!.docs[index]
                                             ['dateofAchievement'],
                                     style: GoogleFonts.poppins(

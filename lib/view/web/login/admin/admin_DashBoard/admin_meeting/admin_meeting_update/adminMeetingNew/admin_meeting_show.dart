@@ -145,7 +145,7 @@ class MeetingDisplay extends StatelessWidget {
                                                     title: const Text(
                                                         'Confirm Remove'),
                                                     content: const Text(
-                                                        'Are you sure you want to remove this Notice'),
+                                                        'Are you sure you want to remove this notice'),
                                                     actions: [
                                                       TextButton(
                                                         onPressed: () {
@@ -290,7 +290,7 @@ class DataTableWidget extends StatelessWidget {
           DataRow(
             cells: <DataCell>[
               const DataCell(
-                NoticeTextWidget(title: 'Category of Meeting'),
+                NoticeTextWidget(title: 'Category of meeting'),
               ),
               DataCell(
                 NoticeTextWidget(title: categoryOfMeeting),
@@ -310,7 +310,7 @@ class DataTableWidget extends StatelessWidget {
           DataRow(
             cells: <DataCell>[
               const DataCell(
-                NoticeTextWidget(title: 'Expected Members'),
+                NoticeTextWidget(title: 'Expected members'),
               ),
               DataCell(
                 NoticeTextWidget(title: membersToBeExpected),
@@ -320,7 +320,7 @@ class DataTableWidget extends StatelessWidget {
           DataRow(
             cells: <DataCell>[
               const DataCell(
-                NoticeTextWidget(title: 'Special Guest'),
+                NoticeTextWidget(title: 'Special guest'),
               ),
               DataCell(
                 NoticeTextWidget(title: specialGuest),
