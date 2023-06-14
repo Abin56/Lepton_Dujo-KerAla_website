@@ -26,7 +26,6 @@ Future<String> dateTimePicker(BuildContext context) async {
 }
 
 Future<String> timePicker(BuildContext context) async {
-  log('Haiiiii');
   TimeOfDay? initialTime = TimeOfDay.now();
   TimeOfDay? pickedTime = await showTimePicker(
     context: context,
@@ -34,7 +33,10 @@ Future<String> timePicker(BuildContext context) async {
   );
 
   if (pickedTime != null) {
-    return "${pickedTime.hourOfPeriod}:${pickedTime.minute}";
+    int hour = pickedTime.hourOfPeriod;
+    String period = pickedTime.period == DayPeriod.am ? 'AM' : 'PM';
+
+    return "${hour.toString().padLeft(2, '0')}:${pickedTime.minute.toString().padLeft(2, '0')} $period";
   } else {
     return "";
   }

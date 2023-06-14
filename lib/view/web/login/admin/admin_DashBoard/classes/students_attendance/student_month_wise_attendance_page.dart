@@ -2,7 +2,7 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../../../controller/attendance_controller/month_wise_attendance_controller.dart';
+import '../../../../../../../controller/attendance_controller/month_wise/month_wise_attendance_controller.dart';
 import '../../../../../../constant/constant.dart';
 
 class StudentMonthWiseAttendancePage extends StatelessWidget {
@@ -17,9 +17,9 @@ class StudentMonthWiseAttendancePage extends StatelessWidget {
         //clearing all data before back button press
         monthWiseAttendanceController.monthWiseSubjectId.value = "";
         monthWiseAttendanceController.monthWiseMonthId.value = "";
-        monthWiseAttendanceController.studentNames.value = [];
+        monthWiseAttendanceController.studentNamesList.value = [];
         monthWiseAttendanceController.monthWiseAllAttendanceData = [];
-        monthWiseAttendanceController.subjectIds.value = [];
+        monthWiseAttendanceController.periodIdsList.value = [];
 
         return Future.value(true);
       },
@@ -104,16 +104,16 @@ class SubjectSelectDropDownSearchWidget extends StatelessWidget {
     return Obx(() => monthAttendanceController.isLoadinggetMonth.value ||
             monthAttendanceController.isLoadingfetchallList.value
         ? circularProgressIndicator
-        : DropdownSearch<StudentSubjectModelAllData>(
+        : DropdownSearch<String>(
             items: monthAttendanceController.fetchAllSubjectIds(
                 monthAttendanceController.monthWiseAllAttendanceData),
             popupProps: const PopupProps.bottomSheet(),
             dropdownDecoratorProps: DropDownDecoratorProps(
                 dropdownSearchDecoration: InputDecoration(
                     labelText: label, border: const OutlineInputBorder())),
-            itemAsString: (StudentSubjectModelAllData u) => u.subject,
-            onChanged: (StudentSubjectModelAllData? data) {
-              monthAttendanceController.monthWiseSubjectId.value = data!.docid;
+            itemAsString: (String u) => u,
+            onChanged: (String? data) {
+              monthAttendanceController.monthWiseSubjectId.value = data!;
             }));
   }
 }
@@ -140,54 +140,53 @@ class MonthWiseAttendanceWidget extends StatelessWidget {
               if (monthAttendanceController.monthWiseSubjectId.value.isEmpty) {
                 return const SizedBox();
               }
-              return monthAttendanceController.isLoadinggetStudentName.value
-                  ? circularProgressIndicator
-                  : DataTable(
-                      showCheckboxColumn: false,
-                      columns: const [
-                        DataColumn(label: Text('Student Name')),
-                        DataColumn(label: Text('Present Days')),
-                        DataColumn(label: Text('Absent Days')),
-                        DataColumn(label: Text('Total Days')),
-                        DataColumn(label: Text('Percentage')),
-                      ],
-                      rows: List.generate(
-                          monthAttendanceController.studentNames.length,
-                          (index) {
-                        final Map<String, num> student =
+              if (monthAttendanceController.isLoadinggetStudentName.value) {
+                return circularProgressIndicator;
+              } else {
+                return DataTable(
+                  showCheckboxColumn: false,
+                  columns: const [
+                    DataColumn(label: Text('Student Name')),
+                    DataColumn(label: Text('Present Hours')),
+                    DataColumn(label: Text('Absent Hours')),
+                    DataColumn(label: Text('Total Hours(Present+Absent)')),
+                    DataColumn(label: Text('Total Subject Hour')),
+                    DataColumn(label: Text('Attendance Percentage')),
+                  ],
+                  rows: List.generate(
+                      monthAttendanceController.studentNamesList.length,
+                      (index) {
+                    final Map<String, num> student =
+                        monthAttendanceController.calculateMonthlyAttendance(
                             monthAttendanceController
-                                .calculateMonthlyAttendance(
-                                    monthAttendanceController
-                                        .monthWiseAllAttendanceData,
-                                    monthAttendanceController
-                                        .monthWiseSubjectId.value,
-                                    monthAttendanceController
-                                        .studentNames[index]);
-                        final color = index % 2 == 0
-                            ? Colors.white
-                            : Colors.grey.withOpacity(0.3);
+                                .monthWiseAllAttendanceData,
+                            monthAttendanceController.monthWiseSubjectId.value,
+                            monthAttendanceController.studentNamesList[index]);
+                    final color = index % 2 == 0
+                        ? Colors.white
+                        : Colors.grey.withOpacity(0.3);
 
-                        return DataRow(
-                          onSelectChanged: (value) {},
-                          color:
-                              MaterialStateColor.resolveWith((states) => color),
-                          cells: [
-                            DataCell(Text(
-                              monthAttendanceController.studentNames[index],
-                            )),
-                            DataCell(Text(
-                              student["present"].toString(),
-                              style: const TextStyle(color: Colors.green),
-                            )),
-                            DataCell(Text(student["absent"].toString(),
-                                style: const TextStyle(color: Colors.red))),
-                            DataCell(Text(student["total"].toString())),
-                            DataCell(
-                                Text("${student["percentage"].toString()}%")),
-                          ],
-                        );
-                      }),
+                    return DataRow(
+                      onSelectChanged: (value) {},
+                      color: MaterialStateColor.resolveWith((states) => color),
+                      cells: [
+                        DataCell(Text(
+                          monthAttendanceController.studentNamesList[index],
+                        )),
+                        DataCell(Text(
+                          student["present"].toString(),
+                          style: const TextStyle(color: Colors.green),
+                        )),
+                        DataCell(Text(student["absent"].toString(),
+                            style: const TextStyle(color: Colors.red))),
+                        DataCell(Text(student["total"].toString())),
+                        const DataCell(Text("0")),
+                        const DataCell(Text("0%")),
+                      ],
                     );
+                  }),
+                );
+              }
             }),
           ),
         ),
@@ -195,10 +194,3 @@ class MonthWiseAttendanceWidget extends StatelessWidget {
     );
   }
 }
-
-
-
-
-     
-
-    

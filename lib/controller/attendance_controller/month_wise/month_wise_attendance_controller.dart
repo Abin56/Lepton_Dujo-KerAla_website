@@ -1,21 +1,30 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
-import '../../model/student_attendance_model/student_attendance_model.dart';
-import '../../view/constant/constant.dart';
-import '../admin_login_screen/admin_login_screen_controller.dart';
-import '../get_firebase-data/get_firebase_data.dart';
-import 'attendance_controller.dart';
+import '../../../model/student_attendance_model/student_attendance_model.dart';
+import '../../../view/constant/constant.dart';
+import '../../admin_login_screen/admin_login_screen_controller.dart';
+import '../../get_firebase-data/get_firebase_data.dart';
+import '../attendance_controller.dart';
+import 'mont_wise_models/attendance_alldate_model.dart';
+import 'mont_wise_models/student_subjectwise_alldata_model.dart';
 
 class MonthWiseAttendanceController {
-  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  CollectionReference<Map<String, dynamic>> firebaseFirestore =
+      FirebaseFirestore.instance
+          .collection('SchoolListCollection')
+          .doc(Get.find<AdminLoginScreenController>().schoolID)
+          .collection(Get.find<GetFireBaseData>().bYear.value)
+          .doc(Get.find<GetFireBaseData>().bYear.value)
+          .collection('classes')
+          .doc(Get.find<AttendanceController>().classId.value)
+          .collection('Attendence');
   List<AttendanceDateModelAllData> monthWiseAllAttendanceData = [];
-  RxList<String> studentNames = RxList([]);
-  RxList<StudentSubjectModelAllData> subjectIds = RxList([]);
+  RxList<String> studentNamesList = RxList([]);
+  RxList<StudentSubjectModelAllData> periodIdsList = RxList([]);
+  RxList<String> subjectNameList = RxList([]);
   RxString monthWiseMonthId = RxString("");
   RxString monthWiseSubjectId = RxString("");
   RxBool isLoadinggetMonth = RxBool(false);
@@ -23,20 +32,19 @@ class MonthWiseAttendanceController {
   RxBool isLoadinggetStudentName = RxBool(false);
   RxBool isLoadinggetSubjects = RxBool(false);
 
-//*****************first step fetch all month data*/
+  /// [1] First step: Fetching all months [getAllAttendanceMonths] as a list of maps.
+  /// This function is called when the [MonthSelectDropDownSearchWidgetMonthly] dropdown is tapped.
+  /// In the [MonthSelectDropDownSearchWidgetMonthly] dropdown's onTap function, two functions are called:
+  /// 1. [fetchPercentageWiseData] : This is the main function that fetches all Firebase data into Dart models.
+  /// 2. After the completion of [fetchPercentageWiseData], [fetchAllSubjectIds] and [createStudentsNameList] functions will be called.
+
+  /// [2] Second step: calling [calculateMonthlyAttendance] this function for calculate monthly subjects wise present absent
 
   Future<List<String>> getAllAttendanceMonths() async {
     try {
       isLoadinggetMonth.value = true;
-      final QuerySnapshot<Map<String, dynamic>> data = await firebaseFirestore
-          .collection('SchoolListCollection')
-          .doc(Get.find<AdminLoginScreenController>().schoolID)
-          .collection(Get.find<GetFireBaseData>().bYear.value)
-          .doc(Get.find<GetFireBaseData>().bYear.value)
-          .collection('classes')
-          .doc(Get.find<AttendanceController>().classId.value)
-          .collection('Attendence')
-          .get();
+      final QuerySnapshot<Map<String, dynamic>> data =
+          await firebaseFirestore.get();
       final result = data.docs.map((e) => e.data()["id"].toString()).toList();
       isLoadinggetMonth.value = false;
 
@@ -96,13 +104,6 @@ class MonthWiseAttendanceController {
     }
     try {
       final QuerySnapshot<Map<String, dynamic>> data = await firebaseFirestore
-          .collection('SchoolListCollection')
-          .doc(Get.find<AdminLoginScreenController>().schoolID)
-          .collection(Get.find<GetFireBaseData>().bYear.value)
-          .doc(Get.find<GetFireBaseData>().bYear.value)
-          .collection('classes')
-          .doc(Get.find<AttendanceController>().classId.value)
-          .collection('Attendence')
           .doc(monthWiseMonthId.value)
           .collection(monthWiseMonthId.value)
           .get();
@@ -123,13 +124,6 @@ class MonthWiseAttendanceController {
       String dateValue) async {
     try {
       final QuerySnapshot<Map<String, dynamic>> data = await firebaseFirestore
-          .collection('SchoolListCollection')
-          .doc(Get.find<AdminLoginScreenController>().schoolID)
-          .collection(Get.find<GetFireBaseData>().bYear.value)
-          .doc(Get.find<GetFireBaseData>().bYear.value)
-          .collection('classes')
-          .doc(Get.find<AttendanceController>().classId.value)
-          .collection('Attendence')
           .doc(monthWiseMonthId.value)
           .collection(monthWiseMonthId.value)
           .doc(dateValue)
@@ -153,13 +147,6 @@ class MonthWiseAttendanceController {
       String subjectIdnew, String dateIdnew) async {
     try {
       final QuerySnapshot<Map<String, dynamic>> data = await firebaseFirestore
-          .collection('SchoolListCollection')
-          .doc(Get.find<AdminLoginScreenController>().schoolID)
-          .collection(Get.find<GetFireBaseData>().bYear.value)
-          .doc(Get.find<GetFireBaseData>().bYear.value)
-          .collection('classes')
-          .doc(Get.find<AttendanceController>().classId.value)
-          .collection('Attendence')
           .doc(monthWiseMonthId.value)
           .collection(monthWiseMonthId.value)
           .doc(dateIdnew)
@@ -182,6 +169,7 @@ class MonthWiseAttendanceController {
 
 //fetch all students data from collection
   void createStudentsNameList() {
+    studentNamesList.value = [];
     try {
       isLoadinggetStudentName.value = true;
       for (var attendanceDateModel in monthWiseAllAttendanceData) {
@@ -193,8 +181,8 @@ class MonthWiseAttendanceController {
 
           for (var attendanceRecord in attendanceRecords) {
             String studentName = attendanceRecord.studentName;
-            if (!studentNames.contains(studentName)) {
-              studentNames.add(studentName);
+            if (!studentNamesList.contains(studentName)) {
+              studentNamesList.add(studentName);
             }
           }
         }
@@ -206,11 +194,11 @@ class MonthWiseAttendanceController {
     }
   }
 
-  List<StudentSubjectModelAllData> fetchAllSubjectIds(
+  List<String> fetchAllSubjectIds(
       List<AttendanceDateModelAllData> attendanceData) {
     try {
       isLoadinggetSubjects.value = true;
-      subjectIds.value = [];
+      periodIdsList.value = [];
       // Iterate over each AttendanceDateModelAllData
       for (var attendanceDateModel in attendanceData) {
         // Extract the subjects from the AttendanceDateModelAllData
@@ -219,13 +207,16 @@ class MonthWiseAttendanceController {
 
         // Iterate over each StudentSubjectModelAllData
         for (var subject in subjects) {
-          if (!subjectIds.contains(subject)) {
-            subjectIds.add(subject);
+          if (!periodIdsList.contains(subject)) {
+            periodIdsList.add(subject);
+          }
+          if (!subjectNameList.contains(subject.subject)) {
+            subjectNameList.add(subject.subject);
           }
         }
       }
 
-      return subjectIds;
+      return subjectNameList;
     } catch (e) {
       log(e.toString());
       return [];
@@ -241,7 +232,6 @@ class MonthWiseAttendanceController {
       // Create a map to store subject-wise attendance information
       int subjectPresentDays = 0;
       int subjectAbsentDays = 0;
-      int subjectTotalDays = 0;
 
       // Iterate over each AttendanceDateModelAllData
       for (var attendanceDateModel in attendanceData) {
@@ -250,7 +240,7 @@ class MonthWiseAttendanceController {
 
         // Iterate over each StudentSubjectModelAllData
         for (var subjectModel in subjects) {
-          String subjectName = subjectModel.docid;
+          String subjectName = subjectModel.subject;
 
           // Check if the current subject matches the provided subject
           if (subjectName == subject) {
@@ -271,108 +261,22 @@ class MonthWiseAttendanceController {
                 } else {
                   subjectAbsentDays++;
                 }
-                subjectTotalDays++;
               }
             }
           }
         }
       }
       isLoadinggetStudentName.value = false;
+
       return {
         "present": subjectPresentDays,
         "absent": subjectAbsentDays,
-        "total": subjectTotalDays,
-        "percentage": subjectPresentDays == 0 && subjectTotalDays == 0
-            ? 0
-            : ((subjectPresentDays / subjectTotalDays) * 100).round()
+        "total": subjectPresentDays + subjectAbsentDays
       };
     } catch (e) {
       isLoadinggetStudentName.value = false;
       log(e.toString());
       return {};
     }
-  }
-}
-
-//*********************Attendance Date Wise Model */
-
-class AttendanceDateModelAllData {
-  String dDate;
-  String day;
-  String docid;
-  List<StudentSubjectModelAllData>? subjects;
-
-  AttendanceDateModelAllData({
-    required this.dDate,
-    required this.day,
-    required this.docid,
-    this.subjects,
-  });
-
-  factory AttendanceDateModelAllData.fromJson(Map<String, dynamic> json) =>
-      AttendanceDateModelAllData(
-        dDate: json["dDate"] ?? "",
-        day: json["day"] ?? "",
-        docid: json["docid"] ?? "",
-        subjects: List<StudentSubjectModelAllData>.from(json["subjects"] ?? []),
-      );
-
-  @override
-  String toString() {
-    return 'AttendanceDateModelAllData(dDate: $dDate, day: $day, docid: $docid, subjects: $subjects)';
-  }
-
-  @override
-  bool operator ==(covariant AttendanceDateModelAllData other) {
-    if (identical(this, other)) return true;
-
-    return other.dDate == dDate &&
-        other.day == day &&
-        other.docid == docid &&
-        listEquals(other.subjects, subjects);
-  }
-
-  @override
-  int get hashCode {
-    return dDate.hashCode ^ day.hashCode ^ docid.hashCode ^ subjects.hashCode;
-  }
-}
-
-class StudentSubjectModelAllData {
-  String date;
-  String docid;
-  String subject;
-  List<StudentAttendanceModel> present;
-
-  StudentSubjectModelAllData({
-    required this.date,
-    required this.docid,
-    required this.subject,
-    required this.present,
-  });
-
-  factory StudentSubjectModelAllData.fromJson(Map<String, dynamic> json) =>
-      StudentSubjectModelAllData(
-        date: json["date"],
-        docid: json["docid"],
-        subject: json["subject"],
-        present: List<StudentAttendanceModel>.from(json["present"] ?? []),
-      );
-
-  @override
-  String toString() {
-    return 'StudentSubjectModelAllData(date: $date, docid: $docid, subject: $subject, present: $present)';
-  }
-
-  @override
-  bool operator ==(covariant StudentSubjectModelAllData other) {
-    if (identical(this, other)) return true;
-
-    return other.docid == docid && other.subject == subject;
-  }
-
-  @override
-  int get hashCode {
-    return docid.hashCode ^ subject.hashCode;
   }
 }

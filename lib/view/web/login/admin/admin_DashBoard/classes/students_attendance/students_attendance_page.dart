@@ -48,7 +48,7 @@ class AttendancePage extends StatelessWidget {
               sizedBoxH10,
 
               //select month dropdown
-              SubjectSelectDropDownSearchWidget(label: "Select Subject"),
+              SubjectSelectDropDownSearchWidget(label: "Select Period"),
               sizedBoxH10,
 
               //show all students subject wise data
@@ -180,69 +180,6 @@ class DateWiseAttendanceWidget extends StatelessWidget {
   }
 }
 
-class MonthWiseAttendanceWidget extends StatelessWidget {
-  MonthWiseAttendanceWidget({
-    super.key,
-  });
-
-  final AttendanceController attendanceController =
-      Get.put(AttendanceController());
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-        ),
-        child: SizedBox(
-          width: double.infinity,
-          child: SingleChildScrollView(
-            child: StreamBuilder(
-                stream: attendanceController.getAllSubjectWiseAttendance(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return DataTable(
-                      showCheckboxColumn: false,
-                      columns: const [
-                        DataColumn(label: Text('Student Name')),
-                        DataColumn(label: Text('Present Days')),
-                        DataColumn(label: Text('Absent Days')),
-                        DataColumn(label: Text('Total')),
-                        DataColumn(label: Text('Percentage')),
-                      ],
-                      rows: List.generate(snapshot.data!.length, (index) {
-                        final student = snapshot.data![index];
-                        final color = index % 2 == 0
-                            ? Colors.white
-                            : Colors.grey.withOpacity(0.3);
-
-                        return DataRow(
-                          onSelectChanged: (value) {},
-                          color:
-                              MaterialStateColor.resolveWith((states) => color),
-                          cells: const [
-                            DataCell(Text("")),
-                            DataCell(Text("")),
-                            DataCell(Text("")),
-                            DataCell(Text("")),
-                            DataCell(Text("")),
-                          ],
-                        );
-                      }),
-                    );
-                  } else {
-                    return const Center(
-                        child: CircularProgressIndicator.adaptive());
-                  }
-                }),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class MonthSelectDropDownSearchWidget extends StatelessWidget {
   MonthSelectDropDownSearchWidget({
     super.key,
@@ -316,7 +253,8 @@ class SubjectSelectDropDownSearchWidget extends StatelessWidget {
         dropdownDecoratorProps: DropDownDecoratorProps(
             dropdownSearchDecoration: InputDecoration(
                 labelText: label, border: const OutlineInputBorder())),
-        itemAsString: (AttendanceSubjectModel u) => u.subject,
+        itemAsString: (AttendanceSubjectModel u) =>
+            "Hour - ${u.period} (${u.subject})",
         onChanged: (AttendanceSubjectModel? data) async {
           attendanceController.subjectId.value = data!.docid;
           attendanceController.getAllSubjectWiseAttendance();
