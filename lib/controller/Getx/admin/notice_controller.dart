@@ -277,7 +277,7 @@ class AdminNoticeController extends GetxController {
 
     for (var i = 0; i < parentsTokenList.length; i++) {
       sendPushMessage(
-          parentsTokenList[i], 'പുതിയ അറിയിപ്പ് ചേർത്തു', 'Notice Notification');
+          parentsTokenList[i], 'New Notice added', 'Notice Notification');
     }
   }
 
@@ -362,6 +362,7 @@ class AdminNoticeController extends GetxController {
       final docData = doc.data() as Map<String, dynamic>;
       if (docData['deviceToken'] != null) {
         studentsTokenList.add(docData['deviceToken']);
+        log(docData['deviceToken'] +' '+ docData['studentName']);
       }
     }
 
