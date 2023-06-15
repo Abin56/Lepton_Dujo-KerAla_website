@@ -150,7 +150,6 @@ class MonthWiseAttendanceWidget extends StatelessWidget {
                     DataColumn(label: Text('Present Hours')),
                     DataColumn(label: Text('Absent Hours')),
                     DataColumn(label: Text('Total Hours(Present+Absent)')),
-                    DataColumn(label: Text('Total Subject Hour')),
                     DataColumn(label: Text('Attendance Percentage')),
                   ],
                   rows: List.generate(
@@ -180,8 +179,7 @@ class MonthWiseAttendanceWidget extends StatelessWidget {
                         DataCell(Text(student["absent"].toString(),
                             style: const TextStyle(color: Colors.red))),
                         DataCell(Text(student["total"].toString())),
-                        const DataCell(Text("0")),
-                        const DataCell(Text("0%")),
+                        DataCell(Text("${student["percentage"].toString()}%")),
                       ],
                     );
                   }),

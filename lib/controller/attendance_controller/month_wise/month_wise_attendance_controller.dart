@@ -267,11 +267,16 @@ class MonthWiseAttendanceController {
         }
       }
       isLoadinggetStudentName.value = false;
+      int totalDay = subjectPresentDays + subjectAbsentDays;
+      double percentage = (subjectPresentDays * 100 / totalDay);
+
+      double formattedPercentage = double.parse(percentage.toStringAsFixed(1));
 
       return {
         "present": subjectPresentDays,
         "absent": subjectAbsentDays,
-        "total": subjectPresentDays + subjectAbsentDays
+        "total": totalDay,
+        "percentage": formattedPercentage
       };
     } catch (e) {
       isLoadinggetStudentName.value = false;
