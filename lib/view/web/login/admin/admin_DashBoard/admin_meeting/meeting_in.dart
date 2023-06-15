@@ -62,7 +62,7 @@ class MeetingCreates extends StatelessWidget {
                                             BorderRadius.circular(20)),
                                     icon: const Icon(Icons.calendar_today,
                                         color: adminePrimayColor),
-                                    labelText: "Enter Date"),
+                                    labelText: "Enter date"),
                                 readOnly: true,
                                 onTap: () async {
                                   adminMeetingController.dateController.text =
@@ -83,12 +83,12 @@ class MeetingCreates extends StatelessWidget {
                             TextFieldMettingWidget(
                               textEditingController: adminMeetingController
                                   .membersTobeExpectedController,
-                              labelText: 'Members to be Expected',
+                              labelText: 'Members to be expected',
                             ),
                             TextFieldMettingWidget(
                               textEditingController:
                                   adminMeetingController.specialGuestController,
-                              labelText: 'Special Guest',
+                              labelText: 'Special guest',
                             ),
                             Padding(
                               padding: const EdgeInsets.all(15.0),
@@ -159,7 +159,7 @@ class AdminMeetingCreateLeftSideWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  'Hi Admin ',
+                  'Hi! Admin ',
                   style: ralewayStyle.copyWith(
                     fontSize: 48.0,
                     color: AppColors.whiteColor,

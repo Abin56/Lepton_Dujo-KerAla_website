@@ -77,7 +77,7 @@ class NoticeDisplay extends StatelessWidget {
                                               (context, error, stackTrace) {
                                             return const Center(
                                               child: Text(
-                                                'Image Not Found',
+                                                'Image not found',
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                 ),
@@ -162,7 +162,7 @@ class NoticeDisplay extends StatelessWidget {
                                                     title: const Text(
                                                         'Confirm Remove'),
                                                     content: const Text(
-                                                        'Are you sure you want to remove this Notice'),
+                                                        'Are you sure you want to remove this notice'),
                                                     actions: [
                                                       TextButton(
                                                         onPressed: () {
@@ -315,7 +315,7 @@ class DataTableWidget extends StatelessWidget {
       DataRow(
         cells: <DataCell>[
           const DataCell(
-            NoticeTextWidget(title: 'Chief Guest'),
+            NoticeTextWidget(title: 'Chief guest'),
           ),
           DataCell(
             NoticeTextWidget(title: chiefGuest),
@@ -325,7 +325,7 @@ class DataTableWidget extends StatelessWidget {
       DataRow(
         cells: <DataCell>[
           const DataCell(
-            NoticeTextWidget(title: 'Date Of Submission'),
+            NoticeTextWidget(title: 'Date Of submission'),
           ),
           DataCell(
             NoticeTextWidget(title: dateOfSubmission),
@@ -335,7 +335,7 @@ class DataTableWidget extends StatelessWidget {
       DataRow(
         cells: <DataCell>[
           const DataCell(
-            NoticeTextWidget(title: 'Date Of Ocassion'),
+            NoticeTextWidget(title: 'Date Of ocassion'),
           ),
           DataCell(
             NoticeTextWidget(title: dateOfOccassion),
@@ -345,7 +345,7 @@ class DataTableWidget extends StatelessWidget {
       DataRow(
         cells: <DataCell>[
           const DataCell(
-            NoticeTextWidget(title: 'Published Date'),
+            NoticeTextWidget(title: 'Published date'),
           ),
           DataCell(
             NoticeTextWidget(title: publishedDate),
@@ -355,7 +355,7 @@ class DataTableWidget extends StatelessWidget {
       DataRow(
         cells: <DataCell>[
           const DataCell(
-            NoticeTextWidget(title: 'Signed By'),
+            NoticeTextWidget(title: 'Signed by'),
           ),
           DataCell(
             NoticeTextWidget(title: signedBy),

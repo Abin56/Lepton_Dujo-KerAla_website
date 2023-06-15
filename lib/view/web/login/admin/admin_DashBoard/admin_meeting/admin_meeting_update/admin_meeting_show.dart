@@ -83,7 +83,7 @@ class AdminMeetingShowPage extends StatelessWidget {
                                 .membersTobeExpectedController,
                             decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
-                                labelText: 'Members to be Expected',
+                                labelText: 'Members to be expected',
                                 labelStyle: TextStyle(
                                     color: Colors.black, fontSize: 16)),
                           ),
@@ -94,7 +94,7 @@ class AdminMeetingShowPage extends StatelessWidget {
                                 adminMeetingController.specialGuestController,
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
-                              labelText: 'Special Guest',
+                              labelText: 'Special guest',
                               labelStyle:
                                   TextStyle(color: Colors.black, fontSize: 16),
                             ),

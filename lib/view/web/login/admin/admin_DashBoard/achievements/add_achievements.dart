@@ -147,7 +147,7 @@ class _AddAchievementsState extends State<AddAchievements> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'Hi Admin ',
+                        'Hi! Admin ',
                         style: ralewayStyle.copyWith(
                           fontSize: 48.0,
                           color: Colors.white,
@@ -407,7 +407,7 @@ class _AddAchievementsState extends State<AddAchievements> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20))),
                           icon: Icon(Icons.calendar_today, color: Colors.blue),
-                          labelText: "Enter Date"),
+                          labelText: "Enter date"),
                       readOnly: true,
                       onTap: () async {
                         DateTime? pickedDate = await showDatePicker(
@@ -441,7 +441,7 @@ class _AddAchievementsState extends State<AddAchievements> {
                             borderRadius: BorderRadius.all(Radius.circular(20))),
                         icon:
                             Icon(Icons.format_list_numbered, color: Colors.blue),
-                        labelText: 'ADMISSION NUMBER',
+                        labelText: 'Admission number',
                       ),
                     ),
                   ),
@@ -455,7 +455,7 @@ class _AddAchievementsState extends State<AddAchievements> {
                             borderRadius: BorderRadius.all(Radius.circular(20))),
                         icon:
                             Icon(Icons.card_membership_sharp, color: Colors.blue),
-                        labelText: 'ACHIEVEMENT HEAD',
+                        labelText: 'Achivement head',
                       ),
                     ),
                   ),
@@ -468,7 +468,7 @@ class _AddAchievementsState extends State<AddAchievements> {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(20))),
                         icon: Icon(Icons.note_alt_outlined, color: Colors.blue),
-                        labelText: 'DESCRIPTION',
+                        labelText: 'Description',
                       ),
                     ),
                   ),

@@ -61,7 +61,7 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                                   adminNoticeController.publishedDateController,
                               decoration: InputDecoration(
                                 border: const OutlineInputBorder(),
-                                labelText: 'Published Date'.tr,
+                                labelText: 'Published date'.tr,
                               ),
                             ),
                             sizedBoxH20,
@@ -104,7 +104,7 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                                   adminNoticeController.chiefGuestController,
                               decoration: InputDecoration(
                                 border: const OutlineInputBorder(),
-                                labelText: 'Chief Guest'.tr,
+                                labelText: 'Chief guest'.tr,
                               ),
                             ),
                             sizedBoxH20,
@@ -118,7 +118,7 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                                   .dateOfSubmissionController,
                               decoration: InputDecoration(
                                 border: const OutlineInputBorder(),
-                                labelText: 'Date of Submission'.tr,
+                                labelText: 'Date of submission'.tr,
                               ),
                             ),
                             sizedBoxH20,
@@ -205,7 +205,7 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                                       }
                                     },
                                     child: Text(
-                                      'Update Sign'.tr,
+                                      'Update sign'.tr,
                                     ),
                                   ),
                                 ),
@@ -226,7 +226,7 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                                       }
                                     },
                                     child: Text(
-                                      'Update Image'.tr,
+                                      'Update image'.tr,
                                     ),
                                   ),
                                 ),

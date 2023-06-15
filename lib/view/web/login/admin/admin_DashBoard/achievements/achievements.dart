@@ -53,7 +53,7 @@ class _AchievementsState extends State<Achievements> {
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        'Hi Admin ',
+                                        'Hi! Admin ',
                                         style: ralewayStyle.copyWith(
                                           fontSize: 48.0,
                                           color: AppColors.whiteColor,
@@ -106,7 +106,7 @@ class _AchievementsState extends State<Achievements> {
                     height: screenSize.width * 1 / 15,
                     width: screenSize.width * 1 / 3,
                     child: CustomContainer(
-                      text: 'Add Achievements',
+                      text: 'Add achievements',
                       onTap: () {},
                     )),
               ),
@@ -126,7 +126,7 @@ class _AchievementsState extends State<Achievements> {
                       height: screenSize.width * 1 / 15,
                       width: screenSize.width * 1 / 3,
                       child: CustomContainer(
-                        text: 'Edit  Achievements',
+                        text: 'Edit  achievements',
                         onTap: () {},
                       )),
                 ))),
