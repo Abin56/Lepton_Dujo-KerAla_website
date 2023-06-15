@@ -1,5 +1,6 @@
 //import 'package:dujo_website/view/pages/web/class_teacher/upload_timetable/showtimetable.dart';
 //import 'package:dujo_website/view/pages/web/class_teacher/upload_timetable/upload_time_tables.dart';
+import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/upload_timetable/new_timetable_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -121,7 +122,11 @@ class _TimeTableScreenState extends State<TimeTableScreen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Add Timetable', style: GoogleFonts.poppins(),), 
+            title: GestureDetector(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> const NewTimeTableScreen()));
+              },
+              child: Text('Add Timetable', style: GoogleFonts.poppins(),)), 
             backgroundColor:  const Color.fromARGB(255, 0, 70, 128),
             actions: [
               Padding(
