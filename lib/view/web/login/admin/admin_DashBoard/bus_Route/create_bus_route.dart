@@ -6,8 +6,8 @@ import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
 import '../../../../../fonts/fonts.dart';
 
-class CreateBusRoute extends StatefulWidget {
-  CreateBusRoute({super.key});
+class CreateBusRoute extends StatelessWidget {
+  const CreateBusRoute({super.key});
   //  TextEditingController routeController = TextEditingController();
   //   TextEditingController busnumberController = TextEditingController();
   //    TextEditingController driverphoneController = TextEditingController();
@@ -15,18 +15,9 @@ class CreateBusRoute extends StatefulWidget {
   //      TextEditingController staffinchargeController = TextEditingController();
 
   @override
-  State<CreateBusRoute> createState() => _CreateBusRouteState();
-}
-
-final formKey = GlobalKey<FormState>();
-
-class _CreateBusRouteState extends State<CreateBusRoute> {
-  @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
-      //backgroundColor: adminePrimayColor,
-
       body: ListView(children: [
         Row(
           children: [
@@ -42,7 +33,7 @@ class _CreateBusRouteState extends State<CreateBusRoute> {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back,
                         color: Colors.white,
                       )),
@@ -77,11 +68,6 @@ class _CreateBusRouteState extends State<CreateBusRoute> {
                           child: LottieBuilder.network(
                               'https://assets3.lottiefiles.com/private_files/lf30_aav3tdzz.json'),
                         )
-                        //       SizedBox(
-                        // height: 400,
-                        // width: 600,
-                        // child: LottieBuilder.asset(
-                        //     "assets/images/")),
                       ],
                     ),
                   ),
@@ -100,31 +86,31 @@ class _CreateBusRouteState extends State<CreateBusRoute> {
                         padding: EdgeInsets.only(
                             left: size.width / 10, right: size.width / 10),
                         child: Column(children: [
-                          BusRouteTextFormWidget(
+                          const BusRouteTextFormWidget(
                             //  textEditingController:routeController,
                             function: checkFieldEmpty,
                             labelText: 'Route Number',
                             icon: Icons.route_outlined,
                           ),
-                          BusRouteTextFormWidget(
+                          const BusRouteTextFormWidget(
                             //textEditingController:busnumberController ,
                             function: checkFieldEmpty,
                             labelText: 'Bus Number',
                             icon: Icons.bus_alert,
                           ),
-                          BusRouteTextFormWidget(
+                          const BusRouteTextFormWidget(
                             // textEditingController:driverphoneController,
                             function: checkFieldPhoneNumberIsValid,
-                            labelText: 'Driver Mobile Number',
+                            labelText: 'Driver Mobile Numbe',
                             icon: Icons.phone_android_sharp,
                           ),
-                          BusRouteTextFormWidget(
+                          const BusRouteTextFormWidget(
                             // textEditingController: assistancephoneController,
                             function: checkFieldPhoneNumberIsValid,
                             labelText: 'Assistance Mobile Number',
                             icon: Icons.phone_android,
                           ),
-                          BusRouteTextFormWidget(
+                          const BusRouteTextFormWidget(
                             // textEditingController:staffinchargeController ,
                             function: checkFieldEmpty,
                             labelText: 'Staff inCharge',
@@ -144,7 +130,7 @@ class _CreateBusRouteState extends State<CreateBusRoute> {
                               child: TextButton(
                                 style: TextButton.styleFrom(
                                   foregroundColor:
-                                      Color.fromARGB(255, 255, 255, 255),
+                                      const Color.fromARGB(255, 255, 255, 255),
                                   padding: const EdgeInsets.all(9.0),
                                   textStyle: const TextStyle(fontSize: 17),
                                 ),
@@ -152,12 +138,11 @@ class _CreateBusRouteState extends State<CreateBusRoute> {
                                   bool? result =
                                       formKey.currentState?.validate();
                                   if (result == true) {
-                                  
                                     showToast(
                                         msg: 'Bus route successfully created ');
                                   }
                                 },
-                                child: Text('Create'),
+                                child: const Text('Create'),
                               ),
                             ),
                           ),
@@ -173,8 +158,10 @@ class _CreateBusRouteState extends State<CreateBusRoute> {
   }
 }
 
+final formKey = GlobalKey<FormState>();
+
 class BusRouteTextFormWidget extends StatelessWidget {
-  BusRouteTextFormWidget({
+  const BusRouteTextFormWidget({
     super.key,
     required this.labelText,
     // required this.textEditingController,
@@ -184,12 +171,12 @@ class BusRouteTextFormWidget extends StatelessWidget {
   // final TextEditingController textEditingController;
   final String labelText;
   final String? Function(String? fieldContent) function;
-  IconData icon;
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
       child: TextFormField(
         validator: function,
         // controller: textEditingController,
@@ -205,130 +192,3 @@ class BusRouteTextFormWidget extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Column(
-//                                                       children: [
-//                                                       Padding(
-//                                                         padding: EdgeInsets.all(15),
-//                                                         child: TextFormField(
-                                                          
-//                                                           decoration: InputDecoration(
-//                                                             border: OutlineInputBorder( borderRadius: BorderRadius.circular(20)),
-//                                                             icon: Icon(Icons.route_outlined,color: Color.fromARGB(255, 19, 7, 134)),
-//                                                             labelText: 'Route Number',
-//                                                           ),
-//                                                         ),
-//                                                       ),
-                                                      
-//                                                       Padding(
-//                                                         padding: EdgeInsets.all(15),
-//                                                         child: TextFormField(
-                                                         
-//                                                           decoration: InputDecoration(
-//                                                             border: OutlineInputBorder(
-//                                                                borderRadius: BorderRadius.circular(20)
-//                                                             ),
-//                                                              icon: Icon(Icons.bus_alert,color: Color.fromARGB(255, 19, 7, 134)),
-//                                                             labelText: 'Bus Number',
-//                                                           ),
-//                                                         ),
-//                                                       ),
-//                                                       Padding(
-//                                                         padding: EdgeInsets.all(15),
-//                                                         child: TextFormField(
-                                                          
-//                                                           decoration: InputDecoration(
-//                                                             border: OutlineInputBorder(
-//                                                                borderRadius: BorderRadius.circular(20)
-//                                                             ),
-//                                                              icon: Icon(Icons.phone_android_sharp,color: Color.fromARGB(255, 19, 7, 134)),
-//                                                             labelText: 'Driver Mobile Number',
-//                                                           ),
-//                                                         ),
-//                                                       ),
-//                                                       Padding(
-//                                                         padding: EdgeInsets.all(15),
-//                                                         child: TextFormField(
-//                                                           decoration: InputDecoration(
-//                                                             border: OutlineInputBorder(
-//                                                                borderRadius: BorderRadius.circular(20)
-//                                                             ),
-//                                                              icon: Icon(Icons.phone_android,color: Color.fromARGB(255, 19, 7, 134)),
-//                                                             labelText: 'Assistnce Mobile Number',
-//                                                           ),
-//                                                         ),
-//                                                       ),
-//                                                       Padding(
-//                                                         padding: EdgeInsets.all(15),
-//                                                         child: TextFormField(
-//                                                           decoration: InputDecoration(
-//                                                             border: OutlineInputBorder(
-//                                                                borderRadius: BorderRadius.circular(20)
-//                                                             ),
-//                                                              icon: Icon(Icons.person_2,color: Color.fromARGB(255, 19, 7, 134)),
-//                                                             labelText: 'Staff in Charge',
-//                                                           ),
-//                                                         ),
-//                                                       ),
-                                                     
-                                                      
-//                                                       SizedBox(
-//                                                         height: 30,),
-//                                                       InkWell(
-//                                                         onTap: () {
-//                                                         //  Navigator.push
-//                                                         //                 (context, MaterialPageRoute
-//                                                         //                 (builder: 
-//                                                         //                 ((context) =>  )));
-//                                                       },
-//                                                         child: Container(
-//                                                               height: size.width * 1 / 30,
-//                                                               width: size.width * 1 / 5,
-//                                                               decoration: BoxDecoration(
-//                                                                   color: Colors.blue,
-//                                                                   borderRadius: BorderRadius.circular(14)),
-//                                                               child: TextButton(
-//                                                                 style: TextButton.styleFrom(
-//                                                                   foregroundColor: Color.fromARGB(255, 255, 255, 255),
-//                                                                   padding: const EdgeInsets.all(9.0),
-//                                                                   textStyle: const TextStyle(fontSize: 17),
-//                                                                 ),
-//                                                                 onPressed: () {},
-//                                                                 child: const Text('Create'),
-//                                                               ),
-//                                                             ),
-//                                                       ),
-                                                      
-//                                                     ]),
