@@ -59,13 +59,13 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
         .collection(Get.find<GetFireBaseData>().bYear.value)
         .doc(Get.find<GetFireBaseData>().bYear.value)
         .collection('classes')
-        .doc(Get.find<GetFireBaseData>().classIDD.value)
+        .doc(Get.find<GetFireBaseData>().classIDD.value)         
         .collection('timetables')
         .doc(dayName)
         .collection(dayName)
         .doc(selectedPeriod)
         .set({
-      subjectName: {
+      'period': {
         'periodName': subjectName,
         'periodTeacher': teacherName,
         'startTime': startTimeController.text,
