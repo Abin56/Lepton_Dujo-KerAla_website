@@ -1,3 +1,15 @@
+
+
+
+
+
+
+
+
+
+
+
+
 // ignore_for_file: sort_child_properties_last, must_be_immutable
 
 import 'dart:developer';
@@ -231,19 +243,21 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
 
                               return DropdownButton<String>(
                                 underline: Container(),
-                                value: dropdownValues.isNotEmpty
-                                    ? dropdownValues[0]
-                                    : null,
+                                value:subjectName.isEmpty?null:subjectName,
                                 items: dropdownValues.map((value) {
                                   return DropdownMenuItem<String>(
                                     value: value,
                                     child: Text(value),
-                                  );
+                                  ); 
                                 }).toList(),
                                 onChanged: (selectedValue) {
                                   // Handle dropdown value change
-                                  subjectName = selectedValue!;
-                                  log(selectedValue);
+                                   setState(() {
+                                   subjectName = selectedValue!;
+                                 });
+                                 
+                                  log('tN$subjectName');
+                                  log('dv${dropdownValues[0]}');
                                 },
                               );
                             },
@@ -308,8 +322,8 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
 
                               return DropdownButton<String>(
                                 underline: Container(),
-                                value: dropdownValues.isNotEmpty
-                                    ? dropdownValues[0]
+                                value: teacherName.isNotEmpty
+                                    ? teacherName
                                     : null,
                                 items: dropdownValues.map((value) {
                                   return DropdownMenuItem<String>(
@@ -319,8 +333,12 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                 }).toList(),
                                 onChanged: (selectedValue) {
                                   // Handle dropdown value change
-                                  teacherName = selectedValue!;
-                                  print(selectedValue);
+                                 setState(() {
+                                   teacherName = selectedValue!;
+                                 });
+                                 
+                                  log('tN$teacherName');
+                                  log('dv${dropdownValues[0]}');
                                 },
                               );
                             },

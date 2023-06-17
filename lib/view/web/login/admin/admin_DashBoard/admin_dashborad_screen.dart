@@ -516,7 +516,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                 ),
                                 Text('Batch Year ${getFireBaseData.bYear}'),
                                 Tooltip(
-                                    message: "Change/add batch year",
+                                    message: "Class promotion",
                                     child: GestureDetector(
                                         onTap: () {
                                           showDialog(
