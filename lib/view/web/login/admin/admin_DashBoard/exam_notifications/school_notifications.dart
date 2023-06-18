@@ -112,7 +112,7 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                                         ? "required field"
                                                         : null,
                                                     items: const [
-                                                      "Public Level",
+                                                      "School Level",
                                                       "State Level",
                                                     ],
                                                     onChanged: (value) {
@@ -245,7 +245,7 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                 .collection(
                                     Get.find<GetFireBaseData>().bYear.value)
                                 .doc(Get.find<GetFireBaseData>().bYear.value)
-                                .collection('Public Level')
+                                .collection('School Level')
                                 .snapshots(),
                             builder: ((context, snapshot) {
                               if (snapshot.connectionState ==
@@ -291,10 +291,10 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                                   ),
                                                 ),
                                                 actions: <Widget>[
-                                                      TextButton(
+                                                  TextButton(
                                                     child: const Text('Ok'),
                                                     onPressed: () async {
-                                                            Navigator.pop(context);
+                                                      Navigator.pop(context);
                                                     },
                                                   ),
                                                   TextButton(
@@ -315,7 +315,7 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                                               .bYear
                                                               .value)
                                                           .collection(
-                                                              'Public Level')
+                                                              'State Level')
                                                           .doc(data.docid)
                                                           .delete()
                                                           .then((value) {
@@ -561,7 +561,8 @@ class HeadingContainer extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.only(top: 18.h, bottom: 10.h),
               child: Text(
-                "State level Exam",
+
+                "School level Exams",
                 style: TextStyle(color: Colors.black, fontSize: 25.h),
               ),
             ),
@@ -574,7 +575,7 @@ class HeadingContainer extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.only(top: 18.h, bottom: 10.h),
               child: Text(
-                "Public level Exam",
+                "State Level Exams",
                 style: TextStyle(fontSize: 25.h),
               ),
             ),
