@@ -54,7 +54,7 @@ class AddStudentFromClassTeacher extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'Hi Admin ',
+                        'Hi! Admin ',
                         style: ralewayStyle.copyWith(
                           fontSize: 48.0,
                           color: AppColors.whiteColor,
@@ -128,7 +128,7 @@ class AddStudentFromClassTeacher extends StatelessWidget {
                                 .addmissionNumberController,
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
-                              labelText: 'AdmissionNumber',
+                              labelText: 'Admission Number',
                             ),
                           ),
                         ),

@@ -958,7 +958,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                               ),
                             ),
                             SizedBox(
-                              height: screenSize.height - 60,
+                              height: screenSize.height - 80 ,
                               child: Padding(
                                 padding:
                                     EdgeInsets.only(right: 50.0.w, left: 50.w),

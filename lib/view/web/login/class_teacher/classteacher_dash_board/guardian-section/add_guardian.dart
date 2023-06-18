@@ -113,7 +113,7 @@ class AddGuardian extends StatelessWidget {
                       sizedBoxH30,
                       AddGuardianWidget(
                         function: checkFieldPhoneNumberIsValid,
-                        labelText: 'Guardian PhoneNumber',
+                        labelText: 'Guardian Phone Number',
                         textEditingController: guardianPhoneNoController,
                       ),
                       sizedBoxH30,

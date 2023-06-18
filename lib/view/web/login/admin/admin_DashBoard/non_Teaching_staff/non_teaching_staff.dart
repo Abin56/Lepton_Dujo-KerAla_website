@@ -71,7 +71,7 @@ class _NonTeachingLoginState extends State<NonTeachingLogin> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'Hi Admin ',
+                        'Hi! Admin ',
                         style: ralewayStyle.copyWith(
                           fontSize: 48.0,
                           color: Colors.white,

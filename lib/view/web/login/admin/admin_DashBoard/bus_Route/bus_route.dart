@@ -43,7 +43,7 @@ class _BusRouteState extends State<BusRoute> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'Hi Admin ',
+                        'Hi! Admin ',
                         style: ralewayStyle.copyWith(
                           fontSize: 48.0,
                           color: AppColors.whiteColor,
