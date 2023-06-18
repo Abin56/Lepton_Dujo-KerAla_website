@@ -40,7 +40,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
   String selectedPeriod = 'Period 1';
   String selectedTime1 = 'Start Time  ';
   String selectedTime2 = 'End Time  ';
-  MaterialColor selectedColor = Colors.amber;
+  Color selectedColor =  Color(0xFCFCFC);
   bool loadingStatus = false;
 
   //values
@@ -82,7 +82,8 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
         'periodTeacher': teacherName,
         'startTime': startTimeController.text,
         'endTime': endTimeController.text,
-        'color': selectedColor.toString()
+        'color': selectedColor.toString(), 
+        'timeStamp' : selectedPeriod
       }
     });
   }
@@ -121,8 +122,11 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
           //?
           Scaffold(
         //  backgroundColor:
+        appBar: AppBar(
+          title: Text("Create Timetable") ,
+        ),
         body: SingleChildScrollView(
-          child: Row(
+          child: Row( 
             children: [
               Container(
                 height: screenSize.height,
@@ -504,16 +508,17 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                           border: Border.all(color: Colors.black, width: 0.5),
                         ),
                         width: 450,
-                        child: DropdownButton<MaterialColor>(
+                        child: DropdownButton(
                           underline: Container(),
                           isExpanded: true,
                           value: selectedColor,
-                          onChanged: (MaterialColor? newValue) {
+                          onChanged: (Color? newValue) {
                             setState(() {
                               selectedColor = newValue!;
                             });
                           },
-                          items: <MaterialColor>[
+                          items: [
+                        
                             Colors.amber,
                             Colors.red,
                             Colors.green,
