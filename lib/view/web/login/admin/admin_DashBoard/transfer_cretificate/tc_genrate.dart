@@ -1,5 +1,3 @@
-import 'dart:math';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -34,7 +32,7 @@ class GenrateTC extends StatelessWidget {
    schoolName,
    schoolPlace,);
     var screenSize = MediaQuery.of(context).size;
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: CircularProgressIndicator.adaptive(),
       ),
@@ -50,7 +48,7 @@ nextpage(
   String schoolName,
   String schoolPlace,
 ) async {
-  await Future.delayed(Duration(seconds: 1));
+  await Future.delayed(const Duration(seconds: 1));
   Printing.layoutPdf(
     onLayout: (PdfPageFormat format) {
       return buildPdf(format,
@@ -109,7 +107,7 @@ Future<Uint8List> buildPdf(PdfPageFormat format,
                                           children: [
                                             pw.Padding(
                                               padding:
-                                                  pw.EdgeInsets.only(top: 10),
+                                                  const pw.EdgeInsets.only(top: 10),
                                               child: pw.Text(
                                                schoolName ,
                                                 style: pw.TextStyle(
@@ -126,7 +124,7 @@ Future<Uint8List> buildPdf(PdfPageFormat format,
                                           children: [
                                             pw.Text(
                                               schoolPlace,
-                                              style: pw.TextStyle(fontSize: 15),
+                                              style: const pw.TextStyle(fontSize: 15),
                                             ),
                                           ]),
                                       pw.SizedBox(height: 40),
@@ -148,7 +146,7 @@ Future<Uint8List> buildPdf(PdfPageFormat format,
                                                 child: pw.Center(
                                                   child: pw.Text(
                                                     'School Leaving Certificate',
-                                                    style: pw.TextStyle(
+                                                    style: const pw.TextStyle(
                                                         fontSize: 20),
                                                   ),
                                                 ))
@@ -157,7 +155,7 @@ Future<Uint8List> buildPdf(PdfPageFormat format,
                                         height: 30,
                                       ),
                                       pw.Padding(
-                                        padding: pw.EdgeInsets.only(right: 30),
+                                        padding: const pw.EdgeInsets.only(right: 30),
                                         child: pw.Row(
                                             mainAxisAlignment:
                                                 pw.MainAxisAlignment.end,
@@ -165,7 +163,7 @@ Future<Uint8List> buildPdf(PdfPageFormat format,
                                               pw.Text(
                                                 'S.No.',
                                                 style:
-                                                    pw.TextStyle(fontSize: 14),
+                                                    const pw.TextStyle(fontSize: 14),
                                               ),
                                               pw.SizedBox(
                                                 width: 10,
@@ -179,7 +177,7 @@ Future<Uint8List> buildPdf(PdfPageFormat format,
                                         height: 10,
                                       ),
                                       pw.Padding(
-                                        padding: pw.EdgeInsets.only(right: 30),
+                                        padding: const pw.EdgeInsets.only(right: 30),
                                         child: pw.Row(
                                             mainAxisAlignment:
                                                 pw.MainAxisAlignment.end,
@@ -187,7 +185,7 @@ Future<Uint8List> buildPdf(PdfPageFormat format,
                                               pw.Text(
                                                 'Reg.No.',
                                                 style:
-                                                    pw.TextStyle(fontSize: 14),
+                                                    const pw.TextStyle(fontSize: 14),
                                               ),
                                               pw.SizedBox(
                                                 width: 10,
@@ -201,13 +199,13 @@ Future<Uint8List> buildPdf(PdfPageFormat format,
                                         height: 30,
                                       ),
                                       pw.Padding(
-                                          padding: pw.EdgeInsets.only(
+                                          padding: const pw.EdgeInsets.only(
                                               right: 10, left: 10),
                                           child: pw.Column(
                                               // mainAxisAlignment: pw.MainAxisAlignment.start,
                                               children: [
                                                 pw.Padding(
-                                                  padding: pw.EdgeInsets.only(
+                                                  padding: const pw.EdgeInsets.only(
                                                       right: 10, left: 10),
                                                   child: pw.Row(children: [
                                                     pw.Text(
@@ -224,7 +222,7 @@ Future<Uint8List> buildPdf(PdfPageFormat format,
                                                   height: 10,
                                                 ),
                                                 pw.Padding(
-                                                  padding: pw.EdgeInsets.only(
+                                                  padding: const pw.EdgeInsets.only(
                                                       right: 10, left: 10),
                                                   child: pw.Row(children: [
                                                     pw.Text(
@@ -244,7 +242,7 @@ Future<Uint8List> buildPdf(PdfPageFormat format,
                                                 ),
                                                 pw.SizedBox(height: 10),
                                                 pw.Padding(
-                                                  padding: pw.EdgeInsets.only(
+                                                  padding: const pw.EdgeInsets.only(
                                                       right: 10, left: 10),
                                                   child: pw.Row(children: [
                                                     pw.Container(
@@ -258,7 +256,7 @@ Future<Uint8List> buildPdf(PdfPageFormat format,
                                                 ),
                                                 pw.SizedBox(height: 10),
                                                 pw.Padding(
-                                                  padding: pw.EdgeInsets.only(
+                                                  padding: const pw.EdgeInsets.only(
                                                       right: 10, left: 10),
                                                   child: pw.Row(
                                                       mainAxisAlignment: pw
@@ -275,7 +273,7 @@ Future<Uint8List> buildPdf(PdfPageFormat format,
                                                 ),
                                                 pw.SizedBox(height: 10),
                                                 pw.Padding(
-                                                  padding: pw.EdgeInsets.only(
+                                                  padding: const pw.EdgeInsets.only(
                                                       right: 10, left: 10),
                                                   child: pw.Row(children: [
                                                     pw.Text(
@@ -291,7 +289,7 @@ Future<Uint8List> buildPdf(PdfPageFormat format,
                                                 ),
                                                 pw.SizedBox(height: 10),
                                                 pw.Padding(
-                                                  padding: pw.EdgeInsets.only(
+                                                  padding: const pw.EdgeInsets.only(
                                                       right: 10, left: 10),
                                                   child: pw.Row(children: [
                                                     pw.Container(
@@ -304,7 +302,7 @@ Future<Uint8List> buildPdf(PdfPageFormat format,
                                                 ),
                                                 pw.SizedBox(height: 10),
                                                 pw.Padding(
-                                                  padding: pw.EdgeInsets.only(
+                                                  padding: const pw.EdgeInsets.only(
                                                       right: 10, left: 10),
                                                   child: pw.Row(children: [
                                                     pw.Text(
@@ -313,7 +311,7 @@ Future<Uint8List> buildPdf(PdfPageFormat format,
                                                 ),
                                                 pw.SizedBox(height: 10),
                                                 pw.Padding(
-                                                  padding: pw.EdgeInsets.only(
+                                                  padding: const pw.EdgeInsets.only(
                                                       right: 10, left: 10),
                                                   child: pw.Row(
                                                       mainAxisAlignment: pw

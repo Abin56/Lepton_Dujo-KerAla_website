@@ -182,7 +182,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       StudentProtectionGroup(), //12-Students Protection Group
       AdminScholarships(schoolID: widget.schoolID), //13-ScholarShip
 
-      BusRoute(), //14-Bus Route
+      const BusRoute(), //14-Bus Route
       const UnderMaintanceScreen(), //15-Student Summary
       const UnderMaintanceScreen(), //16-Research and development
       const UnderMaintanceScreen(), //17-School Calendar
@@ -976,7 +976,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                             key: _formKey,
                                             child: ListBody(
                                               children: <Widget>[
-                                                GetClassesListDropDownButton(),
+                                                const GetClassesListDropDownButton(),
                                                 TextFormField(
                                                   validator: checkFieldEmpty,
                                                   controller:

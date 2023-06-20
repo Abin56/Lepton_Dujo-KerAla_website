@@ -7,7 +7,7 @@ import '../../../../../constant/constant.dart';
 import '../../../../../fonts/fonts.dart';
 
 class CreateBusRoute extends StatefulWidget {
-  CreateBusRoute({super.key});
+  const CreateBusRoute({super.key});
   //  TextEditingController routeController = TextEditingController();
   //   TextEditingController busnumberController = TextEditingController();
   //    TextEditingController driverphoneController = TextEditingController();
@@ -42,7 +42,7 @@ class _CreateBusRouteState extends State<CreateBusRoute> {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back,
                         color: Colors.white,
                       )),
@@ -144,7 +144,7 @@ class _CreateBusRouteState extends State<CreateBusRoute> {
                               child: TextButton(
                                 style: TextButton.styleFrom(
                                   foregroundColor:
-                                      Color.fromARGB(255, 255, 255, 255),
+                                      const Color.fromARGB(255, 255, 255, 255),
                                   padding: const EdgeInsets.all(9.0),
                                   textStyle: const TextStyle(fontSize: 17),
                                 ),
@@ -157,7 +157,7 @@ class _CreateBusRouteState extends State<CreateBusRoute> {
                                         msg: 'Bus route successfully created ');
                                   }
                                 },
-                                child: Text('Create'),
+                                child: const Text('Create'),
                               ),
                             ),
                           ),
@@ -189,7 +189,7 @@ class BusRouteTextFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
       child: TextFormField(
         validator: function,
         // controller: textEditingController,

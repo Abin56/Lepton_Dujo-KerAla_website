@@ -70,7 +70,7 @@ class CreationGeneralInstruction extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
+                  SizedBox(
                      height: size.width * 1 / 15,
                               width: size.width * 1 / 3,
                     child: GenInstruHomeButtonWidget(
@@ -86,7 +86,7 @@ class CreationGeneralInstruction extends StatelessWidget {
                         }),
                   ),
                   sizedBoxH30,
-                  Container(
+                  SizedBox(
                      height: size.width * 1 / 15,
                               width: size.width * 1 / 3,
                     child: GenInstruHomeButtonWidget(
@@ -104,7 +104,7 @@ class CreationGeneralInstruction extends StatelessWidget {
                         }),
                   ),
                   sizedBoxH30,
-                  Container(
+                  SizedBox(
                      height: size.width * 1 / 15,
                               width: size.width * 1 / 3,
                     child: GenInstruHomeButtonWidget(

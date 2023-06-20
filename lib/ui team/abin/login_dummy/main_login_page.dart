@@ -1,11 +1,8 @@
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:dujo_kerala_website/view/fonts/fonts.dart';
-import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:dujo_kerala_website/view/icons/icons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../view/web/widgets/Iconbackbutton.dart';
@@ -57,7 +54,7 @@ class NewAllLogin extends StatelessWidget {
                    height: 550.h,
                    width: 450.w,
                    decoration: BoxDecoration(
-                     borderRadius: BorderRadius.all(Radius.circular(20)),border: Border.all(color: cWhite),
+                     borderRadius: const BorderRadius.all(Radius.circular(20)),border: Border.all(color: cWhite),
                      color:  Colors.transparent
                      ),
                      child: 
@@ -146,7 +143,7 @@ class NewAllLogin extends StatelessWidget {
                                             icon: Image.asset(AppIcons.emailIcon),
                                           ),
                                           suffixIcon: IconButton(
-                                            icon: Icon(Icons.visibility,),
+                                            icon: const Icon(Icons.visibility,),
                                               //  _hideGetxController.isObscurefirst.value
                                                //     ? Icons.visibility_off
                                                  //   : Icons.visibility),
@@ -206,7 +203,7 @@ class NewAllLogin extends StatelessWidget {
                                               icon: Image.asset(AppIcons.lockIcon),
                                             ),
                                             suffixIcon: IconButton(
-                                              icon: Icon(
+                                              icon: const Icon(
                                                 //  _hideGetxController.isObscureSecond.value
                                                    //   ? 
                                                       Icons.visibility_off),
@@ -252,7 +249,7 @@ class NewAllLogin extends StatelessWidget {
                    height: 550.h,
                    width: 450.w,
                    decoration: BoxDecoration(
-                     borderRadius: BorderRadius.all(Radius.circular(20)),border: Border.all(color: cWhite),
+                     borderRadius: const BorderRadius.all(Radius.circular(20)),border: Border.all(color: cWhite),
                      color:  Colors.transparent,
                      ),
                      child: 
@@ -341,7 +338,7 @@ class NewAllLogin extends StatelessWidget {
                                             icon: Image.asset(AppIcons.emailIcon),
                                           ),
                                           suffixIcon: IconButton(
-                                            icon: Icon(Icons.visibility,),
+                                            icon: const Icon(Icons.visibility,),
                                               //  _hideGetxController.isObscurefirst.value
                                                //     ? Icons.visibility_off
                                                  //   : Icons.visibility),
@@ -401,7 +398,7 @@ class NewAllLogin extends StatelessWidget {
                                               icon: Image.asset(AppIcons.lockIcon),
                                             ),
                                             suffixIcon: IconButton(
-                                              icon: Icon(
+                                              icon: const Icon(
                                                 //  _hideGetxController.isObscureSecond.value
                                                    //   ? 
                                                       Icons.visibility_off),
@@ -446,7 +443,7 @@ class NewAllLogin extends StatelessWidget {
                    height: 550.h,
                    width: 450.w,
                    decoration: BoxDecoration(
-                     borderRadius: BorderRadius.all(Radius.circular(20)),border: Border.all(color: cWhite),
+                     borderRadius: const BorderRadius.all(Radius.circular(20)),border: Border.all(color: cWhite),
                      color:  Colors.transparent
                      ),
                      child: 
@@ -535,7 +532,7 @@ class NewAllLogin extends StatelessWidget {
                                             icon: Image.asset(AppIcons.emailIcon),
                                           ),
                                           suffixIcon: IconButton(
-                                            icon: Icon(Icons.visibility,),
+                                            icon: const Icon(Icons.visibility,),
                                               //  _hideGetxController.isObscurefirst.value
                                                //     ? Icons.visibility_off
                                                  //   : Icons.visibility),
@@ -595,7 +592,7 @@ class NewAllLogin extends StatelessWidget {
                                               icon: Image.asset(AppIcons.lockIcon),
                                             ),
                                             suffixIcon: IconButton(
-                                              icon: Icon(
+                                              icon: const Icon(
                                                 //  _hideGetxController.isObscureSecond.value
                                                    //   ? 
                                                       Icons.visibility_off),
@@ -650,7 +647,7 @@ class NewAllLogin extends StatelessWidget {
 
 
 class MainLoginTextFormField extends StatelessWidget {
-  MainLoginTextFormField({
+  const MainLoginTextFormField({
     super.key,
     required this.labelText,
   ///  required this.textEditingController,
@@ -665,7 +662,7 @@ class MainLoginTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
       child: TextFormField(
         validator: function,
         // controller: textEditingController,

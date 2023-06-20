@@ -19,12 +19,12 @@ class Livecontainer extends StatelessWidget {
         height: 85,
         width: 350,
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
-        gradient: LinearGradient(colors: [
+        gradient: const LinearGradient(colors: [
           Colors.cyanAccent,Colors.cyan
         ])),
         child: Center(
           child: Text(text,style:GoogleFonts.acme(fontSize: 20.0,
-          color: Color.fromARGB(255, 0, 0, 0), 
+          color: const Color.fromARGB(255, 0, 0, 0), 
           fontWeight: FontWeight.w800,),),
         ),
       ),

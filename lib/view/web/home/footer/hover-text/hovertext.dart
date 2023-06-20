@@ -25,7 +25,7 @@ class _OnHoverTextState extends State<OnHoverText> {
       onExit: (event)=>onEntered(false),
       child: AnimatedContainer(
         curve: Sprung.overDamped,
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
       transform: transform,
       child: widget.builder(isHoverd),
       ),

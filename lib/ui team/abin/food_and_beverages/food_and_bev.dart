@@ -1,7 +1,5 @@
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -33,7 +31,7 @@ class _FoodBeveragesState extends State<FoodBeverages> {
                  child: Row(
                    children: [ 
                     Container(
-                           color: Color.fromARGB(255, 12, 34, 133),
+                           color: const Color.fromARGB(255, 12, 34, 133),
                            height: screenSize.height,
                           width: screenSize.width * 1 / 2,
                             child: Column(
@@ -75,7 +73,7 @@ class _FoodBeveragesState extends State<FoodBeverages> {
                     ),                            
                         Padding(
                             padding:  EdgeInsets.only(left: 80.w,top:250.w),
-                            child: Container(
+                            child: SizedBox(
                               height: screenSize.height * 1 /1 ,
                                width: screenSize.width * 1 / 3,
                               child: SingleChildScrollView(
@@ -91,10 +89,10 @@ class _FoodBeveragesState extends State<FoodBeverages> {
                                                  Navigator.push(
                                                      context,
                                                      MaterialPageRoute(
-                                                       builder: (context) => CreateFoodMenu(),
+                                                       builder: (context) => const CreateFoodMenu(),
                                                      ));
                                                },
-                                               child: Container(
+                                               child: SizedBox(
                                                    height: screenSize.width * 1 / 15,
                                                    width: screenSize.width * 1 / 3,
                                                    child: CustomContainer(
@@ -109,10 +107,10 @@ class _FoodBeveragesState extends State<FoodBeverages> {
                                                  Navigator.push(
                                                      context,
                                                      MaterialPageRoute(
-                                                       builder: (context) => FoodTimeTableMenu(),
+                                                       builder: (context) => const FoodTimeTableMenu(),
                                                      ));
                                                },
-                                               child: Container(
+                                               child: SizedBox(
                                                    height: screenSize.width * 1 / 15,
                                                    width: screenSize.width * 1 / 3,
                                                    child: CustomContainer(
@@ -130,7 +128,7 @@ class _FoodBeveragesState extends State<FoodBeverages> {
                                                //         builder: (context) => AdminTeacherList(),
                                                //       ));
                                                // },
-                                               child: Container(
+                                               child: SizedBox(
                                                    height: screenSize.width * 1 / 15,
                                                    width: screenSize.width * 1 / 3,
                                                    child: CustomContainer(

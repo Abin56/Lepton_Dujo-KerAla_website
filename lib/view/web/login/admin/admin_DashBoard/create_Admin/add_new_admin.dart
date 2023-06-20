@@ -255,7 +255,7 @@ class _AddNewAdminState extends State<AddNewAdmin> {
               )
             :  Scaffold(
               appBar: AppBar(backgroundColor: Colors.transparent,),
-                body: Center(
+                body: const Center(
                   child: Text(
                     "Sorry you are not a main Admin",
                     style: TextStyle(fontSize: 25),

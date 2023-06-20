@@ -32,7 +32,7 @@ class _LiveClassesState extends State<LiveClasses> {
   Widget build(BuildContext context) {
        final Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(backgroundColor:  adminePrimayColor,title: Text('Live Class'),),
+      appBar: AppBar(backgroundColor:  adminePrimayColor,title: const Text('Live Class'),),
       body:  SingleChildScrollView(
         child: Column(
             children:[
@@ -75,7 +75,7 @@ class _LiveClassesState extends State<LiveClasses> {
                     ),                            
                         Padding(
                             padding:  EdgeInsets.only(left: size.width/8),
-                            child: Container(
+                            child: SizedBox(
                               height: size.height * 1 /1 ,
                                width: size.width * 1 / 3,
                               child: SingleChildScrollView(
@@ -94,20 +94,20 @@ class _LiveClassesState extends State<LiveClasses> {
                                      },
                                      child: AnimatedOpacity(
                                        opacity: isContainer1Visible ? 1.0 : 1.0,
-                                       duration: Duration(milliseconds: 500),
+                                       duration: const Duration(milliseconds: 500),
                                        child: Container(
                                         margin: EdgeInsets.only(top: size.width/30),
                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
-                                        gradient: LinearGradient(colors: [
+                                        gradient: const LinearGradient(colors: [
                                  Colors.cyanAccent,Colors.cyan
                                         ])),
+                                         width: 200,
+                                         height: 100,
                                         child: Center(
                                  child: Text(' As per the TimeTable  ',style:GoogleFonts.acme(fontSize: 20.0,
-                                 color: Color.fromARGB(255, 0, 0, 0), 
+                                 color: const Color.fromARGB(255, 0, 0, 0), 
                                  fontWeight: FontWeight.w800,),),
-                                        ),
-                                         width: 200,
-                                         height: 100,                                        
+                                        ),                                        
                                        ),
                                      ),                                  
                                    ),
@@ -123,7 +123,7 @@ class _LiveClassesState extends State<LiveClasses> {
                                      },
                                      child: AnimatedOpacity(
                                        opacity: isContainer2Visible ? 1.0 : 0.0,
-                                       duration: Duration(milliseconds: 10),
+                                       duration: const Duration(milliseconds: 10),
                                        child: Container(                                    
                                          width: 600,
                                          height: 200,
@@ -137,7 +137,7 @@ class _LiveClassesState extends State<LiveClasses> {
                                        height: size.width/2.5,
                                     decoration: BoxDecoration(                                   
                                       borderRadius: BorderRadius.circular(20),
-                                      gradient: LinearGradient(colors: 
+                                      gradient: const LinearGradient(colors: 
                                       [Color.fromARGB(255, 168, 219, 207),Color.fromARGB(255, 228, 235, 236)]
                                       )),
                                       child: Column( 
@@ -145,7 +145,7 @@ class _LiveClassesState extends State<LiveClasses> {
                                         Container(
                                           margin: EdgeInsets.only(top: size.width/25),
                                           child: Text('Scheduled Class', style: GoogleFonts.aclonica(fontSize: 20,
-                                              color: Color.fromARGB(255, 10, 10, 10),
+                                              color: const Color.fromARGB(255, 10, 10, 10),
                                              fontWeight: FontWeight.w800,
                                             ),),
                                         ),                                           
@@ -154,7 +154,7 @@ class _LiveClassesState extends State<LiveClasses> {
                                               left: size.width/22,right: size.width/22),
                                               child: TextField(
                                                             controller: dateinput, 
-                                                            decoration: InputDecoration( 
+                                                            decoration: const InputDecoration( 
                                                               border: OutlineInputBorder(),
                                                                icon: Icon(Icons.calendar_today), 
                                                                labelText: "Enter Date" 
@@ -180,14 +180,14 @@ class _LiveClassesState extends State<LiveClasses> {
                                                          ),),
                                       Padding(padding:  EdgeInsets.only(top: size.width/40,                                   
                                       left: size.width/22,right: size.width/22),
-                                     child:  TextFieldlive(text: 'Time', icon: Icon (Icons.timer))),
+                                     child:  const TextFieldlive(text: 'Time', icon: Icon (Icons.timer))),
                                          Padding( padding: EdgeInsets.only(top: size.width/40,                                      
                                          left: size.width/22,right: size.width/22),
-                                        child: TextFieldlive(text: 'Teacher', icon: Icon (Icons.school_outlined),),
+                                        child: const TextFieldlive(text: 'Teacher', icon: Icon (Icons.school_outlined),),
                                       ), 
                                       Padding( padding: EdgeInsets.only(top: size.width/40,                                     
                                          left: size.width/22,right: size.width/22),
-                                        child: TextFieldlive(text: 'Subject', icon:Icon (Icons.subject_sharp),),
+                                        child: const TextFieldlive(text: 'Subject', icon:Icon (Icons.subject_sharp),),
                                       ),
                                        Padding( padding: EdgeInsets.only(top: size.width/40,                                      
                                         left: size.width/22,right: size.width/22),
@@ -219,7 +219,7 @@ class TextFieldlive extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
                         decoration: InputDecoration(
-                          border: OutlineInputBorder(),
+                          border: const OutlineInputBorder(),
                            icon: icon, 
                           labelText: text,
                         ),

@@ -91,7 +91,7 @@ class _EventsUpdatesState extends State<EventsUpdates> {
                               builder: (context) => AddEventsAdmin(schoolID: widget.schoolID),
                             ));
                       },
-                      child: Container(
+                      child: SizedBox(
                           height: screenSize.width * 1 / 15,
                           width: screenSize.width * 1 / 3,
                           child: CustomContainer(
@@ -108,7 +108,7 @@ class _EventsUpdatesState extends State<EventsUpdates> {
                               builder: (context) => EventsEditREmove(schoolID: widget.schoolID),
                             ));
                       },
-                      child: Container(
+                      child: SizedBox(
                           height: screenSize.width * 1 / 15,
                           width: screenSize.width * 1 / 3,
                           //color: Colors.red,

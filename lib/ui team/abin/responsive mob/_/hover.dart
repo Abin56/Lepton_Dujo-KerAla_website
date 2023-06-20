@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../view/web/widgets/drop_DownList/schoolDropDownList.dart';
 
 class HoverDropdown extends StatefulWidget {
+  const HoverDropdown({super.key});
+
   @override
   _HoverDropdownState createState() => _HoverDropdownState();
 }
@@ -30,7 +32,7 @@ class _HoverDropdownState extends State<HoverDropdown> {
         },
         child: Stack(
           children: [
-            Text(
+            const Text(
               'Hover over me!',
               style: TextStyle(
                 fontSize: 18,
@@ -40,14 +42,14 @@ class _HoverDropdownState extends State<HoverDropdown> {
             Visibility(
               visible: _isHovered,
               child: Container(
-                margin: EdgeInsets.only(top: 25),
+                margin: const EdgeInsets.only(top: 25),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.2),
                       blurRadius: 4.0,
-                      offset: Offset(0, 2),
+                      offset: const Offset(0, 2),
                     ),
                   ],
                 ),

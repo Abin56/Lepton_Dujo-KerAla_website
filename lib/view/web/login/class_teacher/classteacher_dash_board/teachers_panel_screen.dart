@@ -534,7 +534,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                         content:
                                                             SingleChildScrollView(
                                                           child: ListBody(
-                                                            children: <Widget>[
+                                                            children: const <Widget>[
                                                               Center(
                                                                   child:
                                                                       GetClassTeacherListDropDownButton()),

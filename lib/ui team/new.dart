@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class MyWidget extends StatefulWidget {
   const MyWidget({super.key});
@@ -14,7 +12,7 @@ class _MyWidgetState extends State<MyWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-      title: Text('ADD hhh'),
+      title: const Text('ADD hhh'),
     ));
   }
 }

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../view/colors/colors.dart';
@@ -22,14 +20,14 @@ class _MothersListState extends State<MothersList> {
 
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(title: Text('Mothers list'),
+      appBar: AppBar(title: const Text('Mothers list'),
       backgroundColor: adminePrimayColor),
      body: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           SingleChildScrollView(
             child: Column(
               children: [
-                Container(
+                SizedBox(
                        width: screenSize.width*0.3,
                     //  color: Colors.amber[50],
                     child: Padding(

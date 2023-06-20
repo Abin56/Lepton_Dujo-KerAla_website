@@ -71,7 +71,7 @@ class PTAMembersAddToFireBase {
                 title: const Text('Message'),
                 content: SingleChildScrollView(
                   child: ListBody(
-                    children: <Widget>[
+                    children: const <Widget>[
                       Text('Successfully created'),
                     ],
                   ),

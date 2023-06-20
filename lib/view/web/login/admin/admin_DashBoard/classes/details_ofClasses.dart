@@ -454,7 +454,7 @@ class ClassesDeatils extends StatelessWidget {
                                       },
                                     );
                                   },
-                                  child: Text("Change Incharge")),
+                                  child: const Text("Change Incharge")),
                             ),
                             SizedBox(
                               height: 60,

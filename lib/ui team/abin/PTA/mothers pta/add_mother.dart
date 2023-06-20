@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../view/colors/colors.dart';
@@ -69,7 +67,7 @@ class _AddMothersState extends State<AddMothers> {
                         
                        Padding(
                         padding:  EdgeInsets.only(left: size.width/8),
-                        child: Container(
+                        child: SizedBox(
                           height: size.height * 1 /1 ,
                            width: size.width * 1 / 4,
                           child: Padding(
@@ -87,7 +85,7 @@ class _AddMothersState extends State<AddMothers> {
                       border:  OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20)
                       ),
-                      icon: Icon(Icons.person_3,color: Color.fromARGB(255, 13, 5, 122)),
+                      icon: const Icon(Icons.person_3,color: Color.fromARGB(255, 13, 5, 122)),
                       labelText: 'Name of Mother ',
                     ),
                   ),
@@ -100,7 +98,7 @@ class _AddMothersState extends State<AddMothers> {
                       border:  OutlineInputBorder(
                         borderRadius:BorderRadius.circular(20) 
                       ),
-                       icon: Icon(Icons.people_outline_sharp,color: Color.fromARGB(255, 13, 5, 122)),
+                       icon: const Icon(Icons.people_outline_sharp,color: Color.fromARGB(255, 13, 5, 122)),
                       labelText: 'Member ID',
                     ),
                   ),

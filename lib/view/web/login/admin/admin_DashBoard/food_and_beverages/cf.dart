@@ -27,7 +27,7 @@ class _CfState extends State<Cf> {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create Food Menu'),
+        title: const Text('Create Food Menu'),
       ),
       body: ListView(
         children: [
@@ -68,7 +68,7 @@ class _CfState extends State<Cf> {
           ),
           ListView(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             children: [
               Flexible(
                 child: Row(

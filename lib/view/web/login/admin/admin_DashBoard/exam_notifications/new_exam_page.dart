@@ -17,7 +17,7 @@ class ExmNotification extends StatelessWidget {
         title: Row(
           children: [
             IconButtonBackWidget(),
-            Text(
+            const Text(
               "Exam Notification View",
             ),
           ],
@@ -26,7 +26,7 @@ class ExmNotification extends StatelessWidget {
       ),
       body: Column(
         
-        children: [SizedBox(height: 10,),
+        children: [const SizedBox(height: 10,),
           Padding(
             padding:  EdgeInsets.only(left: 13.h,right: 13.h),
             child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -43,12 +43,12 @@ class ExmNotification extends StatelessWidget {
                                 ),
             ],),
           ),
-          SizedBox(height: 10,),
+          const SizedBox(height: 10,),
           Expanded(
             child: ListView.separated(
                 itemCount: 5,
                 separatorBuilder: ((context, index) {
-                  return SizedBox(height: 10,);
+                  return const SizedBox(height: 10,);
                 }),
                 itemBuilder: (BuildContext context, int index) {
                   return Column(
@@ -65,7 +65,7 @@ class ExmNotification extends StatelessWidget {
               ),
             ),
                           child: ListTile(
-                              shape: BeveledRectangleBorder(
+                              shape: const BeveledRectangleBorder(
                                   side: BorderSide(color: Colors.grey, width: 0.2)),
                               
                               title: GooglePoppinsWidgets(

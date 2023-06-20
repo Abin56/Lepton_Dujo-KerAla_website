@@ -23,7 +23,7 @@ class WhoWeAre extends StatelessWidget {
           Center(
             child: Padding(
               padding:  EdgeInsets.only(left: 50.w,right: 50.w,top: 80.h),
-              child: Container(
+              child: SizedBox(
                 height: 250.w,
                 width: double.infinity,
                // color: Colors.white,
@@ -39,7 +39,7 @@ class WhoWeAre extends StatelessWidget {
           // const SizedBox(height: 10),
           Padding(
              padding:  EdgeInsets.only(left: 50.w,right: 50.w,top: 10.h),
-            child: Container(
+            child: SizedBox(
               height: 250.w,
                 width: double.infinity,
               child:GoogleMonstserratWidgets(fontsize: 18.w,text: 

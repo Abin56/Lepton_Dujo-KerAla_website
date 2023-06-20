@@ -6,7 +6,6 @@ import 'package:lottie/lottie.dart';
 
 import '../../../../../colors/colors.dart';
 import '../../../../../fonts/fonts.dart';
-import '../../../../widgets/custom_button.dart';
 
 class FeesUpdates extends StatefulWidget {
   const FeesUpdates({super.key});
@@ -84,7 +83,7 @@ class _FeesUpdatesState extends State<FeesUpdates> {
             ),
             Padding(
               padding: EdgeInsets.only(left: screenSize.width / 8),
-              child: Container(
+              child: SizedBox(
                 height: screenSize.height * 1 / 1,
                 width: screenSize.width * 1 / 4,
                 child: Padding(
@@ -103,7 +102,7 @@ class _FeesUpdatesState extends State<FeesUpdates> {
                             //   ),
                             // );
                           },
-                          child: Container(
+                          child: SizedBox(
                               height: screenSize.width * 1 / 15,
                               width: screenSize.width * 1 / 3,
                               child: CustomContainer(
@@ -127,7 +126,7 @@ class _FeesUpdatesState extends State<FeesUpdates> {
                               //   ),
                               // );
                             },
-                            child: Container(
+                            child: SizedBox(
                               height: screenSize.width * 1 / 15,
                               width: screenSize.width * 1 / 3,
                               child: CustomContainer(
@@ -150,7 +149,7 @@ class _FeesUpdatesState extends State<FeesUpdates> {
                             //   ),
                             // );
                           },
-                          child: Container(
+                          child: SizedBox(
                             height: screenSize.width * 1 / 15,
                             width: screenSize.width * 1 / 3,
                             child: CustomContainer(

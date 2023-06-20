@@ -27,8 +27,8 @@ class ExploreDrawer extends StatelessWidget {
                   IconButton(onPressed: () {
                     Navigator.pop(context);
                   },
-                   icon: Icon(Icons.arrow_back,color: cWhite,size: 35,)),
-                  Container(
+                   icon: const Icon(Icons.arrow_back,color: cWhite,size: 35,)),
+                  SizedBox(
                     height: 150.w,
                     width: 160.w,
                     child: Image.asset('assets/images/leptdujo.png'),),
@@ -36,7 +36,7 @@ class ExploreDrawer extends StatelessWidget {
                     onTap: () {
                   //    Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
                     },
-                    child: Text(
+                    child: const Text(
                       'Login',
                       style: TextStyle(color: Colors.white, fontSize: 22),
                     ),
@@ -50,7 +50,7 @@ class ExploreDrawer extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {},
-                    child: Text(
+                    child: const Text(
                       'Log Out',
                       style: TextStyle(color: Colors.white, fontSize: 22),
                     ),
@@ -64,7 +64,7 @@ class ExploreDrawer extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {},
-                    child: Text(
+                    child: const Text(
                       'Contact Us',
                       style: TextStyle(color: Colors.white, fontSize: 22),
                     ),
@@ -78,7 +78,7 @@ class ExploreDrawer extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {},
-                    child: Text(
+                    child: const Text(
                       '',
                       style: TextStyle(color: Colors.white, fontSize: 22),
                     ),
