@@ -27,7 +27,7 @@ class ListItemCard extends StatelessWidget {
                                 children: [
                               Text(title, style: GoogleFonts.poppins(fontSize: 22, fontWeight: FontWeight.bold),), 
     
-                                   SizedBox(
+                                   const SizedBox(
                                     height: 20,
                                   ),
                                   Text(
@@ -39,10 +39,10 @@ class ListItemCard extends StatelessWidget {
                               ),), 
                               Row(
                                 children: [
-                                  MaterialButton(onPressed: ()=> tapFun(),
+                                  MaterialButton(onPressed: ()=> tapFun(), color: Colors.blue,
                             
-                                   child: Text('Edit', style: GoogleFonts.poppins(color: Colors.white),), color: Colors.blue,), SizedBox(width: 20,), 
-                                  MaterialButton(onPressed: ()=> tapFun2(), child: Text('Delete',style: GoogleFonts.poppins(color: Colors.white),), color: Colors.red,), 
+                                   child: Text('Edit', style: GoogleFonts.poppins(color: Colors.white),),), const SizedBox(width: 20,), 
+                                  MaterialButton(onPressed: ()=> tapFun2(), color: Colors.red, child: Text('Delete',style: GoogleFonts.poppins(color: Colors.white),),), 
                                 ],
                               )
                                 ],

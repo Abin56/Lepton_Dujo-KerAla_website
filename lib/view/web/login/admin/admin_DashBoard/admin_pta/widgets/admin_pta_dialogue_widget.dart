@@ -166,7 +166,7 @@ Future<void> createAdminPtaDialogue(
 
 ImageProvider<Object>? netWorkImage(String? imageUrl) {
   PtaController ptaController = Get.find<PtaController>();
-  if (imageUrl == null)
+  if (imageUrl == null) {
     imageUrl == null && ptaController.imageDataUin8.value == null ||
             imageUrl!.isEmpty
         ? const AssetImage("assets/images/user.png")
@@ -175,4 +175,7 @@ ImageProvider<Object>? netWorkImage(String? imageUrl) {
             : MemoryImage(
                 ptaController.imageDataUin8.value!,
               );
+  return null;
+  }
+  return null;
 }

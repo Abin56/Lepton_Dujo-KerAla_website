@@ -28,7 +28,7 @@ class _SummaryState extends State<Summary> {
   String _skills = '';
   String _arts = '';
   String _sports = '';
-  String _technology = '';
+  final String _technology = '';
   String _schoollevel = '';
   String _districtlevel = '';
   String _statelevel = '';
@@ -83,6 +83,7 @@ class _SummaryState extends State<Summary> {
     });
   }
 
+  @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
 
@@ -129,7 +130,7 @@ class _SummaryState extends State<Summary> {
                   Padding(
                     padding: const EdgeInsets.only(left: 20),
                     child: Text(
-                      "Name:" + "    " + "$_studentName",
+                      "Name:    $_studentName",
                       style: GoogleFonts.montserrat(fontSize: 16),
                     ),
                   ),
@@ -142,8 +143,8 @@ class _SummaryState extends State<Summary> {
                 ),
                 Row(children: [
                   Padding(
-                    padding: EdgeInsets.only(left: 20),
-                    child: Text("Adm No:" + "    " + "$_admissionno",
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Text("Adm No:    $_admissionno",
                         style: GoogleFonts.montserrat(fontSize: 16)),
                   ),
                   SizedBox(
@@ -156,7 +157,7 @@ class _SummaryState extends State<Summary> {
                 Row(children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 20),
-                    child: Text("Class:" + "    " + "$_class",
+                    child: Text("Class:    $_class",
                         style: GoogleFonts.montserrat(fontSize: 16)),
                   ),
                   SizedBox(
@@ -169,7 +170,7 @@ class _SummaryState extends State<Summary> {
                 Row(children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 20),
-                    child: Text("Mother's Name:" + "    " + "$_mothername",
+                    child: Text("Mother's Name:    $_mothername",
                         style: GoogleFonts.montserrat(fontSize: 16)),
                   ),
                 ]),
@@ -179,7 +180,7 @@ class _SummaryState extends State<Summary> {
                 Row(children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 20),
-                    child: Text("Father's Name:" + "    " + "$_fathername",
+                    child: Text("Father's Name:    $_fathername",
                         style: GoogleFonts.montserrat(fontSize: 16)),
                   ),
                 ]),
@@ -205,7 +206,7 @@ class _SummaryState extends State<Summary> {
                 Row(children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 20),
-                    child: Text("Address:" + "    " + "$_housename ,"+ "    "  +"$_place",
+                    child: Text("Address:    $_housename ,    $_place",
                         style: GoogleFonts.montserrat(fontSize: 16)),
                   ),
                   SizedBox(
@@ -219,7 +220,7 @@ class _SummaryState extends State<Summary> {
                 Row(children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 20),
-                    child: Text("District:" + "    " + "$_district",
+                    child: Text("District:    $_district",
                         style: GoogleFonts.montserrat(fontSize: 16)),
                   ),
                   SizedBox(
@@ -233,7 +234,7 @@ class _SummaryState extends State<Summary> {
                 Row(children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 20),
-                    child: Text("State :" + "    "+ "$_state",
+                    child: Text("State :    $_state",
                         style: GoogleFonts.montserrat(fontSize: 16)),
                   ),
                   SizedBox(
@@ -246,7 +247,7 @@ class _SummaryState extends State<Summary> {
                 Row(children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 20),
-                    child: Text("Phone No:" + "    " + "$_phoneNo",
+                    child: Text("Phone No:    $_phoneNo",
                         style: GoogleFonts.montserrat(fontSize: 16)),
                   ),
                   SizedBox(
@@ -259,7 +260,7 @@ class _SummaryState extends State<Summary> {
                 Row(children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 20),
-                    child: Text("Email Id:" + "    " + "$_emailId",
+                    child: Text("Email Id:    $_emailId",
                         style: GoogleFonts.montserrat(fontSize: 16)),
                   ),
                   SizedBox(
@@ -293,7 +294,7 @@ class _SummaryState extends State<Summary> {
             Row(children: [
               Padding(
                 padding: const EdgeInsets.only(left: 20),
-                child: Text("Scholarships:" + "    " + "$_scholarship",
+                child: Text("Scholarships:    $_scholarship",
                     style: GoogleFonts.montserrat(fontSize: 16)),
               ),
               SizedBox(
@@ -306,7 +307,7 @@ class _SummaryState extends State<Summary> {
             Row(children: [
               Padding(
                 padding: const EdgeInsets.only(left: 20),
-                child: Text("Class:" + "    " + "$_class",
+                child: Text("Class:    $_class",
                     style: GoogleFonts.montserrat(fontSize: 16)),
               ),
               SizedBox(
@@ -318,8 +319,8 @@ class _SummaryState extends State<Summary> {
             ),
             Row(children: [
               Padding(
-                padding: EdgeInsets.only(left: 20),
-                child: Text("Year:" + "    " + "$_resultYear",
+                padding: const EdgeInsets.only(left: 20),
+                child: Text("Year:    $_resultYear",
                     style: GoogleFonts.montserrat(fontSize: 16)),
               ),
               SizedBox(
@@ -332,8 +333,8 @@ class _SummaryState extends State<Summary> {
             Row(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 20),
-                  child: Text("Results:" + "    " + "$_result",
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text("Results:    $_result",
                       style: GoogleFonts.montserrat(fontSize: 16)),
                 ),
               ],
@@ -355,7 +356,7 @@ class _SummaryState extends State<Summary> {
             Row(children: [
               Padding(
                 padding: const EdgeInsets.only(left: 20),
-                child: Text("1." + "    " + "$_skills",
+                child: Text("1.    $_skills",
                     style: GoogleFonts.montserrat(fontSize: 16)),
               ),
               SizedBox(
@@ -367,7 +368,7 @@ class _SummaryState extends State<Summary> {
             ),
             Row(children: [
               Padding(
-                padding:  EdgeInsets.only(left: 20),
+                padding:  const EdgeInsets.only(left: 20),
                 child: Text("2.", style: GoogleFonts.montserrat(fontSize: 16)),
               ),
               SizedBox(
@@ -392,7 +393,7 @@ class _SummaryState extends State<Summary> {
             Row(children: [
               Padding(
                 padding: const EdgeInsets.only(left: 20),
-                child: Text("Arts:" + "    " + "$_arts",
+                child: Text("Arts:    $_arts",
                     style: GoogleFonts.montserrat(fontSize: 16)),
               ),
               SizedBox(
@@ -404,8 +405,8 @@ class _SummaryState extends State<Summary> {
             ),
             Row(children: [
               Padding(
-                padding: EdgeInsets.only(left: 20),
-                child: Text("Sports:" + "    " + "$_sports",
+                padding: const EdgeInsets.only(left: 20),
+                child: Text("Sports:    $_sports",
                     style: GoogleFonts.montserrat(fontSize: 16)),
               ),
               SizedBox(
@@ -417,8 +418,8 @@ class _SummaryState extends State<Summary> {
             ),
             Row(children: [
               Padding(
-                padding: EdgeInsets.only(left: 20),
-                child: Text("Technology:" + "    " + "$_technology",
+                padding: const EdgeInsets.only(left: 20),
+                child: Text("Technology:    $_technology",
                     style: GoogleFonts.montserrat(fontSize: 16)),
               ),
               SizedBox(
@@ -438,8 +439,8 @@ class _SummaryState extends State<Summary> {
             ),
             Row(children: [
               Padding(
-                padding: EdgeInsets.only(left: 20),
-                child: Text("School Level:" + "    " + "$_schoollevel",
+                padding: const EdgeInsets.only(left: 20),
+                child: Text("School Level:    $_schoollevel",
                     style: GoogleFonts.montserrat(fontSize: 16)),
               ),
               SizedBox(
@@ -451,8 +452,8 @@ class _SummaryState extends State<Summary> {
             ),
             Row(children: [
               Padding(
-                padding: EdgeInsets.only(left: 20),
-                child: Text("District Level:" + "    " + "$_districtlevel",
+                padding: const EdgeInsets.only(left: 20),
+                child: Text("District Level:    $_districtlevel",
                     style: GoogleFonts.montserrat(fontSize: 16)),
               ),
               SizedBox(
@@ -465,8 +466,8 @@ class _SummaryState extends State<Summary> {
             Row(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 20),
-                  child: Text("State Level:" + "    " + "$_statelevel",
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text("State Level:    $_statelevel",
                       style: GoogleFonts.montserrat(fontSize: 16)),
                 ),
               ],
@@ -488,7 +489,7 @@ class _SummaryState extends State<Summary> {
             Row(children: [
               Padding(
                 padding: const EdgeInsets.only(left: 20),
-                child: Text("Member In :" + "    " + "$_clubs",
+                child: Text("Member In :    $_clubs",
                     style: GoogleFonts.montserrat(fontSize: 16)),
               ),
               SizedBox(
@@ -514,7 +515,7 @@ class _SummaryState extends State<Summary> {
             Row(children: [
               Padding(
                 padding: const EdgeInsets.only(left: 20),
-                child: Text("Opinion:" + "    " + "$_teacherOpinion", style: GoogleFonts.montserrat(fontSize: 18)),
+                child: Text("Opinion:    $_teacherOpinion", style: GoogleFonts.montserrat(fontSize: 18)),
               ),
               SizedBox(
                 height: screenSize.height * 0.01,

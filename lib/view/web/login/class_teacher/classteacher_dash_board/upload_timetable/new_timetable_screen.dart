@@ -28,7 +28,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
   String selectedPeriod = 'Period 1';
   String selectedTime1 = 'Start Time  ';
   String selectedTime2 = 'End Time  ';
-  MaterialColor selectedColor = Colors.amber;
+  Color selectedColor = const Color(0x00fcfcfc);
   bool loadingStatus = false;
 
   //values
@@ -39,6 +39,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
 
   TextEditingController startTimeController = TextEditingController();
   TextEditingController endTimeController = TextEditingController();
+
 
   Future<void> addTimeTableDataToFirebase() async {
     // String uid = const Uuid().v1();
@@ -65,12 +66,13 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
         .collection(dayName)
         .doc(selectedPeriod)
         .set({
-      subjectName: {
+      'period': {
         'periodName': subjectName,
         'periodTeacher': teacherName,
         'startTime': startTimeController.text,
         'endTime': endTimeController.text,
-        'color': selectedColor.toString()
+        'color': selectedColor.toString().substring(29, selectedColor.toString().length-1),
+        'timeStamp': selectedPeriod
       }
     });
   }
@@ -109,6 +111,9 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
           //?
           Scaffold(
         //  backgroundColor:
+        appBar: AppBar(
+          title: const Text("Create Timetable"),
+        ),
         body: SingleChildScrollView(
           child: Row(
             children: [
@@ -231,9 +236,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
 
                               return DropdownButton<String>(
                                 underline: Container(),
-                                value: dropdownValues.isNotEmpty
-                                    ? dropdownValues[0]
-                                    : null,
+                                value: subjectName.isEmpty ? null : subjectName,
                                 items: dropdownValues.map((value) {
                                   return DropdownMenuItem<String>(
                                     value: value,
@@ -242,8 +245,12 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                 }).toList(),
                                 onChanged: (selectedValue) {
                                   // Handle dropdown value change
-                                  subjectName = selectedValue!;
-                                  log(selectedValue);
+                                  setState(() {
+                                    subjectName = selectedValue!;
+                                  });
+
+                                  log('tN$subjectName');
+                                  log('dv${dropdownValues[0]}');
                                 },
                               );
                             },
@@ -308,9 +315,8 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
 
                               return DropdownButton<String>(
                                 underline: Container(),
-                                value: dropdownValues.isNotEmpty
-                                    ? dropdownValues[0]
-                                    : null,
+                                value:
+                                    teacherName.isNotEmpty ? teacherName : null,
                                 items: dropdownValues.map((value) {
                                   return DropdownMenuItem<String>(
                                     value: value,
@@ -319,8 +325,12 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                 }).toList(),
                                 onChanged: (selectedValue) {
                                   // Handle dropdown value change
-                                  teacherName = selectedValue!;
-                                  print(selectedValue);
+                                  setState(() {
+                                    teacherName = selectedValue!;
+                                  });
+
+                                  log('tN$teacherName');
+                                  log('dv${dropdownValues[0]}');
                                 },
                               );
                             },
@@ -486,16 +496,17 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                           border: Border.all(color: Colors.black, width: 0.5),
                         ),
                         width: 450,
-                        child: DropdownButton<MaterialColor>(
+                        child: DropdownButton(
                           underline: Container(),
                           isExpanded: true,
-                          value: selectedColor,
-                          onChanged: (MaterialColor? newValue) {
+                          value: Colors.amber,
+                          onChanged: (Color? newValue) {
                             setState(() {
                               selectedColor = newValue!;
+                              log('COL :${selectedColor.toString().substring(29, selectedColor.toString().length-1)}');
                             });
                           },
-                          items: <MaterialColor>[
+                          items: [
                             Colors.amber,
                             Colors.red,
                             Colors.green,

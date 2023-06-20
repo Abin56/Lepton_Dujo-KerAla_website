@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class UploadTimetableScreen extends StatelessWidget {
    UploadTimetableScreen({super.key, required this.numberOfPeriodsinString}); 
@@ -16,14 +14,14 @@ class UploadTimetableScreen extends StatelessWidget {
      print(numberOfPeriod);
     return Scaffold(
         appBar: AppBar(
-          title: Text('Upload Timetables'),
+          title: const Text('Upload Timetables'),
         ),
         body: Column(
           children: [
             Row( 
               mainAxisAlignment: MainAxisAlignment.spaceBetween, 
               children: [
-                Text('Monday'), 
+                const Text('Monday'), 
                    SizedBox( 
                   width: 125,
                   child: TextField(
@@ -35,10 +33,10 @@ class UploadTimetableScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15),
                             borderSide: BorderSide.none,
                           ),
-                          hintStyle: TextStyle(fontSize: 18,),
+                          hintStyle: const TextStyle(fontSize: 18,),
                           hintText: 'First',
                         ),
-                        style: TextStyle(fontSize: 19),
+                        style: const TextStyle(fontSize: 19),
                       ),
                 ), 
                     SizedBox( 
@@ -52,10 +50,10 @@ class UploadTimetableScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15),
                             borderSide: BorderSide.none,
                           ),
-                          hintStyle: TextStyle(fontSize: 19),
+                          hintStyle: const TextStyle(fontSize: 19),
                           hintText: 'Second',
                         ),
-                        style: TextStyle(fontSize: 19),
+                        style: const TextStyle(fontSize: 19),
                       ),
                     ),
                     SizedBox( 
@@ -69,10 +67,10 @@ class UploadTimetableScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15),
                             borderSide: BorderSide.none,
                           ),
-                          hintStyle: TextStyle(fontSize: 19),
+                          hintStyle: const TextStyle(fontSize: 19),
                           hintText: 'Third',
                         ),
-                        style: TextStyle(fontSize: 19),
+                        style: const TextStyle(fontSize: 19),
                       ),
                     ), 
                      SizedBox( 
@@ -86,10 +84,10 @@ class UploadTimetableScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15),
                             borderSide: BorderSide.none,
                           ),
-                          hintStyle: TextStyle(fontSize: 19),
+                          hintStyle: const TextStyle(fontSize: 19),
                           hintText: 'Fourth',
                         ),
-                        style: TextStyle(fontSize: 19),
+                        style: const TextStyle(fontSize: 19),
                       ),
                     ), 
                      SizedBox( 
@@ -103,10 +101,10 @@ class UploadTimetableScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15),
                             borderSide: BorderSide.none,
                           ),
-                          hintStyle: TextStyle(fontSize: 19),
+                          hintStyle: const TextStyle(fontSize: 19),
                           hintText: 'Fifth',
                         ),
-                        style: TextStyle(fontSize: 19),
+                        style: const TextStyle(fontSize: 19),
                       ),
                     ), 
 
@@ -121,10 +119,10 @@ class UploadTimetableScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15),
                             borderSide: BorderSide.none,
                           ),
-                          hintStyle: TextStyle(fontSize: 19),
+                          hintStyle: const TextStyle(fontSize: 19),
                           hintText: 'Sixth',
                         ),
-                        style: TextStyle(fontSize: 19),
+                        style: const TextStyle(fontSize: 19),
                       ),
                     ),
                 ],

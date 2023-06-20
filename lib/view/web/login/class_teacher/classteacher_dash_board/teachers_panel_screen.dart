@@ -5,7 +5,6 @@ import 'dart:html' as html;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/subject/subject_screen.dart';
-import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/upload_timetable/timetable_add_screen.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:dujo_kerala_website/view/web/widgets/sample/under_maintance.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -35,6 +34,7 @@ import 'manage_teachers/all_class_teachers.dart';
 import 'my_stuents/my_students_list.dart';
 import 'notice_screen/class_notices.dart';
 import 'notice_screen/create_notice_screen.dart';
+import 'upload_timetable/new_timetable_screen.dart';
 
 class ClassTeacherAdmin extends StatefulWidget {
   const ClassTeacherAdmin({
@@ -133,10 +133,12 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
           schoolId: Get.find<AdminLoginScreenController>().schoolID),
       const UnderMaintanceScreen(), //6
 
-      TimeTableScreen(
-        classID: teacherClassId,
-        schoolID: widget.schoolID,
-      ),
+      NewTimeTableScreen(),
+
+      // TimeTableScreen(
+      //   classID: teacherClassId,
+      //   schoolID: widget.schoolID,
+      // ),
 
       //const UnderMaintanceScreen(), //9
       ClassTeacherCreateEventsPage(), //6
@@ -532,7 +534,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                         content:
                                                             SingleChildScrollView(
                                                           child: ListBody(
-                                                            children: <Widget>[
+                                                            children: const <Widget>[
                                                               Center(
                                                                   child:
                                                                       GetClassTeacherListDropDownButton()),
@@ -956,7 +958,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                               ),
                             ),
                             SizedBox(
-                              height: screenSize.height - 60,
+                              height: screenSize.height - 80 ,
                               child: Padding(
                                 padding:
                                     EdgeInsets.only(right: 50.0.w, left: 50.w),

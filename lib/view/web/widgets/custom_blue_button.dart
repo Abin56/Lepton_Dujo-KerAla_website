@@ -14,14 +14,14 @@ class CustomBlueButton extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
-            gradient: LinearGradient(colors: [
+            gradient: const LinearGradient(colors: [
               Color(0xFF26A69A),
               Color.fromARGB(255, 9, 49, 45),
             ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
           ),
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color.fromARGB(255, 3, 39, 68),
+              backgroundColor: const Color.fromARGB(255, 3, 39, 68),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),

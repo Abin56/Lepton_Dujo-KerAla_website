@@ -3,8 +3,6 @@ import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_da
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 //import 'package:dujo_website/view/pages/web/class_teacher/upload_timetable/timetable_add_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../colors/colors.dart';
@@ -22,12 +20,12 @@ class SelectClassForTimeTable extends StatefulWidget {
 class _SelectClassForTimeTableState extends State<SelectClassForTimeTable> { 
  var classListValue;
 
- FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance; 
+ final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance; 
 
   @override
   Widget build(BuildContext context) {
     return Container( 
-       decoration: BoxDecoration(
+       decoration: const BoxDecoration(
         gradient: LinearGradient(colors: [
           Color.fromRGBO(131, 234, 241, 1), 
           Color.fromRGBO(99, 164, 255, 1)
@@ -99,7 +97,7 @@ class _SelectClassForTimeTableState extends State<SelectClassForTimeTable> {
                           ),
                         );
                       } 
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     }),
                     sizedBoxH20,
                   //   DropdownButton<String>(
@@ -118,7 +116,7 @@ class _SelectClassForTimeTableState extends State<SelectClassForTimeTable> {
                   // ),] 
                   
                   MaterialButton(
-                    color: Color.fromARGB(255, 0, 70, 128),
+                    color: const Color.fromARGB(255, 0, 70, 128),
                     onPressed: (){
                     print(classListValue!["classID"]);
                    Navigator.push(context, MaterialPageRoute(builder: ((context) => TimeTableScreen(classID: classListValue!["classID"], schoolID: widget.schoolID,)))); 

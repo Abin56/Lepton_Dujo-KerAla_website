@@ -1,7 +1,6 @@
 import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:lottie/lottie.dart';
@@ -12,7 +11,7 @@ import '../../../../widgets/custom_container.dart';
 import 'create_bus_route.dart';
 
 class BusRoute extends StatefulWidget {
-   BusRoute({super.key});
+   const BusRoute({super.key});
  
   @override
   State<BusRoute> createState() => _BusRouteState();
@@ -43,7 +42,7 @@ class _BusRouteState extends State<BusRoute> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'Hi Admin ',
+                        'Hi! Admin ',
                         style: ralewayStyle.copyWith(
                           fontSize: 48.0,
                           color: AppColors.whiteColor,
@@ -92,10 +91,10 @@ class _BusRouteState extends State<BusRoute> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => CreateBusRoute(),
+                                  builder: (context) => const CreateBusRoute(),
                                 ));
                           },
-                          child: Container(
+                          child: SizedBox(
                               height: size.width * 1 / 15,
                               width: size.width * 1 / 3,
                               child: CustomContainer(
@@ -112,7 +111,7 @@ class _BusRouteState extends State<BusRoute> {
                             //       builder: (context) => AdminTeacherList(),
                             //     ));
                           },
-                          child: Container(
+                          child: SizedBox(
                               height: size.width * 1 / 15,
                               width: size.width * 1 / 3,
                               child: CustomContainer(
@@ -129,7 +128,7 @@ class _BusRouteState extends State<BusRoute> {
                             //       builder: (context) => AdminTeacherList(),
                             //     ));
                           },
-                          child: Container(
+                          child: SizedBox(
                               height: size.width * 1 / 15,
                               width: size.width * 1 / 3,
                               child: CustomContainer(

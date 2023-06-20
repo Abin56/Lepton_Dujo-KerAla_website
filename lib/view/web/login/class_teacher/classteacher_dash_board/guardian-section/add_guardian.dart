@@ -12,7 +12,6 @@ import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../utils/utils.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
-import '../../../../../fonts/google_monstre.dart';
 import '../../../../widgets/drop_DownList/get_students.dart';
 
 class AddGuardian extends StatelessWidget {
@@ -113,7 +112,7 @@ class AddGuardian extends StatelessWidget {
                       sizedBoxH30,
                       AddGuardianWidget(
                         function: checkFieldPhoneNumberIsValid,
-                        labelText: 'Guardian PhoneNumber',
+                        labelText: 'Guardian Phone Number',
                         textEditingController: guardianPhoneNoController,
                       ),
                       sizedBoxH30,
@@ -187,7 +186,7 @@ class AddGuardian extends StatelessWidget {
                                            style: TextStyle(
                                           fontSize: 13.w,
                                           fontWeight: FontWeight.w600,
-                                          color: Color.fromARGB(255, 27, 106, 170)),
+                                          color: const Color.fromARGB(255, 27, 106, 170)),
                                           ),
                         ],
                       ),

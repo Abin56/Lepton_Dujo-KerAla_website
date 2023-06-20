@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
-import '../../../../controller/get_firebase-data/get_firebase_data.dart';
 
 var allTeachersListValue;
 

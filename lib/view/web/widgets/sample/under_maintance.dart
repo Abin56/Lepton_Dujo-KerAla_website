@@ -37,7 +37,7 @@ class UnderMaintanceScreen extends StatelessWidget {
                         style: GoogleFonts.poppins(
                           fontSize: 18,
                       
-                          color: Color.fromARGB(255, 34, 34, 34)
+                          color: const Color.fromARGB(255, 34, 34, 34)
                         ),
                       ),
                       LottieBuilder.network(

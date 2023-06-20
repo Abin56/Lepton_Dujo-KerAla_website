@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomButton extends StatelessWidget {
   final String text;
 
-  CustomButton({
+  const CustomButton({
     Key? key,
     required this.text,
     required Null Function() onTap,
@@ -15,7 +15,7 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Padding(
-      padding: EdgeInsets.all(0),
+      padding: const EdgeInsets.all(0),
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),

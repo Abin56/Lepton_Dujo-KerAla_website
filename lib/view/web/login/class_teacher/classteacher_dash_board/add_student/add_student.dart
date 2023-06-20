@@ -11,7 +11,6 @@ import '../../../../../../controller/Getx/class_teacher/teacher_add_student_cont
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../model/create_classModel/add_student_model.dart';
 import '../../../../../../utils/utils.dart';
-import '../../../../../fonts/google_monstre.dart';
 
 class AddStudentFromClassTeacher extends StatelessWidget {
   final String schoolID;
@@ -54,7 +53,7 @@ class AddStudentFromClassTeacher extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'Hi Admin ',
+                        'Hi! Admin ',
                         style: ralewayStyle.copyWith(
                           fontSize: 48.0,
                           color: AppColors.whiteColor,
@@ -128,7 +127,7 @@ class AddStudentFromClassTeacher extends StatelessWidget {
                                 .addmissionNumberController,
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
-                              labelText: 'AdmissionNumber',
+                              labelText: 'Admission Number',
                             ),
                           ),
                         ),
@@ -201,7 +200,7 @@ class AddStudentFromClassTeacher extends StatelessWidget {
                                            style: TextStyle(
                                           fontSize: 13.w,
                                           fontWeight: FontWeight.w600,
-                                          color: Color.fromARGB(255, 27, 106, 170)),
+                                          color: const Color.fromARGB(255, 27, 106, 170)),
                                           ),
                           ],
                         ),

@@ -18,7 +18,7 @@ class _SchoolAidedSubscriptionState extends State<SchoolAidedSubscription> {
     return Scaffold(
       
       appBar: AppBar(
-        title:Text('School Aided / Gov') ,backgroundColor: Color.fromARGB(255, 45, 120, 180),
+        title:const Text('School Aided / Gov') ,backgroundColor: const Color.fromARGB(255, 45, 120, 180),
         ),
   
         
@@ -29,7 +29,7 @@ class _SchoolAidedSubscriptionState extends State<SchoolAidedSubscription> {
                    Container(
                       height:screenSize.width*1/2,
                           width: screenSize.width*1/2,
-                          color: Color.fromARGB(255, 45, 120, 180),
+                          color: const Color.fromARGB(255, 45, 120, 180),
                       child: Padding(
                         padding: EdgeInsets.only(left: screenSize.width*0,
                         top: screenSize.width*0,
@@ -39,7 +39,7 @@ class _SchoolAidedSubscriptionState extends State<SchoolAidedSubscription> {
                              Padding(
                                padding: const EdgeInsets.all(15),
                                child: Container(
-                                  child:  Center(
+                                  child:  const Center(
                                     child: Text(
                                         "DuJo Schools",
                                         style: TextStyle(
@@ -59,10 +59,10 @@ class _SchoolAidedSubscriptionState extends State<SchoolAidedSubscription> {
                               color:Colors.blueAccent ,),
                              child: ListView(children: [
                                  
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 20,
                                   ),
-                                  Container(
+                                  SizedBox(
                                       height: screenSize.width * 1 / 20,
                                       width: screenSize.width * 1 / 6,
                                       child: CustomBlueButton(
@@ -75,10 +75,10 @@ class _SchoolAidedSubscriptionState extends State<SchoolAidedSubscription> {
                                           // );
                                         },
                                       )),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
-                                  Container(
+                                  SizedBox(
                                       height: screenSize.width * 1 / 20,
                                       width: screenSize.width * 1 / 6,
                                       child: CustomBlueButton(
@@ -91,127 +91,127 @@ class _SchoolAidedSubscriptionState extends State<SchoolAidedSubscription> {
                                           // );
                                         },
                                       )),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
-                                  Container(
+                                  SizedBox(
                                       height: screenSize.width * 1 / 20,
                                       width: screenSize.width * 1 / 6,
                                       child: CustomBlueButton(
                                         text: 'SNV HSS',
                                         onPressed: () {},
                                       )),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
-                                  Container(
+                                  SizedBox(
                                       height: screenSize.width * 1 / 20,
                                       width: screenSize.width * 1 / 6,
                                       child: CustomBlueButton(
                                         text: 'MS HSS',
                                         onPressed: () {},
                                       )),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
-                                  Container(
+                                  SizedBox(
                                       height: screenSize.width * 1 / 20,
                                       width: screenSize.width * 1 / 6,
                                       child: CustomBlueButton(
                                         text: 'TTTMHSS',
                                         onPressed: () {},
                                       )),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
-                                  Container(
+                                  SizedBox(
                                       height: screenSize.width * 1 / 20,
                                       width: screenSize.width * 1 / 6,
                                       child: CustomBlueButton(
                                         text: '',
                                         onPressed: () {},
                                       )),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
-                                  Container(
+                                  SizedBox(
                                       height: screenSize.width * 1 / 20,
                                       width: screenSize.width * 1 / 6,
                                       child: CustomBlueButton(
                                         text: '',
                                         onPressed: () {},
                                       )),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
-                                  Container(
+                                  SizedBox(
                                       height: screenSize.width * 1 / 20,
                                       width: screenSize.width * 1 / 6,
                                       child: CustomBlueButton(
                                         text: '',
                                         onPressed: () {},
                                       )),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
-                                  Container(
+                                  SizedBox(
                                       height: screenSize.width * 1 / 20,
                                       width: screenSize.width * 1 / 6,
                                       child: CustomBlueButton(
                                         text: '',
                                         onPressed: () {},
                                       )),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
-                                  Container(
+                                  SizedBox(
                                       height: screenSize.width * 1 / 20,
                                       width: screenSize.width * 1 / 6,
                                       child: CustomBlueButton(
                                         text: '',
                                         onPressed: () {},
                                       )),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
-                                  Container(
+                                  SizedBox(
                                       height: screenSize.width * 1 / 20,
                                       width: screenSize.width * 1 / 6,
                                       child: CustomBlueButton(
                                         text: '',
                                         onPressed: () {},
                                       )),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
-                                  Container(
+                                  SizedBox(
                                       height: screenSize.width * 1 / 20,
                                       width: screenSize.width * 1 / 6,
                                       child: CustomBlueButton(
                                         text: '',
                                         onPressed: () {},
                                       )),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
-                                  Container(
+                                  SizedBox(
                                       height: screenSize.width * 1 / 20,
                                       width: screenSize.width * 1 / 6,
                                       child: CustomBlueButton(
                                         text: '',
                                         onPressed: () {},
                                       )),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
-                                  Container(
+                                  SizedBox(
                                       height: screenSize.width * 1 / 20,
                                       width: screenSize.width * 1 / 6,
                                       child: CustomBlueButton(
                                         text: '',
                                         onPressed: () {},
                                       )),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
                                 ])
@@ -234,18 +234,18 @@ class _SchoolAidedSubscriptionState extends State<SchoolAidedSubscription> {
                       // decoration: BoxDecoration(
                       // borderRadius: BorderRadius.
                       // circular(30),
-                      color:Color.fromARGB(255, 255, 255, 255) ,
+                      color:const Color.fromARGB(255, 255, 255, 255) ,
                      // ),
                       child: Column(children: [
                         Center(
                           child: Padding(
                             padding:  EdgeInsets.only(top: screenSize.width*1/40),
-                            child: Text('Features',style: TextStyle(color: Color.fromARGB(255, 0, 0, 0),
+                            child: const Text('Features',style: TextStyle(color: Color.fromARGB(255, 0, 0, 0),
                                         fontWeight: FontWeight.bold, 
                                         fontSize: 25),),
                           ),
                         ),
-                        SizedBox(height: 50,),
+                        const SizedBox(height: 50,),
                        
                   
                   
@@ -257,9 +257,9 @@ class _SchoolAidedSubscriptionState extends State<SchoolAidedSubscription> {
                             child: Container(
                              height: screenSize.width*1/4,
                                width: screenSize.width*1/5,
-                             decoration: BoxDecoration(
+                             decoration: const BoxDecoration(
                               color: Color.fromARGB(255, 99, 218, 226),
-                               borderRadius: const BorderRadius.all(
+                               borderRadius: BorderRadius.all(
                             Radius.circular(30),
                           ),
                             ),
@@ -318,7 +318,7 @@ class _SchoolAidedSubscriptionState extends State<SchoolAidedSubscription> {
                               ),
                             ),
                           ),
-                          SizedBox(width: 20,),
+                          const SizedBox(width: 20,),
                   
                   
                           
@@ -327,17 +327,17 @@ class _SchoolAidedSubscriptionState extends State<SchoolAidedSubscription> {
                             child: Container(
                              height: screenSize.width*1/4,
                                width: screenSize.width*1/5,
-                             decoration: BoxDecoration(
+                             decoration: const BoxDecoration(
                               color: Color.fromARGB(255, 99, 218, 226),
-                               borderRadius: const BorderRadius.all(
+                               borderRadius: BorderRadius.all(
                             Radius.circular(30),
                           ),
                             ),
                               child: Container(
                                 child: Column(
-                                      children: [
+                                      children: const [
                                        Padding(
-                                         padding: const EdgeInsets.only(top: 50),
+                                         padding: EdgeInsets.only(top: 50),
                                          child: 
                                           Align(
                                                        alignment: Alignment.centerLeft,
@@ -434,13 +434,13 @@ class _SchoolAidedSubscriptionState extends State<SchoolAidedSubscription> {
                               children:  [
                                 Padding(
                                   padding:  EdgeInsets.only(left:screenSize.width*1/25 ),
-                                  child: Text("SUBSCRIBE",
+                                  child: const Text("SUBSCRIBE",
                                     style: TextStyle(color: Colors.white,
                                     fontWeight: FontWeight.bold, 
                                     fontSize: 16),),
                                 ),
                               
-                                   Icon(Icons.notifications,color: Colors.red,),  
+                                   const Icon(Icons.notifications,color: Colors.red,),  
                               ],
                             ),
                           

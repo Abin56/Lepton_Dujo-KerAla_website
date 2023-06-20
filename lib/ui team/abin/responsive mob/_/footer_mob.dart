@@ -16,7 +16,7 @@ class FooterMob1 extends StatelessWidget {
         //margin: EdgeInsets.only(left: 10.w),
         height: 500.h,
         width: double.infinity,
-        color:  Color.fromARGB(255, 13, 122, 117),
+        color:  const Color.fromARGB(255, 13, 122, 117),
         child: Column(
           children: [
             Row(
@@ -293,7 +293,7 @@ class FooterMob1 extends StatelessWidget {
                                 'Lepton Plus Communications is a customer oriented company offering digital solutions in Healthcare, E-Commerce Applications,\nHome Automation and Social Networking. We are committed to providing high end sustainable products and services that\nenhances the quality of life',
                                 style: GoogleFonts.poppins(
                                     fontSize: 8.w,
-                                    color: Color.fromARGB(255, 255, 255, 255)),
+                                    color: const Color.fromARGB(255, 255, 255, 255)),
                               ),
                             )
                           ],

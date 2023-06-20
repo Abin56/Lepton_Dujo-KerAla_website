@@ -15,7 +15,7 @@ class _ResearchDevelopmentState extends State<ResearchDevelopment> {
   Widget build(BuildContext context) {
    var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-        appBar: AppBar(title: Text('Research and Development')),
+        appBar: AppBar(title: const Text('Research and Development')),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Column(
@@ -31,16 +31,16 @@ class _ResearchDevelopmentState extends State<ResearchDevelopment> {
                         height: screenSize.width * 1 / 2.09,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(40),
-                        color: Color.fromARGB(255, 164, 206, 223)
+                        color: const Color.fromARGB(255, 164, 206, 223)
                         ),
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                           top: 30,
                         ),
-                        child: ListView(children: [
+                        child: ListView(children: const [
                           
                         ])),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 30,
                   ),
 
@@ -53,7 +53,7 @@ class _ResearchDevelopmentState extends State<ResearchDevelopment> {
                         //color: Colors.blue,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(40),
-                        color: Color.fromARGB(255, 164, 206, 223)
+                        color: const Color.fromARGB(255, 164, 206, 223)
                         ),
                         padding: const EdgeInsets.only(
                           top: 120,
@@ -67,7 +67,7 @@ class _ResearchDevelopmentState extends State<ResearchDevelopment> {
                               //       builder: (context) => AddClasses(),
                               //     ));
                             },
-                            child: Container(
+                            child: SizedBox(
                                 height: screenSize.width * 1 / 12,
                                 width: screenSize.width * 1 / 4,
                                 child: CustomButton(
@@ -75,7 +75,7 @@ class _ResearchDevelopmentState extends State<ResearchDevelopment> {
                                   onTap: () {},
                                 )),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 80,
                           ),
                           InkWell(
@@ -86,7 +86,7 @@ class _ResearchDevelopmentState extends State<ResearchDevelopment> {
                               //       builder: (context) => AdminPage(),
                               //     ));
                             },
-                            child: Container(
+                            child: SizedBox(
                                 height: screenSize.width * 1 / 12,
                                 width: screenSize.width * 1 / 4,
                                 child: CustomButton(
@@ -94,7 +94,7 @@ class _ResearchDevelopmentState extends State<ResearchDevelopment> {
                                   onTap: () {},
                                 )),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 80,
                           ),
                           InkWell(
@@ -105,7 +105,7 @@ class _ResearchDevelopmentState extends State<ResearchDevelopment> {
                               //       builder: (context) => AdminPage(),
                               //     ));
                             },
-                            child: Container(
+                            child: SizedBox(
                                 height: screenSize.width * 1 / 12,
                                 width: screenSize.width * 1 / 4,
                                 child: CustomButton(
@@ -115,7 +115,7 @@ class _ResearchDevelopmentState extends State<ResearchDevelopment> {
                           ),
                         ])),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 30,
                   ),
 

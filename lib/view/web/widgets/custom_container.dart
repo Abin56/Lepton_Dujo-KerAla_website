@@ -11,7 +11,7 @@ class CustomContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Padding(
-        padding: EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8.0),
         child: InkWell(
           child: Container(
             decoration: BoxDecoration(
@@ -27,7 +27,7 @@ class CustomContainer extends StatelessWidget {
               
                Text(
                 text,
-                style: TextStyle(fontSize: 25, color: cBlack),
+                style: const TextStyle(fontSize: 25, color: cBlack),
               ),
             ),
           ),

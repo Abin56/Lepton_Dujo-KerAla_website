@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
 import 'package:dujo_kerala_website/controller/get_firebase-data/get_firebase_data.dart';
 import 'package:dujo_kerala_website/model/time_table_model/day_model.dart'; 
 import 'package:get/get.dart';
 
 class AddTimeTableToFirebase{
-  FirebaseFirestore _firestore = FirebaseFirestore.instance; 
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance; 
 
   Future<void>AddTimeTablesToFirebase(String schoolID, String classID, MondayModel MondayModel,MondayModel tuesdayModel, MondayModel wednesdayModel,
   MondayModel thursdayModel, MondayModel fridayModel )async{ 
