@@ -588,7 +588,7 @@ class StudentsDetails extends StatelessWidget {
                                                         image: AssetImage(
                                                             'assets/images/exchange.png'))),
                                               ),
-                                              const Text("Shift Class ",
+                                              const Text("Class promotion",
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold)),

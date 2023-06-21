@@ -205,7 +205,7 @@ class AllClassController extends GetxController {
                                     width: 120.w,
                                     child: Center(
                                       child: Text(
-                                        'Exam Results',
+                                        'Exam results',
                                         style: GoogleFonts.montserrat(
                                             color: const Color.fromARGB(
                                                 255, 255, 254, 254),

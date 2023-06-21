@@ -930,12 +930,10 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                               message: "Logout",
                                               child: Row(
                                                 children: [
-                                                  IconButton(
-                                                    onPressed: () {},
-                                                    icon: Icon(
+                                                  Icon(
                                                       Icons.logout_outlined,
                                                     ),
-                                                  ),
+                                                  
                                                   Container(
                                                     margin: EdgeInsets.only(
                                                         top: 5.h),
