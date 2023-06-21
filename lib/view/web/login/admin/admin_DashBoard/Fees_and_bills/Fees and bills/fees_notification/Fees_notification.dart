@@ -73,7 +73,7 @@ class FeesNotification extends StatelessWidget {
                             items: feesBillsController.selectionList,
                             itemAsString: (String u) => u,
                             onChanged: (String? data) => feesBillsController
-                                .selectionListValue = data ?? "",
+                                .categoryCreateValue = data ?? "",
                             dropdownDecoratorProps:
                                 const DropDownDecoratorProps(
                               dropdownSearchDecoration: InputDecoration(
@@ -98,7 +98,7 @@ class FeesNotification extends StatelessWidget {
                   if (_formKey.currentState?.validate() ?? false) {
                     await feesBillsController.createFeesCategory(
                         feesBillsController.categoryNameController.text,
-                        feesBillsController.selectionListValue,
+                        feesBillsController.categoryCreateValue,
                         context);
                   }
                 },

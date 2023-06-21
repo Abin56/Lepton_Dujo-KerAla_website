@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/Fees_and_bills/Fees%20and%20bills/fees_notification/widgets/submit_button_widget.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +29,12 @@ class FeesNotificationRightSideWidget extends StatelessWidget {
               DropdownSearch<Map<String, dynamic>>(
                 asyncItems: (text) => feesBillsController.fetchCategoryList(),
                 itemAsString: (item) => item["categoryName"],
-                onChanged: (Map<String, dynamic>? data) => log(data.toString()),
+                onChanged: (Map<String, dynamic>? data) {
+                  feesBillsController.selectedType.value = data?["type"];
+                  feesBillsController.selectDateList.value =
+                      getPeriodList(data?["type"]);
+                  feesBillsController.selectDateList.refresh;
+                },
                 dropdownDecoratorProps: const DropDownDecoratorProps(
                   dropdownSearchDecoration: InputDecoration(
                     labelText: "Select Category",
@@ -40,17 +43,20 @@ class FeesNotificationRightSideWidget extends StatelessWidget {
                 ),
               ),
               sizedBoxH20,
-              DropdownSearch<String>(
-                // asyncItems: (String filter) => items,
-                itemAsString: (String u) => u,
-                onChanged: (String? data) => log(data.toString()),
-                dropdownDecoratorProps: const DropDownDecoratorProps(
-                  dropdownSearchDecoration: InputDecoration(
-                    labelText: "Select Date",
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-              ),
+              Obx(() => feesBillsController.selectDateList.isEmpty
+                  ? sizedBoxH10
+                  : DropdownSearch<String>(
+                      items: feesBillsController.selectDateList,
+                      itemAsString: (String u) => u,
+                      onChanged: (String? data) =>
+                          feesBillsController.selectedPeriod = data ?? "",
+                      dropdownDecoratorProps: const DropDownDecoratorProps(
+                        dropdownSearchDecoration: InputDecoration(
+                          labelText: "Select Date",
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    )),
               sizedBoxH20,
               const TextFormFieldFWidget(
                 function: checkFieldEmpty,
@@ -83,5 +89,19 @@ class FeesNotificationRightSideWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  List<String> getPeriodList(String categoryName) {
+    if (categoryName == feesBillsController.selectionList[0]) {
+      return feesBillsController.monthly;
+    } else if (categoryName == feesBillsController.selectionList[1]) {
+      return feesBillsController.quarterly;
+    } else if (categoryName == feesBillsController.selectionList[2]) {
+      return feesBillsController.halfYearly;
+    } else if (categoryName == feesBillsController.selectionList[3]) {
+      return ["Annually"];
+    } else {
+      return ["hello allll"];
+    }
   }
 }

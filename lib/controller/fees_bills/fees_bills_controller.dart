@@ -22,11 +22,10 @@ class FeesBillsController {
       .doc(Get.find<GetFireBaseData>().bYear.value);
   final Uuid uuid = const Uuid();
 
-  String monthlyValue = "";
-  String quarterlyValue = "";
-  String halfYearlyVa = "";
-  String classId = "";
-  String selectionListValue = "";
+  String categoryCreateValue = "";
+  String selectedPeriod = "";
+  RxString selectedType = RxString("");
+  RxList<String> selectDateList = RxList([]);
   List<ClassModel> allClass = [];
   List<AddStudentModel> allClassStudents = [];
   TextEditingController categoryNameController = TextEditingController();
@@ -65,32 +64,32 @@ class FeesBillsController {
 
   //fetch all classes
 
-  Future<void> getAllClasses() async {
-    try {
-      final QuerySnapshot<Map<String, dynamic>> data =
-          await fStore.collection("classes").get();
-      allClass = data.docs.map((e) => ClassModel.fromMap(e.data())).toList();
-    } catch (e) {
-      log(e.toString());
-      showToast(msg: "Something Went Wrong");
-    }
-  }
+  // Future<void> getAllClasses() async {
+  //   try {
+  //     final QuerySnapshot<Map<String, dynamic>> data =
+  //         await fStore.collection("classes").get();
+  //     allClass = data.docs.map((e) => ClassModel.fromMap(e.data())).toList();
+  //   } catch (e) {
+  //     log(e.toString());
+  //     showToast(msg: "Something Went Wrong");
+  //   }
+  // }
 
 //get all students from class
-  Future<void> getAllStudentsFromClass() async {
-    try {
-      final QuerySnapshot<Map<String, dynamic>> data = await fStore
-          .collection("classes")
-          .doc(classId)
-          .collection("Students")
-          .get();
-      allClassStudents =
-          data.docs.map((e) => AddStudentModel.fromMap(e.data())).toList();
-    } catch (e) {
-      log(e.toString());
-      showToast(msg: "Something Went Wrong");
-    }
-  }
+  // Future<void> getAllStudentsFromClass() async {
+  //   try {
+  //     final QuerySnapshot<Map<String, dynamic>> data = await fStore
+  //         .collection("classes")
+  //         .doc(classId)
+  //         .collection("Students")
+  //         .get();
+  //     allClassStudents =
+  //         data.docs.map((e) => AddStudentModel.fromMap(e.data())).toList();
+  //   } catch (e) {
+  //     log(e.toString());
+  //     showToast(msg: "Something Went Wrong");
+  //   }
+  // }
 
   //create category
   Future<void> createFeesCategory(
@@ -99,7 +98,7 @@ class FeesBillsController {
     BuildContext context,
   ) async {
     try {
-      if (selectionListValue.isEmpty) {
+      if (categoryCreateValue.isEmpty) {
         return showToast(msg: "Please select category");
       }
       categoryCreateloading.value = true;
@@ -122,7 +121,7 @@ class FeesBillsController {
         },
       ).then((value) {
         showToast(msg: "Successfully Created");
-        selectionListValue = "";
+        categoryCreateValue = "";
         categoryNameController.clear();
         Navigator.pop(context);
       });
