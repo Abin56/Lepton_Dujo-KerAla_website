@@ -29,6 +29,7 @@ import '../../../widgets/button_container_widget.dart';
 import '../../../widgets/drop_DownList/get_batchYear.dart';
 import '../../../widgets/drop_DownList/get_classes.dart';
 import '../../../widgets/sample/under_maintance.dart';
+import 'Fees_and_bills/Fees and bills/fees_and_bills.dart';
 import 'Students_ScholarShip/student_scholarship.dart';
 import 'achievements/achievements.dart';
 import 'admin_meeting/admin_meeting_update/adminMeetingNew/admin_meeting_show.dart';
@@ -68,14 +69,14 @@ class AdminDashBoardPage extends StatefulWidget {
 }
 
 class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
-  TeacherAddStudentController     teacherAddStudentController =
+  TeacherAddStudentController teacherAddStudentController =
       Get.put(TeacherAddStudentController());
   GetFireBaseData getFireBaseData = Get.put(GetFireBaseData());
   TextEditingController applynewBatchYearContoller = TextEditingController();
   TextEditingController selectedToDaterContoller = TextEditingController();
   DateTime? _selectedDateForApplyDate;
   DateTime? _selectedToDate;
-  final _formKey =GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   List<String> dashboardNamesList = [
     'Create Admin',
@@ -381,11 +382,18 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                         color: adminePrimayColor,
                         child: ListView(
                           children: [
-                            Container(
-                                margin: EdgeInsets.only(top: 20.h),
-                                height: 30.h,
-                                width: 80.w,
-                                child: Image.asset('assets/images/dujon.png')),
+                            GestureDetector(
+                              onTap: () => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const FeesAndBillsWeb())),
+                              child: Container(
+                                  margin: EdgeInsets.only(top: 20.h),
+                                  height: 30.h,
+                                  width: 80.w,
+                                  child:
+                                      Image.asset('assets/images/dujon.png')),
+                            ),
                             Row(
                               children: [
                                 IconButton(
@@ -458,7 +466,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                           child: Text(
                                             viewListNames[index],
                                             style: GoogleFonts.poppins(
-                                                color: Colors.white,fontSize: 14.w),
+                                                color: Colors.white,
+                                                fontSize: 14.w),
                                           ),
                                         )
                                       ],
@@ -467,25 +476,25 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                 }),
                             Container(
                               margin: EdgeInsets.only(left: 25.w),
-                                width: 80.w,
-                                      height: 40.h,
+                              width: 80.w,
+                              height: 40.h,
                               child: GestureDetector(
                                 onTap: () {
-                                                     print("object");
-                                                     addstudent(context);
+                                  print("object");
+                                  addstudent(context);
                                 },
                                 child: Row(
                                   children: [
                                     SizedBox(
-
-                                      width: 20.w,
-                                      height: 10.h,
-                                      child: Image.asset('assets/images/students.png')),
+                                        width: 20.w,
+                                        height: 10.h,
+                                        child: Image.asset(
+                                            'assets/images/students.png')),
                                     GooglePoppinsWidgets(
                                       text: 'Add Student',
                                       fontsize: 13.w,
                                       color: cWhite,
-                                     // fontWeight: FontWeight.w500,
+                                      // fontWeight: FontWeight.w500,
                                     ),
                                   ],
                                 ),
@@ -497,7 +506,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                       color: Colors.white54,
                       width: screenSize.width * 5 / 6,
                       child: Column(children: [
-                          Container(
+                        Container(
                           color: Colors.white30,
                           height: 60.w,
                           child: Padding(
@@ -509,7 +518,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                   Get.find<AdminLoginScreenController>()
                                       .schoolName,
                                   style: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w500,fontSize: 14.w),
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 14.w),
                                 ),
                                 SizedBox(
                                   width: screenSize.height / 12,
@@ -898,7 +908,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                 ),
                                                 Text(
                                                   dashboardNamesList[index],
-                                                  style: GoogleFonts.poppins(fontSize: 14.w),
+                                                  style: GoogleFonts.poppins(
+                                                      fontSize: 14.w),
                                                 )
                                               ],
                                             )),
@@ -955,103 +966,81 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       });
     }
   }
-         addstudent(BuildContext context) async {
-                                  TextEditingController phoneNumberController =
-                                      TextEditingController();
 
-                                  TextEditingController studentNameController =
-                                      TextEditingController();
-                                  TextEditingController addmissionController =
-                                      TextEditingController();
+  addstudent(BuildContext context) async {
+    TextEditingController phoneNumberController = TextEditingController();
 
-                                  return showDialog(
-                                    context: context,
-                                    barrierDismissible:
-                                        false, // user must tap button!
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        title: const Text('Add Student'),
-                                        content: SingleChildScrollView(
-                                          child: Form(
-                                            key: _formKey,
-                                            child: ListBody(
-                                              children: <Widget>[
-                                                const GetClassesListDropDownButton(),
-                                                TextFormField(
-                                                  validator: checkFieldEmpty,
-                                                  controller:
-                                                      studentNameController,
-                                                  decoration: const InputDecoration(
-                                                      hintText:
-                                                          'Enter StudentName'),
-                                                ),
-                                                TextFormField(
-                                                  validator: checkFieldPhoneNumberIsValid,
-                                                  controller:
-                                                      phoneNumberController,
-                                                  decoration: const InputDecoration(
-                                                      hintText:
-                                                          'Enter PhoneNumber'),
-                                                ),
-                                                TextFormField(
-                                                  validator: checkFieldEmpty,
-                                                  controller:
-                                                      addmissionController,
-                                                  decoration: const InputDecoration(
-                                                      hintText:
-                                                          'Enter Admission Number'),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        actions: <Widget>[
-                                          TextButton(
-                                            child: const Text('Cancel'),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                          TextButton(
-                                            child: const Text('Add student'),
-                                            onPressed: () async {
+    TextEditingController studentNameController = TextEditingController();
+    TextEditingController addmissionController = TextEditingController();
 
-                                              if(_formKey.currentState!.validate()){
-                                                log('class id${classesListValue!['docid']}');
-                                              teacherAddStudentController
-                                                  .admincreateStudent(
-                                                    classID:classesListValue!['docid'] ,
-                                                      studentModel:
-                                                          AddStudentModel(
-                                                studentName:
-                                                    studentNameController.text
-                                                        .trim(),
-                                                parentPhoneNumber:
-                                                    phoneNumberController.text
-                                                        .trim(),
-                                                admissionNumber:
-                                                    addmissionController.text
-                                                        .trim(),
-                                                classID: classesListValue!['docid'],
-                                                createDate:
-                                                    DateTime.now().toString(),
-                                              ));
-                                               clearAdminAdd();
-                                              }
-                                             
-                                            },
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                 
-                                }
-                                void clearAdminAdd() {
-                                  phoneNumberController .clear();
-                                  // studentNameController .clear();
-                                  // addmissionController .clear();
-                                }
-                                 
+    return showDialog(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Add Student'),
+          content: SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: ListBody(
+                children: <Widget>[
+                  const GetClassesListDropDownButton(),
+                  TextFormField(
+                    validator: checkFieldEmpty,
+                    controller: studentNameController,
+                    decoration:
+                        const InputDecoration(hintText: 'Enter StudentName'),
+                  ),
+                  TextFormField(
+                    validator: checkFieldPhoneNumberIsValid,
+                    controller: phoneNumberController,
+                    decoration:
+                        const InputDecoration(hintText: 'Enter PhoneNumber'),
+                  ),
+                  TextFormField(
+                    validator: checkFieldEmpty,
+                    controller: addmissionController,
+                    decoration: const InputDecoration(
+                        hintText: 'Enter Admission Number'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Add student'),
+              onPressed: () async {
+                if (_formKey.currentState!.validate()) {
+                  log('class id${classesListValue!['docid']}');
+                  teacherAddStudentController.admincreateStudent(
+                      classID: classesListValue!['docid'],
+                      studentModel: AddStudentModel(
+                        studentName: studentNameController.text.trim(),
+                        parentPhoneNumber: phoneNumberController.text.trim(),
+                        admissionNumber: addmissionController.text.trim(),
+                        classID: classesListValue!['docid'],
+                        createDate: DateTime.now().toString(),
+                      ));
+                  clearAdminAdd();
+                }
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void clearAdminAdd() {
+    phoneNumberController.clear();
+    // studentNameController .clear();
+    // addmissionController .clear();
+  }
 }
-

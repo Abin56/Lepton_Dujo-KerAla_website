@@ -138,7 +138,7 @@ class SearchStuents extends SearchDelegate {
 
               return GestureDetector(
                 onTap: () {
-                  final data = searchStudentController.searchStudent[index];
+                  final data = buildSuggestionList[index];
 
                   _showlert(context, data);
                 },
@@ -152,8 +152,7 @@ class SearchStuents extends SearchDelegate {
                       children: [
                         GestureDetector(
                             onTap: () {
-                              final data =
-                                  searchStudentController.searchStudent[index];
+                              final data = buildSuggestionList[index];
 
                               _showlert(context, data);
                             },
