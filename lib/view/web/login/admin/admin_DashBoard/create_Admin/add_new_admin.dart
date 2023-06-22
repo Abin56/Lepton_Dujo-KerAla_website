@@ -253,8 +253,10 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                   ),
                 ),
               )
-            :  Scaffold(
-              appBar: AppBar(backgroundColor: Colors.transparent,),
+            : Scaffold(
+                appBar: AppBar(
+                  backgroundColor: Colors.transparent,
+                ),
                 body: const Center(
                   child: Text(
                     "Sorry you are not a main Admin",
@@ -295,8 +297,11 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                   emailController.clear(),
                   phoneNumberController.clear(),
                   confirmPasswordController.clear()
-                }).then((value) => Navigator.pop(context));
+                })
+            .then((value) => Navigator.pop(context));
       });
+    } on FirebaseAuthException catch (e) {
+      showToast(msg: e.toString());
     } catch (e) {
       log('Create admin  $e');
     }

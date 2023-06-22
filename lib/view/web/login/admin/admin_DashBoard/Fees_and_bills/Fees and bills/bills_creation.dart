@@ -52,6 +52,7 @@ class BillsCreationalPage extends StatelessWidget {
                 ),
                 TextFormFieldFWidget(
                   function: checkFieldEmpty,
+                  readOnly: false,
                   // textEditingController: ,
                   labelText: 'Due date',
                 ),
@@ -136,22 +137,27 @@ class BillsHalfContainerWidget extends StatelessWidget {
 }
 
 class TextFormFieldFWidget extends StatelessWidget {
-  const TextFormFieldFWidget({
-    super.key,
-    required this.function,
-    this.textEditingController,
-    this.labelText,
-    this.hintText,
-  });
+  TextFormFieldFWidget(
+      {super.key,
+      required this.function,
+      this.textEditingController,
+      this.labelText,
+      this.hintText,
+      this.ontap,
+      this.readOnly = false});
 
   final String? Function(String? fieldContent) function;
   final TextEditingController? textEditingController;
   final String? labelText;
   final String? hintText;
+  final VoidCallback? ontap;
+  bool readOnly;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: readOnly,
+      onTap: ontap,
       maxLines: null,
       validator: function,
       controller: textEditingController,

@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -102,7 +103,8 @@ class SchoolApproveController extends GetxController {
           });
         });
       });
-    } on FirebaseException catch (e) {
+    } on FirebaseAuthException catch (e) {
+      showToast(msg: e.toString());
       isLoading.value = false;
       log('Error ${e.message.toString()}');
     }

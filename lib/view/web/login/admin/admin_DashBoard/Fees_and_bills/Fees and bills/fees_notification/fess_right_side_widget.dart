@@ -1,11 +1,11 @@
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:dujo_kerala_website/utils/utils.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/Fees_and_bills/Fees%20and%20bills/fees_notification/widgets/submit_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../../../controller/fees_bills/fees_bills_controller.dart';
-import '../../../../../../../colors/colors.dart';
 import '../../../../../../../constant/constant.dart';
 import '../bills_creation.dart';
 
@@ -33,6 +33,7 @@ class FeesNotificationRightSideWidget extends StatelessWidget {
                   feesBillsController.selectedType.value = data?["type"];
                   feesBillsController.selectDateList.value =
                       getPeriodList(data?["type"]);
+                  feesBillsController.categoryMap = data ?? {};
                   feesBillsController.selectDateList.refresh;
                 },
                 dropdownDecoratorProps: const DropDownDecoratorProps(
@@ -58,32 +59,47 @@ class FeesNotificationRightSideWidget extends StatelessWidget {
                       ),
                     )),
               sizedBoxH20,
-              const TextFormFieldFWidget(
+              TextFormFieldFWidget(
                 function: checkFieldEmpty,
+                textEditingController: feesBillsController.amountController,
                 labelText: 'Amount',
               ),
               sizedBoxH20,
-              const TextFormFieldFWidget(
+              TextFormFieldFWidget(
+                textEditingController: feesBillsController.dueDateController,
+                ontap: () async => feesBillsController.dueDateController.text =
+                    await dateTimePicker(context),
                 function: checkFieldEmpty,
                 labelText: 'Due date',
               ),
               sizedBoxH20,
               GestureDetector(
-                onTap: () {
-                  _formKey.currentState?.validate() ?? false;
-                },
-                child: const SubmitButtonWidget(
-                  text: 'Create',
-                ),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.add,
-                  color: cWhite,
-                  size: 25.w,
-                ),
-              ),
+                  onTap: () {
+                    if (_formKey.currentState?.validate() ?? false) {
+                      feesBillsController.createFeesForAllClass(
+                        feesBillsController.categoryMap["id"],
+                        feesBillsController.categoryMap["categoryName"],
+                        feesBillsController.amountController.text,
+                        feesBillsController.dueDateController.text,
+                        feesBillsController.categoryMap["type"],
+                      );
+                    }
+                  },
+                  child: Obx(
+                    () => feesBillsController.categoryCreateloading.value
+                        ? circularProgressIndicator
+                        : const SubmitButtonWidget(
+                            text: 'Create',
+                          ),
+                  )),
+              // IconButton(
+              //   onPressed: () {},
+              //   icon: Icon(
+              //     Icons.add,
+              //     color: cWhite,
+              //     size: 25.w,
+              //   ),
+              // ),
             ],
           ),
         ),
@@ -101,7 +117,7 @@ class FeesNotificationRightSideWidget extends StatelessWidget {
     } else if (categoryName == feesBillsController.selectionList[3]) {
       return ["Annually"];
     } else {
-      return ["hello allll"];
+      return [];
     }
   }
 }

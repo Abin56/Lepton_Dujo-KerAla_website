@@ -8,12 +8,18 @@ class FeesModel {
   String categoryName;
   String amount;
   String dueDate;
+  String classId;
+  String className;
+  String type;
   List<StudentFeesModel> studentList;
   FeesModel({
     required this.categoryId,
     required this.categoryName,
     required this.amount,
     required this.dueDate,
+    required this.classId,
+    required this.className,
+    required this.type,
     required this.studentList,
   });
 
@@ -22,6 +28,9 @@ class FeesModel {
     String? categoryName,
     String? amount,
     String? dueDate,
+    String? classId,
+    String? className,
+    String? type,
     List<StudentFeesModel>? studentList,
   }) {
     return FeesModel(
@@ -29,6 +38,9 @@ class FeesModel {
       categoryName: categoryName ?? this.categoryName,
       amount: amount ?? this.amount,
       dueDate: dueDate ?? this.dueDate,
+      classId: classId ?? this.classId,
+      className: className ?? this.className,
+      type: type ?? this.type,
       studentList: studentList ?? this.studentList,
     );
   }
@@ -39,6 +51,9 @@ class FeesModel {
       'categoryName': categoryName,
       'amount': amount,
       'dueDate': dueDate,
+      'classId': classId,
+      'className': className,
+      'type': type,
       'studentList': studentList.map((x) => x.toMap()).toList(),
     };
   }
@@ -49,6 +64,9 @@ class FeesModel {
       categoryName: map['categoryName'] as String,
       amount: map['amount'] as String,
       dueDate: map['dueDate'] as String,
+      classId: map['classId'] as String,
+      className: map['className'] as String,
+      type: map['type'] as String,
       studentList: List<StudentFeesModel>.from(
         (map['studentList'] as List<int>).map<StudentFeesModel>(
           (x) => StudentFeesModel.fromMap(x as Map<String, dynamic>),
@@ -64,7 +82,7 @@ class FeesModel {
 
   @override
   String toString() {
-    return 'FeesModel(categoryId: $categoryId, categoryName: $categoryName, amount: $amount, dueDate: $dueDate, studentList: $studentList)';
+    return 'FeesModel(categoryId: $categoryId, categoryName: $categoryName, amount: $amount, dueDate: $dueDate, classId: $classId, className: $className, type: $type, studentList: $studentList)';
   }
 
   @override
@@ -75,6 +93,9 @@ class FeesModel {
         other.categoryName == categoryName &&
         other.amount == amount &&
         other.dueDate == dueDate &&
+        other.classId == classId &&
+        other.className == className &&
+        other.type == type &&
         listEquals(other.studentList, studentList);
   }
 
@@ -84,6 +105,9 @@ class FeesModel {
         categoryName.hashCode ^
         amount.hashCode ^
         dueDate.hashCode ^
+        classId.hashCode ^
+        className.hashCode ^
+        type.hashCode ^
         studentList.hashCode;
   }
 }
