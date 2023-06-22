@@ -150,7 +150,7 @@ class AddParent extends StatelessWidget {
                                       }
                                     }
                                   },
-                                  child: const Text("Upload Data From Excel"),
+                                  child: const Text("Upload data from excel"),
                                 ),
                               ),
                               sizedBoxH10,

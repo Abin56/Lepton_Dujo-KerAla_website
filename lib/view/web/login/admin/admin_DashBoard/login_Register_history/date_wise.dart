@@ -176,7 +176,7 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
                                           },
                                         );
                                       },
-                                      icon: const Icon(Icons.more_vert_rounded))
+                                      icon: const Icon(Icons.delete_rounded,color: cred))
                                 ],
                               ),
                             ),

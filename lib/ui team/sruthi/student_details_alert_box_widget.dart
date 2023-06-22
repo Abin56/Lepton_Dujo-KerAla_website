@@ -181,7 +181,7 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
                           ),
                           sizedBoxH20,
                           Student_Info_Elevated_button_Widget(
-                            text: 'Shift Class',
+                            text: 'promote Class',
                             onPressed: () {
                               Navigator.push(context, MaterialPageRoute(builder: (context) => const UnderMaintanceScreen(),));
                             },

@@ -1,27 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../../../../../controller/bus_route_controller/bus_route_controller.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
 import '../../../../../fonts/fonts.dart';
 
-class CreateBusRoute extends StatelessWidget {
-  CreateBusRoute({super.key});
-  final TextEditingController routeController = TextEditingController();
-  final TextEditingController busnumberController = TextEditingController();
-  final TextEditingController driverphoneController = TextEditingController();
-  final TextEditingController assistancephoneController =
-      TextEditingController();
-  final TextEditingController staffinchargeController = TextEditingController();
-  final BusRouteController busRouteController = Get.put(BusRouteController());
+class CreateBusRoute extends StatefulWidget {
+  const CreateBusRoute({super.key});
+  //  TextEditingController routeController = TextEditingController();
+  //   TextEditingController busnumberController = TextEditingController();
+  //    TextEditingController driverphoneController = TextEditingController();
+  //     TextEditingController assistancephoneController = TextEditingController();
+  //      TextEditingController staffinchargeController = TextEditingController();
 
+  @override
+  State<CreateBusRoute> createState() => _CreateBusRouteState();
+}
+
+final formKey = GlobalKey<FormState>();
+
+class _CreateBusRouteState extends State<CreateBusRoute> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
+      //backgroundColor: adminePrimayColor,
+
       body: ListView(children: [
         Row(
           children: [
@@ -47,7 +52,7 @@ class CreateBusRoute extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          'Hi Admin ',
+                          'Hi! Admin ',
                           style: ralewayStyle.copyWith(
                             fontSize: 48.0,
                             color: AppColors.whiteColor,
@@ -72,6 +77,11 @@ class CreateBusRoute extends StatelessWidget {
                           child: LottieBuilder.network(
                               'https://assets3.lottiefiles.com/private_files/lf30_aav3tdzz.json'),
                         )
+                        //       SizedBox(
+                        // height: 400,
+                        // width: 600,
+                        // child: LottieBuilder.asset(
+                        //     "assets/images/")),
                       ],
                     ),
                   ),
@@ -91,34 +101,52 @@ class CreateBusRoute extends StatelessWidget {
                             left: size.width / 10, right: size.width / 10),
                         child: Column(children: [
                           BusRouteTextFormWidget(
-                            textEditingController: routeController,
+                            //  textEditingController:routeController,
                             function: checkFieldEmpty,
-                            labelText: 'Route Number',
+                            labelText: 'Route number',
                             icon: Icons.route_outlined,
                           ),
                           BusRouteTextFormWidget(
-                            textEditingController: busnumberController,
+                            //textEditingController:busnumberController ,
                             function: checkFieldEmpty,
-                            labelText: 'Bus Number',
+                            labelText: 'Bus number',
                             icon: Icons.bus_alert,
                           ),
                           BusRouteTextFormWidget(
-                            textEditingController: driverphoneController,
+                            // textEditingController:staffinchargeController ,
+                            function: checkFieldEmpty,
+                            labelText: 'Driver name',
+                            icon: Icons.person_2,
+                          ),
+                          BusRouteTextFormWidget(
+                            // textEditingController:driverphoneController,
                             function: checkFieldPhoneNumberIsValid,
-                            labelText: 'Driver Mobile Number',
+                            labelText: 'Driver mobile number',
                             icon: Icons.phone_android_sharp,
                           ),
                           BusRouteTextFormWidget(
-                            textEditingController: assistancephoneController,
+                            // textEditingController:staffinchargeController ,
+                            function: checkFieldEmpty,
+                            labelText: 'Assistance name',
+                            icon: Icons.person_2,
+                          ),
+                          BusRouteTextFormWidget(
+                            // textEditingController: assistancephoneController,
                             function: checkFieldPhoneNumberIsValid,
-                            labelText: 'Assistance Mobile Number',
+                            labelText: 'Assistance mobile number',
                             icon: Icons.phone_android,
                           ),
                           BusRouteTextFormWidget(
-                            textEditingController: staffinchargeController,
+                            // textEditingController:staffinchargeController ,
                             function: checkFieldEmpty,
-                            labelText: 'Staff inCharge',
+                            labelText: 'Staff incharge',
                             icon: Icons.person_2,
+                          ),
+                           BusRouteTextFormWidget(
+                            // textEditingController: assistancephoneController,
+                            function: checkFieldPhoneNumberIsValid,
+                            labelText: 'Staff incharge number',
+                            icon: Icons.phone_android,
                           ),
                           SizedBox(
                             height: 30.h,
@@ -139,31 +167,15 @@ class CreateBusRoute extends StatelessWidget {
                                   textStyle: const TextStyle(fontSize: 17),
                                 ),
                                 onPressed: () async {
-                                  if (formKey.currentState?.validate() ??
-                                      false) {
-                                    await busRouteController
-                                        .createBusRoute(
-                                            routeNumber: routeController.text,
-                                            busNumber: busnumberController.text,
-                                            driveMobNum:
-                                                driverphoneController.text,
-                                            assistantMobNum:
-                                                assistancephoneController.text,
-                                            staffInCharge:
-                                                staffinchargeController.text)
-                                        .then((value) {
-                                      routeController.clear();
-                                      busnumberController.clear();
-                                      driverphoneController.clear();
-                                      assistancephoneController.clear();
-                                      staffinchargeController.clear();
-                                    });
+                                  bool? result =
+                                      formKey.currentState?.validate();
+                                  if (result == true) {
+                                  
+                                    showToast(
+                                        msg: 'Bus route successfully created ');
                                   }
                                 },
-                                child: Obx(() =>
-                                    busRouteController.isLoading.value
-                                        ? circularProgressIndicator
-                                        : const Text('Create')),
+                                child: const Text('Create'),
                               ),
                             ),
                           ),
@@ -179,20 +191,18 @@ class CreateBusRoute extends StatelessWidget {
   }
 }
 
-final formKey = GlobalKey<FormState>();
-
 class BusRouteTextFormWidget extends StatelessWidget {
-  const BusRouteTextFormWidget({
+  BusRouteTextFormWidget({
     super.key,
     required this.labelText,
-    required this.textEditingController,
+    // required this.textEditingController,
     required this.function,
     required this.icon,
   });
-  final TextEditingController textEditingController;
+  // final TextEditingController textEditingController;
   final String labelText;
   final String? Function(String? fieldContent) function;
-  final IconData icon;
+  IconData icon;
 
   @override
   Widget build(BuildContext context) {
@@ -200,7 +210,7 @@ class BusRouteTextFormWidget extends StatelessWidget {
       padding: const EdgeInsets.all(15),
       child: TextFormField(
         validator: function,
-        controller: textEditingController,
+        // controller: textEditingController,
         decoration: InputDecoration(
           fillColor: cWhite,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
@@ -213,3 +223,34 @@ class BusRouteTextFormWidget extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

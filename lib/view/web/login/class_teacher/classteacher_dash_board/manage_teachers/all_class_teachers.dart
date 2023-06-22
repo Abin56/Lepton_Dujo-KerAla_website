@@ -75,7 +75,7 @@ class AllClassesListViewForTeacher extends StatelessWidget {
                         width: screenSize.width * 0.25,
                         child: Center(
                           child: GoogleMonstserratWidgets(
-                            text: 'Class Teacher Name',
+                            text: 'Class teacher name',
                             fontsize: 15.w,
                             color: cWhite,
                             fontWeight: FontWeight.w500,
