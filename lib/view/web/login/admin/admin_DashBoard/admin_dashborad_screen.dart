@@ -833,7 +833,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                       message: "Logout",
                                       child: Row(
                                         children: [
-                                            Icon(
+                                            const Icon(
                                               Icons.logout_outlined,
                                             ),
                                         
@@ -968,7 +968,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                         false, // user must tap button!
                                     builder: (BuildContext context) {
                                       return AlertDialog(
-                                        title: const Text('Add Student'),
+                                        title: const Text('Add student'),
                                         content: SingleChildScrollView(
                                           child: Form(
                                             key: _formKey,
@@ -981,7 +981,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                       studentNameController,
                                                   decoration: const InputDecoration(
                                                       hintText:
-                                                          'Enter StudentName'),
+                                                          'Enter student name'),
                                                 ),
                                                 TextFormField(
                                                   validator: checkFieldPhoneNumberIsValid,
@@ -989,7 +989,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                       phoneNumberController,
                                                   decoration: const InputDecoration(
                                                       hintText:
-                                                          'Enter PhoneNumber'),
+                                                          'Enter phone number'),
                                                 ),
                                                 TextFormField(
                                                   validator: checkFieldEmpty,
@@ -997,7 +997,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                       addmissionController,
                                                   decoration: const InputDecoration(
                                                       hintText:
-                                                          'Enter Admission Number'),
+                                                          'Enter admission number'),
                                                 ),
                                               ],
                                             ),

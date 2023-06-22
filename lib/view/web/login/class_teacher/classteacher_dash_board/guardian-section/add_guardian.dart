@@ -58,7 +58,7 @@ class AddGuardian extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'Hi ! Admin ',
+                        'Hi ! Class teacher ',
                         style: ralewayStyle.copyWith(
                           fontSize: 42.0,
                           color: Colors.white,
@@ -106,13 +106,13 @@ class AddGuardian extends StatelessWidget {
                       sizedBoxH30,
                       AddGuardianWidget(
                         function: checkFieldEmpty,
-                        labelText: 'Guardian Name',
+                        labelText: 'Guardian name',
                         textEditingController: guardianNameController,
                       ),
                       sizedBoxH30,
                       AddGuardianWidget(
                         function: checkFieldPhoneNumberIsValid,
-                        labelText: 'Guardian Phone Number',
+                        labelText: 'Guardian phone number',
                         textEditingController: guardianPhoneNoController,
                       ),
                       sizedBoxH30,
@@ -175,7 +175,7 @@ class AddGuardian extends StatelessWidget {
                                     }
                                   }
                                 },
-                                child: const Text("Upload From Excel"),
+                                child: const Text("Upload data from excel"),
                               ),
                             ),
                           ),

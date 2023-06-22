@@ -74,6 +74,7 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
+                                  
                                   Text('Create New Admin',
                                       style: GoogleFont.headTextStyleBold),
                                   sizedBoxH20,

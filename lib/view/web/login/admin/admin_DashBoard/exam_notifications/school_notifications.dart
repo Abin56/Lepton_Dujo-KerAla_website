@@ -84,7 +84,7 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                         height: 100.h,
                         width: 500.w,
                         child: ListTile(
-                          leading: const Icon(Icons.add),
+                          leading: const Icon(Icons.add,color: cWhite,),
                           onTap: () {
                             showDialog(
                                 barrierDismissible: false,
@@ -143,6 +143,7 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                                 height: 20.h,
                                               ),
                                               TextFormField(
+                                                validator: checkFieldEmpty,
                                                 controller:
                                                     _applyFromDateController,
                                                 readOnly: true,
@@ -156,6 +157,7 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                               ),
                                               sizedBoxH10,
                                               TextFormField(
+                                                validator: checkFieldEmpty,
                                                 controller:
                                                     _applyTODateController,
                                                 readOnly: true,
@@ -188,7 +190,9 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                           child: MaterialButton(
                                             color: Colors.green,
                                             onPressed: () async {
-                                              await widget.addExamController
+                                              if(formKey.currentState!.validate()){
+
+                                                  await widget.addExamController
                                                   .addExamtoSever(
                                                       context,
                                                       '',
@@ -202,6 +206,12 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                                           .trim(),
                                                       DateTime.now()
                                                           .toString());
+
+                                                          clearnotFunction();
+                                              }
+
+                                              
+                                            
                                             },
                                             child: Text(
                                               'Add',
@@ -292,7 +302,7 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                                 ),
                                                 actions: <Widget>[
                                                   TextButton(
-                                                    child: const Text('Ok'),
+                                                    child: const Text('Cancel'),
                                                     onPressed: () async {
                                                       Navigator.pop(context);
                                                     },
@@ -407,6 +417,13 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                                 ),
                                               ),
                                               actions: <Widget>[
+
+                                                 TextButton(
+                                                    child: const Text('Cancel'),
+                                                    onPressed: () async {
+                                                      Navigator.pop(context);
+                                                    },
+                                                  ),
                                                 TextButton(
                                                   child: const Text('Ok'),
                                                   onPressed: () async {
@@ -465,6 +482,12 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
         )
       ],
     ));
+  }
+
+  void clearnotFunction(){
+    _applyFromDateController.clear();
+    _applyTODateController.clear();
+    name.clear();
   }
 
   _selectDate(BuildContext context) async {
@@ -575,7 +598,7 @@ class HeadingContainer extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.only(top: 18.h, bottom: 10.h),
               child: Text(
-                "State Level Exams",
+                "Public Level Exams",
                 style: TextStyle(fontSize: 25.h),
               ),
             ),

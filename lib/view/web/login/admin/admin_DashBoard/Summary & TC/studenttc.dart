@@ -108,7 +108,7 @@ class _SchoolTcState extends State<SchoolTc> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Admission Number :",
+                        "Admission number :",
                         style: GoogleFonts.openSans(
                           fontSize: 14,
                         ),

@@ -247,7 +247,7 @@ class ShiftClassStudents extends StatelessWidget {
                                 Padding(
                                   padding: EdgeInsets.all(8.0.w),
                                   child: GoogleMonstserratWidgets(
-                                    text: 'Admission Number',
+                                    text: 'Admission number',
                                     fontsize: 14.w,
                                     fontWeight: FontWeight.w600,
                                   ),

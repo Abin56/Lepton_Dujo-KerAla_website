@@ -53,7 +53,7 @@ class AddStudentFromClassTeacher extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'Hi! Admin ',
+                        'Hi! Class teacher ',
                         style: ralewayStyle.copyWith(
                           fontSize: 48.0,
                           color: AppColors.whiteColor,
@@ -115,7 +115,7 @@ class AddStudentFromClassTeacher extends StatelessWidget {
                                 .parentPhNoController,
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
-                              labelText: 'Parent Phone Number',
+                              labelText: 'Parent phone number',
                             ),
                           ),
                         ),
@@ -127,7 +127,7 @@ class AddStudentFromClassTeacher extends StatelessWidget {
                                 .addmissionNumberController,
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
-                              labelText: 'Admission Number',
+                              labelText: 'Admission number',
                             ),
                           ),
                         ),
@@ -190,7 +190,7 @@ class AddStudentFromClassTeacher extends StatelessWidget {
                                   onPressed: () async {
                                     await teacherExcelFunction();
                                   },
-                                  child: const Text("Create from Excel"),
+                                  child: const Text("Upload data from excel"),
                                 ),
                               ),
                             ),
