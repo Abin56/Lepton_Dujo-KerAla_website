@@ -90,6 +90,7 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                             ),
                             sizedBoxH20,
                             TextFormField(
+                              controller: adminNoticeController.venueController,
                               validator: checkFieldEmpty,
                               decoration: InputDecoration(
                                   border: const OutlineInputBorder(),
