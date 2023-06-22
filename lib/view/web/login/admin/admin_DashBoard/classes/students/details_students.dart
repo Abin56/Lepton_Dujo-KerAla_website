@@ -69,7 +69,7 @@ class StudentsDetails extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              "S T U D E N T S Info",
+                              "STUDENTS INFO",
                               style: GoogleFonts.montserrat(
                                   color: const Color.fromARGB(255, 75, 75, 75),
                                   fontSize: 30,
@@ -200,7 +200,7 @@ class StudentsDetails extends StatelessWidget {
                                           child: const Text('back')),
                                     ),
                                   ],
-                                  title: const Text('Edit Student Name'),
+                                  title: const Text('Edit student name'),
                                   content: SingleChildScrollView(
                                     child: ListBody(
                                       children: <Widget>[

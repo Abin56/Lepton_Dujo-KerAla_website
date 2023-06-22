@@ -45,10 +45,12 @@ class EditGeneralInstructions extends StatelessWidget {
                    mainAxisAlignment: MainAxisAlignment.center,
                    crossAxisAlignment: CrossAxisAlignment.center,
                    children: [
+                    sizedBoxH40,
                      Text(
-                       'Hi! Admin ',
+                      
+                       'Hi ! Admin ',
                        style: ralewayStyle.copyWith(
-                         fontSize: 48.0,
+                         fontSize: 45.0,
                          color: AppColors.whiteColor,
                          fontWeight: FontWeight.w800,
                        ),
@@ -68,7 +70,7 @@ class EditGeneralInstructions extends StatelessWidget {
                        height: screenSize.width / 5,
                        width: screenSize.width / 2,
                        child: LottieBuilder.network(
-                           'https://assets4.lottiefiles.com/packages/lf20_HYpftP1320.json'),
+                           'https://assets2.lottiefiles.com/packages/lf20_kP6sKi50mK.json'),
                      )
                    ],
                  ),

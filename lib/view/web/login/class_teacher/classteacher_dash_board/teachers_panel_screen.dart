@@ -93,7 +93,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
 
   List<String> viewListNames = [
     'Events', //1
-    'Notice', //2
+    'Notices', //2
     'Students List', //3
     'My Students', //4
   ];
@@ -242,7 +242,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                     context: context,
                                     builder: (BuildContext context) {
                                       return AlertDialog(
-                                        title: const Text('Add BatchYear'),
+                                        title: const Text('Add Batch Year'),
                                         content: SingleChildScrollView(
                                           child: ListBody(
                                             children: <Widget>[
@@ -618,7 +618,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                         // ),
                                         // kwidth20,
                                         Text(
-                                            'Batch Year ${getFireBaseData.bYear}',
+                                            'Batch Year   ${getFireBaseData.bYear}',
                                             style: TextStyle(fontSize: 15.w)),
 
                                         GestureDetector(
@@ -711,7 +711,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                             });
                                                           },
                                                           child: Text(
-                                                            'Set BatchYear',
+                                                            'Set Batch Year',
                                                             style: GoogleFonts
                                                                 .poppins(
                                                                     fontSize:
@@ -771,7 +771,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                                       context) {
                                                                 return AlertDialog(
                                                                   title: Text(
-                                                                      'Add BatchYear',
+                                                                      'Add Batch Year',
                                                                       style: TextStyle(
                                                                           fontSize:
                                                                               15.w)),

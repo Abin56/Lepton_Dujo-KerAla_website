@@ -55,7 +55,7 @@ class LeptonAdminLoginScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Hi ! \n Admin',
+                                    'Hi !  Admin',
                                     style: ralewayStyle.copyWith(
                                       fontSize: 45.0.w,
                                       color: AppColors.whiteColor,

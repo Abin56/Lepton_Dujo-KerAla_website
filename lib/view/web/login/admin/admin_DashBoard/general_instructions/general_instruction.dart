@@ -30,7 +30,7 @@ class GeneralInstruction extends StatelessWidget {
               backgroundColor: adminePrimayColor,
               title: const Center(
                 child: Text(
-                  'View Instruction',
+                  'View Instructions',
                   style: TextStyle(color: cWhite),
                 ),
               )),
@@ -87,7 +87,7 @@ class GeneralInstruction extends StatelessWidget {
               sizedBoxH40,
               Center(
                   child: Text(
-                "General Instruction",
+                "General Instructions",
                 style: GoogleFonts.acme(
                     fontSize: 20, decoration: TextDecoration.underline),
               )),

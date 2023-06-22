@@ -49,9 +49,9 @@ class _FoodBeveragesState extends State<FoodBeverages> {
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        'Hi! Admin ',
+                                        'Hi ! Admin ',
                                         style: ralewayStyle.copyWith(
-                                          fontSize: 48.0,
+                                          fontSize: 45.0,
                                           color: AppColors.whiteColor,
                                           fontWeight: FontWeight.w800,
                                         ),

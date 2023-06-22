@@ -42,9 +42,9 @@ class _BusRouteState extends State<BusRoute> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'Hi! Admin ',
+                        'Hi ! Admin ',
                         style: ralewayStyle.copyWith(
-                          fontSize: 48.0,
+                          fontSize: 45.0,
                           color: AppColors.whiteColor,
                           fontWeight: FontWeight.w800,
                         ),
@@ -115,7 +115,7 @@ class _BusRouteState extends State<BusRoute> {
                               height: size.width * 1 / 15,
                               width: size.width * 1 / 3,
                               child: CustomContainer(
-                                text: 'Update  Bus Route',
+                                text: 'Update bus route',
                                 onTap: () {},
                               )),
                         )),
@@ -132,7 +132,7 @@ class _BusRouteState extends State<BusRoute> {
                               height: size.width * 1 / 15,
                               width: size.width * 1 / 3,
                               child: CustomContainer(
-                                text: 'Remove  Bus Route',
+                                text: 'Remove  bus route',
                                 onTap: () {},
                               )),
                         )),

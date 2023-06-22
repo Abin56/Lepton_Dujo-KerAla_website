@@ -81,15 +81,15 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                               Text(
                                 'Hi ! Admin',
                                 style: ralewayStyle.copyWith(
-                                  fontSize: 48.0,
+                                  fontSize: 45.0,
                                   color: AppColors.whiteColor,
                                   fontWeight: FontWeight.w800,
                                 ),
                               ),
                               Text(
-                                'Create New\n Events',
+                                'Create New Events',
                                 style: ralewayStyle.copyWith(
-                                  fontSize: 29.0,
+                                  fontSize: 26.0,
                                   color: AppColors.whiteColor,
                                   fontWeight: FontWeight.w800,
                                 ),

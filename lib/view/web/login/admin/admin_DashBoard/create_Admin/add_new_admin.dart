@@ -4,9 +4,11 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/fonts/fonts.dart';
+import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -74,9 +76,19 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
+
+                                  Text(
+                        'Hi ! Class teacher ',
+                        style: ralewayStyle.copyWith(
+                          fontSize: 42.0.w,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      sizedBoxH20,
                                   
-                                  Text('Create New Admin',
-                                      style: GoogleFont.headTextStyleBold),
+                                  GoogleMonstserratWidgets(text: 'Create new admin',fontsize: 26.0.w,
+                                      ),
                                   sizedBoxH20,
                                   SizedBox(
                                     height: 300,
@@ -115,7 +127,7 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                                     controller: adminUserNameController,
                                     decoration: const InputDecoration(
                                       border: OutlineInputBorder(),
-                                      labelText: 'Admin UserName',
+                                      labelText: 'Admin username',
                                     ),
                                   ),
                                 ),
@@ -125,7 +137,7 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                                   child: TextFormField(
                                     validator: (value) {
                                       if (value!.isEmpty) {
-                                        return 'Please Enter a valid Employee ID';
+                                        return 'Please enter a valid employee ID';
                                       } else {
                                         return null;
                                       }
@@ -164,7 +176,7 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                                       if (passwordController.text.trim() !=
                                           confirmPasswordController.text
                                               .trim()) {
-                                        return 'Password are Incorrect!!';
+                                        return 'Password are incorrect!!';
                                       } else {
                                         return null;
                                       }
@@ -199,7 +211,7 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                                     controller: phoneNumberController,
                                     decoration: const InputDecoration(
                                       border: OutlineInputBorder(),
-                                      labelText: 'Phone Number',
+                                      labelText: 'Phone number',
                                     ),
                                   ),
                                 ),

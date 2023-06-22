@@ -342,7 +342,7 @@ class DataTableWidget extends StatelessWidget {
       DataRow(
         cells: <DataCell>[
           const DataCell(
-            ClassTeacherNoticeCard(title: 'Signed By'),
+            ClassTeacherNoticeCard(title: 'Signed by'),
           ),
           DataCell(
             ClassTeacherNoticeCard(title: signedBy),

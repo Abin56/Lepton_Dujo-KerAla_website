@@ -52,22 +52,25 @@ class _EventsUpdatesState extends State<EventsUpdates> {
                                 Text(
                                   'Hi ! Admin ',
                                   style: ralewayStyle.copyWith(
-                                    fontSize: 48.0,
+                                    fontSize: 45.0,
                                     color: AppColors.whiteColor,
                                     fontWeight: FontWeight.w800,
                                   ),
                                 ),
+                                sizedBoxH30,
                                 Text(
-                                  ' Create Events',
+                                  'Create Events',
                                   style: ralewayStyle.copyWith(
-                                    fontSize: 28.0,
+                                    fontSize: 30.0,
                                     color: AppColors.whiteColor,
                                     fontWeight: FontWeight.w800,
                                   ),
                                 ),
+                                sizedBoxH30,
+
                             
                                 SizedBox(
-                                  height: 300,
+                                  height: 300.h,
                                   width:screenSize.width/2,
                                   child: LottieBuilder.network(
                                       'https://assets1.lottiefiles.com/packages/lf20_98vgucqb.json'),

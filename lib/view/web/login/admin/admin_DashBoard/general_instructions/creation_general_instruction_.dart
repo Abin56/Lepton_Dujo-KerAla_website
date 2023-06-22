@@ -35,10 +35,11 @@ class CreationGeneralInstruction extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      sizedBoxH40,
                       Text(
-                        'Hi! Admin ',
+                        'Hi ! Admin ',
                         style: ralewayStyle.copyWith(
-                          fontSize: 48.0,
+                          fontSize: 45.0,
                           color: AppColors.whiteColor,
                           fontWeight: FontWeight.w800,
                         ),
@@ -47,18 +48,18 @@ class CreationGeneralInstruction extends StatelessWidget {
                         height: size.width / 20,
                       ),
                       Text(
-                        'GENERAL INSTRUCTION',
+                        'General Instructions',
                         style: ralewayStyle.copyWith(
-                          fontSize: 20.0,
+                          fontSize: 30.0,
                           color: AppColors.whiteColor,
                           fontWeight: FontWeight.w800,
                         ),
                       ),
                       SizedBox(
-                        height: size.width / 5,
+                        height: size.height / 2,
                         width: size.width / 2,
                         child: LottieBuilder.network(
-                            'https://assets7.lottiefiles.com/packages/lf20_OP8F21PTtz.json'),
+                            'https://assets2.lottiefiles.com/packages/lf20_wd1udlcz.json'),
                       )
                     ],
                   ),
@@ -90,7 +91,7 @@ class CreationGeneralInstruction extends StatelessWidget {
                      height: size.width * 1 / 15,
                               width: size.width * 1 / 3,
                     child: GenInstruHomeButtonWidget(
-                        title: 'View Instruction',
+                        title: 'View Instructions',
                         function: () {
                           Navigator.push(
                             context,
@@ -108,7 +109,7 @@ class CreationGeneralInstruction extends StatelessWidget {
                      height: size.width * 1 / 15,
                               width: size.width * 1 / 3,
                     child: GenInstruHomeButtonWidget(
-                        title: 'Edit Instruction',
+                        title: 'Edit Instructions',
                         function: () {
                           Navigator.push(
                             context,

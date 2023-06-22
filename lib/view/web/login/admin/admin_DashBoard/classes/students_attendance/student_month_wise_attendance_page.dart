@@ -146,7 +146,7 @@ class MonthWiseAttendanceWidget extends StatelessWidget {
                 return DataTable(
                   showCheckboxColumn: false,
                   columns: const [
-                    DataColumn(label: Text('Student Name')),
+                    DataColumn(label: Text('Student name')),
                     DataColumn(label: Text('Present Hours')),
                     DataColumn(label: Text('Absent Hours')),
                     DataColumn(label: Text('Total Hours(Present+Absent)')),

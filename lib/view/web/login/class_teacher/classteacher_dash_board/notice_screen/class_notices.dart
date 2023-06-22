@@ -326,7 +326,7 @@ class DataTableWidget extends StatelessWidget {
         cells: <DataCell>[
           const DataCell(
             ClassTeacherNoticeCard(
-              title: 'Signed By',
+              title: 'Signed by',
             ),
           ),
           DataCell(
