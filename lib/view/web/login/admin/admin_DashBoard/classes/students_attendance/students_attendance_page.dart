@@ -90,7 +90,7 @@ class DateWiseAttendanceWidget extends StatelessWidget {
                             return DataTable(
                               showCheckboxColumn: false,
                               columns: const [
-                                DataColumn(label: Text('Student Name')),
+                                DataColumn(label: Text('Student name')),
                                 DataColumn(label: Text('Present/Absent')),
                                 DataColumn(label: Text('Edit')),
                               ],
@@ -124,9 +124,9 @@ class DateWiseAttendanceWidget extends StatelessWidget {
                                                     const Text('Confirmation'),
                                                 content: student.present
                                                     ? const Text(
-                                                        'Are you sure you want to change Absent?')
+                                                        'Are you sure you want to days absent?')
                                                     : const Text(
-                                                        'Are you sure you want to change Present?'),
+                                                        'Are you sure you want to days aresent?'),
                                                 actions: [
                                                   TextButton(
                                                     child: const Text('Cancel'),

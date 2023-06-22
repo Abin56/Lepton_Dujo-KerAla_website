@@ -119,7 +119,7 @@ class AlumniAssociation extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Members In Group',
+                          Text('Members in group',
                               style: GoogleFonts.oswald(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -199,7 +199,7 @@ class AlumniAssociationTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return FittedBox(
       child: Text(
-        "MEMBERS IN ALUMNI ASSOCIATION",
+        "Members in alumni assocation",
         style: GoogleFonts.alumniSans(
           fontSize: 18,
           fontWeight: FontWeight.bold,

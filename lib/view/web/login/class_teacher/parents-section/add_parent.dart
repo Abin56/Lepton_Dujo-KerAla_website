@@ -1,5 +1,6 @@
 // ignore_for_file: sort_child_properties_last
 import 'package:dujo_kerala_website/controller/_addParent&Guardian/parent_Controller.dart';
+import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:excel/excel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -52,8 +53,18 @@ class AddParent extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text('ADD New Parent',
-                            style: GoogleFont.headTextStyleBold),
+                        Text(
+                        'Hi ! Class teacher ',
+                        style: ralewayStyle.copyWith(
+                          fontSize: 42.0.w,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      sizedBoxH20,
+                        GoogleMonstserratWidgets(
+                          text: 'Add New Parent',fontsize: 26.0.w,color: cWhite,
+                           ),
                         sizedBoxH20,
                         SizedBox(
                           height: 300,
@@ -87,13 +98,13 @@ class AddParent extends StatelessWidget {
                           sizedBoxH30,
                           AddParentWidget(
                               function: checkFieldPhoneNumberIsValid,
-                              labelText: 'Parent Phone Number',
+                              labelText: 'Parent phone number',
                               textEditingController:
                                   parentPhoneNumberController),
                           sizedBoxH30,
                           AddParentWidget(
                               function: checkFieldEmpty,
-                              labelText: 'Parent Name',
+                              labelText: 'Parent name',
                               textEditingController: parentNameController),
                           sizedBoxH30,
                           SizedBox(

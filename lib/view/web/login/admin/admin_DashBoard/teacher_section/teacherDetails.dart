@@ -276,7 +276,7 @@ class TeacherDeatils extends StatelessWidget {
                             controller: newPhoneNumberController,
                             decoration: InputDecoration(
                               border: const OutlineInputBorder(),
-                              labelText: 'Phone Number : $phoneNumber',
+                              labelText: 'Phone number : $phoneNumber',
                             ),
                           ),
                         ),

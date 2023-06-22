@@ -45,9 +45,18 @@ class AddTeacherSectionScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          'Hi ! Admin \n   Create Teacher  Profile',
+                          'Hi ! Admin',
                           style: ralewayStyle.copyWith(
-                            fontSize: 40.0,
+                            fontSize: 45.0.w,
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        sizedBoxH30,
+                        Text(
+                          'Create Teacher Profile',
+                          style: ralewayStyle.copyWith(
+                            fontSize: 26.0.w,
                             color: const Color.fromARGB(255, 255, 255, 255),
                             fontWeight: FontWeight.w800,
                           ),
@@ -78,7 +87,7 @@ class AddTeacherSectionScreen extends StatelessWidget {
                         validator: checkFieldEmpty,
                       ),
                       CreateTeacherTextInputFieldWidget(
-                        labelText: "Phone Number",
+                        labelText: "Phone number",
                         textEditingController:
                             teacherController.phoneNumberController,
                         validator: checkFieldPhoneNumberIsValid,
@@ -129,7 +138,7 @@ class AddTeacherSectionScreen extends StatelessWidget {
                                                   .createNewTeacher(teacher);
                                             }
                                           },
-                                          child: const Text('Add Teacher'),
+                                          child: const Text('Add teacher'),
                                         ),
                                 ),
                               ),
@@ -163,7 +172,7 @@ class AddTeacherSectionScreen extends StatelessWidget {
                                               await teacherExcelFunction();
                                             },
                                             child:
-                                                Text('Add Teacher From Excel'),
+                                                Text('Upload data from excel'),
                                           ),
                                         ),
                                         sizedBoxH10,

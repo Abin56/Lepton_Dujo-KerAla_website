@@ -273,7 +273,7 @@ class _EventsEditREmoveState extends State<EventsEditREmove> {
                                               decoration: InputDecoration(
                                                   border: const OutlineInputBorder(),
                                                   labelText:
-                                                      'Signed By: ${snapshot.data!.docs[index]['signedBy']}'),
+                                                      'Signed by: ${snapshot.data!.docs[index]['signedBy']}'),
                                             ),
                                           ],
                                         ),

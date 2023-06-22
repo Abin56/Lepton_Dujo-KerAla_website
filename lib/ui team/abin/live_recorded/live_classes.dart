@@ -46,16 +46,16 @@ class _LiveClassesState extends State<LiveClasses> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  'Hi! Admin ',
+                                  'Hi ! Admin ',
                                   style: ralewayStyle.copyWith(
-                                    fontSize: 48.0,
+                                    fontSize: 45.0,
                                     color: AppColors.whiteColor,
                                     fontWeight: FontWeight.w800,
                                   ),
                                 ),
                                 SizedBox(height: size.width/20,),
                                  Text(
-                                  'Welcome',
+                                  'Live Classes',
                                   style: GoogleFonts.aclonica(
                                     fontSize: 25.0,
                                     color: AppColors.whiteColor,

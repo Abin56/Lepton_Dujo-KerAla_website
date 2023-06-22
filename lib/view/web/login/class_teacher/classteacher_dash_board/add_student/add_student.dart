@@ -52,10 +52,12 @@ class AddStudentFromClassTeacher extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      sizedBoxH40,
+                     
                       Text(
-                        'Hi! Class teacher ',
+                        'Hi ! Class teacher ',
                         style: ralewayStyle.copyWith(
-                          fontSize: 48.0,
+                          fontSize: 40.0.w,
                           color: AppColors.whiteColor,
                           fontWeight: FontWeight.w800,
                         ),
