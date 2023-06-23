@@ -9,7 +9,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
-import 'fees_notification/widgets/submit_button_widget.dart';
+import '../../../../../../../../utils/utils.dart';
+import '../fees_notification/widgets/submit_button_widget.dart';
 
 class BillsCreationalPage extends StatelessWidget {
   BillsCreationalPage({super.key});
@@ -50,11 +51,20 @@ class BillsCreationalPage extends StatelessWidget {
                   // textEditingController: ,
                   labelText: 'Amount',
                 ),
-                TextFormFieldFWidget(
-                  function: checkFieldEmpty,
-                  readOnly: false,
-                  // textEditingController: ,
-                  labelText: 'Due date',
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: TextField(
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.w)),
+                        icon: const Icon(Icons.calendar_today,
+                            color: adminePrimayColor),
+                        labelText: "Due date"),
+                    readOnly: true,
+                    onTap: () async {
+                      dateTimePicker(context);
+                    },
+                  ),
                 ),
                 GestureDetector(
                     onTap: () {
@@ -77,14 +87,14 @@ class BillsCreationalPage extends StatelessWidget {
 }
 
 class BillsHalfContainerWidget extends StatelessWidget {
-  const BillsHalfContainerWidget({
+  BillsHalfContainerWidget({
     super.key,
     required this.screenSize,
     required this.text,
   });
 
   final Size screenSize;
-  final String text;
+  String text;
 
   @override
   Widget build(BuildContext context) {
@@ -137,28 +147,25 @@ class BillsHalfContainerWidget extends StatelessWidget {
 }
 
 class TextFormFieldFWidget extends StatelessWidget {
-  TextFormFieldFWidget(
-      {super.key,
-      required this.function,
-      this.textEditingController,
-      this.labelText,
-      this.hintText,
-      this.ontap,
-      this.readOnly = false});
+  const TextFormFieldFWidget({
+    super.key,
+    required this.function,
+    this.textEditingController,
+    this.labelText,
+    this.hintText,
+    this.onTap,
+  });
 
   final String? Function(String? fieldContent) function;
   final TextEditingController? textEditingController;
   final String? labelText;
   final String? hintText;
-  final VoidCallback? ontap;
-  bool readOnly;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      readOnly: readOnly,
-      onTap: ontap,
-      maxLines: null,
+      onTap: onTap,
       validator: function,
       controller: textEditingController,
       decoration: InputDecoration(

@@ -1,13 +1,13 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:dujo_kerala_website/utils/utils.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/Fees_and_bills/Fees%20and%20bills/fees_notification/widgets/submit_button_widget.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/Fees_and_bills/Fees/fees_notification/widgets/submit_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../../../controller/fees_bills/fees_bills_controller.dart';
 import '../../../../../../../constant/constant.dart';
-import '../bills_creation.dart';
+import '../fees_satus/bills_creation.dart';
 
 class FeesNotificationRightSideWidget extends StatelessWidget {
   FeesNotificationRightSideWidget({super.key});
@@ -67,7 +67,7 @@ class FeesNotificationRightSideWidget extends StatelessWidget {
               sizedBoxH20,
               TextFormFieldFWidget(
                 textEditingController: feesBillsController.dueDateController,
-                ontap: () async => feesBillsController.dueDateController.text =
+                onTap: () async => feesBillsController.dueDateController.text =
                     await dateTimePicker(context),
                 function: checkFieldEmpty,
                 labelText: 'Due date',
@@ -92,14 +92,6 @@ class FeesNotificationRightSideWidget extends StatelessWidget {
                             text: 'Create',
                           ),
                   )),
-              // IconButton(
-              //   onPressed: () {},
-              //   icon: Icon(
-              //     Icons.add,
-              //     color: cWhite,
-              //     size: 25.w,
-              //   ),
-              // ),
             ],
           ),
         ),

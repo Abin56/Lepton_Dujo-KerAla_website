@@ -10,9 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../model/create_classModel/add_student_model.dart';
-import '../../utils/utils.dart';
-
 class FeesBillsController extends GetxController {
   @override
   void onInit() async {
@@ -33,10 +30,10 @@ class FeesBillsController extends GetxController {
   Map<String, dynamic> categoryMap = {};
   String categoryCreateValue = "";
   String selectedPeriod = "";
+
   RxString selectedType = RxString("");
   RxList<String> selectDateList = RxList([]);
   List<ClassModel> allClass = [];
-  List<AddStudentModel> allClassStudents = [];
 
   List<String> tokenList = [];
   TextEditingController categoryNameController = TextEditingController();
@@ -77,30 +74,16 @@ class FeesBillsController extends GetxController {
 
   //fetch all classes
 
-  Future<void> getAllClasses() async {
+  Future<List<ClassModel>> getAllClasses() async {
     try {
       final QuerySnapshot<Map<String, dynamic>> data =
           await fStore.collection("classes").get();
       allClass = data.docs.map((e) => ClassModel.fromMap(e.data())).toList();
+      return allClass;
     } catch (e) {
       log(e.toString());
       showToast(msg: "Something Went Wrong");
-    }
-  }
-
-//get all students from class
-  Future<void> getAllStudentsFromClass(String classId) async {
-    try {
-      final QuerySnapshot<Map<String, dynamic>> data = await fStore
-          .collection("classes")
-          .doc(classId)
-          .collection("Students")
-          .get();
-      allClassStudents =
-          data.docs.map((e) => AddStudentModel.fromMap(e.data())).toList();
-    } catch (e) {
-      log(e.toString());
-      showToast(msg: "Something Went Wrong");
+      return [];
     }
   }
 
@@ -194,12 +177,6 @@ class FeesBillsController extends GetxController {
             )
             .then((value) async {
           showToast(msg: "Successfully Completed");
-          await fetchAllTokenList().then((value) async {
-            log("create time ${tokenList.toString()}");
-            for (var element3 in tokenList) {
-              await sendPushMessage(element3, "Fees", "Fees");
-            }
-          });
         });
       }
       categoryCreateloading.value = false;
@@ -210,62 +187,13 @@ class FeesBillsController extends GetxController {
     }
   }
 
-
 //create all tokens
   Future<void> fetchAllTokenList() async {
     try {
-      log("all class ${allClass.toString()}");
-
       for (var element in allClass) {
-        //fetching all students data
-        final QuerySnapshot<Map<String, dynamic>> studentResult = await fStore
-            .collection("classes")
-            .doc(element.docid)
-            .collection("Students")
-            .get();
-        for (var element1 in studentResult.docs) {
-          String? deviceToken = element1.data()["deviceToken"];
-          if (deviceToken == null || deviceToken.isEmpty) {
-            continue;
-          }
-          if (!tokenList.contains(element1.data()["deviceToken"])) {
-            tokenList.add(element1.data()["deviceToken"]);
-          }
-        }
-
-        //fetching all parent data
-        final QuerySnapshot<Map<String, dynamic>> parentResult = await fStore
-            .collection("classes")
-            .doc(element.docid)
-            .collection("ParentCollection")
-            .get();
-        for (var element1 in parentResult.docs) {
-          String? deviceToken = element1.data()["deviceToken"];
-
-          if (deviceToken == null || deviceToken.isEmpty) {
-            continue;
-          }
-          if (!tokenList.contains(element1.data()["deviceToken"])) {
-            tokenList.add(element1.data()["deviceToken"]);
-          }
-        }
-
-        //fetch all guardian dta
-        final QuerySnapshot<Map<String, dynamic>> guardianResult = await fStore
-            .collection("classes")
-            .doc(element.docid)
-            .collection("GuardianCollection")
-            .get();
-        for (var element1 in guardianResult.docs) {
-          String? deviceToken = element1.data()["deviceToken"];
-          if (deviceToken == null || deviceToken.isEmpty) {
-            continue;
-          }
-          if (!tokenList.contains(element1.data()["deviceToken"])) {
-            tokenList.add(element1.data()["deviceToken"]);
-          }
-        }
-        log("token array ${tokenList.toString()}");
+        await fetchTokensForCollection(element.docid, "Students");
+        await fetchTokensForCollection(element.docid, "ParentCollection");
+        await fetchTokensForCollection(element.docid, "GuardianCollection");
       }
     } on FirebaseException catch (e) {
       log(e.toString());
@@ -275,4 +203,36 @@ class FeesBillsController extends GetxController {
       showToast(msg: "Something Went Wrong");
     }
   }
+
+  Future<void> fetchTokensForCollection(
+      String docId, String collectionName) async {
+    final QuerySnapshot<Map<String, dynamic>> collectionResult = await fStore
+        .collection("classes")
+        .doc(docId)
+        .collection(collectionName)
+        .get();
+
+    for (var element in collectionResult.docs) {
+      String? deviceToken = element.data()["deviceToken"];
+
+      if (deviceToken == null || deviceToken.isEmpty) {
+        continue;
+      }
+
+      if (!tokenList.contains(deviceToken)) {
+        tokenList.add(deviceToken);
+      }
+    }
+  }
 }
+
+
+    // //creating token lists parent,guardian,students
+    //       await fetchAllTokenList().then((value) async {
+    //         log("create time ${tokenList.toString()}");
+    //         for (var element3 in tokenList) {
+    //           //send push notification from push notification
+    //           await sendPushMessage(element3,
+    //               "Due Date : $dueDate Amount : $amount", categoryName);
+    //         }
+    //       });
