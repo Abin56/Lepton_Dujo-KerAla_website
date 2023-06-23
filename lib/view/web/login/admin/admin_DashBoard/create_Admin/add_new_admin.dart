@@ -78,7 +78,7 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                                 children: [
 
                                   Text(
-                        'Hi ! Class teacher ',
+                        'Hi ! Admin ',
                         style: ralewayStyle.copyWith(
                           fontSize: 42.0.w,
                           color: Colors.white,
@@ -88,6 +88,9 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                       sizedBoxH20,
                                   
                                   GoogleMonstserratWidgets(text: 'Create new admin',fontsize: 26.0.w,
+                                  color: cWhite,
+
+                                  fontWeight: FontWeight.w600,
                                       ),
                                   sizedBoxH20,
                                   SizedBox(
@@ -310,8 +313,11 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                   confirmPasswordController.clear()
                 }).then((value) => Navigator.pop(context));
       });
-    } catch (e) {
+    }on FirebaseAuthException catch (e) {
+      showToast(msg: e.code);
       log('Create admin  $e');
+    }catch (e){
+      log(e.toString());
     }
 
     setState(() {

@@ -277,7 +277,7 @@ class AdminNoticeController extends GetxController {
 
     for (var i = 0; i < parentsTokenList.length; i++) {
       sendPushMessage(
-          parentsTokenList[i], 'New Notice added', 'Notice Notification');
+          parentsTokenList[i], 'New Notice added, പുതിയ നോട്ടീസ് പ്രസിദ്ധീകരിച്ചു', 'Notice Notification');
     }
   }
 
@@ -310,7 +310,7 @@ class AdminNoticeController extends GetxController {
 
     for (var i = 0; i < guardiansTokenList.length; i++) {
       sendPushMessage(
-          guardiansTokenList[i], 'New Notice added', 'Notice Notification');
+          guardiansTokenList[i], 'New Notice added, പുതിയ നോട്ടീസ് പ്രസിദ്ധീകരിച്ചു', 'Notice Notification');
     }
   }
 
@@ -348,7 +348,7 @@ class AdminNoticeController extends GetxController {
 
     for (var i = 0; i < deviceTokenList.length; i++) {
       sendPushMessage(
-          deviceTokenList[i], 'New Notice added', 'Notice Notification');
+          deviceTokenList[i], 'New Notice added, പുതിയ നോട്ടീസ് പ്രസിദ്ധീകരിച്ചു', 'Notice Notification');
     }
   }
 
@@ -387,7 +387,7 @@ class AdminNoticeController extends GetxController {
 
     for (var i = 0; i < studentsTokenList.length; i++) {
       sendPushMessage(
-          studentsTokenList[i], 'New Notice added', 'Notice Notification');
+          studentsTokenList[i], 'New Notice added, പുതിയ നോട്ടീസ് പ്രസിദ്ധീകരിച്ചു', 'Notice Notification');
     }
   }
 }

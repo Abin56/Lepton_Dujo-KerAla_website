@@ -859,7 +859,7 @@ class HomePageImages extends StatelessWidget {
                                 width: 5.h,
                               ),
                               Text(
-                                'leptondujo@gmail.com',
+                                'info@leptondujo.com',
                                 
                                 style: GoogleFonts.poppins(
                                     // adminePrimayColor,

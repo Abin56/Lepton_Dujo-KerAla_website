@@ -168,7 +168,7 @@ class AdminMeetingController extends GetxController {
 
     for (var i = 0; i < parentsTokenList.length; i++) {
       sendPushMessage(
-          parentsTokenList[i], 'New Meeting added', 'Meeting Notification');
+          parentsTokenList[i], 'New Meeting added, പുതിയ മീറ്റിംഗ് പ്രസിദ്ധീകരിച്ചു', 'Meeting Notification');
     }
   }
 
@@ -200,7 +200,7 @@ class AdminMeetingController extends GetxController {
 
     for (var i = 0; i < guardiansTokenList.length; i++) {
       sendPushMessage(
-          guardiansTokenList[i], 'New Meeting added', 'Meeting Notification');
+          guardiansTokenList[i], 'New Meeting added, പുതിയ മീറ്റിംഗ് പ്രസിദ്ധീകരിച്ചു', 'Meeting Notification');
     }
   }
 
@@ -243,7 +243,7 @@ class AdminMeetingController extends GetxController {
 
     for (var i = 0; i < deviceTokenList.length; i++) {
       sendPushMessage(
-          deviceTokenList[i], 'New Meeting added', 'Meeting Notification');
+          deviceTokenList[i], 'New Meeting added, പുതിയ മീറ്റിംഗ് പ്രസിദ്ധീകരിച്ചു', 'Meeting Notification');
     }
   }
 
@@ -286,7 +286,7 @@ class AdminMeetingController extends GetxController {
 
     for (var i = 0; i < studentsTokenList.length; i++) {
       sendPushMessage(
-          studentsTokenList[i], 'New Meeting added', 'Meeting Notification');
+          studentsTokenList[i], 'New Meeting added, പുതിയ മീറ്റിംഗ് പ്രസിദ്ധീകരിച്ചു', 'Meeting Notification');
     }
   }
 }
