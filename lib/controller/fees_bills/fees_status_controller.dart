@@ -13,7 +13,7 @@ import '../get_firebase-data/get_firebase_data.dart';
 class FeesStatusController {
   List<AddStudentModel> allClassStudents = [];
   String categoryData = "";
-  final DocumentReference<Map<String, dynamic>> fStore = FirebaseFirestore
+  final DocumentReference<Map<String, dynamic>> _fStore = FirebaseFirestore
       .instance
       .collection("SchoolListCollection")
       .doc(Get.find<AdminLoginScreenController>().schoolID)
@@ -23,7 +23,7 @@ class FeesStatusController {
   //get all students from class
   Future<List<AddStudentModel>> getAllStudentsFromClass(String classId) async {
     try {
-      final QuerySnapshot<Map<String, dynamic>> data = await fStore
+      final QuerySnapshot<Map<String, dynamic>> data = await _fStore
           .collection("classes")
           .doc(classId)
           .collection("Students")
@@ -45,7 +45,7 @@ class FeesStatusController {
   Future<List<ClassModel>> getAllClasses() async {
     try {
       final QuerySnapshot<Map<String, dynamic>> data =
-          await fStore.collection("classes").get();
+          await _fStore.collection("classes").get();
       return data.docs.map((e) => ClassModel.fromMap(e.data())).toList();
     } catch (e) {
       log(e.toString());
@@ -57,7 +57,7 @@ class FeesStatusController {
   Future<FeesModel?> getFeesCategoryData(
       String feesCategoryId, String classId) async {
     try {
-      final QuerySnapshot<Map<String, dynamic>> data = await fStore
+      final QuerySnapshot<Map<String, dynamic>> data = await _fStore
           .collection("Fees")
           .doc(feesCategoryId)
           .collection("Classes")
@@ -73,5 +73,47 @@ class FeesStatusController {
       log(e.toString());
       return null;
     }
+  }
+
+  Future<void> addStudentToFeePaid({
+    required String categoryId,
+    required String classId,
+    required String studentId,
+  }) async {
+    await _fStore
+        .collection("Fees")
+        .doc(categoryId)
+        .collection("Classes")
+        .doc(classId)
+        .update({
+      "studentList": FieldValue.arrayUnion([
+        {
+          "collectedAmount": "",
+          "studentId": studentId,
+          "totalAmount": "",
+        }
+      ])
+    }).catchError((error) => showToast(msg: (error as FirebaseException).code));
+  }
+
+  Future<void> removeStudentToFeePaid({
+    required String categoryId,
+    required String classId,
+    required String studentId,
+  }) async {
+    await _fStore
+        .collection("Fees")
+        .doc(categoryId)
+        .collection("Classes")
+        .doc(classId)
+        .update({
+      "studentList": FieldValue.arrayRemove([
+        {
+          "collectedAmount": "",
+          "studentId": studentId,
+          "totalAmount": "",
+        }
+      ])
+    }).catchError((error) => showToast(msg: (error as FirebaseException).code));
   }
 }

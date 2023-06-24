@@ -155,3 +155,27 @@ Future<void> sendPushMessage(String token, String body, String title) async {
     }
   }
 }
+
+class MyAlertDialog extends StatelessWidget {
+  const MyAlertDialog(
+      {super.key, required this.content, required this.okButton});
+  final String content;
+  final VoidCallback okButton;
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Alert'),
+      content: Text(content),
+      actions: <Widget>[
+        TextButton(
+          child: const Text('Cancel'),
+          onPressed: () {
+            Navigator.of(context).pop(); // Close the dialog
+          },
+        ),
+        TextButton(onPressed: okButton, child: const Text('OK')),
+      ],
+    );
+  }
+}
