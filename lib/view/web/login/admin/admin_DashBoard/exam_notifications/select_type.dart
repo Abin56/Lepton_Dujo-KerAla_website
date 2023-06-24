@@ -119,7 +119,7 @@ class _SelectTypeState extends State<SelectType> {
                         color: const Color.fromARGB(255, 245, 86, 75),
                         child: Center(
                             child: Text(
-                          'State Level Examinations',
+                          'Public Level Examinations',
                           style: GoogleFonts.poppins(
                               color: Colors.white,
                               fontSize: 25,

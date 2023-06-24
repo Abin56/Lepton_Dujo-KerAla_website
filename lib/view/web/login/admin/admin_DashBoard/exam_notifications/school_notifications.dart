@@ -113,7 +113,7 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                                         : null,
                                                     items: const [
                                                       "School Level",
-                                                      "State Level",
+                                                      "Public Level",
                                                     ],
                                                     onChanged: (value) {
                                                       setState(() {
@@ -325,7 +325,7 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                                               .bYear
                                                               .value)
                                                           .collection(
-                                                              'State Level')
+                                                              'School Level')
                                                           .doc(data.docid)
                                                           .delete()
                                                           .then((value) {
@@ -374,7 +374,7 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                 .collection(
                                     Get.find<GetFireBaseData>().bYear.value)
                                 .doc(Get.find<GetFireBaseData>().bYear.value)
-                                .collection('State Level')
+                                .collection('Public Level')
                                 .snapshots(),
                             builder: ((context, snapshot) {
                               if (snapshot.connectionState ==
@@ -442,7 +442,7 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                                             .bYear
                                                             .value)
                                                         .collection(
-                                                            'State Level')
+                                                            'Public Level')
                                                         .doc(data.docid)
                                                         .delete()
                                                         .then((value) {
@@ -485,8 +485,8 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
   }
 
   void clearnotFunction(){
-    _applyFromDateController.clear();
-    _applyTODateController.clear();
+    // _applyFromDateController.clear();
+    // _applyTODateController.clear();
     name.clear();
   }
 
@@ -599,7 +599,7 @@ class HeadingContainer extends StatelessWidget {
               padding: EdgeInsets.only(top: 18.h, bottom: 10.h),
               child: Text(
                 "Public Level Exams",
-                style: TextStyle(fontSize: 25.h),
+                 style: TextStyle(fontSize: 25.h),
               ),
             ),
           )
