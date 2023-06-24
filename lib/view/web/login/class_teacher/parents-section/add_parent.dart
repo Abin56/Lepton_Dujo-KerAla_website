@@ -70,7 +70,7 @@ class AddParent extends StatelessWidget {
                           height: 300,
                           width: size.width / 2,
                           child: LottieBuilder.network(
-                              'https://assets10.lottiefiles.com/packages/lf20_SPA6bgo7nO.json'),
+                              'https://assets1.lottiefiles.com/temp/lf20_zi0rIM.json'),
                         )
                       ],
                     ),

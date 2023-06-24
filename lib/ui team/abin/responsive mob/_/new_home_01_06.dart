@@ -1139,6 +1139,8 @@ class HomePageImages extends StatelessWidget {
               ),
               Stack(
                 children: [
+                   
+
                   SizedBox(
                  
                   height: 900.h,
@@ -1147,6 +1149,32 @@ class HomePageImages extends StatelessWidget {
                 child:  Image.asset('assets/images/websiteHomepage.jpg',fit: BoxFit.fill,)
                
                   ),
+                  Padding(
+                     padding:  EdgeInsets.only(left: 1125.w,top: 30.h),
+                     child: SizedBox(
+                                 //height: 150.h,
+                                 width: 450.w,
+                                              child: Column(
+                                               mainAxisAlignment: MainAxisAlignment.end,
+                                 children: [
+                                  GoogleMonstserratWidgets(text: 'Customer support',
+                                   fontsize:15,color: adminePrimayColor,
+                                   fontWeight: FontWeight.w500),
+                                   //sizedBoxH5,
+                                           GoogleMonstserratWidgets(text:
+                                           '10.00 AM to 06.00 PM, Mon-Fri',
+                                           fontWeight: FontWeight.w500,
+                                            fontsize: 15.w,color: adminePrimayColor,),
+                                               sizedBoxH10,
+                                             GoogleMonstserratWidgets(text: '080 696 21 222', fontsize: 25.w,
+                                   fontWeight: FontWeight.w700,
+                                   color: cred),
+                                
+                                        
+                                              ],
+                                              )),
+                   ),
+                  
                   Padding(
                     padding:  EdgeInsets.only( right: 80.0.w,
                   left: 80.w,
@@ -1189,6 +1217,9 @@ class HomePageImages extends StatelessWidget {
                                   height: 170.h,
                                 ),
                               ),
+
+                              
+
                                                          ],
                               ),
                               Padding(
@@ -1228,14 +1259,17 @@ class HomePageImages extends StatelessWidget {
                                         fontWeight: FontWeight.w500),
                                   ),
                                 ),
-                              )
+                              ),
+                             
                             ],
                           ),
                         ]),
                                   ),
                   ),
+                   
                 ]
               ),
+             
              
              
               sizedBoxH20,
@@ -1259,31 +1293,7 @@ class HomePageImages extends StatelessWidget {
                 width: double.infinity,
                 child: Image(image: AssetImage('assets/images/dujo_colleges_image.png',),fit: BoxFit.fill,)
           ),
-          //  InkWell(
-          //    onTap: () {
-          //                                   Navigator.push(
-          //                                     context,
-          //                                     MaterialPageRoute(
-          //                                       builder:(context) => UnderMaintanceScreen(),
-          //                                     ),
-          //                                   );
-          //                                 },
-          //    child: Container(
-          //                         margin: EdgeInsets.only(top: 690.h,left: 910.w),
-          //                         height: 60.h,
-          //                         width: 250.w,
-          //                         color: adminePrimayColor,
-          //                         child: Center(
-          //                           child: Text(
-          //                             'Create College Profile',
-          //                             style: GoogleFonts.poppins(
-          //                                 color: Colors.white,
-          //                                 fontSize: 16.w,
-          //                                 fontWeight: FontWeight.w500),
-          //                           ),
-          //                         ),
-          //                       ),
-          //  ),
+       
              ],
            ),
           sizedBoxH20,

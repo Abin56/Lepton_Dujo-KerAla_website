@@ -134,8 +134,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
 
   List<String> viewListNames = [
     'All Students',
-    'School'
-        'Teachers',
+    'All Teachers',
     'Classes',
     'Notices',
     'Meetings',

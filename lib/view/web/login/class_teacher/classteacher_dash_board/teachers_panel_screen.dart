@@ -423,7 +423,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                         padding: EdgeInsets.only(
                                             left: 5.w, right: 15.w),
                                         child: Text(
-                                          'Classteacher Dashboard',
+                                          'Class teacher Dashboard',
                                           style: GoogleFonts.poppins(
                                               color: Colors.red,
                                               fontWeight: FontWeight.w800,
