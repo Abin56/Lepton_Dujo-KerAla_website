@@ -113,7 +113,7 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                                         : null,
                                                     items: const [
                                                       "School Level",
-                                                      "State Level",
+                                                      "Public Level",
                                                     ],
                                                     onChanged: (value) {
                                                       setState(() {
