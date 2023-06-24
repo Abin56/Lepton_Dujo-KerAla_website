@@ -1,15 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../constant/constant.dart';
-import '../../../../../fonts/fonts.dart';
 
 class SchoolTc extends StatefulWidget {
-  SchoolTc({super.key});
+  const SchoolTc({super.key});
 
   @override
   State<SchoolTc> createState() => _SchoolTcState();
@@ -87,13 +83,14 @@ class _SchoolTcState extends State<SchoolTc> {
     });
   }
 
+  @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10),
-          child: Container(
+          child: SizedBox(
             width: screenSize.width * 1,
             height: screenSize.height * 1,
             //  color: Colors.amber,
@@ -111,12 +108,12 @@ class _SchoolTcState extends State<SchoolTc> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Admission Number :",
+                        "Admission number :",
                         style: GoogleFonts.openSans(
                           fontSize: 14,
                         ),
                       ),
-                      Container(
+                      SizedBox(
                         // color: Colors.white,
                         // height: 100,
                         width: 300,
@@ -140,7 +137,7 @@ class _SchoolTcState extends State<SchoolTc> {
                       Padding(
                         padding: const EdgeInsets.only(right: 20),
                         child: Flexible(
-                          child: Container(
+                          child: SizedBox(
                             // color: Colors.white,
                             // height: 100,
                             width: 200,
@@ -170,7 +167,7 @@ class _SchoolTcState extends State<SchoolTc> {
                             fontSize: 14,
                           )),
                       Flexible(
-                        child: Container(
+                        child: SizedBox(
                           height: 45,
                           width: 800,
                           child: Padding(
@@ -229,7 +226,7 @@ class _SchoolTcState extends State<SchoolTc> {
                             fontSize: 14,
                           )),
                       Flexible(
-                        child: Container(
+                        child: SizedBox(
                           // color: Colors.white,
                           height: 45,
                           width: 800,
@@ -259,7 +256,7 @@ class _SchoolTcState extends State<SchoolTc> {
                             fontSize: 14,
                           )),
                       Flexible(
-                        child: Container(
+                        child: SizedBox(
                           // color: Colors.white,
                           height: 45,
                           width: 800,
@@ -289,7 +286,7 @@ class _SchoolTcState extends State<SchoolTc> {
                             fontSize: 14,
                           )),
                       Flexible(
-                        child: Container(
+                        child: SizedBox(
                           // color: Colors.white,
                           height: 45,
                           width: 800,
@@ -319,7 +316,7 @@ class _SchoolTcState extends State<SchoolTc> {
                             fontSize: 14,
                           )),
                       Flexible(
-                        child: Container(
+                        child: SizedBox(
                           // color: Colors.white,
                           height: 45,
                           width: 800,
@@ -349,7 +346,7 @@ class _SchoolTcState extends State<SchoolTc> {
                             fontSize: 14,
                           )),
                       Flexible(
-                        child: Container(
+                        child: SizedBox(
                           // color: Colors.white,
                           height: 45,
                           width: 800,
@@ -379,7 +376,7 @@ class _SchoolTcState extends State<SchoolTc> {
                             fontSize: 14,
                           )),
                       Flexible(
-                        child: Container(
+                        child: SizedBox(
                           // color: Colors.white,
                           height: 45,
                           width: 800,
@@ -410,7 +407,7 @@ class _SchoolTcState extends State<SchoolTc> {
                             fontSize: 14,
                           )),
                       Flexible(
-                        child: Container(
+                        child: SizedBox(
                           // color: Colors.white,
                           height: 45,
                           width: 800,
@@ -441,7 +438,7 @@ class _SchoolTcState extends State<SchoolTc> {
                             fontSize: 14,
                           )),
                       Flexible(
-                        child: Container(
+                        child: SizedBox(
                           // color: Colors.white,
                           height: 45,
                           width: 800,
@@ -470,7 +467,7 @@ class _SchoolTcState extends State<SchoolTc> {
                             fontSize: 14,
                           )),
                       Flexible(
-                        child: Container(
+                        child: SizedBox(
                           // color: Colors.white,
                           height: 45,
                           width: 800,
@@ -500,7 +497,7 @@ class _SchoolTcState extends State<SchoolTc> {
                             fontSize: 14,
                           )),
                       Flexible(
-                        child: Container(
+                        child: SizedBox(
                           // color: Colors.white,
                           height: 45,
                           width: 800,
@@ -529,7 +526,7 @@ class _SchoolTcState extends State<SchoolTc> {
                             fontSize: 14,
                           )),
                       Flexible(
-                        child: Container(
+                        child: SizedBox(
                           // color: Colors.white,
                           height: 45,
                           width: 800,
@@ -559,7 +556,7 @@ class _SchoolTcState extends State<SchoolTc> {
                             fontSize: 14,
                           )),
                       Flexible(
-                        child: Container(
+                        child: SizedBox(
                           // color: Colors.white,
                           height: 45,
                           width: 800,
@@ -589,7 +586,7 @@ class _SchoolTcState extends State<SchoolTc> {
                             fontSize: 14,
                           )),
                       Flexible(
-                        child: Container(
+                        child: SizedBox(
                           // color: Colors.white,
                           height: 45,
                           width: 800,
@@ -620,7 +617,7 @@ class _SchoolTcState extends State<SchoolTc> {
                             fontSize: 14,
                           )),
                       Flexible(
-                        child: Container(
+                        child: SizedBox(
                           // color: Colors.white,
                           height: 45,
                           width: 800,
@@ -650,7 +647,7 @@ class _SchoolTcState extends State<SchoolTc> {
                             fontSize: 14,
                           )),
                       Flexible(
-                        child: Container(
+                        child: SizedBox(
                           // color: Colors.white,
                           height: 45,
                           width: 800,
@@ -679,7 +676,7 @@ class _SchoolTcState extends State<SchoolTc> {
                             fontSize: 14,
                           )),
                       Flexible(
-                        child: Container(
+                        child: SizedBox(
                           // color: Colors.white,
                           height: 50,
                           width: 800,
@@ -687,7 +684,7 @@ class _SchoolTcState extends State<SchoolTc> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 8, vertical: 16),
                             child: TextFormField(
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                   border: InputBorder.none,
                                   hintText: 'Please enter the details',
                                   hintStyle: TextStyle(fontSize: 14)),
@@ -708,7 +705,7 @@ class _SchoolTcState extends State<SchoolTc> {
                             fontSize: 14,
                           )),
                       Flexible(
-                        child: Container(
+                        child: SizedBox(
                           // color: Colors.white,
                           height: 45,
                           width: 800,
@@ -737,7 +734,7 @@ class _SchoolTcState extends State<SchoolTc> {
                             fontSize: 14,
                           )),
                       Flexible(
-                        child: Container(
+                        child: SizedBox(
                           // color: Colors.white,
                           height: 45,
                           width: 800,
@@ -766,7 +763,7 @@ class _SchoolTcState extends State<SchoolTc> {
                             fontSize: 14,
                           )),
                       Flexible(
-                        child: Container(
+                        child: SizedBox(
                           // color: Colors.white,
                           height: 45,
                           width: 800,

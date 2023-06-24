@@ -534,7 +534,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                         content:
                                                             SingleChildScrollView(
                                                           child: ListBody(
-                                                            children: <Widget>[
+                                                            children: const <Widget>[
                                                               Center(
                                                                   child:
                                                                       GetClassTeacherListDropDownButton()),
@@ -930,12 +930,10 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                               message: "Logout",
                                               child: Row(
                                                 children: [
-                                                  IconButton(
-                                                    onPressed: () {},
-                                                    icon: Icon(
+                                                  Icon(
                                                       Icons.logout_outlined,
                                                     ),
-                                                  ),
+                                                  
                                                   Container(
                                                     margin: EdgeInsets.only(
                                                         top: 5.h),
@@ -958,7 +956,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                               ),
                             ),
                             SizedBox(
-                              height: screenSize.height - 60,
+                              height: screenSize.height - 80 ,
                               child: Padding(
                                 padding:
                                     EdgeInsets.only(right: 50.0.w, left: 50.w),

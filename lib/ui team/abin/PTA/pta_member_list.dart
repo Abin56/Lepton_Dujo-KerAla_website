@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
 
 import '../../../view/colors/colors.dart';
 
@@ -21,14 +20,14 @@ class _PTAMemberListState extends State<PTAMemberList> {
 
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(title: Text('Member list'),
+      appBar: AppBar(title: const Text('Member list'),
       backgroundColor: adminePrimayColor),
      body: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           SingleChildScrollView(
             child: Column(
               children: [
-                Container(
+                SizedBox(
                        width: screenSize.width*0.3,
                     //  color: Colors.amber[50],
                     child: Padding(

@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
@@ -42,7 +40,7 @@ class _ShowTimeTableState extends State<ShowTimeTable> {
         body: Center(
           child: ListView.separated( 
             shrinkWrap: true, 
-            physics: ScrollPhysics(),
+            physics: const ScrollPhysics(),
               separatorBuilder: (context, index) {
                 return sizedBoxH10;
               },

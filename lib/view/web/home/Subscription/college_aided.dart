@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 import '../../widgets/button_container_widget.dart';
 import '../../widgets/custom_blue_button.dart';
@@ -18,7 +16,7 @@ class _CollegeAidedSubscriptionState extends State<CollegeAidedSubscription> {
    var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title:Text('College Govt / Aided') 
+        title:const Text('College Govt / Aided') 
         ),
         body: 
           
@@ -36,7 +34,7 @@ class _CollegeAidedSubscriptionState extends State<CollegeAidedSubscription> {
                       color:Colors.blueAccent ,),
                      child: ListView(children: [
                           Container(
-                            child:  Center(
+                            child:  const Center(
                               child: Text(
                                   "List of Colleges",
                                   style: TextStyle(
@@ -47,10 +45,10 @@ class _CollegeAidedSubscriptionState extends State<CollegeAidedSubscription> {
                             ),
                             
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
-                          Container(
+                          SizedBox(
                               height: screenSize.width * 1 / 20,
                               width: screenSize.width * 1 / 6,
                               child: CustomBlueButton(
@@ -63,10 +61,10 @@ class _CollegeAidedSubscriptionState extends State<CollegeAidedSubscription> {
                                   // );
                                 },
                               )),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
-                          Container(
+                          SizedBox(
                               height: screenSize.width * 1 / 20,
                               width: screenSize.width * 1 / 6,
                               child: CustomBlueButton(
@@ -79,127 +77,127 @@ class _CollegeAidedSubscriptionState extends State<CollegeAidedSubscription> {
                                   // );
                                 },
                               )),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
-                          Container(
+                          SizedBox(
                               height: screenSize.width * 1 / 20,
                               width: screenSize.width * 1 / 6,
                               child: CustomBlueButton(
                                 text: 'NSS College',
                                 onPressed: () {},
                               )),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
-                          Container(
+                          SizedBox(
                               height: screenSize.width * 1 / 20,
                               width: screenSize.width * 1 / 6,
                               child: CustomBlueButton(
                                 text: 'MG College',
                                 onPressed: () {},
                               )),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
-                          Container(
+                          SizedBox(
                               height: screenSize.width * 1 / 20,
                               width: screenSize.width * 1 / 6,
                               child: CustomBlueButton(
                                 text: 'NIT College',
                                 onPressed: () {},
                               )),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
-                          Container(
+                          SizedBox(
                               height: screenSize.width * 1 / 20,
                               width: screenSize.width * 1 / 6,
                               child: CustomBlueButton(
                                 text: '',
                                 onPressed: () {},
                               )),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
-                          Container(
+                          SizedBox(
                               height: screenSize.width * 1 / 20,
                               width: screenSize.width * 1 / 6,
                               child: CustomBlueButton(
                                 text: '',
                                 onPressed: () {},
                               )),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
-                          Container(
+                          SizedBox(
                               height: screenSize.width * 1 / 20,
                               width: screenSize.width * 1 / 6,
                               child: CustomBlueButton(
                                 text: '',
                                 onPressed: () {},
                               )),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
-                          Container(
+                          SizedBox(
                               height: screenSize.width * 1 / 20,
                               width: screenSize.width * 1 / 6,
                               child: CustomBlueButton(
                                 text: '',
                                 onPressed: () {},
                               )),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
-                          Container(
+                          SizedBox(
                               height: screenSize.width * 1 / 20,
                               width: screenSize.width * 1 / 6,
                               child: CustomBlueButton(
                                 text: '',
                                 onPressed: () {},
                               )),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
-                          Container(
+                          SizedBox(
                               height: screenSize.width * 1 / 20,
                               width: screenSize.width * 1 / 6,
                               child: CustomBlueButton(
                                 text: '',
                                 onPressed: () {},
                               )),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
-                          Container(
+                          SizedBox(
                               height: screenSize.width * 1 / 20,
                               width: screenSize.width * 1 / 6,
                               child: CustomBlueButton(
                                 text: '',
                                 onPressed: () {},
                               )),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
-                          Container(
+                          SizedBox(
                               height: screenSize.width * 1 / 20,
                               width: screenSize.width * 1 / 6,
                               child: CustomBlueButton(
                                 text: '',
                                 onPressed: () {},
                               )),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
-                          Container(
+                          SizedBox(
                               height: screenSize.width * 1 / 20,
                               width: screenSize.width * 1 / 6,
                               child: CustomBlueButton(
                                 text: '',
                                 onPressed: () {},
                               )),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                         ])
@@ -215,18 +213,18 @@ class _CollegeAidedSubscriptionState extends State<CollegeAidedSubscription> {
                     decoration: BoxDecoration(
                     borderRadius: BorderRadius.
                     circular(30),
-                    color:Color.fromARGB(255, 6, 218, 154) ,
+                    color:const Color.fromARGB(255, 6, 218, 154) ,
                     ),
                     child: ListView(children: [
                       Center(
                         child: Padding(
                           padding:  EdgeInsets.only(top: screenSize.width*1/30),
-                          child: Text('Features',style: TextStyle(color: Color.fromARGB(255, 0, 0, 0),
+                          child: const Text('Features',style: TextStyle(color: Color.fromARGB(255, 0, 0, 0),
                                       fontWeight: FontWeight.bold, 
                                       fontSize: 25),),
                         ),
                       ),
-                      SizedBox(height: 50,),
+                      const SizedBox(height: 50,),
                       
                     Row(
                       children: [
@@ -236,9 +234,9 @@ class _CollegeAidedSubscriptionState extends State<CollegeAidedSubscription> {
                            height: screenSize.width*1/4,
                              width: screenSize.width*1/5,
                             
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: Color.fromARGB(255, 99, 218, 226),
-                               borderRadius: const BorderRadius.all(
+                               borderRadius: BorderRadius.all(
                             Radius.circular(30),
                           ),
                             ),
@@ -295,7 +293,7 @@ class _CollegeAidedSubscriptionState extends State<CollegeAidedSubscription> {
                             ),
                           ),
                         ),
-                        SizedBox(width: 20,),
+                        const SizedBox(width: 20,),
 
 
                         
@@ -304,16 +302,16 @@ class _CollegeAidedSubscriptionState extends State<CollegeAidedSubscription> {
                           child: Container(
                           height: screenSize.width*1/4,
                                width: screenSize.width*1/5,
-                             decoration: BoxDecoration(
+                             decoration: const BoxDecoration(
                               color: Color.fromARGB(255, 99, 218, 226),
-                               borderRadius: const BorderRadius.all(
+                               borderRadius: BorderRadius.all(
                             Radius.circular(30),
                           ),
                             ),
                             child: Column(
-                                  children: [
+                                  children: const [
                                    Padding(
-                                     padding: const EdgeInsets.only(top: 50),
+                                     padding: EdgeInsets.only(top: 50),
                                      child: 
                                       Align(
                                                    alignment: Alignment.centerLeft,
@@ -409,13 +407,13 @@ class _CollegeAidedSubscriptionState extends State<CollegeAidedSubscription> {
                               children:  [
                                 Padding(
                                   padding:  EdgeInsets.only(left:screenSize.width/13.5 ),
-                                  child: Text("SUBSCRIBE",
+                                  child: const Text("SUBSCRIBE",
                                     style: TextStyle(color: Colors.white,
                                     fontWeight: FontWeight.bold, 
                                     fontSize: 16),),
                                 ),
                               
-                                   Icon(Icons.notifications,color: Colors.red,),  
+                                   const Icon(Icons.notifications,color: Colors.red,),  
                               ],
                             ),
                           

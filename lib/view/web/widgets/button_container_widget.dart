@@ -1,6 +1,5 @@
 // ignore_for_file: must_be_immutable, file_names
 
-import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 
 class ButtonContainerWidget extends StatelessWidget {

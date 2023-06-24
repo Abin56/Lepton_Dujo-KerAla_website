@@ -42,9 +42,9 @@ class _EventsEditREmoveState extends State<EventsEditREmove> {
               .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
-            if (snapshot.data!.docs.length == 0) {
+            if (snapshot.data!.docs.isEmpty) {
               return Center(
                   child: Text(
                 'No Events',
@@ -155,8 +155,8 @@ class _EventsEditREmoveState extends State<EventsEditREmove> {
                                   context: context,
                                   builder: (context) {
                                     return AlertDialog(
-                                      title: Text('Delete Event'),
-                                      content: Text(
+                                      title: const Text('Delete Event'),
+                                      content: const Text(
                                           'Are you sure you want to delete event?'),
                                       actions: [
                                         Padding(
@@ -180,18 +180,18 @@ class _EventsEditREmoveState extends State<EventsEditREmove> {
                                                           Navigator.pop(
                                                               context));
                                                 },
-                                                child: Text('Yes'),
                                                 color: Colors.red,
+                                                child: const Text('Yes'),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 20,
                                               ),
                                               MaterialButton(
                                                 onPressed: () {
                                                   Navigator.pop(context);
                                                 },
-                                                child: Text('No'),
                                                 color: Colors.blue,
+                                                child: const Text('No'),
                                               )
                                             ],
                                           ),
@@ -218,8 +218,8 @@ class _EventsEditREmoveState extends State<EventsEditREmove> {
                                   context: context,
                                   builder: (context) {
                                     return AlertDialog(
-                                      title: Text('Edit Event'),
-                                      content: Container(
+                                      title: const Text('Edit Event'),
+                                      content: SizedBox(
                                         width: 400,
                                         height: 500,
                                         child: Column(
@@ -227,51 +227,51 @@ class _EventsEditREmoveState extends State<EventsEditREmove> {
                                             TextField(
                                               controller: headingController,
                                               decoration: InputDecoration(
-                                                border: OutlineInputBorder(),
+                                                border: const OutlineInputBorder(),
                                                 labelText:
                                                     'Event Name: ${snapshot.data!.docs[index]['eventName']}',
                                               ),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 30,
                                             ),
                                             TextField(
                                               controller: descriptionController,
                                               decoration: InputDecoration(
-                                                border: OutlineInputBorder(),
+                                                border: const OutlineInputBorder(),
                                                 labelText:
                                                     'Description: ${snapshot.data!.docs[index]['eventDescription']}',
                                               ),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 30,
                                             ),
                                             TextField(
                                               controller: dateController,
                                               decoration: InputDecoration(
-                                                border: OutlineInputBorder(),
+                                                border: const OutlineInputBorder(),
                                                 labelText:
                                                     'Date: ${snapshot.data!.docs[index]['eventDate']}',
                                               ),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 30,
                                             ),
                                             TextField(
                                               controller: venueController,
                                               decoration: InputDecoration(
-                                                border: OutlineInputBorder(),
+                                                border: const OutlineInputBorder(),
                                                 labelText:
                                                     'Venue: ${snapshot.data!.docs[index]['venue']}',
                                               ),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 30,
                                             ),
                                             TextField(
                                               controller: signedByController,
                                               decoration: InputDecoration(
-                                                  border: OutlineInputBorder(),
+                                                  border: const OutlineInputBorder(),
                                                   labelText:
                                                       'Signed By: ${snapshot.data!.docs[index]['signedBy']}'),
                                             ),

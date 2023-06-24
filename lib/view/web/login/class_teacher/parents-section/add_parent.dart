@@ -11,7 +11,6 @@ import '../../../../../utils/utils.dart';
 import '../../../../colors/colors.dart';
 import '../../../../constant/constant.dart';
 import '../../../../fonts/fonts.dart';
-import '../../../../fonts/google_monstre.dart';
 import '../../../widgets/Iconbackbutton.dart';
 import '../../../widgets/drop_DownList/get_students.dart';
 
@@ -151,7 +150,7 @@ class AddParent extends StatelessWidget {
                                       }
                                     }
                                   },
-                                  child: const Text("Upload Data From Excel"),
+                                  child: const Text("Upload data from excel"),
                                 ),
                               ),
                               sizedBoxH10,
@@ -160,7 +159,7 @@ class AddParent extends StatelessWidget {
                                            style: TextStyle(
                                           fontSize: 13.w,
                                           fontWeight: FontWeight.w600,
-                                          color: Color.fromARGB(255, 27, 106, 170)),
+                                          color: const Color.fromARGB(255, 27, 106, 170)),
                                           ),
                             ],
                           ),

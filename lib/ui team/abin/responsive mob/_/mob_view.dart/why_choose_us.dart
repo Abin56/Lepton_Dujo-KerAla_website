@@ -18,7 +18,7 @@ class WhyChooseUs extends StatelessWidget {
           IconButtonBackWidget(color: cWhite),
            Padding(
              padding:  EdgeInsets.only(left: 50.w,right: 50.w,top: 80.h),
-             child: Container(
+             child: SizedBox(
               height: 500.h,
               width: double.infinity,
               child: GoogleMonstserratWidgets(text: "Lepton DUJO - the ultimate digitalized school infra app that streamlines infrastructure management and enhances school operations. With DUJO, schools can easily manage their facilities, assets, and resources with just a few clicks."

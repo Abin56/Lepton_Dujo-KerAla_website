@@ -571,7 +571,7 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                               BorderRadius.all(Radius.circular(13.w))),
                       icon: Icon(Icons.format_list_numbered,
                           color: AppColors.blueDarkColor),
-                      labelText: 'Admission Number',
+                      labelText: 'Admission number',
                     ),
                   ),
                 ),

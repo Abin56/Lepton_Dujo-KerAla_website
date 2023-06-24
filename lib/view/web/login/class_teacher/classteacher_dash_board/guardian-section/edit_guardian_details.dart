@@ -26,30 +26,30 @@ class EditGuardianDetails extends StatelessWidget {
           child: Center(
             child: Column(children: [
               Padding(
-                padding: EdgeInsets.all(15),
+                padding: const EdgeInsets.all(15),
                 child: TextField(
                   controller: guardianNameController,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                     hintText: model.guardianName,
                   ),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(15),
+                padding: const EdgeInsets.all(15),
                 child: TextField(
                   controller: classInChargeController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                   ),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(15),
+                padding: const EdgeInsets.all(15),
                 child: TextField(
                   controller: joinDateController,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                     hintText: model.createdate,
                   ),
                 ),

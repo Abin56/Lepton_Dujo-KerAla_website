@@ -336,7 +336,7 @@ class AllStudentsController extends GetxController {
                       Navigator.pop(context);
                     },
                     icon: const Icon(Icons.arrow_back)),
-                const Text('Change AdmissionNumber'),
+                const Text('Change admission number'),
               ],
             ),
             content: SingleChildScrollView(

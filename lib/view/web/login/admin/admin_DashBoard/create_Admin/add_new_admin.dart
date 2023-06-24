@@ -74,6 +74,7 @@ class _AddNewAdminState extends State<AddNewAdmin> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
+                                  
                                   Text('Create New Admin',
                                       style: GoogleFont.headTextStyleBold),
                                   sizedBoxH20,
@@ -255,7 +256,7 @@ class _AddNewAdminState extends State<AddNewAdmin> {
               )
             :  Scaffold(
               appBar: AppBar(backgroundColor: Colors.transparent,),
-                body: Center(
+                body: const Center(
                   child: Text(
                     "Sorry you are not a main Admin",
                     style: TextStyle(fontSize: 25),

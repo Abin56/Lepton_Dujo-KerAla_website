@@ -3,7 +3,6 @@ import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/achieve
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:uuid/uuid.dart';
 
@@ -17,7 +16,7 @@ class Achievements extends StatefulWidget {
   Achievements({super.key, required this.schoolID});
 
   String schoolID;
-  String uid = Uuid().v1();
+  String uid = const Uuid().v1();
 
   @override
   State<Achievements> createState() => _AchievementsState();
@@ -39,7 +38,7 @@ class _AchievementsState extends State<Achievements> {
                  child: Row(
                    children: [ 
                     Container(
-                           color: Color.fromARGB(255, 12, 34, 133),
+                           color: const Color.fromARGB(255, 12, 34, 133),
                            height: screenSize.height,
                           width: screenSize.width * 1 / 2,
                             child: Column(

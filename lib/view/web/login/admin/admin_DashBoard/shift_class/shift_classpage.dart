@@ -56,7 +56,7 @@ class ShiftClassPage extends StatelessWidget {
                       height: screenSize.width / 20,
                     ),
                     Text(
-                      'Shift your class',
+                      'promote your students',
                       style: ralewayStyle.copyWith(
                         fontSize: 25.0,
                         color: AppColors.whiteColor,
@@ -195,7 +195,7 @@ class ShiftClassPage extends StatelessWidget {
               );
             },
             child: GoogleMonstserratWidgets(
-              text: 'Shift Your Class',
+              text: 'promote Your students',
               fontsize: 20.w,
             ),
           ),

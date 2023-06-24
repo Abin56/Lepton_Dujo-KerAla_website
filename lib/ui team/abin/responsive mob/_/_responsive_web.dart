@@ -1125,7 +1125,7 @@ class HomePageResponse extends StatelessWidget {
                         "Manage Recorded and Live Classes",
                     text5: "* Teacher Login -Manage Timetable, Manage Classes"
                         "Create Teaching \n"
-                        " Notes, Share Exam results Upload Study Materials, Upload recorded classes"
+                        " Notes, Share Exam results upload study materials, Upload recorded classes"
                         "Schedule and conduct Online Classes",
                     text6: "* Student Login - View assigned homework"
                         "View Schedule exam and \n"

@@ -12,7 +12,6 @@ import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../utils/utils.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
-import '../../../../../fonts/google_monstre.dart';
 import '../../../../widgets/drop_DownList/get_students.dart';
 
 class AddGuardian extends StatelessWidget {
@@ -59,7 +58,7 @@ class AddGuardian extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'Hi ! Admin ',
+                        'Hi ! Class teacher ',
                         style: ralewayStyle.copyWith(
                           fontSize: 42.0,
                           color: Colors.white,
@@ -107,13 +106,13 @@ class AddGuardian extends StatelessWidget {
                       sizedBoxH30,
                       AddGuardianWidget(
                         function: checkFieldEmpty,
-                        labelText: 'Guardian Name',
+                        labelText: 'Guardian name',
                         textEditingController: guardianNameController,
                       ),
                       sizedBoxH30,
                       AddGuardianWidget(
                         function: checkFieldPhoneNumberIsValid,
-                        labelText: 'Guardian PhoneNumber',
+                        labelText: 'Guardian phone number',
                         textEditingController: guardianPhoneNoController,
                       ),
                       sizedBoxH30,
@@ -176,7 +175,7 @@ class AddGuardian extends StatelessWidget {
                                     }
                                   }
                                 },
-                                child: const Text("Upload From Excel"),
+                                child: const Text("Upload data from excel"),
                               ),
                             ),
                           ),
@@ -187,7 +186,7 @@ class AddGuardian extends StatelessWidget {
                                            style: TextStyle(
                                           fontSize: 13.w,
                                           fontWeight: FontWeight.w600,
-                                          color: Color.fromARGB(255, 27, 106, 170)),
+                                          color: const Color.fromARGB(255, 27, 106, 170)),
                                           ),
                         ],
                       ),

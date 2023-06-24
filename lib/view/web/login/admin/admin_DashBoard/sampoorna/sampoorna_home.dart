@@ -394,7 +394,7 @@ class StdAdmissionWidget extends StatelessWidget {
         sizedBoxH20,
         Flexible(
           child: TextFormFieldTextWidget(
-            title: 'Admission Number',
+            title: 'Admission number',
             controller:
                 Get.find<SampoornaController>().admissionNumberController,
             validator: checkFieldEmpty,

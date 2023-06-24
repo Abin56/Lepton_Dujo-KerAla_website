@@ -10,7 +10,7 @@ Future<void> getParentDatas(
     {required BuildContext context,
     required String schooilID,
     required String studentID}) async {
-  final _firebase = FirebaseFirestore.instance
+  final firebase = FirebaseFirestore.instance
       .collection("SchoolListCollection")
       .doc(schooilID)
       .collection("Students_Parents");
@@ -18,7 +18,7 @@ Future<void> getParentDatas(
     context: context,
     builder: (context) {
       return FutureBuilder(
-          future: _firebase.where('wStudent', isEqualTo: studentID).get(),
+          future: firebase.where('wStudent', isEqualTo: studentID).get(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               log(snapshot.data!.docs[0].data()['parentImage'].toString());
@@ -94,13 +94,13 @@ Future<void> getParentDatas(
                                           barrierDismissible:
                                               false, // user must tap button!
                                           builder: (BuildContext context) {
-                                            final _newParentNo =
+                                            final newParentNo =
                                                 TextEditingController();
                                             return AlertDialog(
                                               actions: [
                                                 GestureDetector(
                                                   onTap: () async {
-                                                    _firebase
+                                                    firebase
                                                         .doc(snapshot
                                                                 .data!.docs[0]
                                                                 .data()[
@@ -108,7 +108,7 @@ Future<void> getParentDatas(
                                                         .set(
                                                             {
                                                           'parentPhoneNumber':
-                                                              _newParentNo.text
+                                                              newParentNo.text
                                                                   .trim()
                                                         },
                                                             SetOptions(
@@ -140,7 +140,7 @@ Future<void> getParentDatas(
                                                 child: ListBody(
                                                   children: <Widget>[
                                                     TextFormField(
-                                                      controller: _newParentNo,
+                                                      controller: newParentNo,
                                                       decoration: InputDecoration(
                                                           hintText: snapshot
                                                               .data!.docs[0]
@@ -209,7 +209,7 @@ Future<void> getGuardianDatas(
     {required BuildContext context,
     required String schooilID,
     required String studentID}) async {
-  final _firebase = FirebaseFirestore.instance
+  final firebase = FirebaseFirestore.instance
       .collection("SchoolListCollection")
       .doc(schooilID)
       .collection("Student_Guardian");
@@ -217,7 +217,7 @@ Future<void> getGuardianDatas(
     context: context,
     builder: (context) {
       return FutureBuilder(
-          future: _firebase.where('wStudent', isEqualTo: studentID).get(),
+          future: firebase.where('wStudent', isEqualTo: studentID).get(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               log(snapshot.data!.docs[0].data()['parentImage'].toString());
@@ -271,20 +271,20 @@ Future<void> getGuardianDatas(
                                           barrierDismissible:
                                               false, // user must tap button!
                                           builder: (BuildContext context) {
-                                            final _newParentNo =
+                                            final newParentNo =
                                                 TextEditingController();
                                             return AlertDialog(
                                               actions: [
                                                 GestureDetector(
                                                   onTap: () async {
-                                                    _firebase
+                                                    firebase
                                                         .doc(snapshot
                                                             .data!.docs[0]
                                                             .data()['id'])
                                                         .set(
                                                             {
                                                           'guardianPhoneNumber':
-                                                              _newParentNo.text
+                                                              newParentNo.text
                                                                   .trim()
                                                         },
                                                             SetOptions(
@@ -316,7 +316,7 @@ Future<void> getGuardianDatas(
                                                 child: ListBody(
                                                   children: <Widget>[
                                                     TextFormField(
-                                                      controller: _newParentNo,
+                                                      controller: newParentNo,
                                                       decoration: InputDecoration(
                                                           hintText: snapshot
                                                               .data!.docs[0]

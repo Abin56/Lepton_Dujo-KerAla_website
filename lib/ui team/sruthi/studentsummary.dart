@@ -38,7 +38,7 @@ class _SummaryState extends State<Summary> {
           Container(
             width: screenSize.width * 0.3,
             height: screenSize.height * 1,
-            color: Color.fromARGB(255, 14, 57, 92),
+            color: const Color.fromARGB(255, 14, 57, 92),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,8 +47,8 @@ class _SummaryState extends State<Summary> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20),
+                      const Padding(
+                        padding: EdgeInsets.only(top: 20),
                         child: CircleAvatar(
                           radius: 90,
                           // backgroundImage: NetworkImage(
@@ -60,13 +60,13 @@ class _SummaryState extends State<Summary> {
                       sizedBoxH20,
                       LeftWidget(
                         screenSize: screenSize,
-                        texts: ["Name", "Class", "Admission No."],
+                        texts: const ["Name", "Class", "Admission No."],
                         maintext: "Personal Info",
                       ),
                       sizedBoxH20,
                       LeftWidget(
                         screenSize: screenSize,
-                        texts: [
+                        texts: const [
                           "Mother's Name",
                           "Father's Name",
                         ],
@@ -75,7 +75,7 @@ class _SummaryState extends State<Summary> {
                       sizedBoxH20,
                       LeftWidget(
                         screenSize: screenSize,
-                        texts: [
+                        texts: const [
                           "Address",
                           "Phone No.",
                         ],
@@ -92,7 +92,7 @@ class _SummaryState extends State<Summary> {
             ),
           ),
           SizedBox(width: screenSize.width * 0.01),
-          Container(
+          SizedBox(
             width: screenSize.width * 0.68,
             height: screenSize.height * 1,
             child: SingleChildScrollView(
@@ -102,38 +102,38 @@ class _SummaryState extends State<Summary> {
                   RightWidget(
                     screenSize: screenSize,
                     maintext: "Academics",
-                    texts: ["Class", "Year", "Result"],
+                    texts: const ["Class", "Year", "Result"],
                   ),
                   sizedBoxH20,
                   RightWidget(
                     screenSize: screenSize,
                     maintext: "Extra Curricular Activities",
-                    texts: ["Arts", "Sports", "Technology"],
+                    texts: const ["Arts", "Sports", "Technology"],
                   ),
                   sizedBoxH20,
                   RightWidget(
                     screenSize: screenSize,
                     maintext: "Achievement",
-                    texts: ["School Level", "District Level", "State Level"],
+                    texts: const ["School Level", "District Level", "State Level"],
                   ),
                   sizedBoxH20,
                   RightWidget(
                     screenSize: screenSize,
                     maintext: "Skills/Talents",
-                    texts: ["*"],
+                    texts: const ["*"],
                   ),
                    sizedBoxH20,
                   RightWidget(
                     screenSize: screenSize,
                     maintext: "Clubs",
-                    texts: ["*"],
+                    texts: const ["*"],
             
                   ),
                    sizedBoxH20,
                   RightWidget(
                     screenSize: screenSize,
                     maintext: "Teachers Opinion",
-                    texts: ["Good"],
+                    texts: const ["Good"],
                   ),
             
                 ],
@@ -184,7 +184,7 @@ class RightWidget extends StatelessWidget {
             for (String text in texts)
               Column(children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 15),
+                  padding: const EdgeInsets.only(top: 15),
                   child: Text(text,
                       style: GoogleFonts.poppins(
                           color: const Color.fromARGB(255, 115, 114, 114),
@@ -239,7 +239,7 @@ class LeftWidget extends StatelessWidget {
             for (String text in texts)
               Column(children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 15),
+                  padding: const EdgeInsets.only(top: 15),
                   child: Text(text,
                       style: GoogleFonts.poppins(
                           color:Colors.white,

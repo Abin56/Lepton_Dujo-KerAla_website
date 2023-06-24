@@ -92,15 +92,15 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'School Protection\nGroup',
     'Scholarship',
     'Bus Route',
-    'Student Summary',
-    'Research and\nDevelopment',
-    'School Calendar',
-    'Online Classes',
-    'Recorded Classes',
+   // 'Student Summary',
+   // 'Research and\nDevelopment',
+    //'School Calendar',
+    'Video Conference',
+    //'Recorded Classes',
     'Food and Beverages',
     'Exam Notifications',
     'Alumni Associations',
-    'Shift Class',
+    'Class Promotion',
     'Non-Teaching Staffs',
   ];
 
@@ -119,11 +119,11 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'assets/images/protection.png',
     'assets/images/graduation.png',
     'assets/images/route.png',
-    'assets/images/students.png',
-    'assets/images/research-and-development.png',
-    'assets/images/calendar.png',
+    //  'assets/images/students.png',
+   // 'assets/images/research-and-development.png',
+   // 'assets/images/calendar.png',
     'assets/images/elearning.png',
-    'assets/images/video-conference.png',
+   // 'assets/images/video-conference.png',
     'assets/images/fast-food.png',
     'assets/images/exam.png',
     'assets/images/alumni.png',
@@ -182,12 +182,12 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       StudentProtectionGroup(), //12-Students Protection Group
       AdminScholarships(schoolID: widget.schoolID), //13-ScholarShip
 
-      BusRoute(), //14-Bus Route
-      const UnderMaintanceScreen(), //15-Student Summary
-      const UnderMaintanceScreen(), //16-Research and development
-      const UnderMaintanceScreen(), //17-School Calendar
-      const UnderMaintanceScreen(), //8
-      const UnderMaintanceScreen(), //9
+      const BusRoute(), //14-Bus Route
+    //  const UnderMaintanceScreen(), //15-Student Summary
+     // const UnderMaintanceScreen(), //16-Research and development
+     // const UnderMaintanceScreen(), //17-School Calendar
+      const UnderMaintanceScreen(), //18
+      //const UnderMaintanceScreen(), //19
       FoodBeverages(schoolID: widget.schoolID),
       //SelectType(schoolID: widget.schoolID),
       SchoolLevelNotifications(schoolID: widget.schoolID),
@@ -833,12 +833,10 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                       message: "Logout",
                                       child: Row(
                                         children: [
-                                          IconButton(
-                                            onPressed: () {},
-                                            icon: const Icon(
+                                            const Icon(
                                               Icons.logout_outlined,
                                             ),
-                                          ),
+                                        
                                           Container(
                                             margin: EdgeInsets.only(top: 5.h),
                                             height: 20.h,
@@ -970,20 +968,20 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                         false, // user must tap button!
                                     builder: (BuildContext context) {
                                       return AlertDialog(
-                                        title: const Text('Add Student'),
+                                        title: const Text('Add student'),
                                         content: SingleChildScrollView(
                                           child: Form(
                                             key: _formKey,
                                             child: ListBody(
                                               children: <Widget>[
-                                                GetClassesListDropDownButton(),
+                                                const GetClassesListDropDownButton(),
                                                 TextFormField(
                                                   validator: checkFieldEmpty,
                                                   controller:
                                                       studentNameController,
                                                   decoration: const InputDecoration(
                                                       hintText:
-                                                          'Enter StudentName'),
+                                                          'Enter student name'),
                                                 ),
                                                 TextFormField(
                                                   validator: checkFieldPhoneNumberIsValid,
@@ -991,7 +989,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                       phoneNumberController,
                                                   decoration: const InputDecoration(
                                                       hintText:
-                                                          'Enter PhoneNumber'),
+                                                          'Enter phone number'),
                                                 ),
                                                 TextFormField(
                                                   validator: checkFieldEmpty,
@@ -999,7 +997,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                       addmissionController,
                                                   decoration: const InputDecoration(
                                                       hintText:
-                                                          'Enter Admission Number'),
+                                                          'Enter admission number'),
                                                 ),
                                               ],
                                             ),

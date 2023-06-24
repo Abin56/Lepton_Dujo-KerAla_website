@@ -1,7 +1,5 @@
 import 'package:dujo_kerala_website/view/web/home/lepton_Admin/requested_list/req_list_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../widgets/button_container_widget.dart';
@@ -24,7 +22,7 @@ class LeptonHomePage extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return SchoolsListScreen();
+                      return const SchoolsListScreen();
                     },
                   ),
                 );

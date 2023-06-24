@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-
 
 import '../../../view/web/login/admin/admin_DashBoard/Students_ScholarShip/student_scholarship.dart';
 
@@ -19,41 +16,41 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
   Widget build(BuildContext context) {
      var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(title: Text('Create Food Menu')),
+      appBar: AppBar(title: const Text('Create Food Menu')),
       body:SingleChildScrollView(child:
               Column(
                 children: [
                   Row(children: [
-                    Container(
+                    SizedBox(
                       height: screenSize.width/1.5,
                       width:screenSize.width/7.5 ,
                       child: Column(
                         children: [
-                          DaysContainer2(screenSize: screenSize, text: 'Days',Color:Color.fromARGB(255, 255, 102, 222), ),
-                          SizedBox(height: 20,),
-                          DaysContainer2(screenSize: screenSize, text: 'BreakFast',Color:Color.fromARGB(255, 131, 236, 184), ),
-                          SizedBox(height: 20,),
-                           DaysContainer2(screenSize: screenSize, text: 'Lunch',Color:Color.fromARGB(255, 255, 102, 222), ),
-                          SizedBox(height: 20,),
-                          DaysContainer2(screenSize: screenSize, text: 'Tea',Color:Color.fromARGB(255, 131, 236, 184), ),
+                          DaysContainer2(screenSize: screenSize, text: 'Days',Color:const Color.fromARGB(255, 255, 102, 222), ),
+                          const SizedBox(height: 20,),
+                          DaysContainer2(screenSize: screenSize, text: 'BreakFast',Color:const Color.fromARGB(255, 131, 236, 184), ),
+                          const SizedBox(height: 20,),
+                           DaysContainer2(screenSize: screenSize, text: 'Lunch',Color:const Color.fromARGB(255, 255, 102, 222), ),
+                          const SizedBox(height: 20,),
+                          DaysContainer2(screenSize: screenSize, text: 'Tea',Color:const Color.fromARGB(255, 131, 236, 184), ),
                         ],
                       ),
                     ),
                      
-                          Container(
+                          SizedBox(
                           height: screenSize.width/1.5,
                       width:screenSize.width/7.5 ,
                            child: Column(
                              children: [
                                
                                DaysContainer2(screenSize: screenSize, text: 'Mon',
-                               Color:Color.fromARGB(255, 131, 236, 184), ),
+                               Color:const Color.fromARGB(255, 131, 236, 184), ),
                                 DaysContainer(screenSize: screenSize, text: 'Items',
                            ),
-                              SizedBox(height: 20,),
+                              const SizedBox(height: 20,),
                              DaysContainer(screenSize: screenSize, text: 'Items',
                              ),
-                              SizedBox(height: 20,),
+                              const SizedBox(height: 20,),
                              DaysContainer(screenSize: screenSize, text: 'Items',
                              ),
                              FoodButton(onTap: () {  },)
@@ -61,19 +58,19 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
                            ),
                          ),
                        
-                        Container(
+                        SizedBox(
                           height: screenSize.width/1.5,
                       width:screenSize.width/7.5 ,
                           child: Column(
                             children: [
                               DaysContainer2(screenSize: screenSize, text: 'Tue',
-                              Color:Color.fromARGB(255, 255, 102, 222), ),
+                              Color:const Color.fromARGB(255, 255, 102, 222), ),
                                DaysContainer(screenSize: screenSize, text: 'Items',
                            ),
-                              SizedBox(height: 20,),
+                              const SizedBox(height: 20,),
                              DaysContainer(screenSize: screenSize, text: 'Items',
                              ),
-                              SizedBox(height: 20,),
+                              const SizedBox(height: 20,),
                              DaysContainer(screenSize: screenSize, text: 'Items',
                              ),
                               FoodButton(onTap: () {  },)
@@ -81,20 +78,20 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
                           ),
                         ),
                         
-                         Container(
+                         SizedBox(
                           height: screenSize.width/1.5,
                       width:screenSize.width/7.5 ,
                            child: Column(
                              children: [
                                
                                DaysContainer2(screenSize: screenSize, text: 'Wed',
-                               Color:Color.fromARGB(255, 131, 236, 184), ),
+                               Color:const Color.fromARGB(255, 131, 236, 184), ),
                                 DaysContainer(screenSize: screenSize, text: 'Items',
                            ),
-                              SizedBox(height: 20,),
+                              const SizedBox(height: 20,),
                              DaysContainer(screenSize: screenSize, text: 'Items',
                              ),
-                              SizedBox(height: 20,),
+                              const SizedBox(height: 20,),
                              DaysContainer(screenSize: screenSize, text: 'Items',
                              ),
                               FoodButton(onTap: () {  },)
@@ -102,19 +99,19 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
                            ),
                          ),
                           
-                        Container(
+                        SizedBox(
                           height: screenSize.width/1.5,
                       width:screenSize.width/7.5 ,
                           child: Column(
                             children: [
                               DaysContainer2(screenSize: screenSize, text: 'Thurs',
-                              Color:Color.fromARGB(255, 255, 102, 222), ),
+                              Color:const Color.fromARGB(255, 255, 102, 222), ),
                                DaysContainer(screenSize: screenSize, text: 'Items',
                            ),
-                              SizedBox(height: 20,),
+                              const SizedBox(height: 20,),
                              DaysContainer(screenSize: screenSize, text: 'Items',
                              ),
-                              SizedBox(height: 20,),
+                              const SizedBox(height: 20,),
                              DaysContainer(screenSize: screenSize, text: 'Items',
                              ),
                               FoodButton(onTap: () {  },)
@@ -122,19 +119,19 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
                           ),
                         ),
                          
-                         Container(
+                         SizedBox(
                           height: screenSize.width/1.5,
                       width:screenSize.width/7.5 ,
                            child: Column(
                              children: [
                                DaysContainer2(screenSize: screenSize, text: 'Fri',
-                               Color:Color.fromARGB(255, 131, 236, 184), ),
+                               Color:const Color.fromARGB(255, 131, 236, 184), ),
                                 DaysContainer(screenSize: screenSize, text: 'Items',
                            ),
-                              SizedBox(height: 20,),
+                              const SizedBox(height: 20,),
                              DaysContainer(screenSize: screenSize, text: 'Items',
                              ),
-                              SizedBox(height: 20,),
+                              const SizedBox(height: 20,),
                              DaysContainer(screenSize: screenSize, text: 'Items',
                              ),
                               FoodButton(onTap: () {  },)
@@ -142,19 +139,19 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
                            ),
                          ),
                         
-                        Container(
+                        SizedBox(
                           height: screenSize.width/1.5,
                       width:screenSize.width/7.5 ,
                           child: Column(
                             children: [
                               DaysContainer2(screenSize: screenSize, text: 'Sat',
-                              Color:Color.fromARGB(255, 255, 102, 222), ),
+                              Color:const Color.fromARGB(255, 255, 102, 222), ),
                                DaysContainer(screenSize: screenSize, text: 'Items',
                            ),
-                              SizedBox(height: 20,),
+                              const SizedBox(height: 20,),
                              DaysContainer(screenSize: screenSize, text: 'Items',
                              ),
-                              SizedBox(height: 20,),
+                              const SizedBox(height: 20,),
                              DaysContainer(screenSize: screenSize, text: 'Items',
                              ),
                               FoodButton(onTap: () {  },)
@@ -180,13 +177,13 @@ class FoodButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        margin: EdgeInsets.only(top: 10),
+        margin: const EdgeInsets.only(top: 10),
         height: 50,
         width: 120,
         decoration: BoxDecoration(gradient: LinearGradient
         (colors: containerColor[8],),
        borderRadius: BorderRadius.circular(15),),
-       child: Center(child: Text('Add',style: TextStyle(fontSize: 20,color: Colors.white),)),
+       child: const Center(child: Text('Add',style: TextStyle(fontSize: 20,color: Colors.white),)),
       ));
   }
 }
@@ -205,14 +202,14 @@ class DaysContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding:  EdgeInsets.all(8.0),
+        padding:  const EdgeInsets.all(8.0),
         child: Container(
           margin: EdgeInsets.only(top: screenSize.width/32),
           height: screenSize.width/30,
           width: screenSize.width/12,
           child: TextField(
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(),
+                        border: const OutlineInputBorder(),
                         labelText: text,
                       ),
                             ),
@@ -234,13 +231,13 @@ class DaysContainer2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 10),
+      margin: const EdgeInsets.only(top: 10),
     height: screenSize.width/15,
      width: screenSize.width/8,
      decoration: BoxDecoration(color: Color,
         borderRadius: BorderRadius.circular(15)),
     child: Center(child: Text(text,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.white,
                               fontSize:20,
                               fontWeight: FontWeight.bold),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../login/admin/admin_DashBoard/create_Admin/add_new_admin.dart';
 import '../login/loginscreen.dart';
@@ -59,7 +58,7 @@ class NavigationBarWidget extends StatelessWidget {
         child: Row(
           children: [
             Icon(Icons.phone,
-                color: Color.fromARGB(255, 4, 157, 228),
+                color: const Color.fromARGB(255, 4, 157, 228),
                 size: screenSize.width / 50),
 
             GestureDetector(
@@ -90,12 +89,12 @@ class NavigationBarWidget extends StatelessWidget {
             ),
 
             Icon(Icons.mail_outline,
-                color: Color.fromARGB(255, 255, 0, 0),
+                color: const Color.fromARGB(255, 255, 0, 0),
                 size: screenSize.width / 50),
 
             Text('info@leptondujo.com',
                 style: TextStyle(
-                    color: Color.fromARGB(255, 0, 0, 0),
+                    color: const Color.fromARGB(255, 0, 0, 0),
                     fontSize: screenSize.width / 98)),
             SizedBox(
               width: screenSize.width * 0.3,
@@ -120,7 +119,7 @@ class NavigationBarWidget extends StatelessWidget {
                       title: const Text('Enter Your School ID'),
                       content: SingleChildScrollView(
                         child: ListBody(
-                          children: <Widget>[GetSchoolListDropDownButton()],
+                          children: const <Widget>[GetSchoolListDropDownButton()],
                           // children: [
                           //   // TextFormField(
                           //   //   controller:schoolIdController,
@@ -134,7 +133,7 @@ class NavigationBarWidget extends StatelessWidget {
                           onPressed: () async {
                             await Navigator.push(context, MaterialPageRoute(
                               builder: (context) {
-                                return LoginScreen(
+                                return const LoginScreen(
                               
                                 );
                               },

@@ -4,7 +4,6 @@ import 'package:dujo_kerala_website/model/food_model/food_and_beverages_model.da
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import '../../../../../constant/constant.dart';
 import '../../../../widgets/button_container_widget.dart';
@@ -35,14 +34,14 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
    .then((value) => showDialog(barrierDismissible: false,
     context: context, builder: ((context) {
      return AlertDialog(
-      title: Text('Food and Beverages'), 
-      content: Text('Food items for ${day} succesfully added!'), 
+      title: const Text('Food and Beverages'), 
+      content: Text('Food items for $day succesfully added!'), 
       actions: [
         Padding(
           padding: const EdgeInsets.all(20.0),
           child: MaterialButton(onPressed: (){
               Navigator.pop(context);
-          }, child: Text('OK'),),
+          }, child: const Text('OK'),),
         )
       ],
      );
@@ -91,7 +90,7 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
               Column(
                 children: [
                   Row(children: [
-                    Container(
+                    SizedBox(
                       height: screenSize.width/1.5,
                       width:screenSize.width/7.5 ,
                       child: Column(
@@ -107,7 +106,7 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
                       ),
                     ),
                      
-                          Container(
+                          SizedBox(
                           height: screenSize.width/1.5,
                       width:screenSize.width/7.5 ,
                            child: Form(
@@ -128,7 +127,7 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
                                FoodButton(onTap: () async{  
                                  bool? result =
                                         formKey1.currentState?.validate();
-                                FoodModel modell = await FoodModel(items:  {
+                                FoodModel modell = FoodModel(items:  {
                                   'Breakfast' : mondayBreak.text, 
                                   'Lunch' : mondayLunch.text, 
                                   'Snacks': mondaySnacks.text
@@ -147,7 +146,7 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
                            ),
                          ),
                        
-                        Container(
+                        SizedBox(
                           height: screenSize.width/1.5,
                       width:screenSize.width/7.5 ,
                           child: Form(
@@ -166,7 +165,7 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
                                ),
                                 FoodButton(onTap: () async{ 
                                  
-                                  FoodModel modell = await FoodModel(items:  {
+                                  FoodModel modell = FoodModel(items:  {
                                   'Breakfast' : tuesdayBreak.text, 
                                   'Lunch' : tuesdayLunch.text, 
                                   'Snacks': tuesdaySnacks.text
@@ -185,7 +184,7 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
                           ),
                         ),
                         
-                         Container(
+                         SizedBox(
                            height: screenSize.width/1.5,
                            width:screenSize.width/7.5 ,
                            child: Form(
@@ -205,7 +204,7 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
                                ),
                                 FoodButton(onTap: ()async { 
                                   
-                                 FoodModel modell = await FoodModel(items:  {
+                                 FoodModel modell = FoodModel(items:  {
                                   'Breakfast' : wednesdayBreak.text, 
                                   'Lunch' : wednesdayLunch.text, 
                                   'Snacks': wednesdaySnacks.text
@@ -217,14 +216,14 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
                                   wednesdayBreak.clear(); 
                                   wednesdayLunch.clear(); 
                                   wednesdaySnacks.clear();
-                                });;
+                                });
                              }},)
                                ],
                              ),
                            ),
                          ),
                           
-                        Container(
+                        SizedBox(
                           height: screenSize.width/1.5,
                       width:screenSize.width/7.5 ,
                           child: Form(
@@ -243,7 +242,7 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
                                ),
                                 FoodButton(onTap: () async { 
                                    
-                                  FoodModel modell = await FoodModel(items:  {
+                                  FoodModel modell = FoodModel(items:  {
                                   'Breakfast' : thursdayBreak.text, 
                                   'Lunch' : thursdayLunch.text, 
                                   'Snacks': thursdaySnacks.text
@@ -262,7 +261,7 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
                           ),
                         ),
                          
-                         Container(
+                         SizedBox(
                           height: screenSize.width/1.5,
                       width:screenSize.width/7.5 ,
                            child: Form(
@@ -281,7 +280,7 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
                                ),
                                 FoodButton(onTap: () async{
                                 
-                                  FoodModel modell = await FoodModel(items:  {
+                                  FoodModel modell = FoodModel(items:  {
                                   'Breakfast' : fridayBreak.text, 
                                   'Lunch' : fridayLunch.text, 
                                   'Snacks': fridaySnacks.text
@@ -292,14 +291,14 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
                                   fridayBreak.clear(); 
                                   fridayLunch.clear(); 
                                   fridaySnacks.clear();
-                                });;
+                                });
                                   }},)
                                ],
                              ),
                            ),
                          ),
                         
-                        Container(
+                        SizedBox(
                           height: screenSize.width/1.5,
                       width:screenSize.width/7.5 ,
                           child: Form(
@@ -318,7 +317,7 @@ class _CreateFoodMenuState extends State<CreateFoodMenu> {
                                ),
                                 FoodButton(onTap: () async{  
                               
-                                FoodModel modell = await FoodModel(items:  {
+                                FoodModel modell = FoodModel(items:  {
                                   'Breakfast' : saturdayBreak.text, 
                                   'Lunch' : saturdayLunch.text, 
                                   'Snacks': saturdaySnacks.text

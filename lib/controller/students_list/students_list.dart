@@ -10,7 +10,7 @@ class StudentsProfileList extends GetxController {
   List<Map<String, dynamic>> categoryCollections = [];
    RxnInt indexValue = RxnInt();
   Stream<List<AddExtraDetailsofStudentsModel>> getProduct(String type,id) {
-    log(">>>>>>>>iddddddddddddddddddddddddd${type}");
+    log(">>>>>>>>iddddddddddddddddddddddddd$type");
     String catData = '';
     for (Map<String, dynamic> map in categoryCollections) {
       if (map["courseTitle"] == type) {
@@ -35,9 +35,9 @@ class StudentsProfileList extends GetxController {
         .collection("SchoolListCollection").doc().collection("Classes")
         .get()
         .then((value) {
-      value.docs.forEach((element) {
+      for (var element in value.docs) {
         list.add(element.data());
-      });
+      }
     });
     list1 = list;
     log(list.toString());

@@ -242,7 +242,9 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                                     widget.loadingStatus = false;
                                   });
                                   clearEventFunction();
-
+                                  parentsNotification();
+                                  guardiansNotification();
+                                  studentsNotification();
                                   // showToast(msg: 'New Event Added!');
 
                                   // showDialog(context: context, builder: (context){

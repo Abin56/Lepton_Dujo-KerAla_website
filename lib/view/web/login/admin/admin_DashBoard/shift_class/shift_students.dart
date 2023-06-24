@@ -48,7 +48,7 @@ class ShiftClassStudents extends StatelessWidget {
                     height: screenSize.width / 20,
                   ),
                   Text(
-                    'Shift students to next class',
+                    'promote students to next class',
                     style: ralewayStyle.copyWith(
                       fontSize: 22.0.w,
                       color: AppColors.whiteColor,
@@ -247,7 +247,7 @@ class ShiftClassStudents extends StatelessWidget {
                                 Padding(
                                   padding: EdgeInsets.all(8.0.w),
                                   child: GoogleMonstserratWidgets(
-                                    text: 'Admission Number',
+                                    text: 'Admission number',
                                     fontsize: 14.w,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -351,7 +351,7 @@ class ShiftClassStudents extends StatelessWidget {
                                         .isLoadingSubmit.value
                                     ? circularProgressIndicator
                                     : const Text(
-                                        "Shift Selected Students to new class");
+                                        "promote Selected Students to new class");
                               },
                             ),
                           ),

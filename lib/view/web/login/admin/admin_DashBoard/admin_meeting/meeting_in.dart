@@ -1,9 +1,7 @@
-import 'dart:developer';
 
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../../controller/Getx/admin/meeting_controller.dart';

@@ -4,7 +4,6 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/controller/add_subject/subject_controller.dart';
-import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -51,7 +50,7 @@ class SubmitSubjectClassTeacher extends StatelessWidget {
                         width: 50.w,
                       ),
                       GoogleMonstserratWidgets(
-                          text: '${Get.find<GetFireBaseData>().bYear.value} '+'  Subject List',
+                          text: '${Get.find<GetFireBaseData>().bYear.value} ''  Subject List',
                           fontsize: 18.w,
                           color: cWhite),
                     ],
@@ -89,7 +88,7 @@ class SubmitSubjectClassTeacher extends StatelessWidget {
                                           ),
                                         height: 65.w,
                                           width: 85.w,
-                                        child: Container(
+                                        child: SizedBox(
                                            height: 75.w ,
                                             width: 90.w,
                                                                     
@@ -151,8 +150,7 @@ class SubmitSubjectClassTeacher extends StatelessWidget {
                     child: Column(
                       children: [
                         GoogleMonstserratWidgets(
-                      text: Get.find<GetFireBaseData>().bYear.value +
-                          ' -Add Subject', ////changed normal text to original batch year
+                      text: '${Get.find<GetFireBaseData>().bYear.value} -Add Subject', ////changed normal text to original batch year
                       //'2023 -2024 batch',
                       fontsize: 17.w,
                       color: cBlack,
@@ -223,7 +221,7 @@ class SubmitSubjectClassTeacher extends StatelessWidget {
                         ),
                        
                   
-                        Container(
+                        SizedBox(
                          
                           height: 500.w,
                           child: StreamBuilder(

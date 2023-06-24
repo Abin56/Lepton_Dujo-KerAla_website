@@ -22,7 +22,7 @@ class MobHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
 
 
-    String _imageUrl =
+    String imageUrl =
         "https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/dujocolleges.jpeg?alt=media&token=0c3fa202-c59f-47bd-b997-88f3128e6871";
 
 
@@ -35,7 +35,7 @@ class MobHomePage extends StatelessWidget {
     
  
  
-    String _description = "Any schools from Kerala can register on\n"
+    String description = "Any schools from Kerala can register on\n"
     "Lepton DuJo. Lepton Dujo is a mobile \n"
     "application with student login,parent, \n"
     "teacher login";
@@ -68,9 +68,9 @@ class MobHomePage extends StatelessWidget {
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 75.h),
-                      child: Image.network(_imageUrl)),
+                      child: Image.network(imageUrl)),
 
-                  FeatureTile(iconImageUrl: "boy.png", title: _description, topMargin: 290.0,),
+                  FeatureTile(iconImageUrl: "boy.png", title: description, topMargin: 290.0,),
 
                   FeatureTile(topMargin: 520, iconImageUrl: "women1.png", title: "Add Teacher Add classes Create and publish\n"
                       "notice Create and share events info"),
@@ -253,7 +253,7 @@ class MobHomePage extends StatelessWidget {
       
               Stack(
                 children: [
-                  Container(
+                  SizedBox(
                      // margin: EdgeInsets.only(top: 50.h),
                      height: 300.w,
                               width:double.infinity,
@@ -394,7 +394,7 @@ class MobHomePage extends StatelessWidget {
               
               Stack(
                 children: [
-                   Container(
+                   SizedBox(
                     
                      height: 300.w,
                               width:double.infinity,
@@ -526,7 +526,7 @@ class MobHomePage extends StatelessWidget {
              
               Stack(
                 children: [
-                  Container(
+                  SizedBox(
                      height: 300.w,
                               width:double.infinity,
                       child: Image.asset("assets/images/professional.png",fit:  BoxFit.cover)),

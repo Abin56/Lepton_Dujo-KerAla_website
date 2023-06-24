@@ -4,8 +4,6 @@ import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/exam_no
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/exam_notifications/state_level_notifications.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
@@ -93,7 +91,7 @@ class _SelectTypeState extends State<SelectType> {
                       width: screenSize.width / 3.5,
                       height: screenSize.height / 4,
                       child: Card(
-                        color: Color.fromARGB(255, 68, 165, 245),
+                        color: const Color.fromARGB(255, 68, 165, 245),
                         child: Center(
                             child: Text('School Level Examinations',
                                 style: GoogleFonts.poppins(
@@ -103,7 +101,7 @@ class _SelectTypeState extends State<SelectType> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   GestureDetector(
@@ -112,13 +110,13 @@ class _SelectTypeState extends State<SelectType> {
                           context,
                           MaterialPageRoute(
                               builder: ((context) =>
-                                  StateLevelNotifications())));
+                                  const StateLevelNotifications())));
                     },
                     child: SizedBox(
                       width: screenSize.width / 3.5,
                       height: screenSize.height / 4,
                       child: Card(
-                        color: Color.fromARGB(255, 245, 86, 75),
+                        color: const Color.fromARGB(255, 245, 86, 75),
                         child: Center(
                             child: Text(
                           'State Level Examinations',

@@ -7,7 +7,7 @@ import '../../../../../constant/constant.dart';
 import '../../../../../fonts/fonts.dart';
 
 class CreateBusRoute extends StatefulWidget {
-  CreateBusRoute({super.key});
+  const CreateBusRoute({super.key});
   //  TextEditingController routeController = TextEditingController();
   //   TextEditingController busnumberController = TextEditingController();
   //    TextEditingController driverphoneController = TextEditingController();
@@ -42,7 +42,7 @@ class _CreateBusRouteState extends State<CreateBusRoute> {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back,
                         color: Colors.white,
                       )),
@@ -52,7 +52,7 @@ class _CreateBusRouteState extends State<CreateBusRoute> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          'Hi Admin ',
+                          'Hi! Admin ',
                           style: ralewayStyle.copyWith(
                             fontSize: 48.0,
                             color: AppColors.whiteColor,
@@ -103,32 +103,50 @@ class _CreateBusRouteState extends State<CreateBusRoute> {
                           BusRouteTextFormWidget(
                             //  textEditingController:routeController,
                             function: checkFieldEmpty,
-                            labelText: 'Route Number',
+                            labelText: 'Route number',
                             icon: Icons.route_outlined,
                           ),
                           BusRouteTextFormWidget(
                             //textEditingController:busnumberController ,
                             function: checkFieldEmpty,
-                            labelText: 'Bus Number',
+                            labelText: 'Bus number',
                             icon: Icons.bus_alert,
+                          ),
+                          BusRouteTextFormWidget(
+                            // textEditingController:staffinchargeController ,
+                            function: checkFieldEmpty,
+                            labelText: 'Driver name',
+                            icon: Icons.person_2,
                           ),
                           BusRouteTextFormWidget(
                             // textEditingController:driverphoneController,
                             function: checkFieldPhoneNumberIsValid,
-                            labelText: 'Driver Mobile Number',
+                            labelText: 'Driver mobile number',
                             icon: Icons.phone_android_sharp,
+                          ),
+                          BusRouteTextFormWidget(
+                            // textEditingController:staffinchargeController ,
+                            function: checkFieldEmpty,
+                            labelText: 'Assistance name',
+                            icon: Icons.person_2,
                           ),
                           BusRouteTextFormWidget(
                             // textEditingController: assistancephoneController,
                             function: checkFieldPhoneNumberIsValid,
-                            labelText: 'Assistance Mobile Number',
+                            labelText: 'Assistance mobile number',
                             icon: Icons.phone_android,
                           ),
                           BusRouteTextFormWidget(
                             // textEditingController:staffinchargeController ,
                             function: checkFieldEmpty,
-                            labelText: 'Staff inCharge',
+                            labelText: 'Staff incharge',
                             icon: Icons.person_2,
+                          ),
+                           BusRouteTextFormWidget(
+                            // textEditingController: assistancephoneController,
+                            function: checkFieldPhoneNumberIsValid,
+                            labelText: 'Staff incharge number',
+                            icon: Icons.phone_android,
                           ),
                           SizedBox(
                             height: 30.h,
@@ -144,7 +162,7 @@ class _CreateBusRouteState extends State<CreateBusRoute> {
                               child: TextButton(
                                 style: TextButton.styleFrom(
                                   foregroundColor:
-                                      Color.fromARGB(255, 255, 255, 255),
+                                      const Color.fromARGB(255, 255, 255, 255),
                                   padding: const EdgeInsets.all(9.0),
                                   textStyle: const TextStyle(fontSize: 17),
                                 ),
@@ -157,7 +175,7 @@ class _CreateBusRouteState extends State<CreateBusRoute> {
                                         msg: 'Bus route successfully created ');
                                   }
                                 },
-                                child: Text('Create'),
+                                child: const Text('Create'),
                               ),
                             ),
                           ),
@@ -189,7 +207,7 @@ class BusRouteTextFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
       child: TextFormField(
         validator: function,
         // controller: textEditingController,
@@ -236,99 +254,3 @@ class BusRouteTextFormWidget extends StatelessWidget {
 
 
 
-
-
-// Column(
-//                                                       children: [
-//                                                       Padding(
-//                                                         padding: EdgeInsets.all(15),
-//                                                         child: TextFormField(
-                                                          
-//                                                           decoration: InputDecoration(
-//                                                             border: OutlineInputBorder( borderRadius: BorderRadius.circular(20)),
-//                                                             icon: Icon(Icons.route_outlined,color: Color.fromARGB(255, 19, 7, 134)),
-//                                                             labelText: 'Route Number',
-//                                                           ),
-//                                                         ),
-//                                                       ),
-                                                      
-//                                                       Padding(
-//                                                         padding: EdgeInsets.all(15),
-//                                                         child: TextFormField(
-                                                         
-//                                                           decoration: InputDecoration(
-//                                                             border: OutlineInputBorder(
-//                                                                borderRadius: BorderRadius.circular(20)
-//                                                             ),
-//                                                              icon: Icon(Icons.bus_alert,color: Color.fromARGB(255, 19, 7, 134)),
-//                                                             labelText: 'Bus Number',
-//                                                           ),
-//                                                         ),
-//                                                       ),
-//                                                       Padding(
-//                                                         padding: EdgeInsets.all(15),
-//                                                         child: TextFormField(
-                                                          
-//                                                           decoration: InputDecoration(
-//                                                             border: OutlineInputBorder(
-//                                                                borderRadius: BorderRadius.circular(20)
-//                                                             ),
-//                                                              icon: Icon(Icons.phone_android_sharp,color: Color.fromARGB(255, 19, 7, 134)),
-//                                                             labelText: 'Driver Mobile Number',
-//                                                           ),
-//                                                         ),
-//                                                       ),
-//                                                       Padding(
-//                                                         padding: EdgeInsets.all(15),
-//                                                         child: TextFormField(
-//                                                           decoration: InputDecoration(
-//                                                             border: OutlineInputBorder(
-//                                                                borderRadius: BorderRadius.circular(20)
-//                                                             ),
-//                                                              icon: Icon(Icons.phone_android,color: Color.fromARGB(255, 19, 7, 134)),
-//                                                             labelText: 'Assistnce Mobile Number',
-//                                                           ),
-//                                                         ),
-//                                                       ),
-//                                                       Padding(
-//                                                         padding: EdgeInsets.all(15),
-//                                                         child: TextFormField(
-//                                                           decoration: InputDecoration(
-//                                                             border: OutlineInputBorder(
-//                                                                borderRadius: BorderRadius.circular(20)
-//                                                             ),
-//                                                              icon: Icon(Icons.person_2,color: Color.fromARGB(255, 19, 7, 134)),
-//                                                             labelText: 'Staff in Charge',
-//                                                           ),
-//                                                         ),
-//                                                       ),
-                                                     
-                                                      
-//                                                       SizedBox(
-//                                                         height: 30,),
-//                                                       InkWell(
-//                                                         onTap: () {
-//                                                         //  Navigator.push
-//                                                         //                 (context, MaterialPageRoute
-//                                                         //                 (builder: 
-//                                                         //                 ((context) =>  )));
-//                                                       },
-//                                                         child: Container(
-//                                                               height: size.width * 1 / 30,
-//                                                               width: size.width * 1 / 5,
-//                                                               decoration: BoxDecoration(
-//                                                                   color: Colors.blue,
-//                                                                   borderRadius: BorderRadius.circular(14)),
-//                                                               child: TextButton(
-//                                                                 style: TextButton.styleFrom(
-//                                                                   foregroundColor: Color.fromARGB(255, 255, 255, 255),
-//                                                                   padding: const EdgeInsets.all(9.0),
-//                                                                   textStyle: const TextStyle(fontSize: 17),
-//                                                                 ),
-//                                                                 onPressed: () {},
-//                                                                 child: const Text('Create'),
-//                                                               ),
-//                                                             ),
-//                                                       ),
-                                                      
-//                                                     ]),
