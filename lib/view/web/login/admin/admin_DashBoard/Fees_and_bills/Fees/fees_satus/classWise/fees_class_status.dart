@@ -9,15 +9,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../../../../../../../controller/fees_bills/fees_bills_controller.dart';
-import 'fees_class_students.dart';
+import '../../../../../../../../../controller/fees_bills/fees_class_controller.dart';
+import 'fees_class_category_status.dart';
 
 class FeesClassStatus extends StatelessWidget {
-  FeesClassStatus({super.key, required this.feesCategory});
-  final FeesBillsController feesBillsController =
-      Get.put(FeesBillsController());
-
-  final String feesCategory;
+  FeesClassStatus({super.key});
+  final FeesClassController feesClassController =
+      Get.put(FeesClassController());
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +27,7 @@ class FeesClassStatus extends StatelessWidget {
               screenSize: screenSize, text: 'Fees class list'),
           Expanded(
             child: FutureBuilder(
-                future: feesBillsController.getAllClasses(),
+                future: feesClassController.getAllClasses(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return GridView.builder(
@@ -46,15 +44,14 @@ class FeesClassStatus extends StatelessWidget {
                               try {
                                 if (snapshot.data != null &&
                                     snapshot.data![index].docid.isNotEmpty) {
-                                  snapshot.data![index].docid;
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => FeesClassStudents(
-                                          classId: snapshot.data![index].docid,
-                                          feesCategory: feesCategory,
-                                        ),
-                                      ));
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          FeesClassStatusCategoryPage(
+                                        classId: snapshot.data![index].docid,
+                                      ),
+                                    ),
+                                  );
                                 }
                               } catch (e) {
                                 log(e.toString());

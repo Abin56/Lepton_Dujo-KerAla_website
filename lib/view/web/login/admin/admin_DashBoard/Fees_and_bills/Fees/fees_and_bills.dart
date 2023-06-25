@@ -6,7 +6,8 @@ import 'package:get/get_utils/get_utils.dart';
 
 import 'fees_notification/Fees_notification.dart';
 import 'fees_satus/bills_creation.dart';
-import 'fees_satus/fees_status.dart';
+import 'fees_satus/classWise/fees_class_status.dart';
+import 'fees_satus/schoolWise/fees_status.dart';
 
 class FeesAndBillsWeb extends StatelessWidget {
   const FeesAndBillsWeb({super.key});
@@ -61,7 +62,7 @@ class FeesAndBillsWeb extends StatelessWidget {
           child: TabBarView(
             children: [
               FeesNotification(),
-              FeesStstatues(),
+              FeesClassStatus(),
               BillsCreationalPage(),
             ],
           ),

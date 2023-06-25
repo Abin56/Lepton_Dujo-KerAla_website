@@ -25,22 +25,33 @@ class FeesBillsController extends GetxController {
       .doc(Get.find<AdminLoginScreenController>().schoolID)
       .collection(Get.find<GetFireBaseData>().bYear.value)
       .doc(Get.find<GetFireBaseData>().bYear.value);
+
+  ///for unique id creation
   final Uuid uuid = const Uuid();
-
-  Map<String, dynamic> categoryMap = {};
-  String categoryCreateValue = "";
-  String selectedPeriod = "";
-
-  RxString selectedType = RxString("");
-  RxList<String> selectDateList = RxList([]);
-  List<ClassModel> allClass = [];
-
-  List<String> tokenList = [];
   TextEditingController categoryNameController = TextEditingController();
   TextEditingController amountController = TextEditingController();
   TextEditingController dueDateController = TextEditingController();
 
-  final List<String> selectionList = [
+//category create section variables
+
+//category name dropdown selected category
+  Map<String, dynamic> selectedCategory = {};
+
+  ///selected category type[typeOfCategoryList]
+  String selectedTypeOfCategory = "";
+//selected period from
+  String selectedPeriod = "";
+
+  ///category creation varibles
+  RxString selectedType = RxString("");
+  RxList<String> selectDateList = RxList([]);
+  List<ClassModel> allClass = [];
+  List<String> tokenList = [];
+//this for add category only selected class if this value is true then selected school dropdown will show
+  RxBool isSpecificClassOnly = RxBool(false);
+  ClassModel? selectedClass;
+
+  final List<String> typeOfCategoryList = [
     'Monthly',
     'Quarterly',
     'Halfly',
@@ -94,7 +105,7 @@ class FeesBillsController extends GetxController {
     BuildContext context,
   ) async {
     try {
-      if (categoryCreateValue.isEmpty) {
+      if (selectedTypeOfCategory.isEmpty) {
         return showToast(msg: "Please select category");
       }
       categoryCreateloading.value = true;
@@ -117,7 +128,7 @@ class FeesBillsController extends GetxController {
         },
       ).then((value) {
         showToast(msg: "Successfully Created");
-        categoryCreateValue = "";
+        selectedTypeOfCategory = "";
         categoryNameController.clear();
         Navigator.pop(context);
       });
@@ -147,8 +158,7 @@ class FeesBillsController extends GetxController {
     }
   }
 
-  //creatin fee
-
+  //creatin fees for all class
   Future<void> createFeesForAllClass(
     String categoryId,
     String categoryName,
@@ -185,6 +195,42 @@ class FeesBillsController extends GetxController {
       showToast(msg: "Something Went Wrong");
       log(e.toString());
     }
+  }
+
+//fees created only specific class
+  Future<void> createFeesForSpecificClass(
+      String categoryId,
+      String categoryName,
+      String amount,
+      String dueDate,
+      String type,
+      ClassModel classModel) async {
+    categoryCreateloading.value = true;
+    fStore
+        .collection("classes")
+        .doc(classModel.docid)
+        .collection("ClassFees")
+        .doc(categoryId)
+        .set(
+          FeesModel(
+              categoryId: categoryId,
+              categoryName: categoryName,
+              amount: amount,
+              dueDate: dueDate,
+              classId: classModel.docid,
+              className: classModel.className,
+              type: type,
+              studentList: []).toMap(),
+        )
+        .then((value) async {
+      showToast(msg: "Successfully Completed");
+      categoryCreateloading.value = false;
+      selectedClass = null;
+    }).catchError((error) {
+      categoryCreateloading.value = false;
+      showToast(msg: (error as FirebaseException).code);
+      log(error.toString());
+    });
   }
 
 //create all tokens
@@ -226,13 +272,12 @@ class FeesBillsController extends GetxController {
   }
 }
 
-
-    // //creating token lists parent,guardian,students
-    //       await fetchAllTokenList().then((value) async {
-    //         log("create time ${tokenList.toString()}");
-    //         for (var element3 in tokenList) {
-    //           //send push notification from push notification
-    //           await sendPushMessage(element3,
-    //               "Due Date : $dueDate Amount : $amount", categoryName);
-    //         }
-    //       });
+// //creating token lists parent,guardian,students
+//       await fetchAllTokenList().then((value) async {
+//         log("create time ${tokenList.toString()}");
+//         for (var element3 in tokenList) {
+//           //send push notification from push notification
+//           await sendPushMessage(element3,
+//               "Due Date : $dueDate Amount : $amount", categoryName);
+//         }
+//       });

@@ -5,25 +5,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../../../../../../controller/fees_bills/fees_status_controller.dart';
-import '../../../../../../../../model/create_classModel/add_student_model.dart';
-import '../../../../../../../../utils/utils.dart';
+import '../../../../../../../../../controller/fees_bills/fees_class_controller.dart';
+import '../../../../../../../../../model/create_classModel/add_student_model.dart';
+import '../../../../../../../../../model/fees_bills_model/fees_model.dart';
+import '../../../../../../../../../utils/utils.dart';
 import 'fees_class_status.dart';
 
-class FeesClassStudents extends StatefulWidget {
-  const FeesClassStudents(
+class FeesClassWiseStudentsPage extends StatefulWidget {
+  const FeesClassWiseStudentsPage(
       {super.key, required this.classId, required this.feesCategory});
   final String classId;
   final String feesCategory;
 
   @override
-  State<FeesClassStudents> createState() => _FeesClassStudentsState();
+  State<FeesClassWiseStudentsPage> createState() => _FeesClassStudentsState();
 }
 
-class _FeesClassStudentsState extends State<FeesClassStudents> {
-  final FeesStatusController feesStatusController =
-      Get.put(FeesStatusController());
-
+class _FeesClassStudentsState extends State<FeesClassWiseStudentsPage> {
+  final FeesClassController feesClassController =
+      Get.put(FeesClassController());
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
@@ -39,8 +39,8 @@ class _FeesClassStudentsState extends State<FeesClassStudents> {
           ),
           Expanded(
             child: FutureBuilder(
-                future: feesStatusController
-                    .getAllStudentsFromClass(widget.classId),
+                future:
+                    feesClassController.getAllStudentsFromClass(widget.classId),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return ListView.separated(
@@ -128,10 +128,10 @@ class _FeesClassStudentsState extends State<FeesClassStudents> {
 
   Future<bool> paidOrNot(
       String feesCategoryId, String classId1, String studentId) async {
-    final data = await feesStatusController.getFeesCategoryData(
-        feesCategoryId, classId1);
+    final FeesModel? data =
+        await feesClassController.getFeesCategoryData(feesCategoryId, classId1);
 
-    final listOfStudent =
+    final List<String> listOfStudent =
         data?.studentList.map((e) => e.studentId).toList() ?? [];
 
     if (listOfStudent.contains(studentId)) {
@@ -147,11 +147,11 @@ class _FeesClassStudentsState extends State<FeesClassStudents> {
     required int index,
   }) async {
     psnapshot.data ?? false
-        ? await feesStatusController.removeStudentToFeePaid(
+        ? await feesClassController.removeStudentToFeePaid(
             categoryId: widget.feesCategory,
             classId: widget.classId,
             studentId: snapshota.data?[index].docid ?? "")
-        : await feesStatusController.addStudentToFeePaid(
+        : await feesClassController.addStudentToFeePaid(
             categoryId: widget.feesCategory,
             classId: widget.classId,
             studentId: snapshota.data?[index].docid ?? "");

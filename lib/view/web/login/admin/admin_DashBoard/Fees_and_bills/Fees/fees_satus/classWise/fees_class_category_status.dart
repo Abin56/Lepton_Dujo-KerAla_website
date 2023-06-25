@@ -4,15 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../../../../../../controller/fees_bills/fees_bills_controller.dart';
-import '../fees_notification/widgets/fees_left_side_widget.dart';
-import 'fees_class_status.dart';
+import '../../../../../../../../../controller/fees_bills/fees_class_controller.dart';
+import '../../fees_notification/widgets/fees_left_side_widget.dart';
+import 'fees_classwise_student.dart';
 
-class FeesStstatues extends StatelessWidget {
-  FeesStstatues({super.key});
-
-  final FeesBillsController feesBillsController =
-      Get.put(FeesBillsController());
+class FeesClassStatusCategoryPage extends StatelessWidget {
+  FeesClassStatusCategoryPage({
+    super.key,
+    required this.classId,
+  });
+  final String classId;
+  final FeesClassController feesClassController =
+      Get.put(FeesClassController());
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +27,9 @@ class FeesStstatues extends StatelessWidget {
               screenSize: screenSize, text: 'Fees Catergories'),
           Expanded(
             child: FutureBuilder(
-              future: feesBillsController.fetchCategoryList(),
+              future: feesClassController.fetchCategoryList(
+                classId: classId,
+              ),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return GridView.builder(
@@ -38,13 +43,12 @@ class FeesStstatues extends StatelessWidget {
                         padding: EdgeInsets.all(20.w),
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => FeesClassStatus(
-                                      feesCategory: snapshot.data?[index]
-                                          ["id"]),
-                                ));
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => FeesClassWiseStudentsPage(
+                                      classId: classId,
+                                      feesCategory: snapshot.data![index]
+                                          ["categoryId"],
+                                    )));
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -71,7 +75,8 @@ class FeesStstatues extends StatelessWidget {
                                   height: 10.w,
                                 ),
                                 GoogleMonstserratWidgets(
-                                    text: snapshot.data?[index]["categoryName"],
+                                    text: snapshot.data![index]["categoryName"]
+                                        .toString(),
                                     fontsize: 15.w,
                                     color: cBlack,
                                     fontWeight: FontWeight.w600),
