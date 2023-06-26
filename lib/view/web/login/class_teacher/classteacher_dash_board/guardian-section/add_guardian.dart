@@ -1,7 +1,6 @@
 import 'package:dujo_kerala_website/controller/_addParent&Guardian/guardian_Controller.dart';
 import 'package:dujo_kerala_website/view/fonts/fonts.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
-import 'package:excel/excel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,7 +8,6 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
-import '../../../../../../utils/utils.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
 import '../../../../widgets/drop_DownList/get_students.dart';
@@ -102,7 +100,8 @@ class AddGuardian extends StatelessWidget {
                       GetStudentsListDropDownButton(
                           classID: Get.find<GetFireBaseData>()
                               .getTeacherClassRole
-                              .value),
+                              .value,
+                              parentOrGuardian: "guardianID"),
                       sizedBoxH30,
                       AddGuardianWidget(
                         function: checkFieldEmpty,
@@ -144,52 +143,52 @@ class AddGuardian extends StatelessWidget {
                           ),
                         ),
                       ),
-                      sizedBoxH20,
-                      Column(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(
-                                left: 50.w, bottom: 10.w, top: 10.w),
-                            child: SizedBox(
-                              width: 250.w,
-                              height: 60.h,
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: adminePrimayColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                ),
-                                onPressed: () async {
-                                  final result = await extractDataFromExcel();
-                                  if (result != null) {
-                                    if (result.tables.isNotEmpty) {
-                                      Sheet? table =
-                                          result.tables[result.tables.keys.first];
+                      // sizedBoxH20,
+                      // Column(
+                      //   children: [
+                      //     Padding(
+                      //       padding: EdgeInsets.only(
+                      //           left: 50.w, bottom: 10.w, top: 10.w),
+                      //       child: SizedBox(
+                      //         width: 250.w,
+                      //         height: 60.h,
+                      //         child: ElevatedButton(
+                      //           style: ElevatedButton.styleFrom(
+                      //             backgroundColor: adminePrimayColor,
+                      //             shape: RoundedRectangleBorder(
+                      //               borderRadius: BorderRadius.circular(20),
+                      //             ),
+                      //           ),
+                      //           onPressed: () async {
+                      //             final result = await extractDataFromExcel();
+                      //             if (result != null) {
+                      //               if (result.tables.isNotEmpty) {
+                      //                 Sheet? table =
+                      //                     result.tables[result.tables.keys.first];
 
-                                      List<Data?>? firstRow = table?.rows[1];
-                                      guardianNameController.text =
-                                          firstRow?[0]?.value.toString() ?? "";
-                                      guardianPhoneNoController.text =
-                                          firstRow?[1]?.value.toString() ?? "";
-                                    }
-                                  }
-                                },
-                                child: const Text("Upload data from excel"),
-                              ),
-                            ),
-                          ),
-                          sizedBoxH20,
-                            sizedBoxH10,
-                                        Text(
-                                           "* Please use .xlsx format",
-                                           style: TextStyle(
-                                          fontSize: 13.w,
-                                          fontWeight: FontWeight.w600,
-                                          color: const Color.fromARGB(255, 27, 106, 170)),
-                                          ),
-                        ],
-                      ),
+                      //                 List<Data?>? firstRow = table?.rows[1];
+                      //                 guardianNameController.text =
+                      //                     firstRow?[0]?.value.toString() ?? "";
+                      //                 guardianPhoneNoController.text =
+                      //                     firstRow?[1]?.value.toString() ?? "";
+                      //               }
+                      //             }
+                      //           },
+                      //           child: const Text("Upload data from excel"),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     sizedBoxH20,
+                      //       sizedBoxH10,
+                      //                   Text(
+                      //                      "* Please use .xlsx format",
+                      //                      style: TextStyle(
+                      //                     fontSize: 13.w,
+                      //                     fontWeight: FontWeight.w600,
+                      //                     color: const Color.fromARGB(255, 27, 106, 170)),
+                      //                     ),
+                      //   ],
+                      // ),
                     ]),
               ),
             ),

@@ -11,7 +11,8 @@ var schoolStudentListValue;
 
 class GetStudentsListDropDownButton extends StatefulWidget {
   String classID;
-  GetStudentsListDropDownButton({required this.classID, Key? key})
+ final String parentOrGuardian;
+  GetStudentsListDropDownButton({required this.classID, Key? key, required this.parentOrGuardian})
       : super(key: key);
 
   @override
@@ -62,14 +63,25 @@ class _GeClasseslListDropDownButtonState
                 ),
                 filled: true,
               ),
-              items: snapshot.data!.docs.map(
-                (val) {
-                  return DropdownMenuItem(
-                    value: val["studentName"],
-                    child: Text(val["studentName"]),
-                  );
-                },
-              ).toList(),
+              items: snapshot.data!.docs
+                  .map(
+                    (val) {
+                      if ((val[widget.parentOrGuardian]).toString().isEmpty) {
+                        return DropdownMenuItem(
+                          value: val["studentName"],
+                          child: Text(val["studentName"]),
+                        );
+                      } else {
+                        return const DropdownMenuItem(
+                          value: "",
+                          child: SizedBox.shrink(),
+                        );
+                      }
+                    },
+                  )
+                  .where((item) =>
+                      item.value != "") // Filter out the placeholder items
+                  .toList(),
               onChanged: (val) {
                 var categoryIDObject = snapshot.data!.docs
                     .where((element) => element["studentName"] == val)

@@ -1,14 +1,12 @@
 // ignore_for_file: sort_child_properties_last
 import 'package:dujo_kerala_website/controller/_addParent&Guardian/parent_Controller.dart';
 import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
-import 'package:excel/excel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../controller/get_firebase-data/get_firebase_data.dart';
-import '../../../../../utils/utils.dart';
 import '../../../../colors/colors.dart';
 import '../../../../constant/constant.dart';
 import '../../../../fonts/fonts.dart';
@@ -93,7 +91,8 @@ class AddParent extends StatelessWidget {
                           GetStudentsListDropDownButton(
                               classID: Get.find<GetFireBaseData>()
                                   .getTeacherClassRole
-                                  .value),
+                                  .value,
+                                  parentOrGuardian: "parentID"),
                           sizedBoxH30,
                           sizedBoxH30,
                           AddParentWidget(
@@ -131,49 +130,49 @@ class AddParent extends StatelessWidget {
                               child: const Text("Add Parent"),
                             ),
                           ),
-                          sizedBoxH20,
-                          Column(
-                            children: [
-                              SizedBox(
-                                width: 250.w,
-                                height: 60.h,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: adminePrimayColor,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                  ),
-                                  onPressed: () async {
-                                    final result = await extractDataFromExcel();
-                                    if (result != null) {
-                                      if (result.tables.isNotEmpty) {
-                                        Sheet? table = result
-                                            .tables[result.tables.keys.first];
+                          // sizedBoxH20,
+                          // Column(
+                          //   children: [
+                          //     SizedBox(
+                          //       width: 250.w,
+                          //       height: 60.h,
+                          //       child: ElevatedButton(
+                          //         style: ElevatedButton.styleFrom(
+                          //           backgroundColor: adminePrimayColor,
+                          //           shape: RoundedRectangleBorder(
+                          //             borderRadius: BorderRadius.circular(20),
+                          //           ),
+                          //         ),
+                          //         onPressed: () async {
+                          //           final result = await extractDataFromExcel();
+                          //           if (result != null) {
+                          //             if (result.tables.isNotEmpty) {
+                          //               Sheet? table = result
+                          //                   .tables[result.tables.keys.first];
 
-                                        List<Data?>? firstRow = table?.rows[1];
-                                        parentNameController.text =
-                                            firstRow?[0]?.value.toString() ??
-                                                "";
-                                        parentPhoneNumberController.text =
-                                            firstRow?[1]?.value.toString() ??
-                                                "";
-                                      }
-                                    }
-                                  },
-                                  child: const Text("Upload data from excel"),
-                                ),
-                              ),
-                              sizedBoxH10,
-                                        Text(
-                                           "* Please use .xlsx format",
-                                           style: TextStyle(
-                                          fontSize: 13.w,
-                                          fontWeight: FontWeight.w600,
-                                          color: const Color.fromARGB(255, 27, 106, 170)),
-                                          ),
-                            ],
-                          ),
+                          //               List<Data?>? firstRow = table?.rows[1];
+                          //               parentNameController.text =
+                          //                   firstRow?[0]?.value.toString() ??
+                          //                       "";
+                          //               parentPhoneNumberController.text =
+                          //                   firstRow?[1]?.value.toString() ??
+                          //                       "";
+                          //             }
+                          //           }
+                          //         },
+                          //         child: const Text("Upload data from excel"),
+                          //       ),
+                          //     ),
+                          //     sizedBoxH10,
+                          //               Text(
+                          //                  "* Please use .xlsx format",
+                          //                  style: TextStyle(
+                          //                 fontSize: 13.w,
+                          //                 fontWeight: FontWeight.w600,
+                          //                 color: const Color.fromARGB(255, 27, 106, 170)),
+                          //                 ),
+                          //   ],
+                          // ),
                           // Padding(
                           //   padding: EdgeInsets.only(left: 80.w, right: 50.w),
                           //   child: SizedBox(

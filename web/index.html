@@ -8,7 +8,7 @@
 
     The path provided below has to start and end with a slash "/" in order for
     it to work correctly.
-
+ 
     For more details:
     * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
 
@@ -19,8 +19,31 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  "<meta name="LeptonDujo,dujo,leptondujo,Lepton,School App,online schools,online teaching,digital schools,students app,parents app,teachers app,attendance management,live classes,recorded classes" content="" />
   <meta name="description"
-    content="Welcome to LeptonDujo,\nThe top digitazlized school infrastructure tool that improves academic operations and infrastructure management">
+    content="LeptonDujo is a comprehensive school management app designed to streamline and automate various administrative and academic processes in educational institutions. It is built to cater to the needs of schools, colleges, and other educational organizations, providing them with a centralized platform to manage their day-to-day operations efficiently.
+
+    Here are some key features and functionalities offered by LeptonDujo:
+    
+    Student Information Management: LeptonDujo allows schools to maintain a centralized database of student information, including personal details, contact information, academic records, attendance, and disciplinary records. This feature simplifies the task of tracking student progress and facilitates effective communication with parents or guardians.
+    
+    Attendance Tracking: The app provides a user-friendly interface to record and manage student attendance. It enables teachers to take attendance digitally and generates detailed reports for monitoring and analysis purposes. This feature helps in identifying attendance patterns and addressing any attendance-related issues promptly.
+    
+    Gradebook and Academic Progress: LeptonDujo offers a digital gradebook where teachers can enter and calculate student grades based on various assessment criteria. It provides an overview of individual student progress, generating reports that can be shared with parents or used for internal evaluations.
+    
+    Communication and Collaboration: The app facilitates seamless communication between teachers, students, parents, and school administrators. It offers features such as messaging, announcements, and discussion forums, enabling efficient information sharing and fostering collaboration within the school community.
+    
+    Timetable and Scheduling: LeptonDujo simplifies the creation and management of school timetables, allowing administrators to schedule classes, assign teachers, and allocate resources efficiently. It helps avoid scheduling conflicts and provides visibility into the daily and weekly routines of students and teachers.
+    
+    Fee Management: The app includes a module for managing student fees, allowing schools to generate invoices, track payments, and send reminders to parents or guardians. It offers flexibility in setting up fee structures and supports multiple payment methods for convenient and secure transactions.
+    
+    Exam and Assessment Management: LeptonDujo assists in organizing and managing exams and assessments within the school. It enables the creation of exam schedules, tracks student performance, and generates reports. Teachers can also input and manage assessment scores, providing a comprehensive view of student achievement.
+    
+    Reporting and Analytics: The app generates various reports and analytics to help school administrators and teachers make informed decisions. These reports include attendance summaries, grade reports, fee collection summaries, and academic performance analyses. The data-driven insights provided by LeptonDujo aid in evaluating and improving school processes.
+    
+    Mobile Accessibility: LeptonDujo offers a mobile application, ensuring accessibility for teachers, students, and parents on their smartphones or tablets. This allows stakeholders to access information, communicate, and stay updated on school-related activities anytime, anywhere.
+    
+    Overall, LeptonDujo aims to enhance efficiency, productivity, and communication within educational institutions, reducing administrative burdens and providing a more streamlined and organized school management experience.">
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -31,7 +54,8 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png" />
 
-  <title>LeptonDuJo </title>
+  <title>LeptonDujo          is a comprehensive school management app designed to streamline and automate various administrative and academic processes in educational institutions. It is built to cater to the needs of schools, colleges, and other educational organizations, providing them with a centralized platform to manage their day-to-day operations efficiently.
+    Here are some key features and functionalities offered by LeptonDujo:Student Information Management: LeptonDujo allows schools to maintain a centralized database of student information, including personal details, contact information, academic records, attendance, and disciplinary records. This feature simplifies the task of tracking student progress and facilitates effective communication with parents or guardians.</title>
   <link rel="manifest" href="manifest.json">
 
   <script>
@@ -43,6 +67,13 @@
 </head>
 
 <body>
+  <script>
+    const regExp = new RegExp("bot|google|baidu|bing|msn|teoma|slurp|yandex", "i");
+    if (regExp.test(navigator.userAgent)) {
+      window.flutterWebRenderer = "html";
+    }
+  </script>
+
   <script>
     window.addEventListener('load', function (ev) {
       // Download main.dart.js
