@@ -158,6 +158,9 @@ class FeesBillsController extends GetxController {
     }
   }
 
+
+  
+
   //creatin fees for all class
   Future<void> createFeesForAllClass(
     String categoryId,
