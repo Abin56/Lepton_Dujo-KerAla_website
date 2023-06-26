@@ -114,7 +114,11 @@ class FeesClassController {
           "totalAmount": "",
         }
       ])
-    }).catchError((error) => showToast(msg: (error as FirebaseException).code));
+    }).catchError(
+      (error) => showToast(
+        msg: (error as FirebaseException).code,
+      ),
+    );
   }
 
   Future<void> removeStudentToFeePaid({
@@ -135,6 +139,10 @@ class FeesClassController {
           "totalAmount": "",
         }
       ])
-    }).catchError((error) => showToast(msg: (error as FirebaseException).code));
+    }).catchError(
+      (error) => showToast(
+        msg: (error as FirebaseException).code,
+      ),
+    );
   }
 }

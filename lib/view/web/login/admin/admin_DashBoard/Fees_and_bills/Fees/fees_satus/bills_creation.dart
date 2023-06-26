@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:developer';
+
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:dujo_kerala_website/view/fonts/fonts.dart';
@@ -10,11 +12,19 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../../../../utils/utils.dart';
+import '../bills/invoice_creation.dart';
 import '../fees_notification/widgets/submit_button_widget.dart';
 
 class BillsCreationalPage extends StatelessWidget {
   BillsCreationalPage({super.key});
   final _formKey = GlobalKey<FormState>();
+
+  final TextEditingController studentNameController = TextEditingController();
+  final TextEditingController invoiceController = TextEditingController();
+  final TextEditingController categoryNameController = TextEditingController();
+  final TextEditingController studentIdController = TextEditingController();
+  final TextEditingController amountController = TextEditingController();
+  final TextEditingController dateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,27 +43,38 @@ class BillsCreationalPage extends StatelessWidget {
               children: [
                 TextFormFieldFWidget(
                   function: checkFieldEmpty,
-                  // textEditingController: ,
-                  labelText: 'Head',
+                  textEditingController: categoryNameController,
+                  labelText: 'Category Name',
                 ),
+                sizedBoxH10,
                 TextFormFieldFWidget(
                   function: checkFieldEmpty,
-                  // textEditingController: ,
-                  labelText: 'Title',
+                  textEditingController: invoiceController,
+                  labelText: 'Invoice Number',
                 ),
+                sizedBoxH10,
                 TextFormFieldFWidget(
                   function: checkFieldEmpty,
-                  // textEditingController: ,
+                  textEditingController: studentNameController,
                   labelText: 'Name of students',
                 ),
+                sizedBoxH10,
                 TextFormFieldFWidget(
                   function: checkFieldEmpty,
-                  // textEditingController: ,
+                  textEditingController: studentIdController,
+                  labelText: 'Student Id',
+                ),
+                sizedBoxH10,
+                TextFormFieldFWidget(
+                  function: checkFieldEmpty,
+                  textEditingController: amountController,
                   labelText: 'Amount',
                 ),
+                sizedBoxH10,
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: TextField(
+                    controller: dateController,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.w)),
@@ -62,21 +83,44 @@ class BillsCreationalPage extends StatelessWidget {
                         labelText: "Due date"),
                     readOnly: true,
                     onTap: () async {
-                      dateTimePicker(context);
+                      dateController.text = await dateTimePicker(context);
                     },
                   ),
                 ),
                 GestureDetector(
-                    onTap: () {
-                      _formKey.currentState?.validate() ?? false;
-                    },
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          left: 130.w, right: 50.w, bottom: 25.h),
-                      child: SubmitButtonWidget(
-                        text: 'Create',
-                      ),
-                    )),
+                  onTap: () async {
+                    try {
+                      if (_formKey.currentState?.validate() ?? false) {
+                        final double amount =
+                            double.parse(amountController.text);
+                        await createStudentBill(
+                                studentName: studentNameController.text,
+                                studentId: studentIdController.text,
+                                invoiceNumber: invoiceController.text,
+                                date: dateController.text,
+                                amount: amount,
+                                category: categoryNameController.text)
+                            .then((value) {
+                          studentNameController.clear();
+                          studentIdController.clear();
+                          invoiceController.clear();
+                          dateController.clear();
+                          categoryNameController.clear();
+                          amountController.clear();
+                        });
+                      }
+                    } catch (e) {
+                      log(e.toString());
+                    }
+                  },
+                  child: Padding(
+                    padding:
+                        EdgeInsets.only(left: 130.w, right: 50.w, bottom: 25.h),
+                    child: SubmitButtonWidget(
+                      text: 'Create',
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

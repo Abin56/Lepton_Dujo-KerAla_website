@@ -15,7 +15,7 @@ class FeesAndBillsWeb extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         appBar: AppBar(
           iconTheme: const IconThemeData(color: cBlack),
@@ -35,16 +35,25 @@ class FeesAndBillsWeb extends StatelessWidget {
               tabs: [
                 Tab(
                   child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: FeeAndBillsConWidget(
-                        text: 'Fees Notifications'.tr,
-                      )),
+                    padding: const EdgeInsets.all(8.0),
+                    child: FeeAndBillsConWidget(
+                      text: 'Fees Notifications'.tr,
+                    ),
+                  ),
                 ),
                 Tab(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: FeeAndBillsConWidget(
                       text: 'Fees Status'.tr,
+                    ),
+                  ),
+                ),
+                Tab(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: FeeAndBillsConWidget(
+                      text: 'Class Fees Status'.tr,
                     ),
                   ),
                 ),
@@ -62,6 +71,7 @@ class FeesAndBillsWeb extends StatelessWidget {
           child: TabBarView(
             children: [
               FeesNotification(),
+              FeesStstatues(),
               FeesClassStatus(),
               BillsCreationalPage(),
             ],
