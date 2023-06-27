@@ -146,25 +146,25 @@ class AllClassController extends GetxController {
                                   ),
                                 ),
                                 sizedBoxH20,
-                                GestureDetector(
-                                  onTap: () async {},
-                                  child: ButtonContainerWidget(
-                                    curving: 10,
-                                    colorindex: 0,
-                                    height: 30.h,
-                                    width: 120.w,
-                                    child: Center(
-                                      child: Text(
-                                        'TimeTable',
-                                        style: GoogleFonts.montserrat(
-                                            color: const Color.fromARGB(
-                                                255, 255, 254, 254),
-                                            fontSize: 14.w,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                // GestureDetector(
+                                //   onTap: () async {},
+                                //   child: ButtonContainerWidget(
+                                //     curving: 10,
+                                //     colorindex: 0,
+                                //     height: 30.h,
+                                //     width: 120.w,
+                                //     child: Center(
+                                //       child: Text(
+                                //         'TimeTable',
+                                //         style: GoogleFonts.montserrat(
+                                //             color: const Color.fromARGB(
+                                //                 255, 255, 254, 254),
+                                //             fontSize: 14.w,
+                                //             fontWeight: FontWeight.w600),
+                                //       ),
+                                //     ),
+                                //   ),
+                                // ),
                               ],
                             ),
                             sizedBoxw20,
@@ -196,25 +196,25 @@ class AllClassController extends GetxController {
                                   ),
                                 ),
                                 sizedBoxH20,
-                                GestureDetector(
-                                  onTap: () async {},
-                                  child: ButtonContainerWidget(
-                                    curving: 10,
-                                    colorindex: 0,
-                                    height: 30.h,
-                                    width: 120.w,
-                                    child: Center(
-                                      child: Text(
-                                        'Exam results',
-                                        style: GoogleFonts.montserrat(
-                                            color: const Color.fromARGB(
-                                                255, 255, 254, 254),
-                                            fontSize: 14.w,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                // GestureDetector(
+                                //   onTap: () async {},
+                                //   child: ButtonContainerWidget(
+                                //     curving: 10,
+                                //     colorindex: 0,
+                                //     height: 30.h,
+                                //     width: 120.w,
+                                //     child: Center(
+                                //       child: Text(
+                                //         'Exam results',
+                                //         style: GoogleFonts.montserrat(
+                                //             color: const Color.fromARGB(
+                                //                 255, 255, 254, 254),
+                                //             fontSize: 14.w,
+                                //             fontWeight: FontWeight.w600),
+                                //       ),
+                                //     ),
+                                //   ),
+                                // ),
                               ],
                             ),
                             sizedBoxw20,
@@ -251,25 +251,25 @@ class AllClassController extends GetxController {
                                   ),
                                 ),
                                 sizedBoxH20,
-                                GestureDetector(
-                                  onTap: () async {},
-                                  child: ButtonContainerWidget(
-                                    curving: 10,
-                                    colorindex: 0,
-                                    height: 30.h,
-                                    width: 120.w,
-                                    child: Center(
-                                      child: Text(
-                                        'Subject',
-                                        style: GoogleFonts.montserrat(
-                                            color: const Color.fromARGB(
-                                                255, 255, 254, 254),
-                                            fontSize: 14.w,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                // GestureDetector(
+                                //   onTap: () async {},
+                                //   child: ButtonContainerWidget(
+                                //     curving: 10,
+                                //     colorindex: 0,
+                                //     height: 30.h,
+                                //     width: 120.w,
+                                //     child: Center(
+                                //       child: Text(
+                                //         'Subject',
+                                //         style: GoogleFonts.montserrat(
+                                //             color: const Color.fromARGB(
+                                //                 255, 255, 254, 254),
+                                //             fontSize: 14.w,
+                                //             fontWeight: FontWeight.w600),
+                                //       ),
+                                //     ),
+                                //   ),
+                                // ),
                               ],
                             ),
                           ],
