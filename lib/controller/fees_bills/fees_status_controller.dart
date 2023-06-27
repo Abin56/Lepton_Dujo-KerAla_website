@@ -11,6 +11,9 @@ import '../admin_login_screen/admin_login_screen_controller.dart';
 import '../get_firebase-data/get_firebase_data.dart';
 
 class FeesStatusController {
+  String selectedMainCategory = "";
+  String selectedSubCategory = "";
+  String selectedClass = "";
   List<AddStudentModel> allClassStudents = [];
   String categoryData = "";
   final DocumentReference<Map<String, dynamic>> _fStore = FirebaseFirestore
@@ -40,6 +43,24 @@ class FeesStatusController {
       showToast(msg: "Something Went Wrong");
       return [];
     }
+  }
+
+//fetch all creted category list from database
+  Future<List<Map<String, dynamic>>> fetchAllSchoolCategories() async {
+    final QuerySnapshot<Map<String, dynamic>> categoryList =
+        await _fStore.collection("Fees").get();
+    return categoryList.docs.map((e) => e.data()).toList();
+  }
+
+  //fetch all subcategory
+  Future<List<Map<String, dynamic>>> fetchAllSchoolSubCategories(
+      String categoryId) async {
+    final QuerySnapshot<Map<String, dynamic>> categoryList = await _fStore
+        .collection("Fees")
+        .doc(categoryId)
+        .collection(categoryId)
+        .get();
+    return categoryList.docs.map((e) => e.data()).toList();
   }
 
   Future<List<ClassModel>> getAllClasses() async {

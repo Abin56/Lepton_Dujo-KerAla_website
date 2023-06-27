@@ -1,4 +1,5 @@
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:dujo_kerala_website/model/fees_bills_model/fees_category_model.dart';
 import 'package:dujo_kerala_website/utils/utils.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/Fees_and_bills/Fees/fees_notification/widgets/submit_button_widget.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:get/get.dart';
 
 import '../../../../../../../../controller/fees_bills/fees_bills_controller.dart';
 import '../../../../../../../../model/class_model/class_model.dart';
+import '../../../../../../../../model/fees_bills_model/fees_subcategory_model.dart';
 import '../../../../../../../constant/constant.dart';
 import '../fees_satus/bills_creation.dart';
 
@@ -14,7 +16,8 @@ class FeesNotificationRightSideWidget extends StatelessWidget {
   FeesNotificationRightSideWidget({super.key});
   final _formKey = GlobalKey<FormState>();
 
-  FeesBillsController feesBillsController = Get.put(FeesBillsController());
+  final FeesBillsController feesBillsController =
+      Get.put(FeesBillsController());
 
   @override
   Widget build(BuildContext context) {
@@ -27,15 +30,11 @@ class FeesNotificationRightSideWidget extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              DropdownSearch<Map<String, dynamic>>(
+              DropdownSearch<FeesCategoryModel>(
                 asyncItems: (text) => feesBillsController.fetchCategoryList(),
-                itemAsString: (item) => item["categoryName"],
-                onChanged: (Map<String, dynamic>? data) {
-                  feesBillsController.selectedType.value = data?["type"];
-                  feesBillsController.selectDateList.value =
-                      getPeriodList(data?["type"]);
-                  feesBillsController.selectedCategory = data ?? {};
-                  feesBillsController.selectDateList.refresh;
+                itemAsString: (FeesCategoryModel item) => item.categoryName,
+                onChanged: (FeesCategoryModel? data) {
+                  feesBillsController.selectedMainCategory = data;
                 },
                 dropdownDecoratorProps: const DropDownDecoratorProps(
                   dropdownSearchDecoration: InputDecoration(
@@ -45,20 +44,20 @@ class FeesNotificationRightSideWidget extends StatelessWidget {
                 ),
               ),
               sizedBoxH20,
-              Obx(() => feesBillsController.selectDateList.isEmpty
-                  ? sizedBoxH10
-                  : DropdownSearch<String>(
-                      items: feesBillsController.selectDateList,
-                      itemAsString: (String u) => u,
-                      onChanged: (String? data) =>
-                          feesBillsController.selectedPeriod = data ?? "",
-                      dropdownDecoratorProps: const DropDownDecoratorProps(
-                        dropdownSearchDecoration: InputDecoration(
-                          labelText: "Select Date",
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    )),
+              DropdownSearch<FeesSubCategoryModel>(
+                asyncItems: (items) => feesBillsController.fetchSubCategoryList(
+                  feesBillsController.selectedMainCategory?.id ?? "",
+                ),
+                itemAsString: (FeesSubCategoryModel u) => u.date,
+                onChanged: (FeesSubCategoryModel? data) =>
+                    feesBillsController.selectedSubCategory = data,
+                dropdownDecoratorProps: const DropDownDecoratorProps(
+                  dropdownSearchDecoration: InputDecoration(
+                    labelText: "Select Date",
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
               sizedBoxH20,
               Obx(() => Row(
                     children: [
@@ -112,10 +111,11 @@ class FeesNotificationRightSideWidget extends StatelessWidget {
               sizedBoxH20,
               GestureDetector(
                   onTap: () async {
-                    await createFunction();
+                    //await createFunction();
                   },
                   child: Obx(
-                    () => feesBillsController.categoryCreateloading.value
+                    //Todo need to change loading
+                    () => feesBillsController.categoryFetchloading.value
                         ? circularProgressIndicator
                         : const SubmitButtonWidget(
                             text: 'Create',
@@ -128,44 +128,32 @@ class FeesNotificationRightSideWidget extends StatelessWidget {
     );
   }
 
-  List<String> getPeriodList(String categoryName) {
-    if (categoryName == feesBillsController.typeOfCategoryList[0]) {
-      return feesBillsController.monthly;
-    } else if (categoryName == feesBillsController.typeOfCategoryList[1]) {
-      return feesBillsController.quarterly;
-    } else if (categoryName == feesBillsController.typeOfCategoryList[2]) {
-      return feesBillsController.halfYearly;
-    } else if (categoryName == feesBillsController.typeOfCategoryList[3]) {
-      return ["Annually"];
-    } else {
-      return [];
-    }
-  }
-
-  Future<void> createFunction() async {
-    if (feesBillsController.selectedCategory["id"] == "" ||
-        feesBillsController.selectedCategory["categoryName"] == "" ||
-        feesBillsController.selectedCategory["type"] == "") {
-      return showToast(msg: "All Fields are mandatory");
-    }
-    if (_formKey.currentState?.validate() ?? false) {
-      if (feesBillsController.selectedClass == null) {
-        await feesBillsController.createFeesForAllClass(
-          feesBillsController.selectedCategory["id"],
-          feesBillsController.selectedCategory["categoryName"],
-          feesBillsController.amountController.text,
-          feesBillsController.dueDateController.text,
-          feesBillsController.selectedCategory["type"],
-        );
-      } else {
-        await feesBillsController.createFeesForSpecificClass(
-            feesBillsController.selectedCategory["id"],
-            feesBillsController.selectedCategory["categoryName"],
-            feesBillsController.amountController.text,
-            feesBillsController.dueDateController.text,
-            feesBillsController.selectedCategory["type"],
-            feesBillsController.selectedClass!);
-      }
-    }
-  }
+  // Future<void> createFunction() async {
+  //   if (feesBillsController.selectedCategory["id"] == "" ||
+  //       feesBillsController.selectedCategory["categoryName"] == "" ||
+  //       feesBillsController.selectedCategory["type"] == "" ||
+  //       feesBillsController.selectedPeriod.isEmpty) {
+  //     return showToast(msg: "All Fields are mandatory");
+  //   }
+  //   if (_formKey.currentState?.validate() ?? false) {
+  //     if (feesBillsController.selectedClass == null) {
+  //       await feesBillsController.createFeesForAllClass(
+  //           categoryId: feesBillsController.selectedCategory["id"],
+  //           categoryName: feesBillsController.selectedCategory["categoryName"],
+  //           amount: feesBillsController.amountController.text,
+  //           dueDate: feesBillsController.dueDateController.text,
+  //           type: feesBillsController.selectedCategory["type"],
+  //           datePeriod: feesBillsController.selectedPeriod,
+  //           subCategory: );
+  //     } else {
+  //       await feesBillsController.createFeesForSpecificClass(
+  //           feesBillsController.selectedCategory["id"],
+  //           feesBillsController.selectedCategory["categoryName"],
+  //           feesBillsController.amountController.text,
+  //           feesBillsController.dueDateController.text,
+  //           feesBillsController.selectedCategory["type"],
+  //           feesBillsController.selectedClass!);
+  //     }
+  //   }
+  // }
 }

@@ -11,6 +11,8 @@ class FeesModel {
   String classId;
   String className;
   String type;
+  String datePeriod;
+  String subCategoryId;
   List<StudentFeesModel> studentList;
   FeesModel({
     required this.categoryId,
@@ -20,6 +22,8 @@ class FeesModel {
     required this.classId,
     required this.className,
     required this.type,
+    required this.datePeriod,
+    required this.subCategoryId,
     required this.studentList,
   });
 
@@ -31,6 +35,8 @@ class FeesModel {
     String? classId,
     String? className,
     String? type,
+    String? datePeriod,
+    String? subCategoryId,
     List<StudentFeesModel>? studentList,
   }) {
     return FeesModel(
@@ -41,6 +47,8 @@ class FeesModel {
       classId: classId ?? this.classId,
       className: className ?? this.className,
       type: type ?? this.type,
+      datePeriod: datePeriod ?? this.datePeriod,
+      subCategoryId: subCategoryId ?? this.subCategoryId,
       studentList: studentList ?? this.studentList,
     );
   }
@@ -54,6 +62,8 @@ class FeesModel {
       'classId': classId,
       'className': className,
       'type': type,
+      'datePeriod': datePeriod,
+      'subCategoryId': subCategoryId,
       'studentList': studentList.map((x) => x.toMap()).toList(),
     };
   }
@@ -67,8 +77,10 @@ class FeesModel {
       classId: map['classId'] as String,
       className: map['className'] as String,
       type: map['type'] as String,
+      datePeriod: map['datePeriod'] as String,
+      subCategoryId: map['subCategoryId'] as String,
       studentList: List<StudentFeesModel>.from(
-        (map['studentList'] as List<dynamic>).map<StudentFeesModel>(
+        (map['studentList'] as List<int>).map<StudentFeesModel>(
           (x) => StudentFeesModel.fromMap(x as Map<String, dynamic>),
         ),
       ),
@@ -82,7 +94,7 @@ class FeesModel {
 
   @override
   String toString() {
-    return 'FeesModel(categoryId: $categoryId, categoryName: $categoryName, amount: $amount, dueDate: $dueDate, classId: $classId, className: $className, type: $type, studentList: $studentList)';
+    return 'FeesModel(categoryId: $categoryId, categoryName: $categoryName, amount: $amount, dueDate: $dueDate, classId: $classId, className: $className, type: $type, datePeriod: $datePeriod, subCategoryId: $subCategoryId, studentList: $studentList)';
   }
 
   @override
@@ -96,6 +108,8 @@ class FeesModel {
         other.classId == classId &&
         other.className == className &&
         other.type == type &&
+        other.datePeriod == datePeriod &&
+        other.subCategoryId == subCategoryId &&
         listEquals(other.studentList, studentList);
   }
 
@@ -108,6 +122,8 @@ class FeesModel {
         classId.hashCode ^
         className.hashCode ^
         type.hashCode ^
+        datePeriod.hashCode ^
+        subCategoryId.hashCode ^
         studentList.hashCode;
   }
 }
