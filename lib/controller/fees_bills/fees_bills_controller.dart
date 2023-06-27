@@ -10,9 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../model/create_classModel/add_student_model.dart';
-import '../../utils/utils.dart';
-
 class FeesBillsController extends GetxController {
   @override
   void onInit() async {
@@ -28,22 +25,33 @@ class FeesBillsController extends GetxController {
       .doc(Get.find<AdminLoginScreenController>().schoolID)
       .collection(Get.find<GetFireBaseData>().bYear.value)
       .doc(Get.find<GetFireBaseData>().bYear.value);
+
+  ///for unique id creation
   final Uuid uuid = const Uuid();
-
-  Map<String, dynamic> categoryMap = {};
-  String categoryCreateValue = "";
-  String selectedPeriod = "";
-  RxString selectedType = RxString("");
-  RxList<String> selectDateList = RxList([]);
-  List<ClassModel> allClass = [];
-  List<AddStudentModel> allClassStudents = [];
-
-  List<String> tokenList = [];
   TextEditingController categoryNameController = TextEditingController();
   TextEditingController amountController = TextEditingController();
   TextEditingController dueDateController = TextEditingController();
 
-  final List<String> selectionList = [
+//category create section variables
+
+//category name dropdown selected category
+  Map<String, dynamic> selectedCategory = {};
+
+  ///selected category type[typeOfCategoryList]
+  String selectedTypeOfCategory = "";
+//selected period from
+  String selectedPeriod = "";
+
+  ///category creation varibles
+  RxString selectedType = RxString("");
+  RxList<String> selectDateList = RxList([]);
+  List<ClassModel> allClass = [];
+  List<String> tokenList = [];
+//this for add category only selected class if this value is true then selected school dropdown will show
+  RxBool isSpecificClassOnly = RxBool(false);
+  ClassModel? selectedClass;
+
+  final List<String> typeOfCategoryList = [
     'Monthly',
     'Quarterly',
     'Halfly',
@@ -77,30 +85,16 @@ class FeesBillsController extends GetxController {
 
   //fetch all classes
 
-  Future<void> getAllClasses() async {
+  Future<List<ClassModel>> getAllClasses() async {
     try {
       final QuerySnapshot<Map<String, dynamic>> data =
           await fStore.collection("classes").get();
       allClass = data.docs.map((e) => ClassModel.fromMap(e.data())).toList();
+      return allClass;
     } catch (e) {
       log(e.toString());
       showToast(msg: "Something Went Wrong");
-    }
-  }
-
-//get all students from class
-  Future<void> getAllStudentsFromClass(String classId) async {
-    try {
-      final QuerySnapshot<Map<String, dynamic>> data = await fStore
-          .collection("classes")
-          .doc(classId)
-          .collection("Students")
-          .get();
-      allClassStudents =
-          data.docs.map((e) => AddStudentModel.fromMap(e.data())).toList();
-    } catch (e) {
-      log(e.toString());
-      showToast(msg: "Something Went Wrong");
+      return [];
     }
   }
 
@@ -111,7 +105,7 @@ class FeesBillsController extends GetxController {
     BuildContext context,
   ) async {
     try {
-      if (categoryCreateValue.isEmpty) {
+      if (selectedTypeOfCategory.isEmpty) {
         return showToast(msg: "Please select category");
       }
       categoryCreateloading.value = true;
@@ -134,7 +128,7 @@ class FeesBillsController extends GetxController {
         },
       ).then((value) {
         showToast(msg: "Successfully Created");
-        categoryCreateValue = "";
+        selectedTypeOfCategory = "";
         categoryNameController.clear();
         Navigator.pop(context);
       });
@@ -164,8 +158,10 @@ class FeesBillsController extends GetxController {
     }
   }
 
-  //creatin fee
 
+  
+
+  //creatin fees for all class
   Future<void> createFeesForAllClass(
     String categoryId,
     String categoryName,
@@ -194,12 +190,6 @@ class FeesBillsController extends GetxController {
             )
             .then((value) async {
           showToast(msg: "Successfully Completed");
-          await fetchAllTokenList().then((value) async {
-            log("create time ${tokenList.toString()}");
-            for (var element3 in tokenList) {
-              await sendPushMessage(element3, "Fees", "Fees");
-            }
-          });
         });
       }
       categoryCreateloading.value = false;
@@ -210,62 +200,49 @@ class FeesBillsController extends GetxController {
     }
   }
 
+//fees created only specific class
+  Future<void> createFeesForSpecificClass(
+      String categoryId,
+      String categoryName,
+      String amount,
+      String dueDate,
+      String type,
+      ClassModel classModel) async {
+    categoryCreateloading.value = true;
+    fStore
+        .collection("classes")
+        .doc(classModel.docid)
+        .collection("ClassFees")
+        .doc(categoryId)
+        .set(
+          FeesModel(
+              categoryId: categoryId,
+              categoryName: categoryName,
+              amount: amount,
+              dueDate: dueDate,
+              classId: classModel.docid,
+              className: classModel.className,
+              type: type,
+              studentList: []).toMap(),
+        )
+        .then((value) async {
+      showToast(msg: "Successfully Completed");
+      categoryCreateloading.value = false;
+      selectedClass = null;
+    }).catchError((error) {
+      categoryCreateloading.value = false;
+      showToast(msg: (error as FirebaseException).code);
+      log(error.toString());
+    });
+  }
 
 //create all tokens
   Future<void> fetchAllTokenList() async {
     try {
-      log("all class ${allClass.toString()}");
-
       for (var element in allClass) {
-        //fetching all students data
-        final QuerySnapshot<Map<String, dynamic>> studentResult = await fStore
-            .collection("classes")
-            .doc(element.docid)
-            .collection("Students")
-            .get();
-        for (var element1 in studentResult.docs) {
-          String? deviceToken = element1.data()["deviceToken"];
-          if (deviceToken == null || deviceToken.isEmpty) {
-            continue;
-          }
-          if (!tokenList.contains(element1.data()["deviceToken"])) {
-            tokenList.add(element1.data()["deviceToken"]);
-          }
-        }
-
-        //fetching all parent data
-        final QuerySnapshot<Map<String, dynamic>> parentResult = await fStore
-            .collection("classes")
-            .doc(element.docid)
-            .collection("ParentCollection")
-            .get();
-        for (var element1 in parentResult.docs) {
-          String? deviceToken = element1.data()["deviceToken"];
-
-          if (deviceToken == null || deviceToken.isEmpty) {
-            continue;
-          }
-          if (!tokenList.contains(element1.data()["deviceToken"])) {
-            tokenList.add(element1.data()["deviceToken"]);
-          }
-        }
-
-        //fetch all guardian dta
-        final QuerySnapshot<Map<String, dynamic>> guardianResult = await fStore
-            .collection("classes")
-            .doc(element.docid)
-            .collection("GuardianCollection")
-            .get();
-        for (var element1 in guardianResult.docs) {
-          String? deviceToken = element1.data()["deviceToken"];
-          if (deviceToken == null || deviceToken.isEmpty) {
-            continue;
-          }
-          if (!tokenList.contains(element1.data()["deviceToken"])) {
-            tokenList.add(element1.data()["deviceToken"]);
-          }
-        }
-        log("token array ${tokenList.toString()}");
+        await fetchTokensForCollection(element.docid, "Students");
+        await fetchTokensForCollection(element.docid, "ParentCollection");
+        await fetchTokensForCollection(element.docid, "GuardianCollection");
       }
     } on FirebaseException catch (e) {
       log(e.toString());
@@ -275,4 +252,35 @@ class FeesBillsController extends GetxController {
       showToast(msg: "Something Went Wrong");
     }
   }
+
+  Future<void> fetchTokensForCollection(
+      String docId, String collectionName) async {
+    final QuerySnapshot<Map<String, dynamic>> collectionResult = await fStore
+        .collection("classes")
+        .doc(docId)
+        .collection(collectionName)
+        .get();
+
+    for (var element in collectionResult.docs) {
+      String? deviceToken = element.data()["deviceToken"];
+
+      if (deviceToken == null || deviceToken.isEmpty) {
+        continue;
+      }
+
+      if (!tokenList.contains(deviceToken)) {
+        tokenList.add(deviceToken);
+      }
+    }
+  }
 }
+
+// //creating token lists parent,guardian,students
+//       await fetchAllTokenList().then((value) async {
+//         log("create time ${tokenList.toString()}");
+//         for (var element3 in tokenList) {
+//           //send push notification from push notification
+//           await sendPushMessage(element3,
+//               "Due Date : $dueDate Amount : $amount", categoryName);
+//         }
+//       });

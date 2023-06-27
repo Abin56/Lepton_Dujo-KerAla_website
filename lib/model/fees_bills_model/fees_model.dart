@@ -68,7 +68,7 @@ class FeesModel {
       className: map['className'] as String,
       type: map['type'] as String,
       studentList: List<StudentFeesModel>.from(
-        (map['studentList'] as List<int>).map<StudentFeesModel>(
+        (map['studentList'] as List<dynamic>).map<StudentFeesModel>(
           (x) => StudentFeesModel.fromMap(x as Map<String, dynamic>),
         ),
       ),
