@@ -1,16 +1,16 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:dujo_kerala_website/controller/_addParent&Guardian/guardian_Controller.dart';
 import 'package:dujo_kerala_website/view/fonts/fonts.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
+import '../../../../../../model/create_classModel/add_student_model.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
-import '../../../../widgets/drop_DownList/get_students.dart';
 
 class AddGuardian extends StatelessWidget {
   GuardianController guardianController = Get.put(GuardianController());
@@ -20,8 +20,6 @@ class AddGuardian extends StatelessWidget {
 
   String studentID = '';
 
-  Map<String, dynamic>? classListDropDown;
-
   final formKey = GlobalKey<FormState>();
 
   TextEditingController guardianNameController = TextEditingController();
@@ -29,8 +27,6 @@ class AddGuardian extends StatelessWidget {
   TextEditingController guardianEmailController = TextEditingController();
 
   TextEditingController guardianPhoneNoController = TextEditingController();
-
-  final _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -86,113 +82,84 @@ class AddGuardian extends StatelessWidget {
           ),
           //right section
 
-          SizedBox(
-            width: size.width / 2,
-            height: size.height * 1.4,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50),
-              child: Form(
-                key: formKey,
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      sizedBoxH30,
-                      GetStudentsListDropDownButton(
-                          classID: Get.find<GetFireBaseData>()
-                              .getTeacherClassRole
-                              .value,
-                              parentOrGuardian: "guardianID"),
-                      sizedBoxH30,
-                      AddGuardianWidget(
-                        function: checkFieldEmpty,
-                        labelText: 'Guardian name',
-                        textEditingController: guardianNameController,
-                      ),
-                      sizedBoxH30,
-                      AddGuardianWidget(
-                        function: checkFieldPhoneNumberIsValid,
-                        labelText: 'Guardian phone number',
-                        textEditingController: guardianPhoneNoController,
-                      ),
-                      sizedBoxH30,
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: 50.w, bottom: 10.w, top: 30.w),
-                        child: SizedBox(
-                          width: 250.w,
-                          height: 60.h,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: adminePrimayColor,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
+          Obx(
+            () => guardianController.isLoading.value
+                ? circularProgressIndicator
+                : SizedBox(
+                    width: size.width / 2,
+                    height: size.height * 1.4,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 50),
+                      child: Form(
+                        key: formKey,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            sizedBoxH30,
+                            DropdownSearch<AddStudentModel>(
+                              asyncItems: (String filter) =>
+                                  guardianController.getAllStudent(
+                                Get.find<GetFireBaseData>()
+                                    .getTeacherClassRole
+                                    .value,
+                              ),
+                              itemAsString: (AddStudentModel u) =>
+                                  u.studentName ?? "",
+                              onChanged: (AddStudentModel? data) =>
+                                  studentID = data?.docid ?? "",
+                              dropdownDecoratorProps:
+                                  const DropDownDecoratorProps(
+                                dropdownSearchDecoration: InputDecoration(
+                                    labelText: "Select Student"),
                               ),
                             ),
-                            onPressed: () async {
-                              if (formKey.currentState!.validate()) {
-                                guardianController.addGuardian(
-                                    guardianNameController,
-                                    guardianPhoneNoController,
-                                    schoolStudentListValue!['docid'],
-                                    Get.find<GetFireBaseData>()
-                                        .getTeacherClassRole
-                                        .value);
-                              }
-                            },
-                            child: const Text("Add Guardian"),
-                          ),
+                            sizedBoxH30,
+                            AddGuardianWidget(
+                              function: checkFieldEmpty,
+                              labelText: 'Guardian name',
+                              textEditingController: guardianNameController,
+                            ),
+                            sizedBoxH30,
+                            AddGuardianWidget(
+                              function: checkFieldPhoneNumberIsValid,
+                              labelText: 'Guardian phone number',
+                              textEditingController: guardianPhoneNoController,
+                            ),
+                            sizedBoxH30,
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  left: 50.w, bottom: 10.w, top: 30.w),
+                              child: SizedBox(
+                                width: 250.w,
+                                height: 60.h,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: adminePrimayColor,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                  ),
+                                  onPressed: () async {
+                                    if (formKey.currentState!.validate()) {
+                                      guardianController.addGuardian(
+                                          guardianNameController,
+                                          guardianPhoneNoController,
+                                          studentID,
+                                          Get.find<GetFireBaseData>()
+                                              .getTeacherClassRole
+                                              .value);
+                                    }
+                                  },
+                                  child: const Text("Add Guardian"),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      // sizedBoxH20,
-                      // Column(
-                      //   children: [
-                      //     Padding(
-                      //       padding: EdgeInsets.only(
-                      //           left: 50.w, bottom: 10.w, top: 10.w),
-                      //       child: SizedBox(
-                      //         width: 250.w,
-                      //         height: 60.h,
-                      //         child: ElevatedButton(
-                      //           style: ElevatedButton.styleFrom(
-                      //             backgroundColor: adminePrimayColor,
-                      //             shape: RoundedRectangleBorder(
-                      //               borderRadius: BorderRadius.circular(20),
-                      //             ),
-                      //           ),
-                      //           onPressed: () async {
-                      //             final result = await extractDataFromExcel();
-                      //             if (result != null) {
-                      //               if (result.tables.isNotEmpty) {
-                      //                 Sheet? table =
-                      //                     result.tables[result.tables.keys.first];
-
-                      //                 List<Data?>? firstRow = table?.rows[1];
-                      //                 guardianNameController.text =
-                      //                     firstRow?[0]?.value.toString() ?? "";
-                      //                 guardianPhoneNoController.text =
-                      //                     firstRow?[1]?.value.toString() ?? "";
-                      //               }
-                      //             }
-                      //           },
-                      //           child: const Text("Upload data from excel"),
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     sizedBoxH20,
-                      //       sizedBoxH10,
-                      //                   Text(
-                      //                      "* Please use .xlsx format",
-                      //                      style: TextStyle(
-                      //                     fontSize: 13.w,
-                      //                     fontWeight: FontWeight.w600,
-                      //                     color: const Color.fromARGB(255, 27, 106, 170)),
-                      //                     ),
-                      //   ],
-                      // ),
-                    ]),
-              ),
-            ),
-          ),
+                    ),
+                  ),
+          )
         ],
       ),
     );

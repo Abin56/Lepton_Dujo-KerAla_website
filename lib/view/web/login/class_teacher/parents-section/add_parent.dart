@@ -1,5 +1,7 @@
 // ignore_for_file: sort_child_properties_last
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:dujo_kerala_website/controller/_addParent&Guardian/parent_Controller.dart';
+import 'package:dujo_kerala_website/model/create_classModel/add_student_model.dart';
 import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,7 +13,6 @@ import '../../../../colors/colors.dart';
 import '../../../../constant/constant.dart';
 import '../../../../fonts/fonts.dart';
 import '../../../widgets/Iconbackbutton.dart';
-import '../../../widgets/drop_DownList/get_students.dart';
 
 class AddParent extends StatelessWidget {
   ParentController parentController = Get.put(ParentController());
@@ -19,9 +20,7 @@ class AddParent extends StatelessWidget {
   AddParent({super.key, required this.schoolID, required this.teacherIDE});
   String schoolID;
 
-  String studentID = '';
-
-  Map<String, dynamic>? classListDropDown;
+  String studentID = "";
 
   TextEditingController parentNameController = TextEditingController();
 
@@ -52,17 +51,19 @@ class AddParent extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                        'Hi ! Class teacher ',
-                        style: ralewayStyle.copyWith(
-                          fontSize: 42.0.w,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w800,
+                          'Hi ! Class teacher ',
+                          style: ralewayStyle.copyWith(
+                            fontSize: 42.0.w,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w800,
+                          ),
                         ),
-                      ),
-                      sizedBoxH20,
+                        sizedBoxH20,
                         GoogleMonstserratWidgets(
-                          text: 'Add New Parent',fontsize: 26.0.w,color: cWhite,
-                           ),
+                          text: 'Add New Parent',
+                          fontsize: 26.0.w,
+                          color: cWhite,
+                        ),
                         sizedBoxH20,
                         SizedBox(
                           height: 300,
@@ -77,117 +78,84 @@ class AddParent extends StatelessWidget {
               ),
               color: const Color.fromARGB(255, 6, 71, 157),
             ),
-            SizedBox(
-              width: size.width / 2,
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 50),
-                  child: Form(
-                    key: formKey,
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          sizedBoxH30,
-                          GetStudentsListDropDownButton(
-                              classID: Get.find<GetFireBaseData>()
-                                  .getTeacherClassRole
-                                  .value,
-                                  parentOrGuardian: "parentID"),
-                          sizedBoxH30,
-                          sizedBoxH30,
-                          AddParentWidget(
-                              function: checkFieldPhoneNumberIsValid,
-                              labelText: 'Parent phone number',
-                              textEditingController:
-                                  parentPhoneNumberController),
-                          sizedBoxH30,
-                          AddParentWidget(
-                              function: checkFieldEmpty,
-                              labelText: 'Parent name',
-                              textEditingController: parentNameController),
-                          sizedBoxH30,
-                          SizedBox(
-                            width: 250.w,
-                            height: 60.h,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: adminePrimayColor,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                              ),
-                              onPressed: () async {
-                                if (formKey.currentState!.validate()) {
-                                  parentController.addParent(
-                                      parentNameController,
-                                      parentPhoneNumberController,
-                                      schoolStudentListValue!['docid'],
+            Obx(
+              () => parentController.isLoading.value
+                  ? circularProgressIndicator
+                  : SizedBox(
+                      width: size.width / 2,
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 50),
+                          child: Form(
+                            key: formKey,
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  sizedBoxH30,
+                                  DropdownSearch<AddStudentModel>(
+                                    asyncItems: (String filter) =>
+                                        parentController.getAllStudent(
                                       Get.find<GetFireBaseData>()
                                           .getTeacherClassRole
-                                          .value);
-                                }
-                              },
-                              child: const Text("Add Parent"),
-                            ),
+                                          .value,
+                                    ),
+                                    itemAsString: (AddStudentModel u) =>
+                                        u.studentName ?? "",
+                                    onChanged: (AddStudentModel? data) =>
+                                        studentID = data?.docid ?? "",
+                                    dropdownDecoratorProps:
+                                        const DropDownDecoratorProps(
+                                      dropdownSearchDecoration: InputDecoration(
+                                          labelText: "Select Student"),
+                                    ),
+                                  ),
+                                  sizedBoxH30,
+                                  sizedBoxH30,
+                                  AddParentWidget(
+                                      function: checkFieldEmpty,
+                                      labelText: 'Parent name',
+                                      textEditingController:
+                                          parentNameController),
+                                  sizedBoxH30,
+                                  AddParentWidget(
+                                      function: checkFieldPhoneNumberIsValid,
+                                      labelText: 'Parent phone number',
+                                      textEditingController:
+                                          parentPhoneNumberController),
+                                  sizedBoxH30,
+                                  SizedBox(
+                                    width: 250.w,
+                                    height: 60.h,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: adminePrimayColor,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                      ),
+                                      onPressed: () async {
+                                        if (formKey.currentState!.validate()) {
+                                          await parentController
+                                              .addParent(
+                                                  parentNameController,
+                                                  parentPhoneNumberController,
+                                                  studentID,
+                                                  Get.find<GetFireBaseData>()
+                                                      .getTeacherClassRole
+                                                      .value)
+                                              .then((value) => studentID = "");
+                                        }
+                                      },
+                                      child: const Text("Add Parent"),
+                                    ),
+                                  ),
+                                ]),
                           ),
-                          // sizedBoxH20,
-                          // Column(
-                          //   children: [
-                          //     SizedBox(
-                          //       width: 250.w,
-                          //       height: 60.h,
-                          //       child: ElevatedButton(
-                          //         style: ElevatedButton.styleFrom(
-                          //           backgroundColor: adminePrimayColor,
-                          //           shape: RoundedRectangleBorder(
-                          //             borderRadius: BorderRadius.circular(20),
-                          //           ),
-                          //         ),
-                          //         onPressed: () async {
-                          //           final result = await extractDataFromExcel();
-                          //           if (result != null) {
-                          //             if (result.tables.isNotEmpty) {
-                          //               Sheet? table = result
-                          //                   .tables[result.tables.keys.first];
-
-                          //               List<Data?>? firstRow = table?.rows[1];
-                          //               parentNameController.text =
-                          //                   firstRow?[0]?.value.toString() ??
-                          //                       "";
-                          //               parentPhoneNumberController.text =
-                          //                   firstRow?[1]?.value.toString() ??
-                          //                       "";
-                          //             }
-                          //           }
-                          //         },
-                          //         child: const Text("Upload data from excel"),
-                          //       ),
-                          //     ),
-                          //     sizedBoxH10,
-                          //               Text(
-                          //                  "* Please use .xlsx format",
-                          //                  style: TextStyle(
-                          //                 fontSize: 13.w,
-                          //                 fontWeight: FontWeight.w600,
-                          //                 color: const Color.fromARGB(255, 27, 106, 170)),
-                          //                 ),
-                          //   ],
-                          // ),
-                          // Padding(
-                          //   padding: EdgeInsets.only(left: 80.w, right: 50.w),
-                          //   child: SizedBox(
-                          //       height: 60.h,
-                          //       width: 250.w,
-                          //       child: const Text(
-                          //         '(You can only use ".xlxs files)"',
-                          //         style: TextStyle(fontSize: 12),
-                          //       )),
-                          // ),
-                        ]),
-                  ),
-                ),
-              ),
-            ),
+                        ),
+                      ),
+                    ),
+            )
           ],
         ),
       ),
