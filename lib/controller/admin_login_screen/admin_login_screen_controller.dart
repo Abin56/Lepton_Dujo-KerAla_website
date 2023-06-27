@@ -178,7 +178,7 @@ class AdminLoginScreenController extends GetxController {
                                         child: ListBody(
                                           children: const <Widget>[
                                             Text(
-                                                'Batch Added Successfully, Please Login again.')
+                                                'Batch added successfully, Please login again.')
                                           ],
                                         ),
                                       ),

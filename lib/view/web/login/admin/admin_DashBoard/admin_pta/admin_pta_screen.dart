@@ -29,7 +29,7 @@ class AdminPtaScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        tooltip: 'Add New Member',
+        tooltip: 'Add new member',
         onPressed: () async {
           Get.find<PtaController>().clearField();
           await createAdminPtaDialogue(context);
@@ -119,7 +119,7 @@ class AdminPtaScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Members In PTA',
+                          Text('Members in PTA',
                               style: GoogleFonts.oswald(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,

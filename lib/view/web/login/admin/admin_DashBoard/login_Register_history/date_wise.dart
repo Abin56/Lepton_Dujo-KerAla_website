@@ -35,7 +35,7 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: adminePrimayColor,
-        title: const Text("Admin Login Register (Date-Wise)"),
+        title: const Text("Admin Login Register (Date - wise)"),
       ),
       body: SafeArea(
           child: StreamBuilder(
@@ -87,7 +87,7 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
                                                 child: ListBody(
                                                   children: <Widget>[
                                                     Text(
-                                                        "Clear all the data registered on ${snapshot.data?.docs[index]['id']}. ")
+                                                        "Clear all the data registered on  ${snapshot.data?.docs[index]['id']}. ")
                                                   ],
                                                 ),
                                               ),
@@ -142,7 +142,7 @@ class _DateWiseLoginScreenState extends State<DateWiseLoginScreen> {
                                                             context) {
                                                           return AlertDialog(
                                                             title: const Text(
-                                                                'You Are Not a MainAdmin'),
+                                                                'You are not the main admin'),
                                                             content:
                                                                 SingleChildScrollView(
                                                               child: ListBody(

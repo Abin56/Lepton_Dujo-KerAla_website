@@ -44,7 +44,7 @@ class _SelectTypeState extends State<SelectType> {
                       Text(
                         'Hi ! Admin ',
                         style: ralewayStyle.copyWith(
-                          fontSize: 42.0,
+                          fontSize: 45.0,
                           color: Colors.white,
                           fontWeight: FontWeight.w800,
                         ),
@@ -119,7 +119,7 @@ class _SelectTypeState extends State<SelectType> {
                         color: const Color.fromARGB(255, 245, 86, 75),
                         child: Center(
                             child: Text(
-                          'State Level Examinations',
+                          'Public Level Examinations',
                           style: GoogleFonts.poppins(
                               color: Colors.white,
                               fontSize: 25,

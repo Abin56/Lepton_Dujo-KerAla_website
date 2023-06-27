@@ -71,9 +71,9 @@ class _NonTeachingLoginState extends State<NonTeachingLogin> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'Hi! Admin ',
+                        'Hi ! Admin ',
                         style: ralewayStyle.copyWith(
-                          fontSize: 48.0,
+                          fontSize: 45.0,
                           color: Colors.white,
                           fontWeight: FontWeight.w800,
                         ),
@@ -82,7 +82,7 @@ class _NonTeachingLoginState extends State<NonTeachingLogin> {
                         height: size.width / 20,
                       ),
                       Text(
-                        'Non-Teaching Staff ',
+                        'Non-teaching staff ',
                         style: ralewayStyle.copyWith(
                           fontSize: 25.0,
                           color: Colors.white,
@@ -139,19 +139,19 @@ class _NonTeachingLoginState extends State<NonTeachingLogin> {
                       ),
                       NonTeachingStaffTextFormFieldWidget(
                         function: checkFieldEmpty,
-                        labelText: 'House Name',
+                        labelText: 'House name',
                         textEditingController: houseNameController,
                         icon:Icons.house,
                       ),
                       NonTeachingStaffTextFormFieldWidget(
                         function: checkFieldEmpty,
-                        labelText: 'House Number',
+                        labelText: 'House number',
                         textEditingController: houseNoConttroller,
                         icon: Icons.house ,
                       ),
                       NonTeachingStaffTextFormFieldWidget(
                         function: checkFieldEmpty,
-                        labelText: 'Street Name',
+                        labelText: 'Street name',
                         textEditingController: streetNameController,
                         icon: Icons.location_city ,
                       ),
@@ -188,7 +188,7 @@ class _NonTeachingLoginState extends State<NonTeachingLogin> {
                       ),
                       NonTeachingStaffTextFormFieldWidget(
                         function: checkFieldPhoneNumberIsValid,
-                        labelText: 'Phone Number',
+                        labelText: 'Phone number',
                         textEditingController: phoneNumberController,
                         icon: Icons.phone,
                       ),

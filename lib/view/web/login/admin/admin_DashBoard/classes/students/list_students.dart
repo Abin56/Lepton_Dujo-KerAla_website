@@ -207,7 +207,7 @@ class _ListOfStudentsState extends State<ListOfStudents> {
                                                   ),
                                                   sizedBoxH10,
                                                   Text(
-                                                    "Admission NO : ${data.admissionNumber}",
+                                                    "Admission No : ${data.admissionNumber}",
                                                     style: GoogleFonts.poppins(
                                                       color: Colors.black,
                                                       fontSize: 12,

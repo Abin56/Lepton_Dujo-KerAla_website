@@ -104,7 +104,7 @@ class SchoolApproveController extends GetxController {
         });
       });
     } on FirebaseAuthException catch (e) {
-      showToast(msg: e.toString());
+      showToast(msg: e.code);
       isLoading.value = false;
       log('Error ${e.message.toString()}');
     }

@@ -40,9 +40,9 @@ class _FeesUpdatesState extends State<FeesUpdates> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          'Hi! Admin ',
+                          'Hi ! Admin ',
                           style: ralewayStyle.copyWith(
-                            fontSize: 48.0,
+                            fontSize: 45.0,
                             color: AppColors.whiteColor,
                             fontWeight: FontWeight.w800,
                           ),
@@ -51,7 +51,7 @@ class _FeesUpdatesState extends State<FeesUpdates> {
                           height: screenSize.width / 40,
                         ),
                         Text(
-                          'Welcome  ',
+                          'Fees Updates  ',
                           style: ralewayStyle.copyWith(
                             fontSize: 25.0,
                             color: AppColors.whiteColor,

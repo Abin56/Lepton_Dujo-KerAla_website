@@ -20,6 +20,7 @@ class MeetingCreates extends StatelessWidget {
   Widget build(BuildContext context) {
     adminMeetingController.clearControllers();
     final Size size = MediaQuery.of(context).size;
+    
     return Scaffold(
         // appBar: AppBar(
         //   title: const Text('MEETINGS'),
@@ -144,6 +145,7 @@ class AdminMeetingCreateLeftSideWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
     return Container(
       color: adminePrimayColor,
       child: SingleChildScrollView(
@@ -156,24 +158,33 @@ class AdminMeetingCreateLeftSideWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                sizedBoxH40,
                 Text(
-                  'Hi! Admin ',
+                  'Hi ! Admin ',
                   style: ralewayStyle.copyWith(
-                    fontSize: 48.0,
+                    fontSize: 45.0,
                     color: AppColors.whiteColor,
                     fontWeight: FontWeight.w800,
                   ),
                 ),
+                sizedBoxH20,
                 Text(
                   'Create Meetings',
                   style: ralewayStyle.copyWith(
-                    fontSize: 25.0,
+                    fontSize: 30.0,
                     color: AppColors.whiteColor,
                     fontWeight: FontWeight.w800,
                   ),
                 ),
-                LottieBuilder.network(
-                    'https://assets1.lottiefiles.com/packages/lf20_q5qvqtnr.json')
+                 SizedBox(
+                                        height: screenSize.width/3.5,
+                                        width:screenSize.width/2,
+                                        child: LottieBuilder.network(
+                                            "https://assets1.lottiefiles.com/packages/lf20_q5qvqtnr.json"),
+                                      ) 
+                
+                // LottieBuilder.network(
+                //     'https://assets1.lottiefiles.com/packages/lf20_q5qvqtnr.json')
               ],
             ),
           ],

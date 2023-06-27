@@ -80,7 +80,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                             //  color: Color.fromARGB(255, 63, 181, 102),
                             child: Center(
                               child: GoogleMonstserratWidgets(
-                                  text: 'Class Name',
+                                  text: 'Class name',
                                   fontsize: 12.w,
                                   color: cWhite,
                                   fontWeight: FontWeight.bold),
@@ -95,7 +95,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                             width: screenSize.width * 0.28,
                             child: Center(
                               child: GoogleMonstserratWidgets(
-                                text: 'Classteacher Name',
+                                text: 'Class teacher name',
                                 fontsize: 15.w,
                                 color: cWhite,
                                 fontWeight: FontWeight.w500,
@@ -327,7 +327,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                       sizedBoxH30,
                       GoogleMonstserratWidgets(
                         text:
-                            '${Get.find<GetFireBaseData>().bYear.value} -Class List', ////changed normal text to original batch year
+                            '${Get.find<GetFireBaseData>().bYear.value} -  Class list', ////changed normal text to original batch year
                         //'2023 -2024 batch',
                         fontsize: 17.w,
                         color: cBlack,
@@ -348,7 +348,7 @@ class AddClassesSectionScreen extends StatelessWidget {
                             // ignore: prefer_const_constructors
                             decoration: InputDecoration(
                               border: const OutlineInputBorder(),
-                              labelText: 'Class Name',
+                              labelText: 'Class name',
                             ),
                           ),
                         ),

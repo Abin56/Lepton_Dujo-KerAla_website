@@ -66,7 +66,7 @@ class _AllStudentListState extends State<AllStudentList> {
                           icon: const Icon(Icons.arrow_back)),
                       sizedBoxW20,
                       Text(
-                        "A L L S T U D E N T S",
+                        "ALL  STUDENTS",
                         style: GoogleFonts.montserrat(
                             color: const Color.fromRGBO(158, 158, 158, 1),
                             fontSize: 30,

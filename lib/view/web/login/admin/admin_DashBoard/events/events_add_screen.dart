@@ -81,15 +81,15 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                               Text(
                                 'Hi ! Admin',
                                 style: ralewayStyle.copyWith(
-                                  fontSize: 48.0,
+                                  fontSize: 45.0,
                                   color: AppColors.whiteColor,
                                   fontWeight: FontWeight.w800,
                                 ),
                               ),
                               Text(
-                                'Create New\n Events',
+                                'Create New Events',
                                 style: ralewayStyle.copyWith(
-                                  fontSize: 29.0,
+                                  fontSize: 26.0,
                                   color: AppColors.whiteColor,
                                   fontWeight: FontWeight.w800,
                                 ),
@@ -313,7 +313,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
 
     for (var i = 0; i < parentsTokenList.length; i++) {
       sendPushMessage(
-          parentsTokenList[i], 'New Events added', 'Events Notification');
+          parentsTokenList[i], 'New Events added, പുതിയ ഇവന്റ് പ്രസിദ്ധീകരിച്ചു', 'Events Notification');
     }
   }
 
@@ -347,7 +347,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
 
     for (var i = 0; i < guardiansTokenList.length; i++) {
       sendPushMessage(
-          guardiansTokenList[i], 'New Events added', 'Events Notification');
+          guardiansTokenList[i], 'New Events added, പുതിയ ഇവന്റ് പ്രസിദ്ധീകരിച്ചു', 'Events Notification');
     }
   }
 
@@ -435,7 +435,7 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
 
     for (var i = 0; i < studentsTokenList.length; i++) {
       sendPushMessage(
-          studentsTokenList[i], 'New Events added', 'Events Notification');
+          studentsTokenList[i], 'New Events added, പുതിയ ഇവന്റ് പ്രസിദ്ധീകരിച്ചു', 'Events Notification');
     }
   }
 }

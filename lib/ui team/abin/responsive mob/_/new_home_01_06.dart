@@ -12,6 +12,8 @@ import 'package:dujo_kerala_website/view/web/widgets/drop_DownList/schoolDropDow
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:seo_renderer/renderers/image_renderer/image_renderer_vm.dart';
+import 'package:seo_renderer/renderers/text_renderer/text_renderer_vm.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../view/constant/constant.dart';
@@ -858,14 +860,16 @@ class HomePageImages extends StatelessWidget {
                               SizedBox(
                                 width: 5.h,
                               ),
-                              Text(
-                                'leptondujo@gmail.com',
-                                
-                                style: GoogleFonts.poppins(
-                                    // adminePrimayColor,
-                                    color: adminePrimayColor,
-                                    fontSize: 16.w,
-                                    fontWeight: FontWeight.w500),
+                              TextRenderer(
+                                child: Text(
+                                  'info@leptondujo.com',
+                                  
+                                  style: GoogleFonts.poppins(
+                                      // adminePrimayColor,
+                                      color: adminePrimayColor,
+                                      fontSize: 16.w,
+                                      fontWeight: FontWeight.w500),
+                                ),
                               ),
                             ],
                           ),
@@ -1057,9 +1061,11 @@ class HomePageImages extends StatelessWidget {
                                
                                 ),
                                  child:Center(child:
-                                 GoogleMonstserratWidgets(
-                                  text: "Login", fontsize: 14.w,fontWeight: FontWeight.w600,
-                                  color: cred,))
+                                  TextRenderer(
+                                   child: GoogleMonstserratWidgets(
+                                    text: "Login", fontsize: 14.w,fontWeight: FontWeight.w600,
+                                    color: cred,),
+                                 ))
                                  )
                           //Image.asset('assets/images/login-button.png')
                          
@@ -1087,12 +1093,15 @@ class HomePageImages extends StatelessWidget {
                             onTap: () {
                               _launchFacebookUrl();
                             },
-                            child: Image.asset(
-                              'assets/images/frdd.png',
-                              height: 25.h,
-                              width: 38.w,
-                              color: adminePrimayColor,
-                              //Color(0xFF17BDB5),
+                            child: ImageRenderer(
+                              alt: 'Asset Image',
+                              child: Image.asset(
+                                'assets/images/frdd.png',
+                                height: 25.h,
+                                width: 38.w,
+                                color: adminePrimayColor,
+                                //Color(0xFF17BDB5),
+                              ),
                             ),
                           ),
                           SizedBox(width: 10.w),
@@ -1100,11 +1109,14 @@ class HomePageImages extends StatelessWidget {
                             onTap: () {
                               _launchInstaUrl();
                             },
-                            child: Image.asset(
-                              'assets/images/instag.png',
-                              height: 40.h,
-                              width: 40.w,
-                              color: adminePrimayColor,
+                            child: ImageRenderer(
+                              alt: 'Asset Image',
+                              child: Image.asset(
+                                'assets/images/instag.png',
+                                height: 40.h,
+                                width: 40.w,
+                                color: adminePrimayColor,
+                              ),
                             ),
                           ),
                           SizedBox(width: 10.w),
@@ -1112,11 +1124,14 @@ class HomePageImages extends StatelessWidget {
                             onTap: () {
                               _launchTwitterUrl();
                             },
-                            child: Image.asset(
-                              'assets/images/twitt.png',
-                              height: 29.h,
-                              width: 30.w,
-                              color: adminePrimayColor,
+                            child: ImageRenderer(
+                              alt: 'Asset image',
+                              child: Image.asset(
+                                'assets/images/twitt.png',
+                                height: 29.h,
+                                width: 30.w,
+                                color: adminePrimayColor,
+                              ),
                             ),
                           ),
                           SizedBox(width: 10.w),
@@ -1124,11 +1139,14 @@ class HomePageImages extends StatelessWidget {
                             onTap: () {
                               _launchyouTubeUrl();
                             },
-                            child: Image.asset(
-                              'assets/images/utube.png',
-                              height: 28.h,
-                              width: 28.w,
-                              color: adminePrimayColor,
+                            child: ImageRenderer(
+                              alt: 'Asset Image',
+                              child: Image.asset(
+                                'assets/images/utube.png',
+                                height: 28.h,
+                                width: 28.w,
+                                color: adminePrimayColor,
+                              ),
                             ),
                           )
                         ],
@@ -1139,14 +1157,44 @@ class HomePageImages extends StatelessWidget {
               ),
               Stack(
                 children: [
+                   
+
                   SizedBox(
                  
                   height: 900.h,
                   width:double.infinity,
                  
-                child:  Image.asset('assets/images/websiteHomepage.jpg',fit: BoxFit.fill,)
+                child:  ImageRenderer(
+                  alt: 'Asset Image',
+                  child: Image.asset('assets/images/websiteHomepage.jpg',fit: BoxFit.fill,))
                
                   ),
+                  Padding(
+                     padding:  EdgeInsets.only(left: 1125.w,top: 30.h),
+                     child: SizedBox(
+                                 //height: 150.h,
+                                 width: 450.w,
+                                              child: Column(
+                                               mainAxisAlignment: MainAxisAlignment.end,
+                                 children: [
+                                  GoogleMonstserratWidgets(text: 'Customer support',
+                                   fontsize:15,color: adminePrimayColor,
+                                   fontWeight: FontWeight.w500),
+                                   //sizedBoxH5,
+                                           GoogleMonstserratWidgets(text:
+                                           '10.00 AM to 06.00 PM, Mon-Fri',
+                                           fontWeight: FontWeight.w500,
+                                            fontsize: 15.w,color: adminePrimayColor,),
+                                               sizedBoxH10,
+                                             GoogleMonstserratWidgets(text: '080 696 21 222', fontsize: 25.w,
+                                   fontWeight: FontWeight.w700,
+                                   color: cred),
+                                
+                                        
+                                              ],
+                                              )),
+                   ),
+                  
                   Padding(
                     padding:  EdgeInsets.only( right: 80.0.w,
                   left: 80.w,
@@ -1166,41 +1214,52 @@ class HomePageImages extends StatelessWidget {
                                 children: [
                                   SizedBox(
                                    // color: cBlue,
-                                    width: 120.w,
-                                    height: 80.h,
-                                    child: Image.network(
-                                     "https://firebasestorage.googleapis.com/v0/b/leptonscipro-31792.appspot.com/o/files%2Fimages%2FLepton-removebg-preview.png?alt=media&token=cb2cbd20-7630-4681-8857-f8b245018453",
-                                     // "assets/images/lepton2.png",
-                                     
-                                      width: 150.w,
-                                      height: 150.h,
+                                    width: 200.w,
+                                    height: 50.h,
+                                    child: ImageRenderer(
+                                      alt: 'Network Image',
+                                      child: Image.asset(
+                                       //"https://firebasestorage.googleapis.com/v0/b/leptonscipro-31792.appspot.com/o/files%2Fimages%2FLepton-removebg-preview.png?alt=media&token=cb2cbd20-7630-4681-8857-f8b245018453",
+                                        "assets/images/lepton2.png",
+                                       
+                                        width: 150.w,
+                                        height: 150.h,
+                                      ),
                                     ),
                                   ),
                                
                               Container(
-                                margin: EdgeInsets.only(top: 40.h,left: 10.w),
+                                margin: EdgeInsets.only(top: 60.h,left: 10.w),
                                // color: cBlue,
-                                width: 120.w,
-                                height: 80.h,
-                                child: Image.asset(
-                                  'assets/images/dujon.png',
-                                 
-                                  width: 170.h,
-                                  height: 170.h,
+                                width: 200.w,
+                                height: 50.h,
+                                child: ImageRenderer(
+                                  alt: 'Asset Image',
+                                  child: Image.asset(
+                                    'assets/images/dujon.png',
+                                   
+                                    width: 170.h,
+                                    height: 170.h,
+                                  ),
                                 ),
                               ),
+
+                              
+
                                                          ],
                               ),
                               Padding(
                                 padding: EdgeInsets.only(top: 85.h),
                                 child: Container(
                                  // color: cred,
-                                  child: Text(
-                                    "Watch And Guide,\n""Let Them Study !",
-                                    style: GoogleFonts.montserrat(
-                                      fontSize: 40.w,
-                                      fontWeight: FontWeight.bold,
-                                      color: adminePrimayColor,
+                                  child: TextRenderer(
+                                    child: Text(
+                                      "Watch And Guide,\n""Let Them Study !",
+                                      style: GoogleFonts.montserrat(
+                                        fontSize: 40.w,
+                                        fontWeight: FontWeight.bold,
+                                        color: adminePrimayColor,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -1220,22 +1279,27 @@ class HomePageImages extends StatelessWidget {
                                 },
                                 color: adminePrimayColor,
                                 child: Center(
-                                  child: Text(
-                                    'Create School Profile',
-                                    style: GoogleFonts.poppins(
-                                        color: Colors.white,
-                                        fontSize: 16.w,
-                                        fontWeight: FontWeight.w500),
+                                  child: TextRenderer(
+                                    child: Text(
+                                      'Create School Profile',
+                                      style: GoogleFonts.poppins(
+                                          color: Colors.white,
+                                          fontSize: 16.w,
+                                          fontWeight: FontWeight.w500),
+                                    ),
                                   ),
                                 ),
-                              )
+                              ),
+                             
                             ],
                           ),
                         ]),
                                   ),
                   ),
+                   
                 ]
               ),
+             
              
              
               sizedBoxH20,
@@ -1246,7 +1310,9 @@ class HomePageImages extends StatelessWidget {
               SizedBox(
                 height: 800.h,
                 width: double.infinity,
-                child: Image(image: AssetImage('assets/images/dujo_schools_image.png',),fit: BoxFit.fill,)
+                child: ImageRenderer(
+                  alt: 'Asset Image',
+                  child: Image(image: AssetImage('assets/images/dujo_schools_image.png',),fit: BoxFit.fill,))
               ),
              
            sizedBoxH20,
@@ -1257,33 +1323,11 @@ class HomePageImages extends StatelessWidget {
                SizedBox(
                 height: 800.h,
                 width: double.infinity,
-                child: Image(image: AssetImage('assets/images/dujo_colleges_image.png',),fit: BoxFit.fill,)
+                child: ImageRenderer(alt: 'Asset Image',
+                //src: ,
+                child: Image(image: AssetImage('assets/images/dujo_colleges_image.png',),fit: BoxFit.fill,))
           ),
-          //  InkWell(
-          //    onTap: () {
-          //                                   Navigator.push(
-          //                                     context,
-          //                                     MaterialPageRoute(
-          //                                       builder:(context) => UnderMaintanceScreen(),
-          //                                     ),
-          //                                   );
-          //                                 },
-          //    child: Container(
-          //                         margin: EdgeInsets.only(top: 690.h,left: 910.w),
-          //                         height: 60.h,
-          //                         width: 250.w,
-          //                         color: adminePrimayColor,
-          //                         child: Center(
-          //                           child: Text(
-          //                             'Create College Profile',
-          //                             style: GoogleFonts.poppins(
-          //                                 color: Colors.white,
-          //                                 fontSize: 16.w,
-          //                                 fontWeight: FontWeight.w500),
-          //                           ),
-          //                         ),
-          //                       ),
-          //  ),
+       
              ],
            ),
           sizedBoxH20,
@@ -1293,7 +1337,9 @@ class HomePageImages extends StatelessWidget {
                SizedBox(
                 height: 800.h,
                 width: double.infinity,
-                child: Image(image: AssetImage('assets/images/dujo_professional_image.png',),fit: BoxFit.fill,)
+                child: ImageRenderer(
+                  alt: 'Asset Image',
+                  child: Image(image: AssetImage('assets/images/dujo_professional_image.png',),fit: BoxFit.fill,))
           ),
           //  InkWell(
           //    onTap: () {
@@ -1329,7 +1375,9 @@ class HomePageImages extends StatelessWidget {
                SizedBox(
                 height: 800.h,
                 width: double.infinity,
-                child: Image(image: AssetImage('assets/images/dujo_institutions_image.png',),fit: BoxFit.fill,)
+                child:  ImageRenderer(
+                  alt: 'Asset Image',
+                  child: Image(image: AssetImage('assets/images/dujo_institutions_image.png',),fit: BoxFit.fill,))
           ),
           //  InkWell(
           //    onTap: () {

@@ -81,7 +81,7 @@ class ClassTeacherCreateEventsPage extends StatelessWidget {
                           sizedBoxH20,
                           TextFormFieldWidget(
                               function: checkFieldEmpty,
-                              hint: 'Signed By',
+                              hint: 'Signed by',
                               controller:
                                   teacherEventController.signedByController),
                           sizedBoxH20,

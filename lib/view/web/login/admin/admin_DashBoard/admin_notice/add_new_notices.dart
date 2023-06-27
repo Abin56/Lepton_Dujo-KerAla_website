@@ -1,6 +1,7 @@
 import 'package:dujo_kerala_website/utils/utils.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -44,10 +45,11 @@ class AddNewNotices extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
+                            sizedBoxH40,
                             Text(
-                              'Hi! Admin',
+                              'Hi ! Admin',
                               style: ralewayStyle.copyWith(
-                                fontSize: 48.0,
+                                fontSize: 45.0,
                                 color: AppColors.whiteColor,
                                 fontWeight: FontWeight.w800,
                               ),
@@ -56,13 +58,13 @@ class AddNewNotices extends StatelessWidget {
                             Text(
                               'Create Notices',
                               style: ralewayStyle.copyWith(
-                                fontSize: 25.0,
+                                fontSize: 30.0,
                                 color: AppColors.whiteColor,
                                 fontWeight: FontWeight.w800,
                               ),
                             ),
                             SizedBox(
-                              height: 300,
+                              height: 300.h,
                               width: screenSize.width / 2,
                               child: LottieBuilder.network(
                                   'https://assets7.lottiefiles.com/packages/lf20_2pckVUuMz6.json'),

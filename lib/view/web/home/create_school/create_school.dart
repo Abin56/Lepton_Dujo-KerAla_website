@@ -96,7 +96,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                 width: 150.w,
                                 ),
                         Text(
-                          'Hi! Lepton DuJo ',
+                          'Hi ! Lepton DuJo ',
                           style: ralewayStyle.copyWith(
                             fontSize: 30.0.w,
                             color: AppColors.whiteColor,
@@ -120,7 +120,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
                   Container(
                     margin: EdgeInsets.only(bottom: 25.h),
                     child: Text(
-                      'Create New School',
+                      'Create new school',
                       style: ralewayStyle.copyWith(
                         fontSize: 18.0.w,
                         color: AppColors.whiteColor,
@@ -726,12 +726,12 @@ class _SchoolProfileState extends State<SchoolProfile> {
                             textEditingController:
                                 addNewSchoolController.emailController,
                             function: checkFieldEmailIsValid,
-                            labelText: 'Enter Email',
-                            hintText: "Enter School's official Mail ID",
+                            labelText: 'Enter email',
+                            hintText: "Enter school's official mail ID",
                             icon: Icons.mail_outline,
                           ),
                             GooglePoppinsWidgets(
-                                                  text: "* You Can't Edit or Change this entry in future ", 
+                                                  text: "* You can't edit or change this entry in future ", 
                                                   fontsize: 13,color:  Color.fromARGB(255, 27, 106, 170),),
                         ],
                       ),
@@ -740,7 +740,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
                         textEditingController:
                             addNewSchoolController.phoneNumberController,
                         function: checkFieldPhoneNumberIsValid,
-                        labelText: 'Phone Number',
+                        labelText: 'Phone number',
                         icon: Icons.phone,
                       ),
                       SizedBox(height: 10.h,),
@@ -779,7 +779,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                           child: ListBody(
                                             children:  <Widget>[
                                               GoogleMonstserratWidgets(text:
-                                                  'Please Complete tariff section',fontsize: 15.w,)
+                                                  'Please complete tariff section',fontsize: 15.w,)
                                             ],
                                           ),
                                         ),
@@ -881,7 +881,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: GooglePoppinsWidgets(text: 'ProductName', fontsize: 15.w),
+          title: GooglePoppinsWidgets(text: 'Product name', fontsize: 15.w),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
