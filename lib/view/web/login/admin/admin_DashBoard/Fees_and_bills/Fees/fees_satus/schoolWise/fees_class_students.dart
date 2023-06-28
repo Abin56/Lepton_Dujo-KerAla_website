@@ -9,7 +9,6 @@ import '../../../../../../../../../controller/fees_bills/fees_status_controller.
 import '../../../../../../../../../model/create_classModel/add_student_model.dart';
 import '../../../../../../../../../model/fees_bills_model/fees_model.dart';
 import '../../../../../../../../../utils/utils.dart';
-import '../classWise/fees_class_status.dart';
 
 class FeesClassStudents extends StatefulWidget {
   const FeesClassStudents(
@@ -35,13 +34,13 @@ class _FeesClassStudentsState extends State<FeesClassStudents> {
     return (Scaffold(
       body: Row(
         children: [
-          SizedBox(
-            width: screenSize.width / 2,
-            child: FeesStatusContainerWidget(
-              screenSize: screenSize,
-              text: 'Students list',
-            ),
-          ),
+          // SizedBox(
+          //   width: screenSize.width / 2,
+          //   child: FeesStatusContainerWidget(
+          //     screenSize: screenSize,
+          //     text: 'Students list',
+          //   ),
+          // ),
           Expanded(
             child: FutureBuilder(
                 future: feesStatusController

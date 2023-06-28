@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 import 'package:seo_renderer/helpers/renderer_state.dart';
 import 'package:seo_renderer/helpers/robot_detector_vm.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -22,16 +21,16 @@ void main() async {
         measurementId: "G-QC6SR6TLE0"),
   );
   ScreenUtil.ensureScreenSize();
- runApp(
-  RobotDetector( 
-    debug: true, // you can set true to enable robot mode
-    child: MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: MyApp(),
-      navigatorObservers: [seoRouteObserver],
+  runApp(
+    RobotDetector(
+      debug: true, // you can set true to enable robot mode
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: const MyApp(),
+        navigatorObservers: [seoRouteObserver],
+      ),
     ),
-  ),
-);;
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -58,7 +57,7 @@ class MyApp extends StatelessWidget {
               ),
               home:
                   //const MobHomePage()
-                   HomePageImages());
+                  HomePageImages());
         });
   }
 }

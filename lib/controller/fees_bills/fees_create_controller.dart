@@ -100,7 +100,7 @@ class FeesCreateController extends GetxController {
       required String amount,
       required String dueDate,
       required String type,
-      required String datePeriod}) async {
+      required String subCategoryName}) async {
     try {
       isLoading.value = true;
       for (var element in allClass) {
@@ -120,8 +120,8 @@ class FeesCreateController extends GetxController {
                   classId: element.docid,
                   className: element.className,
                   type: type,
-                  datePeriod: datePeriod,
                   subCategoryId: subCategoryId,
+                  subCategoryName: subCategoryName,
                   studentList: []).toMap(),
             )
             .then((value) async {
@@ -155,38 +155,50 @@ class FeesCreateController extends GetxController {
   }
 
 //fees created only specific class
-  Future<void> createFeesForSpecificClass(
-      String categoryId,
-      String categoryName,
-      String amount,
-      String dueDate,
-      String type,
-      ClassModel classModel) async {
+  Future<void> createFeesForSpecificClass({
+    required FeesCategoryModel categoryModel,
+    required FeesSubCategoryModel subCategoryModel,
+    required String amount,
+    required String dueDate,
+    required ClassModel classModel,
+  }) async {
     isLoading.value = true;
-    fStore
+
+//creating category model fields
+    await fStore
         .collection("classes")
         .doc(classModel.docid)
         .collection("ClassFees")
-        .doc(categoryId)
+        .doc(categoryModel.id)
+        .set(categoryModel.toMap());
+//create fees inside subcategory
+    await fStore
+        .collection("classes")
+        .doc(classModel.docid)
+        .collection("ClassFees")
+        .doc(categoryModel.id)
+        .collection("SubCategory")
+        .doc(subCategoryModel.id)
         .set(
-          //Todo fix seperate class datePeriod subcategoryid
           FeesModel(
-                  categoryId: categoryId,
-                  categoryName: categoryName,
-                  amount: amount,
-                  dueDate: dueDate,
-                  classId: classModel.docid,
-                  className: classModel.className,
-                  type: type,
-                  studentList: [],
-                  datePeriod: "",
-                  subCategoryId: "")
-              .toMap(),
+            categoryId: categoryModel.id,
+            categoryName: categoryModel.categoryName,
+            amount: amount,
+            dueDate: dueDate,
+            classId: classModel.docid,
+            className: classModel.className,
+            type: categoryModel.type,
+            studentList: [],
+            subCategoryId: subCategoryModel.id,
+            subCategoryName: subCategoryModel.subCategoryName,
+          ).toMap(),
         )
         .then((value) async {
       showToast(msg: "Successfully Completed");
       isLoading.value = false;
       selectedClass = null;
+      amountController.clear();
+      dueDateController.clear();
     }).catchError((error) {
       isLoading.value = false;
       showToast(msg: (error as FirebaseException).code);

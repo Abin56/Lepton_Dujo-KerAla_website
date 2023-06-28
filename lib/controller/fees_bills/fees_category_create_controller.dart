@@ -78,7 +78,7 @@ class FeesCategoryCreateController extends GetxController {
             .doc(categoryName + element)
             .set(
               FeesSubCategoryModel(
-                      date: element,
+                      subCategoryName: element,
                       id: categoryName + element,
                       categoryName: categoryName)
                   .toMap(),

@@ -2,22 +2,22 @@
 import 'dart:convert';
 
 class FeesSubCategoryModel {
-  String date;
+  String subCategoryName;
   String id;
   String categoryName;
   FeesSubCategoryModel({
-    required this.date,
+    required this.subCategoryName,
     required this.id,
     required this.categoryName,
   });
 
   FeesSubCategoryModel copyWith({
-    String? date,
+    String? subCategoryName,
     String? id,
     String? categoryName,
   }) {
     return FeesSubCategoryModel(
-      date: date ?? this.date,
+      subCategoryName: subCategoryName ?? this.subCategoryName,
       id: id ?? this.id,
       categoryName: categoryName ?? this.categoryName,
     );
@@ -25,7 +25,7 @@ class FeesSubCategoryModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'date': date,
+      'subCategoryName': subCategoryName,
       'id': id,
       'categoryName': categoryName,
     };
@@ -33,7 +33,7 @@ class FeesSubCategoryModel {
 
   factory FeesSubCategoryModel.fromMap(Map<String, dynamic> map) {
     return FeesSubCategoryModel(
-      date: map['date'] as String,
+      subCategoryName: map['subCategoryName'] as String,
       id: map['id'] as String,
       categoryName: map['categoryName'] as String,
     );
@@ -46,17 +46,18 @@ class FeesSubCategoryModel {
 
   @override
   String toString() =>
-      'FeesSubCategoryModel(date: $date, id: $id, categoryName: $categoryName)';
+      'FeesSubCategoryModel(subCategoryName: $subCategoryName, id: $id, categoryName: $categoryName)';
 
   @override
   bool operator ==(covariant FeesSubCategoryModel other) {
     if (identical(this, other)) return true;
 
-    return other.date == date &&
+    return other.subCategoryName == subCategoryName &&
         other.id == id &&
         other.categoryName == categoryName;
   }
 
   @override
-  int get hashCode => date.hashCode ^ id.hashCode ^ categoryName.hashCode;
+  int get hashCode =>
+      subCategoryName.hashCode ^ id.hashCode ^ categoryName.hashCode;
 }

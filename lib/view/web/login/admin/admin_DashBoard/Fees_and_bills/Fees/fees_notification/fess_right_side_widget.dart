@@ -16,7 +16,7 @@ class FeesNotificationRightSideWidget extends StatelessWidget {
   FeesNotificationRightSideWidget({super.key});
   final _formKey = GlobalKey<FormState>();
 
-  final FeesCreateController feesBillsController =
+  final FeesCreateController _feesCreateController =
       Get.put(FeesCreateController());
 
   @override
@@ -31,10 +31,10 @@ class FeesNotificationRightSideWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               DropdownSearch<FeesCategoryModel>(
-                asyncItems: (text) => feesBillsController.fetchCategoryList(),
+                asyncItems: (text) => _feesCreateController.fetchCategoryList(),
                 itemAsString: (FeesCategoryModel item) => item.categoryName,
                 onChanged: (FeesCategoryModel? data) {
-                  feesBillsController.selectedMainCategory = data;
+                  _feesCreateController.selectedMainCategory = data;
                 },
                 dropdownDecoratorProps: const DropDownDecoratorProps(
                   dropdownSearchDecoration: InputDecoration(
@@ -45,12 +45,13 @@ class FeesNotificationRightSideWidget extends StatelessWidget {
               ),
               sizedBoxH20,
               DropdownSearch<FeesSubCategoryModel>(
-                asyncItems: (items) => feesBillsController.fetchSubCategoryList(
-                  feesBillsController.selectedMainCategory?.id ?? "",
+                asyncItems: (items) =>
+                    _feesCreateController.fetchSubCategoryList(
+                  _feesCreateController.selectedMainCategory?.id ?? "",
                 ),
-                itemAsString: (FeesSubCategoryModel u) => u.date,
+                itemAsString: (FeesSubCategoryModel u) => u.subCategoryName,
                 onChanged: (FeesSubCategoryModel? data) =>
-                    feesBillsController.selectedSubCategory = data,
+                    _feesCreateController.selectedSubCategory = data,
                 dropdownDecoratorProps: const DropDownDecoratorProps(
                   dropdownSearchDecoration: InputDecoration(
                     labelText: "Select Date",
@@ -62,13 +63,13 @@ class FeesNotificationRightSideWidget extends StatelessWidget {
               Obx(() => Row(
                     children: [
                       Checkbox(
-                        value: feesBillsController.isSpecificClassOnly.value,
+                        value: _feesCreateController.isSpecificClassOnly.value,
                         onChanged: (value) {
                           if (value != null) {
-                            feesBillsController.isSpecificClassOnly.value =
+                            _feesCreateController.isSpecificClassOnly.value =
                                 value;
                             if (!value) {
-                              feesBillsController.selectedClass = null;
+                              _feesCreateController.selectedClass = null;
                             }
                           }
                         },
@@ -79,12 +80,12 @@ class FeesNotificationRightSideWidget extends StatelessWidget {
               sizedBoxH20,
               Obx(
                 () => Visibility(
-                  visible: feesBillsController.isSpecificClassOnly.value,
+                  visible: _feesCreateController.isSpecificClassOnly.value,
                   child: DropdownSearch<ClassModel>(
-                    items: feesBillsController.allClass,
+                    items: _feesCreateController.allClass,
                     itemAsString: (ClassModel u) => u.className,
                     onChanged: (ClassModel? data) =>
-                        feesBillsController.selectedClass = data,
+                        _feesCreateController.selectedClass = data,
                     dropdownDecoratorProps: const DropDownDecoratorProps(
                       dropdownSearchDecoration: InputDecoration(
                         labelText: "Select Class",
@@ -97,38 +98,25 @@ class FeesNotificationRightSideWidget extends StatelessWidget {
               sizedBoxH20,
               TextFormFieldFWidget(
                 function: checkFieldEmpty,
-                textEditingController: feesBillsController.amountController,
+                textEditingController: _feesCreateController.amountController,
                 labelText: 'Amount',
               ),
               sizedBoxH20,
               TextFormFieldFWidget(
-                textEditingController: feesBillsController.dueDateController,
-                onTap: () async => feesBillsController.dueDateController.text =
-                    await dateTimePicker(context),
+                textEditingController: _feesCreateController.dueDateController,
+                onTap: () async => _feesCreateController
+                    .dueDateController.text = await dateTimePicker(context),
                 function: checkFieldEmpty,
                 labelText: 'Due date',
               ),
               sizedBoxH20,
               GestureDetector(
                   onTap: () async {
-                    await feesBillsController.createFeesForAllClass(
-                        categoryId:
-                            feesBillsController.selectedMainCategory?.id ?? "",
-                        subCategoryId:
-                            feesBillsController.selectedSubCategory?.id ?? "",
-                        categoryName: feesBillsController
-                                .selectedMainCategory?.categoryName ??
-                            "",
-                        amount: feesBillsController.amountController.text,
-                        dueDate: feesBillsController.dueDateController.text,
-                        type: feesBillsController.selectedType.value,
-                        datePeriod:
-                            feesBillsController.selectedSubCategory?.date ??
-                                "");
+                    await createFunction();
                   },
                   child: Obx(
                     //Todo need to change loading
-                    () => feesBillsController.isLoading.value
+                    () => _feesCreateController.isLoading.value
                         ? circularProgressIndicator
                         : const SubmitButtonWidget(
                             text: 'Create',
@@ -141,32 +129,32 @@ class FeesNotificationRightSideWidget extends StatelessWidget {
     );
   }
 
-  // Future<void> createFunction() async {
-  //   if (feesBillsController.selectedCategory["id"] == "" ||
-  //       feesBillsController.selectedCategory["categoryName"] == "" ||
-  //       feesBillsController.selectedCategory["type"] == "" ||
-  //       feesBillsController.selectedPeriod.isEmpty) {
-  //     return showToast(msg: "All Fields are mandatory");
-  //   }
-  //   if (_formKey.currentState?.validate() ?? false) {
-  //     if (feesBillsController.selectedClass == null) {
-  //       await feesBillsController.createFeesForAllClass(
-  //           categoryId: feesBillsController.selectedCategory["id"],
-  //           categoryName: feesBillsController.selectedCategory["categoryName"],
-  //           amount: feesBillsController.amountController.text,
-  //           dueDate: feesBillsController.dueDateController.text,
-  //           type: feesBillsController.selectedCategory["type"],
-  //           datePeriod: feesBillsController.selectedPeriod,
-  //           subCategory: );
-  //     } else {
-  //       await feesBillsController.createFeesForSpecificClass(
-  //           feesBillsController.selectedCategory["id"],
-  //           feesBillsController.selectedCategory["categoryName"],
-  //           feesBillsController.amountController.text,
-  //           feesBillsController.dueDateController.text,
-  //           feesBillsController.selectedCategory["type"],
-  //           feesBillsController.selectedClass!);
-  //     }
-  //   }
-  // }
+  Future<void> createFunction() async {
+    if (_formKey.currentState?.validate() ?? false) {
+      if (_feesCreateController.selectedClass == null) {
+        await _feesCreateController.createFeesForAllClass(
+            categoryId: _feesCreateController.selectedMainCategory?.id ?? "",
+            subCategoryId: _feesCreateController.selectedSubCategory?.id ?? "",
+            categoryName:
+                _feesCreateController.selectedMainCategory?.categoryName ?? "",
+            amount: _feesCreateController.amountController.text,
+            dueDate: _feesCreateController.dueDateController.text,
+            type: _feesCreateController.selectedType.value,
+            subCategoryName:
+                _feesCreateController.selectedSubCategory?.subCategoryName ??
+                    "");
+      } else {
+        if (_feesCreateController.selectedMainCategory != null ||
+            _feesCreateController.selectedSubCategory != null ||
+            _feesCreateController.selectedClass != null) {
+          await _feesCreateController.createFeesForSpecificClass(
+              categoryModel: _feesCreateController.selectedMainCategory!,
+              subCategoryModel: _feesCreateController.selectedSubCategory!,
+              amount: _feesCreateController.amountController.text,
+              dueDate: _feesCreateController.dueDateController.text,
+              classModel: _feesCreateController.selectedClass!);
+        }
+      }
+    }
+  }
 }

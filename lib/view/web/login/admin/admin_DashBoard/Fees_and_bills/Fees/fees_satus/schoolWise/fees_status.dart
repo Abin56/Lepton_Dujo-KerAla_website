@@ -19,13 +19,13 @@ class FeesStstatues extends StatelessWidget {
       body: Row(
         children: [
           Expanded(
-            child: FeesFilterSecondHalfWidget(),
-          ),
-          Expanded(
             child: FeesHalfContainerWidget(
               screenSize: screenSize,
               text: 'Fees Catergories',
             ),
+          ),
+          Expanded(
+            child: FeesFilterSecondHalfWidget(),
           ),
         ],
       ),
@@ -68,7 +68,7 @@ class FeesFilterSecondHalfWidget extends StatelessWidget {
             asyncItems: (String filter) =>
                 feesStatusController.fetchAllSchoolSubCategories(
                     feesStatusController.selectedMainCategory),
-            itemAsString: (FeesSubCategoryModel u) => u.date,
+            itemAsString: (FeesSubCategoryModel u) => u.subCategoryName,
             onChanged: (FeesSubCategoryModel? data) =>
                 feesStatusController.selectedSubCategory = data?.id ?? "",
             dropdownDecoratorProps: const DropDownDecoratorProps(
@@ -113,71 +113,3 @@ class FeesFilterSecondHalfWidget extends StatelessWidget {
     );
   }
 }
-
-
-//  Expanded(
-//             child: FutureBuilder(
-//               future: feesBillsController.fetchCategoryList(),
-//               builder: (context, snapshot) {
-//                 if (snapshot.hasData) {
-//                   return GridView.builder(
-//                     itemCount: snapshot.data?.length,
-//                     gridDelegate:
-//                         const SliverGridDelegateWithFixedCrossAxisCount(
-//                       crossAxisCount: 3,
-//                     ),
-//                     itemBuilder: (context, index) {
-//                       return Padding(
-//                         padding: EdgeInsets.all(20.w),
-//                         child: GestureDetector(
-//                           onTap: () {
-//                             Navigator.push(
-//                                 context,
-//                                 MaterialPageRoute(
-//                                   builder: (context) => FeesClassStatus(
-//                                       feesCategory: snapshot.data?[index]
-//                                           ["id"]),
-//                                 ));
-//                           },
-//                           child: Container(
-//                             decoration: BoxDecoration(
-//                                 color: Colors.white,
-//                                 boxShadow: [
-//                                   BoxShadow(
-//                                     color:
-//                                         const Color.fromARGB(211, 122, 117, 117)
-//                                             .withOpacity(0.5),
-//                                     spreadRadius: 10,
-//                                     blurRadius: 10,
-//                                     offset: const Offset(0, 3),
-//                                   ),
-//                                 ],
-//                                 borderRadius: BorderRadius.all(
-//                                   Radius.circular(3.w),
-//                                 )),
-//                             height: 80.w,
-//                             width: 160.w,
-//                             child: Column(
-//                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                               children: [
-//                                 SizedBox(
-//                                   height: 10.w,
-//                                 ),
-//                                 GoogleMonstserratWidgets(
-//                                     text: snapshot.data?[index]["categoryName"],
-//                                     fontsize: 15.w,
-//                                     color: cBlack,
-//                                     fontWeight: FontWeight.w600),
-//                               ],
-//                             ),
-//                           ),
-//                         ),
-//                       );
-//                     },
-//                   );
-//                 } else {
-//                   return const SizedBox();
-//                 }
-//               },
-//             ),
-//           ),
