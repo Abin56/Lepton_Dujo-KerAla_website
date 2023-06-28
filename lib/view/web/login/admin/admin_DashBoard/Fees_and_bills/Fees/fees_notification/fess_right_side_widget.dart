@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../../../../../../controller/fees_bills/fees_bills_controller.dart';
+import '../../../../../../../../controller/fees_bills/fees_create_controller.dart';
 import '../../../../../../../../model/class_model/class_model.dart';
 import '../../../../../../../../model/fees_bills_model/fees_subcategory_model.dart';
 import '../../../../../../../constant/constant.dart';
@@ -16,8 +16,8 @@ class FeesNotificationRightSideWidget extends StatelessWidget {
   FeesNotificationRightSideWidget({super.key});
   final _formKey = GlobalKey<FormState>();
 
-  final FeesBillsController feesBillsController =
-      Get.put(FeesBillsController());
+  final FeesCreateController feesBillsController =
+      Get.put(FeesCreateController());
 
   @override
   Widget build(BuildContext context) {
@@ -111,11 +111,24 @@ class FeesNotificationRightSideWidget extends StatelessWidget {
               sizedBoxH20,
               GestureDetector(
                   onTap: () async {
-                    //await createFunction();
+                    await feesBillsController.createFeesForAllClass(
+                        categoryId:
+                            feesBillsController.selectedMainCategory?.id ?? "",
+                        subCategoryId:
+                            feesBillsController.selectedSubCategory?.id ?? "",
+                        categoryName: feesBillsController
+                                .selectedMainCategory?.categoryName ??
+                            "",
+                        amount: feesBillsController.amountController.text,
+                        dueDate: feesBillsController.dueDateController.text,
+                        type: feesBillsController.selectedType.value,
+                        datePeriod:
+                            feesBillsController.selectedSubCategory?.date ??
+                                "");
                   },
                   child: Obx(
                     //Todo need to change loading
-                    () => feesBillsController.categoryFetchloading.value
+                    () => feesBillsController.isLoading.value
                         ? circularProgressIndicator
                         : const SubmitButtonWidget(
                             text: 'Create',

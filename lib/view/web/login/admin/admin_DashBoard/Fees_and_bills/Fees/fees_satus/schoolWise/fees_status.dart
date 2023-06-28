@@ -49,7 +49,7 @@ class FeesStstatues extends StatelessWidget {
                     asyncItems: (String filter) =>
                         feesStatusController.fetchAllSchoolSubCategories(
                             feesStatusController.selectedClass),
-                    itemAsString: (Map<String, dynamic> u) => u[""],
+                    itemAsString: (Map<String, dynamic> u) => u["date"],
                     onChanged: (Map<String, dynamic>? data) => print(data),
                     dropdownDecoratorProps: const DropDownDecoratorProps(
                       dropdownSearchDecoration: InputDecoration(

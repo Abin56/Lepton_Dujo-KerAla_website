@@ -9,13 +9,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../../../../../../../../controller/fees_bills/fees_bills_controller.dart';
+import '../../../../../../../../../controller/fees_bills/fees_create_controller.dart';
 import 'fees_class_students.dart';
 
 class FeesClassStatus extends StatelessWidget {
   FeesClassStatus({super.key, required this.feesCategory});
-  final FeesBillsController feesBillsController =
-      Get.put(FeesBillsController());
+  final FeesCreateController _feesCreateController =
+      Get.put(FeesCreateController());
 
   final String feesCategory;
 
@@ -29,7 +29,7 @@ class FeesClassStatus extends StatelessWidget {
               screenSize: screenSize, text: 'Fees class list'),
           Expanded(
             child: FutureBuilder(
-                future: feesBillsController.getAllClasses(),
+                future: _feesCreateController.getAllClasses(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return GridView.builder(

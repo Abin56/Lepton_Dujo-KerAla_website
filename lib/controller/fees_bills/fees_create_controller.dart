@@ -13,18 +13,20 @@ import 'package:uuid/uuid.dart';
 import '../../model/fees_bills_model/fees_category_model.dart';
 import '../../model/fees_bills_model/fees_subcategory_model.dart';
 
-class FeesBillsController extends GetxController {
+class FeesCreateController extends GetxController {
+  ///for unique id creation
+  final Uuid uuid = const Uuid();
+
+  TextEditingController amountController = TextEditingController();
+  TextEditingController dueDateController = TextEditingController();
   //category name dropdown selected category
   FeesCategoryModel? selectedMainCategory;
   //selected subcategory from
   FeesSubCategoryModel? selectedSubCategory;
-  @override
-  void onInit() async {
-    await getAllClasses();
-    super.onInit();
-  }
+  RxBool isLoading = RxBool(false);
+//fetching all classes for creating fees
+  List<ClassModel> allClass = [];
 
-  RxBool categoryFetchloading = RxBool(false);
   final DocumentReference<Map<String, dynamic>> fStore = FirebaseFirestore
       .instance
       .collection("SchoolListCollection")
@@ -32,21 +34,110 @@ class FeesBillsController extends GetxController {
       .collection(Get.find<GetFireBaseData>().bYear.value)
       .doc(Get.find<GetFireBaseData>().bYear.value);
 
-  ///for unique id creation
-  final Uuid uuid = const Uuid();
-
-  TextEditingController amountController = TextEditingController();
-  TextEditingController dueDateController = TextEditingController();
-
-//category create section variables
+  @override
+  void onInit() async {
+    await getAllClasses();
+    super.onInit();
+  }
 
   ///category creation varibles
   RxString selectedType = RxString("");
-  List<ClassModel> allClass = [];
+
   List<String> tokenList = [];
 //this for add category only selected class if this value is true then selected school dropdown will show
   RxBool isSpecificClassOnly = RxBool(false);
   ClassModel? selectedClass;
+
+  //fetch category list
+
+  Future<List<FeesCategoryModel>> fetchCategoryList() async {
+    try {
+      isLoading.value = true;
+
+      final QuerySnapshot<Map<String, dynamic>> data =
+          await fStore.collection("Fees").get();
+      isLoading.value = false;
+      return data.docs.map((e) => FeesCategoryModel.fromMap(e.data())).toList();
+    } catch (e) {
+      showToast(msg: "Something went wrong");
+      isLoading.value = false;
+      return [];
+    }
+  }
+
+  //fetch sub category list
+
+  Future<List<FeesSubCategoryModel>> fetchSubCategoryList(
+      String categoryId) async {
+    try {
+      isLoading.value = true;
+
+      final QuerySnapshot<Map<String, dynamic>> data = await fStore
+          .collection("Fees")
+          .doc(categoryId)
+          .collection("SubCategory")
+          .get();
+      isLoading.value = false;
+      return data.docs
+          .map(
+            (e) => FeesSubCategoryModel.fromMap(
+              e.data(),
+            ),
+          )
+          .toList();
+    } on FirebaseException catch (e) {
+      showToast(msg: e.code);
+      isLoading.value = false;
+      return [];
+    }
+  }
+
+  //creatin fees for all class
+  Future<void> createFeesForAllClass(
+      {required String categoryId,
+      required String subCategoryId,
+      required String categoryName,
+      required String amount,
+      required String dueDate,
+      required String type,
+      required String datePeriod}) async {
+    try {
+      isLoading.value = true;
+      for (var element in allClass) {
+        fStore
+            .collection("Fees")
+            .doc(categoryId)
+            .collection("SubCategory")
+            .doc(subCategoryId)
+            .collection("Classes")
+            .doc(element.docid)
+            .set(
+              FeesModel(
+                  categoryId: categoryId,
+                  categoryName: categoryName,
+                  amount: amount,
+                  dueDate: dueDate,
+                  classId: element.docid,
+                  className: element.className,
+                  type: type,
+                  datePeriod: datePeriod,
+                  subCategoryId: subCategoryId,
+                  studentList: []).toMap(),
+            )
+            .then((value) async {
+          amountController.clear();
+          dueDateController.clear();
+          selectedSubCategory = null;
+        });
+      }
+      showToast(msg: "Successfully Completed");
+      isLoading.value = false;
+    } catch (e) {
+      isLoading.value = false;
+      showToast(msg: "Something Went Wrong");
+      log(e.toString());
+    }
+  }
 
   //fetch all classes
 
@@ -63,99 +154,6 @@ class FeesBillsController extends GetxController {
     }
   }
 
-  //fetch category list
-
-  Future<List<FeesCategoryModel>> fetchCategoryList() async {
-    try {
-      categoryFetchloading.value = true;
-
-      final QuerySnapshot<Map<String, dynamic>> data =
-          await fStore.collection("Fees").get();
-      categoryFetchloading.value = false;
-      return data.docs.map((e) => FeesCategoryModel.fromMap(e.data())).toList();
-    } catch (e) {
-      showToast(msg: "Something went wrong");
-      categoryFetchloading.value = false;
-      return [];
-    }
-  }
-
-  //fetch sub category list
-
-  Future<List<FeesSubCategoryModel>> fetchSubCategoryList(
-      String categoryId) async {
-    log("<<<<<<<<<<<<<<<<<$categoryId");
-    try {
-      categoryFetchloading.value = true;
-
-      final QuerySnapshot<Map<String, dynamic>> data = await fStore
-          .collection("Fees")
-          .doc(categoryId)
-          .collection("SubCategory")
-          .get();
-      categoryFetchloading.value = false;
-      return data.docs
-          .map(
-            (e) => FeesSubCategoryModel.fromMap(
-              e.data(),
-            ),
-          )
-          .toList();
-    } on FirebaseException catch (e) {
-      showToast(msg: e.code);
-      categoryFetchloading.value = false;
-      return [];
-    }
-  }
-
-  //creatin fees for all class
-  Future<void> createFeesForAllClass({
-    required String categoryId,
-    required String categoryName,
-    required String subCategory,
-    required String amount,
-    required String dueDate,
-    required String type,
-    required String datePeriod,
-  }) async {
-    try {
-      categoryFetchloading.value = true;
-      for (var element in allClass) {
-        fStore
-            .collection("Fees")
-            .doc(categoryId)
-            .collection(subCategory)
-            .doc(subCategory)
-            .collection("Classes")
-            .doc(element.docid)
-            .set(
-              FeesModel(
-                  datePeriod: datePeriod,
-                  subCategoryId: categoryName + datePeriod,
-                  categoryId: categoryId,
-                  categoryName: categoryName,
-                  amount: amount,
-                  dueDate: dueDate,
-                  classId: element.docid,
-                  className: element.className,
-                  type: type,
-                  studentList: []).toMap(),
-            )
-            .then((value) async {
-          amountController.clear();
-          dueDateController.clear();
-          selectedSubCategory = null;
-        });
-      }
-      showToast(msg: "Successfully Completed");
-      categoryFetchloading.value = false;
-    } catch (e) {
-      categoryFetchloading.value = false;
-      showToast(msg: "Something Went Wrong");
-      log(e.toString());
-    }
-  }
-
 //fees created only specific class
   Future<void> createFeesForSpecificClass(
       String categoryId,
@@ -164,7 +162,7 @@ class FeesBillsController extends GetxController {
       String dueDate,
       String type,
       ClassModel classModel) async {
-    categoryFetchloading.value = true;
+    isLoading.value = true;
     fStore
         .collection("classes")
         .doc(classModel.docid)
@@ -187,10 +185,10 @@ class FeesBillsController extends GetxController {
         )
         .then((value) async {
       showToast(msg: "Successfully Completed");
-      categoryFetchloading.value = false;
+      isLoading.value = false;
       selectedClass = null;
     }).catchError((error) {
-      categoryFetchloading.value = false;
+      isLoading.value = false;
       showToast(msg: (error as FirebaseException).code);
       log(error.toString());
     });

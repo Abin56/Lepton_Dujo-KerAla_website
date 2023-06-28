@@ -58,7 +58,7 @@ class FeesStatusController {
     final QuerySnapshot<Map<String, dynamic>> categoryList = await _fStore
         .collection("Fees")
         .doc(categoryId)
-        .collection(categoryId)
+        .collection("SubCategory")
         .get();
     return categoryList.docs.map((e) => e.data()).toList();
   }

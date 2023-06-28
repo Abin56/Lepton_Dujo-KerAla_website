@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../model/fees_bills_model/fees_category_model.dart';
+import '../../model/fees_bills_model/fees_subcategory_model.dart';
 import '../admin_login_screen/admin_login_screen_controller.dart';
 import '../get_firebase-data/get_firebase_data.dart';
 
@@ -75,10 +76,13 @@ class FeesCategoryCreateController extends GetxController {
             .doc(uid)
             .collection("SubCategory")
             .doc(categoryName + element)
-            .set({
-          "id": categoryName + element,
-          "date": element,
-        });
+            .set(
+              FeesSubCategoryModel(
+                      date: element,
+                      id: categoryName + element,
+                      categoryName: categoryName)
+                  .toMap(),
+            );
       }
       isLoading.value = false;
     } catch (e) {
