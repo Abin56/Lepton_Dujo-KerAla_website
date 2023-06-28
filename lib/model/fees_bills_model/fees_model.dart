@@ -80,7 +80,7 @@ class FeesModel {
       datePeriod: map['datePeriod'] as String,
       subCategoryId: map['subCategoryId'] as String,
       studentList: List<StudentFeesModel>.from(
-        (map['studentList'] as List<int>).map<StudentFeesModel>(
+        (map['studentList'] as List<dynamic>).map<StudentFeesModel>(
           (x) => StudentFeesModel.fromMap(x as Map<String, dynamic>),
         ),
       ),

@@ -7,14 +7,19 @@ import 'package:get/get.dart';
 
 import '../../../../../../../../../controller/fees_bills/fees_status_controller.dart';
 import '../../../../../../../../../model/create_classModel/add_student_model.dart';
+import '../../../../../../../../../model/fees_bills_model/fees_model.dart';
 import '../../../../../../../../../utils/utils.dart';
-import 'fees_class_status.dart';
+import '../classWise/fees_class_status.dart';
 
 class FeesClassStudents extends StatefulWidget {
   const FeesClassStudents(
-      {super.key, required this.classId, required this.feesCategory});
+      {super.key,
+      required this.classId,
+      required this.feesCategory,
+      required this.subCategory});
   final String classId;
   final String feesCategory;
+  final String subCategory;
 
   @override
   State<FeesClassStudents> createState() => _FeesClassStudentsState();
@@ -56,7 +61,8 @@ class _FeesClassStudentsState extends State<FeesClassStudents> {
                               future: paidOrNot(
                                   widget.feesCategory,
                                   widget.classId,
-                                  snapshot.data?[index].docid ?? ""),
+                                  snapshot.data?[index].docid ?? "",
+                                  widget.subCategory),
                               builder: (context, psnapshot) {
                                 if (psnapshot.hasData) {
                                   String paidOrNotPaidValue =
@@ -126,10 +132,13 @@ class _FeesClassStudentsState extends State<FeesClassStudents> {
     ));
   }
 
-  Future<bool> paidOrNot(
-      String feesCategoryId, String classId1, String studentId) async {
-    final data = await feesStatusController.getFeesCategoryData(
-        feesCategoryId, classId1);
+  Future<bool> paidOrNot(String feesCategoryId, String classId1,
+      String studentId, String subCategoryId) async {
+    final FeesModel? data = await feesStatusController.getFeesCategoryData(
+      feesCategoryId: feesCategoryId,
+      classId: classId1,
+      subCategoryId: subCategoryId,
+    );
 
     final listOfStudent =
         data?.studentList.map((e) => e.studentId).toList() ?? [];
@@ -150,11 +159,14 @@ class _FeesClassStudentsState extends State<FeesClassStudents> {
         ? await feesStatusController.removeStudentToFeePaid(
             categoryId: widget.feesCategory,
             classId: widget.classId,
-            studentId: snapshota.data?[index].docid ?? "")
+            studentId: snapshota.data?[index].docid ?? "",
+            subCategoryId: widget.subCategory)
         : await feesStatusController.addStudentToFeePaid(
             categoryId: widget.feesCategory,
             classId: widget.classId,
-            studentId: snapshota.data?[index].docid ?? "");
+            studentId: snapshota.data?[index].docid ?? "",
+            subCategoryId: widget.subCategory,
+          );
   }
 }
 
