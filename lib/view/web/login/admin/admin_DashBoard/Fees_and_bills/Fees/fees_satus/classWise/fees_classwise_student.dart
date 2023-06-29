@@ -9,13 +9,16 @@ import '../../../../../../../../../controller/fees_bills/fees_class_controller.d
 import '../../../../../../../../../model/create_classModel/add_student_model.dart';
 import '../../../../../../../../../model/fees_bills_model/fees_model.dart';
 import '../../../../../../../../../utils/utils.dart';
-import 'fees_class_status.dart';
 
 class FeesClassWiseStudentsPage extends StatefulWidget {
   const FeesClassWiseStudentsPage(
-      {super.key, required this.classId, required this.feesCategory});
+      {super.key,
+      required this.classId,
+      required this.feesCategoryId,
+      required this.feesSubCategoryId});
   final String classId;
-  final String feesCategory;
+  final String feesCategoryId;
+  final String feesSubCategoryId;
 
   @override
   State<FeesClassWiseStudentsPage> createState() => _FeesClassStudentsState();
@@ -30,13 +33,6 @@ class _FeesClassStudentsState extends State<FeesClassWiseStudentsPage> {
     return (Scaffold(
       body: Row(
         children: [
-          SizedBox(
-            width: screenSize.width / 2,
-            child: FeesStatusContainerWidget(
-              screenSize: screenSize,
-              text: 'Students list',
-            ),
-          ),
           Expanded(
             child: FutureBuilder(
                 future:
@@ -54,9 +50,11 @@ class _FeesClassStudentsState extends State<FeesClassWiseStudentsPage> {
                           title: Text(snapshot.data?[index].studentName ?? ""),
                           trailing: FutureBuilder<bool>(
                               future: paidOrNot(
-                                  widget.feesCategory,
-                                  widget.classId,
-                                  snapshot.data?[index].docid ?? ""),
+                                feesCategoryId: widget.feesCategoryId,
+                                classId: widget.classId,
+                                studentId: snapshot.data?[index].docid ?? "",
+                                feesSubCategory: widget.feesSubCategoryId,
+                              ),
                               builder: (context, psnapshot) {
                                 if (psnapshot.hasData) {
                                   String paidOrNotPaidValue =
@@ -79,8 +77,8 @@ class _FeesClassStudentsState extends State<FeesClassWiseStudentsPage> {
                                               context: context,
                                               builder: (BuildContext context) {
                                                 return MyAlertDialog(
-                                                  content: content,
-                                                  okButton: () async =>
+                                                    content: content,
+                                                    okButton: () async {
                                                       await addOrRemove(
                                                               index: index,
                                                               psnapshot:
@@ -88,16 +86,16 @@ class _FeesClassStudentsState extends State<FeesClassWiseStudentsPage> {
                                                               snapshota:
                                                                   snapshot)
                                                           .then(
-                                                    (value) {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                      setState(() {});
-                                                      showToast(
-                                                          msg:
-                                                              "Updated Successfully");
-                                                    },
-                                                  ),
-                                                );
+                                                        (value) {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                          setState(() {});
+                                                          showToast(
+                                                              msg:
+                                                                  "Updated Successfully");
+                                                        },
+                                                      );
+                                                    });
                                               },
                                             );
                                           },
@@ -127,9 +125,15 @@ class _FeesClassStudentsState extends State<FeesClassWiseStudentsPage> {
   }
 
   Future<bool> paidOrNot(
-      String feesCategoryId, String classId1, String studentId) async {
-    final FeesModel? data =
-        await feesClassController.getFeesCategoryData(feesCategoryId, classId1);
+      {required String feesCategoryId,
+      required String classId,
+      required String studentId,
+      required String feesSubCategory}) async {
+    final FeesModel? data = await feesClassController.getFeesCategoryData(
+      feesCategoryId: feesCategoryId,
+      classId: classId,
+      feesSubCategoryId: feesSubCategory,
+    );
 
     final List<String> listOfStudent =
         data?.studentList.map((e) => e.studentId).toList() ?? [];
@@ -148,13 +152,17 @@ class _FeesClassStudentsState extends State<FeesClassWiseStudentsPage> {
   }) async {
     psnapshot.data ?? false
         ? await feesClassController.removeStudentToFeePaid(
-            categoryId: widget.feesCategory,
+            categoryId: widget.feesCategoryId,
             classId: widget.classId,
-            studentId: snapshota.data?[index].docid ?? "")
+            studentId: snapshota.data?[index].docid ?? "",
+            subCategoryId: widget.feesSubCategoryId,
+          )
         : await feesClassController.addStudentToFeePaid(
-            categoryId: widget.feesCategory,
+            categoryId: widget.feesCategoryId,
             classId: widget.classId,
-            studentId: snapshota.data?[index].docid ?? "");
+            studentId: snapshota.data?[index].docid ?? "",
+            subCategoryId: widget.feesSubCategoryId,
+          );
   }
 }
 
