@@ -11,32 +11,26 @@ import '../../../../../../../../../model/fees_bills_model/fees_model.dart';
 import '../../../../../../../../../utils/utils.dart';
 
 class FeesClassWiseStudentsPage extends StatefulWidget {
-  const FeesClassWiseStudentsPage(
-      {super.key,
-      required this.classId,
-      required this.feesCategoryId,
-      required this.feesSubCategoryId});
-  final String classId;
-  final String feesCategoryId;
-  final String feesSubCategoryId;
+  const FeesClassWiseStudentsPage({
+    super.key,
+  });
 
   @override
   State<FeesClassWiseStudentsPage> createState() => _FeesClassStudentsState();
 }
 
 class _FeesClassStudentsState extends State<FeesClassWiseStudentsPage> {
-  final FeesClassController feesClassController =
+  final FeesClassController _feesClassController =
       Get.put(FeesClassController());
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
     return (Scaffold(
       body: Row(
         children: [
           Expanded(
             child: FutureBuilder(
-                future:
-                    feesClassController.getAllStudentsFromClass(widget.classId),
+                future: _feesClassController.getAllStudentsFromClass(
+                    _feesClassController.selectedClassModel?.docid ?? ""),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return ListView.separated(
@@ -50,10 +44,15 @@ class _FeesClassStudentsState extends State<FeesClassWiseStudentsPage> {
                           title: Text(snapshot.data?[index].studentName ?? ""),
                           trailing: FutureBuilder<bool>(
                               future: paidOrNot(
-                                feesCategoryId: widget.feesCategoryId,
-                                classId: widget.classId,
+                                feesCategoryId: _feesClassController
+                                        .selectedMainCategoryModel?.id ??
+                                    "",
+                                classId: _feesClassController
+                                        .selectedClassModel?.docid ??
+                                    "",
                                 studentId: snapshot.data?[index].docid ?? "",
-                                feesSubCategory: widget.feesSubCategoryId,
+                                feesSubCategory:
+                                    _feesClassController.selectedSubCategory,
                               ),
                               builder: (context, psnapshot) {
                                 if (psnapshot.hasData) {
@@ -129,7 +128,7 @@ class _FeesClassStudentsState extends State<FeesClassWiseStudentsPage> {
       required String classId,
       required String studentId,
       required String feesSubCategory}) async {
-    final FeesModel? data = await feesClassController.getFeesCategoryData(
+    final FeesModel? data = await _feesClassController.getFeesCategoryData(
       feesCategoryId: feesCategoryId,
       classId: classId,
       feesSubCategoryId: feesSubCategory,
@@ -151,17 +150,19 @@ class _FeesClassStudentsState extends State<FeesClassWiseStudentsPage> {
     required int index,
   }) async {
     psnapshot.data ?? false
-        ? await feesClassController.removeStudentToFeePaid(
-            categoryId: widget.feesCategoryId,
-            classId: widget.classId,
+        ? await _feesClassController.removeStudentToFeePaid(
+            categoryId:
+                _feesClassController.selectedMainCategoryModel?.id ?? "",
+            classId: _feesClassController.selectedClassModel?.docid ?? "",
             studentId: snapshota.data?[index].docid ?? "",
-            subCategoryId: widget.feesSubCategoryId,
+            subCategoryId: _feesClassController.selectedSubCategory,
           )
-        : await feesClassController.addStudentToFeePaid(
-            categoryId: widget.feesCategoryId,
-            classId: widget.classId,
+        : await _feesClassController.addStudentToFeePaid(
+            categoryId:
+                _feesClassController.selectedMainCategoryModel?.id ?? "",
+            classId: _feesClassController.selectedClassModel?.docid ?? "",
             studentId: snapshota.data?[index].docid ?? "",
-            subCategoryId: widget.feesSubCategoryId,
+            subCategoryId: _feesClassController.selectedSubCategory,
           );
   }
 }

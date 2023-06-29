@@ -12,7 +12,6 @@ import 'fees_classwise_student.dart';
 
 class FeesStatusClassWise extends StatelessWidget {
   const FeesStatusClassWise({super.key});
-  
 
   @override
   Widget build(BuildContext context) {
@@ -115,17 +114,19 @@ class _FeesFilterSecondHalfWidgetState
 
           ElevatedButton(
               onPressed: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) {
-                  return FeesClassWiseStudentsPage(
-                    classId:
-                        _feesClassController.selectedClassModel?.docid ?? "",
-                    feesCategoryId:
-                        _feesClassController.selectedMainCategoryModel?.id ??
-                            "",
-                    feesSubCategoryId: _feesClassController.selectedSubCategory,
+                if (_feesClassController.selectedClassModel != null ||
+                    _feesClassController.selectedMainCategoryModel != null ||
+                    _feesClassController.selectedSubCategory.isNotEmpty) {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const FeesClassWiseStudentsPage();
+                      },
+                    ),
                   );
-                }));
+                } else {
+                  showToast(msg: "All Fields are mandatory");
+                }
               },
               child: const Text("Submit"))
         ],

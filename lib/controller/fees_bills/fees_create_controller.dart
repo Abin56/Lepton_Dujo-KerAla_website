@@ -52,15 +52,11 @@ class FeesCreateController extends GetxController {
 
   Future<List<FeesCategoryModel>> fetchCategoryList() async {
     try {
-      isLoading.value = true;
-
       final QuerySnapshot<Map<String, dynamic>> data =
           await fStore.collection("Fees").get();
-      isLoading.value = false;
       return data.docs.map((e) => FeesCategoryModel.fromMap(e.data())).toList();
     } catch (e) {
       showToast(msg: "Something went wrong");
-      isLoading.value = false;
       return [];
     }
   }
@@ -69,15 +65,15 @@ class FeesCreateController extends GetxController {
 
   Future<List<FeesSubCategoryModel>> fetchSubCategoryList(
       String categoryId) async {
+    if (selectedMainCategory == null) {
+      return [];
+    }
     try {
-      isLoading.value = true;
-
       final QuerySnapshot<Map<String, dynamic>> data = await fStore
           .collection("Fees")
           .doc(categoryId)
           .collection("SubCategory")
           .get();
-      isLoading.value = false;
       return data.docs
           .map(
             (e) => FeesSubCategoryModel.fromMap(
@@ -87,7 +83,6 @@ class FeesCreateController extends GetxController {
           .toList();
     } on FirebaseException catch (e) {
       showToast(msg: e.code);
-      isLoading.value = false;
       return [];
     }
   }
@@ -128,6 +123,9 @@ class FeesCreateController extends GetxController {
           amountController.clear();
           dueDateController.clear();
           selectedSubCategory = null;
+          selectedMainCategory = null;
+          selectedClass = null;
+          isSpecificClassOnly.value = false;
         });
       }
       showToast(msg: "Successfully Completed");
@@ -196,9 +194,12 @@ class FeesCreateController extends GetxController {
         .then((value) async {
       showToast(msg: "Successfully Completed");
       isLoading.value = false;
-      selectedClass = null;
       amountController.clear();
       dueDateController.clear();
+      selectedSubCategory = null;
+      selectedMainCategory = null;
+      selectedClass = null;
+      isSpecificClassOnly.value = false;
     }).catchError((error) {
       isLoading.value = false;
       showToast(msg: (error as FirebaseException).code);

@@ -11,14 +11,7 @@ import '../../../../../../../../../model/fees_bills_model/fees_model.dart';
 import '../../../../../../../../../utils/utils.dart';
 
 class FeesClassStudents extends StatefulWidget {
-  const FeesClassStudents(
-      {super.key,
-      required this.classId,
-      required this.feesCategory,
-      required this.subCategory});
-  final String classId;
-  final String feesCategory;
-  final String subCategory;
+  const FeesClassStudents({super.key});
 
   @override
   State<FeesClassStudents> createState() => _FeesClassStudentsState();
@@ -43,8 +36,8 @@ class _FeesClassStudentsState extends State<FeesClassStudents> {
           // ),
           Expanded(
             child: FutureBuilder(
-                future: feesStatusController
-                    .getAllStudentsFromClass(widget.classId),
+                future: feesStatusController.getAllStudentsFromClass(
+                    feesStatusController.selectedClass),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return ListView.separated(
@@ -58,10 +51,10 @@ class _FeesClassStudentsState extends State<FeesClassStudents> {
                           title: Text(snapshot.data?[index].studentName ?? ""),
                           trailing: FutureBuilder<bool>(
                               future: paidOrNot(
-                                  widget.feesCategory,
-                                  widget.classId,
+                                  feesStatusController.selectedMainCategory,
+                                  feesStatusController.selectedClass,
                                   snapshot.data?[index].docid ?? "",
-                                  widget.subCategory),
+                                  feesStatusController.selectedSubCategory),
                               builder: (context, psnapshot) {
                                 if (psnapshot.hasData) {
                                   String paidOrNotPaidValue =
@@ -156,15 +149,15 @@ class _FeesClassStudentsState extends State<FeesClassStudents> {
   }) async {
     psnapshot.data ?? false
         ? await feesStatusController.removeStudentToFeePaid(
-            categoryId: widget.feesCategory,
-            classId: widget.classId,
+            categoryId: feesStatusController.selectedMainCategory,
+            classId: feesStatusController.selectedClass,
             studentId: snapshota.data?[index].docid ?? "",
-            subCategoryId: widget.subCategory)
+            subCategoryId: feesStatusController.selectedSubCategory)
         : await feesStatusController.addStudentToFeePaid(
-            categoryId: widget.feesCategory,
-            classId: widget.classId,
+            categoryId: feesStatusController.selectedMainCategory,
+            classId: feesStatusController.selectedClass,
             studentId: snapshota.data?[index].docid ?? "",
-            subCategoryId: widget.subCategory,
+            subCategoryId: feesStatusController.selectedSubCategory,
           );
   }
 }

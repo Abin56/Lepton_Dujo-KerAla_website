@@ -93,10 +93,16 @@ class FeesNotification extends StatelessWidget {
                 child: Text('Ok', style: TextStyle(fontSize: 15.w)),
                 onPressed: () async {
                   if (_formKey.currentState?.validate() ?? false) {
-                    await feesController.createFeesCategory(
-                        feesController.categoryNameController.text,
-                        feesController.selectedTypeOfCategory,
-                        context);
+                    await feesController
+                        .createFeesCategory(
+                            feesController.categoryNameController.text,
+                            feesController.selectedTypeOfCategory,
+                            context)
+                        .then((value) {
+                      feesController.categoryNameController.clear();
+                      feesController.selectedTypeOfCategory = '';
+                      Navigator.pop(context);
+                    });
                   }
                 },
               ),
