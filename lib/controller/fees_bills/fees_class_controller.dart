@@ -40,19 +40,18 @@ class FeesClassController {
 
   Future<List<FeesCategoryModel>> fetchCategoryList(
       {required String classId}) async {
+    if (selectedClassModel == null) {
+      return [];
+    }
     try {
-      isLoading.value = true;
-
       final QuerySnapshot<Map<String, dynamic>> data = await _fStore
           .collection("classes")
           .doc(classId)
           .collection("ClassFees")
           .get();
-      isLoading.value = false;
       return data.docs.map((e) => FeesCategoryModel.fromMap(e.data())).toList();
     } catch (e) {
       showToast(msg: "Something went wrong");
-      isLoading.value = false;
       return [];
     }
   }
@@ -61,9 +60,10 @@ class FeesClassController {
     required ClassModel classModel,
     required FeesCategoryModel mainCategoryModel,
   }) async {
+    if (selectedMainCategoryModel == null || selectedClassModel == null) {
+      return [];
+    }
     try {
-      isLoading.value = true;
-
       final QuerySnapshot<Map<String, dynamic>> data = await _fStore
           .collection("classes")
           .doc(classModel.docid)
@@ -71,11 +71,9 @@ class FeesClassController {
           .doc(mainCategoryModel.id)
           .collection("SubCategory")
           .get();
-      isLoading.value = false;
       return data.docs.map((e) => FeesModel.fromMap(e.data())).toList();
     } on FirebaseException catch (e) {
       showToast(msg: e.code);
-      isLoading.value = false;
       return [];
     }
   }

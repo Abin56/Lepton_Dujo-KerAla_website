@@ -97,16 +97,16 @@ class FeesFilterSecondHalfWidget extends StatelessWidget {
 
           ElevatedButton(
               onPressed: () {
-                if (feesStatusController.selectedMainCategory.isNotEmpty ||
-                    feesStatusController.selectedSubCategory.isNotEmpty ||
-                    feesStatusController.selectedClass.isNotEmpty) {
+                if (feesStatusController.selectedMainCategory.isEmpty ||
+                    feesStatusController.selectedSubCategory.isEmpty ||
+                    feesStatusController.selectedClass.isEmpty) {
+                  showToast(msg: "Please select all values");
+                } else {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const FeesClassStudents(),
                       ));
-                } else {
-                  showToast(msg: "Please select all values");
                 }
               },
               child: const Text("Submit"))

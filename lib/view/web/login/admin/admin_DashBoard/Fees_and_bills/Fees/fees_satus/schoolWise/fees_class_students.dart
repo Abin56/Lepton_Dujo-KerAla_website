@@ -9,6 +9,7 @@ import '../../../../../../../../../controller/fees_bills/fees_status_controller.
 import '../../../../../../../../../model/create_classModel/add_student_model.dart';
 import '../../../../../../../../../model/fees_bills_model/fees_model.dart';
 import '../../../../../../../../../utils/utils.dart';
+import '../../fees_notification/widgets/fees_left_side_widget.dart';
 
 class FeesClassStudents extends StatefulWidget {
   const FeesClassStudents({super.key});
@@ -27,13 +28,12 @@ class _FeesClassStudentsState extends State<FeesClassStudents> {
     return (Scaffold(
       body: Row(
         children: [
-          // SizedBox(
-          //   width: screenSize.width / 2,
-          //   child: FeesStatusContainerWidget(
-          //     screenSize: screenSize,
-          //     text: 'Students list',
-          //   ),
-          // ),
+          Expanded(
+            child: FeesHalfContainerWidget(
+              screenSize: screenSize,
+              text: 'Fees Catergories',
+            ),
+          ),
           Expanded(
             child: FutureBuilder(
                 future: feesStatusController.getAllStudentsFromClass(

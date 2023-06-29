@@ -20,7 +20,7 @@ class FeesHalfContainerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: screenSize.height - 80,
+      height: screenSize.height,
       width: 800.w,
       // height: screenSize.height,
       color: adminePrimayColor,

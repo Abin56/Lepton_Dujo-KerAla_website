@@ -114,9 +114,11 @@ class _FeesFilterSecondHalfWidgetState
 
           ElevatedButton(
               onPressed: () {
-                if (_feesClassController.selectedClassModel != null ||
-                    _feesClassController.selectedMainCategoryModel != null ||
-                    _feesClassController.selectedSubCategory.isNotEmpty) {
+                if (_feesClassController.selectedClassModel == null ||
+                    _feesClassController.selectedMainCategoryModel == null ||
+                    _feesClassController.selectedSubCategory.isEmpty) {
+                  showToast(msg: "All Fields are mandatory");
+                } else {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) {
@@ -124,8 +126,6 @@ class _FeesFilterSecondHalfWidgetState
                       },
                     ),
                   );
-                } else {
-                  showToast(msg: "All Fields are mandatory");
                 }
               },
               child: const Text("Submit"))

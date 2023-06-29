@@ -9,6 +9,7 @@ import '../../../../../../../../../controller/fees_bills/fees_class_controller.d
 import '../../../../../../../../../model/create_classModel/add_student_model.dart';
 import '../../../../../../../../../model/fees_bills_model/fees_model.dart';
 import '../../../../../../../../../utils/utils.dart';
+import '../../fees_notification/widgets/fees_left_side_widget.dart';
 
 class FeesClassWiseStudentsPage extends StatefulWidget {
   const FeesClassWiseStudentsPage({
@@ -24,9 +25,16 @@ class _FeesClassStudentsState extends State<FeesClassWiseStudentsPage> {
       Get.put(FeesClassController());
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
     return (Scaffold(
       body: Row(
         children: [
+          Expanded(
+            child: FeesHalfContainerWidget(
+              screenSize: screenSize,
+              text: 'Fees Catergories',
+            ),
+          ),
           Expanded(
             child: FutureBuilder(
                 future: _feesClassController.getAllStudentsFromClass(
