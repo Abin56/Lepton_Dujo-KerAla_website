@@ -8,7 +8,6 @@ import 'package:dujo_kerala_website/controller/Getx/class_teacher/teacher_add_st
 import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
 import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:dujo_kerala_website/view/google_poppins_widget/google_poppins_widget.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/Fees_and_bills/Fees%20and%20bills/fees_and_bills.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/list_of_classes.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/shift_class/shift_classpage.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_protection_group/students_proctection_group.dart';
@@ -382,7 +381,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                         child: ListView(
                           children: [
                             GestureDetector(
-                              onTap: ()=>Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const FeesAndBillsWeb())),
+                             // onTap: ()=>Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const FeesAndBillsWeb())),
                               child: Container(
                                   margin: EdgeInsets.only(top: 20.h),
                                   height: 30.h,
