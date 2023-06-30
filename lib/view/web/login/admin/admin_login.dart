@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../controller/get_firebase-data/get_firebase_data.dart';
+import '../../../../controller/super_admin_controller/super_admin_controller.dart';
 import '../../../../controller/text_form_hide/password_filed.dart';
 import '../../../colors/colors.dart';
 import '../../../constant/constant.dart';
@@ -26,6 +27,9 @@ class AdminLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+      MainSuperAdminController mainsuperAdminController =
+      Get.put(MainSuperAdminController());
+        mainsuperAdminController.checkinActivation(context);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import '../login/admin/admin_DashBoard/create_Admin/add_new_admin.dart';
 import '../login/loginscreen.dart';
 import '../widgets/drop_DownList/schoolDropDownList.dart';
@@ -133,7 +134,7 @@ class NavigationBarWidget extends StatelessWidget {
                           onPressed: () async {
                             await Navigator.push(context, MaterialPageRoute(
                               builder: (context) {
-                                return const LoginScreen(
+                                return  LoginScreen(
                               
                                 );
                               },
