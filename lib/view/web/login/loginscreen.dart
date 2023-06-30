@@ -9,7 +9,7 @@ import '../widgets/responsive.dart';
 import 'admin/admin_login.dart';
 import 'class_teacher/class_teacher_screen_login.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatefulWidget { 
   const LoginScreen({ Key? key}) : super(key: key);
 
   @override

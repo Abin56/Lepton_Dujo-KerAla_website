@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:get/get.dart';
-import 'package:seo_renderer/helpers/renderer_state.dart';
-import 'package:seo_renderer/helpers/robot_detector_vm.dart';
 
 import 'configure_web.dart';
 
@@ -30,13 +28,10 @@ void main() async {
   configureApp();
   setUrlStrategy(PathUrlStrategy());
  runApp(
-  RobotDetector( 
-    debug: true, // you can set true to enable robot mode
-    child: MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: const MyApp(),
-      navigatorObservers: [seoRouteObserver],
-    ),
+  const MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: MyApp(),
+    
   ),
 );
 }
