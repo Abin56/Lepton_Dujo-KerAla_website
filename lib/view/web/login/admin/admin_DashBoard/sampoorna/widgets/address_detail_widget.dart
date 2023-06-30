@@ -105,13 +105,13 @@ class AddressDetailWidget extends StatelessWidget {
         sizedBoxH20,
         const ContentTitleWidget(
             title:
-                'If Grama Panchayath Specify District Panchayath and Block Panchayath'),
+                'If grama panchayath specify district panchayath and block panchayath'),
         sizedBoxH20,
         Row(
           children: <Widget>[
             Flexible(
               child: TextFormFieldTextWidget(
-                title: 'District Panchayath',
+                title: 'District panchayath',
                 controller: Get.find<SampoornaController>()
                     .districtPanchayathController,
                 validator: checkFieldEmpty,
@@ -119,7 +119,7 @@ class AddressDetailWidget extends StatelessWidget {
             ),
             Flexible(
               child: TextFormFieldTextWidget(
-                title: 'Block Panchayath',
+                title: 'Block panchayath',
                 controller:
                     Get.find<SampoornaController>().blockPanchayathController,
                 validator: checkFieldEmpty,
@@ -127,7 +127,7 @@ class AddressDetailWidget extends StatelessWidget {
             ),
             Flexible(
               child: TextFormFieldTextWidget(
-                title: 'Name of Local Body',
+                title: 'Name of local body',
                 controller:
                     Get.find<SampoornaController>().nameOfLocalBodyController,
                 validator: checkFieldEmpty,
@@ -155,7 +155,7 @@ class AddressDetailWidget extends StatelessWidget {
             ),
             Flexible(
               child: TextFormFieldTextWidget(
-                title: 'Phone Number',
+                title: 'Phone number',
                 controller:
                     Get.find<SampoornaController>().phoneNumberController,
                 validator: checkFieldPhoneNumberIsValid,
@@ -163,7 +163,7 @@ class AddressDetailWidget extends StatelessWidget {
             ),
             Flexible(
               child: TextFormFieldTextWidget(
-                title: 'Student Email',
+                title: 'Student email',
                 controller: Get.find<SampoornaController>().emailController,
                 validator: checkFieldEmailIsValid,
               ),

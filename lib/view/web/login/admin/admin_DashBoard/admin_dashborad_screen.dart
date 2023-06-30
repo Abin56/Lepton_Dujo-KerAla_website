@@ -133,8 +133,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
 
   List<String> viewListNames = [
     'All Students',
-    'School'
-        'Teachers',
+    'All Teachers',
     'Classes',
     'Notices',
     'Meetings',
@@ -381,11 +380,14 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                         color: adminePrimayColor,
                         child: ListView(
                           children: [
-                            Container(
-                                margin: EdgeInsets.only(top: 20.h),
-                                height: 30.h,
-                                width: 80.w,
-                                child: Image.asset('assets/images/dujon.png')),
+                            GestureDetector(
+                             // onTap: ()=>Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const FeesAndBillsWeb())),
+                              child: Container(
+                                  margin: EdgeInsets.only(top: 20.h),
+                                  height: 30.h,
+                                  width: 80.w,
+                                  child: Image.asset('assets/images/dujon.png')),
+                            ),
                             Row(
                               children: [
                                 IconButton(

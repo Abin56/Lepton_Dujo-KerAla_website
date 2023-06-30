@@ -60,7 +60,7 @@ class ClassTeacherEventShow extends StatelessWidget {
                         ),
                         sizedBoxH20,
                         TextFormFieldWidget(
-                          hint: 'Signed By',
+                          hint: 'Signed by',
                           controller: teacherEventController.signedByController,
                           validator: checkFieldEmpty,
                         ),

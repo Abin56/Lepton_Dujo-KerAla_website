@@ -1,11 +1,9 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../../../../../../controller/fees_bills/fees_bills_controller.dart';
+import '../../../../../../../../controller/fees_bills/fees_category_create_controller.dart';
 import '../../../../../../../constant/constant.dart';
 import 'fess_right_side_widget.dart';
 import 'widgets/fees_left_side_widget.dart';
@@ -14,8 +12,8 @@ class FeesNotification extends StatelessWidget {
   FeesNotification({
     super.key,
   });
-  final FeesBillsController feesBillsController =
-      Get.put(FeesBillsController());
+  final FeesCategoryCreateController feesController =
+      Get.put(FeesCategoryCreateController());
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
@@ -27,7 +25,7 @@ class FeesNotification extends StatelessWidget {
           await feesNotificationDialogue(context);
         },
         tooltip: "Create Category",
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
       body: Row(
         children: [
@@ -53,7 +51,7 @@ class FeesNotification extends StatelessWidget {
           child: AlertDialog(
             title: Text('Fees Categories', style: TextStyle(fontSize: 14.w)),
             content: Obx(
-              () => feesBillsController.categoryCreateloading.value
+              () => feesController.isLoading.value
                   ? circularProgressIndicator
                   : Form(
                       key: _formKey,
@@ -61,8 +59,7 @@ class FeesNotification extends StatelessWidget {
                         children: [
                           TextFormField(
                             validator: checkFieldEmpty,
-                            controller:
-                                feesBillsController.categoryNameController,
+                            controller: feesController.categoryNameController,
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               hintText: 'Fees Categories',
@@ -70,10 +67,10 @@ class FeesNotification extends StatelessWidget {
                           ),
                           sizedBoxH20,
                           DropdownSearch<String>(
-                            items: feesBillsController.selectionList,
+                            items: feesController.typeOfCategoryList,
                             itemAsString: (String u) => u,
-                            onChanged: (String? data) => feesBillsController
-                                .categoryCreateValue = data ?? "",
+                            onChanged: (String? data) => feesController
+                                .selectedTypeOfCategory = data ?? "",
                             dropdownDecoratorProps:
                                 const DropDownDecoratorProps(
                               dropdownSearchDecoration: InputDecoration(
@@ -96,9 +93,9 @@ class FeesNotification extends StatelessWidget {
                 child: Text('Ok', style: TextStyle(fontSize: 15.w)),
                 onPressed: () async {
                   if (_formKey.currentState?.validate() ?? false) {
-                    await feesBillsController.createFeesCategory(
-                        feesBillsController.categoryNameController.text,
-                        feesBillsController.categoryCreateValue,
+                    await feesController.createFeesCategory(
+                        feesController.categoryNameController.text,
+                        feesController.selectedTypeOfCategory,
                         context);
                   }
                 },

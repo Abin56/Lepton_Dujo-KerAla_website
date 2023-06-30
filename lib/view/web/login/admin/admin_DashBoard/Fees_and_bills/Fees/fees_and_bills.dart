@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_utils/get_utils.dart';
 
-import 'fees_notification/Fees_notification.dart';
-import 'bills_creation.dart';
-import 'fees_status.dart';
+import 'fees_notification/fees_notification.dart';
+import 'fees_satus/bills_creation.dart';
+import 'fees_satus/classWise/class_wise_fees_show_page.dart';
+import 'fees_satus/schoolWise/fees_status.dart';
 
 class FeesAndBillsWeb extends StatelessWidget {
   const FeesAndBillsWeb({super.key});
@@ -14,7 +15,7 @@ class FeesAndBillsWeb extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         appBar: AppBar(
           iconTheme: const IconThemeData(color: cBlack),
@@ -34,16 +35,25 @@ class FeesAndBillsWeb extends StatelessWidget {
               tabs: [
                 Tab(
                   child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: FeeAndBillsConWidget(
-                        text: 'Fees Notifications'.tr,
-                      )),
+                    padding: const EdgeInsets.all(8.0),
+                    child: FeeAndBillsConWidget(
+                      text: 'Fees Notifications'.tr,
+                    ),
+                  ),
                 ),
                 Tab(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: FeeAndBillsConWidget(
                       text: 'Fees Status'.tr,
+                    ),
+                  ),
+                ),
+                Tab(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: FeeAndBillsConWidget(
+                      text: 'Class Fees Status'.tr,
                     ),
                   ),
                 ),
@@ -62,6 +72,7 @@ class FeesAndBillsWeb extends StatelessWidget {
             children: [
               FeesNotification(),
               const FeesStstatues(),
+              const FeesStatusClassWise(),
               BillsCreationalPage(),
             ],
           ),

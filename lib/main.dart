@@ -1,10 +1,16 @@
+
 import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/new_home_01_06.dart';
 import 'package:dujo_kerala_website/view/web/home/create_school/create_school.dart';
 import 'package:dujo_kerala_website/view/web/home/privacypolicy.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:get/get.dart';
+
+import 'configure_web.dart';
+
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +25,15 @@ void main() async {
         measurementId: "G-QC6SR6TLE0"),
   );
   ScreenUtil.ensureScreenSize();
-  runApp(const MyApp());
+  configureApp();
+  setUrlStrategy(PathUrlStrategy());
+ runApp(
+  const MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: MyApp(),
+    
+  ),
+);
 }
 
 class MyApp extends StatelessWidget {
@@ -38,7 +52,7 @@ class MyApp extends StatelessWidget {
                 PrivacyPolicy.route: (context) => const PrivacyPolicy(),
                 SchoolProfile.route: (context) => const SchoolProfile(),
               },
-              title: 'DuJo',
+              title: 'LeptonDuJo',
               debugShowCheckedModeBanner: false,
               theme: ThemeData(
                 primaryColor: const Color(0xFF02BB9F),

@@ -55,9 +55,9 @@ class AdminLoginScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            'Hi ! \n Admin',
+                            'Hi ! Admin',
                             style: ralewayStyle.copyWith(
-                              fontSize: 48.0,
+                              fontSize: 45.0,
                               color: AppColors.whiteColor,
                               fontWeight: FontWeight.w800,
                             ),

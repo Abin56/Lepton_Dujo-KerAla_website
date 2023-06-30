@@ -1,9 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../../../controller/super_admin_controller/super_admin_controller.dart';
 import '../../colors/colors.dart';
 import '../../fonts/fonts.dart';
 import '../widgets/button_container_widget.dart';
@@ -11,6 +9,8 @@ import '../widgets/responsive.dart';
 import 'admin/admin_login.dart';
 import 'class_teacher/class_teacher_screen_login.dart';
 
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({ Key? key}) : super(key: key);
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 

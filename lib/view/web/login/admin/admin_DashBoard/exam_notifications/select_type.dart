@@ -44,7 +44,7 @@ class _SelectTypeState extends State<SelectType> {
                       Text(
                         'Hi ! Admin ',
                         style: ralewayStyle.copyWith(
-                          fontSize: 42.0,
+                          fontSize: 45.0,
                           color: Colors.white,
                           fontWeight: FontWeight.w800,
                         ),

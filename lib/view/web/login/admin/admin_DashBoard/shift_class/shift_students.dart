@@ -37,7 +37,7 @@ class ShiftClassStudents extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Hi  ',
+                    'Hi Admin ',
                     style: ralewayStyle.copyWith(
                       fontSize: 45.0.w,
                       color: AppColors.whiteColor,

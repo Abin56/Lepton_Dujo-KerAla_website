@@ -147,9 +147,9 @@ class _AddAchievementsState extends State<AddAchievements> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'Hi! Admin ',
+                        'Hi ! Admin ',
                         style: ralewayStyle.copyWith(
-                          fontSize: 48.0,
+                          fontSize: 45.0,
                           color: Colors.white,
                           fontWeight: FontWeight.w800,
                         ),

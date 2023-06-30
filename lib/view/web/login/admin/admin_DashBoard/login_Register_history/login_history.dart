@@ -77,7 +77,7 @@ class AdminLoginDetailsScreen extends StatelessWidget {
                           width: screenSize.width * 0.21,
                           child: Center(
                             child: GoogleMonstserratWidgets(
-                                text: 'LoginTime ',
+                                text: 'Login Time ',
                                 fontsize: 13.w,
                                 color: cBlack,
                                 fontWeight: FontWeight.w600),
@@ -96,7 +96,7 @@ class AdminLoginDetailsScreen extends StatelessWidget {
                         width: screenSize.width * 0.22,
                         child: Center(
                           child: GoogleMonstserratWidgets(
-                              text: 'LogOutTime',
+                              text: 'Logout Time',
                               fontsize: 13.w,
                               color: cBlack,
                               fontWeight: FontWeight.w600),
@@ -195,7 +195,7 @@ class AdminLoginDetailsScreen extends StatelessWidget {
                                               child: Center(
                                                 child: GoogleMonstserratWidgets(
                                                     text:
-                                                        'LoginTime  : ${data.loginTime}',
+                                                        'Login Time  : ${data.loginTime}',
                                                     fontsize: 13.w,
                                                     color: cBlack,
                                                     fontWeight:
@@ -216,7 +216,7 @@ class AdminLoginDetailsScreen extends StatelessWidget {
                                             child: Center(
                                               child: GoogleMonstserratWidgets(
                                                   text:
-                                                      'LogOutTime  : ${data.logOutTime ?? 'Not found'}',
+                                                      'Logout Time  : ${data.logOutTime ?? 'Not found'}',
                                                   fontsize: 13.w,
                                                   color: cBlack,
                                                   fontWeight:

@@ -74,7 +74,7 @@ class ClassTeacherCreateNoticePage extends StatelessWidget {
                         sizedBoxH20,
                         TextFormFieldWidget(
                             validator: checkFieldEmpty,
-                            hint: 'Signed By',
+                            hint: 'Signed by',
                             controller:
                                 teacherNoticeController.signedByController),
                         sizedBoxH20,
