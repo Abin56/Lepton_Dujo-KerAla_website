@@ -3,6 +3,7 @@ import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../../../../../../controller/fees_bills/fees_create_controller.dart';
 import '../../../../../../../../../controller/fees_bills/fees_status_controller.dart';
 import '../../../../../../../../../model/class_model/class_model.dart';
 import '../../../../../../../../../model/fees_bills_model/fees_subcategory_model.dart';
@@ -40,6 +41,8 @@ class FeesFilterSecondHalfWidget extends StatelessWidget {
 
   final FeesStatusController feesStatusController =
       Get.put(FeesStatusController());
+  final FeesCreateController feesCreateController =
+      Get.put(FeesCreateController());
 
   @override
   Widget build(BuildContext context) {
@@ -96,22 +99,49 @@ class FeesFilterSecondHalfWidget extends StatelessWidget {
           sizedBoxH20,
 
           ElevatedButton(
-              onPressed: () {
-                if (feesStatusController.selectedMainCategory.isEmpty ||
-                    feesStatusController.selectedSubCategory.isEmpty ||
-                    feesStatusController.selectedClass.isEmpty) {
-                  showToast(msg: "Please select all values");
-                } else {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const FeesClassStudents(),
-                      ));
-                }
-              },
-              child: const Text("Submit"))
+            onPressed: () {
+              if (feesStatusController.selectedMainCategory.isEmpty ||
+                  feesStatusController.selectedSubCategory.isEmpty ||
+                  feesStatusController.selectedClass.isEmpty) {
+                showToast(msg: "Please select all values");
+              } else {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const FeesClassStudents(),
+                    ));
+              }
+            },
+            child: const Text("Submit"),
+          ),
+          sizedBoxH20,
+
+          ElevatedButton(
+            onPressed: () async {
+              await _sendNotification();
+            },
+            child: const Text("Send Notifications"),
+          ),
         ],
       ),
     );
+  }
+
+  Future<void> _sendNotification() async {
+    if (feesStatusController.selectedMainCategory.isEmpty ||
+        feesStatusController.selectedClass.isEmpty ||
+        feesStatusController.selectedSubCategory.isEmpty) {
+      return showToast(msg: "Please Select All Category/Class");
+    }
+    final result = await feesStatusController.getFeesCategoryData(
+        feesCategoryId: feesStatusController.selectedMainCategory,
+        classId: feesStatusController.selectedClass,
+        subCategoryId: feesStatusController.selectedSubCategory);
+    await feesCreateController.sendAllClassFeesNotification(
+      dueDate: result?.dueDate ?? "",
+      amount: result?.amount ?? "",
+      categoryName: result?.categoryName ?? "",
+    );
+    showToast(msg: "Successfully");
   }
 }

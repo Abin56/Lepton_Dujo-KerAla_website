@@ -113,24 +113,54 @@ class _FeesFilterSecondHalfWidgetState
           sizedBoxH20,
 
           ElevatedButton(
-              onPressed: () {
-                if (_feesClassController.selectedClassModel == null ||
-                    _feesClassController.selectedMainCategoryModel == null ||
-                    _feesClassController.selectedSubCategory.isEmpty) {
-                  showToast(msg: "All Fields are mandatory");
-                } else {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return const FeesClassWiseStudentsPage();
-                      },
-                    ),
-                  );
-                }
-              },
-              child: const Text("Submit"))
+            onPressed: () {
+              if (_feesClassController.selectedClassModel == null ||
+                  _feesClassController.selectedMainCategoryModel == null ||
+                  _feesClassController.selectedSubCategory.isEmpty) {
+                showToast(msg: "All Fields are mandatory");
+              } else {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const FeesClassWiseStudentsPage();
+                    },
+                  ),
+                );
+              }
+            },
+            child: const Text("Submit"),
+          ),
+          sizedBoxH10,
+          ElevatedButton(
+            onPressed: () async {
+              await _sendClassNotification();
+            },
+            child: const Text("Send Notifications"),
+          ),
         ],
       ),
     );
+  }
+
+  Future<void> _sendClassNotification() async {
+    if (_feesClassController.selectedMainCategoryModel == null ||
+        _feesClassController.selectedSubCategory.isEmpty ||
+        _feesClassController.selectedClassModel == null) {
+      return showToast(msg: "Please Select All Category");
+    }
+    {
+      final result = await _feesClassController.getFeesCategoryData(
+          feesCategoryId:
+              _feesClassController.selectedMainCategoryModel?.id ?? "",
+          classId: _feesClassController.selectedClassModel?.docid ?? "",
+          feesSubCategoryId: _feesClassController.selectedSubCategory);
+
+      await _feesClassController.sendClassFeesNotification(
+          dueDate: result?.dueDate ?? "",
+          amount: result?.amount ?? "",
+          categoryName: result?.categoryName ?? "",
+          classId: result?.classId ?? "");
+      showToast(msg: "Successfully");
+    }
   }
 }

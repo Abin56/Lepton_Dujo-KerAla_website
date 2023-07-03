@@ -12,6 +12,7 @@ import 'package:uuid/uuid.dart';
 
 import '../../model/fees_bills_model/fees_category_model.dart';
 import '../../model/fees_bills_model/fees_subcategory_model.dart';
+import '../../utils/utils.dart';
 
 class FeesCreateController extends GetxController {
   ///for unique id creation
@@ -244,14 +245,19 @@ class FeesCreateController extends GetxController {
       }
     }
   }
-}
 
-// //creating token lists parent,guardian,students
-//       await fetchAllTokenList().then((value) async {
-//         log("create time ${tokenList.toString()}");
-//         for (var element3 in tokenList) {
-//           //send push notification from push notification
-//           await sendPushMessage(element3,
-//               "Due Date : $dueDate Amount : $amount", categoryName);
-//         }
-//       });
+  Future<void> sendAllClassFeesNotification({
+    required String dueDate,
+    required String amount,
+    required String categoryName,
+  }) async {
+    await fetchAllTokenList().then((value) async {
+      log("create time ${tokenList.toString()}");
+      for (var element3 in tokenList) {
+        //send push notification from push notification
+        await sendPushMessage(
+            element3, "Due Date : $dueDate Amount : $amount", categoryName);
+      }
+    });
+  }
+}

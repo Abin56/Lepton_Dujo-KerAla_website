@@ -7,6 +7,7 @@ import '../../model/class_model/class_model.dart';
 import '../../model/create_classModel/add_student_model.dart';
 import '../../model/fees_bills_model/fees_category_model.dart';
 import '../../model/fees_bills_model/fees_model.dart';
+import '../../utils/utils.dart';
 import '../../view/constant/constant.dart';
 import '../admin_login_screen/admin_login_screen_controller.dart';
 import '../get_firebase-data/get_firebase_data.dart';
@@ -16,6 +17,8 @@ class FeesClassController {
   FeesCategoryModel? selectedMainCategoryModel;
   String selectedSubCategory = "";
   RxBool isLoading = RxBool(false);
+
+  List<String> tokenList = [];
 
   final DocumentReference<Map<String, dynamic>> _fStore = FirebaseFirestore
       .instance
@@ -179,5 +182,59 @@ class FeesClassController {
         msg: (error as FirebaseException).code,
       ),
     );
+  }
+
+  //create all tokens
+  Future<void> fetchAllTokenList({required String classId}) async {
+    try {
+      await fetchTokensForCollection(classId, "Students");
+      await fetchTokensForCollection(classId, "ParentCollection");
+      await fetchTokensForCollection(classId, "GuardianCollection");
+    } on FirebaseException catch (e) {
+      log(e.toString());
+      showToast(msg: e.toString());
+    } catch (e) {
+      log(e.toString());
+      showToast(msg: "Something Went Wrong");
+    }
+  }
+
+  Future<void> fetchTokensForCollection(
+      String docId, String collectionName) async {
+    final QuerySnapshot<Map<String, dynamic>> collectionResult = await _fStore
+        .collection("classes")
+        .doc(docId)
+        .collection(collectionName)
+        .get();
+
+    for (var element in collectionResult.docs) {
+      String? deviceToken = element.data()["deviceToken"];
+
+      if (deviceToken == null || deviceToken.isEmpty) {
+        continue;
+      }
+
+      if (!tokenList.contains(deviceToken)) {
+        tokenList.add(deviceToken);
+      }
+    }
+  }
+
+  Future<void> sendClassFeesNotification({
+    required String dueDate,
+    required String amount,
+    required String categoryName,
+    required String classId,
+  }) async {
+    await fetchAllTokenList(classId: classId).then((value) async {
+      for (var element in tokenList) {
+        //send push notification from push notification
+        await sendPushMessage(
+          element,
+          "Due Date : $dueDate Amount : $amount",
+          categoryName,
+        );
+      }
+    });
   }
 }
