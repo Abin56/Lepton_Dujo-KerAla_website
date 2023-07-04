@@ -68,6 +68,7 @@ dependencies:
   intl: null
   liquid_progress_indicator: ^0.4.0
   lottie: ^2.0.0
+  month_picker_dialog: ^1.3.0
   omni_jitsi_meet: ^1.0.2
   open_document: ^1.0.3+1
   open_file: ^3.2.1

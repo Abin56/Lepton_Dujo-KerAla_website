@@ -55,30 +55,195 @@ class FeesNotification extends StatelessWidget {
                   ? circularProgressIndicator
                   : Form(
                       key: _formKey,
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            validator: checkFieldEmpty,
-                            controller: feesController.categoryNameController,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              hintText: 'Fees Categories',
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            TextFormField(
+                              validator: checkFieldEmpty,
+                              controller: feesController.categoryNameController,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                hintText: 'Fees Categories',
+                              ),
                             ),
-                          ),
-                          sizedBoxH20,
-                          DropdownSearch<String>(
-                            items: feesController.typeOfCategoryList,
-                            itemAsString: (String u) => u,
-                            onChanged: (String? data) => feesController
-                                .selectedTypeOfCategory = data ?? "",
-                            dropdownDecoratorProps:
-                                const DropDownDecoratorProps(
-                              dropdownSearchDecoration: InputDecoration(
-                                  labelText: "Select Type",
-                                  border: OutlineInputBorder()),
+                            sizedBoxH20,
+                            DropdownSearch<String>(
+                              items: feesController.typeOfCategoryList,
+                              itemAsString: (String u) => u,
+                              onChanged: (String? data) => feesController
+                                  .selectedTypeOfCategory.value = data ?? "",
+                              dropdownDecoratorProps:
+                                  const DropDownDecoratorProps(
+                                dropdownSearchDecoration: InputDecoration(
+                                    labelText: "Select Type",
+                                    border: OutlineInputBorder()),
+                              ),
                             ),
-                          ),
-                        ],
+                            sizedBoxH10,
+                            Obx(() {
+                              if (feesController.selectedTypeOfCategory.value ==
+                                  'Half Yearly') {
+                                return Column(
+                                  children: [
+                                    MonthSelectFeesWidget(
+                                        startMonth: feesController.splitString(
+                                            value: feesController.halfYearly[0],
+                                            index: 0),
+                                        endMonth: feesController.splitString(
+                                            value: feesController.halfYearly[0],
+                                            index: 1),
+                                        voidCallBackStart: () async {
+                                          feesController.changePeriodHalfYearly(
+                                              context: context,
+                                              index: 0,
+                                              isFirstThreeCharacter: true);
+                                        },
+                                        voidCallBackEnd: () async {
+                                          feesController.changePeriodHalfYearly(
+                                              context: context,
+                                              index: 0,
+                                              isFirstThreeCharacter: false);
+                                        }),
+                                    MonthSelectFeesWidget(
+                                        startMonth: feesController.splitString(
+                                            value: feesController.halfYearly[1],
+                                            index: 0),
+                                        endMonth: feesController.splitString(
+                                            value: feesController.halfYearly[1],
+                                            index: 1),
+                                        voidCallBackStart: () async {
+                                          feesController.changePeriodHalfYearly(
+                                              context: context,
+                                              index: 1,
+                                              isFirstThreeCharacter: true);
+                                        },
+                                        voidCallBackEnd: () async {
+                                          feesController.changePeriodHalfYearly(
+                                              context: context,
+                                              index: 1,
+                                              isFirstThreeCharacter: false);
+                                        }),
+                                  ],
+                                );
+                              } else if (feesController
+                                      .selectedTypeOfCategory.value ==
+                                  'Quarterly') {
+                                return SingleChildScrollView(
+                                  child: Column(
+                                    children: [
+                                      MonthSelectFeesWidget(
+                                          startMonth:
+                                              feesController.splitString(
+                                                  value: feesController
+                                                      .quarterly[0],
+                                                  index: 0),
+                                          endMonth: feesController.splitString(
+                                              value:
+                                                  feesController.quarterly[0],
+                                              index: 1),
+                                          voidCallBackStart: () async {
+                                            feesController
+                                                .changePeriodQuarterly(
+                                                    context: context,
+                                                    index: 0,
+                                                    isFirstThreeCharacter:
+                                                        true);
+                                          },
+                                          voidCallBackEnd: () async {
+                                            feesController
+                                                .changePeriodQuarterly(
+                                                    context: context,
+                                                    index: 0,
+                                                    isFirstThreeCharacter:
+                                                        false);
+                                          }),
+                                      MonthSelectFeesWidget(
+                                          startMonth:
+                                              feesController.splitString(
+                                                  value: feesController
+                                                      .quarterly[1],
+                                                  index: 0),
+                                          endMonth: feesController.splitString(
+                                              value:
+                                                  feesController.quarterly[1],
+                                              index: 1),
+                                          voidCallBackStart: () async {
+                                            feesController
+                                                .changePeriodQuarterly(
+                                                    context: context,
+                                                    index: 1,
+                                                    isFirstThreeCharacter:
+                                                        true);
+                                          },
+                                          voidCallBackEnd: () async {
+                                            feesController
+                                                .changePeriodQuarterly(
+                                                    context: context,
+                                                    index: 1,
+                                                    isFirstThreeCharacter:
+                                                        false);
+                                          }),
+                                      MonthSelectFeesWidget(
+                                          startMonth:
+                                              feesController.splitString(
+                                                  value: feesController
+                                                      .quarterly[2],
+                                                  index: 0),
+                                          endMonth: feesController.splitString(
+                                              value:
+                                                  feesController.quarterly[2],
+                                              index: 1),
+                                          voidCallBackStart: () async {
+                                            feesController
+                                                .changePeriodQuarterly(
+                                                    context: context,
+                                                    index: 2,
+                                                    isFirstThreeCharacter:
+                                                        true);
+                                          },
+                                          voidCallBackEnd: () async {
+                                            feesController
+                                                .changePeriodQuarterly(
+                                                    context: context,
+                                                    index: 2,
+                                                    isFirstThreeCharacter:
+                                                        false);
+                                          }),
+                                      MonthSelectFeesWidget(
+                                          startMonth:
+                                              feesController.splitString(
+                                                  value: feesController
+                                                      .quarterly[3],
+                                                  index: 0),
+                                          endMonth: feesController.splitString(
+                                              value:
+                                                  feesController.quarterly[3],
+                                              index: 1),
+                                          voidCallBackStart: () async {
+                                            feesController
+                                                .changePeriodQuarterly(
+                                                    context: context,
+                                                    index: 3,
+                                                    isFirstThreeCharacter:
+                                                        true);
+                                          },
+                                          voidCallBackEnd: () async {
+                                            feesController
+                                                .changePeriodQuarterly(
+                                                    context: context,
+                                                    index: 3,
+                                                    isFirstThreeCharacter:
+                                                        false);
+                                          }),
+                                    ],
+                                  ),
+                                );
+                              } else {
+                                return sizedBoxH10;
+                              }
+                            })
+                          ],
+                        ),
                       ),
                     ),
             ),
@@ -90,13 +255,19 @@ class FeesNotification extends StatelessWidget {
                 },
               ),
               TextButton(
-                child: Text('Ok', style: TextStyle(fontSize: 15.w)),
+                child: Text('Create', style: TextStyle(fontSize: 15.w)),
                 onPressed: () async {
                   if (_formKey.currentState?.validate() ?? false) {
-                    await feesController.createFeesCategory(
-                        feesController.categoryNameController.text,
-                        feesController.selectedTypeOfCategory,
-                        context);
+                    await feesController
+                        .createFeesCategory(
+                            feesController.categoryNameController.text,
+                            feesController.selectedTypeOfCategory.value,
+                            context)
+                        .then((value) {
+                      feesController.categoryNameController.clear();
+                      feesController.selectedTypeOfCategory.value = '';
+                      Navigator.pop(context);
+                    });
                   }
                 },
               ),
@@ -104,6 +275,39 @@ class FeesNotification extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class MonthSelectFeesWidget extends StatelessWidget {
+  const MonthSelectFeesWidget({
+    super.key,
+    required this.voidCallBackStart,
+    required this.voidCallBackEnd,
+    required this.startMonth,
+    required this.endMonth,
+  });
+
+  final VoidCallback voidCallBackStart;
+  final VoidCallback voidCallBackEnd;
+  final String startMonth;
+  final String endMonth;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        TextButton(
+          onPressed: voidCallBackStart,
+          child: Text(startMonth),
+        ),
+        const Text("-"),
+        TextButton(
+          onPressed: voidCallBackEnd,
+          child: Text(endMonth),
+        ),
+      ],
     );
   }
 }

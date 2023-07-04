@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:month_picker_dialog/month_picker_dialog.dart';
 
 import '../../model/fees_bills_model/fees_category_model.dart';
 import '../../model/fees_bills_model/fees_subcategory_model.dart';
@@ -12,7 +13,7 @@ import '../get_firebase-data/get_firebase_data.dart';
 
 class FeesCategoryCreateController extends GetxController {
   ///selected category type[typeOfCategoryList]
-  String selectedTypeOfCategory = "";
+  Rx<String> selectedTypeOfCategory = RxString("");
   RxBool isLoading = RxBool(false);
   TextEditingController categoryNameController = TextEditingController();
 
@@ -50,7 +51,7 @@ class FeesCategoryCreateController extends GetxController {
         );
 
         showToast(msg: "Successfully Created");
-        selectedTypeOfCategory = "";
+        selectedTypeOfCategory.value = "";
       }
 
       // Creating subcategory
@@ -70,17 +71,18 @@ class FeesCategoryCreateController extends GetxController {
           subCategories = ["yearly"];
           break;
       }
-      for (var element in subCategories) {
+      for (int i = 0; i < subCategories.length; i++) {
         await fStore
             .collection("Fees")
             .doc(uid)
             .collection("SubCategory")
-            .doc(categoryName + element)
+            .doc(categoryName + subCategories[i])
             .set(
               FeesSubCategoryModel(
-                      subCategoryName: element,
-                      id: categoryName + element,
-                      categoryName: categoryName)
+                      subCategoryName: subCategories[i],
+                      id: categoryName + subCategories[i],
+                      categoryName: categoryName,
+                      createdAt: DateTime.now().toString())
                   .toMap(),
             );
       }
@@ -137,14 +139,105 @@ class FeesCategoryCreateController extends GetxController {
     "Nov",
     "Dec",
   ];
-  List<String> quarterly = <String>[
+  RxList<String> quarterly = [
     "Jan-Mar",
     "Apr-Jun",
     "Jul-Sep",
     "Oct-Dec",
-  ];
-  List<String> halfYearly = <String>[
+  ].obs;
+  RxList<String> halfYearly = <String>[
     "Jan-Jun",
     "Jul-Dec",
-  ];
+  ].obs;
+
+  String changeFirstThreeCharacters(String originalString, String newPrefix) {
+    String remainingPart = originalString.substring(3);
+    return newPrefix + remainingPart;
+  }
+
+  String changeLastThreeCharacters(String originalString, String newSuffix) {
+    String prefix = originalString.substring(0, originalString.length - 3);
+    return prefix + newSuffix;
+  }
+
+  String getMonths(int value) {
+    switch (value) {
+      case 1:
+        return "Jan";
+      case 2:
+        return "Feb";
+      case 3:
+        return "Mar";
+      case 4:
+        return "Apr";
+      case 5:
+        return "May";
+      case 6:
+        return "Jun";
+      case 7:
+        return "Jul";
+      case 8:
+        return "Aug";
+      case 9:
+        return "Sep";
+      case 10:
+        return "Oct";
+      case 11:
+        return "Nov";
+      case 12:
+        return "Dec";
+
+      default:
+        return "";
+    }
+  }
+
+  ///this function change[halfYearly] value schools
+
+  void changePeriodHalfYearly(
+      {required BuildContext context,
+      required int index,
+      required bool isFirstThreeCharacter}) async {
+    final DateTime? result = await showMonthPicker(
+      context: context,
+      initialDate: DateTime.now(),
+    );
+    if (result != null) {
+      final String month = getMonths(result.month);
+      String changedMonth = "";
+      if (isFirstThreeCharacter) {
+        changedMonth = changeFirstThreeCharacters(halfYearly[index], month);
+      } else {
+        changedMonth = changeLastThreeCharacters(halfYearly[index], month);
+      }
+      halfYearly[index] = changedMonth;
+      halfYearly.refresh();
+    }
+  }
+
+  ///this function change[quarterly] value schools
+  void changePeriodQuarterly(
+      {required BuildContext context,
+      required int index,
+      required bool isFirstThreeCharacter}) async {
+    final DateTime? result = await showMonthPicker(
+      context: context,
+      initialDate: DateTime.now(),
+    );
+    if (result != null) {
+      final String month = getMonths(result.month);
+      String changedMonth = "";
+      if (isFirstThreeCharacter) {
+        changedMonth = changeFirstThreeCharacters(quarterly[index], month);
+      } else {
+        changedMonth = changeLastThreeCharacters(quarterly[index], month);
+      }
+      quarterly[index] = changedMonth;
+      quarterly.refresh();
+    }
+  }
+
+  String splitString({required String value, required int index}) {
+    return value.split("-")[index].trim();
+  }
 }

@@ -56,10 +56,14 @@ class FeesStatusController {
   //fetch all subcategory
   Future<List<FeesSubCategoryModel>> fetchAllSchoolSubCategories(
       String categoryId) async {
+    if (selectedMainCategory.isEmpty) {
+      return [];
+    }
     final QuerySnapshot<Map<String, dynamic>> categoryList = await _fStore
         .collection("Fees")
         .doc(categoryId)
         .collection("SubCategory")
+        .orderBy("createdAt")
         .get();
     return categoryList.docs
         .map((e) => FeesSubCategoryModel.fromMap(e.data()))
@@ -67,6 +71,9 @@ class FeesStatusController {
   }
 
   Future<List<ClassModel>> getAllClasses() async {
+    if (selectedSubCategory.isEmpty) {
+      return [];
+    }
     try {
       final QuerySnapshot<Map<String, dynamic>> data =
           await _fStore.collection("classes").get();
