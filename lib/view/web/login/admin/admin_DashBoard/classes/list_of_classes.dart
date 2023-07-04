@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dujo_kerala_website/controller/all_class_controller/all_class_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
+import '../../../../../../controller/all_class_controller/all_class_controller.dart';
 import '../../../../../../controller/attendance_controller/attendance_controller.dart';
 import '../../../../../../controller/class_list/class_list_model.dart';
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
@@ -16,12 +16,12 @@ import 'details_ofClasses.dart';
 
 class ListOfClassesScreen extends StatefulWidget {
   AllClassController allClassController = Get.put(AllClassController());
-  String schoolID;
+
   String NoofStundents = '';
   String NoofMaleStundets = '';
   String NoofFemaleStudents = '';
 
-  ListOfClassesScreen({required this.schoolID, super.key});
+  ListOfClassesScreen({super.key});
 
   @override
   State<ListOfClassesScreen> createState() => _ListOfClassesScreenState();
@@ -85,7 +85,7 @@ class _ListOfClassesScreenState extends State<ListOfClassesScreen> {
                           noofFemale: widget.NoofFemaleStudents,
                           noofMale: widget.NoofMaleStundets,
                           totalStudents: widget.NoofStundents,
-                          schooilID: widget.schoolID,
+                          schooilID: Get.find<AdminLoginScreenController>().schoolID,
                           getxController: getxController,
                           allData: allData),
                       Container(

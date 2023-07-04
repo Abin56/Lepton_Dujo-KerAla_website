@@ -69,22 +69,22 @@ class FooterMob1 extends StatelessWidget {
                           'News',
                           style: k,
                         )),
-                    GestureDetector(
-                      onTap: () {
-                        //  Navigator.push(context, MaterialPageRoute(builder: ((context) =>RequestedSchoolsApproval())));
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: ((context) =>
-                        //             LeptonAdminLoginScreen())));
-                      },
-                      child: SizedBox(
-                          width: 80.h,
-                          child: Text(
-                            'Super Admin',
-                            style: TextStyle(fontSize: 12.h, color: Colors.white),
-                          )),
-                    ),
+                    // GestureDetector(
+                    //   onTap: () {
+                    //     //  Navigator.push(context, MaterialPageRoute(builder: ((context) =>RequestedSchoolsApproval())));
+                    //     // Navigator.push(
+                    //     //     context,
+                    //     //     MaterialPageRoute(
+                    //     //         builder: ((context) =>
+                    //     //             LeptonAdminLoginScreen())));
+                    //   },
+                    //   child: SizedBox(
+                    //       width: 80.h,
+                    //       child: Text(
+                    //         'Super Admin',
+                    //         style: TextStyle(fontSize: 12.h, color: Colors.white),
+                    //       )),
+                    // ),
                   ],
                 ),
                 Container(

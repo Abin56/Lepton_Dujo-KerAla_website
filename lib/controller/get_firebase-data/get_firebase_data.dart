@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
-import '../admin_login_screen/admin_login_screen_controller.dart';
+import '../../view/web/widgets/drop_DownList/schoolDropDownList.dart';
 
 class GetFireBaseData extends GetxController {
   RxString getTeacherClassRole = ''.obs;
@@ -19,18 +19,19 @@ class GetFireBaseData extends GetxController {
   RxString classTeacherdocid = ''.obs;
   RxString classTeacherName = ''.obs;
   Future<void> getBatchYearId() async {
+    // log("Get.find<GetFireBaseData>().bYear.value${Get.find<GetFireBaseData>().bYear.value}");
     var vari = await FirebaseFirestore.instance
         .collection("SchoolListCollection")
-        .doc(Get.find<AdminLoginScreenController>().schoolID)
+        .doc(schoolListValue?['docid'])
         .get();
-    bYear.value = vari.data()?['batchYear'];
-    log('getx data >>>>>>>>>>>>>>>>>$bYear');
+    bYear.value = vari.data()!['batchYear'];
+    log('getx data >>>>>>>>>>>>>>>>>${bYear.value}');
   }
 
   Future<void> getTeacherClassRoll() async {
     var vari = await FirebaseFirestore.instance
         .collection("SchoolListCollection")
-        .doc(Get.find<AdminLoginScreenController>().schoolID)
+        .doc(schoolListValue?['docid'])
         .collection("Teachers")
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
@@ -41,7 +42,7 @@ class GetFireBaseData extends GetxController {
   Future<void> getTeacherDetail(String teacherID) async {
     var vari = await FirebaseFirestore.instance
         .collection("SchoolListCollection")
-        .doc(Get.find<AdminLoginScreenController>().schoolID)
+        .doc(schoolListValue?['docid'])
         .collection("Teachers")
         .doc(teacherID)
         .get();
@@ -51,7 +52,7 @@ class GetFireBaseData extends GetxController {
   Future<void> getClassDetail(String classID) async {
     var vari = await FirebaseFirestore.instance
         .collection("SchoolListCollection")
-        .doc(Get.find<AdminLoginScreenController>().schoolID)
+        .doc(schoolListValue?['docid'])
         .collection(Get.find<GetFireBaseData>().bYear.value)
         .doc(Get.find<GetFireBaseData>().bYear.value)
         .collection("classes")
@@ -66,7 +67,7 @@ class GetFireBaseData extends GetxController {
   Future<void> getSchoolDetail() async {
     var vari = await FirebaseFirestore.instance
         .collection("SchoolListCollection")
-        .doc(Get.find<AdminLoginScreenController>().schoolID)
+        .doc(schoolListValue?['docid'])
         .get();
     schoolName.value = vari.data()!['schoolName'];
     placeNameofSchool.value = vari.data()!['place'];
@@ -75,7 +76,7 @@ class GetFireBaseData extends GetxController {
   Future<void> getParentDetail(String studentID) async {
     var vari = await FirebaseFirestore.instance
         .collection("SchoolListCollection")
-        .doc(Get.find<AdminLoginScreenController>().schoolID)
+        .doc(schoolListValue?['docid'])
         .collection("Students_Parents")
         .where('studentID', isEqualTo: studentID)
         .get();
