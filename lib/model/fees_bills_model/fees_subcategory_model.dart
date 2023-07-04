@@ -5,21 +5,25 @@ class FeesSubCategoryModel {
   String subCategoryName;
   String id;
   String categoryName;
+  String createdAt;
   FeesSubCategoryModel({
     required this.subCategoryName,
     required this.id,
     required this.categoryName,
+    required this.createdAt,
   });
 
   FeesSubCategoryModel copyWith({
     String? subCategoryName,
     String? id,
     String? categoryName,
+    String? createdAt,
   }) {
     return FeesSubCategoryModel(
       subCategoryName: subCategoryName ?? this.subCategoryName,
       id: id ?? this.id,
       categoryName: categoryName ?? this.categoryName,
+      createdAt: createdAt ?? this.createdAt,
     );
   }
 
@@ -28,6 +32,7 @@ class FeesSubCategoryModel {
       'subCategoryName': subCategoryName,
       'id': id,
       'categoryName': categoryName,
+      'createdAt': createdAt,
     };
   }
 
@@ -36,6 +41,7 @@ class FeesSubCategoryModel {
       subCategoryName: map['subCategoryName'] as String,
       id: map['id'] as String,
       categoryName: map['categoryName'] as String,
+      createdAt: map['createdAt'] as String,
     );
   }
 
@@ -45,8 +51,9 @@ class FeesSubCategoryModel {
       FeesSubCategoryModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() =>
-      'FeesSubCategoryModel(subCategoryName: $subCategoryName, id: $id, categoryName: $categoryName)';
+  String toString() {
+    return 'FeesSubCategoryModel(subCategoryName: $subCategoryName, id: $id, categoryName: $categoryName, createdAt: $createdAt)';
+  }
 
   @override
   bool operator ==(covariant FeesSubCategoryModel other) {
@@ -54,10 +61,15 @@ class FeesSubCategoryModel {
 
     return other.subCategoryName == subCategoryName &&
         other.id == id &&
-        other.categoryName == categoryName;
+        other.categoryName == categoryName &&
+        other.createdAt == createdAt;
   }
 
   @override
-  int get hashCode =>
-      subCategoryName.hashCode ^ id.hashCode ^ categoryName.hashCode;
+  int get hashCode {
+    return subCategoryName.hashCode ^
+        id.hashCode ^
+        categoryName.hashCode ^
+        createdAt.hashCode;
+  }
 }

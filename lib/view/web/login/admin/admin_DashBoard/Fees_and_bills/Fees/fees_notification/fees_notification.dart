@@ -255,7 +255,7 @@ class FeesNotification extends StatelessWidget {
                 },
               ),
               TextButton(
-                child: Text('Ok', style: TextStyle(fontSize: 15.w)),
+                child: Text('Create', style: TextStyle(fontSize: 15.w)),
                 onPressed: () async {
                   if (_formKey.currentState?.validate() ?? false) {
                     await feesController

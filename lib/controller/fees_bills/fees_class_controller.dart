@@ -73,6 +73,7 @@ class FeesClassController {
           .collection("ClassFees")
           .doc(mainCategoryModel.id)
           .collection("SubCategory")
+          .orderBy("createdAt")
           .get();
       return data.docs.map((e) => FeesModel.fromMap(e.data())).toList();
     } on FirebaseException catch (e) {

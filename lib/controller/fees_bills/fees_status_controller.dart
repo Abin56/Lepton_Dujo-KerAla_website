@@ -63,6 +63,7 @@ class FeesStatusController {
         .collection("Fees")
         .doc(categoryId)
         .collection("SubCategory")
+        .orderBy("createdAt")
         .get();
     return categoryList.docs
         .map((e) => FeesSubCategoryModel.fromMap(e.data()))

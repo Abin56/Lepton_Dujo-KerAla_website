@@ -74,6 +74,7 @@ class FeesCreateController extends GetxController {
           .collection("Fees")
           .doc(categoryId)
           .collection("SubCategory")
+          .orderBy("createdAt")
           .get();
       return data.docs
           .map(
@@ -100,7 +101,7 @@ class FeesCreateController extends GetxController {
     try {
       isLoading.value = true;
       for (var element in allClass) {
-        fStore
+        await fStore
             .collection("Fees")
             .doc(categoryId)
             .collection("SubCategory")

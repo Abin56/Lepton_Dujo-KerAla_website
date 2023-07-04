@@ -71,17 +71,18 @@ class FeesCategoryCreateController extends GetxController {
           subCategories = ["yearly"];
           break;
       }
-      for (var element in subCategories) {
+      for (int i = 0; i < subCategories.length; i++) {
         await fStore
             .collection("Fees")
             .doc(uid)
             .collection("SubCategory")
-            .doc(categoryName + element)
+            .doc(categoryName + subCategories[i])
             .set(
               FeesSubCategoryModel(
-                      subCategoryName: element,
-                      id: categoryName + element,
-                      categoryName: categoryName)
+                      subCategoryName: subCategories[i],
+                      id: categoryName + subCategories[i],
+                      categoryName: categoryName,
+                      createdAt: DateTime.now().toString())
                   .toMap(),
             );
       }
@@ -191,6 +192,8 @@ class FeesCategoryCreateController extends GetxController {
     }
   }
 
+  ///this function change[halfYearly] value schools
+
   void changePeriodHalfYearly(
       {required BuildContext context,
       required int index,
@@ -212,6 +215,7 @@ class FeesCategoryCreateController extends GetxController {
     }
   }
 
+  ///this function change[quarterly] value schools
   void changePeriodQuarterly(
       {required BuildContext context,
       required int index,

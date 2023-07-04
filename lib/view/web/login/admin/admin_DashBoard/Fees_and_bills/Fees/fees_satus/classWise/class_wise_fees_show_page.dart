@@ -91,7 +91,7 @@ class _FeesFilterSecondHalfWidgetState
           ),
           sizedBoxH20,
           //select class
-          if (_feesClassController.selectedClassModel != null ||
+          if (_feesClassController.selectedClassModel != null &&
               _feesClassController.selectedMainCategoryModel != null)
             DropdownSearch<FeesModel>(
               asyncItems: (String filter) =>
