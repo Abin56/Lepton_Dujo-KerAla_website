@@ -49,8 +49,8 @@ dependencies:
   firebase_database: ^9.1.5
   firebase_storage: ^10.3.9
   flick_video_player: ^0.5.0
-  flutter_web_plugins:
-    sdk: flutter
+  # flutter_web_plugins:
+  #   sdk: flutter
   flutter_colorpicker: ^1.0.3
   flutter_inset_box_shadow: ^1.0.8
   flutter_overboard: ^3.1.1
@@ -91,7 +91,7 @@ dependencies:
   video_player: ^2.4.0
   video_player_web_hls: ^0.1.11
   visibility_detector: ^0.3.0
-  wakelock: ^0.6.2
+  # wakelock: ^0.6.2 
 
 dev_dependencies:
   flutter_lints: ^2.0.0
