@@ -32,7 +32,7 @@ class _ManageAttendanceNotificationsState
         .doc(Get.find<AdminLoginScreenController>().schoolID)
         .collection('Notifications')
         .doc('Attendance')
-        .set({'timeToDeliverAbsenceNotification': timeController.text})
+        .set({'timeToDeliverAbsenceNotification': timeController.text,'notificationNeededOrNot': true })
         .then((value) => timeController.clear())
         .then((value) => showDialog(
               context: context,
