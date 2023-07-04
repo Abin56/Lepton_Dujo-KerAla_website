@@ -2,7 +2,6 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:month_picker_dialog/month_picker_dialog.dart';
 
 import '../../../../../../../../controller/fees_bills/fees_category_create_controller.dart';
 import '../../../../../../../constant/constant.dart';
@@ -87,29 +86,43 @@ class FeesNotification extends StatelessWidget {
                                 return Column(
                                   children: [
                                     MonthSelectFeesWidget(
+                                        startMonth: feesController.splitString(
+                                            value: feesController.halfYearly[0],
+                                            index: 0),
+                                        endMonth: feesController.splitString(
+                                            value: feesController.halfYearly[0],
+                                            index: 1),
                                         voidCallBackStart: () async {
-                                      await showMonthPicker(
-                                        context: context,
-                                        initialDate: DateTime.now(),
-                                      );
-                                    }, voidCallBackEnd: () async {
-                                      await showMonthPicker(
-                                        context: context,
-                                        initialDate: DateTime.now(),
-                                      );
-                                    }),
+                                          feesController.changePeriodHalfYearly(
+                                              context: context,
+                                              index: 0,
+                                              isFirstThreeCharacter: true);
+                                        },
+                                        voidCallBackEnd: () async {
+                                          feesController.changePeriodHalfYearly(
+                                              context: context,
+                                              index: 0,
+                                              isFirstThreeCharacter: false);
+                                        }),
                                     MonthSelectFeesWidget(
+                                        startMonth: feesController.splitString(
+                                            value: feesController.halfYearly[1],
+                                            index: 0),
+                                        endMonth: feesController.splitString(
+                                            value: feesController.halfYearly[1],
+                                            index: 1),
                                         voidCallBackStart: () async {
-                                      await showMonthPicker(
-                                        context: context,
-                                        initialDate: DateTime.now(),
-                                      );
-                                    }, voidCallBackEnd: () async {
-                                      await showMonthPicker(
-                                        context: context,
-                                        initialDate: DateTime.now(),
-                                      );
-                                    }),
+                                          feesController.changePeriodHalfYearly(
+                                              context: context,
+                                              index: 1,
+                                              isFirstThreeCharacter: true);
+                                        },
+                                        voidCallBackEnd: () async {
+                                          feesController.changePeriodHalfYearly(
+                                              context: context,
+                                              index: 1,
+                                              isFirstThreeCharacter: false);
+                                        }),
                                   ],
                                 );
                               } else if (feesController
@@ -119,53 +132,109 @@ class FeesNotification extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       MonthSelectFeesWidget(
+                                          startMonth:
+                                              feesController.splitString(
+                                                  value: feesController
+                                                      .quarterly[0],
+                                                  index: 0),
+                                          endMonth: feesController.splitString(
+                                              value:
+                                                  feesController.quarterly[0],
+                                              index: 1),
                                           voidCallBackStart: () async {
-                                        await showMonthPicker(
-                                          context: context,
-                                          initialDate: DateTime.now(),
-                                        );
-                                      }, voidCallBackEnd: () async {
-                                        await showMonthPicker(
-                                          context: context,
-                                          initialDate: DateTime.now(),
-                                        );
-                                      }),
+                                            feesController
+                                                .changePeriodQuarterly(
+                                                    context: context,
+                                                    index: 0,
+                                                    isFirstThreeCharacter:
+                                                        true);
+                                          },
+                                          voidCallBackEnd: () async {
+                                            feesController
+                                                .changePeriodQuarterly(
+                                                    context: context,
+                                                    index: 0,
+                                                    isFirstThreeCharacter:
+                                                        false);
+                                          }),
                                       MonthSelectFeesWidget(
+                                          startMonth:
+                                              feesController.splitString(
+                                                  value: feesController
+                                                      .quarterly[1],
+                                                  index: 0),
+                                          endMonth: feesController.splitString(
+                                              value:
+                                                  feesController.quarterly[1],
+                                              index: 1),
                                           voidCallBackStart: () async {
-                                        await showMonthPicker(
-                                          context: context,
-                                          initialDate: DateTime.now(),
-                                        );
-                                      }, voidCallBackEnd: () async {
-                                        await showMonthPicker(
-                                          context: context,
-                                          initialDate: DateTime.now(),
-                                        );
-                                      }),
+                                            feesController
+                                                .changePeriodQuarterly(
+                                                    context: context,
+                                                    index: 1,
+                                                    isFirstThreeCharacter:
+                                                        true);
+                                          },
+                                          voidCallBackEnd: () async {
+                                            feesController
+                                                .changePeriodQuarterly(
+                                                    context: context,
+                                                    index: 1,
+                                                    isFirstThreeCharacter:
+                                                        false);
+                                          }),
                                       MonthSelectFeesWidget(
+                                          startMonth:
+                                              feesController.splitString(
+                                                  value: feesController
+                                                      .quarterly[2],
+                                                  index: 0),
+                                          endMonth: feesController.splitString(
+                                              value:
+                                                  feesController.quarterly[2],
+                                              index: 1),
                                           voidCallBackStart: () async {
-                                        await showMonthPicker(
-                                          context: context,
-                                          initialDate: DateTime.now(),
-                                        );
-                                      }, voidCallBackEnd: () async {
-                                        await showMonthPicker(
-                                          context: context,
-                                          initialDate: DateTime.now(),
-                                        );
-                                      }),
+                                            feesController
+                                                .changePeriodQuarterly(
+                                                    context: context,
+                                                    index: 2,
+                                                    isFirstThreeCharacter:
+                                                        true);
+                                          },
+                                          voidCallBackEnd: () async {
+                                            feesController
+                                                .changePeriodQuarterly(
+                                                    context: context,
+                                                    index: 2,
+                                                    isFirstThreeCharacter:
+                                                        false);
+                                          }),
                                       MonthSelectFeesWidget(
+                                          startMonth:
+                                              feesController.splitString(
+                                                  value: feesController
+                                                      .quarterly[3],
+                                                  index: 0),
+                                          endMonth: feesController.splitString(
+                                              value:
+                                                  feesController.quarterly[3],
+                                              index: 1),
                                           voidCallBackStart: () async {
-                                        await showMonthPicker(
-                                          context: context,
-                                          initialDate: DateTime.now(),
-                                        );
-                                      }, voidCallBackEnd: () async {
-                                        await showMonthPicker(
-                                          context: context,
-                                          initialDate: DateTime.now(),
-                                        );
-                                      }),
+                                            feesController
+                                                .changePeriodQuarterly(
+                                                    context: context,
+                                                    index: 3,
+                                                    isFirstThreeCharacter:
+                                                        true);
+                                          },
+                                          voidCallBackEnd: () async {
+                                            feesController
+                                                .changePeriodQuarterly(
+                                                    context: context,
+                                                    index: 3,
+                                                    isFirstThreeCharacter:
+                                                        false);
+                                          }),
                                     ],
                                   ),
                                 );
@@ -215,10 +284,14 @@ class MonthSelectFeesWidget extends StatelessWidget {
     super.key,
     required this.voidCallBackStart,
     required this.voidCallBackEnd,
+    required this.startMonth,
+    required this.endMonth,
   });
 
   final VoidCallback voidCallBackStart;
   final VoidCallback voidCallBackEnd;
+  final String startMonth;
+  final String endMonth;
 
   @override
   Widget build(BuildContext context) {
@@ -227,11 +300,12 @@ class MonthSelectFeesWidget extends StatelessWidget {
       children: [
         TextButton(
           onPressed: voidCallBackStart,
-          child: const Text("Start Month"),
+          child: Text(startMonth),
         ),
+        const Text("-"),
         TextButton(
           onPressed: voidCallBackEnd,
-          child: const Text("End Month"),
+          child: Text(endMonth),
         ),
       ],
     );
