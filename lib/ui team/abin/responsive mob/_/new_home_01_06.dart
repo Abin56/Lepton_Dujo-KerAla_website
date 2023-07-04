@@ -987,11 +987,7 @@ class HomePageImages extends StatelessWidget {
                                       children: const <Widget>[
                                         GetSchoolListDropDownButton()
                                       ],
-                                      // children: [
-                                      //   // TextFormField(
-                                      //   //   controller:schoolIdController,
-                                      //   // )
-                                      // ],
+                   
                                     ),
                                   ),
                                   actions: <Widget>[
@@ -1032,7 +1028,7 @@ class HomePageImages extends StatelessWidget {
                                           await Navigator.push(context,
                                               MaterialPageRoute(
                                             builder: (context) {
-                                              return const LoginScreen();
+                                              return  LoginScreen();
                                             },
                                           ));
                                         }

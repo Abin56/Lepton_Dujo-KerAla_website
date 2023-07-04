@@ -1,8 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/controller/all_teachers_controller/all_teachers_controller.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/teacher_section/search_teacher.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/teacher_section/teacherDetails.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -160,10 +163,10 @@ class ListOfSchoolTeachers extends StatelessWidget {
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.center,
                                                   children: [
-                                                    const CircleAvatar(
-                                                      radius: 60,
+                                                     CircleAvatar(
+                                                      radius: 60.w,
                                                       child: CircleAvatar(
-                                                        radius: 30,
+                                                        radius: 30.w,
                                                         backgroundImage: AssetImage(
                                                             'assets/images/teacherr.png'),
                                                       ),
@@ -175,7 +178,7 @@ class ListOfSchoolTeachers extends StatelessWidget {
                                                           .montserrat(
                                                               color:
                                                                   Colors.grey,
-                                                              fontSize: 18,
+                                                              fontSize: 18.w,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold),
@@ -187,7 +190,7 @@ class ListOfSchoolTeachers extends StatelessWidget {
                                                           GoogleFonts.poppins(
                                                         color: Colors.black
                                                             .withOpacity(0.4),
-                                                        fontSize: 14,
+                                                        fontSize: 14.w,
                                                       ),
                                                     ),
                                                     sizedBoxH10,
@@ -197,7 +200,7 @@ class ListOfSchoolTeachers extends StatelessWidget {
                                                           GoogleFonts.poppins(
                                                               color:
                                                                   Colors.black,
-                                                              fontSize: 16,
+                                                              fontSize: 16.w,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w700),
@@ -208,7 +211,7 @@ class ListOfSchoolTeachers extends StatelessWidget {
                                                       style:
                                                           GoogleFonts.poppins(
                                                         color: Colors.black,
-                                                        fontSize: 12,
+                                                        fontSize: 12.w,
                                                       ),
                                                     ),
                                                     Text(
@@ -216,7 +219,7 @@ class ListOfSchoolTeachers extends StatelessWidget {
                                                       style:
                                                           GoogleFonts.poppins(
                                                         color: Colors.black,
-                                                        fontSize: 12,
+                                                        fontSize: 12.w ,
                                                       ),
                                                     ),
                                                   ],
