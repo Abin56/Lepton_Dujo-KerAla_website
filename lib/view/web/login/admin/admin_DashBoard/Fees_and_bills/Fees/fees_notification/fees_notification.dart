@@ -2,6 +2,7 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:month_picker_dialog/month_picker_dialog.dart';
 
 import '../../../../../../../../controller/fees_bills/fees_category_create_controller.dart';
 import '../../../../../../../constant/constant.dart';
@@ -55,30 +56,125 @@ class FeesNotification extends StatelessWidget {
                   ? circularProgressIndicator
                   : Form(
                       key: _formKey,
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            validator: checkFieldEmpty,
-                            controller: feesController.categoryNameController,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              hintText: 'Fees Categories',
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            TextFormField(
+                              validator: checkFieldEmpty,
+                              controller: feesController.categoryNameController,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                hintText: 'Fees Categories',
+                              ),
                             ),
-                          ),
-                          sizedBoxH20,
-                          DropdownSearch<String>(
-                            items: feesController.typeOfCategoryList,
-                            itemAsString: (String u) => u,
-                            onChanged: (String? data) => feesController
-                                .selectedTypeOfCategory = data ?? "",
-                            dropdownDecoratorProps:
-                                const DropDownDecoratorProps(
-                              dropdownSearchDecoration: InputDecoration(
-                                  labelText: "Select Type",
-                                  border: OutlineInputBorder()),
+                            sizedBoxH20,
+                            DropdownSearch<String>(
+                              items: feesController.typeOfCategoryList,
+                              itemAsString: (String u) => u,
+                              onChanged: (String? data) => feesController
+                                  .selectedTypeOfCategory.value = data ?? "",
+                              dropdownDecoratorProps:
+                                  const DropDownDecoratorProps(
+                                dropdownSearchDecoration: InputDecoration(
+                                    labelText: "Select Type",
+                                    border: OutlineInputBorder()),
+                              ),
                             ),
-                          ),
-                        ],
+                            sizedBoxH10,
+                            Obx(() {
+                              if (feesController.selectedTypeOfCategory.value ==
+                                  'Half Yearly') {
+                                return Column(
+                                  children: [
+                                    MonthSelectFeesWidget(
+                                        voidCallBackStart: () async {
+                                      await showMonthPicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),
+                                      );
+                                    }, voidCallBackEnd: () async {
+                                      await showMonthPicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),
+                                      );
+                                    }),
+                                    MonthSelectFeesWidget(
+                                        voidCallBackStart: () async {
+                                      await showMonthPicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),
+                                      );
+                                    }, voidCallBackEnd: () async {
+                                      await showMonthPicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),
+                                      );
+                                    }),
+                                  ],
+                                );
+                              } else if (feesController
+                                      .selectedTypeOfCategory.value ==
+                                  'Quarterly') {
+                                return SingleChildScrollView(
+                                  child: Column(
+                                    children: [
+                                      MonthSelectFeesWidget(
+                                          voidCallBackStart: () async {
+                                        await showMonthPicker(
+                                          context: context,
+                                          initialDate: DateTime.now(),
+                                        );
+                                      }, voidCallBackEnd: () async {
+                                        await showMonthPicker(
+                                          context: context,
+                                          initialDate: DateTime.now(),
+                                        );
+                                      }),
+                                      MonthSelectFeesWidget(
+                                          voidCallBackStart: () async {
+                                        await showMonthPicker(
+                                          context: context,
+                                          initialDate: DateTime.now(),
+                                        );
+                                      }, voidCallBackEnd: () async {
+                                        await showMonthPicker(
+                                          context: context,
+                                          initialDate: DateTime.now(),
+                                        );
+                                      }),
+                                      MonthSelectFeesWidget(
+                                          voidCallBackStart: () async {
+                                        await showMonthPicker(
+                                          context: context,
+                                          initialDate: DateTime.now(),
+                                        );
+                                      }, voidCallBackEnd: () async {
+                                        await showMonthPicker(
+                                          context: context,
+                                          initialDate: DateTime.now(),
+                                        );
+                                      }),
+                                      MonthSelectFeesWidget(
+                                          voidCallBackStart: () async {
+                                        await showMonthPicker(
+                                          context: context,
+                                          initialDate: DateTime.now(),
+                                        );
+                                      }, voidCallBackEnd: () async {
+                                        await showMonthPicker(
+                                          context: context,
+                                          initialDate: DateTime.now(),
+                                        );
+                                      }),
+                                    ],
+                                  ),
+                                );
+                              } else {
+                                return sizedBoxH10;
+                              }
+                            })
+                          ],
+                        ),
                       ),
                     ),
             ),
@@ -96,11 +192,11 @@ class FeesNotification extends StatelessWidget {
                     await feesController
                         .createFeesCategory(
                             feesController.categoryNameController.text,
-                            feesController.selectedTypeOfCategory,
+                            feesController.selectedTypeOfCategory.value,
                             context)
                         .then((value) {
                       feesController.categoryNameController.clear();
-                      feesController.selectedTypeOfCategory = '';
+                      feesController.selectedTypeOfCategory.value = '';
                       Navigator.pop(context);
                     });
                   }
@@ -110,6 +206,34 @@ class FeesNotification extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class MonthSelectFeesWidget extends StatelessWidget {
+  const MonthSelectFeesWidget({
+    super.key,
+    required this.voidCallBackStart,
+    required this.voidCallBackEnd,
+  });
+
+  final VoidCallback voidCallBackStart;
+  final VoidCallback voidCallBackEnd;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        TextButton(
+          onPressed: voidCallBackStart,
+          child: const Text("Start Month"),
+        ),
+        TextButton(
+          onPressed: voidCallBackEnd,
+          child: const Text("End Month"),
+        ),
+      ],
     );
   }
 }

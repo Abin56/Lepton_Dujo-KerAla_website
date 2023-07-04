@@ -93,6 +93,7 @@ dependencies:
   visibility_detector: ^0.3.0
   wakelock: ^0.6.2
   seo_renderer: ^0.6.0
+  month_picker_dialog:
 
 dev_dependencies:
   flutter_lints: ^2.0.0

@@ -12,7 +12,7 @@ import '../get_firebase-data/get_firebase_data.dart';
 
 class FeesCategoryCreateController extends GetxController {
   ///selected category type[typeOfCategoryList]
-  String selectedTypeOfCategory = "";
+  Rx<String> selectedTypeOfCategory = RxString("");
   RxBool isLoading = RxBool(false);
   TextEditingController categoryNameController = TextEditingController();
 
@@ -50,7 +50,7 @@ class FeesCategoryCreateController extends GetxController {
         );
 
         showToast(msg: "Successfully Created");
-        selectedTypeOfCategory = "";
+        selectedTypeOfCategory.value = "";
       }
 
       // Creating subcategory
