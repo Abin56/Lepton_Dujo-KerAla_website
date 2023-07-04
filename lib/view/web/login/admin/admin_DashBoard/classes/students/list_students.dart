@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -151,10 +152,10 @@ class _ListOfStudentsState extends State<ListOfStudents> {
                                             ///
                                           },
                                           child: SizedBox(
-                                            height: 400,
-                                            width: 400,
+                                            height: 430.h,
+                                            width: 400.w,
                                             child: Padding(
-                                              padding: const EdgeInsets.all(10),
+                                              padding:  EdgeInsets.all(10.w),
                                               child: Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.center,
@@ -187,13 +188,13 @@ class _ListOfStudentsState extends State<ListOfStudents> {
                                                                     .network(
                                                                         'https://assets4.lottiefiles.com/packages/lf20_u7yrcwlk.json'),
                                                       )),
-                                                  sizedBoxH10,
+                                                 // sizedBoxH10,
                                                   Text(
                                                     'Created Date : ${stringTimeToDateConvert(data.createDate!)}',
                                                     style: GoogleFonts.poppins(
                                                       color: Colors.black
                                                           .withOpacity(0.4),
-                                                      fontSize: 14,
+                                                      fontSize: 14.w,
                                                     ),
                                                   ),
                                                   sizedBoxH10,
@@ -201,7 +202,7 @@ class _ListOfStudentsState extends State<ListOfStudents> {
                                                     "Name : ${data.studentName}",
                                                     style: GoogleFonts.poppins(
                                                         color: Colors.black,
-                                                        fontSize: 16,
+                                                        fontSize: 16.w,
                                                         fontWeight:
                                                             FontWeight.w700),
                                                   ),
@@ -210,14 +211,14 @@ class _ListOfStudentsState extends State<ListOfStudents> {
                                                     "Admission No : ${data.admissionNumber}",
                                                     style: GoogleFonts.poppins(
                                                       color: Colors.black,
-                                                      fontSize: 12,
+                                                      fontSize: 12.w,
                                                     ),
                                                   ),
                                                   Text(
                                                     "Gender : ${data.gender}",
                                                     style: GoogleFonts.poppins(
                                                       color: Colors.black,
-                                                      fontSize: 12,
+                                                      fontSize: 12.w,
                                                     ),
                                                   ),
                                                 ],

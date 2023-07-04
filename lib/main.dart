@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import 'configure_web.dart';
+
 
 
 void main() async {
@@ -22,7 +24,7 @@ void main() async {
         measurementId: "G-QC6SR6TLE0"),
   );
   ScreenUtil.ensureScreenSize();
-  // configureApp();
+  configureApp();
   // setUrlStrategy(PathUrlStrategy());
  runApp(
   const MaterialApp(

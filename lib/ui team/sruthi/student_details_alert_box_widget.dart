@@ -121,7 +121,7 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
                   children: [
                     Container(
                         width: 300.w,
-                        height: 380.w,
+                        height: 390.w,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
                           color: Colors.grey.withOpacity(0.3),
@@ -179,14 +179,14 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
                               genrateTc(context);
                             },
                           ),
-                          sizedBoxH20,
+                          sizedBoxH10,
                           Student_Info_Elevated_button_Widget(
                             text: 'promote Class',
                             onPressed: () {
                               Navigator.push(context, MaterialPageRoute(builder: (context) => const UnderMaintanceScreen(),));
                             },
                           ),
-                          sizedBoxH20,
+                          sizedBoxH10,
                           StreamBuilder(
                               stream: FirebaseFirestore.instance
                                   .collection("SchoolListCollection")
