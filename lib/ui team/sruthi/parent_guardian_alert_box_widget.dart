@@ -146,7 +146,7 @@ class Student_Info_text_Widget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(text, style: GoogleFonts.poppins(fontSize: 14));
+    return Text(text, style: GoogleFonts.poppins(fontSize: 14.w));
   }
 }
 

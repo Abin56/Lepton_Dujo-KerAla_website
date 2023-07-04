@@ -5,7 +5,6 @@ import 'package:dujo_kerala_website/view/web/home/privacypolicy.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:get/get.dart';
 
 import 'configure_web.dart';
@@ -26,7 +25,7 @@ void main() async {
   );
   ScreenUtil.ensureScreenSize();
   configureApp();
-  setUrlStrategy(PathUrlStrategy());
+  // setUrlStrategy(PathUrlStrategy());
  runApp(
   const MaterialApp(
     debugShowCheckedModeBanner: false,

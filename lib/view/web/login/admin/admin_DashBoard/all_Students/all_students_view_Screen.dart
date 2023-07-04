@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/all_Students/search_students.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -195,9 +196,7 @@ class _AllStudentListState extends State<AllStudentList> {
                                                               letterSpacing: 1,
                                                               color:
                                                                   Colors.grey,
-                                                              fontSize: screenSize
-                                                                      .width /
-                                                                  120,
+                                                              fontSize: 14.w,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold),
@@ -209,9 +208,7 @@ class _AllStudentListState extends State<AllStudentList> {
                                                           GoogleFonts.poppins(
                                                         color: Colors.black
                                                             .withOpacity(0.4),
-                                                        fontSize:
-                                                            screenSize.width /
-                                                                120,
+                                                        fontSize: 14.w,
                                                       ),
                                                     ),
 
@@ -246,10 +243,8 @@ class _AllStudentListState extends State<AllStudentList> {
                                                               style: GoogleFonts.poppins(
                                                                   color: Colors
                                                                       .black,
-                                                                  fontSize:
-                                                                      screenSize
-                                                                              .width /
-                                                                          120,
+                                                                  fontSize:14.w,
+                                                                      
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w600),

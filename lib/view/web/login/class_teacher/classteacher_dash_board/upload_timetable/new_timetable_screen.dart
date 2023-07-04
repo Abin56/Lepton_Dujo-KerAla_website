@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
 import 'package:dujo_kerala_website/controller/get_firebase-data/get_firebase_data.dart';
+import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,7 +29,8 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
   String selectedPeriod = 'Period 1';
   String selectedTime1 = 'Start Time  ';
   String selectedTime2 = 'End Time  ';
-  Color selectedColor = const Color(0x00fcfcfc);
+  //Color selectedColor = const Color(0x00fcfcfc);
+  Color selectedColor= Colors.amber;
   bool loadingStatus = false;
 
   //values
@@ -113,6 +115,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
         //  backgroundColor:
         appBar: AppBar(
           title: const Text("Create Timetable"),
+          backgroundColor: adminePrimayColor,
         ),
         body: SingleChildScrollView(
           child: Row(
@@ -499,10 +502,11 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                         child: DropdownButton(
                           underline: Container(),
                           isExpanded: true,
-                          value: Colors.amber,
+                          value: selectedColor,
                           onChanged: (Color? newValue) {
                             setState(() {
-                              selectedColor = newValue!;
+                              log(newValue!.toString());
+                              selectedColor = newValue;
                               log('COL :${selectedColor.toString().substring(29, selectedColor.toString().length-1)}');
                             });
                           },

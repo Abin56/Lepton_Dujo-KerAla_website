@@ -1,8 +1,10 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -153,77 +155,110 @@ class AllStudentsController extends GetxController {
                         'Place  : $place',
                         style: tea_style,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Row(
+                      GestureDetector(
+                         onTap: () {
+                                      showDialog(
+                                        barrierDismissible: false,
+                                        context: context,
+                                        builder: (context) =>
+                                            ParentAlert_box_Widget(
+                                          classID: classID,
+                                          studentID: docid,
+                                          text: 'Parent Info',
+                                        ),
+                                      );
+                                    },
+                        child: Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              GestureDetector(
-                                onTap: () {
-                                  showDialog(
-                                    barrierDismissible: false,
-                                    context: context,
-                                    builder: (context) =>
-                                        ParentAlert_box_Widget(
-                                      classID: classID,
-                                      studentID: docid,
-                                      text: 'Parent Info',
+                              Row(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      showDialog(
+                                        barrierDismissible: false,
+                                        context: context,
+                                        builder: (context) =>
+                                            ParentAlert_box_Widget(
+                                          classID: classID,
+                                          studentID: docid,
+                                          text: 'Parent Info',
+                                        ),
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 40,
+                                      width: 40,
+                                      decoration: const BoxDecoration(
+                                          image: DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/images/family.png'))),
                                     ),
-                                  );
-                                },
-                                child: Container(
-                                  height: 40,
-                                  width: 40,
-                                  decoration: const BoxDecoration(
-                                      image: DecorationImage(
-                                          image: AssetImage(
-                                              'assets/images/family.png'))),
-                                ),
+                                  ),
+                                  sizedBoxW20,
+                                  const Text(
+                                    "Parents  ",
+                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  const Icon(Icons.info_outlined),
+                                ],
                               ),
-                              sizedBoxW20,
-                              const Text(
-                                "Parents  ",
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              const Icon(Icons.info_outlined),
-                            ],
-                          ),
-                          Row(
-                            children: [
                               GestureDetector(
                                 onTap: () async {
-                                  showDialog(
-                                    barrierDismissible: false,
-                                    context: context,
-                                    builder: (context) =>
-                                        GuardianInfoAlert_box_Widget(
-                                      classID: classID,
-                                      studentID: docid,
-                                      text: 'Guardian Info',
-                                    ),
-                                  );
-                                },
+                                          showDialog(
+                                            barrierDismissible: false,
+                                            context: context,
+                                            builder: (context) =>
+                                                GuardianInfoAlert_box_Widget(
+                                              classID: classID,
+                                              studentID: docid,
+                                              text: 'Guardian Info',
+                                            ),
+                                          );
+                                        },
                                 child: Container(
-                                  height: 40,
-                                  width: 40,
-                                  decoration: const BoxDecoration(
-                                      image: DecorationImage(
-                                          image: AssetImage(
-                                              'assets/images/security-guard.png'))),
+                                  child: Row(
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () async {
+                                          showDialog(
+                                            barrierDismissible: false,
+                                            context: context,
+                                            builder: (context) =>
+                                                GuardianInfoAlert_box_Widget(
+                                              classID: classID,
+                                              studentID: docid,
+                                              text: 'Guardian Info',
+                                            ),
+                                          );
+                                        },
+                                        child: Container(
+                                          height: 40,
+                                          width: 40,
+                                          decoration: const BoxDecoration(
+                                              image: DecorationImage(
+                                                  image: AssetImage(
+                                                      'assets/images/security-guard.png'))),
+                                        ),
+                                      ),
+                                      sizedBoxW20,
+                                      const Text("Guardian  ",
+                                          style:
+                                              TextStyle(fontWeight: FontWeight.bold)),
+                                      const Icon(Icons.info_outlined),
+                                    ],
+                                  ),
                                 ),
                               ),
-                              sizedBoxW20,
-                              const Text("Guardian  ",
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                              const Icon(Icons.info_outlined),
                             ],
                           ),
-                        ],
+                        ),
                       ),
                       sizedBoxH20,
                       Center(
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             GestureDetector(
                               onTap: () async {
@@ -232,15 +267,15 @@ class AllStudentsController extends GetxController {
                               child: ButtonContainerWidget(
                                 curving: 5,
                                 colorindex: 0,
-                                height: 30,
-                                width: 120,
+                                height: 40.h,
+                                width: 120.w,
                                 child: Center(
                                   child: Text(
                                     'Genrate TC',
                                     style: GoogleFonts.poppins(
                                         color: const Color.fromARGB(
                                             255, 255, 254, 254),
-                                        fontSize: 14,
+                                        fontSize: 14.w,
                                         fontWeight: FontWeight.w600),
                                   ),
                                 ),
@@ -256,19 +291,20 @@ class AllStudentsController extends GetxController {
                                   },
                                 ));
                               },
-                              child: ButtonContainerWidget(
-                                curving: 5,
-                                colorindex: 0,
-                                height: 30,
-                                width: 120,
-                                child: Center(
-                                  child: Text(
-                                    'Genrate Sampoorna',
-                                    style: GoogleFonts.poppins(
-                                        color: const Color.fromARGB(
-                                            255, 255, 254, 254),
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w600),
+                              child: Center(
+                                child: ButtonContainerWidget(
+                                  curving: 5,
+                                  colorindex: 0,
+                                  height: 42.h,
+                                  width: 150.w,
+                                  child: 
+                                  Center(
+                                    child: GoogleMonstserratWidgets(text: 
+                                      'Genrate Sampoorna', fontsize: 13.w,
+                                      color:  const Color.fromARGB(
+                                              255, 255, 254, 254), 
+                                          fontWeight: FontWeight.w600
+                                    ),
                                   ),
                                 ),
                               ),
@@ -276,6 +312,7 @@ class AllStudentsController extends GetxController {
                           ],
                         ),
                       ),
+                      sizedBoxH20,
                       Center(
                         child: GestureDetector(
                           onTap: () async {
@@ -284,8 +321,8 @@ class AllStudentsController extends GetxController {
                           child: ButtonContainerWidget(
                             curving: 10,
                             colorindex: 6,
-                            height: 40,
-                            width: 110,
+                            height: 40.h,
+                            width: 110.w,
                             child: Center(
                               child: Text(
                                 'Remove',
