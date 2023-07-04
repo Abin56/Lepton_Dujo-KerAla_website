@@ -201,7 +201,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     List<Widget> drawerPages = [
       AllStudentList(),
       ListOfSchoolTeachers(schoolID: widget.schoolID),
-      ListOfClassesScreen(schoolID: widget.schoolID),
+      ListOfClassesScreen(),
       NoticeDisplay(
         schoolId: widget.schoolID,
       ),
