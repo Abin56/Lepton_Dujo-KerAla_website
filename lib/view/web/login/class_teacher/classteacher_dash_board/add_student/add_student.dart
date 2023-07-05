@@ -1,3 +1,4 @@
+import 'package:dujo_kerala_website/controller/add_students_from_class/add_students_class_controller.dart';
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:dujo_kerala_website/view/fonts/fonts.dart';
@@ -8,11 +9,14 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../../controller/Getx/class_teacher/teacher_add_student_controller/teacher_add_student_controller.dart';
+import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../model/create_classModel/add_student_model.dart';
 import '../../../../../../utils/utils.dart';
 
 class AddStudentFromClassTeacher extends StatelessWidget {
+  AddStudentsFromClassController addStudentsFromClassController =
+      Get.put(AddStudentsFromClassController());
   final String schoolID;
   final String teacherIDE;
 
@@ -53,7 +57,6 @@ class AddStudentFromClassTeacher extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       sizedBoxH40,
-                     
                       Text(
                         'Hi ! Class teacher ',
                         style: ralewayStyle.copyWith(
@@ -190,20 +193,65 @@ class AddStudentFromClassTeacher extends StatelessWidget {
                                     ),
                                   ),
                                   onPressed: () async {
+                                    addStudentsFromClassController
+                                        .addStudentsFromClass(
+                                            context,
+                                            Get.find<
+                                                    AdminLoginScreenController>()
+                                                .schoolID,
+                                            Get.find<GetFireBaseData>()
+                                                .bYear
+                                                .value,
+                                            Get.find<GetFireBaseData>()
+                                                .classIDD
+                                                .value);
+                                  },
+                                  child: const Text("Select Class"),
+                                ),
+                              ),
+                            ),
+                            sizedBoxH10,
+                            Text(
+                              "* Add Students from classes",
+                              style: TextStyle(
+                                  fontSize: 13.w,
+                                  fontWeight: FontWeight.w600,
+                                  color:
+                                      const Color.fromARGB(255, 27, 106, 170)),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  left: 50.w, right: 50.w, top: 30.h),
+                              child: SizedBox(
+                                height: 60.h,
+                                width: 250.w,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: adminePrimayColor,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                  ),
+                                  onPressed: () async {
                                     await teacherExcelFunction();
                                   },
                                   child: const Text("Upload data from excel"),
                                 ),
                               ),
                             ),
-                             sizedBoxH10,
-                                        Text(
-                                           "* Please use .xlsx format",
-                                           style: TextStyle(
-                                          fontSize: 13.w,
-                                          fontWeight: FontWeight.w600,
-                                          color: const Color.fromARGB(255, 27, 106, 170)),
-                                          ),
+                            sizedBoxH10,
+                            Text(
+                              "* Please use .xlsx format",
+                              style: TextStyle(
+                                  fontSize: 13.w,
+                                  fontWeight: FontWeight.w600,
+                                  color:
+                                      const Color.fromARGB(255, 27, 106, 170)),
+                            ),
                           ],
                         ),
                       ]),
