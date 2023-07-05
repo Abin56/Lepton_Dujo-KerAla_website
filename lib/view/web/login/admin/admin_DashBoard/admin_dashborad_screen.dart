@@ -29,6 +29,7 @@ import '../../../widgets/button_container_widget.dart';
 import '../../../widgets/drop_DownList/get_batchYear.dart';
 import '../../../widgets/drop_DownList/get_classes.dart';
 import '../../../widgets/sample/under_maintance.dart';
+import 'Fees_and_bills/Fees/fees_and_bills.dart';
 import 'Students_ScholarShip/student_scholarship.dart';
 import 'achievements/achievements.dart';
 import 'admin_meeting/admin_meeting_update/adminMeetingNew/admin_meeting_show.dart';
@@ -92,16 +93,13 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'School Protection\nGroup',
     'Scholarship',
     'Bus Route',
-   // 'Student Summary',
-   // 'Research and\nDevelopment',
-    //'School Calendar',
     'Video Conference',
-    //'Recorded Classes',
     'Food and Beverages',
     'Exam Notifications',
     'Alumni Associations',
     'Class Promotion',
     'Non-Teaching Staffs',
+    'Fess & Bills'
   ];
 
   List<String> dashboardImagesList = [
@@ -119,16 +117,13 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'assets/images/protection.png',
     'assets/images/graduation.png',
     'assets/images/route.png',
-    //  'assets/images/students.png',
-   // 'assets/images/research-and-development.png',
-   // 'assets/images/calendar.png',
     'assets/images/elearning.png',
-   // 'assets/images/video-conference.png',
     'assets/images/fast-food.png',
     'assets/images/exam.png',
     'assets/images/alumni.png',
     'assets/images/exchange.png',
     'assets/images/steward.png',
+    'assets/images/feesandbills.png'
   ];
 
   List<String> viewListNames = [
@@ -140,13 +135,11 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'PTA',
     'Non-Teaching Staffs',
     'Login History',
-    // 'Parents',
     'Manage Notifications',
     'Dujo Cart',
   ];
   List<String> viewListImages = [
     'assets/images/students.png',
-    //'assets/images/admin.png'
     'assets/images/teacherr.png',
     'assets/images/classes.png',
     'assets/images/notices.png',
@@ -170,7 +163,6 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
           schoolId: widget.schoolID), //4-general instructions
       AddNewNotices(schoolId: widget.schoolID), //5-notices
       EventsUpdates(schoolID: widget.schoolID), //6-events
-      //const FeesUpdates(),
       const UnderMaintanceScreen(), //fees and bills
       MeetingCreates(
         schoolId: widget.schoolID,
@@ -182,21 +174,15 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       AdminScholarships(schoolID: widget.schoolID), //13-ScholarShip
 
       const BusRoute(), //14-Bus Route
-    //  const UnderMaintanceScreen(), //15-Student Summary
-     // const UnderMaintanceScreen(), //16-Research and development
-     // const UnderMaintanceScreen(), //17-School Calendar
+   
       const UnderMaintanceScreen(), //18
-      //const UnderMaintanceScreen(), //19
       FoodBeverages(schoolID: widget.schoolID),
-      //SelectType(schoolID: widget.schoolID),
       SchoolLevelNotifications(schoolID: widget.schoolID),
-      //const AlumniAssocation(), //10
       AlumniAssociation(),
       ShiftClassPage(),
       NonTeachingLogin(schoolID: widget.schoolID),
-      // const UnderMaintanceScreen(), //11
-      // const UnderMaintanceScreen(),
-      // SampoornaHomeScreen(schoolId: widget.schoolID, studentId: ''), //13
+      const FeesAndBillsWeb(),
+      
     ];
     List<Widget> drawerPages = [
       AllStudentList(),
@@ -210,9 +196,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       ),
       AdminPtaScreen(),
       const UnderMaintanceScreen(),
-      // NonTeachingStaffView(
-      //   schoolID: widget.schoolID,
-      // ),
+   
       DateWiseLoginScreen(schoolID: widget.schoolID),
       const MainScreenNotifications()
     ];

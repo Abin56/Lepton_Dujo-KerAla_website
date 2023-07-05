@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import 'configure_nonweb.dart';
-
 
 
 void main() async {
@@ -24,14 +22,8 @@ void main() async {
         measurementId: "G-QC6SR6TLE0"),
   );
   ScreenUtil.ensureScreenSize();
-  configureApp();
-  // setUrlStrategy(PathUrlStrategy());
  runApp(
-  const MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: MyApp(),
-    
-  ),
+ const MyApp()
 );
 }
 
@@ -58,7 +50,6 @@ class MyApp extends StatelessWidget {
                 primaryColorDark: const Color(0xFF167F67),
               ),
               home:
-                  //const MobHomePage()
                    HomePageImages());
         });
   }

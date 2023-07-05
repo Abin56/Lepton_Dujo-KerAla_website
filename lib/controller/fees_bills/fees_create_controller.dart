@@ -12,6 +12,7 @@ import 'package:uuid/uuid.dart';
 
 import '../../model/fees_bills_model/fees_category_model.dart';
 import '../../model/fees_bills_model/fees_subcategory_model.dart';
+import '../../utils/utils.dart';
 
 class FeesCreateController extends GetxController {
   ///for unique id creation
@@ -52,15 +53,11 @@ class FeesCreateController extends GetxController {
 
   Future<List<FeesCategoryModel>> fetchCategoryList() async {
     try {
-      isLoading.value = true;
-
       final QuerySnapshot<Map<String, dynamic>> data =
           await fStore.collection("Fees").get();
-      isLoading.value = false;
       return data.docs.map((e) => FeesCategoryModel.fromMap(e.data())).toList();
     } catch (e) {
       showToast(msg: "Something went wrong");
-      isLoading.value = false;
       return [];
     }
   }
@@ -69,15 +66,16 @@ class FeesCreateController extends GetxController {
 
   Future<List<FeesSubCategoryModel>> fetchSubCategoryList(
       String categoryId) async {
+    if (selectedMainCategory == null) {
+      return [];
+    }
     try {
-      isLoading.value = true;
-
       final QuerySnapshot<Map<String, dynamic>> data = await fStore
           .collection("Fees")
           .doc(categoryId)
           .collection("SubCategory")
+          .orderBy("createdAt")
           .get();
-      isLoading.value = false;
       return data.docs
           .map(
             (e) => FeesSubCategoryModel.fromMap(
@@ -87,7 +85,6 @@ class FeesCreateController extends GetxController {
           .toList();
     } on FirebaseException catch (e) {
       showToast(msg: e.code);
-      isLoading.value = false;
       return [];
     }
   }
@@ -104,7 +101,7 @@ class FeesCreateController extends GetxController {
     try {
       isLoading.value = true;
       for (var element in allClass) {
-        fStore
+        await fStore
             .collection("Fees")
             .doc(categoryId)
             .collection("SubCategory")
@@ -128,6 +125,9 @@ class FeesCreateController extends GetxController {
           amountController.clear();
           dueDateController.clear();
           selectedSubCategory = null;
+          selectedMainCategory = null;
+          selectedClass = null;
+          isSpecificClassOnly.value = false;
         });
       }
       showToast(msg: "Successfully Completed");
@@ -196,9 +196,12 @@ class FeesCreateController extends GetxController {
         .then((value) async {
       showToast(msg: "Successfully Completed");
       isLoading.value = false;
-      selectedClass = null;
       amountController.clear();
       dueDateController.clear();
+      selectedSubCategory = null;
+      selectedMainCategory = null;
+      selectedClass = null;
+      isSpecificClassOnly.value = false;
     }).catchError((error) {
       isLoading.value = false;
       showToast(msg: (error as FirebaseException).code);
@@ -243,14 +246,19 @@ class FeesCreateController extends GetxController {
       }
     }
   }
-}
 
-// //creating token lists parent,guardian,students
-//       await fetchAllTokenList().then((value) async {
-//         log("create time ${tokenList.toString()}");
-//         for (var element3 in tokenList) {
-//           //send push notification from push notification
-//           await sendPushMessage(element3,
-//               "Due Date : $dueDate Amount : $amount", categoryName);
-//         }
-//       });
+  Future<void> sendAllClassFeesNotification({
+    required String dueDate,
+    required String amount,
+    required String categoryName,
+  }) async {
+    await fetchAllTokenList().then((value) async {
+      log("create time ${tokenList.toString()}");
+      for (var element3 in tokenList) {
+        //send push notification from push notification
+        await sendPushMessage(
+            element3, "Due Date : $dueDate Amount : $amount", categoryName);
+      }
+    });
+  }
+}
