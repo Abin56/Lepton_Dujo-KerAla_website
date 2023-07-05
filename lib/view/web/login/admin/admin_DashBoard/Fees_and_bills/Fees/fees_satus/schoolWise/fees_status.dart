@@ -22,7 +22,7 @@ class FeesStstatues extends StatelessWidget {
           Expanded(
             child: FeesHalfContainerWidget(
               screenSize: screenSize,
-              text: 'Fees Catergories',
+              text: 'Fees',
             ),
           ),
           Expanded(
@@ -60,7 +60,7 @@ class FeesFilterSecondHalfWidget extends StatelessWidget {
             },
             dropdownDecoratorProps: const DropDownDecoratorProps(
               dropdownSearchDecoration: InputDecoration(
-                labelText: "Select Category",
+                labelText: "Select Fee",
                 border: OutlineInputBorder(),
               ),
             ),
@@ -76,7 +76,7 @@ class FeesFilterSecondHalfWidget extends StatelessWidget {
                 feesStatusController.selectedSubCategory = data?.id ?? "",
             dropdownDecoratorProps: const DropDownDecoratorProps(
               dropdownSearchDecoration: InputDecoration(
-                labelText: "Select Sub Category",
+                labelText: "Select Period",
                 border: OutlineInputBorder(),
               ),
             ),

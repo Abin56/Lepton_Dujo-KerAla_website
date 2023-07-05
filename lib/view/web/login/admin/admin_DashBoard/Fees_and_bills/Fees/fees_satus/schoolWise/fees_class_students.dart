@@ -31,7 +31,7 @@ class _FeesClassStudentsState extends State<FeesClassStudents> {
           Expanded(
             child: FeesHalfContainerWidget(
               screenSize: screenSize,
-              text: 'Fees Catergories',
+              text: 'Fees',
             ),
           ),
           Expanded(
