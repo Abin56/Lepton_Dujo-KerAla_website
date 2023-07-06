@@ -38,7 +38,7 @@ class FeesNotificationRightSideWidget extends StatelessWidget {
                 },
                 dropdownDecoratorProps: const DropDownDecoratorProps(
                   dropdownSearchDecoration: InputDecoration(
-                    labelText: "Select Category",
+                    labelText: "Select Fee",
                     border: OutlineInputBorder(),
                   ),
                 ),

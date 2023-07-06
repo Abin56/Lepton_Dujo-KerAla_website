@@ -24,14 +24,14 @@ class FeesNotification extends StatelessWidget {
         onPressed: () async {
           await feesNotificationDialogue(context);
         },
-        tooltip: "Create Category",
+        tooltip: "Create New Fee",
         child: const Icon(Icons.add),
       ),
       body: Row(
         children: [
           //left side widget
           FeesHalfContainerWidget(
-              screenSize: screenSize, text: 'Fees notifications'),
+              screenSize: screenSize, text: 'Fees'),
           //right side widget
           Expanded(
             child: FeesNotificationRightSideWidget(),
@@ -49,7 +49,7 @@ class FeesNotification extends StatelessWidget {
         return Padding(
           padding: EdgeInsets.only(bottom: 150.h, top: 80.h),
           child: AlertDialog(
-            title: Text('Fees Categories', style: TextStyle(fontSize: 14.w)),
+            title: Text('Fees', style: TextStyle(fontSize: 14.w)),
             content: Obx(
               () => feesController.isLoading.value
                   ? circularProgressIndicator
@@ -63,7 +63,7 @@ class FeesNotification extends StatelessWidget {
                               controller: feesController.categoryNameController,
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
-                                hintText: 'Fees Categories',
+                                hintText: 'Enter the Name of the fee',
                               ),
                             ),
                             sizedBoxH20,
@@ -75,7 +75,7 @@ class FeesNotification extends StatelessWidget {
                               dropdownDecoratorProps:
                                   const DropDownDecoratorProps(
                                 dropdownSearchDecoration: InputDecoration(
-                                    labelText: "Select Type",
+                                    labelText: "Select Period",
                                     border: OutlineInputBorder()),
                               ),
                             ),

@@ -160,30 +160,30 @@ class FooterHomeP extends StatelessWidget {
                           //   ),
                           // ),
                           
-                          GestureDetector(
-                            onTap: () {
-                              //  Navigator.push(context, MaterialPageRoute(builder: ((context) =>RequestedSchoolsApproval())));
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: ((context) =>
-                                          LeptonAdminLoginScreen())));
-                            },
-                            child: OnHoverText(
-                              builder: (isHoverd) {
-                                final color = isHoverd
-                                    ? const Color.fromARGB(255, 255, 0, 0)
-                                    : Colors.black;
-                                return SizedBox(
-                                    width: 170.w,
-                                    child: Text(
-                                      'Super Admin',
-                                      style: TextStyle(
-                                          fontSize: 17.h, color: color),
-                                    ));
-                              },
-                            ),
-                          ),
+                          // GestureDetector(
+                          //   onTap: () {
+                          //     //  Navigator.push(context, MaterialPageRoute(builder: ((context) =>RequestedSchoolsApproval())));
+                          //     Navigator.push(
+                          //         context,
+                          //         MaterialPageRoute(
+                          //             builder: ((context) =>
+                          //                 LeptonAdminLoginScreen())));
+                          //   },
+                          //   child: OnHoverText(
+                          //     builder: (isHoverd) {
+                          //       final color = isHoverd
+                          //           ? const Color.fromARGB(255, 255, 0, 0)
+                          //           : Colors.black;
+                          //       return SizedBox(
+                          //           width: 170.w,
+                          //           child: Text(
+                          //             'Super Admin',
+                          //             style: TextStyle(
+                          //                 fontSize: 17.h, color: color),
+                          //           ));
+                          //     },
+                          //   ),
+                          // ),
                         ],
                       ),
                       Column(

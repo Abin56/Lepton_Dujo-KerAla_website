@@ -22,7 +22,7 @@ class FeesStatusClassWise extends StatelessWidget {
           Expanded(
             child: FeesHalfContainerWidget(
               screenSize: screenSize,
-              text: 'Fees Catergories',
+              text: 'Fees',
             ),
           ),
           const Expanded(
@@ -84,7 +84,7 @@ class _FeesFilterSecondHalfWidgetState
             }),
             dropdownDecoratorProps: const DropDownDecoratorProps(
               dropdownSearchDecoration: InputDecoration(
-                labelText: "Select Category",
+                labelText: "Select Fee",
                 border: OutlineInputBorder(),
               ),
             ),
@@ -104,7 +104,7 @@ class _FeesFilterSecondHalfWidgetState
                   .selectedSubCategory = data?.subCategoryId ?? "",
               dropdownDecoratorProps: const DropDownDecoratorProps(
                 dropdownSearchDecoration: InputDecoration(
-                  labelText: "Select Sub Category",
+                  labelText: "Select Period",
                   border: OutlineInputBorder(),
                 ),
               ),
