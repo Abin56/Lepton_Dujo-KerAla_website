@@ -115,7 +115,6 @@ class FeesNotificationRightSideWidget extends StatelessWidget {
                     await createFunction();
                   },
                   child: Obx(
-                    //Todo need to change loading
                     () => _feesCreateController.isLoading.value
                         ? circularProgressIndicator
                         : const SubmitButtonWidget(

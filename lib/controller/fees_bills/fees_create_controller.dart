@@ -122,6 +122,14 @@ class FeesCreateController extends GetxController {
                   studentList: []).toMap(),
             )
             .then((value) async {
+          fStore
+              .collection("Fees")
+              .doc(categoryId)
+              .collection("SubCategory")
+              .doc(subCategoryId)
+              .update({
+            "isCreated": true,
+          });
           amountController.clear();
           dueDateController.clear();
           selectedSubCategory = null;

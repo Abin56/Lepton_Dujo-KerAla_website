@@ -6,11 +6,13 @@ class FeesSubCategoryModel {
   String id;
   String categoryName;
   String createdAt;
+  bool isCreated = false;
   FeesSubCategoryModel({
     required this.subCategoryName,
     required this.id,
     required this.categoryName,
     required this.createdAt,
+    this.isCreated = false,
   });
 
   FeesSubCategoryModel copyWith({
@@ -18,12 +20,14 @@ class FeesSubCategoryModel {
     String? id,
     String? categoryName,
     String? createdAt,
+    bool? isCreated,
   }) {
     return FeesSubCategoryModel(
       subCategoryName: subCategoryName ?? this.subCategoryName,
       id: id ?? this.id,
       categoryName: categoryName ?? this.categoryName,
       createdAt: createdAt ?? this.createdAt,
+      isCreated: isCreated ?? this.isCreated,
     );
   }
 
@@ -33,6 +37,7 @@ class FeesSubCategoryModel {
       'id': id,
       'categoryName': categoryName,
       'createdAt': createdAt,
+      'isCreated': isCreated,
     };
   }
 
@@ -42,6 +47,7 @@ class FeesSubCategoryModel {
       id: map['id'] as String,
       categoryName: map['categoryName'] as String,
       createdAt: map['createdAt'] as String,
+      isCreated: map['isCreated'] as bool,
     );
   }
 
@@ -52,7 +58,7 @@ class FeesSubCategoryModel {
 
   @override
   String toString() {
-    return 'FeesSubCategoryModel(subCategoryName: $subCategoryName, id: $id, categoryName: $categoryName, createdAt: $createdAt)';
+    return 'FeesSubCategoryModel(subCategoryName: $subCategoryName, id: $id, categoryName: $categoryName, createdAt: $createdAt, isCreated: $isCreated)';
   }
 
   @override
@@ -62,7 +68,8 @@ class FeesSubCategoryModel {
     return other.subCategoryName == subCategoryName &&
         other.id == id &&
         other.categoryName == categoryName &&
-        other.createdAt == createdAt;
+        other.createdAt == createdAt &&
+        other.isCreated == isCreated;
   }
 
   @override
@@ -70,6 +77,7 @@ class FeesSubCategoryModel {
     return subCategoryName.hashCode ^
         id.hashCode ^
         categoryName.hashCode ^
-        createdAt.hashCode;
+        createdAt.hashCode ^
+        isCreated.hashCode;
   }
 }
