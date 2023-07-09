@@ -1,25 +1,21 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-class FeesCategoryModel {
+class CategoryModel {
   String categoryName;
   String id;
-  String type;
-  FeesCategoryModel({
+  CategoryModel({
     required this.categoryName,
     required this.id,
-    required this.type,
   });
 
-  FeesCategoryModel copyWith({
+  CategoryModel copyWith({
     String? categoryName,
     String? id,
-    String? type,
   }) {
-    return FeesCategoryModel(
+    return CategoryModel(
       categoryName: categoryName ?? this.categoryName,
       id: id ?? this.id,
-      type: type ?? this.type,
     );
   }
 
@@ -27,36 +23,31 @@ class FeesCategoryModel {
     return <String, dynamic>{
       'categoryName': categoryName,
       'id': id,
-      'type': type,
     };
   }
 
-  factory FeesCategoryModel.fromMap(Map<String, dynamic> map) {
-    return FeesCategoryModel(
+  factory CategoryModel.fromMap(Map<String, dynamic> map) {
+    return CategoryModel(
       categoryName: map['categoryName'] as String,
       id: map['id'] as String,
-      type: map['type'] as String,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory FeesCategoryModel.fromJson(String source) =>
-      FeesCategoryModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory CategoryModel.fromJson(String source) =>
+      CategoryModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() =>
-      'FeesCategoryModel(categoryName: $categoryName, id: $id, type: $type)';
+  String toString() => 'CategoryModel(categoryName: $categoryName, id: $id)';
 
   @override
-  bool operator ==(covariant FeesCategoryModel other) {
+  bool operator ==(covariant CategoryModel other) {
     if (identical(this, other)) return true;
 
-    return other.categoryName == categoryName &&
-        other.id == id &&
-        other.type == type;
+    return other.categoryName == categoryName && other.id == id;
   }
 
   @override
-  int get hashCode => categoryName.hashCode ^ id.hashCode ^ type.hashCode;
+  int get hashCode => categoryName.hashCode ^ id.hashCode;
 }

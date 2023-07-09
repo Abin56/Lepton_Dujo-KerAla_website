@@ -4,86 +4,82 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
 class FeesModel {
+  String feesName;
+  String feesId;
+  String createdAt;
+  String feePeriod;
   String categoryId;
-  String categoryName;
   String amount;
   String dueDate;
   String classId;
   String className;
-  String type;
-  String subCategoryId;
-  String subCategoryName;
-  List<StudentFeesModel> studentList;
+  List<String> studentList;
   FeesModel({
+    required this.feesName,
+    required this.feesId,
+    required this.createdAt,
+    required this.feePeriod,
     required this.categoryId,
-    required this.categoryName,
     required this.amount,
     required this.dueDate,
     required this.classId,
     required this.className,
-    required this.type,
-    required this.subCategoryId,
-    required this.subCategoryName,
     required this.studentList,
   });
 
   FeesModel copyWith({
+    String? feesName,
+    String? feesId,
+    String? createdAt,
+    String? feePeriod,
     String? categoryId,
-    String? categoryName,
     String? amount,
     String? dueDate,
     String? classId,
     String? className,
-    String? type,
-    String? subCategoryId,
-    String? subCategoryName,
-    List<StudentFeesModel>? studentList,
+    List<String>? studentList,
   }) {
     return FeesModel(
+      feesName: feesName ?? this.feesName,
+      feesId: feesId ?? this.feesId,
+      createdAt: createdAt ?? this.createdAt,
+      feePeriod: feePeriod ?? this.feePeriod,
       categoryId: categoryId ?? this.categoryId,
-      categoryName: categoryName ?? this.categoryName,
       amount: amount ?? this.amount,
       dueDate: dueDate ?? this.dueDate,
       classId: classId ?? this.classId,
       className: className ?? this.className,
-      type: type ?? this.type,
-      subCategoryId: subCategoryId ?? this.subCategoryId,
-      subCategoryName: subCategoryName ?? this.subCategoryName,
       studentList: studentList ?? this.studentList,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'feesName': feesName,
+      'feesId': feesId,
+      'createdAt': createdAt,
+      'feePeriod': feePeriod,
       'categoryId': categoryId,
-      'categoryName': categoryName,
       'amount': amount,
       'dueDate': dueDate,
       'classId': classId,
       'className': className,
-      'type': type,
-      'subCategoryId': subCategoryId,
-      'subCategoryName': subCategoryName,
-      'studentList': studentList.map((x) => x.toMap()).toList(),
+      'studentList': studentList,
     };
   }
 
   factory FeesModel.fromMap(Map<String, dynamic> map) {
     return FeesModel(
+      feesName: map['feesName'] as String,
+      feesId: map['feesId'] as String,
+      createdAt: map['createdAt'] as String,
+      feePeriod: map['feePeriod'] as String,
       categoryId: map['categoryId'] as String,
-      categoryName: map['categoryName'] as String,
       amount: map['amount'] as String,
       dueDate: map['dueDate'] as String,
       classId: map['classId'] as String,
       className: map['className'] as String,
-      type: map['type'] as String,
-      subCategoryId: map['subCategoryId'] as String,
-      subCategoryName: map['subCategoryName'] as String,
-      studentList: List<StudentFeesModel>.from(
-        (map['studentList'] as List<dynamic>).map<StudentFeesModel>(
-          (x) => StudentFeesModel.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
+      studentList: List<String>.from((map['studentList'] as List<dynamic>)),
     );
   }
 
@@ -94,36 +90,36 @@ class FeesModel {
 
   @override
   String toString() {
-    return 'FeesModel(categoryId: $categoryId, categoryName: $categoryName, amount: $amount, dueDate: $dueDate, classId: $classId, className: $className, type: $type, subCategoryId: $subCategoryId, subCategoryName: $subCategoryName, studentList: $studentList)';
+    return 'FeesModel(feesName: $feesName, feesId: $feesId, createdAt: $createdAt, feePeriod: $feePeriod, categoryId: $categoryId, amount: $amount, dueDate: $dueDate, classId: $classId, className: $className, studentList: $studentList)';
   }
 
   @override
   bool operator ==(covariant FeesModel other) {
     if (identical(this, other)) return true;
 
-    return other.categoryId == categoryId &&
-        other.categoryName == categoryName &&
+    return other.feesName == feesName &&
+        other.feesId == feesId &&
+        other.createdAt == createdAt &&
+        other.feePeriod == feePeriod &&
+        other.categoryId == categoryId &&
         other.amount == amount &&
         other.dueDate == dueDate &&
         other.classId == classId &&
         other.className == className &&
-        other.type == type &&
-        other.subCategoryId == subCategoryId &&
-        other.subCategoryName == subCategoryName &&
         listEquals(other.studentList, studentList);
   }
 
   @override
   int get hashCode {
-    return categoryId.hashCode ^
-        categoryName.hashCode ^
+    return feesName.hashCode ^
+        feesId.hashCode ^
+        createdAt.hashCode ^
+        feePeriod.hashCode ^
+        categoryId.hashCode ^
         amount.hashCode ^
         dueDate.hashCode ^
         classId.hashCode ^
         className.hashCode ^
-        type.hashCode ^
-        subCategoryId.hashCode ^
-        subCategoryName.hashCode ^
         studentList.hashCode;
   }
 }

@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_utils/get_utils.dart';
 
-import 'fees_notification/fees_notification.dart';
-import 'fees_satus/bills_creation.dart';
-import 'fees_satus/classWise/class_wise_fees_show_page.dart';
-import 'fees_satus/schoolWise/fees_status.dart';
+import 'fees_create/fees_create_page.dart';
+import 'fees_status/bills_creation.dart';
+import 'fees_status/classWise/fees_show_class_page.dart';
+import 'fees_status/schoolWise/fees_show_school_page.dart';
 
 class FeesAndBillsWeb extends StatelessWidget {
   const FeesAndBillsWeb({super.key});
@@ -70,9 +70,9 @@ class FeesAndBillsWeb extends StatelessWidget {
         body: SafeArea(
           child: TabBarView(
             children: [
-              FeesNotification(),
-              const FeesStstatues(),
-              const FeesStatusClassWise(),
+              FeesCreatePage(),
+              const FeesSchoolShowPage(),
+              const FeesClassShowPage(),
               BillsCreationalPage(),
             ],
           ),

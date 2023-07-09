@@ -13,7 +13,7 @@ import 'package:lottie/lottie.dart';
 
 import '../../../../../../../../utils/utils.dart';
 import '../bills/invoice_creation.dart';
-import '../fees_notification/widgets/submit_button_widget.dart';
+import '../fees_create/widgets/submit_button_widget.dart';
 
 class BillsCreationalPage extends StatelessWidget {
   BillsCreationalPage({super.key});
@@ -44,31 +44,31 @@ class BillsCreationalPage extends StatelessWidget {
                 TextFormFieldFWidget(
                   function: checkFieldEmpty,
                   textEditingController: categoryNameController,
-                  labelText: 'Category Name',
+                  hintText: 'Category Name',
                 ),
                 sizedBoxH10,
                 TextFormFieldFWidget(
                   function: checkFieldEmpty,
                   textEditingController: invoiceController,
-                  labelText: 'Invoice Number',
+                  hintText: 'Invoice Number',
                 ),
                 sizedBoxH10,
                 TextFormFieldFWidget(
                   function: checkFieldEmpty,
                   textEditingController: studentNameController,
-                  labelText: 'Name of students',
+                  hintText: 'Name of students',
                 ),
                 sizedBoxH10,
                 TextFormFieldFWidget(
                   function: checkFieldEmpty,
                   textEditingController: studentIdController,
-                  labelText: 'Student Id',
+                  hintText: 'Student Id',
                 ),
                 sizedBoxH10,
                 TextFormFieldFWidget(
                   function: checkFieldEmpty,
                   textEditingController: amountController,
-                  labelText: 'Amount',
+                  hintText: 'Amount',
                 ),
                 sizedBoxH10,
                 Padding(
@@ -131,14 +131,14 @@ class BillsCreationalPage extends StatelessWidget {
 }
 
 class BillsHalfContainerWidget extends StatelessWidget {
-  BillsHalfContainerWidget({
+  const BillsHalfContainerWidget({
     super.key,
     required this.screenSize,
     required this.text,
   });
 
   final Size screenSize;
-  String text;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -191,30 +191,29 @@ class BillsHalfContainerWidget extends StatelessWidget {
 }
 
 class TextFormFieldFWidget extends StatelessWidget {
-  const TextFormFieldFWidget({
-    super.key,
-    required this.function,
-    this.textEditingController,
-    this.labelText,
-    this.hintText,
-    this.onTap,
-  });
+  TextFormFieldFWidget(
+      {super.key,
+      required this.function,
+      this.textEditingController,
+      this.hintText,
+      this.onTap,
+      this.readOnly = false});
 
   final String? Function(String? fieldContent) function;
   final TextEditingController? textEditingController;
-  final String? labelText;
   final String? hintText;
   final VoidCallback? onTap;
+  bool readOnly = false;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: readOnly,
       onTap: onTap,
       validator: function,
       controller: textEditingController,
       decoration: InputDecoration(
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.w)),
-          labelText: labelText,
           hintText: hintText,
           labelStyle: TextStyle(color: cBlack)),
     );

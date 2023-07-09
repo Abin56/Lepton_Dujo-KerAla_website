@@ -431,7 +431,7 @@ class AllTeachersController extends GetxController {
             child: ListBody(
               children: const <Widget>[
                 Text(
-                    'Once delete a teacher all data will be lost \n Are you shure to delete ?')
+                    'By removing a teacher, you are deleting all the details associated with that teacher. Are you sure to proceed?')
               ],
             ),
           ),

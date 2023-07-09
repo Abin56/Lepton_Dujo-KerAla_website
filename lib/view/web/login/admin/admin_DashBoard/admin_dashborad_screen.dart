@@ -99,7 +99,6 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'Alumni Associations',
     'Class Promotion',
     'Non-Teaching Staffs',
-    'Fess & Bills'
   ];
 
   List<String> dashboardImagesList = [
@@ -123,7 +122,6 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'assets/images/alumni.png',
     'assets/images/exchange.png',
     'assets/images/steward.png',
-    'assets/images/feesandbills.png'
   ];
 
   List<String> viewListNames = [
@@ -163,7 +161,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
           schoolId: widget.schoolID), //4-general instructions
       AddNewNotices(schoolId: widget.schoolID), //5-notices
       EventsUpdates(schoolID: widget.schoolID), //6-events
-      const UnderMaintanceScreen(), //fees and bills
+        const FeesAndBillsWeb(), //fees and bills
       MeetingCreates(
         schoolId: widget.schoolID,
       ), //8-Meetings
@@ -181,7 +179,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       AlumniAssociation(),
       ShiftClassPage(),
       NonTeachingLogin(schoolID: widget.schoolID),
-      const FeesAndBillsWeb(),
+    
       
     ];
     List<Widget> drawerPages = [
@@ -216,7 +214,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                         ),
                         sizedBoxH30,
                         Text(
-                          'Please Set Your 👇 Batch Year ',
+                          'Please Set Your 👇 Academic Year ',
                           style: GoogleFonts.montserrat(
                             fontSize: 25,
                             fontWeight: FontWeight.bold,
@@ -262,7 +260,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                 width: 200.w,
                                 child: Center(
                                   child: Text(
-                                    "Set Batch Year",
+                                    "Set Academic Year",
                                     style: GoogleFonts.montserrat(
                                         fontSize: 15,
                                         fontWeight: FontWeight.w600,
@@ -280,7 +278,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                         false, // user must tap button!
                                     builder: (BuildContext context) {
                                       return AlertDialog(
-                                        title: const Text('Add BatchYear'),
+                                        title: const Text('Add Academic Year'),
                                         content: SingleChildScrollView(
                                           child: ListBody(
                                             children: <Widget>[
@@ -350,7 +348,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                     },
                                   );
                                 },
-                                child: const Text("Add New Batch Year"))
+                                child: const Text("Add New Academic Year"))
                           ],
                         ),
                       ],
@@ -500,7 +498,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                 SizedBox(
                                   width: screenSize.height / 12,
                                 ),
-                                Text('Batch Year ${getFireBaseData.bYear}'),
+                                Text('Academic Year ${getFireBaseData.bYear}'),
                                 Tooltip(
                                     message: "Class promotion",
                                     child: GestureDetector(
@@ -510,7 +508,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                             builder: (BuildContext context) {
                                               return AlertDialog(
                                                 title: const Text(
-                                                    'Change Batch Year'),
+                                                    'Change Academic Year'),
                                                 content: SingleChildScrollView(
                                                   child: ListBody(
                                                     children: <Widget>[
@@ -584,7 +582,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                           });
                                                         },
                                                         child: Text(
-                                                          'Set BatchYear',
+                                                          'Set Academic Year',
                                                           style: GoogleFonts
                                                               .poppins(
                                                                   color: Colors
@@ -635,7 +633,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                                     context) {
                                                               return AlertDialog(
                                                                 title: const Text(
-                                                                    'Add BatchYear'),
+                                                                    'Add Academic Year'),
                                                                 content:
                                                                     SingleChildScrollView(
                                                                   child:
@@ -722,7 +720,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                           );
                                                         },
                                                         child: Text(
-                                                          'Add Batch Year',
+                                                          'Add Academic Year',
                                                           style: GoogleFonts
                                                               .poppins(
                                                                   color: Colors

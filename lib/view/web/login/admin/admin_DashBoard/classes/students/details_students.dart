@@ -650,7 +650,7 @@ class StudentsDetails extends StatelessWidget {
                                                         children: const <
                                                             Widget>[
                                                           Text(
-                                                              "Are you shure remove the student \n when press ok all data will be lost")
+                                                              "By removing a student, you are deleting all the details associated with that student. Are you sure to proceed?")
                                                         ],
                                                       ),
                                                     ),
