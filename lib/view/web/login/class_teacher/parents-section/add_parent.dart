@@ -106,7 +106,8 @@ class AddParent extends StatelessWidget {
                                     dropdownDecoratorProps:
                                         const DropDownDecoratorProps(
                                       dropdownSearchDecoration: InputDecoration(
-                                          labelText: "Select Student",border: OutlineInputBorder()),
+                                          labelText: "Select Student",
+                                          border: OutlineInputBorder()),
                                     ),
                                   ),
                                   sizedBoxH30,
