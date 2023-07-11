@@ -12,10 +12,12 @@ class FeesHalfContainerWidget extends StatelessWidget {
     super.key,
     required this.screenSize,
     required this.text,
+    this.callback,
   });
 
   final Size screenSize;
   final String text;
+  final VoidCallback? callback;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +32,7 @@ class FeesHalfContainerWidget extends StatelessWidget {
           children: [
             IconButtonBackWidget(
               color: cWhite,
+             // callback: callback,
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,

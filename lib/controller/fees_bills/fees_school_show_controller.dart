@@ -9,8 +9,8 @@ import '../../model/fees_bills_model/fees_model.dart';
 import '../admin_login_screen/admin_login_screen_controller.dart';
 import '../get_firebase-data/get_firebase_data.dart';
 
-class FeesClassController {
-  static String className = "FeesClassController";
+class FeesSchoolController {
+  static String className = "FeesSchoolController";
   Map<String, dynamic> selectedClass = {};
   Rxn<FeesModel> selectedFeesModel = Rxn<FeesModel>();
   List<AddStudentModel> allClassStudents = [];
@@ -25,7 +25,7 @@ class FeesClassController {
 
   Future<List<Map<String, dynamic>>> fetchClassName() async {
     try {
-      final data = await _fStore.doc("Fees").collection("ClassFees").get();
+      final data = await _fStore.doc("Fees").collection("SchoolFees").get();
       return data.docs.map((e) => e.data()).toList();
     } catch (e) {
       log(e.toString(), name: "$className+fetchClassName");
@@ -41,7 +41,7 @@ class FeesClassController {
       }
       final QuerySnapshot<Map<String, dynamic>> data = await _fStore
           .doc("Fees")
-          .collection("ClassFees")
+          .collection("SchoolFees")
           .doc(selectedClass)
           .collection("AllFees")
           .get();
@@ -84,7 +84,7 @@ class FeesClassController {
       isLoading.value = true;
       await _fStore
           .doc("Fees")
-          .collection("ClassFees")
+          .collection("SchoolFees")
           .doc(selectedClass["id"])
           .collection("AllFees")
           .doc(selectedFeesModel.value?.feesId)
@@ -93,7 +93,7 @@ class FeesClassController {
       }).then((value) async {
         final result = await _fStore
             .doc("Fees")
-            .collection("ClassFees")
+            .collection("SchoolFees")
             .doc(selectedClass["id"])
             .collection("AllFees")
             .doc(selectedFeesModel.value?.feesId)

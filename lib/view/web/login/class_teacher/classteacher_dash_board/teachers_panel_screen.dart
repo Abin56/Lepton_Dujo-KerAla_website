@@ -168,7 +168,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                 ),
                 sizedBoxH30,
                 Text(
-                  'Please Set Your 👇 Batch Year ',
+                  'Please Set Your 👇 Academic Year ',
                   style: GoogleFonts.montserrat(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
@@ -218,7 +218,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                         width: 200.w,
                         child: Center(
                           child: Text(
-                            "Set Batch Year",
+                            "Set Academic Year",
                             style: GoogleFonts.montserrat(
                                 fontSize: 15.w,
                                 fontWeight: FontWeight.w600,
@@ -292,7 +292,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                             },
                           );
                         },
-                        child: const Text("Add New Batch Year"))
+                        child: const Text("Add New Academic Year"))
                   ],
                 ),
               ],
@@ -647,7 +647,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                             //   style: GoogleFonts.poppins(),
                             // ),
                             // kwidth20,
-                            Text('Batch Year   ${getFireBaseData.bYear}',
+                            Text('Academic Year   ${getFireBaseData.bYear}',
                                 style: TextStyle(fontSize: 15.w)),
 
                             GestureDetector(
@@ -658,7 +658,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                       false, // user must tap button!
                                   builder: (BuildContext context) {
                                     return AlertDialog(
-                                      title: Text('Change Batch Year',
+                                      title: Text('Change Academic Year',
                                           style: TextStyle(fontSize: 15.w)),
                                       content: SingleChildScrollView(
                                         child: ListBody(
@@ -726,7 +726,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                 });
                                               },
                                               child: Text(
-                                                'Set Batch Year',
+                                                'Set Academic Year',
                                                 style: GoogleFonts.poppins(
                                                     fontSize: 15.w,
                                                     color: Colors.white),
@@ -773,7 +773,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                       (BuildContext context) {
                                                     return AlertDialog(
                                                       title: Text(
-                                                          'Add Batch Year',
+                                                          'Add Academic Year',
                                                           style: TextStyle(
                                                               fontSize: 15.w)),
                                                       content:
@@ -865,7 +865,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                                                 );
                                               },
                                               child: Text(
-                                                'Add Batch Year',
+                                                'Add Academic Year',
                                                 style: GoogleFonts.poppins(
                                                     color: Colors.white),
                                               )),

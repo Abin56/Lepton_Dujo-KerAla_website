@@ -603,7 +603,7 @@ class AllStudentsController extends GetxController {
               child: ListBody(
                 children: const <Widget>[
                   Text(
-                      'Once Student a teacher all data will be lost \n Are you shure to delete ?')
+                      'By removing a student, you are deleting all the details associated with that student. Are you sure to proceed?')
                 ],
               ),
             ),
