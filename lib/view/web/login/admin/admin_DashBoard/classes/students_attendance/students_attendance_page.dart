@@ -33,7 +33,7 @@ class AttendancePage extends StatelessWidget {
               child: const Text(
                 "Month Wise",
                 style: TextStyle(color: Colors.white),
-              ))
+              )),
         ]),
         body: Padding(
           padding: const EdgeInsets.all(16.0),

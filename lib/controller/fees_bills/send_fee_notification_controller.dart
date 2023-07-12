@@ -83,6 +83,7 @@ class FeesNotificationController extends GetxController {
       log("create time ${tokenListSchool.toString()}");
       for (var element3 in tokenListSchool) {
         //send push notification from push notification
+        log(element3);
         await sendPushMessage(
           element3,
           "Due Date : $dueDate Amount : $amount",
@@ -96,9 +97,9 @@ class FeesNotificationController extends GetxController {
   //create all tokens
   Future<void> fetchAllTokenListClass({required String classId}) async {
     try {
-      await fetchTokensForCollection(classId, "Students");
-      await fetchTokensForCollection(classId, "ParentCollection");
-      await fetchTokensForCollection(classId, "GuardianCollection");
+      await fetchTokensForCollectionClass(classId, "Students");
+      await fetchTokensForCollectionClass(classId, "ParentCollection");
+      await fetchTokensForCollectionClass(classId, "GuardianCollection");
     } on FirebaseException catch (e) {
       log(e.toString());
       showToast(msg: e.toString());
