@@ -286,9 +286,9 @@ class AddStudentFromClassTeacher extends StatelessWidget {
               teacherAddStudentController.createStudent(
                   studentModel: TempStudent(
                       studentName: firstRow[0]?.value.toString() ?? "",
-                      phoneNumber: firstRow[1]?.value.toString() ?? "",
+                      parentPhoneNumber: firstRow[1]?.value.toString() ?? "",
                       admissionNumber: firstRow[2]?.value.toString() ?? "",
-                      classId: Get.find<GetFireBaseData>().classIDD.value,
+                      classid: Get.find<GetFireBaseData>().classIDD.value,
                       createdDate: DateTime.now().toString(),
                       parentName: firstRow[3]?.value.toString() ?? "",
                       docId: ""));

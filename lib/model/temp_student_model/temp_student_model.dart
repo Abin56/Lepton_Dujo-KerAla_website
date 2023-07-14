@@ -5,37 +5,37 @@ class TempStudent {
   String studentName;
   String admissionNumber;
   String parentName;
-  String classId;
+  String classid;
   String createdDate;
   String docId;
-  String phoneNumber;
+  String parentPhoneNumber;
   TempStudent({
     required this.studentName,
     required this.admissionNumber,
     required this.parentName,
-    required this.classId,
+    required this.classid,
     required this.createdDate,
     required this.docId,
-    required this.phoneNumber,
+    required this.parentPhoneNumber,
   });
 
   TempStudent copyWith({
     String? studentName,
     String? admissionNumber,
     String? parentName,
-    String? classId,
+    String? classid,
     String? createdDate,
     String? docId,
-    String? phoneNumber,
+    String? parentPhoneNumber,
   }) {
     return TempStudent(
       studentName: studentName ?? this.studentName,
       admissionNumber: admissionNumber ?? this.admissionNumber,
       parentName: parentName ?? this.parentName,
-      classId: classId ?? this.classId,
+      classid: classid ?? this.classid,
       createdDate: createdDate ?? this.createdDate,
       docId: docId ?? this.docId,
-      phoneNumber: phoneNumber ?? this.phoneNumber,
+      parentPhoneNumber: parentPhoneNumber ?? this.parentPhoneNumber,
     );
   }
 
@@ -44,10 +44,10 @@ class TempStudent {
       'studentName': studentName,
       'admissionNumber': admissionNumber,
       'parentName': parentName,
-      'classId': classId,
+      'classid': classid,
       'createdDate': createdDate,
       'docId': docId,
-      'phoneNumber': phoneNumber,
+      'parentPhoneNumber': parentPhoneNumber,
     };
   }
 
@@ -56,10 +56,10 @@ class TempStudent {
       studentName: map['studentName'] as String,
       admissionNumber: map['admissionNumber'] as String,
       parentName: map['parentName'] as String,
-      classId: map['classId'] as String,
+      classid: map['classid'] as String,
       createdDate: map['createdDate'] as String,
       docId: map['docId'] as String,
-      phoneNumber: map['phoneNumber'] as String,
+      parentPhoneNumber: map['parentPhoneNumber'] as String,
     );
   }
 
@@ -70,7 +70,7 @@ class TempStudent {
 
   @override
   String toString() {
-    return 'TempStudent(studentName: $studentName, admissionNumber: $admissionNumber, parentName: $parentName, classId: $classId, createdDate: $createdDate, docId: $docId, phoneNumber: $phoneNumber)';
+    return 'TempStudent(studentName: $studentName, admissionNumber: $admissionNumber, parentName: $parentName, classid: $classid, createdDate: $createdDate, docId: $docId, parentPhoneNumber: $parentPhoneNumber)';
   }
 
   @override
@@ -80,10 +80,10 @@ class TempStudent {
     return other.studentName == studentName &&
         other.admissionNumber == admissionNumber &&
         other.parentName == parentName &&
-        other.classId == classId &&
+        other.classid == classid &&
         other.createdDate == createdDate &&
         other.docId == docId &&
-        other.phoneNumber == phoneNumber;
+        other.parentPhoneNumber == parentPhoneNumber;
   }
 
   @override
@@ -91,9 +91,9 @@ class TempStudent {
     return studentName.hashCode ^
         admissionNumber.hashCode ^
         parentName.hashCode ^
-        classId.hashCode ^
+        classid.hashCode ^
         createdDate.hashCode ^
         docId.hashCode ^
-        phoneNumber.hashCode;
+        parentPhoneNumber.hashCode;
   }
 }
