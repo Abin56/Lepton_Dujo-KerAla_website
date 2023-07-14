@@ -159,8 +159,5 @@ class AttendanceController {
     }
   }
 
-
   //*************************************************** it for monthly*/
 }
-
-

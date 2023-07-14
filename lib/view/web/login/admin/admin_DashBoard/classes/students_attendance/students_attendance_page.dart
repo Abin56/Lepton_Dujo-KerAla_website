@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../../controller/attendance_controller/attendance_controller.dart';
+import '../../../../../../../controller/attendance_controller/attendance_excel_controller.dart';
 import '../../../../../../../model/attendance_date_model/attendance_date_model.dart';
 import '../../../../../../../model/attendance_subject_model/attendance_subject_model.dart';
 import '../../../../../../constant/constant.dart';
@@ -12,6 +13,8 @@ class AttendancePage extends StatelessWidget {
   AttendancePage({super.key});
   final AttendanceController attendanceController =
       Get.put(AttendanceController());
+  final AttendanceExcelReportController _excelController =
+      Get.put(AttendanceExcelReportController());
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +36,18 @@ class AttendancePage extends StatelessWidget {
               child: const Text(
                 "Month Wise",
                 style: TextStyle(color: Colors.white),
-              ))
+              )),
+          TextButton(
+              onPressed: () async {
+                await _excelController.generateDayWiseExcelReport(
+                    attendanceController.classId.value,
+                    attendanceController.monthId.value,
+                    attendanceController.dateId.value);
+              },
+              child: const Text(
+                "Generate Excel",
+                style: TextStyle(color: Colors.white),
+              )),
         ]),
         body: Padding(
           padding: const EdgeInsets.all(16.0),

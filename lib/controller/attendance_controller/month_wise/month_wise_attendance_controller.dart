@@ -268,7 +268,9 @@ class MonthWiseAttendanceController {
       }
       isLoadinggetStudentName.value = false;
       int totalDay = subjectPresentDays + subjectAbsentDays;
-      double percentage = (subjectPresentDays * 100 / totalDay);
+      double percentage = (subjectPresentDays * 100 / totalDay).isNaN
+          ? 0
+          : (subjectPresentDays * 100 / totalDay);
 
       double formattedPercentage = double.parse(percentage.toStringAsFixed(1));
 

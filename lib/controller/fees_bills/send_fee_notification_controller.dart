@@ -83,6 +83,7 @@ class FeesNotificationController extends GetxController {
       log("create time ${tokenListSchool.toString()}");
       for (var element3 in tokenListSchool) {
         //send push notification from push notification
+        log(element3);
         await sendPushMessage(
           element3,
           "Due Date : $dueDate Amount : $amount",

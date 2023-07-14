@@ -1,4 +1,5 @@
 import 'package:dujo_kerala_website/controller/add_students_from_class/add_students_class_controller.dart';
+import 'package:dujo_kerala_website/model/temp_student_model/temp_student_model.dart';
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:dujo_kerala_website/view/fonts/fonts.dart';
@@ -279,16 +280,18 @@ class AddStudentFromClassTeacher extends StatelessWidget {
 //fetching data from excel cells
             if (firstRow[0]?.value != null &&
                 firstRow[1]?.value != null &&
-                firstRow[2]?.value != null) {
+                firstRow[2]?.value != null &&
+                firstRow[3]?.value != null) {
               //creating objects and upload to firebase
               teacherAddStudentController.createStudent(
-                  studentModel: AddStudentModel(
-                studentName: firstRow[0]?.value.toString(),
-                parentPhoneNumber: firstRow[1]?.value.toString(),
-                admissionNumber: firstRow[2]?.value.toString(),
-                classID: Get.find<GetFireBaseData>().classIDD.value,
-                createDate: DateTime.now().toString(),
-              ));
+                  studentModel: TempStudent(
+                      studentName: firstRow[0]?.value.toString() ?? "",
+                      parentPhoneNumber: firstRow[1]?.value.toString() ?? "",
+                      admissionNumber: firstRow[2]?.value.toString() ?? "",
+                      classid: Get.find<GetFireBaseData>().classIDD.value,
+                      createdDate: DateTime.now().toString(),
+                      parentName: firstRow[3]?.value.toString() ?? "",
+                      docId: ""));
             }
           }
           teacherAddStudentController.isLoading.value = false;
