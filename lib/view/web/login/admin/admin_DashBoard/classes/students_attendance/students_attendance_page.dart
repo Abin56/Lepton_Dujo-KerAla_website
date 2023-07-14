@@ -39,37 +39,45 @@ class AttendancePage extends StatelessWidget {
               )),
           TextButton(
               onPressed: () async {
-                await _excelController.generateDayWiseExcelReport(
-                    attendanceController.classId.value,
-                    attendanceController.monthId.value,
-                    attendanceController.dateId.value);
+                if (attendanceController.classId.value.isNotEmpty &&
+                    attendanceController.monthId.value.isNotEmpty &&
+                    attendanceController.dateId.value.isNotEmpty) {
+                  await _excelController.generateDayWiseExcelReport(
+                      attendanceController.classId.value,
+                      attendanceController.monthId.value,
+                      attendanceController.dateId.value);
+                } else {
+                  showToast(msg: "Please select all fields");
+                }
               },
               child: const Text(
                 "Generate Excel",
                 style: TextStyle(color: Colors.white),
               )),
         ]),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: <Widget>[
-              MonthSelectDropDownSearchWidget(
-                label: "Select Month",
-              ),
-              sizedBoxH10,
-              //select subject dropdown
-              DaySelectDropDownSearchWidget(label: "Select Day"),
-              sizedBoxH10,
+        body: Obx(() => _excelController.isLoading.value
+            ? circularProgressIndicator
+            : Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: <Widget>[
+                    MonthSelectDropDownSearchWidget(
+                      label: "Select Month",
+                    ),
+                    sizedBoxH10,
+                    //select subject dropdown
+                    DaySelectDropDownSearchWidget(label: "Select Day"),
+                    sizedBoxH10,
 
-              //select month dropdown
-              SubjectSelectDropDownSearchWidget(label: "Select Period"),
-              sizedBoxH10,
+                    //select month dropdown
+                    SubjectSelectDropDownSearchWidget(label: "Select Period"),
+                    sizedBoxH10,
 
-              //show all students subject wise data
-              DateWiseAttendanceWidget()
-            ],
-          ),
-        ),
+                    //show all students subject wise data
+                    DateWiseAttendanceWidget()
+                  ],
+                ),
+              )),
       ),
     );
   }
@@ -230,23 +238,26 @@ class DaySelectDropDownSearchWidget extends StatelessWidget {
   final String label;
   final AttendanceController attendanceController =
       Get.put(AttendanceController());
+  final AttendanceExcelReportController _excelController =
+      Get.put(AttendanceExcelReportController());
 
   @override
   Widget build(BuildContext context) {
     return DropdownSearch<AttendanceDateModel>(
-      asyncItems: (String filter) =>
-          attendanceController.getAllAttendanceDateWise(),
-      popupProps: const PopupProps.bottomSheet(),
-      dropdownDecoratorProps: DropDownDecoratorProps(
-        dropdownSearchDecoration: InputDecoration(
-          labelText: label,
-          border: const OutlineInputBorder(),
+        asyncItems: (String filter) =>
+            attendanceController.getAllAttendanceDateWise(),
+        popupProps: const PopupProps.bottomSheet(),
+        dropdownDecoratorProps: DropDownDecoratorProps(
+          dropdownSearchDecoration: InputDecoration(
+            labelText: label,
+            border: const OutlineInputBorder(),
+          ),
         ),
-      ),
-      itemAsString: (AttendanceDateModel u) => u.dDate,
-      onChanged: (AttendanceDateModel? data) =>
-          attendanceController.dateId.value = data!.docid,
-    );
+        itemAsString: (AttendanceDateModel u) => u.dDate,
+        onChanged: (AttendanceDateModel? data) {
+          attendanceController.dateId.value = data!.docid;
+          _excelController.dayModel = data;
+        });
   }
 }
 
@@ -258,6 +269,9 @@ class SubjectSelectDropDownSearchWidget extends StatelessWidget {
   final String label;
   final AttendanceController attendanceController =
       Get.put(AttendanceController());
+
+  final AttendanceExcelReportController _excelController =
+      Get.put(AttendanceExcelReportController());
 
   @override
   Widget build(BuildContext context) {
@@ -272,6 +286,7 @@ class SubjectSelectDropDownSearchWidget extends StatelessWidget {
         onChanged: (AttendanceSubjectModel? data) async {
           attendanceController.subjectId.value = data!.docid;
           attendanceController.getAllSubjectWiseAttendance();
+          _excelController.subjectModel = data;
         });
   }
 }

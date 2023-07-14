@@ -18,6 +18,7 @@ class AttendanceController {
   RxString dateId = RxString("");
   RxString subjectId = RxString("");
   RxBool isLoading = RxBool(false);
+
 //fetching month attendance data month wise
   Future<List<String>> getAllAttendanceMonthWise() async {
     try {
