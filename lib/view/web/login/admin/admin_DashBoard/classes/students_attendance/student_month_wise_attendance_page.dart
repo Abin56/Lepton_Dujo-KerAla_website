@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -41,9 +43,30 @@ class StudentMonthWiseAttendancePage extends StatelessWidget {
               //show all students subject wise data
               MonthWiseAttendanceWidget(),
               sizedBoxH10,
+              ExcelReportWidget()
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class ExcelReportWidget extends StatelessWidget {
+  ExcelReportWidget({
+    super.key,
+  });
+  final MonthWiseAttendanceController monthAttendanceController =
+      Get.put(MonthWiseAttendanceController());
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () async {
+        await monthAttendanceController.createExcelReport();
+      },
+      child: const Text(
+        "Export data to excel",
       ),
     );
   }

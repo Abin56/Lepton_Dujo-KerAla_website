@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:excel/excel.dart';
 import 'package:get/get.dart';
 
 import '../../../model/student_attendance_model/student_attendance_model.dart';
@@ -27,6 +28,7 @@ class MonthWiseAttendanceController {
   RxList<String> subjectNameList = RxList([]);
   RxString monthWiseMonthId = RxString("");
   RxString monthWiseSubjectId = RxString("");
+  String selectedSubjectName = "";
   RxBool isLoadinggetMonth = RxBool(false);
   RxBool isLoadingfetchallList = RxBool(false);
   RxBool isLoadinggetStudentName = RxBool(false);
@@ -285,5 +287,75 @@ class MonthWiseAttendanceController {
       log(e.toString());
       return {};
     }
+  }
+
+  Future<void> createExcelReport() async {
+    if (Get.find<AttendanceController>().classId.value.isEmpty ||
+        studentNamesList.isEmpty ||
+        monthWiseAllAttendanceData.isEmpty ||
+        monthWiseSubjectId.value.isEmpty) {
+      return showToast(msg: "Please select all fields");
+    }
+    Excel excel = Excel.createExcel();
+    Sheet sheetObject = excel['Sheet1'];
+
+    String className =
+        await getClassName(Get.find<AttendanceController>().classId.value);
+    sheetObject.merge(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: 0),
+        CellIndex.indexByColumnRow(columnIndex: 10, rowIndex: 0),
+        customValue:
+            'Month :${monthWiseMonthId.value}   Class Name : $className   Subject Name : ${monthWiseSubjectId.value}');
+
+    sheetObject
+        .cell(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: 1))
+        .value = "Student Name";
+    sheetObject
+        .cell(CellIndex.indexByColumnRow(columnIndex: 1, rowIndex: 1))
+        .value = "Present Hours";
+    sheetObject
+        .cell(CellIndex.indexByColumnRow(columnIndex: 2, rowIndex: 1))
+        .value = "Absent Hours";
+    sheetObject
+        .cell(CellIndex.indexByColumnRow(columnIndex: 3, rowIndex: 1))
+        .value = "Total Hours (Present+Absent)";
+    sheetObject
+        .cell(CellIndex.indexByColumnRow(columnIndex: 4, rowIndex: 1))
+        .value = "Attendance Percentage";
+
+    for (int i = 0; i < studentNamesList.length; i++) {
+      final Map<String, num> result = calculateMonthlyAttendance(
+        monthWiseAllAttendanceData,
+        monthWiseSubjectId.value,
+        studentNamesList[i],
+      );
+      sheetObject
+          .cell(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: i + 2))
+          .value = studentNamesList[i];
+      sheetObject
+          .cell(CellIndex.indexByColumnRow(columnIndex: 1, rowIndex: i + 2))
+          .value = result["present"];
+      sheetObject
+          .cell(CellIndex.indexByColumnRow(columnIndex: 2, rowIndex: i + 2))
+          .value = result["absent"];
+      sheetObject
+          .cell(CellIndex.indexByColumnRow(columnIndex: 3, rowIndex: i + 2))
+          .value = result["total"];
+      sheetObject
+          .cell(CellIndex.indexByColumnRow(columnIndex: 4, rowIndex: i + 2))
+          .value = "${result["percentage"]}%";
+    }
+    excel.save(fileName: 'abc.xlsx');
+  }
+
+  Future<String> getClassName(String classId) async {
+    final data = await FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(Get.find<AdminLoginScreenController>().schoolID)
+        .collection(Get.find<GetFireBaseData>().bYear.value)
+        .doc(Get.find<GetFireBaseData>().bYear.value)
+        .collection('classes')
+        .doc(classId)
+        .get();
+    return data.data()?["className"] ?? " ";
   }
 }
