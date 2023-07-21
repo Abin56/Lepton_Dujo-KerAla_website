@@ -1,4 +1,3 @@
-
 import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/new_home_01_06.dart';
 import 'package:dujo_kerala_website/view/web/home/create_school/create_school.dart';
 import 'package:dujo_kerala_website/view/web/home/privacypolicy.dart';
