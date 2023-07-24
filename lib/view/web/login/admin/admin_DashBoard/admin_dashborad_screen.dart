@@ -100,6 +100,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'Alumni Associations',
     'Class Promotion',
     'Non-Teaching Staffs',
+    'Add Attendance'
   ];
 
   List<String> dashboardImagesList = [
@@ -123,6 +124,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'assets/images/alumni.png',
     'assets/images/exchange.png',
     'assets/images/steward.png',
+    'assets/images/attendance.png'
   ];
 
   List<String> viewListNames = [
@@ -180,6 +182,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       AlumniAssociation(),
       ShiftClassPage(),
       NonTeachingLogin(schoolID: widget.schoolID),
+      AddAttendnceHomePage()
     ];
     List<Widget> drawerPages = [
       AllStudentList(),
@@ -360,22 +363,11 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                         color: adminePrimayColor,
                         child: ListView(
                           children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        AddAttendnceHomePage(),
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                  margin: EdgeInsets.only(top: 20.h),
-                                  height: 30.h,
-                                  width: 80.w,
-                                  child:
-                                      Image.asset('assets/images/dujon.png')),
-                            ),
+                            Container(
+                                margin: EdgeInsets.only(top: 20.h),
+                                height: 30.h,
+                                width: 80.w,
+                                child: Image.asset('assets/images/dujon.png')),
                             Row(
                               children: [
                                 IconButton(
