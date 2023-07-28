@@ -21,6 +21,7 @@ class ParentController extends GetxController {
       TextEditingController parentPhoneNumber,
       String studentDocID,
       String classID) async {
+        
     ParentModel data = ParentModel(
         parentName: parentName.text.trim(),
         parentPhoneNumber: parentPhoneNumber.text.trim(),
