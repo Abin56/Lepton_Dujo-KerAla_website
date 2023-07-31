@@ -7,7 +7,7 @@ class TempStudent {
   String parentName;
   String classid;
   String createdDate;
-  String docId;
+  String docid;
   String parentPhoneNumber;
   TempStudent({
     required this.studentName,
@@ -15,7 +15,7 @@ class TempStudent {
     required this.parentName,
     required this.classid,
     required this.createdDate,
-    required this.docId,
+    required this.docid,
     required this.parentPhoneNumber,
   });
 
@@ -25,7 +25,7 @@ class TempStudent {
     String? parentName,
     String? classid,
     String? createdDate,
-    String? docId,
+    String? docid,
     String? parentPhoneNumber,
   }) {
     return TempStudent(
@@ -34,7 +34,7 @@ class TempStudent {
       parentName: parentName ?? this.parentName,
       classid: classid ?? this.classid,
       createdDate: createdDate ?? this.createdDate,
-      docId: docId ?? this.docId,
+      docid: docid ?? this.docid,
       parentPhoneNumber: parentPhoneNumber ?? this.parentPhoneNumber,
     );
   }
@@ -46,7 +46,7 @@ class TempStudent {
       'parentName': parentName,
       'classid': classid,
       'createdDate': createdDate,
-      'docId': docId,
+      'docid': docid,
       'parentPhoneNumber': parentPhoneNumber,
     };
   }
@@ -58,7 +58,7 @@ class TempStudent {
       parentName: map['parentName'] as String,
       classid: map['classid'] as String,
       createdDate: map['createdDate'] as String,
-      docId: map['docId'] as String,
+      docid: map['docid'] as String,
       parentPhoneNumber: map['parentPhoneNumber'] as String,
     );
   }
@@ -70,30 +70,31 @@ class TempStudent {
 
   @override
   String toString() {
-    return 'TempStudent(studentName: $studentName, admissionNumber: $admissionNumber, parentName: $parentName, classid: $classid, createdDate: $createdDate, docId: $docId, parentPhoneNumber: $parentPhoneNumber)';
+    return 'TempStudent(studentName: $studentName, admissionNumber: $admissionNumber, parentName: $parentName, classid: $classid, createdDate: $createdDate, docid: $docid, parentPhoneNumber: $parentPhoneNumber)';
   }
 
   @override
   bool operator ==(covariant TempStudent other) {
     if (identical(this, other)) return true;
-
-    return other.studentName == studentName &&
-        other.admissionNumber == admissionNumber &&
-        other.parentName == parentName &&
-        other.classid == classid &&
-        other.createdDate == createdDate &&
-        other.docId == docId &&
-        other.parentPhoneNumber == parentPhoneNumber;
+  
+    return 
+      other.studentName == studentName &&
+      other.admissionNumber == admissionNumber &&
+      other.parentName == parentName &&
+      other.classid == classid &&
+      other.createdDate == createdDate &&
+      other.docid == docid &&
+      other.parentPhoneNumber == parentPhoneNumber;
   }
 
   @override
   int get hashCode {
     return studentName.hashCode ^
-        admissionNumber.hashCode ^
-        parentName.hashCode ^
-        classid.hashCode ^
-        createdDate.hashCode ^
-        docId.hashCode ^
-        parentPhoneNumber.hashCode;
+      admissionNumber.hashCode ^
+      parentName.hashCode ^
+      classid.hashCode ^
+      createdDate.hashCode ^
+      docid.hashCode ^
+      parentPhoneNumber.hashCode;
   }
 }

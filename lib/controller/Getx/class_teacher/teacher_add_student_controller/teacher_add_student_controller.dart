@@ -36,7 +36,7 @@ class TeacherAddStudentController extends GetxController {
             .doc(Get.find<GetFireBaseData>().classIDD.value)
             .collection('TempStudents')
             .doc(value.id)
-            .update({"docId": value.id});
+            .update({"docid": value.id});
         studentNameController.clear();
         parentPhNoController.clear();
         addmissionNumberController.clear();

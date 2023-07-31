@@ -12,7 +12,6 @@ import 'package:lottie/lottie.dart';
 import '../../../../../../controller/Getx/class_teacher/teacher_add_student_controller/teacher_add_student_controller.dart';
 import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
-import '../../../../../../model/create_classModel/add_student_model.dart';
 import '../../../../../../utils/utils.dart';
 
 class AddStudentFromClassTeacher extends StatelessWidget {
@@ -154,7 +153,9 @@ class AddStudentFromClassTeacher extends StatelessWidget {
                                     if (formKey.currentState?.validate() ??
                                         false) {
                                       teacherAddStudentController.createStudent(
-                                          studentModel: AddStudentModel(
+                                          studentModel: TempStudent(
+                                            parentName: "",
+                                            docid: "",
                                         studentName: teacherAddStudentController
                                             .studentNameController.text,
                                         parentPhoneNumber:
@@ -164,10 +165,10 @@ class AddStudentFromClassTeacher extends StatelessWidget {
                                             teacherAddStudentController
                                                 .addmissionNumberController
                                                 .text,
-                                        classID: Get.find<GetFireBaseData>()
+                                        classid: Get.find<GetFireBaseData>()
                                             .classIDD
                                             .value,
-                                        createDate: DateTime.now().toString(),
+                                        createdDate: DateTime.now().toString(),
                                       ));
                                     }
                                   },
@@ -291,7 +292,7 @@ class AddStudentFromClassTeacher extends StatelessWidget {
                       classid: Get.find<GetFireBaseData>().classIDD.value,
                       createdDate: DateTime.now().toString(),
                       parentName: firstRow[3]?.value.toString() ?? "",
-                      docId: ""));
+                      docid: ""));
             }
           }
           teacherAddStudentController.isLoading.value = false;
