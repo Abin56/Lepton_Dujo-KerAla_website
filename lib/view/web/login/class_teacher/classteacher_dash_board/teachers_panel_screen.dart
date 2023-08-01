@@ -24,6 +24,7 @@ import '../../../../fonts/google_monstre.dart';
 import '../../../widgets/button_container_widget.dart';
 import '../../../widgets/drop_DownList/get_batchYear.dart';
 import '../../../widgets/drop_DownList/get_classList.dart';
+import '../../admin/admin_DashBoard/attendance_edit/add_attendance_home_page.dart';
 import '../../admin/admin_DashBoard/classes/list_of_classes.dart';
 import '../parents-section/add_parent.dart';
 import 'add_student/add_student.dart';
@@ -72,6 +73,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
     //'Upload Progress Report', //8
     'Upload Events', //9
     'Upload Notice', //10
+    'Add Attendance', //
     //'Live Clasees', //11
     //'Recorded Classes' //12
   ];
@@ -87,6 +89,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
     //'assets/images/report.png', //8
     'assets/images/events.png', //9
     'assets/images/notices.png', //10
+    'assets/images/attendance.png',
     //'assets/images/video-conference.png',  //11
     //'assets/images/elearning.png',  //12
   ];
@@ -138,6 +141,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
       ClassTeacherCreateEventsPage(), //6
 
       ClassTeacherCreateNoticePage(), //8
+      AddAttendnceHomePage() //9
     ];
     List<Widget> drawerPages = [
       ClassEventsPageList(
