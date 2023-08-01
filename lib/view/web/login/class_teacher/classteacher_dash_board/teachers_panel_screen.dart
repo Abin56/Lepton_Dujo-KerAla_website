@@ -6,7 +6,6 @@ import 'dart:html' as html;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/subject/subject_screen.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
-import 'package:dujo_kerala_website/view/web/widgets/sample/under_maintance.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -67,7 +66,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
     'Add Parent', //3
     'Manage Teachers', //4
     'Add Guardian', //5
-    'Chat with Parents', //6
+   // 'Chat with Parents', //6
     'Upload Time Table', //7
     //'Upload Progress Report', //8
     'Upload Events', //9
@@ -131,7 +130,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
       AddGuardian(
           teacherIDE: widget.teacherEmail,
           schoolId: Get.find<AdminLoginScreenController>().schoolID),
-      const UnderMaintanceScreen(), //6
+    //  const UnderMaintanceScreen(), //6
 
       NewTimeTableScreen(),
 

@@ -30,7 +30,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
   String selectedTime1 = 'Start Time  ';
   String selectedTime2 = 'End Time  ';
   //Color selectedColor = const Color(0x00fcfcfc);
-  Color selectedColor= Colors.amber;
+  Color selectedColor = Colors.amber;
   bool loadingStatus = false;
 
   //values
@@ -41,7 +41,6 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
 
   TextEditingController startTimeController = TextEditingController();
   TextEditingController endTimeController = TextEditingController();
-
 
   Future<void> addTimeTableDataToFirebase() async {
     // String uid = const Uuid().v1();
@@ -73,7 +72,9 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
         'periodTeacher': teacherName,
         'startTime': startTimeController.text,
         'endTime': endTimeController.text,
-        'color': selectedColor.toString().substring(29, selectedColor.toString().length-1),
+        'color': selectedColor
+            .toString()
+            .substring(29, selectedColor.toString().length - 1),
         'timeStamp': selectedPeriod
       }
     });
@@ -507,7 +508,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                             setState(() {
                               log(newValue!.toString());
                               selectedColor = newValue;
-                              log('COL :${selectedColor.toString().substring(29, selectedColor.toString().length-1)}');
+                              log('COL :${selectedColor.toString().substring(29, selectedColor.toString().length - 1)}');
                             });
                           },
                           items: [
@@ -548,7 +549,16 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                   });
                                   await addTimeTableDataToFirebase();
                                   setState(() {
+                                     dropdownValue1 = 'Select Day';
+                                     dropdownValue2 = 'Select Subject';
+                                     dropdownValue3 = 'Select Teacher';
+                                     teacherName = '';
+                                     subjectName = '';
+                                     selectedPeriod = 'Period 1';
+                                     startTimeController.clear();
+                                     endTimeController.clear();
                                     loadingStatus = false;
+                                   
                                   });
 
                                   log(dayName);
