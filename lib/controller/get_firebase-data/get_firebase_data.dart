@@ -47,6 +47,7 @@ class GetFireBaseData extends GetxController {
         .doc(teacherID)
         .get();
     teacherName.value = vari.data()!['teacherName'];
+      log('Teacher Nameee data >>>>>>>>>>>>>>>>>$teacherName');
   }
 
   Future<void> getClassDetail(String classID) async {

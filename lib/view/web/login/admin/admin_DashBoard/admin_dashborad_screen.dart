@@ -51,6 +51,7 @@ import 'login_Register_history/date_wise.dart';
 import 'manage_notifications/main_screen_notifications.dart';
 import 'mothers_pta/mothers_pta_screen.dart';
 import 'non_Teaching_staff/non_teaching_staff.dart';
+import 'non_Teaching_staff/non_teaching_staff_view.dart';
 
 class AdminDashBoardPage extends StatefulWidget {
   AdminDashBoardPage(
@@ -94,13 +95,12 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'School Protection\nGroup',
     'Scholarship',
     'Bus Route',
-    'Video Conference',
     'Food and Beverages',
     'Exam Notifications',
     'Alumni Associations',
     'Class Promotion',
     'Non-Teaching Staffs',
-    'Add Attendance'
+    'Add Attendance',
   ];
 
   List<String> dashboardImagesList = [
@@ -118,13 +118,12 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'assets/images/protection.png',
     'assets/images/graduation.png',
     'assets/images/route.png',
-    'assets/images/elearning.png',
     'assets/images/fast-food.png',
     'assets/images/exam.png',
     'assets/images/alumni.png',
     'assets/images/exchange.png',
     'assets/images/steward.png',
-    'assets/images/attendance.png'
+    'assets/images/attendance.png',
   ];
 
   List<String> viewListNames = [
@@ -137,7 +136,6 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'Non-Teaching Staffs',
     'Login History',
     'Manage Notifications',
-    'Dujo Cart',
   ];
   List<String> viewListImages = [
     'assets/images/students.png',
@@ -149,7 +147,6 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'assets/images/steward.png',
     'assets/images/admin.png',
     'assets/images/notification.png',
-    'assets/images/shoppincart.png',
   ];
 
   @override
@@ -182,7 +179,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       AlumniAssociation(),
       ShiftClassPage(),
       NonTeachingLogin(schoolID: widget.schoolID),
-      AddAttendnceHomePage()
+      AddAttendnceHomePage(),
     ];
     List<Widget> drawerPages = [
       AllStudentList(),
@@ -195,9 +192,9 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
         schoolId: widget.schoolID,
       ),
       AdminPtaScreen(),
-      const UnderMaintanceScreen(),
+       NonTeachingStaffView(schoolID: widget.schoolID),
       DateWiseLoginScreen(schoolID: widget.schoolID),
-      const MainScreenNotifications()
+      const MainScreenNotifications(),
     ];
     var screenSize = MediaQuery.of(context).size;
 
@@ -998,7 +995,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                         admissionNumber: addmissionController.text.trim(),
                         classID: classesListValue!['docid'],
                         createDate: DateTime.now().toString(),
-                      ));
+                      
+                      )).then((value) => Navigator.pop(context));
                   clearAdminAdd();
                 }
               },
