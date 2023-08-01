@@ -28,7 +28,6 @@ import '../../../../constant/constant.dart';
 import '../../../widgets/button_container_widget.dart';
 import '../../../widgets/drop_DownList/get_batchYear.dart';
 import '../../../widgets/drop_DownList/get_classes.dart';
-import '../../../widgets/sample/under_maintance.dart';
 import 'Fees_and_bills/Fees/fees_and_bills.dart';
 import 'Students_ScholarShip/student_scholarship.dart';
 import 'achievements/achievements.dart';
@@ -172,8 +171,6 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       AdminScholarships(schoolID: widget.schoolID), //13-ScholarShip
 
       const BusRoute(), //14-Bus Route
-
-      const UnderMaintanceScreen(), //18
       FoodBeverages(schoolID: widget.schoolID),
       SchoolLevelNotifications(schoolID: widget.schoolID),
       AlumniAssociation(),
