@@ -105,12 +105,12 @@ class GeneralInstruction extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Image.network(
-                                'https://upload.wikimedia.org/wikipedia/en/d/d4/Samantha_Signature.jpg',
-                                width: 70,
-                                height: 40,
-                              ),
-                              sizedBoxH10,
+                              // Image.network(
+                              //   'https://upload.wikimedia.org/wikipedia/en/d/d4/Samantha_Signature.jpg',
+                              //   width: 70,
+                              //   height: 40,
+                              // ),
+                              // sizedBoxH10,
                               Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
