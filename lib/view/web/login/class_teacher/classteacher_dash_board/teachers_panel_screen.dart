@@ -24,9 +24,9 @@ import '../../../../fonts/google_monstre.dart';
 import '../../../widgets/button_container_widget.dart';
 import '../../../widgets/drop_DownList/get_batchYear.dart';
 import '../../../widgets/drop_DownList/get_classList.dart';
-import '../../admin/admin_DashBoard/attendance_edit/add_attendance_home_page.dart';
 import '../../admin/admin_DashBoard/classes/list_of_classes.dart';
 import '../parents-section/add_parent.dart';
+import 'add_attendance/add_attendance_teacher_page.dart';
 import 'add_student/add_student.dart';
 import 'events_screen/create_events_screen.dart';
 import 'events_screen/update_event_screens/list_classwise_event.dart';
@@ -141,7 +141,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
       ClassTeacherCreateEventsPage(), //6
 
       ClassTeacherCreateNoticePage(), //8
-      AddAttendnceHomePage() //9
+      AddAttendnceTeacherHomePage() //9
     ];
     List<Widget> drawerPages = [
       ClassEventsPageList(
