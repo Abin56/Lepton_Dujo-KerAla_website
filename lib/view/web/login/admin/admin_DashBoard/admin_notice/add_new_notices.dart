@@ -231,7 +231,7 @@ class AddNewNotices extends StatelessWidget {
                                                   .value = value ?? false;
                                             },
                                           ),
-                                          const Text('Guardian')
+                                          const Text('Parents')
                                         ],
                                       ),
                                     ],
