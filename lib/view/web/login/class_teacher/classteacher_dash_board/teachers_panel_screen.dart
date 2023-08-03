@@ -25,6 +25,7 @@ import '../../../widgets/drop_DownList/get_batchYear.dart';
 import '../../../widgets/drop_DownList/get_classList.dart';
 import '../../admin/admin_DashBoard/classes/list_of_classes.dart';
 import '../parents-section/add_parent.dart';
+import 'add_attendance/add_attendance_teacher_page.dart';
 import 'add_student/add_student.dart';
 import 'events_screen/create_events_screen.dart';
 import 'events_screen/update_event_screens/list_classwise_event.dart';
@@ -71,6 +72,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
     //'Upload Progress Report', //8
     'Upload Events', //9
     'Upload Notice', //10
+    'Add Attendance', //
     //'Live Clasees', //11
     //'Recorded Classes' //12
   ];
@@ -86,6 +88,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
     //'assets/images/report.png', //8
     'assets/images/events.png', //9
     'assets/images/notices.png', //10
+    'assets/images/attendance.png',
     //'assets/images/video-conference.png',  //11
     //'assets/images/elearning.png',  //12
   ];
@@ -137,6 +140,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
       ClassTeacherCreateEventsPage(), //6
 
       ClassTeacherCreateNoticePage(), //8
+      AddAttendnceTeacherHomePage() //9
     ];
     List<Widget> drawerPages = [
       ClassEventsPageList(
