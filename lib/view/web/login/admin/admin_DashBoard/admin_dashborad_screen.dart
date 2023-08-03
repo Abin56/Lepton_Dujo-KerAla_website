@@ -297,14 +297,14 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                         OutlineInputBorder(),
                                                   ),
                                                 ),
-
-
-
-
-
-
-
-
+    
+    
+    
+    
+    
+    
+    
+    
                                               ),
                                               const Icon(Icons
                                                   .arrow_downward_outlined),
