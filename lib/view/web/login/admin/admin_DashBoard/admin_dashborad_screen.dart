@@ -126,8 +126,9 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'assets/images/exchange.png',
     'assets/images/steward.png',
     'assets/images/attendance.png',
-    'assets/images/admin.png'
+    'assets/images/admin.png',
     'assets/images/attendance.png',
+    'assets/images/admin.png'
   ];
 
   List<String> viewListNames = [
