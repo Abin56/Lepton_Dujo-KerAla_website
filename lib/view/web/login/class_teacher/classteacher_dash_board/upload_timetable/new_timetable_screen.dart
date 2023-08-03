@@ -12,7 +12,8 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 class NewTimeTableScreen extends StatefulWidget {
-  const NewTimeTableScreen({
+  String firebaseColor='';
+   NewTimeTableScreen({
     super.key,
   });
 
@@ -22,6 +23,7 @@ class NewTimeTableScreen extends StatefulWidget {
 
 class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
   final _formKey = GlobalKey<FormState>();
+
 
   String dropdownValue1 = 'Select Day';
   String dropdownValue2 = 'Select Subject';
@@ -43,6 +45,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
   TextEditingController endTimeController = TextEditingController();
 
   Future<void> addTimeTableDataToFirebase() async {
+    log('Colorrrrrrrrrrrrrrrrrrrrrrrrrrrr$widget.firebaseColor');
     // String uid = const Uuid().v1();
     await FirebaseFirestore.instance
         .collection('SchoolListCollection')
@@ -72,9 +75,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
         'periodTeacher': teacherName,
         'startTime': startTimeController.text,
         'endTime': endTimeController.text,
-        'color': selectedColor
-            .toString()
-            .substring(29, selectedColor.toString().length - 1),
+        'color': 'Co${widget.firebaseColor}',
         'timeStamp': selectedPeriod
       }
     });
@@ -259,29 +260,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                               );
                             },
                           )
-                          // child: DropdownButton<String>(
-                          //   underline: Container(),
-                          //   isExpanded: true,
-                          //   value: dropdownValue2,
-                          //   onChanged: (String? newValue) {
-                          //     setState(() {
-                          //       dropdownValue2 = newValue!;
-                          //     });
-                          //   },
-                          //   items: <String>[
-                          //     'Select Subject',
-                          //     'Maths',
-                          //     'Science',
-                          //     'Malayalam',
-                          //     'English',
-                          //     'Social'
-                          //   ].map<DropdownMenuItem<String>>((String value) {
-                          //     return DropdownMenuItem<String>(
-                          //       value: value,
-                          //       child: Text(value),
-                          //     );
-                          //   }).toList(),
-                          // ),
+          
                           ),
                       const SizedBox(height: 22.0),
                       Container(
@@ -414,75 +393,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                           ),
                         ),
 
-                        // Row(
-                        //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        //     children:  [
 
-                        //       Container(
-                        //         decoration: BoxDecoration(
-                        //           borderRadius: BorderRadius.circular(10),
-                        //           border:
-                        //               Border.all(color: Colors.black, width: 0.5),
-                        //         ),
-                        //         width: 140,
-                        //         child: DropdownButton<String>(
-                        //           underline: Container(),
-                        //           isExpanded: true,
-                        //           value: selectedTime1,
-                        //           onChanged: (String? newValue) {
-                        //             setState(() {
-                        //               selectedTime1 = newValue!;
-                        //             });
-                        //           },
-                        //           items: <String>[
-                        //             'Start Time  ',
-                        //             '8:30',
-                        //             '9:00',
-                        //             '9:30',
-                        //             '10:00',
-                        //             '10:30',
-                        //             '11:00'
-                        //           ].map<DropdownMenuItem<String>>((String time) {
-                        //             return DropdownMenuItem<String>(
-                        //               value: time,
-                        //               child: Text(time),
-                        //             );
-                        //           }).toList(),
-                        //         ),
-                        //       ),
-                        //      const SizedBox(width: 30.0),
-                        //       Container(
-                        //         decoration: BoxDecoration(
-                        //           borderRadius: BorderRadius.circular(10),
-                        //           border:
-                        //               Border.all(color: Colors.black, width: 0.5),
-                        //         ),
-                        //         width: 140,
-                        //         child: DropdownButton<String>(
-                        //           isExpanded: true,
-                        //           underline: Container(),
-                        //           value: selectedTime2,
-                        //           onChanged: (String? newValue) {
-                        //             setState(() {
-                        //               selectedTime2 = newValue!;
-                        //             });
-                        //           },
-                        //           items: <String>[
-                        //             'End Time  ',
-                        //             '9:00',
-                        //             '9:30',
-                        //             '10:00',
-                        //             '10:30',
-                        //             '11:00'
-                        //           ].map<DropdownMenuItem<String>>((String time) {
-                        //             return DropdownMenuItem<String>(
-                        //               value: time,
-                        //               child: Text(time),
-                        //             );
-                        //           }).toList(),
-                        //         ),
-                        //       ),
-                        //     ]),
                       ]),
                       const SizedBox(
                         height: 16,
@@ -508,6 +419,8 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                             setState(() {
                               log(newValue!.toString());
                               selectedColor = newValue;
+                             String result =selectedColor.toString().substring(29, selectedColor.toString().length - 1);
+                            widget.firebaseColor=result;
                               log('COL :${selectedColor.toString().substring(29, selectedColor.toString().length - 1)}');
                             });
                           },
@@ -549,16 +462,15 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                   });
                                   await addTimeTableDataToFirebase();
                                   setState(() {
-                                     dropdownValue1 = 'Select Day';
-                                     dropdownValue2 = 'Select Subject';
-                                     dropdownValue3 = 'Select Teacher';
-                                     teacherName = '';
-                                     subjectName = '';
-                                     selectedPeriod = 'Period 1';
-                                     startTimeController.clear();
-                                     endTimeController.clear();
+                                    dropdownValue1 = 'Select Day';
+                                    dropdownValue2 = 'Select Subject';
+                                    dropdownValue3 = 'Select Teacher';
+                                    teacherName = '';
+                                    subjectName = '';
+                                    selectedPeriod = 'Period 1';
+                                    startTimeController.clear();
+                                    endTimeController.clear();
                                     loadingStatus = false;
-                                   
                                   });
 
                                   log(dayName);
