@@ -29,7 +29,6 @@ import '../../../../constant/constant.dart';
 import '../../../widgets/button_container_widget.dart';
 import '../../../widgets/drop_DownList/get_batchYear.dart';
 import '../../../widgets/drop_DownList/get_classes.dart';
-import '../../../widgets/sample/under_maintance.dart';
 import 'Fees_and_bills/Fees/fees_and_bills.dart';
 import 'Students_ScholarShip/student_scholarship.dart';
 import 'achievements/achievements.dart';
@@ -52,6 +51,7 @@ import 'login_Register_history/date_wise.dart';
 import 'manage_notifications/main_screen_notifications.dart';
 import 'mothers_pta/mothers_pta_screen.dart';
 import 'non_Teaching_staff/non_teaching_staff.dart';
+import 'non_Teaching_staff/non_teaching_staff_view.dart';
 
 class AdminDashBoardPage extends StatefulWidget {
   AdminDashBoardPage(
@@ -95,15 +95,14 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'School Protection\nGroup',
     'Scholarship',
     'Bus Route',
-    'Video Conference',
     'Food and Beverages',
     'Exam Notifications',
     'Alumni Associations',
     'Class Promotion',
     'Non-Teaching Staffs',
-    'Add Attendance', 
+    'Add Attendance',
     'Handle Parents with\n Multiple Children'
-  
+
   ];
 
   List<String> dashboardImagesList = [
@@ -121,15 +120,14 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'assets/images/protection.png',
     'assets/images/graduation.png',
     'assets/images/route.png',
-    'assets/images/elearning.png',
     'assets/images/fast-food.png',
     'assets/images/exam.png',
     'assets/images/alumni.png',
     'assets/images/exchange.png',
     'assets/images/steward.png',
-    'assets/images/attendance.png', 
-    'assets/images/attendance.png', 
+    'assets/images/attendance.png',
     'assets/images/admin.png'
+    'assets/images/attendance.png',
   ];
 
   List<String> viewListNames = [
@@ -142,7 +140,6 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'Non-Teaching Staffs',
     'Login History',
     'Manage Notifications',
-    'Dujo Cart',
   ];
   List<String> viewListImages = [
     'assets/images/students.png',
@@ -154,7 +151,6 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'assets/images/steward.png',
     'assets/images/admin.png',
     'assets/images/notification.png',
-    'assets/images/shoppincart.png',
   ];
 
   @override
@@ -172,7 +168,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       const FeesAndBillsWeb(), //fees and bills
       MeetingCreates(
         schoolId: widget.schoolID,
-      ), //8-Meetings
+      ), //8-Meetings\
       AdminPtaScreen(), //9-PTA
       MothersPtaScreen(), //10-Mothers PTA
       Achievements(schoolID: widget.schoolID), //11-Achievements
@@ -180,8 +176,6 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       AdminScholarships(schoolID: widget.schoolID), //13-ScholarShip
 
       const BusRoute(), //14-Bus Route
-
-      const UnderMaintanceScreen(), //18
       FoodBeverages(schoolID: widget.schoolID),
       SchoolLevelNotifications(schoolID: widget.schoolID),
       AlumniAssociation(),
@@ -201,9 +195,9 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
         schoolId: widget.schoolID,
       ),
       AdminPtaScreen(),
-      const UnderMaintanceScreen(),
+       NonTeachingStaffView(schoolID: widget.schoolID),
       DateWiseLoginScreen(schoolID: widget.schoolID),
-      const MainScreenNotifications()
+      const MainScreenNotifications(),
     ];
     var screenSize = MediaQuery.of(context).size;
 
@@ -303,14 +297,14 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                         OutlineInputBorder(),
                                                   ),
                                                 ),
-          
-          
-          
-          
-          
-          
-          
-          
+
+
+
+
+
+
+
+
                                               ),
                                               const Icon(Icons
                                                   .arrow_downward_outlined),
@@ -1012,7 +1006,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                         admissionNumber: addmissionController.text.trim(),
                         classID: classesListValue!['docid'],
                         createDate: DateTime.now().toString(),
-                      ));
+
+                      )).then((value) => Navigator.pop(context));
                   clearAdminAdd();
                 }
               },

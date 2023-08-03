@@ -156,6 +156,7 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
                                 child: CircularProgressIndicator(),
                               );
                             } else {
+                              controller.getTeacherDetail(controller.classTeacherdocid.value);
                               return ListTile(
                                 leading: const Icon(Icons.person),
                                 title: const Student_Info_text_Widget(
