@@ -20,7 +20,6 @@ class AttendancePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        attendanceController.classId.value = "";
         attendanceController.dateId.value = "";
         attendanceController.monthId.value = "";
         attendanceController.subjectId.value = "";
