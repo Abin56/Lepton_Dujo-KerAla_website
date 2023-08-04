@@ -290,7 +290,7 @@ class CheckedBoxMeetingWidget extends StatelessWidget {
                       value ?? false;
                 },
               ),
-              const Text('Guardian')
+              const Text('Parents')
             ],
           ),
         ],

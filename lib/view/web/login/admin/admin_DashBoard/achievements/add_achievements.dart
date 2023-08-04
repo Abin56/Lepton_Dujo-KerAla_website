@@ -401,6 +401,7 @@ class _AddAchievementsState extends State<AddAchievements> {
                   Padding(
                     padding: const EdgeInsets.only(left: 80, right: 80, top: 20),
                     child: TextFormField(
+                      validator: checkFieldEmpty,
                       controller: dateController,
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(
@@ -490,6 +491,10 @@ class _AddAchievementsState extends State<AddAchievements> {
                         dateController.clear();
                         descriptionController.clear();
                         admissionNumberController.clear();
+                        setState(() {
+                          _file = null;
+                          classListValue = null;
+                        });
                         }
                       },
                       child: CreateContainerWidget(text: 'Create',fontSize: 20.w,),

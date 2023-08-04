@@ -203,6 +203,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     var screenSize = MediaQuery.of(context).size;
 
     return Obx(() => Scaffold(
+      
           body: getFireBaseData.bYear.isEmpty
               ? Center(
                   child: SingleChildScrollView(
@@ -238,7 +239,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                 FirebaseFirestore.instance
                                     .collection("SchoolListCollection")
                                     .doc(widget.schoolID)
-                                    .set({
+                                    .set({ 
                                   'batchYear': schoolBatchYearListValue!['id']
                                 }, SetOptions(merge: true)).then((value) async {
                                   await getFireBaseData.getBatchYearId();

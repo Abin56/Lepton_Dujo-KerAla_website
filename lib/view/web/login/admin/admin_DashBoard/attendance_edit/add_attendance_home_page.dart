@@ -1,4 +1,5 @@
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,6 +19,7 @@ class AddAttendnceHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Attendance"),
+        backgroundColor: adminePrimayColor,
       ),
       body: SizedBox(
         width: size.width,
