@@ -26,6 +26,17 @@ class BillsCreationalPage extends StatelessWidget {
   final TextEditingController amountController = TextEditingController();
   final TextEditingController dateController = TextEditingController();
 
+
+
+  void clearAllFields(){
+    studentNameController.clear();
+    invoiceController.clear();
+    categoryNameController.clear();
+    studentIdController.clear();
+    amountController.clear();
+    dateController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;

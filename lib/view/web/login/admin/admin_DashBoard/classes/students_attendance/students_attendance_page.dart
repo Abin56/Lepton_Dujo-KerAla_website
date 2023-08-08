@@ -145,9 +145,9 @@ class DateWiseAttendanceWidget extends StatelessWidget {
                                                     const Text('Confirmation'),
                                                 content: student.present
                                                     ? const Text(
-                                                        'Are you sure you want to days absent?')
+                                                        'Are you sure you want to change?')
                                                     : const Text(
-                                                        'Are you sure you want to days aresent?'),
+                                                        'Are you sure you want to change?'),
                                                 actions: [
                                                   TextButton(
                                                     child: const Text('Cancel'),
@@ -168,7 +168,7 @@ class DateWiseAttendanceWidget extends StatelessWidget {
                                                       attendanceController
                                                           .updateStudentAttendance(
                                                               student
-                                                                  .studentName,
+                                                                  .uid,
                                                               student.present
                                                                   ? false
                                                                   : true);

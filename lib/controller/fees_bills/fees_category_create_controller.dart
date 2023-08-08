@@ -10,7 +10,7 @@ import 'package:uuid/uuid.dart';
 
 class FeesCategoryCreateController {
   TextEditingController categoryNameController = TextEditingController();
-  static String className = "FeesCreateController";
+  static String className = "FeesCreateController";//for log information
   RxBool isLoding = RxBool(false);
   final Uuid uuid = const Uuid();
   final CollectionReference<Map<String, dynamic>> _fireStore = FirebaseFirestore
