@@ -26,7 +26,7 @@ class ParentsViewPage extends StatelessWidget {
             itemBuilder: (context, index){
             return GestureDetector(
               onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>AssigningPage(parentSnap: snap.data!.docs[index])));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>AssigningPage(parentSnap: snap.data!.docs[index], classID: classSnap['docid'])));
               },
               child: SizedBox(
                 height: 100, 
