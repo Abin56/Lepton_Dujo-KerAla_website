@@ -9,6 +9,7 @@ import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../controller/add_Newschool/add_new_schhol.dart';
 import '../../../../controller/payment_tarif/checking_tarif_controller.dart';
@@ -127,11 +128,14 @@ class _SchoolProfileState extends State<SchoolProfile> {
                       ),
                     ),
                   ),
-//                   Flexible(
-//                     child: SizedBox(
-//                       height: 890.h,
-//                       width: 800.w,
-//                       child: Center(
+
+                  Flexible(
+                    child: SizedBox(
+                      height: 890.h,
+                      width: 800.w,
+                      child: Center(
+                        child: LottieBuilder.asset('assets/images/22462-campus-library-school-building-maison-mocca-animation.json'),
+                      )))
 //                         child: Padding(
 //                           padding: EdgeInsets.all(10.w),
 //                           child: Container(
