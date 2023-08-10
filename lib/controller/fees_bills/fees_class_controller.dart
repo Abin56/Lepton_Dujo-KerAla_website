@@ -16,6 +16,9 @@ class FeesClassController {
   List<AddStudentModel> allClassStudents = [];
   RxBool isLoading = RxBool(false);
 
+
+
+
   final _fStore = FirebaseFirestore.instance
       .collection("SchoolListCollection")
       .doc(Get.find<AdminLoginScreenController>().schoolID)
@@ -102,6 +105,7 @@ class FeesClassController {
           selectedFeesModel.value = FeesModel.fromMap(result.data()!);
           selectedFeesModel.refresh();
         }
+        clearAllFields();
         showToast(msg: "Successfully Updated");
       });
       isLoading.value = false;
@@ -110,5 +114,13 @@ class FeesClassController {
       log(e.toString(), name: "$className+submit");
       showToast(msg: "Something went wrong");
     }
+  }
+
+  void clearAllFields(){
+    className = "FeesClassController";
+    selectedClass = {};
+    selectedFeesModel = Rxn<FeesModel>();
+    allClassStudents = [];
+    RxBool(false);
   }
 }
