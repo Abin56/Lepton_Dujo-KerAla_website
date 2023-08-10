@@ -111,7 +111,7 @@ class StudentsDetails extends StatelessWidget {
                       //     Text(
                       //       "Male : $totalMale",
                       //       style: GoogleFonts.poppins(
-                      //           color: const Color.fromARGB(255, 0, 0, 0),
+                      //           color: const Color.fromARGB(255, 0, 0, 0),cd ..
                       //           fontSize: 20,
                       //           fontWeight: FontWeight.bold),
                       //     ),

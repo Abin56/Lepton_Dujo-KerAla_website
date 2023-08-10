@@ -124,7 +124,7 @@ class _TimeTableScreenState extends State<TimeTableScreen> {
           appBar: AppBar(
             title: GestureDetector(
               onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> const NewTimeTableScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>  NewTimeTableScreen()));
               },
               child: Text('Add Timetable', style: GoogleFonts.poppins(),)), 
             backgroundColor:  const Color.fromARGB(255, 0, 70, 128),
