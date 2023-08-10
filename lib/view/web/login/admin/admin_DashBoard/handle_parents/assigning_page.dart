@@ -98,7 +98,21 @@ log("classID: $classID");
         'userRole' : widget.parentSnap['userRole'],
         'multipleChildren': true,
         'childrenIDList': childrenList
-      });
+      }); 
+
+        FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(schoolListValue!['docid'])
+        .collection(Get.find<GetFireBaseData>().bYear.value)
+        .doc(Get.find<GetFireBaseData>().bYear.value)
+        .collection('classes').doc(classID).collection('Students').doc(childID).update({
+          'parentID' : widget.parentSnap['docid']
+        }); 
+
+      
+
+
+
   }
 
   @override
@@ -182,7 +196,7 @@ log("classID: $classID");
                     .doc(Get.find<GetFireBaseData>().bYear.value)
                     .collection('classes')
                     .doc(classListValue?['docid'])
-                    .collection('Students')
+                    .collection('Students').where('parentID', isEqualTo: '')
                     .snapshots(),
                 builder: ((context, snapshot) {
                   return Padding(
