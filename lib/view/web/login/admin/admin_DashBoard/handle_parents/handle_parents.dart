@@ -14,7 +14,9 @@ class HandleParentsWithMultipleChildren extends StatelessWidget {
   Widget build(BuildContext context) {
     log(Get.find<GetFireBaseData>().getTeacherClassRole.value);
     return Scaffold(
-      
+      appBar: AppBar(
+        title: const Text('Select Class'),
+      ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection('SchoolListCollection')
         .doc(schoolListValue!['docid'])

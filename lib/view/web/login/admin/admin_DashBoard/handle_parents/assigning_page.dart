@@ -118,6 +118,9 @@ log("classID: $classID");
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Assigning Page'),
+      ),
         body: Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
