@@ -14,6 +14,9 @@ class ParentsViewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Select Parent'),
+      ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection('SchoolListCollection')
         .doc(schoolListValue!['docid'])
