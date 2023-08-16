@@ -30,6 +30,10 @@ class ParentsViewPage extends StatelessWidget {
               .collection('ParentCollection')
               .snapshots(),
           builder: (context, snap) {
+             if (snap.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
             return ListView.builder(
                 itemCount: snap.data!.docs.length,
                 itemBuilder: (context, index) {

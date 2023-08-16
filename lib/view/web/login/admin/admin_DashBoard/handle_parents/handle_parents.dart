@@ -28,13 +28,11 @@ class HandleParentsWithMultipleChildren extends StatelessWidget {
                 // .collection('ParentCollection')
                 .snapshots(),
             builder: (context, snap) {
-              log(snap.data!.docs[0]['className']);
+             // log(snap.data!.docs[0]['className']);
               if (snap.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator();
+                return const Center(child: CircularProgressIndicator());
               }
-              if (snap.data == null) {
-                return const Text('No Data');
-              }
+
 
               return ListView.builder(
                   itemCount: snap.data!.docs.length,

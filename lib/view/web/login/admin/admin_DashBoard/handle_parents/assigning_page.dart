@@ -151,6 +151,10 @@ class _AssigningPageState extends State<AssigningPage> {
                             .collection('classes')
                             .snapshots(),
                         builder: ((context, snapshot) {
+                           if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
                           return Padding(
                             padding:
                                 const EdgeInsets.only(right: 100, left: 100),
@@ -212,6 +216,10 @@ class _AssigningPageState extends State<AssigningPage> {
                               .collection('Students')
                               .snapshots(),
                           builder: ((context, snapshot) {
+                             if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
                             return Padding(
                               padding:
                                   const EdgeInsets.only(left: 100, right: 100),
