@@ -14,55 +14,61 @@ class HandleParentsWithMultipleChildren extends StatelessWidget {
   Widget build(BuildContext context) {
     log(Get.find<GetFireBaseData>().getTeacherClassRole.value);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Select Class'),
-      ),
-      body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('SchoolListCollection')
-        .doc(schoolListValue!['docid'])
-                    .collection(Get.find<GetFireBaseData>().bYear.value)
-                    .doc(Get.find<GetFireBaseData>().bYear.value)
-                    .collection('classes')
-                    // .doc(Get.find<GetFireBaseData>().classIDD.value)
-                    // .collection('ParentCollection')
-                    .snapshots(),
-        builder: (context, snap){
-          log(snap.data!.docs[0]['className']);
-          if(snap.connectionState == ConnectionState.waiting){
-            return const CircularProgressIndicator();
-          }
-          if(snap.data == null){
-            return const Text('No Data');
-          }
+        appBar: AppBar(
+          title: const Text('Select Class'),
+        ),
+        body: StreamBuilder(
+            stream: FirebaseFirestore.instance
+                .collection('SchoolListCollection')
+                .doc(schoolListValue!['docid'])
+                .collection(Get.find<GetFireBaseData>().bYear.value)
+                .doc(Get.find<GetFireBaseData>().bYear.value)
+                .collection('classes')
+                // .doc(Get.find<GetFireBaseData>().classIDD.value)
+                // .collection('ParentCollection')
+                .snapshots(),
+            builder: (context, snap) {
+              log(snap.data!.docs[0]['className']);
+              if (snap.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              }
+              if (snap.data == null) {
+                return const Text('No Data');
+              }
 
-          return ListView.builder(
-
-            itemCount: snap.data!.docs.length,
-            itemBuilder: (context, index){
-              return SizedBox(
-          width: 150,
-          height: 150,
-          child: GestureDetector(
-            onTap: (){
-              log(snap.data!.docs[index]['className']);
-             Navigator.push(context, MaterialPageRoute(builder: (context)=>  ParentsViewPage(classSnap: snap.data!.docs[index],)));
-            },
-            child: Card(
-              elevation: 5, // Adjust the elevation for the shadow effect
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Center(
-                child: Text(
-                  snap.data!.docs[index]['className'],
-                  style: const TextStyle(fontSize: 20),
-                ),
-              ),
-            ),
-          ));
-             
-            });
-        })
-    );
+              return ListView.builder(
+                  itemCount: snap.data!.docs.length,
+                  itemBuilder: (context, index) {
+                    return SizedBox(
+                        width: 150,
+                        height: 150,
+                        child: GestureDetector(
+                          onTap: () {
+                            log(snap.data!.docs[index]['className']);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ParentsViewPage(
+                                          classSnap: snap.data!.docs[index],
+                                          parentClassID: snap.data!.docs[index]
+                                              ['docid'],
+                                        )));
+                          },
+                          child: Card(
+                            elevation:
+                                5, // Adjust the elevation for the shadow effect
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Center(
+                              child: Text(
+                                snap.data!.docs[index]['className'],
+                                style: const TextStyle(fontSize: 20),
+                              ),
+                            ),
+                          ),
+                        ));
+                  });
+            }));
   }
 }
