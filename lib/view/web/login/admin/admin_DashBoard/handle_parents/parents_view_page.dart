@@ -42,6 +42,8 @@ class ParentsViewPage extends StatelessWidget {
                                     parentSnap: snap.data!.docs[index],
                                     classID: classSnap['docid'],
                                     parentClassID: parentClassID,
+                                    parentDocID: snap.data?.docs[index]
+                                        ['docid'],
                                   )));
                     },
                     child: SizedBox(

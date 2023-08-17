@@ -10,6 +10,27 @@ import '../get_firebase-data/get_firebase_data.dart';
 
 class MultipleStudentsController extends GetxController {
   RxBool isLoading = RxBool(false);
+
+  Future<Map<String, dynamic>> checkingparentCollection(
+      {required String schooId,
+      required String batchId,
+      required String classID,
+      required String parentID,
+      required String studentId}) async {
+    DocumentSnapshot<Map<String, dynamic>> firebase = await FirebaseFirestore
+        .instance
+        .collection("SchoolListCollection")
+        .doc(schooId)
+        .collection(batchId)
+        .doc(batchId)
+        .collection('classes')
+        .doc(classID)
+        .collection('ParentCollection')
+        .doc(parentID)
+        .get();
+    return firebase.data() ?? {};
+  }
+
   assignStudentToParent(
       String schoolID,
       String batchID,

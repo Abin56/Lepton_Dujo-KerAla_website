@@ -12,13 +12,16 @@ import '../../../../../../controller/multipile_students/multipile_students_contr
 
 class AssigningPage extends StatefulWidget {
   String parentClassID;
+  String parentDocID;
   MultipleStudentsController multipileStudentsController =
       Get.put(MultipleStudentsController());
   AssigningPage(
       {super.key,
       required this.parentSnap,
       required this.classID,
-      required this.parentClassID});
+      required this.parentClassID,
+      required this.parentDocID
+      });
 
   DocumentSnapshot parentSnap;
   String classID;
@@ -121,6 +124,13 @@ class _AssigningPageState extends State<AssigningPage> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
+      log('Parent id ${widget.parentSnap['docid']}');
+      widget.multipileStudentsController.checkingparentCollection(
+          schooId: schoolListValue?['docid'],
+          batchId: Get.find<GetFireBaseData>().bYear.value,
+          classID: widget.parentClassID,
+          parentID: widget.parentDocID,
+          studentId: '');
       return widget.multipileStudentsController.isLoading.value
           ? const Center(child: CircularProgressIndicator.adaptive())
           : Scaffold(
