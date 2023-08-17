@@ -214,16 +214,6 @@ class AddAttendanceController extends GetxController {
     final String id1 = uuid.v1() + selectedPeriod.toString();
 
     for (var studentObject in studentsList) {
-      //some time user didn't press add button that time list is empty
-      if (studentsListToAdd.isEmpty) {
-        uploadingStudentsLists.add({
-          "Date": DateTime.now().toString(),
-          "present": true,
-          "studentName": studentObject.studentName,
-          "uid": studentObject.docid,
-        });
-      }
-
       //if student list is not empty
       for (var studentId in studentsListToAdd) {
         if (studentId == studentObject.docid) {
@@ -233,7 +223,19 @@ class AddAttendanceController extends GetxController {
             "studentName": studentObject.studentName,
             "uid": studentObject.docid,
           });
-        } else {
+        }
+      }
+      //this for that list not contain student id then it will be absent
+      bool isContain1 = false;
+      for (var studentObject in studentsList) {
+        isContain1 = false;
+        for (var element in uploadingStudentsLists) {
+          if (element["uid"] == studentObject.docid) {
+            isContain1 = true;
+            break;
+          }
+        }
+        if (!isContain1) {
           uploadingStudentsLists.add({
             "Date": DateTime.now().toString(),
             "present": false,
@@ -277,22 +279,13 @@ class AddAttendanceController extends GetxController {
           .set(element);
     }
     uploadingStudentsLists.clear();
+    studentsListToAdd.clear();
   }
 
   Future<void> createNewPeriodOnly() async {
     List<Map<String, dynamic>> uploadingStudentsLists = [];
     List<AddStudentModel> studentsList = await fetchAllStudentsData();
     for (var studentObject in studentsList) {
-      //some time user didn't press add button that time list is empty
-      if (studentsListToAdd.isEmpty) {
-        uploadingStudentsLists.add({
-          "Date": DateTime.now().toString(),
-          "present": true,
-          "studentName": studentObject.studentName,
-          "uid": studentObject.docid,
-        });
-      }
-
       //if student list is not empty
       for (var studentId in studentsListToAdd) {
         if (studentId == studentObject.docid) {
@@ -302,14 +295,26 @@ class AddAttendanceController extends GetxController {
             "studentName": studentObject.studentName,
             "uid": studentObject.docid,
           });
-        } else {
-          uploadingStudentsLists.add({
-            "Date": DateTime.now().toString(),
-            "present": false,
-            "studentName": studentObject.studentName,
-            "uid": studentObject.docid,
-          });
         }
+      }
+    }
+    //this for that list not contain student id then it will be absent
+    bool isContain1 = false;
+    for (var studentObject in studentsList) {
+      isContain1 = false;
+      for (var element in uploadingStudentsLists) {
+        if (element["uid"] == studentObject.docid) {
+          isContain1 = true;
+          break;
+        }
+      }
+      if (!isContain1) {
+        uploadingStudentsLists.add({
+          "Date": DateTime.now().toString(),
+          "present": false,
+          "studentName": studentObject.studentName,
+          "uid": studentObject.docid,
+        });
       }
     }
 
@@ -347,6 +352,7 @@ class AddAttendanceController extends GetxController {
           .set(element);
     }
     uploadingStudentsLists.clear();
+    studentsListToAdd.clear();
   }
 
   String formatDate(DateTime date) {

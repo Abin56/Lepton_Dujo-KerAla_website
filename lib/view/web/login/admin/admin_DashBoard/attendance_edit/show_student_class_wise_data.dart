@@ -66,8 +66,8 @@ class ShowStudentsClassWiseAttendanceDataPage extends StatelessWidget {
                                               .contains(
                                                   snapshot.data?[index].docid ??
                                                       " ")
-                                          ? const Text("Absent")
-                                          : const Text("Present"),
+                                          ? const Text("Present")
+                                          : const Text("Absent"),
                                     ),
                                   ),
                                 );
