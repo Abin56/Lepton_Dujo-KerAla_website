@@ -6,10 +6,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:country_state_city_picker/country_state_city_picker.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../../controller/add_Newschool/add_new_schhol.dart';
 import '../../../../controller/payment_tarif/checking_tarif_controller.dart';
@@ -35,6 +39,8 @@ class _SchoolProfileState extends State<SchoolProfile> {
   double gst = 0;
   bool isChecked = false;
   bool showError = false;
+  Uint8List? file;
+  Uint8List? _file;
 
   void _validateForm() {
     setState(() {
@@ -71,28 +77,29 @@ class _SchoolProfileState extends State<SchoolProfile> {
       //backgroundColor: Color.fromARGB(255, 27, 95, 88),
 
       body: ListView(children: [
-                Row(
+        Row(
           children: [
-             //IconButtonBackWidget(color: cWhite,),
+            //IconButtonBackWidget(color: cWhite,),
             Container(
               color: adminePrimayColor,
               height: size.height,
               width: 730.w,
               child: Column(
-               
                 children: [
-                 
                   Container(
-                    margin: EdgeInsets.only(top: 35.h,),
+                    margin: EdgeInsets.only(
+                      top: 35.h,
+                    ),
                     child: Row(
-                     // mainAxisAlignment: MainAxisAlignment.center,
+                      // mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        IconButtonBackWidget(color: cWhite,),
-                       
+                        IconButtonBackWidget(
+                          color: cWhite,
+                        ),
                         SizedBox(
-                                width: 150.w,
-                                ),
+                          width: 150.w,
+                        ),
                         Text(
                           'Hi ! Lepton DuJo ',
                           style: ralewayStyle.copyWith(
@@ -130,12 +137,13 @@ class _SchoolProfileState extends State<SchoolProfile> {
                   ),
 
                   Flexible(
-                    child: SizedBox(
-                      height: 890.h,
-                      width: 800.w,
-                      child: Center(
-                        child: LottieBuilder.asset('assets/images/22462-campus-library-school-building-maison-mocca-animation.json'),
-                      )))
+                      child: SizedBox(
+                          height: 890.h,
+                          width: 800.w,
+                          child: Center(
+                            child: LottieBuilder.asset(
+                                'assets/images/22462-campus-library-school-building-maison-mocca-animation.json'),
+                          )))
 //                         child: Padding(
 //                           padding: EdgeInsets.all(10.w),
 //                           child: Container(
@@ -198,7 +206,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
 //                                                     255, 0, 0, 0),
 //                                                 text:
 //                                                     " Based on student strength ",
-//                                                 fontsize: 15.w,        
+//                                                 fontsize: 15.w,
 //                                                 fontWeight: FontWeight.w500,
 //                                               ),
 //                                             ],
@@ -528,7 +536,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
 //                                                   ),
 //                                                 ),
 //                                                 sizedBoxH10,
-                                               
+
 //                                               // sizedBoxH10,
 //                                              //   GoogleMonstserratWidgets(
 //                                                 //     Row(
@@ -541,7 +549,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
 //                                                 //             ),
 //                                                 //       ],
 //                                                 //     ),
-                                               
+
 //                                                 Row(
 //                                                   mainAxisAlignment: MainAxisAlignment.center,
 //                                                   children: [
@@ -581,11 +589,10 @@ class _SchoolProfileState extends State<SchoolProfile> {
 //                                                               fontWeight:
 //                                                                   FontWeight.w600),
 //                                                         ),
-                                                   
-                                                   
+
 //                                                   ],
 //                                                 ),
-                                               
+
 //                                                 if (showError && !isChecked)
 //                                                   const Text(
 //                                                 'Please agree to the terms and conditions',
@@ -597,7 +604,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
 //                                                 //   onPressed: _validateForm,
 //                                                 //   child: const Text('Submit'),
 //                                                 // ),
-                                                 
+
 //                                               ],
 //                                             );
 //                                           }
@@ -630,147 +637,186 @@ class _SchoolProfileState extends State<SchoolProfile> {
                     padding: EdgeInsets.only(
                         left: size.width / 10, right: size.width / 10),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: SelectState(
-                          onCountryChanged: (value) {
-                            addNewSchoolController.countryValue.value = value;
-                          },
-                          onStateChanged: (value) {
-                            addNewSchoolController.stateValue.value = value;
-                          },
-                          onCityChanged: (value) {
-                            addNewSchoolController.cityValue.value = value;
-                          },
-                        ),
-                      ),
-                      SchoolTextFormFieldWidget(
-                        textEditingController:
-                            addNewSchoolController.schoolNameController,
-                        function: checkFieldEmpty,
-                        labelText: 'School Name',
-                        icon: Icons.school,
-                      ),
-                      SizedBox(height: 10.h,),
-                      SchoolTextFormFieldWidget(
-                        textEditingController:
-                            addNewSchoolController.schoolCodeController,
-                        function: checkFieldEmpty,
-                        labelText: 'School Code',
-                        icon: Icons.school_outlined,
-                      ),
-                      SizedBox(height: 10.h,),
-                      SchoolTextFormFieldWidget(
-                        textEditingController:
-                            addNewSchoolController.placeController,
-                        function: checkFieldEmpty,
-                        labelText: 'Place',
-                        icon: Icons.place_outlined,
-                      ),
-                      SizedBox(height: 10.h,),
-                      SchoolTextFormFieldWidget(
-                        textEditingController:
-                            addNewSchoolController.adminUserNameController,
-                        function: checkFieldEmpty,
-                        labelText: 'Admin Username',
-                        icon: Icons.admin_panel_settings_outlined,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: TextFormField(
-                          obscureText: true,
-                          validator: checkFieldPasswordIsValid,
-                          controller:
-                              addNewSchoolController.adminPasswordController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            icon: Icon(
-                              Icons.lock_outline_sharp,
-                              color: const Color.fromARGB(221, 28, 9, 110),
-                            ),
-                            labelText: 'Password',
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: TextFormField(
-                          obscureText: true,
-                          validator: (d) {
-                            if (addNewSchoolController
-                                    .adminPasswordController.text ==
-                                addNewSchoolController
-                                    .conformpassController.text) {
-                              return null;
-                            } else {
-                              return 'Check Password';
-                            }
-                          },
-                          controller:
-                              addNewSchoolController.conformpassController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            icon: Icon(
-                              Icons.lock_outline_sharp,
-                              color: const Color.fromARGB(221, 28, 9, 110),
-                            ),
-                            labelText: 'Confirm Password',
-                          ),
-                        ),
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
+                          Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: SelectState(
+                              onCountryChanged: (value) {
+                                addNewSchoolController.countryValue.value =
+                                    value;
+                              },
+                              onStateChanged: (value) {
+                                addNewSchoolController.stateValue.value = value;
+                              },
+                              onCityChanged: (value) {
+                                addNewSchoolController.cityValue.value = value;
+                              },
+                            ),
+                          ),
                           SchoolTextFormFieldWidget(
                             textEditingController:
-                                addNewSchoolController.emailController,
-                            function: checkFieldEmailIsValid,
-                            labelText: 'Enter email',
-                            hintText: "Enter school's official mail ID",
-                            icon: Icons.mail_outline,
+                                addNewSchoolController.schoolNameController,
+                            function: checkFieldEmpty,
+                            labelText: 'School Name',
+                            icon: Icons.school,
                           ),
-                            GooglePoppinsWidgets(
-                                                  text: "* You can't edit or change this entry in future ", 
-                                                  fontsize: 13,color:  Color.fromARGB(255, 27, 106, 170),),
-                        ],
-                      ),
-                    
-                      SchoolTextFormFieldWidget(
-                        textEditingController:
-                            addNewSchoolController.phoneNumberController,
-                        function: checkFieldPhoneNumberIsValid,
-                        labelText: 'Phone number',
-                        icon: Icons.phone,
-                      ),
-                      SizedBox(height: 10.h,),
-                      SchoolTextFormFieldWidget(
-                        textEditingController:
-                            addNewSchoolController.designationController,
-                        function: checkFieldEmpty,
-                        labelText: 'Designation',
-                        icon: Icons.person_4,
-                      ),
-                      SizedBox(height: 10.h,),
-                      Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: SizedBox(
-                          height: size.width * 1 / 25,
-                          width: size.width * 1 / 6,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  const Color.fromARGB(255, 3, 39, 68),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          SchoolTextFormFieldWidget(
+                            textEditingController:
+                                addNewSchoolController.schoolCodeController,
+                            function: checkFieldEmpty,
+                            labelText: 'School Code',
+                            icon: Icons.school_outlined,
+                          ),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          SchoolTextFormFieldWidget(
+                            textEditingController:
+                                addNewSchoolController.placeController,
+                            function: checkFieldEmpty,
+                            labelText: 'Place',
+                            icon: Icons.place_outlined,
+                          ),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          SchoolTextFormFieldWidget(
+                            textEditingController:
+                                addNewSchoolController.adminUserNameController,
+                            function: checkFieldEmpty,
+                            labelText: 'Admin Username',
+                            icon: Icons.admin_panel_settings_outlined,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(15),
+                            child: TextFormField(
+                              obscureText: true,
+                              validator: checkFieldPasswordIsValid,
+                              controller: addNewSchoolController
+                                  .adminPasswordController,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20)),
+                                icon: Icon(
+                                  Icons.lock_outline_sharp,
+                                  color: const Color.fromARGB(221, 28, 9, 110),
+                                ),
+                                labelText: 'Password',
                               ),
                             ),
-                            onPressed: () async {
-                              if (_formKey.currentState!.validate()) {
-                                return showDialog(
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(15),
+                            child: TextFormField(
+                              obscureText: true,
+                              validator: (d) {
+                                if (addNewSchoolController
+                                        .adminPasswordController.text ==
+                                    addNewSchoolController
+                                        .conformpassController.text) {
+                                  return null;
+                                } else {
+                                  return 'Check Password';
+                                }
+                              },
+                              controller:
+                                  addNewSchoolController.conformpassController,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20)),
+                                icon: Icon(
+                                  Icons.lock_outline_sharp,
+                                  color: const Color.fromARGB(221, 28, 9, 110),
+                                ),
+                                labelText: 'Confirm Password',
+                              ),
+                            ),
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SchoolTextFormFieldWidget(
+                                textEditingController:
+                                    addNewSchoolController.emailController,
+                                function: checkFieldEmailIsValid,
+                                labelText: 'Enter email',
+                                hintText: "Enter school's official mail ID",
+                                icon: Icons.mail_outline,
+                              ),
+                              GooglePoppinsWidgets(
+                                text:
+                                    "* You can't edit or change this entry in future ",
+                                fontsize: 13,
+                                color: Color.fromARGB(255, 27, 106, 170),
+                              ),
+                            ],
+                          ),
+                          SchoolTextFormFieldWidget(
+                            textEditingController:
+                                addNewSchoolController.phoneNumberController,
+                            function: checkFieldPhoneNumberIsValid,
+                            labelText: 'Phone number',
+                            icon: Icons.phone,
+                          ),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          SchoolTextFormFieldWidget(
+                            textEditingController:
+                                addNewSchoolController.designationController,
+                            function: checkFieldEmpty,
+                            labelText: 'Designation',
+                            icon: Icons.person_4,
+                          ),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          Stack(
+                            children: [
+                             (file == null)? CircleAvatar(
+                                radius: 80,
+                                backgroundColor:  Colors.blue
+                              ):  CircleAvatar(
+                                radius: 80,
+                                backgroundImage:  MemoryImage(file!)
+                              ),
+                              Positioned(
+                                  right: 0,
+                                  bottom: 0,
+                                  child: IconButton(
+                                      onPressed: () async {
+                                     FilePickerResult? result = await FilePicker.platform
+                                .pickFiles(type: FileType.image);
+                            if (result != null) {
+                              file = result.files.first.bytes;
+                              setState(() {
+                                _file = file;
+                              });
+                            }
+                                      },
+                                      icon: Icon(Icons.camera_alt)))
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(20),
+                            child: SizedBox(
+                              height: size.width * 1 / 25,
+                              width: size.width * 1 / 6,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 3, 39, 68),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                ),
+                                onPressed: () async {
+                                  if (_formKey.currentState!.validate()) {
+                                    return showDialog(
                                       context: context,
                                       barrierDismissible:
                                           false, // user must tap button!
@@ -789,6 +835,16 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                             TextButton(
                                               child: const Text('OK'),
                                               onPressed: () async {
+                                                   String uid = const Uuid().v1();
+      //isImageUpload.value = true;
+      UploadTask uploadTask = FirebaseStorage.instance
+          .ref()
+          .child("files/schooProfile/$uid")
+          .putData(file!);
+
+      final TaskSnapshot snap = await uploadTask;
+      final String downloadUrl = await snap.ref.getDownloadURL();
+      
                                                 await addNewSchoolController
                                                     .addNewSchool(
                                                         context,
@@ -804,110 +860,111 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                                                 .additionalFeatures[
                                                             0],
                                                         tarifController
-                                                            .additionalFeatures[1]);
+                                                            .additionalFeatures[1], 
+                                                            );
                                               },
                                             ),
                                           ],
                                         );
                                       },
                                     );
-                                  //    if (isChecked == true) {
-                                  //   return showDialog(
-                                  //     context: context,
-                                  //     barrierDismissible:
-                                  //         false, // user must tap button!
-                                  //     builder: (BuildContext context) {
-                                  //       return AlertDialog(
-                                  //         title: const Text('Alert'),
-                                  //         content: SingleChildScrollView(
-                                  //           child: ListBody(
-                                  //             children: const <Widget>[
-                                  //               Text(
-                                  //                   'You are ready to use 7 days free trial')
-                                  //             ],
-                                  //           ),
-                                  //         ),
-                                  //         actions: <Widget>[
-                                  //           TextButton(
-                                  //             child: const Text('OK'),
-                                  //             onPressed: () async {
-                                  //               await addNewSchoolController
-                                  //                   .addNewSchool(
-                                  //                       context,
-                                  //                       tarifController
-                                  //                           .maxstudents.value,
-                                  //                       tarifController
-                                  //                           .selectedPlan.value,
-                                  //                       tarifController
-                                  //                           .price.value,
-                                  //                       gst.toString(),
-                                  //                       totalpayment,
-                                  //                       tarifController
-                                  //                               .additionalFeatures[
-                                  //                           0],
-                                  //                       tarifController
-                                  //                           .additionalFeatures[1]);
-                                  //             },
-                                  //           ),
-                                  //         ],
-                                  //       );
-                                  //     },
-                                  //   );
-                                  // } else {
-                                  //   showToast(
-                                  //       msg:
-                                  //           'Please accept the terms and conditions');
-                                  //   return _validateForm();
-                                  // }
-                                // if (tarif == false) {
-                                //   return showDialog(
-                                //     context: context,
-                                //     barrierDismissible:
-                                //         false, // user must tap button!
-                                //     builder: (BuildContext context) {
-                                //       return AlertDialog(
-                                //         title: const Text('Alert'),
-                                //         content: SingleChildScrollView(
-                                //           child: ListBody(
-                                //             children:  <Widget>[
-                                //               GoogleMonstserratWidgets(text:
-                                //                   'Please complete tariff section',fontsize: 15.w,)
-                                //             ],
-                                //           ),
-                                //         ),
-                                //         actions: <Widget>[
-                                //           TextButton(
-                                //             child: const Text('OK'),
-                                //             onPressed: () {
-                                //               Navigator.of(context).pop();
-                                //             },
-                                //           ),
-                                //         ],
-                                //       );
-                                //     },
-                                //   );
-                                //   ///////////////////////////////////////////////////////////////////////////////////
-                                //   /////////////////
-                                //   /////////////////////////////
-                                //   //////////////////////////////
-                                //   ///
-                                //   ///
-                                //   ///
-                                //   ///
-                                //   ///
-                                //   ///
-                                //   ///
-                                //   ///
-                                // } else {
-                             
-                                // }
-                              }
-                            },
-                            child: const Text("Create"),
+                                    //    if (isChecked == true) {
+                                    //   return showDialog(
+                                    //     context: context,
+                                    //     barrierDismissible:
+                                    //         false, // user must tap button!
+                                    //     builder: (BuildContext context) {
+                                    //       return AlertDialog(
+                                    //         title: const Text('Alert'),
+                                    //         content: SingleChildScrollView(
+                                    //           child: ListBody(
+                                    //             children: const <Widget>[
+                                    //               Text(
+                                    //                   'You are ready to use 7 days free trial')
+                                    //             ],
+                                    //           ),
+                                    //         ),
+                                    //         actions: <Widget>[
+                                    //           TextButton(
+                                    //             child: const Text('OK'),
+                                    //             onPressed: () async {
+                                    //               await addNewSchoolController
+                                    //                   .addNewSchool(
+                                    //                       context,
+                                    //                       tarifController
+                                    //                           .maxstudents.value,
+                                    //                       tarifController
+                                    //                           .selectedPlan.value,
+                                    //                       tarifController
+                                    //                           .price.value,
+                                    //                       gst.toString(),
+                                    //                       totalpayment,
+                                    //                       tarifController
+                                    //                               .additionalFeatures[
+                                    //                           0],
+                                    //                       tarifController
+                                    //                           .additionalFeatures[1]);
+                                    //             },
+                                    //           ),
+                                    //         ],
+                                    //       );
+                                    //     },
+                                    //   );
+                                    // } else {
+                                    //   showToast(
+                                    //       msg:
+                                    //           'Please accept the terms and conditions');
+                                    //   return _validateForm();
+                                    // }
+                                    // if (tarif == false) {
+                                    //   return showDialog(
+                                    //     context: context,
+                                    //     barrierDismissible:
+                                    //         false, // user must tap button!
+                                    //     builder: (BuildContext context) {
+                                    //       return AlertDialog(
+                                    //         title: const Text('Alert'),
+                                    //         content: SingleChildScrollView(
+                                    //           child: ListBody(
+                                    //             children:  <Widget>[
+                                    //               GoogleMonstserratWidgets(text:
+                                    //                   'Please complete tariff section',fontsize: 15.w,)
+                                    //             ],
+                                    //           ),
+                                    //         ),
+                                    //         actions: <Widget>[
+                                    //           TextButton(
+                                    //             child: const Text('OK'),
+                                    //             onPressed: () {
+                                    //               Navigator.of(context).pop();
+                                    //             },
+                                    //           ),
+                                    //         ],
+                                    //       );
+                                    //     },
+                                    //   );
+                                    //   ///////////////////////////////////////////////////////////////////////////////////
+                                    //   /////////////////
+                                    //   /////////////////////////////
+                                    //   //////////////////////////////
+                                    //   ///
+                                    //   ///
+                                    //   ///
+                                    //   ///
+                                    //   ///
+                                    //   ///
+                                    //   ///
+                                    //   ///
+                                    // } else {
+
+                                    // }
+                                  }
+                                },
+                                child: const Text("Create"),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ]),
+                        ]),
                   ),
                 ),
               ),
@@ -1163,20 +1220,20 @@ class SchoolTextFormFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-       padding:  EdgeInsets.only(bottom: 5.w,left: 15.w,right: 15.w,top: 15.w),
+      padding: EdgeInsets.only(bottom: 5.w, left: 15.w, right: 15.w, top: 15.w),
       child: TextFormField(
         // obscureText: obscureText,
         validator: function,
         controller: textEditingController,
         decoration: InputDecoration(
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
-          icon: Icon(
-            icon,
-            color: const Color.fromARGB(221, 28, 9, 110),
-          ),
-          labelText: labelText,
-          hintText: hintText,labelStyle: TextStyle(color: cBlack)
-        ),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+            icon: Icon(
+              icon,
+              color: const Color.fromARGB(221, 28, 9, 110),
+            ),
+            labelText: labelText,
+            hintText: hintText,
+            labelStyle: TextStyle(color: cBlack)),
       ),
     );
   }
