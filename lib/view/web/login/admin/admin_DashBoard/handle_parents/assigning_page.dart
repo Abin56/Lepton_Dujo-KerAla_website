@@ -20,8 +20,7 @@ class AssigningPage extends StatefulWidget {
       required this.parentSnap,
       required this.classID,
       required this.parentClassID,
-      required this.parentDocID
-      });
+      required this.parentDocID});
 
   DocumentSnapshot parentSnap;
   String classID;
@@ -124,13 +123,6 @@ class _AssigningPageState extends State<AssigningPage> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      log('Parent id ${widget.parentSnap['docid']}');
-      widget.multipileStudentsController.checkingparentCollection(
-          schooId: schoolListValue?['docid'],
-          batchId: Get.find<GetFireBaseData>().bYear.value,
-          classID: widget.parentClassID,
-          parentID: widget.parentDocID,
-          studentId: '');
       return widget.multipileStudentsController.isLoading.value
           ? const Center(child: CircularProgressIndicator.adaptive())
           : Scaffold(
@@ -161,9 +153,11 @@ class _AssigningPageState extends State<AssigningPage> {
                             .collection('classes')
                             .snapshots(),
                         builder: ((context, snapshot) {
-                           if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              }
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }
 
                           return Padding(
                             padding:
@@ -226,9 +220,11 @@ class _AssigningPageState extends State<AssigningPage> {
                               .collection('Students')
                               .snapshots(),
                           builder: ((context, snapshot) {
-                             if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              }
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Center(
+                                  child: CircularProgressIndicator());
+                            }
 
                             return Padding(
                               padding:
