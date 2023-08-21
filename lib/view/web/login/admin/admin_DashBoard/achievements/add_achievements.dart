@@ -401,6 +401,7 @@ class _AddAchievementsState extends State<AddAchievements> {
                   Padding(
                     padding: const EdgeInsets.only(left: 80, right: 80, top: 20),
                     child: TextFormField(
+                      validator: checkFieldEmpty,
                       controller: dateController,
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(
@@ -481,16 +482,28 @@ class _AddAchievementsState extends State<AddAchievements> {
                     padding:  EdgeInsets.all(10.w),
                     child: (InkWell(
                       onTap: () async{
-                        
-                        if (formKey.currentState!.validate()){
+
+                        if(_file==null){
+                          showToast(msg: 'Select an image');
+                        }
+                        else{
+                           if (formKey.currentState!.validate()){
                    // formKey.currentState!.validate();
                         
-                       await uploadImageToStorage(file).then((value) => showToast(msg: 'New Achievement Added!'));
+                       await uploadImageToStorage(file).then((value) => showToast(msg: 'New Achievement Added!')).then((value) {
+                           setState(() {
+                          _file = null;
+                          classListValue = null;
+                        });
+                       });
                         achievementController.clear();
                         dateController.clear();
                         descriptionController.clear();
                         admissionNumberController.clear();
+                     
                         }
+                        }
+                       
                       },
                       child: CreateContainerWidget(text: 'Create',fontSize: 20.w,),
                     )),

@@ -143,7 +143,7 @@ class SearchTeachers extends SearchDelegate {
 
               return GestureDetector(
                 onTap: () {
-                  final data = allTeachersController.searchTeachers[index];
+                  final data = buildSuggestionList[index];
 
                   allTeachersController.getTeacherDetails(
                     context,
@@ -172,7 +172,7 @@ class SearchTeachers extends SearchDelegate {
                         GestureDetector(
                             onTap: () {
                               final data =
-                                  allTeachersController.searchTeachers[index];
+                                  buildSuggestionList[index];
                             },
                             child: const CircleAvatar(
                               radius: 60,

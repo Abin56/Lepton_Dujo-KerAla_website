@@ -721,6 +721,10 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
     admissionNumberController.clear();
     descriptionController.clear();
     scholarshipNameController.clear();
+    setState(() {
+      classListValue = null;
+      _file = null;
+    });
   }
 }
 

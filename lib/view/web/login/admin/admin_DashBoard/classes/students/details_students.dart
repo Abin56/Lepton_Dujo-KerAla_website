@@ -101,38 +101,38 @@ class StudentsDetails extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Row(
-                        children: [
-                          LottieBuilder.network(
-                            'https://assets7.lottiefiles.com/packages/lf20_gslpxfoi.json',
-                            height: 70,
-                          ),
-                          sizedBoxW20,
-                          Text(
-                            "Male : $totalMale",
-                            style: GoogleFonts.poppins(
-                                color: const Color.fromARGB(255, 0, 0, 0),
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          LottieBuilder.network(
-                            'https://assets7.lottiefiles.com/packages/lf20_pmdvl45r.json',
-                            height: 70,
-                          ),
-                          sizedBoxW20,
-                          Text(
-                            "Female :$totaFemale",
-                            style: GoogleFonts.poppins(
-                                color: const Color.fromARGB(255, 19, 19, 19),
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
+                      // Row(
+                      //   children: [
+                      //     LottieBuilder.network(
+                      //       'https://assets7.lottiefiles.com/packages/lf20_gslpxfoi.json',
+                      //       height: 70,
+                      //     ),
+                      //     sizedBoxW20,
+                      //     Text(
+                      //       "Male : $totalMale",
+                      //       style: GoogleFonts.poppins(
+                      //           color: const Color.fromARGB(255, 0, 0, 0),cd ..
+                      //           fontSize: 20,
+                      //           fontWeight: FontWeight.bold),
+                      //     ),
+                      //   ],
+                      // ),
+                      // Row(
+                      //   children: [
+                      //     LottieBuilder.network(
+                      //       'https://assets7.lottiefiles.com/packages/lf20_pmdvl45r.json',
+                      //       height: 70,
+                      //     ),
+                      //     sizedBoxW20,
+                      //     Text(
+                      //       "Female :$totaFemale",
+                      //       style: GoogleFonts.poppins(
+                      //           color: const Color.fromARGB(255, 19, 19, 19),
+                      //           fontSize: 20,
+                      //           fontWeight: FontWeight.bold),
+                      //     ),
+                      //   ],
+                      // ),
                     ],
                   ),
                 ),
