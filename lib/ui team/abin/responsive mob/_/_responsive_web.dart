@@ -24,7 +24,7 @@ class HomePageResponse extends StatelessWidget {
       "https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/dujocolleges.jpeg?alt=media&token=0c3fa202-c59f-47bd-b997-88f3128e6871";
 
   String _description = "Any schools from Kerala can register on\n"
-      "Lepton DuJo. Lepton Dujo is a mobile \n"
+      "COSTECH DuJo. COSTECH Dujo is a mobile \n"
       "application with student login,parent, \n"
       "teacher login";
 

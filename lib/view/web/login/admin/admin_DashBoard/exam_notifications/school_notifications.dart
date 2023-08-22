@@ -226,7 +226,7 @@ class _SchoolLevelNotificationsState extends State<SchoolLevelNotifications> {
                                 }));
                           },
                           title: Text(
-                            'Add new Notification',
+                            'Add new notification',
                             style: GoogleFonts.poppins(
                                 color: Colors.white, fontSize: 20.h),
                           ),

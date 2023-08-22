@@ -50,7 +50,7 @@ class AllClassController extends GetxController {
                                 //  mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   GoogleMonstserratWidgets(
-                                      text: 'ClassName : $className',
+                                      text: 'Classname : $className',
                                       fontsize: 14.w),
                                   IconButton(
                                       onPressed: () async {
@@ -102,7 +102,7 @@ class AllClassController extends GetxController {
                                 children: [
                                   GoogleMonstserratWidgets(
                                       text:
-                                          'ClassIncharge : $classInchargeTeacherName',
+                                          'Class Incharge : $classInchargeTeacherName',
                                       fontsize: 15.w),
                                 ],
                               ),

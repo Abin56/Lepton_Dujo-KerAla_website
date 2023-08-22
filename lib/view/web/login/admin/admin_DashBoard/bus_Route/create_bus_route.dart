@@ -117,7 +117,7 @@ class CreateBusRoute extends StatelessWidget {
                           BusRouteTextFormWidget(
                             textEditingController: staffinchargeController,
                             function: checkFieldEmpty,
-                            labelText: 'Staff inCharge',
+                            labelText: 'Staff Incharge',
                             icon: Icons.person_2,
                           ),
                           SizedBox(

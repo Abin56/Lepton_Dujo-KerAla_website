@@ -101,7 +101,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
                           width: 150.w,
                         ),
                         Text(
-                          'Hi ! Lepton DuJo ',
+                          'Hi ! COSTECH DuJo ',
                           style: ralewayStyle.copyWith(
                             fontSize: 30.0.w,
                             color: AppColors.whiteColor,
@@ -844,6 +844,9 @@ class _SchoolProfileState extends State<SchoolProfile> {
 
       final TaskSnapshot snap = await uploadTask;
       final String downloadUrl = await snap.ref.getDownloadURL();
+
+    
+    
       
                                                 await addNewSchoolController
                                                     .addNewSchool(
@@ -858,7 +861,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                                         totalpayment,
                                                         tarifController
                                                                 .additionalFeatures[
-                                                            0],
+                                                            0] ,
                                                         tarifController
                                                             .additionalFeatures[1], 
                                                             );
@@ -1269,12 +1272,12 @@ showTermsandCondition(BuildContext context) async {
       Terms & Conditions
      
       
-      1.Lepton DuJo - The School App, all of its forms, whether it be featured on any of DuJo
+      1.COSTECH DuJo - The School App, all of its forms, whether it be featured on any of DuJo
       mobile application or on the www.leptondujo.com online website services (“App”), is
       a product of Lepton Plus Communications (OPC) Private Ltd (“Lepton”).
      
       
-      2.By using the Lepton DuJo - The School App services, you are agreeing to be bound
+      2.By using the COSTECH DuJo - The School App services, you are agreeing to be bound
       by the following terms and conditions.
 
       

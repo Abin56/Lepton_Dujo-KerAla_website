@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/controller/get_firebase-data/get_firebase_data.dart';
+import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/handle_parents/parents_view_page.dart';
 import 'package:dujo_kerala_website/view/web/widgets/drop_DownList/schoolDropDownList.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class HandleParentsWithMultipleChildren extends StatelessWidget {
   Widget build(BuildContext context) {
     log(Get.find<GetFireBaseData>().getTeacherClassRole.value);
     return Scaffold(
-        appBar: AppBar(
+        appBar: AppBar(backgroundColor: adminePrimayColor,
           title: const Text('Select Class'),
         ),
         body: StreamBuilder(

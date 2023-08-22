@@ -17,7 +17,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../view/constant/constant.dart';
-import '../../../../../view/web/home/footer/hover-text/hovertext.dart';
 import '../../../../view/constant/responsive_app.dart';
 import 'mob_view.dart/feature_tile.dart';
 
@@ -28,7 +27,7 @@ class HomePageImages extends StatelessWidget {
       "https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/dujocolleges.jpeg?alt=media&token=0c3fa202-c59f-47bd-b997-88f3128e6871";
 
   String _description = "Any schools from Kerala can register on\n"
-      "Lepton DuJo. Lepton Dujo is a mobile application\n"
+      "COSTECH DuJo. COSTECH Dujo is a mobile application\n"
       "with student login,  parent login, teacher login";
 
   Uri _faceBookUrl =
@@ -37,6 +36,8 @@ class HomePageImages extends StatelessWidget {
   Uri _instaUrl = Uri.parse('https://www.instagram.com/leptondujo/');
   Uri _utubeUrl = Uri.parse('https://www.youtube.com/@LEPTONDUJO/featured');
   Uri _leptonUrl = Uri.parse('http://www.leptoncommunications.com');
+  
+
 
   Future<void> _launchFacebookUrl() async {
     if (!await launchUrl(_faceBookUrl)) {
@@ -820,14 +821,16 @@ class HomePageImages extends StatelessWidget {
             )
           : ListView(children: [
               Container(
-                color: Color.fromARGB(255, 240, 240, 240),
+                color: Color(0xFFCE230C),
+                //Color.fromARGB(255, 240, 240, 240),
                 height: 60.h,
                 width: MediaQuery.of(context).size.width,
                 child: Row(
                   //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      //  color: cred,
+
+                       //color: ,
                       width: 470.w,
                       child: Row(
                         children: [
@@ -835,14 +838,14 @@ class HomePageImages extends StatelessWidget {
                             padding: EdgeInsets.only(left: 10.w),
                             child: Row(
                               children: [
-                                Icon(Icons.phone, size: 20.w),
+                                Icon(Icons.phone, size: 20.w,color: cWhite,),
                                 SizedBox(
                                   width: 5.w,
                                 ),
                                 Text(
                                   '+91 8891436651',
                                   style: GoogleFonts.poppins(
-                                      color: adminePrimayColor,
+                                      color: cWhite,
                                       //Color(0xFF17BDB5),
                                       fontSize: 16.w,
                                       fontWeight: FontWeight.w500),
@@ -853,7 +856,7 @@ class HomePageImages extends StatelessWidget {
                           SizedBox(width: 20.h),
                           Row(
                             children: [
-                              Icon(Icons.mail, size: 20.w),
+                              Icon(Icons.mail, size: 20.w,color: cWhite,),
                               SizedBox(
                                 width: 5.h,
                               ),
@@ -861,7 +864,7 @@ class HomePageImages extends StatelessWidget {
                                 'info@leptondujo.com',
                                 style: GoogleFonts.poppins(
                                     // adminePrimayColor,
-                                    color: adminePrimayColor,
+                                    color: cWhite,
                                     fontSize: 16.w,
                                     fontWeight: FontWeight.w500),
                               ),
@@ -879,45 +882,45 @@ class HomePageImages extends StatelessWidget {
                       child: Row(
                         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                barrierDismissible:
-                                    false, // user must tap button!
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: const Text('School List'),
-                                    content: SingleChildScrollView(
-                                      child: ListBody(
-                                        children: const <Widget>[
-                                          GetSchoolListDropDownButton()
-                                        ],
-                                      ),
-                                    ),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        child: const Text('Cancel'),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            },
-                            child: OnHoverText(
-                              builder: (isHoverd) {
-                                final color = isHoverd
-                                    ? Color.fromARGB(255, 255, 255, 255)
-                                    : Color.fromARGB(255, 245, 0, 0);
-                                return ContainerDecrationTabs(
-                                  text: 'Schools',
-                                );
-                              },
-                            ),
-                          ),
+                          // GestureDetector(
+                          //   onTap: () {
+                          //     showDialog(
+                          //       context: context,
+                          //       barrierDismissible:
+                          //           false, // user must tap button!
+                          //       builder: (BuildContext context) {
+                          //         return AlertDialog(
+                          //           title: const Text('School List'),
+                          //           content: SingleChildScrollView(
+                          //             child: ListBody(
+                          //               children: const <Widget>[
+                          //                 GetSchoolListDropDownButton()
+                          //               ],
+                          //             ),
+                          //           ),
+                          //           actions: <Widget>[
+                          //             TextButton(
+                          //               child: const Text('Cancel'),
+                          //               onPressed: () {
+                          //                 Navigator.of(context).pop();
+                          //               },
+                          //             ),
+                          //           ],
+                          //         );
+                          //       },
+                          //     );
+                          //   },
+                          //   child: OnHoverText(
+                          //     builder: (isHoverd) {
+                          //       final color = isHoverd
+                          //           ? Color.fromARGB(255, 255, 255, 255)
+                          //           : Color.fromARGB(255, 245, 0, 0);
+                          //       return ContainerDecrationTabs(
+                          //         text: 'Schools',
+                          //       );
+                          //     },
+                          //   ),
+                          // ),
                           SizedBox(
                             width: 10.w,
                           ),
@@ -1149,11 +1152,19 @@ class HomePageImages extends StatelessWidget {
                               fontsize: 15,
                               color: adminePrimayColor,
                               fontWeight: FontWeight.w500),
+                                SizedBox(
+                                height: 85,
+                                width: 270,
+                                // color: cred                ,
+                                child: Center(
+                                  child:
+                                Image.asset("assets/images/COSTECH_bg.png",fit: BoxFit.cover,)
+                                )),
                           //sizedBoxH5,
                           GoogleMonstserratWidgets(
                             text: '10.00 AM to 06.00 PM, Mon-Fri',
                             fontWeight: FontWeight.w500,
-                            fontsize: 15.w,
+                            fontsize: 15.sp,
                             color: adminePrimayColor,
                           ),
                           sizedBoxH10,
@@ -1180,32 +1191,54 @@ class HomePageImages extends StatelessWidget {
                             children: [
                               Stack(
                                 children: [
-                                  SizedBox(
+                                  Container(
+                                    margin:
+                                        EdgeInsets.only(left: 10.w),
                                     // color: cBlue,
-                                    width: 200.w,
+                                    width: 230.w,
                                     height: 50.h,
 
-                                    child: Image.asset(
-                                      //"https://firebasestorage.googleapis.com/v0/b/leptonscipro-31792.appspot.com/o/files%2Fimages%2FLepton-removebg-preview.png?alt=media&token=cb2cbd20-7630-4681-8857-f8b245018453",
-                                      "assets/images/lepton2.png",
-
-                                      width: 150.w,
-                                      height: 150.h,
+                                    child:
+                                    Text(
+                                     
+                                    "C O S T E C H",
+                                     
+                                    style: GoogleFonts.marvel(
+                                      fontSize: 42.w,
+                                      fontWeight: FontWeight.bold,
+                                     // letterSpacing: 1.5,
+                                      color: adminePrimayColor,
                                     ),
+                                  ),    
+                                    // Image.asset(
+                                    //   //"https://firebasestorage.googleapis.com/v0/b/leptonscipro-31792.appspot.com/o/files%2Fimages%2FLepton-removebg-preview.png?alt=media&token=cb2cbd20-7630-4681-8857-f8b245018453",
+                                    //   "assets/images/lepton2.png",
+
+                                    //   width: 150.w,
+                                    //   height: 150.h,
+                                    // ),
                                   ),
                                   Container(
                                     margin:
-                                        EdgeInsets.only(top: 60.h, left: 10.w),
+                                        EdgeInsets.only(top: 60.h, left: 0.w),
                                     // color: cBlue,
-                                    width: 200.w,
+                                    width: 210.w,
                                     height: 50.h,
 
                                     child: Image.asset(
                                       'assets/images/dujon.png',
-                                      width: 170.h,
+                                      width: 180.h,
                                       height: 170.h,
                                     ),
                                   ),
+                                    // Image.asset(
+                                    //   //"https://firebasestorage.googleapis.com/v0/b/leptonscipro-31792.appspot.com/o/files%2Fimages%2FLepton-removebg-preview.png?alt=media&token=cb2cbd20-7630-4681-8857-f8b245018453",
+                                    //   "assets/images/lepton2.png",
+
+                                    //   width: 150.w,
+                                    //   height: 150.h,
+                                    // ),
+                                 
                                 ],
                               ),
                               Padding(
@@ -1259,116 +1292,214 @@ class HomePageImages extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  SizedBox(
-                      height: 800.h,
-                      width: double.infinity,
-                      child: Image(
-                        image: AssetImage(
-                          'assets/images/dujo_schools_image.png',
-                        ),
-                        fit: BoxFit.fill,
-                      )),
-                  sizedBoxH20,
-                  sizedBoxH20,
                   Stack(
                     children: [
                       SizedBox(
                           height: 800.h,
                           width: double.infinity,
+                          child: Image(
+                            image: AssetImage(
+                              'assets/images/dujo_schools_image.png',
+                            ),
+                            fit: BoxFit.fill,
+                          )),
+                          Container(
+                            margin: EdgeInsets.only(left: 650,top: 155),
+                            height: 800.h,
+                          width: 1100.w,
+                         // color: cBlue,
+                            child: Center(
+                              child: Column(
+                               // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  GoogleMonstserratWidgets(
+                                    color: cBlack,
+                                    fontWeight: FontWeight.w500,
+                                    fontsize: 14.sp,
+                                    text: "The 'COSTECH DuJO The School App' is a collaborative effort between Lepton Communications and \n"
+                                    "\n"
+                                    "COSTECH, designed to serve as a comprehensive mobile application for efficiently managing various \n"
+                                    "\n"
+                                    "aspects of school infrastructure in the state of Kerala, India. The app offers a range of features and \n"
+                                    "\n"
+                                    "functionalities catering to different stakeholders within the educational ecosystem."),
+                                                       sizedBoxH30,  
+                                                   Row(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                     children: [
+                                                       Column(
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                         children: [
+                                                           
+                                                                            GoogleMonstserratWidgets(
+                                                          color: cBlack,
+                                    fontsize: 14.sp,
+                                    fontWeight: FontWeight.w700,
+                                    text:    "* Admin Login\n"),
+                                                         
+                                                      GoogleMonstserratWidgets(
+                                                          color: cBlack,
+                                    fontsize: 14.sp,
+                                    fontWeight: FontWeight.w700,
+                                    text:     "* Class Teacher Login\n"),
+                                                         
+                                                         GoogleMonstserratWidgets(
+                                                          color: cBlack,
+                                    fontsize: 14.sp,
+                                    fontWeight: FontWeight.w700,
+                                    text: "* Parent Login\n"),
+                                                         
+                                                        GoogleMonstserratWidgets(
+                                                          color: cBlack,
+                                    fontsize: 14.sp,
+                                    fontWeight: FontWeight.w700,
+                                    text:   "* Student Login\n"),
+                                                         
+                                                       GoogleMonstserratWidgets(
+                                                          color: cBlack,
+                                    fontsize: 14.sp,
+                                    fontWeight: FontWeight.w700,
+                                    text:    "* Guardian Login \n"),
+                                                         
+                                                   
+                                    GoogleMonstserratWidgets( color: cBlack,
+                                    fontsize: 14.sp,
+                                    fontWeight: FontWeight.w700,
+                                    text: "* Online Classes \n"),
 
-                          //src: ,
-                          child: Image(
-                            image: AssetImage(
-                              'assets/images/dujo_colleges_image.png',
-                            ),
-                            fit: BoxFit.fill,
-                          )),
-                    ],
-                  ),
-                  sizedBoxH20,
-                  sizedBoxH20,
-                  Stack(
-                    children: [
-                      SizedBox(
-                          height: 800.h,
-                          width: double.infinity,
-                          child: Image(
-                            image: AssetImage(
-                              'assets/images/dujo_professional_image.png',
-                            ),
-                            fit: BoxFit.fill,
-                          )),
-                      //  InkWell(
-                      //    onTap: () {
-                      //                                   Navigator.push(
-                      //                                     context,
-                      //                                     MaterialPageRoute(
-                      //                                       builder:(context) => UnderMaintanceScreen(),
-                      //                                     ),
-                      //                                   );
-                      //                                 },
-                      //    child: Container(
-                      //                         margin: EdgeInsets.only(top: 690.h,left: 210.w),
-                      //                         height: 60.h,
-                      //                         width: 250.w,
-                      //                         color: adminePrimayColor,
-                      //                         child: Center(
-                      //                           child: Text(
-                      //                             'Create professional Profile',
-                      //                             style: GoogleFonts.poppins(
-                      //                                 color: Colors.white,
-                      //                                 fontSize: 16.w,
-                      //                                 fontWeight: FontWeight.w500),
-                      //                           ),
-                      //                         ),
-                      //                       ),
-                      //  ),
-                    ],
-                  ),
-                  sizedBoxH20,
-                  sizedBoxH20,
-                  Stack(
-                    children: [
-                      SizedBox(
-                          height: 800.h,
-                          width: double.infinity,
-                          child: Image(
-                            image: AssetImage(
-                              'assets/images/dujo_institutions_image.png',
-                            ),
-                            fit: BoxFit.fill,
-                          )),
-                      //  InkWell(
-                      //    onTap: () {
-                      //                                   Navigator.push(
-                      //                                     context,
-                      //                                     MaterialPageRoute(
-                      //                                       builder:(context) => UnderMaintanceScreen(),
-                      //                                     ),
-                      //                                   );
-                      //                                 },
-                      //    child: Container(
-                      //                        margin: EdgeInsets.only(top: 690.h,left: 210.w),
-                      //                         height: 60.h,
-                      //                         width: 250.w,
+                                      ],
+                                                       ),
+                                                         sizedBoxw20,
+                                                         sizedBoxw10,
+                                                     Column(
+                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                       children: [
+                                                         GoogleMonstserratWidgets(
+                                                              color: cBlack,
+                                    fontsize: 14.sp,
+                                    fontWeight: FontWeight.w700,
+                                    text:      "* Recorded Sessions\n"),
+                                                      
+                                                         
+                                                        GoogleMonstserratWidgets(
+                                                          color: cBlack,
+                                    fontsize: 14.sp,
+                                    fontWeight: FontWeight.w700,
+                                    text:   "* Study Materials \n"),
+                                                         
+                                                      GoogleMonstserratWidgets(
+                                                          color: cBlack,
+                                    fontsize: 14.sp,
+                                    fontWeight: FontWeight.w700,
+                                    text:     "* Notices and Events \n"),
 
-                      //                         color: adminePrimayColor,
-                      //                         child: Center(
-                      //                           child: Text(
-                      //                             'Create institution Profile',
-                      //                             style: GoogleFonts.poppins(
-                      //                                 color: Colors.white,
-                      //                                 fontSize: 16.w,
-                      //                                 fontWeight: FontWeight.w500),
-                      //                           ),
-                      //                         ),
-                      //                       ),
-                      //  ),
+                                    GoogleMonstserratWidgets(
+                                                          color: cBlack,
+                                    fontsize: 14.sp,
+                                    fontWeight: FontWeight.w700,
+                                    text:   "* Attendance Updates \n"),
+
+                                     GoogleMonstserratWidgets(
+                                                          color: cBlack,
+                                    fontsize: 14.sp,
+                                    fontWeight: FontWeight.w700,
+                                    text:    "* Notifications and Alerts \n"),
+
+                                     GoogleMonstserratWidgets(
+                                                          color: cBlack,
+                                    fontsize: 14.sp,
+                                    fontWeight: FontWeight.w700,
+                                    text:       "* Chat Functionality \n"),
+
+                                                         
+                                  
+                                     ],
+                                                     ),
+                                     ],
+                                                   ),
+
+                                                //   sizedBoxH30,
+                                   GoogleMonstserratWidgets(
+                                    color: cBlack,
+                                    fontsize: 14 .sp,
+                                    fontWeight: FontWeight.w500,
+                                    text: 
+                                    "\n"
+                                    "'COSTECH DuJO The School App' aims to revolutionize the way schools in Kerala manage\n"
+                                    "\n"
+                                            "their infrastructure and interact with their stakeholders. By providing a centralized platform\n"
+                                            "\n"
+                                            "for communication,learning, and administration, the app enhances the educational experience\n"
+                                            "\n"
+                                            "for students,simplifies administrative tasks,and fosters a more connected and engaged \n"
+                                            "\n"
+                                            "educational community.",),
+                                ],
+                              ),
+                            ),
+                          )
                     ],
                   ),
+                //  sizedBoxH20,
+                //  sizedBoxH20,
+                  // Stack(
+                  //   children: [
+                  //     SizedBox(
+                  //         height: 800.h,
+                  //         width: double.infinity,
+
+                  //         //src: ,
+                  //         child: Image(
+                  //           image: AssetImage(
+                  //             'assets/images/dujo_colleges_image.png',
+                  //           ),
+                  //           fit: BoxFit.fill,
+                  //         )),
+                  //   ],
+                  // ),
+                  // sizedBoxH20,
+                  // sizedBoxH20,
+                  // Stack(
+                  //   children: [
+                  //     SizedBox(
+                  //         height: 800.h,
+                  //         width: double.infinity,
+                  //         child: Image(
+                  //           image: AssetImage(
+                  //             'assets/images/dujo_professional_image.png',
+                  //           ),
+                  //           fit: BoxFit.fill,
+                  //         )),
+                     
+                  //   ],
+                  // ),
+                  // sizedBoxH20,
+                  // sizedBoxH20,
+                  // Stack(
+                  //   children: [
+                  //     SizedBox(
+                  //         height: 800.h,
+                  //         width: double.infinity,
+                  //         child: Image(
+                  //           image: AssetImage(
+                  //             'assets/images/dujo_institutions_image.png',
+                  //           ),
+                  //           fit: BoxFit.fill,
+                  //         )),
+                      
+                  //   ],
+                  // ),
                 ],
               ),
-              sizedBoxH100,
+              sizedBoxH40,
+              
+              Divider(color: adminScreencolor
+              // Color(0xFFCE230C),
+              ),
+              sizedBoxH20,
               FooterHomeP()
             ]),
     );
@@ -1465,55 +1596,55 @@ class TextContainerWidget extends StatelessWidget {
             sizedBoxH10,
             GoogleMonstserratWidgets(
                 text: text,
-                fontsize: 18.w,
+                fontsize: 18.sp,
                 fontWeight: FontWeight.w900,
                 color: cWhite),
             sizedBoxH10,
             GoogleMonstserratWidgets(
                 text: text1,
-                fontsize: 15.w,
+                fontsize: 15.sp,
                 fontWeight: FontWeight.w600,
                 color: cWhite),
             sizedBoxH10,
             GoogleMonstserratWidgets(
                 text: text2,
-                fontsize: 15.w,
+                fontsize: 15.sp,
                 fontWeight: FontWeight.w600,
                 color: cWhite),
             sizedBoxH10,
             GoogleMonstserratWidgets(
                 text: text3,
-                fontsize: 15.w,
+                fontsize: 15.sp,
                 fontWeight: FontWeight.w600,
                 color: cWhite),
             sizedBoxH10,
             GoogleMonstserratWidgets(
                 text: text4,
-                fontsize: 15.w,
+                fontsize: 15.sp,
                 fontWeight: FontWeight.w600,
                 color: cWhite),
             sizedBoxH10,
             GoogleMonstserratWidgets(
                 text: text5,
-                fontsize: 15.w,
+                fontsize: 15.sp,
                 fontWeight: FontWeight.w600,
                 color: cWhite),
             sizedBoxH10,
             GoogleMonstserratWidgets(
                 text: text6,
-                fontsize: 15.w,
+                fontsize: 15.sp,
                 fontWeight: FontWeight.w600,
                 color: cWhite),
             sizedBoxH10,
             GoogleMonstserratWidgets(
                 text: text7,
-                fontsize: 15.w,
+                fontsize: 15.sp,
                 fontWeight: FontWeight.w600,
                 color: cWhite),
             sizedBoxH10,
             GoogleMonstserratWidgets(
                 text: text8,
-                fontsize: 15.w,
+                fontsize: 15.sp,
                 fontWeight: FontWeight.w600,
                 color: cWhite),
           ]),

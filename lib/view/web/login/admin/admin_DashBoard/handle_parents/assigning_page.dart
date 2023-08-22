@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/controller/get_firebase-data/get_firebase_data.dart';
+import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:dujo_kerala_website/view/web/widgets/drop_DownList/schoolDropDownList.dart';
 import 'package:flutter/material.dart';
@@ -123,7 +124,7 @@ class _AssigningPageState extends State<AssigningPage> {
     return Obx(() {
       return widget.multipileStudentsController.isLoading.value
           ? const Center(child: CircularProgressIndicator.adaptive())
-          : Scaffold(
+          : Scaffold(backgroundColor: adminePrimayColor,
               appBar: AppBar(
                 title: const Text('Assigning Page'),
               ),

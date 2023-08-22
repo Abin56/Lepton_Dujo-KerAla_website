@@ -147,7 +147,7 @@ class AchievementsViewAndEdit extends StatelessWidget {
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500)),
                                   Text(
-                                    'Date Of achievement: ' +
+                                    'Date of achievement: ' +
                                         snapshot.data!.docs[index]
                                             ['dateofAchievement'],
                                     style: GoogleFonts.poppins(

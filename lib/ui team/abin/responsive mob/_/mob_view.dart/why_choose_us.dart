@@ -21,7 +21,7 @@ class WhyChooseUs extends StatelessWidget {
              child: SizedBox(
               height: 500.h,
               width: double.infinity,
-              child: GoogleMonstserratWidgets(text: "Lepton DUJO - the ultimate digitalized school infra app that streamlines infrastructure management and enhances school operations. With DUJO, schools can easily manage their facilities, assets, and resources with just a few clicks."
+              child: GoogleMonstserratWidgets(text: "COSTECH DUJO - the ultimate digitalized school infra app that streamlines infrastructure management and enhances school operations. With DUJO, schools can easily manage their facilities, assets, and resources with just a few clicks."
              
              "DUJO provides a comprehensive range of features to manage schools' infrastructure, including live updates of attendance, a list of classes, a list of teachers, and notices and events as notifications. DUJO also offers online payment facilities, with a bill generation option for easy payment processing."
              

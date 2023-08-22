@@ -536,7 +536,7 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                                 BorderRadius.all(Radius.circular(13.w))),
                         icon: Icon(Icons.calendar_today,
                             color: AppColors.blueDarkColor),
-                        labelText: "Enter Date"),
+                        labelText: "Enter date"),
                     readOnly: true,
                     onTap: () async {
                       DateTime? pickedDate = await showDatePicker(
@@ -586,7 +586,7 @@ class _AdminScholarshipsState extends State<AdminScholarships> {
                               BorderRadius.all(Radius.circular(13.w))),
                       icon: Icon(Icons.card_membership_sharp,
                           color: AppColors.blueDarkColor),
-                      labelText: 'ScholarShip Name',
+                      labelText: 'Scholarship name',
                     ),
                   ),
                 ),
