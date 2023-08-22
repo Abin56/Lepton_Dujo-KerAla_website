@@ -5,15 +5,18 @@ import 'hostel_card_widget.dart';
 import 'hostel_title_widget.dart';
 
 class WebScreenHostelWidget extends StatelessWidget {
-  const WebScreenHostelWidget(
-      {super.key,
-      required this.title,
-      required this.names,
-      required this.iconList});
+  const WebScreenHostelWidget({
+    super.key,
+    required this.title,
+    required this.names,
+    required this.iconList,
+    required this.navigationWidgets,
+  });
 
   final String title;
   final List<String> names;
   final List<String> iconList;
+  final List<Widget> navigationWidgets;
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +35,13 @@ class WebScreenHostelWidget extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: HostelCardWidget(
-                    title: names[index],
-                    imagePath: iconList[index],
+                  child: GestureDetector(
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => navigationWidgets[index])),
+                    child: HostelCardWidget(
+                      title: names[index],
+                      imagePath: iconList[index],
+                    ),
                   ),
                 );
               },

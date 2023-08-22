@@ -16,7 +16,7 @@ class ComplaintMobileWidget extends StatelessWidget {
         backgroundColor: adminePrimayColor,
       ),
       body: Row(
-        children: const [
+        children: [
           ComplaintListViewBuilder(),
         ],
       ),

@@ -68,7 +68,7 @@ class ComplaintWebViewWidget extends StatelessWidget {
             ),
           ),
           const VerticalDivider(),
-          const ComplaintListViewBuilder(),
+          ComplaintListViewBuilder(),
         ],
       ),
     );

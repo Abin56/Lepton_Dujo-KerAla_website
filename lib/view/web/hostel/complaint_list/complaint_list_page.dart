@@ -4,8 +4,8 @@ import '../../../constant/layout_builder_class.dart';
 import 'widgets/complaint_mobile_widget.dart';
 import 'widgets/complaint_web_widget.dart';
 
-class HostelComplaintListPage extends StatelessWidget {
-  const HostelComplaintListPage({super.key});
+class HostelComplaintMainPage extends StatelessWidget {
+  const HostelComplaintMainPage({super.key});
 
   @override
   Widget build(BuildContext context) {

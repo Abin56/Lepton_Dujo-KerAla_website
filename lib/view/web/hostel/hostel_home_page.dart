@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../colors/colors.dart';
 import '../../constant/layout_builder_class.dart';
+import 'complaint_list/complaint_list_page.dart';
 import 'widgets/mobile_view_widget.dart';
 import 'widgets/web_view_widget.dart';
 
@@ -14,6 +15,12 @@ class HostelHomePage extends StatelessWidget {
     'Emergency Request',
     'Visitors Pass',
     'Suggestions',
+  ];
+  final List<Widget> raiseNavigation = [
+    const HostelComplaintMainPage(),
+    const HostelComplaintMainPage(),
+    const HostelComplaintMainPage(),
+    const HostelComplaintMainPage(),
   ];
 
   final List<String> iconListRaise = [
@@ -60,13 +67,25 @@ class HostelHomePage extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             children: <Widget>[
               WebScreenHostelWidget(
-                  title: 'RAISE', names: raiseNames, iconList: iconListRaise),
+                title: 'RAISE',
+                names: raiseNames,
+                iconList: iconListRaise,
+                navigationWidgets: raiseNavigation,
+              ),
               const SizedBox(height: 20),
               WebScreenHostelWidget(
-                  title: 'SEE', names: seeNames, iconList: iconListSee),
+                title: 'SEE',
+                names: seeNames,
+                iconList: iconListSee,
+                navigationWidgets: raiseNavigation,
+              ),
               const SizedBox(height: 20),
               WebScreenHostelWidget(
-                  title: 'PAY', names: payNames, iconList: iconListPay),
+                title: 'PAY',
+                names: payNames,
+                iconList: iconListPay,
+                navigationWidgets: raiseNavigation,
+              ),
             ],
           );
         },

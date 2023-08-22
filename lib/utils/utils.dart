@@ -1,15 +1,21 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/controller/get_firebase-data/get_firebase_data.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:excel/excel.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+
+import '../controller/admin_login_screen/admin_login_screen_controller.dart';
+import '../model/create_classModel/add_student_model.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 Future<String> dateTimePicker(BuildContext context) async {
@@ -177,5 +183,40 @@ class MyAlertDialog extends StatelessWidget {
         TextButton(onPressed: okButton, child: const Text('OK')),
       ],
     );
+  }
+}
+
+String timeStampToDateFormat(int timeStamp) {
+  if (timeStamp == -1) {
+    return "";
+  }
+  try {
+    DateTime dt = DateTime.fromMillisecondsSinceEpoch(timeStamp);
+    String d12 = DateFormat('dd-MM-yyyy').format(dt);
+
+    return d12;
+  } catch (e) {
+    log("Format error");
+    return "";
+  }
+}
+
+Future<AddStudentModel?> getStudentData(
+    {required String studentId, required String classId}) async {
+  try {
+    final studentData = await FirebaseFirestore.instance
+        .collection("SchoolListCollection")
+        .doc(Get.find<AdminLoginScreenController>().schoolID)
+        .collection(Get.find<GetFireBaseData>().bYear.value)
+        .doc(Get.find<GetFireBaseData>().bYear.value)
+        .collection("classes")
+        .doc(classId)
+        .collection("Students")
+        .doc(studentId)
+        .get();
+
+    return AddStudentModel.fromMap(studentData.data() ?? {});
+  } catch (e) {
+    return null;
   }
 }
