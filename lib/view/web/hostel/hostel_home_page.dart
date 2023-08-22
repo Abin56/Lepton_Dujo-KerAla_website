@@ -17,10 +17,10 @@ class HostelHomePage extends StatelessWidget {
     'Suggestions',
   ];
   final List<Widget> raiseNavigation = [
-    const HostelComplaintMainPage(),
-    const HostelComplaintMainPage(),
-    const HostelComplaintMainPage(),
-    const HostelComplaintMainPage(),
+    const ComplaintListPage(),
+    const ComplaintListPage(),
+    const ComplaintListPage(),
+    const ComplaintListPage(),
   ];
 
   final List<String> iconListRaise = [
