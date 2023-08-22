@@ -50,7 +50,11 @@ class ComplaintListViewBuilderUnCompleted extends StatelessWidget {
                             }
                           }),
                       onTap: () {
-                        hostelComplaintDialogue(context);
+                        if (snapshot.data != null) {
+                          hostelComplaintDialogue(
+                              complaint: snapshot.data![index],
+                              context: context);
+                        }
                       },
                     ),
                   );
