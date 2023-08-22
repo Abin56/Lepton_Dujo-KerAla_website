@@ -365,7 +365,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                         child: ListView(
                           children: [
                             GestureDetector(
-                              onTap: () => Get.to(HostelHomePage()),
+                              //onTap: () => Get.to(HostelHomePage()),
                               child: Container(
                                   margin: EdgeInsets.only(top: 20.h),
                                   height: 30.h,
