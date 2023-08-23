@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../../../../controller/hostel/hostel_complaint/hostel_complaint_controller.dart';
 import '../../../../../model/hostel/hostel_model_complaint.dart';
+import '../../../../constant/constant.dart';
 import '../../../../constant/responsive_app.dart';
 
 Future<dynamic> hostelComplaintDialogue({
@@ -31,17 +34,41 @@ Future<dynamic> hostelComplaintDialogue({
             const SizedBox(
               height: 10,
             ),
-            Text(complaint.description),
+            Text(
+              complaint.description,
+              textAlign: TextAlign.center,
+            ),
             const SizedBox(
               height: 20,
             ),
             Align(
               alignment: Alignment.bottomCenter,
-              child: ElevatedButton(
-                  style:
-                      ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                  onPressed: () {},
-                  child: const Text("Mark as solved")),
+              child: Obx(
+                () => Get.find<HostelComplaintController>().isloading.value
+                    ? circularProgressIndicator
+                    : ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green),
+                        onPressed: () async {
+                          complaint.isCompleted
+                              ? await Get.find<HostelComplaintController>()
+                                  .updateSolvedOrNot(
+                                  docId: complaint.docId,
+                                  isSolved: false,
+                                  context: context,
+                                )
+                              : await Get.find<HostelComplaintController>()
+                                  .updateSolvedOrNot(
+                                  docId: complaint.docId,
+                                  isSolved: true,
+                                  context: context,
+                                );
+                        },
+                        child: complaint.isCompleted
+                            ? const Text("Mark as Unsolved")
+                            : const Text("Mark as Solved"),
+                      ),
+              ),
             )
           ],
         ),
