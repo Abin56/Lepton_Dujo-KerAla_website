@@ -13,6 +13,12 @@ Future<dynamic> hostelComplaintDialogue({
   return showDialog(
     context: context,
     builder: (context) => AlertDialog(
+      icon: Align(
+        alignment: Alignment.bottomLeft,
+        child: CloseButton(
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+      ),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(32.0),
