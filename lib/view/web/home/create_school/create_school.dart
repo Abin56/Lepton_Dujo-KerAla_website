@@ -777,26 +777,26 @@ class _SchoolProfileState extends State<SchoolProfile> {
                           ),
                           Stack(
                             children: [
-                             (file == null)? CircleAvatar(
-                                radius: 80,
-                                backgroundColor:  Colors.blue
-                              ):  CircleAvatar(
-                                radius: 80,
-                                backgroundImage:  MemoryImage(file!)
-                              ),
+                              (file == null)
+                                  ? CircleAvatar(
+                                      radius: 80, backgroundColor: Colors.blue)
+                                  : CircleAvatar(
+                                      radius: 80,
+                                      backgroundImage: MemoryImage(file!)),
                               Positioned(
                                   right: 0,
                                   bottom: 0,
                                   child: IconButton(
                                       onPressed: () async {
-                                     FilePickerResult? result = await FilePicker.platform
-                                .pickFiles(type: FileType.image);
-                            if (result != null) {
-                              file = result.files.first.bytes;
-                              setState(() {
-                                _file = file;
-                              });
-                            }
+                                        FilePickerResult? result =
+                                            await FilePicker.platform.pickFiles(
+                                                type: FileType.image);
+                                        if (result != null) {
+                                          file = result.files.first.bytes;
+                                          setState(() {
+                                            _file = file;
+                                          });
+                                        }
                                       },
                                       icon: Icon(Icons.camera_alt)))
                             ],
@@ -835,36 +835,36 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                             TextButton(
                                               child: const Text('OK'),
                                               onPressed: () async {
-                                                   String uid = const Uuid().v1();
-      //isImageUpload.value = true;
-      UploadTask uploadTask = FirebaseStorage.instance
-          .ref()
-          .child("files/schooProfile/$uid")
-          .putData(file!);
+                                                String uid = const Uuid().v1();
+                                                //isImageUpload.value = true;
+                                                UploadTask uploadTask =
+                                                    FirebaseStorage.instance
+                                                        .ref()
+                                                        .child(
+                                                            "files/schooProfile/$uid")
+                                                        .putData(file!);
 
-      final TaskSnapshot snap = await uploadTask;
-      final String downloadUrl = await snap.ref.getDownloadURL();
+                                                final TaskSnapshot snap =
+                                                    await uploadTask;
+                                                final String downloadUrl =
+                                                    await snap.ref
+                                                        .getDownloadURL();
 
-    
-    
-      
                                                 await addNewSchoolController
                                                     .addNewSchool(
-                                                        context,
-                                                        tarifController
-                                                            .maxstudents.value,
-                                                        tarifController
-                                                            .selectedPlan.value,
-                                                        tarifController
-                                                            .price.value,
-                                                        gst.toString(),
-                                                        totalpayment,
-                                                        tarifController
-                                                                .additionalFeatures[
-                                                            0] ,
-                                                        tarifController
-                                                            .additionalFeatures[1], 
-                                                            );
+                                                  context,
+                                                  tarifController
+                                                      .maxstudents.value,
+                                                  tarifController
+                                                      .selectedPlan.value,
+                                                  tarifController.price.value,
+                                                  gst.toString(),
+                                                  totalpayment,
+                                                  tarifController
+                                                      .additionalFeatures[0],
+                                                  tarifController
+                                                      .additionalFeatures[1],
+                                                );
                                               },
                                             ),
                                           ],
