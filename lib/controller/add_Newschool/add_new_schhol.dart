@@ -38,6 +38,7 @@ class AddNewSchoolController extends GetxController {
     String totalprice,
     TarifPurchaseModel? tarifPurchaseModelindex0,
     TarifPurchaseModel? tarifPurchaseModelindex1,
+
   ) async {
     log(cityValue.value);
     String uUID = schoolNameController.text.substring(0, 5) +

@@ -34,7 +34,7 @@ class GuardianInfoAlert_box_Widget extends StatelessWidget {
               child: Row(
                 children: [
                   IconButtonBackWidget(color: cWhite),
-                  Text('Parent Details',
+                  Text('Guardian Details',
                       style:
                           GoogleFonts.poppins(fontSize: 16.h, color: cWhite)),
                 ],

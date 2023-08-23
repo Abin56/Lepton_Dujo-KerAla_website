@@ -43,7 +43,7 @@ class After7DaysPaymentScreen extends StatelessWidget {
                           if (snapshot.hasData) {
                             return AlertDialog(
                               title: GooglePoppinsWidgets(
-                                  text: "Lepton DuJo", fontsize: 20),
+                                  text: "COSTECH DuJo", fontsize: 20),
                               content: SingleChildScrollView(
                                 child: ListBody(
                                   children: <Widget>[

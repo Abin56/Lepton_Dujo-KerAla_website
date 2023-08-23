@@ -26,6 +26,7 @@ import '../../../../../model/create_classModel/add_student_model.dart';
 import '../../../../../model/loginHistory_model/login_history_model.dart';
 import '../../../../colors/colors.dart';
 import '../../../../constant/constant.dart';
+import '../../../hostel/hostel_home_page.dart';
 import '../../../widgets/button_container_widget.dart';
 import '../../../widgets/drop_DownList/get_batchYear.dart';
 import '../../../widgets/drop_DownList/get_classes.dart';
@@ -102,7 +103,6 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'Non-Teaching Staffs',
     'Add Attendance',
     'Handle Parents with\n Multiple Children'
-
   ];
 
   List<String> dashboardImagesList = [
@@ -196,14 +196,13 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
         schoolId: widget.schoolID,
       ),
       AdminPtaScreen(),
-       NonTeachingStaffView(schoolID: widget.schoolID),
+      NonTeachingStaffView(schoolID: widget.schoolID),
       DateWiseLoginScreen(schoolID: widget.schoolID),
       const MainScreenNotifications(),
     ];
     var screenSize = MediaQuery.of(context).size;
 
     return Obx(() => Scaffold(
-      
           body: getFireBaseData.bYear.isEmpty
               ? Center(
                   child: SingleChildScrollView(
@@ -239,7 +238,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                 FirebaseFirestore.instance
                                     .collection("SchoolListCollection")
                                     .doc(widget.schoolID)
-                                    .set({ 
+                                    .set({
                                   'batchYear': schoolBatchYearListValue!['id']
                                 }, SetOptions(merge: true)).then((value) async {
                                   await getFireBaseData.getBatchYearId();
@@ -299,14 +298,6 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                         OutlineInputBorder(),
                                                   ),
                                                 ),
-    
-    
-    
-    
-    
-    
-    
-    
                                               ),
                                               const Icon(Icons
                                                   .arrow_downward_outlined),
@@ -373,11 +364,15 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                         color: adminePrimayColor,
                         child: ListView(
                           children: [
-                            Container(
-                                margin: EdgeInsets.only(top: 20.h),
-                                height: 30.h,
-                                width: 80.w,
-                                child: Image.asset('assets/images/dujon.png')),
+                            GestureDetector(
+                              //onTap: () => Get.to(HostelHomePage()),
+                              child: Container(
+                                  margin: EdgeInsets.only(top: 20.h),
+                                  height: 30.h,
+                                  width: 80.w,
+                                  child:
+                                      Image.asset('assets/images/dujon.png')),
+                            ),
                             Row(
                               children: [
                                 IconButton(
@@ -1000,16 +995,18 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
               onPressed: () async {
                 if (_formKey.currentState!.validate()) {
                   log('class id${classesListValue!['docid']}');
-                  teacherAddStudentController.admincreateStudent(
-                      classID: classesListValue!['docid'],
-                      studentModel: AddStudentModel(
-                        studentName: studentNameController.text.trim(),
-                        parentPhoneNumber: phoneNumberController.text.trim(),
-                        admissionNumber: addmissionController.text.trim(),
-                        classID: classesListValue!['docid'],
-                        createDate: DateTime.now().toString(),
-
-                      )).then((value) => Navigator.pop(context));
+                  teacherAddStudentController
+                      .admincreateStudent(
+                          classID: classesListValue!['docid'],
+                          studentModel: AddStudentModel(
+                            studentName: studentNameController.text.trim(),
+                            parentPhoneNumber:
+                                phoneNumberController.text.trim(),
+                            admissionNumber: addmissionController.text.trim(),
+                            classID: classesListValue!['docid'],
+                            createDate: DateTime.now().toString(),
+                          ))
+                      .then((value) => Navigator.pop(context));
                   clearAdminAdd();
                 }
               },

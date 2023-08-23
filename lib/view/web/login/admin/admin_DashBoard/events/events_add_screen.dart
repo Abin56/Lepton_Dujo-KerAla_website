@@ -49,7 +49,12 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
         .collection('AdminEvents')
         .doc(modell!.id)
         .set(modell!.toJson())
-        .then((value) => showToast(msg: 'New Event Added!'));
+        .then((value) {
+      setState(() {
+        widget.loadingStatus = false;
+      });
+      showToast(msg: 'New Event Added!');
+    });
   }
 
   @override
@@ -238,14 +243,13 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
                                               .microsecondsSinceEpoch
                                               .toString());
                                   await addEvent();
-                                  setState(() {
-                                    widget.loadingStatus = false;
-                                  });
+
                                   clearEventFunction();
                                   parentsNotification();
                                   guardiansNotification();
                                   studentsNotification();
-                                  // showToast(msg: 'New Event Added!');
+
+                                  showToast(msg: 'New Event Added!');
 
                                   // showDialog(context: context, builder: (context){
                                   //     return AlertDialog(
@@ -313,7 +317,9 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
 
     for (var i = 0; i < parentsTokenList.length; i++) {
       sendPushMessage(
-          parentsTokenList[i], 'New Events added, പുതിയ ഇവന്റ് പ്രസിദ്ധീകരിച്ചു', 'Events Notification');
+          parentsTokenList[i],
+          'New Events added, പുതിയ ഇവന്റ് പ്രസിദ്ധീകരിച്ചു',
+          'Events Notification');
     }
   }
 
@@ -347,7 +353,9 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
 
     for (var i = 0; i < guardiansTokenList.length; i++) {
       sendPushMessage(
-          guardiansTokenList[i], 'New Events added, പുതിയ ഇവന്റ് പ്രസിദ്ധീകരിച്ചു', 'Events Notification');
+          guardiansTokenList[i],
+          'New Events added, പുതിയ ഇവന്റ് പ്രസിദ്ധീകരിച്ചു',
+          'Events Notification');
     }
   }
 
@@ -435,7 +443,9 @@ class _AddEventsAdminState extends State<AddEventsAdmin> {
 
     for (var i = 0; i < studentsTokenList.length; i++) {
       sendPushMessage(
-          studentsTokenList[i], 'New Events added, പുതിയ ഇവന്റ് പ്രസിദ്ധീകരിച്ചു', 'Events Notification');
+          studentsTokenList[i],
+          'New Events added, പുതിയ ഇവന്റ് പ്രസിദ്ധീകരിച്ചു',
+          'Events Notification');
     }
   }
 }

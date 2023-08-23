@@ -1,6 +1,6 @@
 # dujo_kerala_website
 
-Lepton DuJo - The ultimate digitalized school ifra app from Lepton Communications that streamlines infrastructure management and enhances school operations. With Lepton DuJo, schools can easily manage their facilities, assets and resources with just a few clicks.
+COSTECH DuJo - The ultimate digitalized school ifra app from Lepton Communications that streamlines infrastructure management and enhances school operations. With COSTECH DuJo, schools can easily manage their facilities, assets and resources with just a few clicks.
 
 ## Getting Started
 

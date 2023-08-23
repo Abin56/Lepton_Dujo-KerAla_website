@@ -61,7 +61,7 @@ class FooterMob extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    'Lepton DuJo',
+                    'COSTECH DuJo',
                     style: GoogleFonts.poppins(
                       fontSize: 10.h,
                       fontWeight: FontWeight.bold,

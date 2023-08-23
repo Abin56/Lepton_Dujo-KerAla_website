@@ -1,3 +1,4 @@
+import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,7 +14,7 @@ class ShowStudentsClassWiseAttendanceDataPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(backgroundColor: adminePrimayColor,
         title: const Text("Students List"),
       ),
       body: Padding(
@@ -66,8 +67,8 @@ class ShowStudentsClassWiseAttendanceDataPage extends StatelessWidget {
                                               .contains(
                                                   snapshot.data?[index].docid ??
                                                       " ")
-                                          ? const Text("Absent")
-                                          : const Text("Present"),
+                                          ? const Text("Present")
+                                          : const Text("Absent"),
                                     ),
                                   ),
                                 );

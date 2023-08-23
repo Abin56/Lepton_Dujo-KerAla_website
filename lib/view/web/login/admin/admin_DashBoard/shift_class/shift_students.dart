@@ -48,7 +48,7 @@ class ShiftClassStudents extends StatelessWidget {
                     height: screenSize.width / 20,
                   ),
                   Text(
-                    'promote students to next class',
+                    'Promote students to next class',
                     style: ralewayStyle.copyWith(
                       fontSize: 22.0.w,
                       color: AppColors.whiteColor,
@@ -253,7 +253,7 @@ class ShiftClassStudents extends StatelessWidget {
                                   ),
                                 ),
                                 GoogleMonstserratWidgets(
-                                  text: 'studentname',
+                                  text: 'Student Name',
                                   fontsize: 14.w,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -263,7 +263,7 @@ class ShiftClassStudents extends StatelessWidget {
                                     padding: EdgeInsets.all(8.0.w),
                                     child: Center(
                                       child: GoogleMonstserratWidgets(
-                                        text: "ADD",
+                                        text: "Add",
                                         fontsize: 14.w,
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -351,7 +351,7 @@ class ShiftClassStudents extends StatelessWidget {
                                         .isLoadingSubmit.value
                                     ? circularProgressIndicator
                                     : const Text(
-                                        "promote Selected Students to new class");
+                                        "Promote selected students to new class");
                               },
                             ),
                           ),
@@ -389,7 +389,7 @@ class ShiftClassStudents extends StatelessWidget {
                                                       .length !=
                                                   snapshot.data?.length
                                               ? const Text(
-                                                  "Select All Students")
+                                                  "Select all students")
                                               : const Text(
                                                   "Remove All Students");
                                     },

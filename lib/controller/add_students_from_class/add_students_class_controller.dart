@@ -70,7 +70,7 @@ class AddStudentsFromClassController extends GetxController {
                   ),
                   actions: <Widget>[
                     TextButton(
-                      child: const Text('cancel'),
+                      child: const Text('Cancel'),
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
@@ -169,7 +169,7 @@ class AddStudentsFromClassController extends GetxController {
                   ),
                   actions: <Widget>[
                     TextButton(
-                      child: const Text('cancel'),
+                      child: const Text('Cancel'),
                       onPressed: () {
                         Navigator.of(context).pop();
                       },

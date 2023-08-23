@@ -66,7 +66,8 @@ class NonTeachingStaffView extends StatelessWidget {
 
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return const Center(child: CircularProgressIndicator());
+                          return const Center(
+                              child: CircularProgressIndicator());
                         }
                         return Row(
                           children: [
@@ -78,7 +79,8 @@ class NonTeachingStaffView extends StatelessWidget {
                                   Text(
                                     "Non Teaching Staffs",
                                     style: GoogleFonts.montserrat(
-                                        color: const Color.fromARGB(255, 75, 75, 75),
+                                        color: const Color.fromARGB(
+                                            255, 75, 75, 75),
                                         fontSize: 40,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -107,10 +109,21 @@ class NonTeachingStaffView extends StatelessWidget {
                                         child: CircularProgressIndicator(),
                                       );
                                     }
-                                    return ListView.builder(
-                                        scrollDirection: Axis.horizontal,
+                                    return GridView.builder(
+                                        gridDelegate:
+                                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount:
+                                              2, // Number of columns
+                                              
+                                          mainAxisSpacing:
+                                              0, // Spacing between rows
+                                          crossAxisSpacing:
+                                              0, // Spacing between columns
+                                        ),
+                                        scrollDirection: Axis.vertical,
                                         shrinkWrap: true,
-                                        physics: const NeverScrollableScrollPhysics(),
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
                                         itemCount: snapshot.data!.docs.length,
                                         itemBuilder: (context, index) {
                                           return Container(
@@ -136,7 +149,7 @@ class NonTeachingStaffView extends StatelessWidget {
                                                       fontWeight:
                                                           FontWeight.w700),
                                                 ),
-                                                sizedBoxH10,
+                                                
                                                 Text(
                                                   'Designation: ' +
                                                       snapshot.data!.docs[index]

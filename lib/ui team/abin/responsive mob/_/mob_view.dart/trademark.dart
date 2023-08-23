@@ -30,7 +30,7 @@ class TrademarkAndPolicy extends StatelessWidget {
                // color: Colors.white,
                 child:  GoogleMonstserratWidgets(text: 
                     "Statement \n"
-"Lepton Dujo acknowledges that trademarks are a valuable part of Lepton Dujo’s intellectual property portfolio. They serve to signify that particular products and services originates from Lepton Dujo. Trademarks also help to distinguish Lepton Dujo’s products and services from competitors."
+"COSTECH Dujo acknowledges that trademarks are a valuable part of COSTECH Dujo’s intellectual property portfolio. They serve to signify that particular products and services originates from COSTECH Dujo. Trademarks also help to distinguish COSTECH Dujo’s products and services from competitors."
 "Any improper use of our trademarks, whether by any member of staff or other third parties, could significantly diminish the value of such trademarks."
 "As such, to ensure that the company can maintain, and continue to exploit its trademarks, the company expect all members of staff to act in compliance with this trademark policy.",
                       fontsize: 18.w,letterSpacing: 3,

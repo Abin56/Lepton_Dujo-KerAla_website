@@ -36,7 +36,7 @@ class MobHomePage extends StatelessWidget {
  
  
     String description = "Any schools from Kerala can register on\n"
-    "Lepton DuJo. Lepton Dujo is a mobile \n"
+    "COSTECH DuJo. COSTECH Dujo is a mobile \n"
     "application with student login,parent, \n"
     "teacher login";
     return  Scaffold(

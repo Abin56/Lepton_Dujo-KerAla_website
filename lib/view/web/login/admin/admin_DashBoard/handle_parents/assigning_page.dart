@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/controller/get_firebase-data/get_firebase_data.dart';
+import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
 import 'package:dujo_kerala_website/view/web/widgets/drop_DownList/schoolDropDownList.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +12,14 @@ import 'package:get/get.dart';
 import '../../../../../../controller/multipile_students/multipile_students_controller.dart';
 
 class AssigningPage extends StatefulWidget {
+  String parentClassID;
   MultipleStudentsController multipileStudentsController =
       Get.put(MultipleStudentsController());
-  AssigningPage({super.key, required this.parentSnap, required this.classID});
+  AssigningPage(
+      {super.key,
+      required this.parentSnap,
+      required this.classID,
+      required this.parentClassID});
 
   DocumentSnapshot parentSnap;
   String classID;
@@ -111,189 +117,234 @@ class _AssigningPageState extends State<AssigningPage> {
         .doc(childID)
         .update({'parentID': widget.parentSnap['docid']});
   }
+  //widget.multipileStudentsController.isLoading.value?const CircularProgressIndicator.adaptive()
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Assigning Page'),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CircleAvatar(
-                radius: 50,
-                backgroundImage:
-                    NetworkImage(widget.parentSnap['profileImageURL']),
+    return Obx(() {
+      return widget.multipileStudentsController.isLoading.value
+          ? const Center(child: CircularProgressIndicator.adaptive())
+          : Scaffold(backgroundColor: adminePrimayColor,
+              appBar: AppBar(
+                title: const Text('Assigning Page'),
               ),
-              sizedBoxH20,
-              Text(widget.parentSnap['parentName']),
-              sizedBoxH20,
-              const Text('Add Student from class: '),
-              sizedBoxH20,
-              StreamBuilder(
-                  stream: FirebaseFirestore.instance
-                      .collection('SchoolListCollection')
-                      .doc(schoolListValue!['docid'])
-                      .collection(Get.find<GetFireBaseData>().bYear.value)
-                      .doc(Get.find<GetFireBaseData>().bYear.value)
-                      .collection('classes')
-                      .snapshots(),
-                  builder: ((context, snapshot) {
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 100, left: 100),
-                      child: DropdownButton(
-                          hint: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: (classListValue == null)
-                                ? const Text('Select Class')
-                                : Text(classListValue!['className']),
-                          ),
-                          underline: const SizedBox(),
-                          style: const TextStyle(
-                            fontSize: 18,
-                            color: Colors.black,
-                          ),
-                          icon: Padding(
-                            padding: EdgeInsets.all(
-                              13.w,
-                            ),
-                            child: Icon(Icons.arrow_drop_down,
-                                size: 18.w, color: Colors.grey),
-                          ),
-                          isExpanded: true,
-                          items: snapshot.data?.docs.map(
-                            (val) {
-                              return DropdownMenuItem(
-                                value: val["docid"],
-                                child: Text(val["className"]),
-                              );
-                            },
-                          ).toList(),
-                          onChanged: (val) {
-                            QueryDocumentSnapshot<Map<String, dynamic>>?
-                                categoryIDObject = snapshot.data?.docs
-                                    .where((element) =>
-                                        element["docid"] == val.toString())
-                                    .toList()
-                                    .first;
-                            log(categoryIDObject?['docid']);
-                            setState(() {
-                              classListValue = categoryIDObject;
-                            });
-                          }),
-                    );
-                  })),
-              sizedBoxH20,
-              Visibility(
-                visible: (classListValue != null) ? true : false,
-                child: StreamBuilder(
-                    stream: FirebaseFirestore.instance
-                        .collection('SchoolListCollection')
-                        .doc(schoolListValue!['docid'])
-                        .collection(Get.find<GetFireBaseData>().bYear.value)
-                        .doc(Get.find<GetFireBaseData>().bYear.value)
-                        .collection('classes')
-                        .doc(classListValue?['docid'])
-                        .collection('Students')
-                        .snapshots(),
-                    builder: ((context, snapshot) {
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 100, right: 100),
-                        child: DropdownButton(
-                            hint: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: (studentListValue == null)
-                                  ? const Text('Select Student')
-                                  : Text(studentListValue!['studentName']),
-                            ),
-                            underline: const SizedBox(),
-                            style: const TextStyle(
-                              fontSize: 18,
-                              color: Colors.black,
-                            ),
-                            icon: Padding(
-                              padding: EdgeInsets.all(
-                                13.w,
-                              ),
-                              child: Icon(Icons.arrow_drop_down,
-                                  size: 18.w, color: Colors.grey),
-                            ),
-                            isExpanded: true,
-                            items: snapshot.data?.docs.map(
-                              (val) {
-                                return DropdownMenuItem(
-                                  value: val["docid"],
-                                  child: Text(val["studentName"]),
-                                );
-                              },
-                            ).toList(),
-                            onChanged: (val) {
-                              QueryDocumentSnapshot<Map<String, dynamic>>?
-                                  categoryIDObject = snapshot.data?.docs
-                                      .where((element) =>
-                                          element["docid"] == val.toString())
-                                      .toList()
-                                      .first;
-                              log(categoryIDObject?['docid']);
-                              setState(() {
-                                studentListValue = categoryIDObject;
-                              });
-                            }),
-                      );
-                    })),
-              ),
-              sizedBoxH20,
-              Visibility(
-                visible: (classListValue == null || studentListValue == null)
-                    ? false
-                    : true,
-                child: MaterialButton(
-                  onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: const Text('Confirmation'),
-                            content: Text(
-                                'Are you sure you want to assign ${widget.parentSnap['parentName']} as the parent of ${studentListValue!['studentName']} from class ${classListValue!['className']}'),
-                            actions: <Widget>[
-                              TextButton(
-                                onPressed: () async {
-                                  widget.multipileStudentsController
-                                      .assignStudentToParent(
-                                    schoolListValue!['docid'],
-                                    Get.find<GetFireBaseData>().bYear.value,
-                                    classListValue?['docid'],
-                                    widget.parentSnap['docid'],
-                                    studentListValue!['docid'],
-                                    studentListValue!['studentName'],
-                                  );
-                                  // await assignParentFunction(
-                                  //         studentListValue!['docid'],
-                                  //         classListValue!['docid'])
-                                  //     .then((value) => Navigator.pop(context));
-                                },
-                                child: const Text('Yes'),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: const Text('No'),
-                              ),
-                            ],
+              body: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      radius: 50,
+                      backgroundImage:
+                          NetworkImage(widget.parentSnap['profileImageURL']),
+                    ),
+                    sizedBoxH20,
+                    Text(widget.parentSnap['parentName']),
+                    sizedBoxH20,
+                    const Text('Add Student from class: '),
+                    sizedBoxH20,
+                    StreamBuilder(
+                        stream: FirebaseFirestore.instance
+                            .collection('SchoolListCollection')
+                            .doc(schoolListValue!['docid'])
+                            .collection(Get.find<GetFireBaseData>().bYear.value)
+                            .doc(Get.find<GetFireBaseData>().bYear.value)
+                            .collection('classes')
+                            .snapshots(),
+                        builder: ((context, snapshot) {
+                           if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
+                          return Padding(
+                            padding:
+                                const EdgeInsets.only(right: 100, left: 100),
+                            child: DropdownButton(
+                                hint: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: (classListValue == null)
+                                      ? const Text('Select Class')
+                                      : Text(classListValue!['className']),
+                                ),
+                                underline: const SizedBox(),
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                ),
+                                icon: Padding(
+                                  padding: EdgeInsets.all(
+                                    13.w,
+                                  ),
+                                  child: Icon(Icons.arrow_drop_down,
+                                      size: 18.w, color: Colors.grey),
+                                ),
+                                isExpanded: true,
+                                items: snapshot.data?.docs.map(
+                                  (val) {
+                                    return DropdownMenuItem(
+                                      value: val["docid"],
+                                      child: Text(val["className"]),
+                                    );
+                                  },
+                                ).toList(),
+                                onChanged: (val) {
+                                  QueryDocumentSnapshot<Map<String, dynamic>>?
+                                      categoryIDObject = snapshot.data?.docs
+                                          .where((element) =>
+                                              element["docid"] ==
+                                              val.toString())
+                                          .toList()
+                                          .first;
+                                  log(categoryIDObject?['docid']);
+                                  setState(() {
+                                    classListValue = categoryIDObject;
+                                  });
+                                }),
                           );
-                        });
-                  },
-                  color: Colors.blue,
-                  child: const Text('Assign'),
+                        })),
+                    sizedBoxH20,
+                    Visibility(
+                      visible: (classListValue != null) ? true : false,
+                      child: StreamBuilder(
+                          stream: FirebaseFirestore.instance
+                              .collection('SchoolListCollection')
+                              .doc(schoolListValue!['docid'])
+                              .collection(
+                                  Get.find<GetFireBaseData>().bYear.value)
+                              .doc(Get.find<GetFireBaseData>().bYear.value)
+                              .collection('classes')
+                              .doc(classListValue?['docid'])
+                              .collection('Students')
+                              .snapshots(),
+                          builder: ((context, snapshot) {
+                             if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 100, right: 100),
+                              child: DropdownButton(
+                                  hint: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: (studentListValue == null)
+                                        ? const Text('Select Student')
+                                        : Text(
+                                            studentListValue!['studentName']),
+                                  ),
+                                  underline: const SizedBox(),
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.black,
+                                  ),
+                                  icon: Padding(
+                                    padding: EdgeInsets.all(
+                                      13.w,
+                                    ),
+                                    child: Icon(Icons.arrow_drop_down,
+                                        size: 18.w, color: Colors.grey),
+                                  ),
+                                  isExpanded: true,
+                                  items: snapshot.data?.docs.map(
+                                    (val) {
+                                      return DropdownMenuItem(
+                                        value: val["docid"],
+                                        child: Text(val["studentName"]),
+                                      );
+                                    },
+                                  ).toList(),
+                                  onChanged: (val) {
+                                    QueryDocumentSnapshot<Map<String, dynamic>>?
+                                        categoryIDObject = snapshot.data?.docs
+                                            .where((element) =>
+                                                element["docid"] ==
+                                                val.toString())
+                                            .toList()
+                                            .first;
+                                    log(categoryIDObject?['docid']);
+                                    setState(() {
+                                      studentListValue = categoryIDObject;
+                                    });
+                                  }),
+                            );
+                          })),
+                    ),
+                    sizedBoxH20,
+                    Visibility(
+                      visible:
+                          (classListValue == null || studentListValue == null)
+                              ? false
+                              : true,
+                      child: MaterialButton(
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Obx(() {
+                                  return widget.multipileStudentsController
+                                          .isLoading.value
+                                      ? const Center(
+                                          child: CircularProgressIndicator
+                                              .adaptive())
+                                      : AlertDialog(
+                                          title: const Text('Confirmation'),
+                                          content: Text(
+                                              'Are you sure you want to assign ${widget.parentSnap['parentName']} as the parent of ${studentListValue!['studentName']} from class ${classListValue!['className']}'),
+                                          actions: <Widget>[
+                                            widget.multipileStudentsController
+                                                    .isLoading.value
+                                                ? const Center(
+                                                    child:
+                                                        CircularProgressIndicator
+                                                            .adaptive())
+                                                : TextButton(
+                                                    onPressed: () async {
+                                                      widget
+                                                          .multipileStudentsController
+                                                          .assignStudentToParent(
+                                                        schoolListValue![
+                                                            'docid'],
+                                                        Get.find<
+                                                                GetFireBaseData>()
+                                                            .bYear
+                                                            .value,
+                                                        classListValue?[
+                                                            'docid'],
+                                                        widget.parentSnap[
+                                                            'docid'],
+                                                        studentListValue![
+                                                            'docid'],
+                                                        studentListValue![
+                                                            'studentName'],
+                                                        widget.parentClassID,
+                                                        context,
+                                                      );
+                                                      // await assignParentFunction(
+                                                      //         studentListValue!['docid'],
+                                                      //         classListValue!['docid'])
+                                                      //     .then((value) => Navigator.pop(context));
+                                                    },
+                                                    child: const Text('Yes'),
+                                                  ),
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: const Text('No'),
+                                            ),
+                                          ],
+                                        );
+                                });
+                              });
+                        },
+                        color: Colors.blue,
+                        child: const Text('Assign'),
+                      ),
+                    )
+                  ],
                 ),
-              )
-            ],
-          ),
-        ));
+              ),
+            );
+    });
   }
 }
