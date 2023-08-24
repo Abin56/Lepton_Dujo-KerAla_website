@@ -275,7 +275,7 @@ class AddAttendanceController extends GetxController {
           .collection("Subjects")
           .doc(id1)
           .collection("PresentList")
-          .doc(element["studentName"])
+          .doc(element["uid"])
           .set(element);
     }
     uploadingStudentsLists.clear();
@@ -348,7 +348,7 @@ class AddAttendanceController extends GetxController {
           .collection("Subjects")
           .doc(id1)
           .collection("PresentList")
-          .doc(element["studentName"])
+          .doc(element["uid"])
           .set(element);
     }
     uploadingStudentsLists.clear();

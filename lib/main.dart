@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
                 PrivacyPolicy.route: (context) => const PrivacyPolicy(),
                 SchoolProfile.route: (context) => const SchoolProfile(),
               },
-              title: 'COSTECH 0235DuJo',
+              title: 'COSTECH DuJo',
               debugShowCheckedModeBanner: false,
               theme: ThemeData(
                 primaryColor: const Color(0xFF02BB9F),

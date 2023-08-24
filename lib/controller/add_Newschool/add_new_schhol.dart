@@ -38,6 +38,7 @@ class AddNewSchoolController extends GetxController {
     String totalprice,
     TarifPurchaseModel? tarifPurchaseModelindex0,
     TarifPurchaseModel? tarifPurchaseModelindex1,
+    String imageurl
 
   ) async {
     log(cityValue.value);
@@ -76,7 +77,7 @@ class AddNewSchoolController extends GetxController {
         } else {
           if (context.mounted) {}
           AddRequestedSchoolsToFirebase()
-              .addRequestedSchools(schoolDetails, context)
+              .addRequestedSchools(schoolDetails, context,imageurl)
               .then((value) {
             clearFunction();
           });
