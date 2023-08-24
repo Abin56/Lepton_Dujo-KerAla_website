@@ -2,12 +2,14 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/view/constant/constant.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../model/hostel/hostel_model_complaint.dart';
 import '../../admin_login_screen/admin_login_screen_controller.dart';
 
 class HostelComplaintController {
+  RxBool isloading = RxBool(false);
   final _fireStore = FirebaseFirestore.instance
       .collection("SchoolListCollection")
       .doc(Get.find<AdminLoginScreenController>().schoolID)
@@ -42,6 +44,26 @@ class HostelComplaintController {
       log(e.toString());
       showToast(msg: 'Something went wrong');
       return [];
+    }
+  }
+
+  Future<void> updateSolvedOrNot({
+    required String docId,
+    required bool isSolved,
+    required BuildContext context,
+  }) async {
+    try {
+      isloading.value = true;
+      await _fireStore.doc(docId).update({"isCompleted": isSolved});
+      showToast(msg: "Successfully updated");
+      isloading.value = false;
+      if (context.mounted) {
+        Navigator.of(context).pop();
+      }
+    } catch (e) {
+      log(e.toString());
+      showToast(msg: "Something went wrong");
+      isloading.value = false;
     }
   }
 }

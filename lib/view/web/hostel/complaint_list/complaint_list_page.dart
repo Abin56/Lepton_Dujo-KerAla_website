@@ -106,7 +106,7 @@ class ComplaintListPageBodyWidgetComplete extends StatelessWidget {
           ),
         ),
         const VerticalDivider(),
-        ComplaintListViewBuilderCompleted(),
+        ComplaintListViewBuilderUnCompleted(),
       ],
     );
   }
@@ -175,7 +175,7 @@ class ComplaintListPageBodyWidgetUnComplete extends StatelessWidget {
           ),
         ),
         const VerticalDivider(),
-        ComplaintListViewBuilderUnCompleted(),
+        ComplaintListViewBuilderCompleted(),
       ],
     );
   }

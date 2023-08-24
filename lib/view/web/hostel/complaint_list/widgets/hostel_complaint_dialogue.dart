@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../../../../controller/hostel/hostel_complaint/hostel_complaint_controller.dart';
+import '../../../../../model/hostel/hostel_model_complaint.dart';
+import '../../../../constant/constant.dart';
 import '../../../../constant/responsive_app.dart';
 
-Future<dynamic> hostelComplaintDialogue(BuildContext context) {
+Future<dynamic> hostelComplaintDialogue({
+  required BuildContext context,
+  required HostelModelComplaint complaint,
+}) {
   return showDialog(
     context: context,
     builder: (context) => AlertDialog(
+      icon: Align(
+        alignment: Alignment.bottomLeft,
+        child: CloseButton(
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+      ),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(32.0),
@@ -18,27 +31,50 @@ Future<dynamic> hostelComplaintDialogue(BuildContext context) {
         child: ListView(
           shrinkWrap: true,
           children: <Widget>[
-            const Align(
+            Align(
                 alignment: Alignment.topCenter,
                 child: Text(
-                  "Complaint Details",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  complaint.title,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 )),
             const SizedBox(
               height: 10,
             ),
-            const Text(
-                "Coamaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakjdhsfashdfklhsfkhaskdfhksdhfkljshdfhyefirywehfrkshdfkhsadfkhsfiuywioefrkj;ljl;akjdsflaksdhfkasdhfkljhdklcmnaksfhkshfkshfkadshfkjhfkhjsjuoiuejskjfsjdfl;adjsfasfjjcc,asdfkajsfkl;jasfadsfl;ajsfl;kdjsafkl;jl;adjsfl;dfadsjkfldksjf;palaint Detail"),
+            Text(
+              complaint.description,
+              textAlign: TextAlign.center,
+            ),
             const SizedBox(
               height: 20,
             ),
             Align(
               alignment: Alignment.bottomCenter,
-              child: ElevatedButton(
-                  style:
-                      ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                  onPressed: () {},
-                  child: const Text("Mark as solved")),
+              child: Obx(
+                () => Get.find<HostelComplaintController>().isloading.value
+                    ? circularProgressIndicator
+                    : ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green),
+                        onPressed: () async {
+                          complaint.isCompleted
+                              ? await Get.find<HostelComplaintController>()
+                                  .updateSolvedOrNot(
+                                  docId: complaint.docId,
+                                  isSolved: false,
+                                  context: context,
+                                )
+                              : await Get.find<HostelComplaintController>()
+                                  .updateSolvedOrNot(
+                                  docId: complaint.docId,
+                                  isSolved: true,
+                                  context: context,
+                                );
+                        },
+                        child: complaint.isCompleted
+                            ? const Text("Mark as Unsolved")
+                            : const Text("Mark as Solved"),
+                      ),
+              ),
             )
           ],
         ),
