@@ -5,16 +5,16 @@ class TempStudent {
   String studentName;
   String admissionNumber;
   String parentName;
-  String classid;
-  String createdDate;
+  String classID;
+  String createDate;
   String docid;
   String parentPhoneNumber;
   TempStudent({
     required this.studentName,
     required this.admissionNumber,
     required this.parentName,
-    required this.classid,
-    required this.createdDate,
+    required this.classID,
+    required this.createDate,
     required this.docid,
     required this.parentPhoneNumber,
   });
@@ -23,8 +23,8 @@ class TempStudent {
     String? studentName,
     String? admissionNumber,
     String? parentName,
-    String? classid,
-    String? createdDate,
+    String? classID,
+    String? createDate,
     String? docid,
     String? parentPhoneNumber,
   }) {
@@ -32,8 +32,8 @@ class TempStudent {
       studentName: studentName ?? this.studentName,
       admissionNumber: admissionNumber ?? this.admissionNumber,
       parentName: parentName ?? this.parentName,
-      classid: classid ?? this.classid,
-      createdDate: createdDate ?? this.createdDate,
+      classID: classID ?? this.classID,
+      createDate: createDate ?? this.createDate,
       docid: docid ?? this.docid,
       parentPhoneNumber: parentPhoneNumber ?? this.parentPhoneNumber,
     );
@@ -44,8 +44,8 @@ class TempStudent {
       'studentName': studentName,
       'admissionNumber': admissionNumber,
       'parentName': parentName,
-      'classid': classid,
-      'createdDate': createdDate,
+      'classID': classID,
+      'createDate': createDate,
       'docid': docid,
       'parentPhoneNumber': parentPhoneNumber,
     };
@@ -56,8 +56,8 @@ class TempStudent {
       studentName: map['studentName'] as String,
       admissionNumber: map['admissionNumber'] as String,
       parentName: map['parentName'] as String,
-      classid: map['classid'] as String,
-      createdDate: map['createdDate'] as String,
+      classID: map['classID'] as String,
+      createDate: map['createDate'] as String,
       docid: map['docid'] as String,
       parentPhoneNumber: map['parentPhoneNumber'] as String,
     );
@@ -70,31 +70,30 @@ class TempStudent {
 
   @override
   String toString() {
-    return 'TempStudent(studentName: $studentName, admissionNumber: $admissionNumber, parentName: $parentName, classid: $classid, createdDate: $createdDate, docid: $docid, parentPhoneNumber: $parentPhoneNumber)';
+    return 'TempStudent(studentName: $studentName, admissionNumber: $admissionNumber, parentName: $parentName, classID: $classID, createDate: $createDate, docid: $docid, parentPhoneNumber: $parentPhoneNumber)';
   }
 
   @override
   bool operator ==(covariant TempStudent other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.studentName == studentName &&
-      other.admissionNumber == admissionNumber &&
-      other.parentName == parentName &&
-      other.classid == classid &&
-      other.createdDate == createdDate &&
-      other.docid == docid &&
-      other.parentPhoneNumber == parentPhoneNumber;
+
+    return other.studentName == studentName &&
+        other.admissionNumber == admissionNumber &&
+        other.parentName == parentName &&
+        other.classID == classID &&
+        other.createDate == createDate &&
+        other.docid == docid &&
+        other.parentPhoneNumber == parentPhoneNumber;
   }
 
   @override
   int get hashCode {
     return studentName.hashCode ^
-      admissionNumber.hashCode ^
-      parentName.hashCode ^
-      classid.hashCode ^
-      createdDate.hashCode ^
-      docid.hashCode ^
-      parentPhoneNumber.hashCode;
+        admissionNumber.hashCode ^
+        parentName.hashCode ^
+        classID.hashCode ^
+        createDate.hashCode ^
+        docid.hashCode ^
+        parentPhoneNumber.hashCode;
   }
 }

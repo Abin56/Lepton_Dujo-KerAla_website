@@ -217,61 +217,61 @@ class AllClassController extends GetxController {
                                 // ),
                               ],
                             ),
-                            sizedBoxw20,
-                            Column(
-                              children: [
-                                GestureDetector(
-                                  onTap: () async {
-                                    Navigator.push(context, MaterialPageRoute(
-                                      builder: (context) {
-                                        return ListOfStudents(
-                                            classID: docid,
-                                            className: className,
-                                            schoolID: Get.find<
-                                                    AdminLoginScreenController>()
-                                                .schoolID);
-                                      },
-                                    ));
-                                  },
-                                  child: ButtonContainerWidget(
-                                    curving: 10,
-                                    colorindex: 0,
-                                    height: 30.h,
-                                    width: 120.w,
-                                    child: Center(
-                                      child: Text(
-                                        'Teacher',
-                                        style: GoogleFonts.montserrat(
-                                            color: const Color.fromARGB(
-                                                255, 255, 254, 254),
-                                            fontSize: 14.w,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                sizedBoxH20,
-                                // GestureDetector(
-                                //   onTap: () async {},
-                                //   child: ButtonContainerWidget(
-                                //     curving: 10,
-                                //     colorindex: 0,
-                                //     height: 30.h,
-                                //     width: 120.w,
-                                //     child: Center(
-                                //       child: Text(
-                                //         'Subject',
-                                //         style: GoogleFonts.montserrat(
-                                //             color: const Color.fromARGB(
-                                //                 255, 255, 254, 254),
-                                //             fontSize: 14.w,
-                                //             fontWeight: FontWeight.w600),
-                                //       ),
-                                //     ),
-                                //   ),
-                                // ),
-                              ],
-                            ),
+                            // sizedBoxw20,
+                            // Column(
+                            //   children: [
+                            //     GestureDetector(
+                            //       onTap: () async {
+                            //         Navigator.push(context, MaterialPageRoute(
+                            //           builder: (context) {
+                            //             return ListOfStudents(
+                            //                 classID: docid,
+                            //                 className: className,
+                            //                 schoolID: Get.find<
+                            //                         AdminLoginScreenController>()
+                            //                     .schoolID);
+                            //           },
+                            //         ));
+                            //       },
+                            //       child: ButtonContainerWidget(
+                            //         curving: 10,
+                            //         colorindex: 0,
+                            //         height: 30.h,
+                            //         width: 120.w,
+                            //         child: Center(
+                            //           child: Text(
+                            //             'Teacher',
+                            //             style: GoogleFonts.montserrat(
+                            //                 color: const Color.fromARGB(
+                            //                     255, 255, 254, 254),
+                            //                 fontSize: 14.w,
+                            //                 fontWeight: FontWeight.w600),
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //     sizedBoxH20,
+                            //     // GestureDetector(
+                            //     //   onTap: () async {},
+                            //     //   child: ButtonContainerWidget(
+                            //     //     curving: 10,
+                            //     //     colorindex: 0,
+                            //     //     height: 30.h,
+                            //     //     width: 120.w,
+                            //     //     child: Center(
+                            //     //       child: Text(
+                            //     //         'Subject',
+                            //     //         style: GoogleFonts.montserrat(
+                            //     //             color: const Color.fromARGB(
+                            //     //                 255, 255, 254, 254),
+                            //     //             fontSize: 14.w,
+                            //     //             fontWeight: FontWeight.w600),
+                            //     //       ),
+                            //     //     ),
+                            //     //   ),
+                            //     // ),
+                            //   ],
+                            // ),
                           ],
                         ),
                       ],

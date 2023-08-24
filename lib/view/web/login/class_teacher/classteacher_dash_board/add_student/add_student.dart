@@ -165,10 +165,10 @@ class AddStudentFromClassTeacher extends StatelessWidget {
                                             teacherAddStudentController
                                                 .addmissionNumberController
                                                 .text,
-                                        classid: Get.find<GetFireBaseData>()
+                                        classID: Get.find<GetFireBaseData>()
                                             .classIDD
                                             .value,
-                                        createdDate: DateTime.now().toString(),
+                                        createDate: DateTime.now().toString(),
                                       ));
                                     }
                                   },
@@ -289,8 +289,8 @@ class AddStudentFromClassTeacher extends StatelessWidget {
                       studentName: firstRow[0]?.value.toString() ?? "",
                       parentPhoneNumber: firstRow[1]?.value.toString() ?? "",
                       admissionNumber: firstRow[2]?.value.toString() ?? "",
-                      classid: Get.find<GetFireBaseData>().classIDD.value,
-                      createdDate: DateTime.now().toString(),
+                      classID: Get.find<GetFireBaseData>().classIDD.value,
+                      createDate: DateTime.now().toString(),
                       parentName: firstRow[3]?.value.toString() ?? "",
                       docid: ""));
             }
