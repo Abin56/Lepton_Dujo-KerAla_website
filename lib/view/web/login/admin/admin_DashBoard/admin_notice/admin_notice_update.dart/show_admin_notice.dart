@@ -165,7 +165,7 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                                               .value = value ?? false;
                                         },
                                       ),
-                                      const Text('Teacher')
+                                      const Text('Teachers')
                                     ],
                                   ),
                                   Row(

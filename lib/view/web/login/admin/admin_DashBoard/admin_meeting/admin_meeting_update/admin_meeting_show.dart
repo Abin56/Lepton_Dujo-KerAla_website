@@ -154,7 +154,7 @@ class AdminMeetingShowPage extends StatelessWidget {
                                             .value = value ?? false;
                                       },
                                     ),
-                                    const Text('Teacher')
+                                    const Text('Teachers')
                                   ],
                                 ),
                                 Row(
@@ -167,7 +167,7 @@ class AdminMeetingShowPage extends StatelessWidget {
                                             .value = value ?? false;
                                       },
                                     ),
-                                    const Text('Guardian')
+                                    const Text('Parents')
                                   ],
                                 ),
                               ],
