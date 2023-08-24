@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
+import '../../../../../../controller/attendance_controller/attendance_controller.dart';
 import '../../../../../../controller/class_list/class_list_model.dart';
 import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../model/add_class/add_new_class.dart';
@@ -32,6 +33,8 @@ class _MyStudentsListViewScreenState extends State<MyStudentsListViewScreen> {
   AllClassController allClassController = Get.put(AllClassController());
   List<SchoolClassesModel> allData = [];
   int columnCount = 3;
+  final AttendanceController attendanceController =
+      Get.put(AttendanceController());
 
   final getxController = Get.put(ClassProfileList());
   @override
@@ -41,7 +44,8 @@ class _MyStudentsListViewScreenState extends State<MyStudentsListViewScreen> {
     double h = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Classes List'), backgroundColor: adminePrimayColor),
+          title: const Text('Classes List'),
+          backgroundColor: adminePrimayColor),
       body: SafeArea(
           child: StreamBuilder(
         stream: FirebaseFirestore.instance
@@ -50,7 +54,8 @@ class _MyStudentsListViewScreenState extends State<MyStudentsListViewScreen> {
             .collection(Get.find<GetFireBaseData>().bYear.value)
             .doc(Get.find<GetFireBaseData>().bYear.value)
             .collection("classes")
-            .where('classTeacherdocid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+            .where('classTeacherdocid',
+                isEqualTo: FirebaseAuth.instance.currentUser!.uid)
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -97,8 +102,9 @@ class _MyStudentsListViewScreenState extends State<MyStudentsListViewScreen> {
                             children: List.generate(
                               snapshot.data!.docs.length,
                               (int index) {
-                                SchoolClassesModel data = SchoolClassesModel.fromMap(
-                                    snapshot.data!.docs[index].data());
+                                SchoolClassesModel data =
+                                    SchoolClassesModel.fromMap(
+                                        snapshot.data!.docs[index].data());
                                 allData.add(data);
                                 return AnimationConfiguration.staggeredGrid(
                                   position: index,
@@ -112,7 +118,9 @@ class _MyStudentsListViewScreenState extends State<MyStudentsListViewScreen> {
                                         padding: const EdgeInsets.all(8.0),
                                         child: GestureDetector(
                                           onTap: () async {
-                                 allClassController.showclass(
+                                            attendanceController.classId.value =
+                                                data.docid;
+                                            allClassController.showclass(
                                                 context,
                                                 data.className,
                                                 data.docid,
@@ -141,7 +149,6 @@ class _MyStudentsListViewScreenState extends State<MyStudentsListViewScreen> {
                                                     ),
                                                   ),
                                                   sizedBoxH10,
-                                                 
                                                   Text(
                                                     "C L A S S ${index + 1}",
                                                     style:
@@ -153,7 +160,6 @@ class _MyStudentsListViewScreenState extends State<MyStudentsListViewScreen> {
                                                                     .bold),
                                                   ),
                                                   sizedBoxH10,
-                                             
                                                   sizedBoxH10,
                                                   Text(
                                                     "Class : ${data.className}",
@@ -171,7 +177,6 @@ class _MyStudentsListViewScreenState extends State<MyStudentsListViewScreen> {
                                                       fontSize: 12,
                                                     ),
                                                   ),
-                                            
                                                 ],
                                               ),
                                             ),
