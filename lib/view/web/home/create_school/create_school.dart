@@ -815,6 +815,22 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                   ),
                                 ),
                                 onPressed: () async {
+                                    if(file==null){
+                                                  showDialog(context: context, builder: (context){
+                                                    return AlertDialog(
+                                                      title: Text('Image'), 
+                                                      content: Text('Add an image of school before requesting create school'),
+                                                      actions: [
+                                                        MaterialButton(onPressed: (){
+                                                          Navigator.pop(context);
+                                                        }, color: Colors.blue, child: Text('OK'),)
+                                                      ],
+                                                    );
+                                                  });
+                                                }
+                                else{
+
+                                                  
                                   if (_formKey.currentState!.validate()) {
                                     return showDialog(
                                       context: context,
@@ -835,6 +851,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                             TextButton(
                                               child: const Text('OK'),
                                               onPressed: () async {
+                                             
                                                 String uid = const Uuid().v1();
                                                 //isImageUpload.value = true;
                                                 UploadTask uploadTask =
@@ -864,6 +881,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
                                                       .additionalFeatures[0],
                                                   tarifController
                                                       .additionalFeatures[1],
+                                                      downloadUrl
                                                 );
                                               },
                                             ),
@@ -962,6 +980,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
 
                                     // }
                                   }
+                                }
                                 },
                                 child: const Text("Create"),
                               ),

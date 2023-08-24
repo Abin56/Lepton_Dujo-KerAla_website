@@ -208,12 +208,19 @@ class AddRequestedSchoolsToFirebase {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<void> addRequestedSchools(
-      SchoolsToBeVerified schoolModel, context) async {
+      SchoolsToBeVerified schoolModel, context, String imgUrl) async {
     try {
       _firestore
           .collection('RequestedSchools')
           .doc(schoolModel.docid)
-          .set(schoolModel.toMap())
+          .set(schoolModel.toMap()).then((value) {
+             _firestore
+          .collection('RequestedSchools')
+          .doc(schoolModel.docid)
+          .update({
+            'imageUrl' : imgUrl
+          });
+          })
           .then((value) {
         return showDialog(
           context: context,
