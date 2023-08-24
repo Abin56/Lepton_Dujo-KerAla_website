@@ -114,7 +114,7 @@ class NonTeachingStaffView extends StatelessWidget {
                                             const SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount:
                                               2, // Number of columns
-                                              
+
                                           mainAxisSpacing:
                                               0, // Spacing between rows
                                           crossAxisSpacing:
@@ -122,8 +122,8 @@ class NonTeachingStaffView extends StatelessWidget {
                                         ),
                                         scrollDirection: Axis.vertical,
                                         shrinkWrap: true,
-                                        physics:
-                                            const NeverScrollableScrollPhysics(),
+                                        // physics:
+                                        //     const NeverScrollableScrollPhysics(),
                                         itemCount: snapshot.data!.docs.length,
                                         itemBuilder: (context, index) {
                                           return Container(
@@ -149,7 +149,6 @@ class NonTeachingStaffView extends StatelessWidget {
                                                       fontWeight:
                                                           FontWeight.w700),
                                                 ),
-                                                
                                                 Text(
                                                   'Designation: ' +
                                                       snapshot.data!.docs[index]

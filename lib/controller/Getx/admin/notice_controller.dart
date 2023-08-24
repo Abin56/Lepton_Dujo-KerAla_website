@@ -54,7 +54,8 @@ class AdminNoticeController extends GetxController {
         dateOfOccasionController.text.isNotEmpty &&
         venueController.text.isNotEmpty &&
         chiefGuestController.text.isNotEmpty &&
-        signedByController.text.isNotEmpty) {
+        signedByController.text.isNotEmpty &&
+        customContentController.text.isNotEmpty) {
       try {
         if (!teacherCheckBox.value &&
             !studentCheckBox.value &&
@@ -277,7 +278,9 @@ class AdminNoticeController extends GetxController {
 
     for (var i = 0; i < parentsTokenList.length; i++) {
       sendPushMessage(
-          parentsTokenList[i], 'New Notice added, പുതിയ നോട്ടീസ് പ്രസിദ്ധീകരിച്ചു', 'Notice Notification');
+          parentsTokenList[i],
+          'New Notice added, പുതിയ നോട്ടീസ് പ്രസിദ്ധീകരിച്ചു',
+          'Notice Notification');
     }
   }
 
@@ -310,7 +313,9 @@ class AdminNoticeController extends GetxController {
 
     for (var i = 0; i < guardiansTokenList.length; i++) {
       sendPushMessage(
-          guardiansTokenList[i], 'New Notice added, പുതിയ നോട്ടീസ് പ്രസിദ്ധീകരിച്ചു', 'Notice Notification');
+          guardiansTokenList[i],
+          'New Notice added, പുതിയ നോട്ടീസ് പ്രസിദ്ധീകരിച്ചു',
+          'Notice Notification');
     }
   }
 
@@ -348,7 +353,9 @@ class AdminNoticeController extends GetxController {
 
     for (var i = 0; i < deviceTokenList.length; i++) {
       sendPushMessage(
-          deviceTokenList[i], 'New Notice added, പുതിയ നോട്ടീസ് പ്രസിദ്ധീകരിച്ചു', 'Notice Notification');
+          deviceTokenList[i],
+          'New Notice added, പുതിയ നോട്ടീസ് പ്രസിദ്ധീകരിച്ചു',
+          'Notice Notification');
     }
   }
 
@@ -362,7 +369,7 @@ class AdminNoticeController extends GetxController {
       final docData = doc.data() as Map<String, dynamic>;
       if (docData['deviceToken'] != null) {
         studentsTokenList.add(docData['deviceToken']);
-        log(docData['deviceToken'] +' '+ docData['studentName']);
+        log(docData['deviceToken'] + ' ' + docData['studentName']);
       }
     }
 
@@ -387,7 +394,9 @@ class AdminNoticeController extends GetxController {
 
     for (var i = 0; i < studentsTokenList.length; i++) {
       sendPushMessage(
-          studentsTokenList[i], 'New Notice added, പുതിയ നോട്ടീസ് പ്രസിദ്ധീകരിച്ചു', 'Notice Notification');
+          studentsTokenList[i],
+          'New Notice added, പുതിയ നോട്ടീസ് പ്രസിദ്ധീകരിച്ചു',
+          'Notice Notification');
     }
   }
 }

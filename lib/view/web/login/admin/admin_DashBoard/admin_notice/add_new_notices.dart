@@ -113,6 +113,18 @@ class AddNewNotices extends StatelessWidget {
                                   ),
                                 ),
                                 sizedBoxH20,
+                                TextFormField(
+                                  validator: checkFieldEmpty,
+                                  controller: adminNoticeController
+                                      .customContentController,
+                                  decoration: InputDecoration(
+                                    border: const OutlineInputBorder(),
+                                    labelText: 'Subject'.tr,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 30,
+                                ),
                                 DateTimeTextField(
                                   labelText: "Date of occation",
                                   textEditingController: adminNoticeController
@@ -170,18 +182,6 @@ class AddNewNotices extends StatelessWidget {
                                   decoration: InputDecoration(
                                     border: const OutlineInputBorder(),
                                     labelText: 'Signed by'.tr,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 30,
-                                ),
-                                TextFormField(
-                                  validator: checkFieldEmpty,
-                                  controller: adminNoticeController
-                                      .customContentController,
-                                  decoration: InputDecoration(
-                                    border: const OutlineInputBorder(),
-                                    labelText: 'Custom notice'.tr,
                                   ),
                                 ),
                                 const SizedBox(
