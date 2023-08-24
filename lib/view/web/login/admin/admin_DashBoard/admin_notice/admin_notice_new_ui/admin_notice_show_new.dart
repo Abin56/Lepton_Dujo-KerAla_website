@@ -54,12 +54,12 @@ class NoticeDisplay extends StatelessWidget {
                           )
                         : Container(
                             decoration: const BoxDecoration(
-                            //  border: Border.all(),
-                              // color: const Color(0xFFE1F8DC),
-                            ),
+                                //  border: Border.all(),
+                                // color: const Color(0xFFE1F8DC),
+                                ),
                             width: screenSize.width * 0.4,
                             child: Padding(
-                              padding:  EdgeInsets.only(left: 60.w,right: 60),
+                              padding: EdgeInsets.only(left: 60.w, right: 60),
                               child: ListView(
                                 shrinkWrap: true,
                                 children: <Widget>[
@@ -70,9 +70,10 @@ class NoticeDisplay extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(20),
                                         child: Image.network(
                                           adminNoticeController
-                                              .adminNoticeModelData
-                                              .value!
-                                              .imageUrl,
+                                                  .adminNoticeModelData
+                                                  .value!
+                                                  .imageUrl ??
+                                              "",
                                           errorBuilder:
                                               (context, error, stackTrace) {
                                             return const Center(
@@ -89,30 +90,45 @@ class NoticeDisplay extends StatelessWidget {
                                   ),
                                   DataTableWidget(
                                     heading: adminNoticeController
-                                        .adminNoticeModelData.value!.heading,
+                                            .adminNoticeModelData
+                                            .value!
+                                            .heading ??
+                                        "",
                                     chiefGuest: adminNoticeController
-                                        .adminNoticeModelData.value!.chiefGuest,
+                                            .adminNoticeModelData
+                                            .value!
+                                            .chiefGuest ??
+                                        "",
                                     dateOfSubmission: adminNoticeController
-                                        .adminNoticeModelData
-                                        .value!
-                                        .dateOfSubmission,
+                                            .adminNoticeModelData
+                                            .value!
+                                            .dateOfSubmission ??
+                                        "",
                                     dateOfOccassion: adminNoticeController
-                                        .adminNoticeModelData
-                                        .value!
-                                        .dateofoccation,
+                                            .adminNoticeModelData
+                                            .value!
+                                            .dateofoccation ??
+                                        "",
                                     publishedDate: adminNoticeController
-                                        .adminNoticeModelData
-                                        .value!
-                                        .publishedDate,
+                                            .adminNoticeModelData
+                                            .value!
+                                            .publishedDate ??
+                                        "",
                                     signedBy: adminNoticeController
-                                        .adminNoticeModelData.value!.signedBy,
+                                            .adminNoticeModelData
+                                            .value!
+                                            .signedBy ??
+                                        "",
                                     venue: adminNoticeController
-                                        .adminNoticeModelData.value!.venue,
+                                            .adminNoticeModelData
+                                            .value!
+                                            .venue ??
+                                        "",
                                   ),
                                   if (adminNoticeController
                                           .adminNoticeModelData.value ==
                                       null)
-                                   const SizedBox()
+                                    const SizedBox()
                                   else
                                     Row(
                                       mainAxisAlignment:
@@ -177,22 +193,23 @@ class NoticeDisplay extends StatelessWidget {
                                                           await adminNoticeController.removeNotice(
                                                               schoolId:
                                                                   schoolId,
-                                                              noticeId:
-                                                                  adminNoticeController
+                                                              noticeId: adminNoticeController
                                                                       .adminNoticeModelData
                                                                       .value!
-                                                                      .noticeId,
+                                                                      .noticeId ??
+                                                                  "",
                                                               context: context,
                                                               noticeImageId:
                                                                   adminNoticeController
+                                                                          .adminNoticeModelData
+                                                                          .value!
+                                                                          .imageId ??
+                                                                      "",
+                                                              signImageId: adminNoticeController
                                                                       .adminNoticeModelData
                                                                       .value!
-                                                                      .imageId,
-                                                              signImageId:
-                                                                  adminNoticeController
-                                                                      .adminNoticeModelData
-                                                                      .value!
-                                                                      .signedImageId);
+                                                                      .signedImageId ??
+                                                                  "");
                                                         },
                                                         child: const Text(
                                                             'Remove'),
@@ -229,7 +246,7 @@ class NoticeDisplay extends StatelessWidget {
                             const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 3),
                         itemBuilder: (context, index) {
-                          AdminNoticeModel data = AdminNoticeModel.fromJson(
+                          AdminNoticeModel data = AdminNoticeModel.fromMap(
                               snapshot.data!.docs[index].data());
                           return GestureDetector(
                             onTap: () {
@@ -237,10 +254,10 @@ class NoticeDisplay extends StatelessWidget {
                                   data;
                             },
                             child: NoticeCardWidget(
-                              date: data.dateofoccation,
-                              heading: data.heading,
-                              uploadedDate: data.publishedDate,
-                              venue: data.venue,
+                              date: data.dateofoccation ?? "",
+                              heading: data.heading ?? "",
+                              uploadedDate: data.publishedDate ?? "",
+                              venue: data.venue ?? "",
                             ),
                           );
                         },
@@ -267,7 +284,7 @@ class NoticePageElevatedButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return SizedBox(
-     width: 70.w,
+      width: 70.w,
       height: 40.w,
       child: ElevatedButton(
         onPressed: function,
@@ -398,15 +415,16 @@ class NoticeCardWidget extends StatelessWidget {
         width: screenSize.width * .17,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5.w),
-           // border: Border.all(),
+            // border: Border.all(),
             color: Colors.white,
             boxShadow: [
               BoxShadow(
-              color: const Color.fromARGB(211, 122, 117, 117).withOpacity(0.5),
-              spreadRadius: 10,
-              blurRadius: 10,
-              offset: const Offset(0, 3),
-            ),
+                color:
+                    const Color.fromARGB(211, 122, 117, 117).withOpacity(0.5),
+                spreadRadius: 10,
+                blurRadius: 10,
+                offset: const Offset(0, 3),
+              ),
             ]),
         child: Padding(
           padding: const EdgeInsets.all(16.0),

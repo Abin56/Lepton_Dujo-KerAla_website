@@ -53,56 +53,40 @@ class ComplaintListPageBodyWidgetComplete extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: Stack(
-            children: [
-              Container(
-                color: adminePrimayColor,
-                alignment: Alignment.center,
-                child: ListView(
-                  shrinkWrap: true,
-                  children: [
-                    Align(
-                      alignment: Alignment.center,
-                      child: SizedBox(
-                        child: Text(
-                          "Hostel",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: ResponsiveApp.width * .04,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+          child: Container(
+            color: adminePrimayColor,
+            alignment: Alignment.center,
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                Align(
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                    child: Text(
+                      "Hostel",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: ResponsiveApp.width * .04,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: SizedBox(
-                        child: Text(
-                          "Complaints",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: ResponsiveApp.width * .04,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-              Positioned(
-                  top: 0,
-                  left: 0,
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
+                Align(
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                    child: Text(
+                      "Complaints",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: ResponsiveApp.width * .04,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  )),
-            ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         const VerticalDivider(),
@@ -122,56 +106,40 @@ class ComplaintListPageBodyWidgetUnComplete extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: Stack(
-            children: [
-              Container(
-                color: adminePrimayColor,
-                alignment: Alignment.center,
-                child: ListView(
-                  shrinkWrap: true,
-                  children: [
-                    Align(
-                      alignment: Alignment.center,
-                      child: SizedBox(
-                        child: Text(
-                          "Hostel",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: ResponsiveApp.width * .04,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+          child: Container(
+            color: adminePrimayColor,
+            alignment: Alignment.center,
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                Align(
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                    child: Text(
+                      "Hostel",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: ResponsiveApp.width * .04,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: SizedBox(
-                        child: Text(
-                          "Complaints",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: ResponsiveApp.width * .04,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-              Positioned(
-                  top: 0,
-                  left: 0,
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
+                Align(
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                    child: Text(
+                      "Complaints",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: ResponsiveApp.width * .04,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  )),
-            ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         const VerticalDivider(),

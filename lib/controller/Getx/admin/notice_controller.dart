@@ -22,6 +22,7 @@ class AdminNoticeController extends GetxController {
   TextEditingController chiefGuestController = TextEditingController();
   TextEditingController dateOfSubmissionController = TextEditingController();
   TextEditingController signedByController = TextEditingController();
+  TextEditingController subjectController = TextEditingController();
   TextEditingController customContentController = TextEditingController();
   RxString imageUrl = ''.obs;
   String imageId = '';
@@ -31,6 +32,7 @@ class AdminNoticeController extends GetxController {
   RxBool isLoadingShowNotice = false.obs;
   RxBool teacherCheckBox = false.obs;
   RxBool studentCheckBox = false.obs;
+  RxBool customContentCheckBox = false.obs;
   RxBool guardianCheckBox = false.obs;
   List<String> deviceTokenList = [];
   List<String> parentsTokenList = [];
@@ -55,7 +57,7 @@ class AdminNoticeController extends GetxController {
         venueController.text.isNotEmpty &&
         chiefGuestController.text.isNotEmpty &&
         signedByController.text.isNotEmpty &&
-        customContentController.text.isNotEmpty) {
+        subjectController.text.isNotEmpty) {
       try {
         if (!teacherCheckBox.value &&
             !studentCheckBox.value &&
@@ -64,27 +66,27 @@ class AdminNoticeController extends GetxController {
           return;
         }
         AdminNoticeModel dataModel = AdminNoticeModel(
-          publishedDate: publishedDateController.text,
-          heading: headingController.text,
-          dateofoccation: dateOfOccasionController.text,
-          venue: venueController.text,
-          chiefGuest: chiefGuestController.text,
-          dateOfSubmission: dateOfSubmissionController.text,
-          signedBy: signedByController.text,
-          noticeId: '',
-          imageUrl: imageUrl.value,
-          signedImageUrl: signedImageUrl.value,
-          imageId: imageId,
-          signedImageId: signedImageId,
-          customContent: customContentController.text,
-          visibleGuardian: guardianCheckBox.value,
-          visibleStudent: studentCheckBox.value,
-          visibleTeacher: teacherCheckBox.value,
-        );
+            publishedDate: publishedDateController.text,
+            heading: headingController.text,
+            dateofoccation: dateOfOccasionController.text,
+            venue: venueController.text,
+            chiefGuest: chiefGuestController.text,
+            dateOfSubmission: dateOfSubmissionController.text,
+            signedBy: signedByController.text,
+            noticeId: '',
+            imageUrl: imageUrl.value,
+            signedImageUrl: signedImageUrl.value,
+            imageId: imageId,
+            signedImageId: signedImageId,
+            subject: subjectController.text,
+            visibleGuardian: guardianCheckBox.value,
+            visibleStudent: studentCheckBox.value,
+            visibleTeacher: teacherCheckBox.value,
+            customContent: customContentController.text);
         isLoading.value = true;
 
         final data = await firebaseFirestore.add(
-          dataModel.toJson(),
+          dataModel.toMap(),
         );
         await firebaseFirestore
             .doc(data.id)
@@ -114,7 +116,7 @@ class AdminNoticeController extends GetxController {
       isLoadingShowNotice.value = true;
       await firebaseFirestore
           .doc(adminNoticeModel.noticeId)
-          .update(adminNoticeModel.toJson());
+          .update(adminNoticeModel.toMap());
       isLoadingShowNotice.value = false;
       adminNoticeModelData.value = null;
       if (context.mounted) {
@@ -234,6 +236,7 @@ class AdminNoticeController extends GetxController {
   }
 
   clearControllers() {
+    customContentController.clear();
     publishedDateController.clear();
     headingController.clear();
     dateOfOccasionController.clear();
@@ -241,7 +244,7 @@ class AdminNoticeController extends GetxController {
     chiefGuestController.clear();
     dateOfSubmissionController.clear();
     signedByController.clear();
-    customContentController.clear();
+    subjectController.clear();
     imageUrl.value = '';
     imageId = '';
     signedImageUrl.value = '';

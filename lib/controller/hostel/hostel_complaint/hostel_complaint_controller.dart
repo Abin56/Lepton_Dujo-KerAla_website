@@ -19,12 +19,14 @@ class HostelComplaintController {
   Future<List<HostelModelComplaint>> fetchAllComplaintsCompleted() async {
     try {
       final data = await _fireStore.get();
-      final result =
-          data.docs.map((e) => HostelModelComplaint.fromMap(e.data())).toList();
-      final filteredList =
-          result.where((element) => element.isCompleted == true).toList();
-      log(filteredList.length.toString());
-      return filteredList;
+
+      final List<HostelModelComplaint> filteredData = data.docs
+          .map((e) => HostelModelComplaint.fromMap(e.data()))
+          .toList()
+          .where((element) => !element.isCompleted)
+          .toList();
+      filteredData.sort((a, b) => a.date.compareTo(b.date));
+      return filteredData;
     } catch (e) {
       log(e.toString());
       showToast(msg: 'Something went wrong');
@@ -35,11 +37,14 @@ class HostelComplaintController {
   Future<List<HostelModelComplaint>> fetchAllComplaintsUncompleted() async {
     try {
       final data = await _fireStore.get();
-      final result =
-          data.docs.map((e) => HostelModelComplaint.fromMap(e.data())).toList();
-      final filteredList =
-          result.where((element) => element.isCompleted == false).toList();
-      return filteredList;
+
+      final List<HostelModelComplaint> filteredData = data.docs
+          .map((e) => HostelModelComplaint.fromMap(e.data()))
+          .toList()
+          .where((element) => !element.isCompleted)
+          .toList();
+      filteredData.sort((a, b) => a.date.compareTo(b.date));
+      return filteredData;
     } catch (e) {
       log(e.toString());
       showToast(msg: 'Something went wrong');

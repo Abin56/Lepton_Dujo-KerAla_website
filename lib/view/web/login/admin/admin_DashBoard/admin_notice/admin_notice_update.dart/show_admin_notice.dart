@@ -199,7 +199,8 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                                       final data = await adminNoticeController
                                           .photoUpdate(
                                               uid: widget.adminNoticeModel
-                                                  .signedImageId);
+                                                      .signedImageId ??
+                                                  "");
                                       if (data.isNotEmpty) {
                                         adminNoticeController
                                             .signedImageUrl.value = data;
@@ -218,8 +219,9 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                                     onPressed: () async {
                                       final data = await adminNoticeController
                                           .photoUpdate(
-                                        uid: widget
-                                            .adminNoticeModel.signedImageId,
+                                        uid: widget.adminNoticeModel
+                                                .signedImageId ??
+                                            "",
                                       );
                                       if (data.isNotEmpty) {
                                         adminNoticeController.imageUrl.value =
@@ -266,7 +268,7 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                                         noticeId:
                                             widget.adminNoticeModel.noticeId,
                                         customContent: adminNoticeController
-                                            .customContentController.text,
+                                            .subjectController.text,
                                         visibleGuardian: adminNoticeController
                                             .guardianCheckBox.value,
                                         visibleStudent: adminNoticeController
@@ -307,28 +309,31 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
 
   void addValueToTextField() {
     adminNoticeController.publishedDateController.text =
-        widget.adminNoticeModel.publishedDate;
+        widget.adminNoticeModel.publishedDate ?? "";
     adminNoticeController.headingController.text =
-        widget.adminNoticeModel.heading;
+        widget.adminNoticeModel.heading ?? "";
     adminNoticeController.dateOfOccasionController.text =
-        widget.adminNoticeModel.dateofoccation;
-    adminNoticeController.venueController.text = widget.adminNoticeModel.venue;
+        widget.adminNoticeModel.dateofoccation ?? "";
+    adminNoticeController.venueController.text =
+        widget.adminNoticeModel.venue ?? "";
     adminNoticeController.chiefGuestController.text =
-        widget.adminNoticeModel.chiefGuest;
+        widget.adminNoticeModel.chiefGuest ?? "";
     adminNoticeController.dateOfSubmissionController.text =
-        widget.adminNoticeModel.dateOfSubmission;
+        widget.adminNoticeModel.dateOfSubmission ?? "";
     adminNoticeController.signedByController.text =
-        widget.adminNoticeModel.signedBy;
-    adminNoticeController.imageId = widget.adminNoticeModel.imageId;
-    adminNoticeController.imageUrl.value = widget.adminNoticeModel.imageUrl;
-    adminNoticeController.signedImageId = widget.adminNoticeModel.signedImageId;
+        widget.adminNoticeModel.signedBy ?? "";
+    adminNoticeController.imageId = widget.adminNoticeModel.imageId ?? "";
+    adminNoticeController.imageUrl.value =
+        widget.adminNoticeModel.imageUrl ?? "";
+    adminNoticeController.signedImageId =
+        widget.adminNoticeModel.signedImageId ?? "";
     adminNoticeController.signedImageUrl.value =
-        widget.adminNoticeModel.signedImageUrl;
+        widget.adminNoticeModel.signedImageUrl ?? "";
     adminNoticeController.studentCheckBox.value =
-        widget.adminNoticeModel.visibleStudent;
+        widget.adminNoticeModel.visibleStudent ?? true;
     adminNoticeController.teacherCheckBox.value =
-        widget.adminNoticeModel.visibleTeacher;
+        widget.adminNoticeModel.visibleTeacher ?? true;
     adminNoticeController.guardianCheckBox.value =
-        widget.adminNoticeModel.visibleGuardian;
+        widget.adminNoticeModel.visibleGuardian ?? true;
   }
 }
