@@ -195,17 +195,7 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                                     style: ElevatedButton.styleFrom(
                                       shape: const StadiumBorder(),
                                     ),
-                                    onPressed: () async {
-                                      final data = await adminNoticeController
-                                          .photoUpdate(
-                                              uid: widget.adminNoticeModel
-                                                      .signedImageId ??
-                                                  "");
-                                      if (data.isNotEmpty) {
-                                        adminNoticeController
-                                            .signedImageUrl.value = data;
-                                      }
-                                    },
+                                    onPressed: () async {},
                                     child: Text(
                                       'Update sign'.tr,
                                     ),
@@ -216,18 +206,7 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                                     style: ElevatedButton.styleFrom(
                                       shape: const StadiumBorder(),
                                     ),
-                                    onPressed: () async {
-                                      final data = await adminNoticeController
-                                          .photoUpdate(
-                                        uid: widget.adminNoticeModel
-                                                .signedImageId ??
-                                            "",
-                                      );
-                                      if (data.isNotEmpty) {
-                                        adminNoticeController.imageUrl.value =
-                                            data;
-                                      }
-                                    },
+                                    onPressed: () async {},
                                     child: Text(
                                       'Update image'.tr,
                                     ),
@@ -240,6 +219,17 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                             ),
                             GestureDetector(
                               onTap: () async {
+                                final signedImageUrl =
+                                    await adminNoticeController.photoUpdate(
+                                        url: widget.adminNoticeModel
+                                                .signedImageUrl ??
+                                            "");
+                                final imageUrl =
+                                    await adminNoticeController.photoUpdate(
+                                        url: widget.adminNoticeModel.imageUrl ??
+                                            "");
+
+                                if (context.mounted) {}
                                 if (formKey.currentState?.validate() ?? false) {
                                   await adminNoticeController.updateAdminNotice(
                                       AdminNoticeModel(
@@ -257,14 +247,8 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                                             .dateOfSubmissionController.text,
                                         signedBy: adminNoticeController
                                             .signedByController.text,
-                                        imageUrl: adminNoticeController
-                                            .imageUrl.value,
-                                        signedImageUrl: adminNoticeController
-                                            .signedImageUrl.value,
-                                        imageId:
-                                            widget.adminNoticeModel.imageId,
-                                        signedImageId: widget
-                                            .adminNoticeModel.signedImageId,
+                                        imageUrl: imageUrl,
+                                        signedImageUrl: signedImageUrl,
                                         noticeId:
                                             widget.adminNoticeModel.noticeId,
                                         customContent: adminNoticeController
@@ -322,13 +306,7 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
         widget.adminNoticeModel.dateOfSubmission ?? "";
     adminNoticeController.signedByController.text =
         widget.adminNoticeModel.signedBy ?? "";
-    adminNoticeController.imageId = widget.adminNoticeModel.imageId ?? "";
-    adminNoticeController.imageUrl.value =
-        widget.adminNoticeModel.imageUrl ?? "";
-    adminNoticeController.signedImageId =
-        widget.adminNoticeModel.signedImageId ?? "";
-    adminNoticeController.signedImageUrl.value =
-        widget.adminNoticeModel.signedImageUrl ?? "";
+    widget.adminNoticeModel.signedImageUrl ?? "";
     adminNoticeController.studentCheckBox.value =
         widget.adminNoticeModel.visibleStudent ?? true;
     adminNoticeController.teacherCheckBox.value =

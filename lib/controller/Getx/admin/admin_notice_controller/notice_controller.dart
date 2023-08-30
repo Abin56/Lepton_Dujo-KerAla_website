@@ -14,6 +14,7 @@ import '../../../../model/admin_models/admin_notice_model/admin_notice_model.dar
 import '../../../../view/constant/constant.dart';
 
 class AdminNoticeController extends GetxController {
+  String className = "AdminNoticeController"; //for log
   TextEditingController publishedDateController = TextEditingController();
   TextEditingController headingController = TextEditingController();
   TextEditingController dateOfOccasionController = TextEditingController();
@@ -23,16 +24,14 @@ class AdminNoticeController extends GetxController {
   TextEditingController signedByController = TextEditingController();
   TextEditingController subjectController = TextEditingController();
   TextEditingController customContentController = TextEditingController();
-  RxString imageUrl = ''.obs;
-  String imageId = '';
-  RxString signedImageUrl = ''.obs;
-  String signedImageId = '';
   RxBool isLoading = false.obs;
   RxBool isLoadingShowNotice = false.obs;
-  RxBool teacherCheckBox = true.obs;
-  RxBool studentCheckBox = true.obs;
-  RxBool guardianCheckBox = true.obs;
-  RxBool customContentCheckBox = false.obs;
+  RxBool teacherCheckBox = RxBool(true);
+  RxBool studentCheckBox = RxBool(true);
+  RxBool guardianCheckBox = RxBool(true);
+  RxBool customContentCheckBox = RxBool(false);
+  Uint8List? imageFile;
+  Uint8List? signImageFile;
 
   Rxn<AdminNoticeModel> adminNoticeModelData = Rxn<AdminNoticeModel>(null);
   CollectionReference<Map<String, dynamic>> firebaseFirestore =
@@ -46,8 +45,19 @@ class AdminNoticeController extends GetxController {
   //add admin notice to firebase
 
   Future<void> createNewAdminNotice() async {
+    AdminNoticeModel? dataModel;
+    String imageUrl = "";
+    String signedImageUrl = "";
     try {
-      AdminNoticeModel dataModel = AdminNoticeModel(
+      if (imageFile != null && signImageFile != null) {
+        isLoading.value = true;
+        imageUrl = await photoUpload(imageFile);
+        signedImageUrl = await photoUpload(signImageFile);
+      }
+
+      if (!customContentCheckBox.value && isFormValid()) {
+        isLoading.value = true;
+        dataModel = AdminNoticeModel(
           publishedDate: publishedDateController.text,
           heading: headingController.text,
           dateofoccation: dateOfOccasionController.text,
@@ -56,16 +66,41 @@ class AdminNoticeController extends GetxController {
           dateOfSubmission: dateOfSubmissionController.text,
           signedBy: signedByController.text,
           noticeId: '',
-          imageUrl: imageUrl.value,
-          signedImageUrl: signedImageUrl.value,
-          imageId: imageId,
-          signedImageId: signedImageId,
+          imageUrl: imageUrl,
+          signedImageUrl: signedImageUrl,
           subject: subjectController.text,
           visibleGuardian: guardianCheckBox.value,
           visibleStudent: studentCheckBox.value,
           visibleTeacher: teacherCheckBox.value,
-          customContent: customContentController.text);
-      isLoading.value = true;
+          customContent: customContentController.text,
+        );
+      } else if (customContentController.text.isNotEmpty &&
+          customContentCheckBox.value) {
+        isLoading.value = true;
+        dataModel = AdminNoticeModel(
+          chiefGuest: "",
+          customContent: customContentController.text,
+          dateOfSubmission: "",
+          dateofoccation: "",
+          heading: "",
+          imageUrl: imageUrl,
+          noticeId: "",
+          publishedDate: "",
+          signedBy: "",
+          signedImageUrl: signedImageUrl,
+          subject: "",
+          venue: "",
+          visibleGuardian: guardianCheckBox.value,
+          visibleStudent: studentCheckBox.value,
+          visibleTeacher: teacherCheckBox.value,
+        );
+      } else {
+        showToast(msg: "All fields are mandatory");
+      }
+      if (dataModel == null) {
+        isLoading.value = false;
+        return;
+      }
 
       final data = await firebaseFirestore.add(
         dataModel.toMap(),
@@ -74,11 +109,13 @@ class AdminNoticeController extends GetxController {
           .doc(data.id)
           .update({"noticeId": data.id}).then((value) async {});
       clearControllers();
+      imageUrl = "";
+      signedImageUrl = "";
 
       isLoading.value = false;
       showToast(msg: 'Successfully Created');
     } catch (e) {
-      log(e.toString());
+      log("$className createNewAdminNotice : $e");
       isLoading.value = false;
     }
   }
@@ -97,49 +134,40 @@ class AdminNoticeController extends GetxController {
         Navigator.of(context).pop();
       }
     } catch (e) {
-      log(e.toString());
+      log("$className updateAdminNotice : $e");
       isLoadingShowNotice.value = false;
     }
   }
 
 //files uploaded to firebase
-  Future<Map<String, String>> photoUpload() async {
+  Future<String> photoUpload(Uint8List? imageFile) async {
     try {
-      isLoading.value = true;
-
-      FilePickerResult? result =
-          await FilePicker.platform.pickFiles(type: FileType.image);
-      if (result != null) {
-        Uint8List? file = result.files.first.bytes;
+      if (imageFile != null) {
         String uid = const Uuid().v1();
         UploadTask uploadTask = FirebaseStorage.instance
             .ref()
             .child(
-                "files/${Get.find<AdminLoginScreenController>().schoolID}/${Get.find<GetFireBaseData>().bYear.value}/adminNotice/$uid")
-            .putData(file!);
+                "${Get.find<AdminLoginScreenController>().schoolID}/${Get.find<GetFireBaseData>().bYear.value}/adminNotice/$uid")
+            .putData(imageFile);
 
         final TaskSnapshot snap = await uploadTask;
         final String downloadUrl = await snap.ref.getDownloadURL();
 
-        isLoading.value = false;
         //this variable is used in update page
         isLoadingShowNotice.value = false;
-        return {
-          "downloadUrl": downloadUrl,
-          "imageUid": uid,
-        };
+        return downloadUrl;
       } else {
-        return {};
+        showToast(msg: "Please Upload Image");
+        return "";
       }
     } catch (e) {
-      log(e.toString());
-      isLoading.value = false;
+      log("$className photoUpload : $e");
 
-      return {};
+      return "";
     }
   }
 
-  Future<String> photoUpdate({required String uid}) async {
+  Future<String> photoUpdate({required String url}) async {
     try {
       isLoading.value = true;
       isLoadingShowNotice.value = true;
@@ -148,11 +176,8 @@ class AdminNoticeController extends GetxController {
       if (result != null) {
         Uint8List? file = result.files.first.bytes;
         //isImageUpload.value = true;
-        UploadTask uploadTask = FirebaseStorage.instance
-            .ref()
-            .child(
-                "files/${Get.find<AdminLoginScreenController>().schoolID}/${Get.find<GetFireBaseData>().bYear.value}/adminNotice/$uid")
-            .putData(file!);
+        UploadTask uploadTask =
+            FirebaseStorage.instance.refFromURL(url).putData(file!);
 
         final TaskSnapshot snap = await uploadTask;
         final String downloadUrl = await snap.ref.getDownloadURL();
@@ -164,7 +189,7 @@ class AdminNoticeController extends GetxController {
         return '';
       }
     } catch (e) {
-      log(e.toString());
+      log("$className photoUpdate : $e");
       isLoading.value = false;
       isLoadingShowNotice.value = false;
       return '';
@@ -174,8 +199,8 @@ class AdminNoticeController extends GetxController {
   Future<void> removeNotice({
     required String schoolId,
     required String noticeId,
-    required String noticeImageId,
-    required String signImageId,
+    required String imageUrl,
+    required String signUrl,
     required BuildContext context,
   }) async {
     try {
@@ -184,20 +209,12 @@ class AdminNoticeController extends GetxController {
       showToast(msg: 'Successfully deleted');
 
 //delete notice image from firebase storage
-      if (noticeImageId.isNotEmpty) {
-        await FirebaseStorage.instance
-            .ref()
-            .child(
-                'files/${Get.find<AdminLoginScreenController>().schoolID}/${Get.find<GetFireBaseData>().bYear.value}/adminNotice/$noticeImageId')
-            .delete();
+      if (imageUrl.isNotEmpty) {
+        await FirebaseStorage.instance.refFromURL(imageUrl).delete();
       }
 //deleting signed image from firebase storage
-      if (signImageId.isNotEmpty) {
-        await FirebaseStorage.instance
-            .ref()
-            .child(
-                'files/${Get.find<AdminLoginScreenController>().schoolID}/${Get.find<GetFireBaseData>().bYear.value}/adminNotice/$signImageId')
-            .delete();
+      if (signUrl.isNotEmpty) {
+        await FirebaseStorage.instance.refFromURL(signUrl).delete();
       }
       adminNoticeModelData.value = null;
       isLoading.value = false;
@@ -219,13 +236,11 @@ class AdminNoticeController extends GetxController {
     dateOfSubmissionController.clear();
     signedByController.clear();
     subjectController.clear();
-    imageUrl.value = '';
-    imageId = '';
-    signedImageUrl.value = '';
-    signedImageId = '';
-    teacherCheckBox.value = false;
-    studentCheckBox.value = false;
-    guardianCheckBox.value = false;
+    teacherCheckBox.value = true;
+    studentCheckBox.value = true;
+    guardianCheckBox.value = true;
+    imageFile = null;
+    signImageFile = null;
   }
 
   bool isFormValid() {

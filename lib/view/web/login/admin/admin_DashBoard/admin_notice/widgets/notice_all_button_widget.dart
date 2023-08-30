@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../../../../../controller/Getx/admin/admin_notice_controller/notice_controller.dart';
 import '../../../../../../../controller/Getx/admin/admin_notice_controller/notice_notification.dart';
+import '../../../../../../../utils/image_picker_helper.dart';
 import '../../../../../../colors/colors.dart';
 import '../../../../../../constant/responsive_app.dart';
 
@@ -20,14 +21,14 @@ class AllButtonsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        adminNoticeController.signedImageUrl.isNotEmpty
+        adminNoticeController.signImageFile != null
             ? const Text('Image uploaded')
             : InkWell(
                 onTap: () async {
-                  final result = await adminNoticeController.photoUpload();
-                  adminNoticeController.signedImageUrl.value =
-                      result["downloadUrl"]!;
-                  adminNoticeController.signedImageId = result["imageUid"]!;
+                  adminNoticeController.isLoading.value = true;
+                  adminNoticeController.signImageFile =
+                      await ImagePickerHelper.pickImage(context);
+                  adminNoticeController.isLoading.value = false;
                 },
                 child: SecondaryCreateButtonWidget(
                   screenSize: ResponsiveApp.size,
@@ -36,13 +37,14 @@ class AllButtonsWidget extends StatelessWidget {
         const SizedBox(
           height: 30,
         ),
-        adminNoticeController.imageUrl.isNotEmpty
+        adminNoticeController.imageFile != null
             ? const Text('Image uploaded')
             : InkWell(
                 onTap: () async {
-                  final result = await adminNoticeController.photoUpload();
-                  adminNoticeController.imageUrl.value = result["downloadUrl"]!;
-                  adminNoticeController.imageId = result["imageUid"]!;
+                  adminNoticeController.isLoading.value = true;
+                  adminNoticeController.imageFile =
+                      await ImagePickerHelper.pickImage(context);
+                  adminNoticeController.isLoading.value = false;
                 },
                 child: SecondaryCreateButtonWidget(
                     screenSize: ResponsiveApp.size, text: 'Upload notice'.tr),
@@ -64,7 +66,8 @@ class AllButtonsWidget extends StatelessWidget {
             ),
             onPressed: () async {
               await adminNoticeController.createNewAdminNotice();
-              await adminNoticeNotification.sendNoticeNotification();
+              //todo: uncomment this function
+              //await adminNoticeNotification.sendNoticeNotification();
             },
             child: Text('Create'.tr),
           ),

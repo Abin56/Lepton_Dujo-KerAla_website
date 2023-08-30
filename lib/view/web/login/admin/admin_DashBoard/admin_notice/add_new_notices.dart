@@ -94,7 +94,8 @@ class AddNewNotices extends StatelessWidget {
                               visible: !adminNoticeController
                                   .customContentCheckBox.value,
                               child: NoticeFormFieldsWidget(
-                                  adminNoticeController: adminNoticeController),
+                                adminNoticeController: adminNoticeController,
+                              ),
                             ),
                             AllCheckedBoxWidget(),
                             const SizedBox(

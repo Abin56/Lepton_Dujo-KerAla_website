@@ -199,16 +199,15 @@ class NoticeDisplay extends StatelessWidget {
                                                                       .noticeId ??
                                                                   "",
                                                               context: context,
-                                                              noticeImageId:
-                                                                  adminNoticeController
-                                                                          .adminNoticeModelData
-                                                                          .value!
-                                                                          .imageId ??
-                                                                      "",
-                                                              signImageId: adminNoticeController
+                                                              imageUrl: adminNoticeController
                                                                       .adminNoticeModelData
                                                                       .value!
-                                                                      .signedImageId ??
+                                                                      .imageUrl ??
+                                                                  "",
+                                                              signUrl: adminNoticeController
+                                                                      .adminNoticeModelData
+                                                                      .value!
+                                                                      .signedImageUrl ??
                                                                   "");
                                                         },
                                                         child: const Text(

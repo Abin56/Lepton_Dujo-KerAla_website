@@ -11,8 +11,6 @@ class AdminNoticeModel {
   String? signedBy;
   String? imageUrl;
   String? signedImageUrl;
-  String? imageId;
-  String? signedImageId;
   String? noticeId;
   String? customContent;
   String? subject;
@@ -29,8 +27,6 @@ class AdminNoticeModel {
     this.signedBy,
     this.imageUrl,
     this.signedImageUrl,
-    this.imageId,
-    this.signedImageId,
     this.noticeId,
     this.customContent,
     this.subject,
@@ -49,8 +45,6 @@ class AdminNoticeModel {
     String? signedBy,
     String? imageUrl,
     String? signedImageUrl,
-    String? imageId,
-    String? signedImageId,
     String? noticeId,
     String? customContent,
     String? subject,
@@ -68,8 +62,6 @@ class AdminNoticeModel {
       signedBy: signedBy ?? this.signedBy,
       imageUrl: imageUrl ?? this.imageUrl,
       signedImageUrl: signedImageUrl ?? this.signedImageUrl,
-      imageId: imageId ?? this.imageId,
-      signedImageId: signedImageId ?? this.signedImageId,
       noticeId: noticeId ?? this.noticeId,
       customContent: customContent ?? this.customContent,
       subject: subject ?? this.subject,
@@ -90,8 +82,6 @@ class AdminNoticeModel {
       'signedBy': signedBy,
       'imageUrl': imageUrl,
       'signedImageUrl': signedImageUrl,
-      'imageId': imageId,
-      'signedImageId': signedImageId,
       'noticeId': noticeId,
       'customContent': customContent,
       'subject': subject,
@@ -120,9 +110,6 @@ class AdminNoticeModel {
       signedImageUrl: map['signedImageUrl'] != null
           ? map['signedImageUrl'] as String
           : null,
-      imageId: map['imageId'] != null ? map['imageId'] as String : null,
-      signedImageId:
-          map['signedImageId'] != null ? map['signedImageId'] as String : null,
       noticeId: map['noticeId'] != null ? map['noticeId'] as String : null,
       customContent:
           map['customContent'] != null ? map['customContent'] as String : null,
@@ -144,7 +131,7 @@ class AdminNoticeModel {
 
   @override
   String toString() {
-    return 'AdminNoticeModel(publishedDate: $publishedDate, heading: $heading, dateofoccation: $dateofoccation, venue: $venue, chiefGuest: $chiefGuest, dateOfSubmission: $dateOfSubmission, signedBy: $signedBy, imageUrl: $imageUrl, signedImageUrl: $signedImageUrl, imageId: $imageId, signedImageId: $signedImageId, noticeId: $noticeId, customContent: $customContent, subject: $subject, visibleTeacher: $visibleTeacher, visibleStudent: $visibleStudent, visibleGuardian: $visibleGuardian)';
+    return 'AdminNoticeModel(publishedDate: $publishedDate, heading: $heading, dateofoccation: $dateofoccation, venue: $venue, chiefGuest: $chiefGuest, dateOfSubmission: $dateOfSubmission, signedBy: $signedBy, imageUrl: $imageUrl, signedImageUrl: $signedImageUrl, noticeId: $noticeId, customContent: $customContent, subject: $subject, visibleTeacher: $visibleTeacher, visibleStudent: $visibleStudent, visibleGuardian: $visibleGuardian)';
   }
 
   @override
@@ -160,8 +147,6 @@ class AdminNoticeModel {
         other.signedBy == signedBy &&
         other.imageUrl == imageUrl &&
         other.signedImageUrl == signedImageUrl &&
-        other.imageId == imageId &&
-        other.signedImageId == signedImageId &&
         other.noticeId == noticeId &&
         other.customContent == customContent &&
         other.subject == subject &&
@@ -181,8 +166,6 @@ class AdminNoticeModel {
         signedBy.hashCode ^
         imageUrl.hashCode ^
         signedImageUrl.hashCode ^
-        imageId.hashCode ^
-        signedImageId.hashCode ^
         noticeId.hashCode ^
         customContent.hashCode ^
         subject.hashCode ^

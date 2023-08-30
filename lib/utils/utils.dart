@@ -221,3 +221,6 @@ Future<AddStudentModel?> getStudentData(
     return null;
   }
 }
+
+
+Future<void>pickImageFromDevice()async{}
