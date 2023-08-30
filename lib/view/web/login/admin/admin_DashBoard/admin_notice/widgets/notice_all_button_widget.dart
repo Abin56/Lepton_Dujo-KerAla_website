@@ -2,19 +2,20 @@ import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/admin_n
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../../../controller/Getx/admin/notice_controller.dart';
+import '../../../../../../../controller/Getx/admin/admin_notice_controller/notice_controller.dart';
+import '../../../../../../../controller/Getx/admin/admin_notice_controller/notice_notification.dart';
 import '../../../../../../colors/colors.dart';
+import '../../../../../../constant/responsive_app.dart';
 
 class AllButtonsWidget extends StatelessWidget {
-  const AllButtonsWidget({
+  AllButtonsWidget({
     super.key,
-    required this.adminNoticeController,
-    required this.screenSize,
   });
 
-  final AdminNoticeController adminNoticeController;
-  final Size screenSize;
-
+  final AdminNoticeController adminNoticeController =
+      Get.put(AdminNoticeController());
+  final AdminNoticeNotification adminNoticeNotification =
+      Get.put(AdminNoticeNotification());
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -29,7 +30,7 @@ class AllButtonsWidget extends StatelessWidget {
                   adminNoticeController.signedImageId = result["imageUid"]!;
                 },
                 child: SecondaryCreateButtonWidget(
-                  screenSize: screenSize,
+                  screenSize: ResponsiveApp.size,
                   text: 'Upload sign'.tr,
                 )),
         const SizedBox(
@@ -44,14 +45,14 @@ class AllButtonsWidget extends StatelessWidget {
                   adminNoticeController.imageId = result["imageUid"]!;
                 },
                 child: SecondaryCreateButtonWidget(
-                    screenSize: screenSize, text: 'Upload notice'.tr),
+                    screenSize: ResponsiveApp.size, text: 'Upload notice'.tr),
               ),
         const SizedBox(
           height: 30,
         ),
         Container(
-          height: screenSize.width * 1 / 30,
-          width: screenSize.width * 1 / 5,
+          height: ResponsiveApp.width * 1 / 30,
+          width: ResponsiveApp.width * 1 / 5,
           decoration: BoxDecoration(
               color: adminePrimayColor,
               borderRadius: BorderRadius.circular(14)),
@@ -62,7 +63,8 @@ class AllButtonsWidget extends StatelessWidget {
               textStyle: const TextStyle(fontSize: 17),
             ),
             onPressed: () async {
-              adminNoticeController.addAdminNotice();
+              await adminNoticeController.createNewAdminNotice();
+              await adminNoticeNotification.sendNoticeNotification();
             },
             child: Text('Create'.tr),
           ),

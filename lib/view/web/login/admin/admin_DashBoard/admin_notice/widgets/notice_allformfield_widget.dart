@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../../../controller/Getx/admin/notice_controller.dart';
+import '../../../../../../../controller/Getx/admin/admin_notice_controller/notice_controller.dart';
 import '../../../../../../../utils/utils.dart';
 import '../../../../../../constant/constant.dart';
 import 'date_time_textfield_widget.dart';

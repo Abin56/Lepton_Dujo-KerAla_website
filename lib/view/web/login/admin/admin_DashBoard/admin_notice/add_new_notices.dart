@@ -4,9 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../../../../../controller/Getx/admin/notice_controller.dart';
+import '../../../../../../controller/Getx/admin/admin_notice_controller/notice_controller.dart';
 import '../../../../../colors/colors.dart';
 import '../../../../../constant/constant.dart';
+import '../../../../../constant/responsive_app.dart';
 import '../../../../../fonts/fonts.dart';
 import 'widgets/notice_all_button_widget.dart';
 import 'widgets/notice_allformfield_widget.dart';
@@ -22,7 +23,6 @@ class AddNewNotices extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     adminNoticeController.clearControllers();
-    var screenSize = MediaQuery.of(context).size;
     final formKey = GlobalKey<FormState>();
     return Form(
       key: formKey,
@@ -32,8 +32,8 @@ class AddNewNotices extends StatelessWidget {
             child: Row(
               children: [
                 Container(
-                  height: screenSize.height * 1.2,
-                  width: screenSize.width * 1 / 2,
+                  height: ResponsiveApp.height * 1.2,
+                  width: ResponsiveApp.width * 1 / 2,
                   color: adminePrimayColor,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +65,7 @@ class AddNewNotices extends StatelessWidget {
                             ),
                             SizedBox(
                               height: 300.h,
-                              width: screenSize.width / 2,
+                              width: ResponsiveApp.width / 2,
                               child: LottieBuilder.network(
                                   'https://assets7.lottiefiles.com/packages/lf20_2pckVUuMz6.json'),
                             )
@@ -76,34 +76,36 @@ class AddNewNotices extends StatelessWidget {
                   ),
                 ),
                 Obx(() {
-                  return adminNoticeController.isLoading.value
-                      ? const Center(
-                          child: CircularProgressIndicator(),
-                        )
-                      : Container(
-                          color: Colors.white,
-                          height: screenSize.height * 1.2,
-                          width: screenSize.width * 1 / 2,
-                          child: SingleChildScrollView(
-                            child: Padding(
-                              padding: const EdgeInsets.all(25.0),
-                              child: Column(children: [
-                                NoticeFormFieldsWidget(
-                                    adminNoticeController:
-                                        adminNoticeController),
-                                CustomContentWidget(),
-                                AllCheckedBoxWidget(),
-                                const SizedBox(
-                                  height: 30,
-                                ),
-                                AllButtonsWidget(
-                                    adminNoticeController:
-                                        adminNoticeController,
-                                    screenSize: screenSize),
-                              ]),
+                  if (adminNoticeController.isLoading.value) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else {
+                    return Container(
+                      color: Colors.white,
+                      height: ResponsiveApp.height * 1.2,
+                      width: ResponsiveApp.width * 1 / 2,
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.all(25.0),
+                          child: Column(children: [
+                            CustomContentWidget(),
+                            Visibility(
+                              visible: !adminNoticeController
+                                  .customContentCheckBox.value,
+                              child: NoticeFormFieldsWidget(
+                                  adminNoticeController: adminNoticeController),
                             ),
-                          ),
-                        );
+                            AllCheckedBoxWidget(),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            AllButtonsWidget(),
+                          ]),
+                        ),
+                      ),
+                    );
+                  }
                 })
               ],
             ),

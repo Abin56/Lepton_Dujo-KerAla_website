@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../../../controller/Getx/admin/notice_controller.dart';
+import '../../../../../../../controller/Getx/admin/admin_notice_controller/notice_controller.dart';
 
 class AllCheckedBoxWidget extends StatelessWidget {
   AllCheckedBoxWidget({

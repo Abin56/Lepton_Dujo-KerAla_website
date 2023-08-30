@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../../../controller/Getx/admin/notice_controller.dart';
+import '../../../../../../../controller/Getx/admin/admin_notice_controller/notice_controller.dart';
 import '../../../../../../constant/constant.dart';
 
 class CustomContentWidget extends StatelessWidget {
@@ -24,17 +24,34 @@ class CustomContentWidget extends StatelessWidget {
                 onChanged: (value) {
                   adminNoticeController.customContentCheckBox.value =
                       value ?? false;
+                  adminNoticeController.clearControllers();
                 },
               ),
-              const Text('Custom Content')
+              RichText(
+                text: const TextSpan(
+                  children: [
+                    TextSpan(text: 'Custom Content  '),
+                    TextSpan(
+                      text:
+                          '(If you select this, then other fields will be disabled.)',
+                      style: TextStyle(
+                        fontSize: 10,
+                      ),
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
           sizedBoxH10,
-          TextFormField(
-            controller: adminNoticeController.customContentController,
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              labelText: 'Custom Content'.tr,
+          Visibility(
+            visible: adminNoticeController.customContentCheckBox.value,
+            child: TextFormField(
+              controller: adminNoticeController.customContentController,
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                labelText: 'Custom Content'.tr,
+              ),
             ),
           ),
           const SizedBox(

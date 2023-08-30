@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../../../controller/Getx/admin/notice_controller.dart';
+import '../../../../../../../controller/Getx/admin/admin_notice_controller/notice_controller.dart';
 import '../../../../../../../model/admin_models/admin_notice_model/admin_notice_model.dart';
 import '../../../../../../../utils/utils.dart';
 import '../../../../../../constant/constant.dart';
