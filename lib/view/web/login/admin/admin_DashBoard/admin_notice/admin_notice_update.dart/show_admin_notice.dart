@@ -3,8 +3,10 @@ import 'package:get/get.dart';
 
 import '../../../../../../../controller/Getx/admin/admin_notice_controller/notice_controller.dart';
 import '../../../../../../../model/admin_models/admin_notice_model/admin_notice_model.dart';
-import '../../../../../../../utils/utils.dart';
-import '../../../../../../constant/constant.dart';
+import '../../../../../../constant/responsive_app.dart';
+import 'widgets/notice_show_udpate_button_widget.dart';
+import 'widgets/notice_update_checked_box_widget.dart';
+import 'widgets/notice_update_form_widget.dart';
 
 class AdminNoticeShow extends StatefulWidget {
   const AdminNoticeShow(
@@ -18,7 +20,6 @@ class AdminNoticeShow extends StatefulWidget {
 }
 
 class _AdminNoticeShowState extends State<AdminNoticeShow> {
-  int _selectedContainerIndex = 0;
   AdminNoticeController adminNoticeController =
       Get.put(AdminNoticeController());
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -32,13 +33,12 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
 //image and signed image url declared as obs because create notice page button updation
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
     return Obx(() {
       return SingleChildScrollView(
         child: Center(
           child: Container(
             color: Colors.white,
-            width: screenSize.width / 3,
+            width: ResponsiveApp.width / 3,
             margin: const EdgeInsets.symmetric(vertical: 20),
             child: Padding(
               padding: const EdgeInsets.all(20.0),
@@ -51,169 +51,18 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            TextFormField(
-                              readOnly: true,
-                              onTap: () async => adminNoticeController
-                                  .publishedDateController
-                                  .text = await dateTimePicker(context),
-                              validator: checkFieldEmpty,
-                              controller:
-                                  adminNoticeController.publishedDateController,
-                              decoration: InputDecoration(
-                                border: const OutlineInputBorder(),
-                                labelText: 'Published date'.tr,
-                              ),
-                            ),
-                            sizedBoxH20,
-                            TextFormField(
-                              validator: checkFieldEmpty,
-                              controller:
-                                  adminNoticeController.headingController,
-                              decoration: InputDecoration(
-                                border: const OutlineInputBorder(),
-                                labelText: 'Heading'.tr,
-                              ),
-                            ),
-                            sizedBoxH20,
-                            TextFormField(
-                              readOnly: true,
-                              onTap: () async => adminNoticeController
-                                  .dateOfOccasionController
-                                  .text = await dateTimePicker(context),
-                              validator: checkFieldEmpty,
-                              controller: adminNoticeController
-                                  .dateOfOccasionController,
-                              decoration: InputDecoration(
-                                border: const OutlineInputBorder(),
-                                labelText: 'Date of occation'.tr,
-                              ),
-                            ),
-                            sizedBoxH20,
-                            TextFormField(
-                              controller: adminNoticeController.venueController,
-                              validator: checkFieldEmpty,
-                              decoration: InputDecoration(
-                                  border: const OutlineInputBorder(),
-                                  labelText: 'Venue'.tr,
-                                  labelStyle: const TextStyle(
-                                      color: Colors.black, fontSize: 16)),
-                            ),
-                            sizedBoxH20,
-                            TextFormField(
-                              validator: checkFieldEmpty,
-                              controller:
-                                  adminNoticeController.chiefGuestController,
-                              decoration: InputDecoration(
-                                border: const OutlineInputBorder(),
-                                labelText: 'Chief guest'.tr,
-                              ),
-                            ),
-                            sizedBoxH20,
-                            TextFormField(
-                              readOnly: true,
-                              onTap: () async => adminNoticeController
-                                  .dateOfOccasionController
-                                  .text = await dateTimePicker(context),
-                              validator: checkFieldEmpty,
-                              controller: adminNoticeController
-                                  .dateOfSubmissionController,
-                              decoration: InputDecoration(
-                                border: const OutlineInputBorder(),
-                                labelText: 'Date of submission'.tr,
-                              ),
-                            ),
-                            sizedBoxH20,
-                            TextFormField(
-                              validator: checkFieldEmpty,
-                              controller:
-                                  adminNoticeController.signedByController,
-                              decoration: InputDecoration(
-                                border: const OutlineInputBorder(),
-                                labelText: 'Signed by'.tr,
-                              ),
-                            ),
+                            NoticeUpdateFormWidget(),
                             const SizedBox(
                               height: 30,
                             ),
                             SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                mainAxisSize: MainAxisSize.max,
-                                children: <Widget>[
-                                  Row(
-                                    children: [
-                                      Checkbox(
-                                        value: adminNoticeController
-                                            .studentCheckBox.value,
-                                        onChanged: (value) {
-                                          adminNoticeController.studentCheckBox
-                                              .value = value ?? false;
-                                        },
-                                      ),
-                                      const Text('Students')
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Checkbox(
-                                        value: adminNoticeController
-                                            .teacherCheckBox.value,
-                                        onChanged: (value) {
-                                          adminNoticeController.teacherCheckBox
-                                              .value = value ?? false;
-                                        },
-                                      ),
-                                      const Text('Teachers')
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Checkbox(
-                                        value: adminNoticeController
-                                            .guardianCheckBox.value,
-                                        onChanged: (value) {
-                                          adminNoticeController.guardianCheckBox
-                                              .value = value ?? false;
-                                        },
-                                      ),
-                                      const Text('Parents')
-                                    ],
-                                  ),
-                                ],
-                              ),
+                              child: NoticeUpdateCheckedBoxWidget(),
                             ),
                             const SizedBox(
                               height: 30,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Flexible(
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      shape: const StadiumBorder(),
-                                    ),
-                                    onPressed: () async {},
-                                    child: Text(
-                                      'Update sign'.tr,
-                                    ),
-                                  ),
-                                ),
-                                Flexible(
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      shape: const StadiumBorder(),
-                                    ),
-                                    onPressed: () async {},
-                                    child: Text(
-                                      'Update image'.tr,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            const NoticeShowUpdateButtonWidget(),
                             const SizedBox(
                               height: 30,
                             ),
@@ -263,18 +112,12 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                                       widget.schoolId,
                                       context);
                                 }
-
-                                setState(() {
-                                  _selectedContainerIndex = 0;
-                                });
                               },
                               child: Container(
-                                height: screenSize.width * 1 / 30,
-                                width: screenSize.width,
+                                height: ResponsiveApp.width * 1 / 30,
+                                width: ResponsiveApp.width,
                                 decoration: BoxDecoration(
-                                    color: _selectedContainerIndex == 0
-                                        ? Colors.blue
-                                        : Colors.grey,
+                                    color: Colors.grey,
                                     borderRadius: BorderRadius.circular(14)),
                                 child: Center(
                                   child: Text('Update'.tr,
@@ -313,5 +156,14 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
         widget.adminNoticeModel.visibleTeacher ?? true;
     adminNoticeController.guardianCheckBox.value =
         widget.adminNoticeModel.visibleGuardian ?? true;
+  }
+}
+
+class NoticeUpdateButtonWidget extends StatelessWidget {
+  const NoticeUpdateButtonWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
