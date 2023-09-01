@@ -50,13 +50,12 @@ class NoticeUpdateFormWidget extends StatelessWidget {
         ),
         sizedBoxH20,
         TextFormField(
-          controller: adminNoticeController.venueController,
-          validator: checkFieldEmpty,
-          decoration: InputDecoration(
+            controller: adminNoticeController.venueController,
+            validator: checkFieldEmpty,
+            decoration: InputDecoration(
               border: const OutlineInputBorder(),
               labelText: 'Venue'.tr,
-              labelStyle: const TextStyle(color: Colors.black, fontSize: 16)),
-        ),
+            )),
         sizedBoxH20,
         TextFormField(
           validator: checkFieldEmpty,

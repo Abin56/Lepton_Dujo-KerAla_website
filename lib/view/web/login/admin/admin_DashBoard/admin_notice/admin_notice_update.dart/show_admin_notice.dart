@@ -3,32 +3,24 @@ import 'package:get/get.dart';
 
 import '../../../../../../../controller/Getx/admin/admin_notice_controller/notice_controller.dart';
 import '../../../../../../../model/admin_models/admin_notice_model/admin_notice_model.dart';
+import '../../../../../../colors/colors.dart';
+import '../../../../../../constant/constant.dart';
 import '../../../../../../constant/responsive_app.dart';
 import 'widgets/notice_show_udpate_button_widget.dart';
 import 'widgets/notice_update_checked_box_widget.dart';
 import 'widgets/notice_update_form_widget.dart';
 
-class AdminNoticeShow extends StatefulWidget {
-  const AdminNoticeShow(
+class AdminNoticeShow extends StatelessWidget {
+  AdminNoticeShow(
       {super.key, required this.schoolId, required this.adminNoticeModel});
   final String schoolId;
 
   final AdminNoticeModel adminNoticeModel;
 
-  @override
-  State<AdminNoticeShow> createState() => _AdminNoticeShowState();
-}
-
-class _AdminNoticeShowState extends State<AdminNoticeShow> {
-  AdminNoticeController adminNoticeController =
+  final AdminNoticeController adminNoticeController =
       Get.put(AdminNoticeController());
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  @override
-  void initState() {
-    addValueToTextField();
-    super.initState();
-  }
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
 //image and signed image url declared as obs because create notice page button updation
   @override
@@ -51,7 +43,25 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            NoticeUpdateFormWidget(),
+                            Visibility(
+                              visible: adminNoticeModel.customContent!.isEmpty,
+                              child: NoticeUpdateFormWidget(),
+                            ),
+                            sizedBoxH20,
+                            Visibility(
+                              visible:
+                                  adminNoticeModel.customContent!.isNotEmpty,
+                              child: TextFormField(
+                                maxLines: null,
+                                validator: checkFieldEmpty,
+                                controller: adminNoticeController
+                                    .customContentController,
+                                decoration: InputDecoration(
+                                  border: const OutlineInputBorder(),
+                                  labelText: 'Custom Content'.tr,
+                                ),
+                              ),
+                            ),
                             const SizedBox(
                               height: 30,
                             ),
@@ -62,68 +72,15 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                             const SizedBox(
                               height: 30,
                             ),
-                            const NoticeShowUpdateButtonWidget(),
+                            NoticeShowUpdateImageButtonWidget(),
                             const SizedBox(
                               height: 30,
                             ),
-                            GestureDetector(
-                              onTap: () async {
-                                final signedImageUrl =
-                                    await adminNoticeController.photoUpdate(
-                                        url: widget.adminNoticeModel
-                                                .signedImageUrl ??
-                                            "");
-                                final imageUrl =
-                                    await adminNoticeController.photoUpdate(
-                                        url: widget.adminNoticeModel.imageUrl ??
-                                            "");
-
-                                if (context.mounted) {}
-                                if (formKey.currentState?.validate() ?? false) {
-                                  await adminNoticeController.updateAdminNotice(
-                                      AdminNoticeModel(
-                                        publishedDate: adminNoticeController
-                                            .publishedDateController.text,
-                                        heading: adminNoticeController
-                                            .headingController.text,
-                                        dateofoccation: adminNoticeController
-                                            .dateOfOccasionController.text,
-                                        venue: adminNoticeController
-                                            .venueController.text,
-                                        chiefGuest: adminNoticeController
-                                            .chiefGuestController.text,
-                                        dateOfSubmission: adminNoticeController
-                                            .dateOfSubmissionController.text,
-                                        signedBy: adminNoticeController
-                                            .signedByController.text,
-                                        imageUrl: imageUrl,
-                                        signedImageUrl: signedImageUrl,
-                                        noticeId:
-                                            widget.adminNoticeModel.noticeId,
-                                        customContent: adminNoticeController
-                                            .subjectController.text,
-                                        visibleGuardian: adminNoticeController
-                                            .guardianCheckBox.value,
-                                        visibleStudent: adminNoticeController
-                                            .studentCheckBox.value,
-                                        visibleTeacher: adminNoticeController
-                                            .teacherCheckBox.value,
-                                      ),
-                                      widget.schoolId,
-                                      context);
-                                }
-                              },
-                              child: Container(
-                                height: ResponsiveApp.width * 1 / 30,
-                                width: ResponsiveApp.width,
-                                decoration: BoxDecoration(
-                                    color: Colors.grey,
-                                    borderRadius: BorderRadius.circular(14)),
-                                child: Center(
-                                  child: Text('Update'.tr,
-                                      style: const TextStyle(fontSize: 17)),
-                                ),
-                              ),
+                            NoticeShowUpdateButtonWidget(
+                              adminNoticeController: adminNoticeController,
+                              formKey: formKey,
+                              adminNoticeModel: adminNoticeModel,
+                              schoolId: schoolId,
                             ),
                           ]),
                     ),
@@ -136,34 +93,85 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
 
   void addValueToTextField() {
     adminNoticeController.publishedDateController.text =
-        widget.adminNoticeModel.publishedDate ?? "";
+        adminNoticeModel.publishedDate ?? "";
     adminNoticeController.headingController.text =
-        widget.adminNoticeModel.heading ?? "";
+        adminNoticeModel.heading ?? "";
     adminNoticeController.dateOfOccasionController.text =
-        widget.adminNoticeModel.dateofoccation ?? "";
-    adminNoticeController.venueController.text =
-        widget.adminNoticeModel.venue ?? "";
+        adminNoticeModel.dateofoccation ?? "";
+    adminNoticeController.venueController.text = adminNoticeModel.venue ?? "";
     adminNoticeController.chiefGuestController.text =
-        widget.adminNoticeModel.chiefGuest ?? "";
+        adminNoticeModel.chiefGuest ?? "";
     adminNoticeController.dateOfSubmissionController.text =
-        widget.adminNoticeModel.dateOfSubmission ?? "";
+        adminNoticeModel.dateOfSubmission ?? "";
     adminNoticeController.signedByController.text =
-        widget.adminNoticeModel.signedBy ?? "";
-    widget.adminNoticeModel.signedImageUrl ?? "";
+        adminNoticeModel.signedBy ?? "";
+    adminNoticeModel.signedImageUrl ?? "";
+
     adminNoticeController.studentCheckBox.value =
-        widget.adminNoticeModel.visibleStudent ?? true;
+        adminNoticeModel.visibleStudent ?? true;
     adminNoticeController.teacherCheckBox.value =
-        widget.adminNoticeModel.visibleTeacher ?? true;
+        adminNoticeModel.visibleTeacher ?? true;
     adminNoticeController.guardianCheckBox.value =
-        widget.adminNoticeModel.visibleGuardian ?? true;
+        adminNoticeModel.visibleGuardian ?? true;
+    adminNoticeController.customContentController.text =
+        adminNoticeModel.customContent ?? "";
   }
 }
 
-class NoticeUpdateButtonWidget extends StatelessWidget {
-  const NoticeUpdateButtonWidget({super.key});
+class NoticeShowUpdateButtonWidget extends StatelessWidget {
+  const NoticeShowUpdateButtonWidget(
+      {super.key,
+      required this.adminNoticeController,
+      required this.adminNoticeModel,
+      required this.formKey,
+      required this.schoolId});
+
+  final AdminNoticeController adminNoticeController;
+  final AdminNoticeModel adminNoticeModel;
+  final GlobalKey<FormState> formKey;
+  final String schoolId;
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return GestureDetector(
+      onTap: () async {
+        if (context.mounted) {}
+        if (formKey.currentState?.validate() ?? false) {
+          await adminNoticeController.updateAdminNotice(
+            adminNoticeModel: AdminNoticeModel(
+              publishedDate: adminNoticeController.publishedDateController.text,
+              heading: adminNoticeController.headingController.text,
+              dateofoccation:
+                  adminNoticeController.dateOfOccasionController.text,
+              venue: adminNoticeController.venueController.text,
+              chiefGuest: adminNoticeController.chiefGuestController.text,
+              dateOfSubmission:
+                  adminNoticeController.dateOfSubmissionController.text,
+              signedBy: adminNoticeController.signedByController.text,
+              imageUrl: adminNoticeModel.imageUrl,
+              signedImageUrl: adminNoticeModel.signedImageUrl,
+              noticeId: adminNoticeModel.noticeId,
+              customContent: adminNoticeController.customContentController.text,
+              visibleGuardian: adminNoticeController.guardianCheckBox.value,
+              visibleStudent: adminNoticeController.studentCheckBox.value,
+              visibleTeacher: adminNoticeController.teacherCheckBox.value,
+            ),
+            schoolId: schoolId,
+            context: context,
+            image: adminNoticeController.updateImageFile,
+            signedImage: adminNoticeController.updateIsignImageFile,
+          );
+        }
+      },
+      child: Container(
+        height: ResponsiveApp.width * 1 / 30,
+        width: ResponsiveApp.width,
+        decoration: BoxDecoration(
+            color: adminePrimayColor, borderRadius: BorderRadius.circular(14)),
+        child: Center(
+          child: Text('Update'.tr, style: const TextStyle(fontSize: 17)),
+        ),
+      ),
+    );
   }
 }

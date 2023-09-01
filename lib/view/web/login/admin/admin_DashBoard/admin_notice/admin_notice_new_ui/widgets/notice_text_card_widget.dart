@@ -13,13 +13,16 @@ class NoticeTextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      title,
-      style: GoogleFonts.sansita(
-        fontSize: fontSize,
-        color: color,
+    return SizedBox(
+      width: 150,
+      child: Text(
+        title,
+        style: GoogleFonts.sansita(
+          fontSize: fontSize,
+          color: color,
+        ),
+        overflow: TextOverflow.ellipsis,
       ),
-      overflow: TextOverflow.ellipsis,
     );
   }
 }

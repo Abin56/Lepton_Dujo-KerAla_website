@@ -4,7 +4,6 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
 import 'package:dujo_kerala_website/controller/get_firebase-data/get_firebase_data.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -32,6 +31,8 @@ class AdminNoticeController extends GetxController {
   RxBool customContentCheckBox = RxBool(false);
   Uint8List? imageFile;
   Uint8List? signImageFile;
+  Uint8List? updateImageFile;
+  Uint8List? updateIsignImageFile;
 
   Rxn<AdminNoticeModel> adminNoticeModelData = Rxn<AdminNoticeModel>(null);
   CollectionReference<Map<String, dynamic>> firebaseFirestore =
@@ -121,15 +122,32 @@ class AdminNoticeController extends GetxController {
   }
 
   //update notice data on firebase
-  Future<void> updateAdminNotice(AdminNoticeModel adminNoticeModel,
-      String schoolId, BuildContext context) async {
+  Future<void> updateAdminNotice(
+      {required AdminNoticeModel adminNoticeModel,
+      required Uint8List? image,
+      required Uint8List? signedImage,
+      required String schoolId,
+      required BuildContext context}) async {
     try {
       isLoadingShowNotice.value = true;
+      if (image != null) {
+        final String result = await photoUpdate(
+            url: adminNoticeModel.imageUrl!, imageFile: image);
+        adminNoticeModel.copyWith(imageUrl: result);
+      }
+      if (signImageFile != null) {
+        final String result = await photoUpdate(
+            url: adminNoticeModel.signedImageUrl!, imageFile: signImageFile!);
+        adminNoticeModel.copyWith(signedImageUrl: result);
+      }
+
       await firebaseFirestore
           .doc(adminNoticeModel.noticeId)
           .update(adminNoticeModel.toMap());
       isLoadingShowNotice.value = false;
       adminNoticeModelData.value = null;
+      signImageFile = null;
+      image = null;
       if (context.mounted) {
         Navigator.of(context).pop();
       }
@@ -167,27 +185,22 @@ class AdminNoticeController extends GetxController {
     }
   }
 
-  Future<String> photoUpdate({required String url}) async {
+  Future<String> photoUpdate(
+      {required String url, required Uint8List imageFile}) async {
     try {
       isLoading.value = true;
       isLoadingShowNotice.value = true;
-      FilePickerResult? result =
-          await FilePicker.platform.pickFiles(type: FileType.image);
-      if (result != null) {
-        Uint8List? file = result.files.first.bytes;
-        //isImageUpload.value = true;
-        UploadTask uploadTask =
-            FirebaseStorage.instance.refFromURL(url).putData(file!);
-
-        final TaskSnapshot snap = await uploadTask;
-        final String downloadUrl = await snap.ref.getDownloadURL();
-        isLoading.value = false;
-        isLoadingShowNotice.value = false;
-        showToast(msg: 'Updated SuccessFully');
-        return downloadUrl;
-      } else {
-        return '';
-      }
+      UploadTask uploadTask =
+          FirebaseStorage.instance.refFromURL(url).putData(imageFile);
+      final TaskSnapshot snap = await uploadTask;
+      final String downloadUrl = await snap.ref.getDownloadURL();
+      isLoading.value = false;
+      isLoadingShowNotice.value = false;
+      showToast(msg: 'Updated SuccessFully');
+      imageCache
+          .clear(); //this function called for after update image url is same so it not update image.network
+      imageCache.clearLiveImages();
+      return downloadUrl;
     } catch (e) {
       log("$className photoUpdate : $e");
       isLoading.value = false;
@@ -197,24 +210,27 @@ class AdminNoticeController extends GetxController {
   }
 
   Future<void> removeNotice({
-    required String schoolId,
-    required String noticeId,
-    required String imageUrl,
-    required String signUrl,
+    required AdminNoticeModel adminNoticeModel,
     required BuildContext context,
   }) async {
     try {
       isLoading.value = true;
-      await firebaseFirestore.doc(noticeId).delete();
+      await firebaseFirestore.doc(adminNoticeModel.noticeId).delete();
       showToast(msg: 'Successfully deleted');
 
 //delete notice image from firebase storage
-      if (imageUrl.isNotEmpty) {
-        await FirebaseStorage.instance.refFromURL(imageUrl).delete();
+      if (adminNoticeModel.imageUrl != null &&
+          adminNoticeModel.imageUrl!.isNotEmpty) {
+        await FirebaseStorage.instance
+            .refFromURL(adminNoticeModel.imageUrl!)
+            .delete();
       }
 //deleting signed image from firebase storage
-      if (signUrl.isNotEmpty) {
-        await FirebaseStorage.instance.refFromURL(signUrl).delete();
+      if (adminNoticeModel.signedImageUrl != null &&
+          adminNoticeModel.signedImageUrl!.isNotEmpty) {
+        await FirebaseStorage.instance
+            .refFromURL(adminNoticeModel.signedImageUrl!)
+            .delete();
       }
       adminNoticeModelData.value = null;
       isLoading.value = false;

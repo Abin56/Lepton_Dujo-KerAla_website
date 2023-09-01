@@ -2,17 +2,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../../../../../controller/Getx/admin/admin_notice_controller/notice_controller.dart';
 import '../../../../../../../../controller/admin_login_screen/admin_login_screen_controller.dart';
 import '../../../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../../../model/admin_models/admin_notice_model/admin_notice_model.dart';
 import '../../../../../../../constant/responsive_app.dart';
-import '../admin_notice_show_new.dart';
 import 'notice_card_widget.dart';
 
 class NoticeGridViewWidget extends StatelessWidget {
-  const NoticeGridViewWidget({
+  NoticeGridViewWidget({
     super.key,
   });
+  final AdminNoticeController adminNoticeController =
+      Get.put(AdminNoticeController());
 
   @override
   Widget build(BuildContext context) {
@@ -35,18 +37,18 @@ class NoticeGridViewWidget extends StatelessWidget {
               itemBuilder: (context, index) {
                 AdminNoticeModel data =
                     AdminNoticeModel.fromMap(snapshot.data!.docs[index].data());
+                    
 
                 String date = data.dateofoccation!.isEmpty
                     ? "custom note"
                     : data.dateofoccation!;
-                String heading = data.customContent!.isEmpty
-                    ? "custom note"
-                    : data.customContent!;
+                String heading =
+                    data.heading!.isEmpty ? data.customContent! : data.heading!;
                 String uploadedDate = data.publishedDate!.isEmpty
                     ? "custom note"
                     : data.publishedDate!;
                 String venue =
-                    data.venue!.isEmpty ? data.venue! : "custom note";
+                    data.venue!.isEmpty ? "custom note" : data.venue!;
 
                 return GestureDetector(
                   onTap: () {

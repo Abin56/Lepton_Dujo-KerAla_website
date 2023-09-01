@@ -10,16 +10,14 @@ import '../../../../../../constant/responsive_app.dart';
 import '../admin_notice_update.dart/show_admin_notice.dart';
 import 'widgets/notice_gridview_widget.dart';
 
-final AdminNoticeController adminNoticeController =
-    Get.put(AdminNoticeController());
-
 class NoticeDisplay extends StatelessWidget {
-  const NoticeDisplay({
+  NoticeDisplay({
     super.key,
     required this.schoolId,
   });
   final String schoolId;
-
+  final AdminNoticeController adminNoticeController =
+      Get.put(AdminNoticeController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,6 +67,7 @@ class NoticeDisplay extends StatelessWidget {
                                                   .value!
                                                   .imageUrl ??
                                               "",
+                                              
                                           errorBuilder:
                                               (context, error, stackTrace) {
                                             return const Center(
@@ -84,41 +83,8 @@ class NoticeDisplay extends StatelessWidget {
                                         )),
                                   ),
                                   DataTableWidget(
-                                    heading: adminNoticeController
-                                            .adminNoticeModelData
-                                            .value!
-                                            .heading ??
-                                        "",
-                                    chiefGuest: adminNoticeController
-                                            .adminNoticeModelData
-                                            .value!
-                                            .chiefGuest ??
-                                        "",
-                                    dateOfSubmission: adminNoticeController
-                                            .adminNoticeModelData
-                                            .value!
-                                            .dateOfSubmission ??
-                                        "",
-                                    dateOfOccassion: adminNoticeController
-                                            .adminNoticeModelData
-                                            .value!
-                                            .dateofoccation ??
-                                        "",
-                                    publishedDate: adminNoticeController
-                                            .adminNoticeModelData
-                                            .value!
-                                            .publishedDate ??
-                                        "",
-                                    signedBy: adminNoticeController
-                                            .adminNoticeModelData
-                                            .value!
-                                            .signedBy ??
-                                        "",
-                                    venue: adminNoticeController
-                                            .adminNoticeModelData
-                                            .value!
-                                            .venue ??
-                                        "",
+                                    adminNoticeModel: adminNoticeController
+                                        .adminNoticeModelData.value!,
                                   ),
                                   if (adminNoticeController
                                           .adminNoticeModelData.value ==
@@ -152,7 +118,8 @@ class NoticeDisplay extends StatelessWidget {
                                                           adminNoticeModel:
                                                               adminNoticeController
                                                                   .adminNoticeModelData
-                                                                  .value!),
+                                                                  .value!)
+                                                        ..addValueToTextField(), //add value to text field called for assigning value to text field
                                                     );
                                                   },
                                                 );
@@ -185,29 +152,22 @@ class NoticeDisplay extends StatelessWidget {
                                                       ),
                                                       TextButton(
                                                         onPressed: () async {
-                                                          await adminNoticeController.removeNotice(
-                                                              schoolId:
-                                                                  schoolId,
-                                                              noticeId: adminNoticeController
-                                                                      .adminNoticeModelData
-                                                                      .value!
-                                                                      .noticeId ??
-                                                                  "",
-                                                              context: context,
-                                                              imageUrl: adminNoticeController
-                                                                      .adminNoticeModelData
-                                                                      .value!
-                                                                      .imageUrl ??
-                                                                  "",
-                                                              signUrl: adminNoticeController
-                                                                      .adminNoticeModelData
-                                                                      .value!
-                                                                      .signedImageUrl ??
-                                                                  "");
+                                                          if (adminNoticeController
+                                                                  .adminNoticeModelData
+                                                                  .value !=
+                                                              null) {
+                                                            await adminNoticeController.removeNotice(
+                                                                context:
+                                                                    context,
+                                                                adminNoticeModel:
+                                                                    adminNoticeController
+                                                                        .adminNoticeModelData
+                                                                        .value!);
+                                                          }
                                                         },
                                                         child: const Text(
                                                             'Remove'),
-                                                      )
+                                                      ),
                                                     ],
                                                   );
                                                 },
@@ -216,13 +176,16 @@ class NoticeDisplay extends StatelessWidget {
                                           ),
                                         ),
                                       ],
-                                    )
+                                    ),
+                                  const SizedBox(
+                                    height: 20,
+                                  )
                                 ],
                               ),
                             ),
                           );
               }),
-              const NoticeGridViewWidget(),
+              NoticeGridViewWidget(),
             ],
           ),
         ));
