@@ -47,6 +47,7 @@ class CustomContentWidget extends StatelessWidget {
           Visibility(
             visible: adminNoticeController.customContentCheckBox.value,
             child: TextFormField(
+              maxLines: null,
               controller: adminNoticeController.customContentController,
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),

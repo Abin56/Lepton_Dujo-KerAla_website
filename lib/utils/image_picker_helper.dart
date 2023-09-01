@@ -11,10 +11,6 @@ class ImagePickerHelper {
       XFile? pickedImage;
 
       pickedImage = await picker.pickImage(source: ImageSource.gallery);
-      if (context.mounted) {
-        Navigator.of(context).pop();
-      }
-
       // Show an options dialog to choose between camera and gallery
 
       if (pickedImage != null) {

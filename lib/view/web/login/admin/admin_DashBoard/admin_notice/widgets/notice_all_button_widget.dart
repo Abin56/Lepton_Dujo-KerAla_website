@@ -25,9 +25,9 @@ class AllButtonsWidget extends StatelessWidget {
             ? const Text('Image uploaded')
             : InkWell(
                 onTap: () async {
-                  adminNoticeController.isLoading.value = true;
                   adminNoticeController.signImageFile =
                       await ImagePickerHelper.pickImage(context);
+                  adminNoticeController.isLoading.value = true;
                   adminNoticeController.isLoading.value = false;
                 },
                 child: SecondaryCreateButtonWidget(
@@ -41,9 +41,9 @@ class AllButtonsWidget extends StatelessWidget {
             ? const Text('Image uploaded')
             : InkWell(
                 onTap: () async {
-                  adminNoticeController.isLoading.value = true;
                   adminNoticeController.imageFile =
                       await ImagePickerHelper.pickImage(context);
+                  adminNoticeController.isLoading.value = true;
                   adminNoticeController.isLoading.value = false;
                 },
                 child: SecondaryCreateButtonWidget(

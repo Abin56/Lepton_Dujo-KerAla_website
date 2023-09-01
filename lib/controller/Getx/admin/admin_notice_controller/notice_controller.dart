@@ -146,11 +146,8 @@ class AdminNoticeController extends GetxController {
           .update(adminNoticeModel.toMap());
       isLoadingShowNotice.value = false;
       adminNoticeModelData.value = null;
-      signImageFile = null;
-      image = null;
-      if (context.mounted) {
-        Navigator.of(context).pop();
-      }
+      updateIsignImageFile = null;
+      updateImageFile = null;
     } catch (e) {
       log("$className updateAdminNotice : $e");
       isLoadingShowNotice.value = false;
@@ -257,6 +254,11 @@ class AdminNoticeController extends GetxController {
     guardianCheckBox.value = true;
     imageFile = null;
     signImageFile = null;
+    adminNoticeModelData.value = null;
+    updateIsignImageFile = null;
+    updateImageFile = null;
+    isLoading.value = false;
+    isLoadingShowNotice.value = false;
   }
 
   bool isFormValid() {

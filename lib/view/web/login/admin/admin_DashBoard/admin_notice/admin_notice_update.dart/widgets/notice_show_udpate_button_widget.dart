@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../../../../../../controller/Getx/admin/admin_notice_controller/notice_controller.dart';
 import '../../../../../../../../utils/image_picker_helper.dart';
+import '../../../../../../../constant/constant.dart';
 
 class NoticeShowUpdateImageButtonWidget extends StatelessWidget {
   NoticeShowUpdateImageButtonWidget({
@@ -13,42 +14,49 @@ class NoticeShowUpdateImageButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Flexible(
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              shape: const StadiumBorder(),
+    return Obx(
+      () => adminNoticeController.isLoadingShowNotice.value
+          ? circularProgressIndicator
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Flexible(
+                  child: adminNoticeController.updateIsignImageFile == null
+                      ? ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: const StadiumBorder(),
+                          ),
+                          onPressed: () async {
+                            adminNoticeController.updateIsignImageFile =
+                                await ImagePickerHelper.pickImage(context);
+                            adminNoticeController.isLoadingShowNotice.refresh();
+                          },
+                          child: Text(
+                            'Update sign'.tr,
+                          ),
+                        )
+                      : const Text("Image Added"),
+                ),
+                Flexible(
+                  child: adminNoticeController.updateImageFile == null
+                      ? ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: const StadiumBorder(),
+                          ),
+                          onPressed: () async {
+                            adminNoticeController.updateImageFile =
+                                await ImagePickerHelper.pickImage(context);
+
+                            adminNoticeController.isLoadingShowNotice.refresh();
+                          },
+                          child: Text(
+                            'Update image'.tr,
+                          ),
+                        )
+                      : const Text("Image Added"),
+                ),
+              ],
             ),
-            onPressed: () async {
-              adminNoticeController.isLoadingShowNotice.value = true;
-              adminNoticeController.updateIsignImageFile =
-                  await ImagePickerHelper.pickImage(context);
-              adminNoticeController.isLoadingShowNotice.value = false;
-            },
-            child: Text(
-              'Update sign'.tr,
-            ),
-          ),
-        ),
-        Flexible(
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              shape: const StadiumBorder(),
-            ),
-            onPressed: () async {
-              adminNoticeController.isLoadingShowNotice.value = true;
-              adminNoticeController.updateImageFile =
-                  await ImagePickerHelper.pickImage(context);
-              adminNoticeController.isLoadingShowNotice.value = false;
-            },
-            child: Text(
-              'Update image'.tr,
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

@@ -135,7 +135,6 @@ class NoticeShowUpdateButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        if (context.mounted) {}
         if (formKey.currentState?.validate() ?? false) {
           await adminNoticeController.updateAdminNotice(
             adminNoticeModel: AdminNoticeModel(
