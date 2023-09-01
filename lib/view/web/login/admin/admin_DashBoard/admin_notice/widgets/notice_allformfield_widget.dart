@@ -29,15 +29,7 @@ class NoticeFormFieldsWidget extends StatelessWidget {
           },
         ),
         sizedBoxH20,
-        TextFormField(
-          validator: checkFieldEmpty,
-          controller: adminNoticeController.headingController,
-          decoration: InputDecoration(
-            border: const OutlineInputBorder(),
-            labelText: 'Heading'.tr,
-          ),
-        ),
-        sizedBoxH20,
+        
         TextFormField(
           validator: checkFieldEmpty,
           controller: adminNoticeController.subjectController,

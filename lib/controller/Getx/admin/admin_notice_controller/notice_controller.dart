@@ -76,7 +76,8 @@ class AdminNoticeController extends GetxController {
           customContent: customContentController.text,
         );
       } else if (customContentController.text.isNotEmpty &&
-          customContentCheckBox.value) {
+          customContentCheckBox.value &&
+          headingController.text.isNotEmpty) {
         isLoading.value = true;
         dataModel = AdminNoticeModel(
           chiefGuest: "",

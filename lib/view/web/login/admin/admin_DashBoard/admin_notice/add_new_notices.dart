@@ -90,6 +90,16 @@ class AddNewNotices extends StatelessWidget {
                           padding: const EdgeInsets.all(25.0),
                           child: Column(children: [
                             CustomContentWidget(),
+                            TextFormField(
+                              validator: checkFieldEmpty,
+                              controller:
+                                  adminNoticeController.headingController,
+                              decoration: InputDecoration(
+                                border: const OutlineInputBorder(),
+                                labelText: 'Heading'.tr,
+                              ),
+                            ),
+                            sizedBoxH20,
                             Visibility(
                               visible: !adminNoticeController
                                   .customContentCheckBox.value,

@@ -43,6 +43,16 @@ class AdminNoticeShow extends StatelessWidget {
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            sizedBoxH20,
+                            TextFormField(
+                              validator: checkFieldEmpty,
+                              controller:
+                                  adminNoticeController.headingController,
+                              decoration: InputDecoration(
+                                border: const OutlineInputBorder(),
+                                labelText: 'Heading'.tr,
+                              ),
+                            ),
                             Visibility(
                               visible: adminNoticeModel.customContent!.isEmpty,
                               child: NoticeUpdateFormWidget(),

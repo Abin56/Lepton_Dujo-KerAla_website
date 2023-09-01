@@ -16,6 +16,7 @@ class NoticeUpdateFormWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
+        sizedBoxH20,
         TextFormField(
           readOnly: true,
           onTap: () async => adminNoticeController
@@ -25,15 +26,6 @@ class NoticeUpdateFormWidget extends StatelessWidget {
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
             labelText: 'Published date'.tr,
-          ),
-        ),
-        sizedBoxH20,
-        TextFormField(
-          validator: checkFieldEmpty,
-          controller: adminNoticeController.headingController,
-          decoration: InputDecoration(
-            border: const OutlineInputBorder(),
-            labelText: 'Heading'.tr,
           ),
         ),
         sizedBoxH20,
