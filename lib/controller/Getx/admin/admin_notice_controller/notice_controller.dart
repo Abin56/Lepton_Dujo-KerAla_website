@@ -84,7 +84,7 @@ class AdminNoticeController extends GetxController {
           customContent: customContentController.text,
           dateOfSubmission: "",
           dateofoccation: "",
-          heading: "",
+          heading: headingController.text,
           imageUrl: imageUrl,
           noticeId: "",
           publishedDate: "",
