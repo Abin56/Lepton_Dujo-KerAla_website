@@ -109,7 +109,7 @@ class NoticeDisplay extends StatelessWidget {
                                                       showDialog(
                                                         context: context,
                                                         builder: (BuildContext
-                                                            context) {
+                                                            context1) {
                                                           return AlertDialog(
                                                             icon: Align(
                                                                 alignment:
@@ -119,7 +119,7 @@ class NoticeDisplay extends StatelessWidget {
                                                                     CloseButton(
                                                                   onPressed: () =>
                                                                       Navigator.of(
-                                                                              context)
+                                                                              context1)
                                                                           .pop(),
                                                                 )),
                                                             content: AdminNoticeShow(
@@ -128,7 +128,7 @@ class NoticeDisplay extends StatelessWidget {
                                                                 adminNoticeModel:
                                                                     adminNoticeController
                                                                         .adminNoticeModelData
-                                                                        .value!)
+                                                                        .value!,dialoguecontext: context1,)
                                                               ..addValueToTextField(), //add value to text field called for assigning value to text field
                                                           );
                                                         },

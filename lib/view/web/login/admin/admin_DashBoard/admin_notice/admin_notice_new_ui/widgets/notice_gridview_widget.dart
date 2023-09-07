@@ -37,18 +37,15 @@ class NoticeGridViewWidget extends StatelessWidget {
               itemBuilder: (context, index) {
                 AdminNoticeModel data =
                     AdminNoticeModel.fromMap(snapshot.data!.docs[index].data());
-                    
 
                 String date = data.dateofoccation!.isEmpty
                     ? "custom note"
                     : data.dateofoccation!;
                 String heading =
                     data.heading!.isEmpty ? data.customContent! : data.heading!;
-                String uploadedDate = data.publishedDate!.isEmpty
-                    ? "custom note"
-                    : data.publishedDate!;
-                String venue =
-                    data.venue!.isEmpty ? "custom note" : data.venue!;
+                String uploadedDate =
+                    data.publishedDate!.isEmpty ? "" : data.publishedDate!;
+                String venue = data.venue!.isEmpty ? "" : data.venue!;
 
                 return GestureDetector(
                   onTap: () {

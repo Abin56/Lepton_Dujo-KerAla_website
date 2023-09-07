@@ -12,8 +12,12 @@ import 'widgets/notice_update_form_widget.dart';
 
 class AdminNoticeShow extends StatelessWidget {
   AdminNoticeShow(
-      {super.key, required this.schoolId, required this.adminNoticeModel});
+      {super.key,
+      required this.schoolId,
+      required this.adminNoticeModel,
+      required this.dialoguecontext});
   final String schoolId;
+  final BuildContext dialoguecontext;
 
   final AdminNoticeModel adminNoticeModel;
 
@@ -91,6 +95,7 @@ class AdminNoticeShow extends StatelessWidget {
                               formKey: formKey,
                               adminNoticeModel: adminNoticeModel,
                               schoolId: schoolId,
+                              dialoguecontext: dialoguecontext,
                             ),
                           ]),
                     ),
@@ -134,42 +139,50 @@ class NoticeShowUpdateButtonWidget extends StatelessWidget {
       required this.adminNoticeController,
       required this.adminNoticeModel,
       required this.formKey,
-      required this.schoolId});
+      required this.schoolId,
+      required this.dialoguecontext});
 
   final AdminNoticeController adminNoticeController;
   final AdminNoticeModel adminNoticeModel;
   final GlobalKey<FormState> formKey;
   final String schoolId;
+  final BuildContext dialoguecontext;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
         if (formKey.currentState?.validate() ?? false) {
-          await adminNoticeController.updateAdminNotice(
-            adminNoticeModel: AdminNoticeModel(
-              publishedDate: adminNoticeController.publishedDateController.text,
-              heading: adminNoticeController.headingController.text,
-              dateofoccation:
-                  adminNoticeController.dateOfOccasionController.text,
-              venue: adminNoticeController.venueController.text,
-              chiefGuest: adminNoticeController.chiefGuestController.text,
-              dateOfSubmission:
-                  adminNoticeController.dateOfSubmissionController.text,
-              signedBy: adminNoticeController.signedByController.text,
-              imageUrl: adminNoticeModel.imageUrl,
-              signedImageUrl: adminNoticeModel.signedImageUrl,
-              noticeId: adminNoticeModel.noticeId,
-              customContent: adminNoticeController.customContentController.text,
-              visibleGuardian: adminNoticeController.guardianCheckBox.value,
-              visibleStudent: adminNoticeController.studentCheckBox.value,
-              visibleTeacher: adminNoticeController.teacherCheckBox.value,
-            ),
-            schoolId: schoolId,
-            context: context,
-            image: adminNoticeController.updateImageFile,
-            signedImage: adminNoticeController.updateIsignImageFile,
-          );
+          await adminNoticeController
+              .updateAdminNotice(
+                adminNoticeModel: AdminNoticeModel(
+                  publishedDate:
+                      adminNoticeController.publishedDateController.text,
+                  heading: adminNoticeController.headingController.text,
+                  dateofoccation:
+                      adminNoticeController.dateOfOccasionController.text,
+                  venue: adminNoticeController.venueController.text,
+                  chiefGuest: adminNoticeController.chiefGuestController.text,
+                  dateOfSubmission:
+                      adminNoticeController.dateOfSubmissionController.text,
+                  signedBy: adminNoticeController.signedByController.text,
+                  imageUrl: adminNoticeModel.imageUrl,
+                  signedImageUrl: adminNoticeModel.signedImageUrl,
+                  noticeId: adminNoticeModel.noticeId,
+                  customContent:
+                      adminNoticeController.customContentController.text,
+                  visibleGuardian: adminNoticeController.guardianCheckBox.value,
+                  visibleStudent: adminNoticeController.studentCheckBox.value,
+                  visibleTeacher: adminNoticeController.teacherCheckBox.value,
+                ),
+                schoolId: schoolId,
+                context: context,
+                image: adminNoticeController.updateImageFile,
+                signedImage: adminNoticeController.updateIsignImageFile,
+              )
+              .then(
+                (value) => Navigator.of(dialoguecontext).pop(),
+              );
         }
       },
       child: Container(
