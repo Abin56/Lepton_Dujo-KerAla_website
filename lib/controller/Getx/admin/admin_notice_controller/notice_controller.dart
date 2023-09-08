@@ -23,6 +23,7 @@ class AdminNoticeController extends GetxController {
   TextEditingController signedByController = TextEditingController();
   TextEditingController subjectController = TextEditingController();
   TextEditingController customContentController = TextEditingController();
+
   RxBool isLoading = false.obs;
   RxBool isLoadingShowNotice = false.obs;
   RxBool teacherCheckBox = RxBool(true);
@@ -269,7 +270,8 @@ class AdminNoticeController extends GetxController {
         venueController.text.isNotEmpty &&
         chiefGuestController.text.isNotEmpty &&
         signedByController.text.isNotEmpty &&
-        subjectController.text.isNotEmpty) {
+        subjectController.text.isNotEmpty &&
+        dateOfSubmissionController.text.isNotEmpty) {
       return true;
     } else {
       return false;
