@@ -19,9 +19,7 @@ void main() async {
         measurementId: "G-QC6SR6TLE0"),
   );
   ScreenUtil.ensureScreenSize();
- runApp(
- const MyApp()
-);
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -36,18 +34,18 @@ class MyApp extends StatelessWidget {
         designSize: const Size(1536, 792),
         builder: (context, child) {
           return GetMaterialApp(
-              routes: {
-                PrivacyPolicy.route: (context) => const PrivacyPolicy(),
-                SchoolProfile.route: (context) => const SchoolProfile(),
-              },
-              title: 'COSTECH DuJo',
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                primaryColor: const Color(0xFF02BB9F),
-                primaryColorDark: const Color(0xFF167F67),
-              ),
-              home:
-                   HomePageImages());
+            routes: {
+              PrivacyPolicy.route: (context) => const PrivacyPolicy(),
+              SchoolProfile.route: (context) => const SchoolProfile(),
+            },
+            title: 'COSTECH DuJo',
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              primaryColor: const Color(0xFF02BB9F),
+              primaryColorDark: const Color(0xFF167F67),
+            ),
+            home: HomePageImages(),
+          );
         });
   }
 }
