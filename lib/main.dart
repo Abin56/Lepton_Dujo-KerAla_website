@@ -1,10 +1,10 @@
-import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/new_home_01_06.dart';
 import 'package:dujo_kerala_website/view/web/home/create_school/create_school.dart';
 import 'package:dujo_kerala_website/view/web/home/privacypolicy.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
+import 'view/web/dujo_homePage/main_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,10 +18,7 @@ void main() async {
         appId: "1:512252187081:web:29a9843fc66f17bc6f5818",
         measurementId: "G-QC6SR6TLE0"),
   );
-  ScreenUtil.ensureScreenSize();
- runApp(
- const MyApp()
-);
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -30,25 +27,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-        minTextAdapt: true,
-        splitScreenMode: true,
-        designSize: const Size(1536, 792),
-        builder: (context, child) {
-          return GetMaterialApp(
-              routes: {
-                PrivacyPolicy.route: (context) => const PrivacyPolicy(),
-                SchoolProfile.route: (context) => const SchoolProfile(),
-              },
-              title: 'COSTECH DuJo',
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                primaryColor: const Color(0xFF02BB9F),
-                primaryColorDark: const Color(0xFF167F67),
-              ),
-              home:
-                   HomePageImages());
-        });
+    return GetMaterialApp(
+        routes: {
+          PrivacyPolicy.route: (context) => const PrivacyPolicy(),
+          SchoolProfile.route: (context) => const SchoolProfile(),
+        },
+        title: 'COSTECH DuJo',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primaryColor: const Color(0xFF02BB9F),
+          primaryColorDark: const Color(0xFF167F67),
+        ),
+        home: const MainScreen());
   }
 }
 
