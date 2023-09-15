@@ -347,7 +347,7 @@ class FooterMob extends StatelessWidget {
                             ),
                           )
                         ],
-                      ),
+                      )
                     ),
                      Expanded(
                        child: Container(
