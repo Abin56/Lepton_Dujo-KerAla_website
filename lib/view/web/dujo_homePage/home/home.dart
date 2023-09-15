@@ -13,10 +13,13 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const PreferredSize(
+          preferredSize: Size(double.infinity, 100),
+          child: ResponsiveMobileAppBar()),
       body: ResponsiveWebSite.isMobile(context)
           ? ListView(
               children: const [
-                MobileAppBAr(), // App Bar
+                // MobileAppBAr(), // App Bar
                 Divider(
                   // height: 05,
                   thickness: 01,
@@ -34,7 +37,7 @@ class HomeScreen extends StatelessWidget {
             )
           : ListView(
               children: const [
-                WebSiteNavBAr(), //Nav Bar
+                // WebSiteNavBAr(), //Nav Bar
                 Divider(
                   height: 05,
                   thickness: 01,
