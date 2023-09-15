@@ -4,8 +4,6 @@ import 'package:dujo_kerala_website/view/web/login/loginscreen.dart';
 import 'package:dujo_kerala_website/view/web/widgets/drop_DownList/schoolDropDownList.dart';
 import 'package:flutter/material.dart';
 
-
-
 class LoginButton extends StatelessWidget {
   const LoginButton({
     super.key,
@@ -86,6 +84,7 @@ class LoginButton extends StatelessWidget {
             child: Container(
                 height: 25,
                 width: 65,
+                margin: EdgeInsets.zero,
                 decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
                     color: cWhite,

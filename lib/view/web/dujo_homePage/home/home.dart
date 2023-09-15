@@ -1,14 +1,10 @@
-import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
-import 'package:dujo_kerala_website/view/google_poppins_widget/google_poppins_widget.dart';
 import 'package:dujo_kerala_website/view/web/dujo_homePage/home/footer/footer.dart';
 import 'package:dujo_kerala_website/view/web/dujo_homePage/home/footer/lepton_footerbar.dart';
 import 'package:dujo_kerala_website/view/web/dujo_homePage/home/footer/widgets/copyright_widget.dart';
 import 'package:dujo_kerala_website/view/web/dujo_homePage/widgets/responsive/responsive.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../colors/colors.dart';
-import '../../home/create_school/create_school.dart';
 import 'appBar/appbar.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -17,14 +13,14 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const PreferredSize(
+          preferredSize: Size(double.infinity, 100),
+          child: ResponsiveMobileAppBar()),
       body: ResponsiveWebSite.isMobile(context)
           ? ListView(
-              children: [
-                const MobileAppBAr(), // App Bar
-                const DujoHOmeScreen(),
-                DujoHomeWebSiteDetails(),
-
-                const Divider(
+              children: const [
+                // MobileAppBAr(), // App Bar
+                Divider(
                   // height: 05,
                   thickness: 01,
                   color: cBlack,
