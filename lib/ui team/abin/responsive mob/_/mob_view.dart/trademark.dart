@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../view/colors/colors.dart';
@@ -40,7 +39,7 @@ class TrademarkAndPolicy extends StatelessWidget {
           // IconButtonBackWidget(color: cWhite),
           Center(
             child: Padding(
-              padding: EdgeInsets.only(left: 50, right: 50, top: 80),
+              padding: const EdgeInsets.only(left: 50, right: 50, top: 80),
               child: GoogleMonstserratWidgets(
                   text: "Statement \n"
                       "COSTECH Dujo acknowledges that trademarks are a valuable part of COSTECH Dujo’s intellectual property portfolio. They serve to signify that particular products and services originates from COSTECH Dujo. Trademarks also help to distinguish COSTECH Dujo’s products and services from competitors."

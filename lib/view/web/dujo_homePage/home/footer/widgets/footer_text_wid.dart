@@ -1,6 +1,15 @@
-
+import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/cancellation.dart';
+import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/mob_view.dart/trademark.dart';
+import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/mob_view.dart/who_we_are.dart';
+import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/mob_view.dart/why_choose_us.dart';
 import 'package:dujo_kerala_website/view/google_poppins_widget/google_poppins_widget.dart';
+import 'package:dujo_kerala_website/view/web/home/family_policy.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../../../home/footer/hover-text/hovertext.dart';
+import '../../../../home/privacypolicy.dart';
+import '../../../../home/terms _and_condition.dart';
 
 class AddressWidget extends StatelessWidget {
   const AddressWidget({
@@ -72,10 +81,30 @@ class LegalWidget extends StatelessWidget {
               padding: const EdgeInsets.only(top: 10),
               child: ListView.separated(
                   itemBuilder: (context, index) {
-                    return GooglePoppinsWidgets(
-                      text: legal[index],
-                      fontsize: 12,
-                      fontWeight: FontWeight.w500,
+                    return GestureDetector(
+                      onTap: () {
+                        if (index == 1) {
+                          Navigator.pushNamed(context, PrivacyPolicy.route);
+                        } else {
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return legalnav[index];
+                            },
+                          ));
+                        }
+                      },
+                      child: OnHoverText(builder: (isHoverd) {
+                        final color = isHoverd
+                            ? const Color.fromARGB(255, 197, 0, 0)
+                            : Colors.black;
+
+                        return GooglePoppinsWidgets(
+                          color: color,
+                          text: legal[index],
+                          fontsize: 12,
+                          fontWeight: FontWeight.w500,
+                        );
+                      }),
                     );
                   },
                   separatorBuilder: (context, index) {
@@ -117,10 +146,21 @@ class ConnecWidget extends StatelessWidget {
               padding: const EdgeInsets.only(top: 10),
               child: ListView.separated(
                   itemBuilder: (context, index) {
-                    return GooglePoppinsWidgets(
-                      text: connect[index],
-                      fontsize: 12,
-                      fontWeight: FontWeight.w500,
+                    return GestureDetector(
+                      onTap: () {
+                        connectnav[index];
+                      },
+                      child: OnHoverText(builder: (isHoverd) {
+                        final color = isHoverd
+                            ? const Color.fromARGB(255, 197, 0, 0)
+                            : Colors.black;
+                        return GooglePoppinsWidgets(
+                          color: color,
+                          text: connect[index],
+                          fontsize: 12,
+                          fontWeight: FontWeight.w500,
+                        );
+                      }),
                     );
                   },
                   separatorBuilder: (context, index) {
@@ -162,10 +202,25 @@ class WhoWeAreWidget extends StatelessWidget {
               padding: const EdgeInsets.only(top: 10),
               child: ListView.separated(
                   itemBuilder: (context, index) {
-                    return GooglePoppinsWidgets(
-                      text: constechDUjo[index],
-                      fontsize: 12,
-                      fontWeight: FontWeight.w500,
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context) {
+                            return costechdujonav[index];
+                          },
+                        ));
+                      },
+                      child: OnHoverText(builder: (isHoverd) {
+                        final color = isHoverd
+                            ? const Color.fromARGB(255, 197, 0, 0)
+                            : Colors.black;
+                        return GooglePoppinsWidgets(
+                          text: constechDUjo[index],
+                          color: color,
+                          fontsize: 12,
+                          fontWeight: FontWeight.w500,
+                        );
+                      }),
                     );
                   },
                   separatorBuilder: (context, index) {
@@ -198,4 +253,50 @@ List<String> address = [
   '📞 +91 97469 66651 | +91 97463 66651 | +91 471 4053483',
   '✉️ info@leptoncommunications.com',
   '✉️ leptoncommunications@gmail.com'
+];
+var costechdujonav = [
+  const WhyChooseUs(),
+  const WhoWeAre(),
+];
+final Uri _faceBookUrl =
+    Uri.parse('https://www.facebook.com/profile.php?id=100091062978371');
+final Uri _twitterUrl = Uri.parse('https://twitter.com/LeptonDujo');
+final Uri _instaUrl = Uri.parse('https://www.instagram.com/leptondujo/');
+final Uri _utubeUrl = Uri.parse('https://www.youtube.com/@LEPTONDUJO/featured');
+Future<void> _launchFacebookUrl() async {
+  if (!await launchUrl(_faceBookUrl)) {
+    throw 'Could not launch $_faceBookUrl';
+  }
+}
+
+Future<void> _launchTwitterUrl() async {
+  if (!await launchUrl(_twitterUrl)) {
+    throw 'Could not launch $_twitterUrl';
+  }
+}
+
+Future<void> _launchyouTubeUrl() async {
+  if (!await launchUrl(_utubeUrl)) {
+    throw 'Could not launch $_utubeUrl';
+  }
+}
+
+Future<void> _launchInstaUrl() async {
+  if (!await launchUrl(_instaUrl)) {
+    throw 'Could not launch $_instaUrl';
+  }
+}
+
+var connectnav = [
+  _launchFacebookUrl(),
+  _launchInstaUrl(),
+  _launchTwitterUrl(),
+  _launchyouTubeUrl(),
+];
+var legalnav = [
+  const TermsAndConditions(),
+  const TermsAndConditions(),
+  const FamilyPolicyScreen(),
+  const TrademarkAndPolicy(),
+  const CancellationPolicy(),
 ];
