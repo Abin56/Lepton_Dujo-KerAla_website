@@ -1,11 +1,16 @@
+import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
+import 'package:dujo_kerala_website/view/google_poppins_widget/google_poppins_widget.dart';
 import 'package:dujo_kerala_website/view/web/dujo_homePage/home/footer/footer.dart';
 import 'package:dujo_kerala_website/view/web/dujo_homePage/home/footer/lepton_footerbar.dart';
 import 'package:dujo_kerala_website/view/web/dujo_homePage/home/footer/widgets/copyright_widget.dart';
 import 'package:dujo_kerala_website/view/web/dujo_homePage/widgets/responsive/responsive.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../colors/colors.dart';
+import '../../home/create_school/create_school.dart';
 import 'appBar/appbar.dart';
+import 'footer/widgets/alertDilogueBox.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -18,9 +23,11 @@ class HomeScreen extends StatelessWidget {
           child: ResponsiveMobileAppBar()),
       body: ResponsiveWebSite.isMobile(context)
           ? ListView(
-              children: const [
+              children: [
+                const DujoHOmeScreen(),
+                DujoHomeWebSiteDetails(),
                 // MobileAppBAr(), // App Bar
-                Divider(
+                const Divider(
                   // height: 05,
                   thickness: 01,
                   color: cBlack,
@@ -37,7 +44,7 @@ class HomeScreen extends StatelessWidget {
             )
           : ListView(
               children: [
-                const WebSiteNavBAr(), //Nav Bar
+                // const WebSiteNavBAr(), //Nav Bar
                 const DujoHOmeScreen(),
                 DujoHomeWebSiteDetails(),
                 const Divider(
@@ -140,33 +147,6 @@ class DujoHOmeScreen extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              // Container(
-                              //   margin: const EdgeInsets.only(left: 10),
-                              //   // color: cBlue,
-                              //   width: 230,
-                              //   height: 50,
-
-                              //   child: Center(
-                              //     child: GooglePoppinsWidgets(
-                              //       text: "C O S T E C H",
-                              //       fontsize: 30,
-                              //       fontWeight: FontWeight.bold,
-                              //     ),
-                              //   ),
-                              // ),
-                              // Container(
-                              //   margin: const EdgeInsets.only(
-                              //     top: 10,
-                              //   ),
-                              //   // color: cBlue,
-                              //   width: 200,
-                              //   height: 50,
-                              //   decoration: const BoxDecoration(
-                              //     image: DecorationImage(
-                              //         image: AssetImage(
-                              //             'assets/images/dujon.png')),
-                              //   ),
-                              // ),
                               Padding(
                                 padding:
                                     const EdgeInsets.only(top: 40, left: 20),
@@ -185,8 +165,7 @@ class DujoHOmeScreen extends StatelessWidget {
                                   height: 60,
                                   minWidth: 100,
                                   onPressed: () {
-                                    Navigator.pushNamed(
-                                        context, SchoolProfile.route);
+                                    mobileandTabAlert(context);
                                   },
                                   color: adminePrimayColor,
                                   child: Center(
@@ -258,8 +237,10 @@ class DujoHOmeScreen extends StatelessWidget {
                                   height: 60,
                                   minWidth: 250,
                                   onPressed: () {
-                                    Navigator.pushNamed(
-                                        context, SchoolProfile.route);
+                                    ResponsiveWebSite.isDesktop(context)
+                                        ? Navigator.pushNamed(
+                                            context, SchoolProfile.route)
+                                        : mobileandTabAlert(context);
                                   },
                                   color: adminePrimayColor,
                                   child: Center(
@@ -338,7 +319,7 @@ class DujoHomeWebSiteDetails extends StatelessWidget {
     return Column(
       children: [
         Container(
-            height: ResponsiveWebSite.isDesktop(context) ? 900 : 700,
+            height: ResponsiveWebSite.isDesktop(context) ? 900 : 840,
             width: double.infinity,
             decoration: BoxDecoration(
                 color: ResponsiveWebSite.isDesktop(context)
@@ -404,7 +385,7 @@ class WebSiteDiscriptionWidget extends StatelessWidget {
             child: SizedBox(
               width:
                   ResponsiveWebSite.isDesktop(context) ? 800 : double.infinity,
-              height: ResponsiveWebSite.isDesktop(context) ? 200 : 200,
+              height: ResponsiveWebSite.isDesktop(context) ? 200 : 300,
               child: Center(
                 child: GooglePoppinsWidgets(
                   text:
@@ -515,7 +496,7 @@ class WebSiteDiscriptionWidget extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 20),
             child: SizedBox(
               width: ResponsiveWebSite.isDesktop(context) ? 800 : 800,
-              height: ResponsiveWebSite.isDesktop(context) ? 200 : 200,
+              height: ResponsiveWebSite.isDesktop(context) ? 200 : 300,
               child: Center(
                 child: GooglePoppinsWidgets(
                     text:

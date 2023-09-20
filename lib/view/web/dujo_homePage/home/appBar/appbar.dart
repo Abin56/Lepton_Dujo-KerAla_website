@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dujo_kerala_website/view/colors/colors.dart';
+import 'package:dujo_kerala_website/view/google_poppins_widget/google_poppins_widget.dart';
 import 'package:dujo_kerala_website/view/web/dujo_homePage/home/appBar/login_button.dart';
 import 'package:dujo_kerala_website/view/web/dujo_homePage/widgets/responsive/responsive.dart';
 import 'package:flutter/material.dart';
@@ -185,14 +186,24 @@ class ResponsiveMobileAppBar extends StatelessWidget {
                     height: 75,
                     width: 75,
                     // color: Colors.white70,
-                    child: Image.asset(
-                      'assets/images/leptdujo.png',
+                    child: Column(
+                      children: [
+                        GooglePoppinsWidgets(
+                          text: "COSTECH",
+                          fontsize: 14,
+                          color: cWhite,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        Image.asset(
+                          'assets/images/dujo_logo.png',
 
-                      fit: BoxFit.contain,
-                      // color: adminePrimayColor,
-                      color: Colors.white,
+                          fit: BoxFit.contain,
+                          // color: adminePrimayColor,
+                          color: Colors.white,
 
-                      //Color(0xFF17BDB5),
+                          //Color(0xFF17BDB5),
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -243,11 +254,11 @@ class ResponsiveMobileAppBar extends StatelessWidget {
                     visible: maxWidthValue < 430,
                     child: Row(
                       children: const [
-                        const LoginButton(),
-                        Icon(
-                          Icons.more_vert,
-                          color: Colors.white,
-                        ),
+                        LoginButton(),
+                        // Icon(
+                        //   Icons.more_vert,
+                        //   color: Colors.white,
+                        // ),
                       ],
                     ),
                   )
