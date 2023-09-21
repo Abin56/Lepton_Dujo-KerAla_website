@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
                 primaryColor: const Color(0xFF02BB9F),
                 primaryColorDark: const Color(0xFF167F67),
                 // ignore: deprecated_member_use
-                accentColor: const Color(0xFF02BB9F),
+                hintColor: const Color(0xFF02BB9F),
               ),
               home: DujoHomePage());
         });
