@@ -2,6 +2,7 @@ import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/google_poppins_widget/google_poppins_widget.dart';
 import 'package:dujo_kerala_website/view/web/dujo_homePage/widgets/responsive/responsive.dart';
 import 'package:dujo_kerala_website/view/web/dujo_homePage/widgets/widget_container.dart';
+import 'package:dujo_kerala_website/view/web/home/footer/hover-text/hovertext.dart';
 import 'package:flutter/material.dart';
 
 class DujoOurFeaturesContainerWidgets extends StatelessWidget {
@@ -19,34 +20,36 @@ class DujoOurFeaturesContainerWidgets extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
-        border: Border.all(color: color.withOpacity(0.1)),
-      ),
-      height: 400,
-      width: 280,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Image.asset(
-            image,
-            height: 45,
-            width: 45,
-          ),
-          GooglePoppinsWidgets(
-            text: title,
-            fontsize: 15,
-            // color: Col,
-            fontWeight: FontWeight.bold,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GooglePoppinsWidgets(text: bodytext, fontsize: 10.9),
-          ),
-        ],
-      ),
-    );
+    return OnHoverText(builder: (context) {
+      return Container(
+        decoration: BoxDecoration(
+          color: color.withOpacity(0.1),
+          border: Border.all(color: color.withOpacity(0.1)),
+        ),
+        height: 400,
+        width: 280,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Image.asset(
+              image,
+              height: 45,
+              width: 45,
+            ),
+            GooglePoppinsWidgets(
+              text: title,
+              fontsize: 15,
+              // color: Col,
+              fontWeight: FontWeight.bold,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GooglePoppinsWidgets(text: bodytext, fontsize: 10.9),
+            ),
+          ],
+        ),
+      );
+    });
   }
 }
 
@@ -123,15 +126,15 @@ class DujoWebFeatures extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 1400,
+                height: 1700,
                 width: double.infinity,
                 child: Column(
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 25, right: 10),
+                          padding: const EdgeInsets.only(),
                           child: DujoOurFeaturesContainerWidgets(
                               color: Colors.blue,
                               bodytext:
@@ -140,7 +143,7 @@ class DujoWebFeatures extends StatelessWidget {
                               title: 'AI - SUPPORTED CHATBOT'),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 10, right: 10),
+                          padding: const EdgeInsets.only(),
                           child: DujoOurFeaturesContainerWidgets(
                               color: Colors.red,
                               bodytext:
@@ -149,8 +152,7 @@ class DujoWebFeatures extends StatelessWidget {
                               title: 'Live Class'),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(
-                              left: 10, bottom: 50, right: 10),
+                          padding: const EdgeInsets.only(),
                           child: DujoOurFeaturesContainerWidgets(
                               color: Colors.green,
                               bodytext:
@@ -159,7 +161,7 @@ class DujoWebFeatures extends StatelessWidget {
                               title: 'Recorded Class'),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 10, right: 10),
+                          padding: const EdgeInsets.only(),
                           child: DujoOurFeaturesContainerWidgets(
                               color: const Color.fromARGB(255, 255, 230, 0),
                               bodytext:
@@ -167,34 +169,15 @@ class DujoWebFeatures extends StatelessWidget {
                               image: 'assets/png/roll-call.png',
                               title: 'Attendance'),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 25, left: 10, right: 10),
-                          child: DujoOurFeaturesContainerWidgets(
-                              color: Colors.blue,
-                              bodytext:
-                                  '''This feature that facilitates real-time text-based conversations among students, teachers, parents, and school staff within the app's secure environment. It serves as a means of enhancing communication and collaboration within the school communit The chat feature provides a user-friendly interface with chat bubbles, contact lists, and message threads, making it easy for users to navigate and communicate.Different users may have different levels of access and permissions within the chat system.Users can engage in one-on-one private conversations or create group chats for specific purposes, such as project collaboration or class discussions''',
-                              image: 'assets/png/chat.png',
-                              title: 'Chat'),
-                        ),
                       ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 10),
+                      padding: const EdgeInsets.only(top: 20),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: 25, right: 10),
-                            child: DujoOurFeaturesContainerWidgets(
-                                color: Colors.indigo,
-                                bodytext:
-                                    'Notices and events in a school app play a crucial role in communication, ensuring that all members of the school community are well-informed about important updates and upcoming activities. These features enhance transparency, engagement, and organization within the school environment.The school app allows authorized users, such as administrators and teachers, to create and post announcements. These announcements can cover a wide range of topics, including school news, policy updates, and important reminders.Users typically receive push notifications on their devices whenever a new notice is posted. This ensures that users stay up-to-date with the latest information without actively checking the app',
-                                image: 'assets/png/notice.png',
-                                title: 'Notices and events'),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10, right: 10),
+                            padding: const EdgeInsets.only(),
                             child: DujoOurFeaturesContainerWidgets(
                                 color: Colors.purple,
                                 bodytext:
@@ -203,8 +186,7 @@ class DujoWebFeatures extends StatelessWidget {
                                 title: 'Performance analysis'),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(
-                                left: 10, bottom: 50, right: 10),
+                            padding: const EdgeInsets.only(),
                             child: DujoOurFeaturesContainerWidgets(
                                 color: Colors.deepOrange,
                                 bodytext:
@@ -213,7 +195,7 @@ class DujoWebFeatures extends StatelessWidget {
                                 title: 'Hostel Management'),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 10, right: 10),
+                            padding: const EdgeInsets.only(),
                             child: DujoOurFeaturesContainerWidgets(
                                 color: const Color.fromARGB(255, 255, 230, 0),
                                 bodytext:
@@ -222,8 +204,7 @@ class DujoWebFeatures extends StatelessWidget {
                                 title: 'Leave letter applications'),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(
-                                top: 25, left: 10, right: 10),
+                            padding: const EdgeInsets.only(),
                             child: DujoOurFeaturesContainerWidgets(
                                 color: Colors.blue,
                                 bodytext:
@@ -236,9 +217,54 @@ The app sends automated reminders to students about upcoming homework due dates.
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 10),
+                      padding: const EdgeInsets.only(top: 20),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(),
+                            child: DujoOurFeaturesContainerWidgets(
+                                color: Colors.black,
+                                bodytext:
+                                    '''Class test module in a school app streamlines the process of creating, administering, grading, and analyzing class tests or quizzes. It enhances the teaching and learning experience by providing immediate feedback, performance analytics, and secure access to assessment materials. This digital tool contributes to effective education management and helps students track their progress.Students and teachers can review the test after completion to see the questions, correct answers, and explanations for incorrect answers.Parents may have access to view their child's test results and performance analytics through the app''',
+                                image: 'assets/png/exam_studenttest.png',
+                                title: 'Class Tests'),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(),
+                            child: DujoOurFeaturesContainerWidgets(
+                                color: Colors.teal,
+                                bodytext:
+                                    'SOS ID cards with RFID (Radio-Frequency Identification) and GPS tracking, along with a panic button feature in a school app, are advanced safety and security measures designed to protect students, staff, and other members of the school community. These comprehensive ID cards combine technology and emergency response features to ensure a rapid and effective response during critical situations',
+                                image: 'assets/png/digital-identity.png',
+                                title: 'SOS ID CARDS'),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(),
+                            child: DujoOurFeaturesContainerWidgets(
+                                color: const Color.fromARGB(255, 255, 230, 0),
+                                bodytext:
+                                    ''' School bus tracking enables parents, school administrators, and transportation staff to monitor the real-time location and status of school buses used to transport students to and from school. This functionality enhances safety, efficiency, and communication in school transportation systems Each school bus is equipped with a GPS (Global Positioning System) device or tracker.The GPS device constantly updates the bus's location and transmits this data to the school's server or cloud-based platform.Authorized users, including parents, school administrators, and transportation staff, can access the school bus tracking feature within the school app.''',
+                                image: 'assets/png/tracking-app.png',
+                                title: 'School Bus Tracking'),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(),
+                            child: DujoOurFeaturesContainerWidgets(
+                                color: Colors.grey,
+                                bodytext:
+                                    '''Digital resources and educational content that students can access through the app to support their learning and academic progress. These materials are typically designed to align with the curriculum and these materials encompass various content types and multimedia elements, offering students a comprehensive and interactive learning experience.
+This app provide digital versions of textbooks and e-books, which students can read and reference on their electronic devices. These digital textbooks often replicate the content of traditional print textbooks, including chapters, illustrations, and exercises.''',
+                                image: 'assets/png/pdf.png',
+                                title: 'Study Materials and Textbooks'),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(top: 25, right: 10),
@@ -250,43 +276,23 @@ The app sends automated reminders to students about upcoming homework due dates.
                                 title: 'Exam Notifications'),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 10, right: 10),
-                            child: DujoOurFeaturesContainerWidgets(
-                                color: Colors.black,
-                                bodytext:
-                                    '''Class test module in a school app streamlines the process of creating, administering, grading, and analyzing class tests or quizzes. It enhances the teaching and learning experience by providing immediate feedback, performance analytics, and secure access to assessment materials. This digital tool contributes to effective education management and helps students track their progress.Students and teachers can review the test after completion to see the questions, correct answers, and explanations for incorrect answers.Parents may have access to view their child's test results and performance analytics through the app''',
-                                image: 'assets/png/exam (1).png',
-                                title: 'Class Tests'),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 10, bottom: 50, right: 10),
-                            child: DujoOurFeaturesContainerWidgets(
-                                color: Colors.teal,
-                                bodytext:
-                                    'SOS ID cards with RFID (Radio-Frequency Identification) and GPS tracking, along with a panic button feature in a school app, are advanced safety and security measures designed to protect students, staff, and other members of the school community. These comprehensive ID cards combine technology and emergency response features to ensure a rapid and effective response during critical situations',
-                                image: 'assets/png/digital-identity.png',
-                                title: 'SOS ID CARDS'),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10, right: 10),
-                            child: DujoOurFeaturesContainerWidgets(
-                                color: const Color.fromARGB(255, 255, 230, 0),
-                                bodytext:
-                                    ''' School bus tracking enables parents, school administrators, and transportation staff to monitor the real-time location and status of school buses used to transport students to and from school. This functionality enhances safety, efficiency, and communication in school transportation systems Each school bus is equipped with a GPS (Global Positioning System) device or tracker.The GPS device constantly updates the bus's location and transmits this data to the school's server or cloud-based platform.Authorized users, including parents, school administrators, and transportation staff, can access the school bus tracking feature within the school app.''',
-                                image: 'assets/png/tracking-app.png',
-                                title: 'School bus Trafficking'),
-                          ),
-                          Padding(
                             padding: const EdgeInsets.only(
                                 top: 25, left: 10, right: 10),
                             child: DujoOurFeaturesContainerWidgets(
-                                color: Colors.grey,
+                                color: Colors.blue,
                                 bodytext:
-                                    '''Digital resources and educational content that students can access through the app to support their learning and academic progress. These materials are typically designed to align with the curriculum and these materials encompass various content types and multimedia elements, offering students a comprehensive and interactive learning experience.
-This app provide digital versions of textbooks and e-books, which students can read and reference on their electronic devices. These digital textbooks often replicate the content of traditional print textbooks, including chapters, illustrations, and exercises.''',
-                                image: 'assets/png/pdf.png',
-                                title: 'Study Materials and Textbooks'),
+                                    '''This feature that facilitates real-time text-based conversations among students, teachers, parents, and school staff within the app's secure environment. It serves as a means of enhancing communication and collaboration within the school communit The chat feature provides a user-friendly interface with chat bubbles, contact lists, and message threads, making it easy for users to navigate and communicate.Different users may have different levels of access and permissions within the chat system.Users can engage in one-on-one private conversations or create group chats for specific purposes, such as project collaboration or class discussions''',
+                                image: 'assets/png/chat.png',
+                                title: 'Chat'),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 25, right: 10),
+                            child: DujoOurFeaturesContainerWidgets(
+                                color: Colors.indigo,
+                                bodytext:
+                                    'Notices and events in a school app play a crucial role in communication, ensuring that all members of the school community are well-informed about important updates and upcoming activities. These features enhance transparency, engagement, and organization within the school environment.The school app allows authorized users, such as administrators and teachers, to create and post announcements. These announcements can cover a wide range of topics, including school news, policy updates, and important reminders.Users typically receive push notifications on their devices whenever a new notice is posted. This ensures that users stay up-to-date with the latest information without actively checking the app',
+                                image: 'assets/png/notice.png',
+                                title: 'Notices and events'),
                           ),
                         ],
                       ),
@@ -457,7 +463,7 @@ This app provide digital versions of textbooks and e-books, which students can r
                             color: Colors.black,
                             bodytext:
                                 '''Class test module in a school app streamlines the process of creating, administering, grading, and analyzing class tests or quizzes. It enhances the teaching and learning experience by providing immediate feedback, performance analytics, and secure access to assessment materials. This digital tool contributes to effective education management and helps students track their progress.Students and teachers can review the test after completion to see the questions, correct answers, and explanations for incorrect answers.Parents may have access to view their child's test results and performance analytics through the app''',
-                            image: 'assets/png/exam (1).png',
+                            image: 'assets/png/exam_studenttest.png',
                             title: 'Class Tests'),
                       ),
                       Padding(
@@ -476,7 +482,7 @@ This app provide digital versions of textbooks and e-books, which students can r
                             bodytext:
                                 ''' School bus tracking enables parents, school administrators, and transportation staff to monitor the real-time location and status of school buses used to transport students to and from school. This functionality enhances safety, efficiency, and communication in school transportation systems Each school bus is equipped with a GPS (Global Positioning System) device or tracker.The GPS device constantly updates the bus's location and transmits this data to the school's server or cloud-based platform.Authorized users, including parents, school administrators, and transportation staff, can access the school bus tracking feature within the school app.''',
                             image: 'assets/png/tracking-app.png',
-                            title: 'School bus Trafficking'),
+                            title: 'School Bus Tracking'),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
@@ -682,7 +688,7 @@ This app provide digital versions of textbooks and e-books, which students can r
                             color: Colors.black,
                             bodytext:
                                 '''Class test module in a school app streamlines the process of creating, administering, grading, and analyzing class tests or quizzes. It enhances the teaching and learning experience by providing immediate feedback, performance analytics, and secure access to assessment materials. This digital tool contributes to effective education management and helps students track their progress.Students and teachers can review the test after completion to see the questions, correct answers, and explanations for incorrect answers.Parents may have access to view their child's test results and performance analytics through the app''',
-                            image: 'assets/png/exam (1).png',
+                            image: 'assets/png/exam_studenttest.png',
                             title: 'Class Tests'),
                       ],
                     ),
@@ -703,7 +709,7 @@ This app provide digital versions of textbooks and e-books, which students can r
                             bodytext:
                                 ''' School bus tracking enables parents, school administrators, and transportation staff to monitor the real-time location and status of school buses used to transport students to and from school. This functionality enhances safety, efficiency, and communication in school transportation systems Each school bus is equipped with a GPS (Global Positioning System) device or tracker.The GPS device constantly updates the bus's location and transmits this data to the school's server or cloud-based platform.Authorized users, including parents, school administrators, and transportation staff, can access the school bus tracking feature within the school app.''',
                             image: 'assets/png/tracking-app.png',
-                            title: 'School bus Trafficking'),
+                            title: 'School Bus Tracking'),
                       ],
                     ),
                   ),
