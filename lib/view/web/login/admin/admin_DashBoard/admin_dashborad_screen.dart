@@ -26,7 +26,6 @@ import '../../../../../model/create_classModel/add_student_model.dart';
 import '../../../../../model/loginHistory_model/login_history_model.dart';
 import '../../../../colors/colors.dart';
 import '../../../../constant/constant.dart';
-import '../../../hostel/hostel_home_page.dart';
 import '../../../widgets/button_container_widget.dart';
 import '../../../widgets/drop_DownList/get_batchYear.dart';
 import '../../../widgets/drop_DownList/get_classes.dart';

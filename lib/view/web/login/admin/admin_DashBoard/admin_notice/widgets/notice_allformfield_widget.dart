@@ -43,6 +43,7 @@ class NoticeFormFieldsWidget extends StatelessWidget {
         ),
         DateTimeTextField(
           labelText: "Date of occation",
+          
           textEditingController: adminNoticeController.dateOfOccasionController,
           function: () async {
             String result = await dateTimePicker(context);
