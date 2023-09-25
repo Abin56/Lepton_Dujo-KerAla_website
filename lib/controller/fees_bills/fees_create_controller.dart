@@ -52,6 +52,8 @@ class FeesCreateController extends GetxController {
       final allClassData = await FirebaseFirestore.instance
           .collection("SchoolListCollection")
           .doc(Get.find<AdminLoginScreenController>().schoolID)
+          .collection(Get.find<GetFireBaseData>().bYear.value)
+          .doc(Get.find<GetFireBaseData>().bYear.value)
           .collection("classes")
           .get();
       allClassLists =

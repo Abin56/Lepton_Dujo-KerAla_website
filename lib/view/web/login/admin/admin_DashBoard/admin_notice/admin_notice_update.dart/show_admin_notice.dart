@@ -1,44 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../../../controller/Getx/admin/notice_controller.dart';
+import '../../../../../../../controller/Getx/admin/admin_notice_controller/notice_controller.dart';
 import '../../../../../../../model/admin_models/admin_notice_model/admin_notice_model.dart';
-import '../../../../../../../utils/utils.dart';
+import '../../../../../../colors/colors.dart';
 import '../../../../../../constant/constant.dart';
+import '../../../../../../constant/responsive_app.dart';
+import 'widgets/notice_show_udpate_button_widget.dart';
+import 'widgets/notice_update_checked_box_widget.dart';
+import 'widgets/notice_update_form_widget.dart';
 
-class AdminNoticeShow extends StatefulWidget {
-  const AdminNoticeShow(
-      {super.key, required this.schoolId, required this.adminNoticeModel});
+class AdminNoticeShow extends StatelessWidget {
+  AdminNoticeShow(
+      {super.key,
+      required this.schoolId,
+      required this.adminNoticeModel,
+      required this.dialoguecontext});
   final String schoolId;
+  final BuildContext dialoguecontext;
 
   final AdminNoticeModel adminNoticeModel;
 
-  @override
-  State<AdminNoticeShow> createState() => _AdminNoticeShowState();
-}
-
-class _AdminNoticeShowState extends State<AdminNoticeShow> {
-  int _selectedContainerIndex = 0;
-  AdminNoticeController adminNoticeController =
+  final AdminNoticeController adminNoticeController =
       Get.put(AdminNoticeController());
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  @override
-  void initState() {
-    addValueToTextField();
-    super.initState();
-  }
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
 //image and signed image url declared as obs because create notice page button updation
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
     return Obx(() {
       return SingleChildScrollView(
         child: Center(
           child: Container(
             color: Colors.white,
-            width: screenSize.width / 3,
+            width: ResponsiveApp.width / 3,
             margin: const EdgeInsets.symmetric(vertical: 20),
             child: Padding(
               padding: const EdgeInsets.all(20.0),
@@ -51,19 +47,6 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            TextFormField(
-                              readOnly: true,
-                              onTap: () async => adminNoticeController
-                                  .publishedDateController
-                                  .text = await dateTimePicker(context),
-                              validator: checkFieldEmpty,
-                              controller:
-                                  adminNoticeController.publishedDateController,
-                              decoration: InputDecoration(
-                                border: const OutlineInputBorder(),
-                                labelText: 'Published date'.tr,
-                              ),
-                            ),
                             sizedBoxH20,
                             TextFormField(
                               validator: checkFieldEmpty,
@@ -74,62 +57,23 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                                 labelText: 'Heading'.tr,
                               ),
                             ),
-                            sizedBoxH20,
-                            TextFormField(
-                              readOnly: true,
-                              onTap: () async => adminNoticeController
-                                  .dateOfOccasionController
-                                  .text = await dateTimePicker(context),
-                              validator: checkFieldEmpty,
-                              controller: adminNoticeController
-                                  .dateOfOccasionController,
-                              decoration: InputDecoration(
-                                border: const OutlineInputBorder(),
-                                labelText: 'Date of occation'.tr,
-                              ),
+                            Visibility(
+                              visible: adminNoticeModel.customContent!.isEmpty,
+                              child: NoticeUpdateFormWidget(),
                             ),
                             sizedBoxH20,
-                            TextFormField(
-                              controller: adminNoticeController.venueController,
-                              validator: checkFieldEmpty,
-                              decoration: InputDecoration(
+                            Visibility(
+                              visible:
+                                  adminNoticeModel.customContent!.isNotEmpty,
+                              child: TextFormField(
+                                maxLines: null,
+                                validator: checkFieldEmpty,
+                                controller: adminNoticeController
+                                    .customContentController,
+                                decoration: InputDecoration(
                                   border: const OutlineInputBorder(),
-                                  labelText: 'Venue'.tr,
-                                  labelStyle: const TextStyle(
-                                      color: Colors.black, fontSize: 16)),
-                            ),
-                            sizedBoxH20,
-                            TextFormField(
-                              validator: checkFieldEmpty,
-                              controller:
-                                  adminNoticeController.chiefGuestController,
-                              decoration: InputDecoration(
-                                border: const OutlineInputBorder(),
-                                labelText: 'Chief guest'.tr,
-                              ),
-                            ),
-                            sizedBoxH20,
-                            TextFormField(
-                              readOnly: true,
-                              onTap: () async => adminNoticeController
-                                  .dateOfOccasionController
-                                  .text = await dateTimePicker(context),
-                              validator: checkFieldEmpty,
-                              controller: adminNoticeController
-                                  .dateOfSubmissionController,
-                              decoration: InputDecoration(
-                                border: const OutlineInputBorder(),
-                                labelText: 'Date of submission'.tr,
-                              ),
-                            ),
-                            sizedBoxH20,
-                            TextFormField(
-                              validator: checkFieldEmpty,
-                              controller:
-                                  adminNoticeController.signedByController,
-                              decoration: InputDecoration(
-                                border: const OutlineInputBorder(),
-                                labelText: 'Signed by'.tr,
+                                  labelText: 'Custom Content'.tr,
+                                ),
                               ),
                             ),
                             const SizedBox(
@@ -137,164 +81,21 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
                             ),
                             SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                mainAxisSize: MainAxisSize.max,
-                                children: <Widget>[
-                                  Row(
-                                    children: [
-                                      Checkbox(
-                                        value: adminNoticeController
-                                            .studentCheckBox.value,
-                                        onChanged: (value) {
-                                          adminNoticeController.studentCheckBox
-                                              .value = value ?? false;
-                                        },
-                                      ),
-                                      const Text('Students')
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Checkbox(
-                                        value: adminNoticeController
-                                            .teacherCheckBox.value,
-                                        onChanged: (value) {
-                                          adminNoticeController.teacherCheckBox
-                                              .value = value ?? false;
-                                        },
-                                      ),
-                                      const Text('Teachers')
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Checkbox(
-                                        value: adminNoticeController
-                                            .guardianCheckBox.value,
-                                        onChanged: (value) {
-                                          adminNoticeController.guardianCheckBox
-                                              .value = value ?? false;
-                                        },
-                                      ),
-                                      const Text('Parents')
-                                    ],
-                                  ),
-                                ],
-                              ),
+                              child: NoticeUpdateCheckedBoxWidget(),
                             ),
                             const SizedBox(
                               height: 30,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Flexible(
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      shape: const StadiumBorder(),
-                                    ),
-                                    onPressed: () async {
-                                      final data = await adminNoticeController
-                                          .photoUpdate(
-                                              uid: widget.adminNoticeModel
-                                                  .signedImageId);
-                                      if (data.isNotEmpty) {
-                                        adminNoticeController
-                                            .signedImageUrl.value = data;
-                                      }
-                                    },
-                                    child: Text(
-                                      'Update sign'.tr,
-                                    ),
-                                  ),
-                                ),
-                                Flexible(
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      shape: const StadiumBorder(),
-                                    ),
-                                    onPressed: () async {
-                                      final data = await adminNoticeController
-                                          .photoUpdate(
-                                        uid: widget
-                                            .adminNoticeModel.signedImageId,
-                                      );
-                                      if (data.isNotEmpty) {
-                                        adminNoticeController.imageUrl.value =
-                                            data;
-                                      }
-                                    },
-                                    child: Text(
-                                      'Update image'.tr,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            NoticeShowUpdateImageButtonWidget(),
                             const SizedBox(
                               height: 30,
                             ),
-                            GestureDetector(
-                              onTap: () async {
-                                if (formKey.currentState?.validate() ?? false) {
-                                  await adminNoticeController.updateAdminNotice(
-                                      AdminNoticeModel(
-                                        publishedDate: adminNoticeController
-                                            .publishedDateController.text,
-                                        heading: adminNoticeController
-                                            .headingController.text,
-                                        dateofoccation: adminNoticeController
-                                            .dateOfOccasionController.text,
-                                        venue: adminNoticeController
-                                            .venueController.text,
-                                        chiefGuest: adminNoticeController
-                                            .chiefGuestController.text,
-                                        dateOfSubmission: adminNoticeController
-                                            .dateOfSubmissionController.text,
-                                        signedBy: adminNoticeController
-                                            .signedByController.text,
-                                        imageUrl: adminNoticeController
-                                            .imageUrl.value,
-                                        signedImageUrl: adminNoticeController
-                                            .signedImageUrl.value,
-                                        imageId:
-                                            widget.adminNoticeModel.imageId,
-                                        signedImageId: widget
-                                            .adminNoticeModel.signedImageId,
-                                        noticeId:
-                                            widget.adminNoticeModel.noticeId,
-                                        customContent: adminNoticeController
-                                            .customContentController.text,
-                                        visibleGuardian: adminNoticeController
-                                            .guardianCheckBox.value,
-                                        visibleStudent: adminNoticeController
-                                            .studentCheckBox.value,
-                                        visibleTeacher: adminNoticeController
-                                            .teacherCheckBox.value,
-                                      ),
-                                      widget.schoolId,
-                                      context);
-                                }
-
-                                setState(() {
-                                  _selectedContainerIndex = 0;
-                                });
-                              },
-                              child: Container(
-                                height: screenSize.width * 1 / 30,
-                                width: screenSize.width,
-                                decoration: BoxDecoration(
-                                    color: _selectedContainerIndex == 0
-                                        ? Colors.blue
-                                        : Colors.grey,
-                                    borderRadius: BorderRadius.circular(14)),
-                                child: Center(
-                                  child: Text('Update'.tr,
-                                      style: const TextStyle(fontSize: 17)),
-                                ),
-                              ),
+                            NoticeShowUpdateButtonWidget(
+                              adminNoticeController: adminNoticeController,
+                              formKey: formKey,
+                              adminNoticeModel: adminNoticeModel,
+                              schoolId: schoolId,
+                              dialoguecontext: dialoguecontext,
                             ),
                           ]),
                     ),
@@ -307,28 +108,92 @@ class _AdminNoticeShowState extends State<AdminNoticeShow> {
 
   void addValueToTextField() {
     adminNoticeController.publishedDateController.text =
-        widget.adminNoticeModel.publishedDate;
+        adminNoticeModel.publishedDate ?? "";
     adminNoticeController.headingController.text =
-        widget.adminNoticeModel.heading;
+        adminNoticeModel.heading ?? "";
     adminNoticeController.dateOfOccasionController.text =
-        widget.adminNoticeModel.dateofoccation;
-    adminNoticeController.venueController.text = widget.adminNoticeModel.venue;
+        adminNoticeModel.dateofoccation ?? "";
+    adminNoticeController.venueController.text = adminNoticeModel.venue ?? "";
     adminNoticeController.chiefGuestController.text =
-        widget.adminNoticeModel.chiefGuest;
+        adminNoticeModel.chiefGuest ?? "";
     adminNoticeController.dateOfSubmissionController.text =
-        widget.adminNoticeModel.dateOfSubmission;
+        adminNoticeModel.dateOfSubmission ?? "";
     adminNoticeController.signedByController.text =
-        widget.adminNoticeModel.signedBy;
-    adminNoticeController.imageId = widget.adminNoticeModel.imageId;
-    adminNoticeController.imageUrl.value = widget.adminNoticeModel.imageUrl;
-    adminNoticeController.signedImageId = widget.adminNoticeModel.signedImageId;
-    adminNoticeController.signedImageUrl.value =
-        widget.adminNoticeModel.signedImageUrl;
+        adminNoticeModel.signedBy ?? "";
+    adminNoticeModel.signedImageUrl ?? "";
+
     adminNoticeController.studentCheckBox.value =
-        widget.adminNoticeModel.visibleStudent;
+        adminNoticeModel.visibleStudent ?? true;
     adminNoticeController.teacherCheckBox.value =
-        widget.adminNoticeModel.visibleTeacher;
+        adminNoticeModel.visibleTeacher ?? true;
     adminNoticeController.guardianCheckBox.value =
-        widget.adminNoticeModel.visibleGuardian;
+        adminNoticeModel.visibleGuardian ?? true;
+    adminNoticeController.customContentController.text =
+        adminNoticeModel.customContent ?? "";
+  }
+}
+
+class NoticeShowUpdateButtonWidget extends StatelessWidget {
+  const NoticeShowUpdateButtonWidget(
+      {super.key,
+      required this.adminNoticeController,
+      required this.adminNoticeModel,
+      required this.formKey,
+      required this.schoolId,
+      required this.dialoguecontext});
+
+  final AdminNoticeController adminNoticeController;
+  final AdminNoticeModel adminNoticeModel;
+  final GlobalKey<FormState> formKey;
+  final String schoolId;
+  final BuildContext dialoguecontext;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () async {
+        if (formKey.currentState?.validate() ?? false) {
+          await adminNoticeController
+              .updateAdminNotice(
+                adminNoticeModel: AdminNoticeModel(
+                  publishedDate:
+                      adminNoticeController.publishedDateController.text,
+                  heading: adminNoticeController.headingController.text,
+                  dateofoccation:
+                      adminNoticeController.dateOfOccasionController.text,
+                  venue: adminNoticeController.venueController.text,
+                  chiefGuest: adminNoticeController.chiefGuestController.text,
+                  dateOfSubmission:
+                      adminNoticeController.dateOfSubmissionController.text,
+                  signedBy: adminNoticeController.signedByController.text,
+                  imageUrl: adminNoticeModel.imageUrl,
+                  signedImageUrl: adminNoticeModel.signedImageUrl,
+                  noticeId: adminNoticeModel.noticeId,
+                  customContent:
+                      adminNoticeController.customContentController.text,
+                  visibleGuardian: adminNoticeController.guardianCheckBox.value,
+                  visibleStudent: adminNoticeController.studentCheckBox.value,
+                  visibleTeacher: adminNoticeController.teacherCheckBox.value,
+                ),
+                schoolId: schoolId,
+                context: context,
+                image: adminNoticeController.updateImageFile,
+                signedImage: adminNoticeController.updateIsignImageFile,
+              )
+              .then(
+                (value) => Navigator.of(dialoguecontext).pop(),
+              );
+        }
+      },
+      child: Container(
+        height: ResponsiveApp.width * 1 / 30,
+        width: ResponsiveApp.width,
+        decoration: BoxDecoration(
+            color: adminePrimayColor, borderRadius: BorderRadius.circular(14)),
+        child: Center(
+          child: Text('Update'.tr, style: const TextStyle(fontSize: 17)),
+        ),
+      ),
+    );
   }
 }

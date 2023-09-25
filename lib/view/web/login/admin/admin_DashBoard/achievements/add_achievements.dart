@@ -35,11 +35,11 @@ class AddAchievements extends StatefulWidget {
 }
 
 class _AddAchievementsState extends State<AddAchievements> {
-
   String uid = const Uuid().v1();
 
   Future getImage() async {
-    final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
     File image;
 
     setState(() {
@@ -50,6 +50,7 @@ class _AddAchievementsState extends State<AddAchievements> {
       }
     });
   }
+
   QueryDocumentSnapshot<Map<String, dynamic>>? classListValue;
   QueryDocumentSnapshot<Map<String, dynamic>>? studentListValue;
   final FirebaseStorage _storage = FirebaseStorage.instance;
@@ -57,8 +58,6 @@ class _AddAchievementsState extends State<AddAchievements> {
   Uint8List? file;
   bool loadingStatus = false;
   String studentID = '';
-
-
 
   TextEditingController achievementController = TextEditingController();
   TextEditingController dateController = TextEditingController();
@@ -90,7 +89,7 @@ class _AddAchievementsState extends State<AddAchievements> {
           dateofAchievement: dateController.text,
           description: descriptionController.text,
           achievement: achievementController.text,
-          admissionNumber: admissionNumberController.text, 
+          admissionNumber: admissionNumberController.text,
           uid: uid,
           studentID: studentID);
 
@@ -129,7 +128,7 @@ class _AddAchievementsState extends State<AddAchievements> {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       //backgroundColor: Color.fromARGB(255, 27, 95, 88),
-      
+
       body: SingleChildScrollView(
         child: Row(
           children: [
@@ -180,23 +179,24 @@ class _AddAchievementsState extends State<AddAchievements> {
               color: Colors.white,
               height: size.height * 1.4,
               width: size.width * 1 / 2,
-              child:
-               Form(key: formKey,
-                 child: Column(children: [
-                   Stack(
+              child: Form(
+                key: formKey,
+                child: Column(children: [
+                  Stack(
                     children: [
                       Padding(
                         padding: EdgeInsets.only(top: size.width / 30),
-                        child:(_file == null)? CircleAvatar(
-                          radius: 80.w,
-                          backgroundImage:
-                              const NetworkImage('https://via.placeholder.com/150'),
-                          backgroundColor: const Color.fromARGB(241, 54, 225, 248),
-                        ): CircleAvatar(
-                          radius: 80.w,
-                          backgroundImage: MemoryImage(_file!)
-                              
-                        ) ,
+                        child: (_file == null)
+                            ? CircleAvatar(
+                                radius: 80.w,
+                                backgroundImage: const NetworkImage(
+                                    'https://via.placeholder.com/150'),
+                                backgroundColor:
+                                    const Color.fromARGB(241, 54, 225, 248),
+                              )
+                            : CircleAvatar(
+                                radius: 80.w,
+                                backgroundImage: MemoryImage(_file!)),
                       ),
                       Padding(
                         padding: EdgeInsets.only(
@@ -222,8 +222,9 @@ class _AddAchievementsState extends State<AddAchievements> {
                               color: Color.fromARGB(255, 0, 0, 0),
                             ),
                             alignment: Alignment.center,
-                            child:  Icon(
-                              Icons.camera_alt_outlined,size: 22.w,
+                            child: Icon(
+                              Icons.camera_alt_outlined,
+                              size: 22.w,
                               color: const Color.fromARGB(255, 156, 20, 20),
                             ),
                           ),
@@ -232,33 +233,39 @@ class _AddAchievementsState extends State<AddAchievements> {
                     ],
                   ),
                   sizedBoxH20,
-                    Text('+ Upload photo',style: TextStyle(color: adminePrimayColor,fontSize: 13.w),),
+                  Text(
+                    '+ Upload photo',
+                    style: TextStyle(color: adminePrimayColor, fontSize: 13.w),
+                  ),
                   Padding(
                     padding: EdgeInsets.only(
                         top: MediaQuery.of(context).size.height * 0.01),
                     child: StreamBuilder(
                         stream: FirebaseFirestore.instance
                             .collection('SchoolListCollection')
-                            .doc(Get.find<AdminLoginScreenController>().schoolID)
+                            .doc(
+                                Get.find<AdminLoginScreenController>().schoolID)
                             .collection('classes')
                             .snapshots(),
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
-                            return const Center(child: CircularProgressIndicator());
-                          } 
-               
-                      //
-                      //    if(snapshot.hasData){
-                           // return Text(snapshot.data!.docs[0]['className']);
-                         // }
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }
+
+                          //
+                          //    if(snapshot.hasData){
+                          // return Text(snapshot.data!.docs[0]['className']);
+                          // }
                           return Container(
                             height: screenSize.width * 1 / 30,
                             width: screenSize.width * 0.30,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               border: Border.all(
-                                  color: const Color.fromARGB(255, 238, 238, 238)),
+                                  color:
+                                      const Color.fromARGB(255, 238, 238, 238)),
                               borderRadius: BorderRadius.circular(13),
                             ),
                             child: DropdownButton(
@@ -268,8 +275,8 @@ class _AddAchievementsState extends State<AddAchievements> {
                                         ? const Text(
                                             "Select Class",
                                             style: TextStyle(
-                                                color:
-                                                    Color.fromARGB(255, 0, 0, 0),
+                                                color: Color.fromARGB(
+                                                    255, 0, 0, 0),
                                                 fontSize: 18),
                                           )
                                         : Text(classListValue?['className'])),
@@ -278,7 +285,7 @@ class _AddAchievementsState extends State<AddAchievements> {
                                   fontSize: 18,
                                   color: Colors.black,
                                 ),
-                                icon:  Padding(
+                                icon: Padding(
                                   padding: EdgeInsets.all(
                                     13.w,
                                   ),
@@ -295,29 +302,25 @@ class _AddAchievementsState extends State<AddAchievements> {
                                   },
                                 ).toList(),
                                 onChanged: (val) {
-                                   QueryDocumentSnapshot<Map<String, dynamic>>? categoryIDObject = snapshot.data?.docs
-                                      .where(
-                                          (element) => element["docid"] == val.toString())
-                                      .toList()
-                                      .first;
-                                 log(categoryIDObject?['docid']);
-                          
+                                  QueryDocumentSnapshot<Map<String, dynamic>>?
+                                      categoryIDObject = snapshot.data?.docs
+                                          .where((element) =>
+                                              element["docid"] ==
+                                              val.toString())
+                                          .toList()
+                                          .first;
+                                  log(categoryIDObject?['docid']);
+
                                   setState(
                                     () {
-                          
-                                       classListValue = categoryIDObject; 
-                                       
-                                    }, 
-               
-                             
-                                    
-                                  ); 
+                                      classListValue = categoryIDObject;
+                                    },
+                                  );
                                   log(classListValue?['docid']);
                                 }),
                           );
                         }),
                   ),
-               
                   const SizedBox(
                     height: 10,
                   ),
@@ -327,7 +330,8 @@ class _AddAchievementsState extends State<AddAchievements> {
                           stream: FirebaseFirestore.instance
                               .collection('SchoolListCollection')
                               .doc(widget.schoolID)
-                              .collection(Get.find<GetFireBaseData>().bYear.value)
+                              .collection(
+                                  Get.find<GetFireBaseData>().bYear.value)
                               .doc(Get.find<GetFireBaseData>().bYear.value)
                               .collection('classes')
                               .doc(classListValue?['docid'])
@@ -336,7 +340,8 @@ class _AddAchievementsState extends State<AddAchievements> {
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
-                              return const Center(child: CircularProgressIndicator());
+                              return const Center(
+                                  child: CircularProgressIndicator());
                             }
                             return Container(
                               height: screenSize.width * 1 / 30,
@@ -344,27 +349,29 @@ class _AddAchievementsState extends State<AddAchievements> {
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 border: Border.all(
-                                    color: const Color.fromARGB(255, 238, 238, 238)),
+                                    color: const Color.fromARGB(
+                                        255, 238, 238, 238)),
                                 borderRadius: BorderRadius.circular(13),
                               ),
                               child: DropdownButton(
                                   hint: Padding(
                                       padding: const EdgeInsets.all(10.0),
                                       child: (studentListValue == null)
-                                          ?  Text(
+                                          ? Text(
                                               "Select Students",
                                               style: TextStyle(
                                                   color: const Color.fromARGB(
                                                       255, 0, 0, 0),
                                                   fontSize: 18.w),
                                             )
-                                          : Text(studentListValue?['studentName'])),
+                                          : Text(studentListValue?[
+                                              'studentName'])),
                                   underline: const SizedBox(),
-                                  style:  TextStyle(
+                                  style: TextStyle(
                                     fontSize: 18.w,
                                     color: Colors.black,
                                   ),
-                                  icon:  Padding(
+                                  icon: Padding(
                                     padding: EdgeInsets.all(
                                       13.w,
                                     ),
@@ -382,24 +389,24 @@ class _AddAchievementsState extends State<AddAchievements> {
                                   ).toList(),
                                   onChanged: (val) {
                                     var categoryIDObject = snapshot.data?.docs
-                                        .where((element) => element["docid"] == val.toString())
+                                        .where((element) =>
+                                            element["docid"] == val.toString())
                                         .toList()
                                         .first;
-               
+
                                     setState(
                                       () {
-                                        studentListValue = categoryIDObject; 
+                                        studentListValue = categoryIDObject;
                                         studentID = studentListValue?['docid'];
                                       },
-                                    ); 
+                                    );
                                     log(studentListValue?['docid']);
                                   }),
                             );
                           }),
-                 
-                
                   Padding(
-                    padding: const EdgeInsets.only(left: 80, right: 80, top: 20),
+                    padding:
+                        const EdgeInsets.only(left: 80, right: 80, top: 20),
                     child: TextFormField(
                       validator: checkFieldEmpty,
                       controller: dateController,
@@ -416,13 +423,13 @@ class _AddAchievementsState extends State<AddAchievements> {
                             initialDate: DateTime.now(),
                             firstDate: DateTime(2000),
                             lastDate: DateTime(2101));
-               
+
                         if (pickedDate != null) {
                           print(pickedDate);
                           String formattedDate =
                               DateFormat('yyyy-MM-dd').format(pickedDate);
                           print(formattedDate);
-               
+
                           setState(() {
                             dateController.text = formattedDate;
                           });
@@ -433,83 +440,89 @@ class _AddAchievementsState extends State<AddAchievements> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 80, right: 80, top: 20),
+                    padding:
+                        const EdgeInsets.only(left: 80, right: 80, top: 20),
                     child: TextFormField(
                       validator: checkFieldEmpty,
                       controller: admissionNumberController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(20))),
-                        icon:
-                            Icon(Icons.format_list_numbered, color: Colors.blue),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20))),
+                        icon: Icon(Icons.format_list_numbered,
+                            color: Colors.blue),
                         labelText: 'Admission number',
                       ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 80, right: 80, top: 20),
+                    padding:
+                        const EdgeInsets.only(left: 80, right: 80, top: 20),
                     child: TextFormField(
                       validator: checkFieldEmpty,
                       controller: achievementController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(20))),
-                        icon:
-                            Icon(Icons.card_membership_sharp, color: Colors.blue),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20))),
+                        icon: Icon(Icons.card_membership_sharp,
+                            color: Colors.blue),
                         labelText: 'Achivement head',
                       ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 80, right: 80, top: 20),
+                    padding:
+                        const EdgeInsets.only(left: 80, right: 80, top: 20),
                     child: TextFormField(
                       validator: checkFieldEmpty,
                       controller: descriptionController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(20))),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20))),
                         icon: Icon(Icons.note_alt_outlined, color: Colors.blue),
                         labelText: 'Description',
                       ),
                     ),
                   ),
-                             
-                             
                   SizedBox(
                     height: size.width / 38,
                   ),
                   Padding(
-                    padding:  EdgeInsets.all(10.w),
+                    padding: EdgeInsets.all(10.w),
                     child: (InkWell(
-                      onTap: () async{
-
-                        if(_file==null){
+                      onTap: () async {
+                        if (_file == null) {
                           showToast(msg: 'Select an image');
+                        } else {
+                          if (formKey.currentState!.validate()) {
+                            // formKey.currentState!.validate();
+
+                            await uploadImageToStorage(file)
+                                .then((value) =>
+                                    showToast(msg: 'New Achievement Added!'))
+                                .then((value) {
+                              setState(() {
+                                _file = null;
+                                classListValue = null;
+                              });
+                            });
+                            achievementController.clear();
+                            dateController.clear();
+                            descriptionController.clear();
+                            admissionNumberController.clear();
+                          }
                         }
-                        else{
-                           if (formKey.currentState!.validate()){
-                   // formKey.currentState!.validate();
-                        
-                       await uploadImageToStorage(file).then((value) => showToast(msg: 'New Achievement Added!')).then((value) {
-                           setState(() {
-                          _file = null;
-                          classListValue = null;
-                        });
-                       });
-                        achievementController.clear();
-                        dateController.clear();
-                        descriptionController.clear();
-                        admissionNumberController.clear();
-                     
-                        }
-                        }
-                       
                       },
-                      child: CreateContainerWidget(text: 'Create',fontSize: 20.w,),
+                      child: CreateContainerWidget(
+                        text: 'Create',
+                        fontSize: 20.w,
+                      ),
                     )),
                   ),
-                             ]),
-               ),
+                ]),
+              ),
             )
           ],
         ),
@@ -517,7 +530,3 @@ class _AddAchievementsState extends State<AddAchievements> {
     );
   }
 }
-
-
-
-

@@ -58,9 +58,11 @@ class AddAttendnceTeacherHomePage extends StatelessWidget {
                   readOnly: true,
                   controller: _addAttendanceController.dateTextController,
                   onTap: () async {
-                    await _addAttendanceController.callDatePicker(
-                        context: context);
-                    await _addAttendanceController.fetchAllStudentsData();
+                    if (_addAttendanceController.selectMonthId.isNotEmpty) {
+                      await _addAttendanceController.callDatePicker(
+                          context: context);
+                      await _addAttendanceController.fetchAllStudentsData();
+                    }
                   },
                 ),
                 sizedBoxH20,
