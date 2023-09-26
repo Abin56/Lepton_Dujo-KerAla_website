@@ -1,5 +1,6 @@
 // ignore_for_file: prefer__fields, must_be_immutable, prefer_final_fields, prefer_const_constructors
 
+import 'package:dujo_kerala_website/leaverequest.dart';
 import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/_drawer.dart';
 import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/footerhomep.dart';
 import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/mob_view.dart/mob_footer.dart';
@@ -36,8 +37,6 @@ class HomePageImages extends StatelessWidget {
   Uri _instaUrl = Uri.parse('https://www.instagram.com/leptondujo/');
   Uri _utubeUrl = Uri.parse('https://www.youtube.com/@LEPTONDUJO/featured');
   Uri _leptonUrl = Uri.parse('http://www.leptoncommunications.com');
-  
-
 
   Future<void> _launchFacebookUrl() async {
     if (!await launchUrl(_faceBookUrl)) {
@@ -829,8 +828,7 @@ class HomePageImages extends StatelessWidget {
                   //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-
-                       //color: ,
+                      //color: ,
                       width: 470.w,
                       child: Row(
                         children: [
@@ -838,7 +836,11 @@ class HomePageImages extends StatelessWidget {
                             padding: EdgeInsets.only(left: 10.w),
                             child: Row(
                               children: [
-                                Icon(Icons.phone, size: 20.w,color: cWhite,),
+                                Icon(
+                                  Icons.phone,
+                                  size: 20.w,
+                                  color: cWhite,
+                                ),
                                 SizedBox(
                                   width: 5.w,
                                 ),
@@ -856,7 +858,11 @@ class HomePageImages extends StatelessWidget {
                           SizedBox(width: 20.h),
                           Row(
                             children: [
-                              Icon(Icons.mail, size: 20.w,color: cWhite,),
+                              Icon(
+                                Icons.mail,
+                                size: 20.w,
+                                color: cWhite,
+                              ),
                               SizedBox(
                                 width: 5.h,
                               ),
@@ -1152,14 +1158,15 @@ class HomePageImages extends StatelessWidget {
                               fontsize: 15,
                               color: adminePrimayColor,
                               fontWeight: FontWeight.w500),
-                                SizedBox(
-                                height: 85,
-                                width: 270,
-                                // color: cred                ,
-                                child: Center(
-                                  child:
-                                Image.asset("assets/images/COSTECH_bg.png",fit: BoxFit.cover,)
-                                )),
+                          SizedBox(
+                              height: 85,
+                              width: 270,
+                              // color: cred                ,
+                              child: Center(
+                                  child: Image.asset(
+                                "assets/images/COSTECH_bg.png",
+                                fit: BoxFit.cover,
+                              ))),
                           //sizedBoxH5,
                           GoogleMonstserratWidgets(
                             text: '10.00 AM to 06.00 PM, Mon-Fri',
@@ -1192,24 +1199,29 @@ class HomePageImages extends StatelessWidget {
                               Stack(
                                 children: [
                                   Container(
-                                    margin:
-                                        EdgeInsets.only(left: 10.w),
+                                    margin: EdgeInsets.only(left: 10.w),
                                     // color: cBlue,
                                     width: 230.w,
                                     height: 50.h,
 
-                                    child:
-                                    Text(
-                                     
-                                    "C O S T E C H",
-                                     
-                                    style: GoogleFonts.marvel(
-                                      fontSize: 42.w,
-                                      fontWeight: FontWeight.bold,
-                                     // letterSpacing: 1.5,
-                                      color: adminePrimayColor,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        // Navigator.push(
+                                        //     context,
+                                        //     MaterialPageRoute(
+                                        //         builder: (context) =>
+                                        //             LeaveRequests()));
+                                      },
+                                      child: Text(
+                                        "C O S T E C H",
+                                        style: GoogleFonts.marvel(
+                                          fontSize: 42.w,
+                                          fontWeight: FontWeight.bold,
+                                          // letterSpacing: 1.5,
+                                          color: adminePrimayColor,
+                                        ),
+                                      ),
                                     ),
-                                  ),    
                                     // Image.asset(
                                     //   //"https://firebasestorage.googleapis.com/v0/b/leptonscipro-31792.appspot.com/o/files%2Fimages%2FLepton-removebg-preview.png?alt=media&token=cb2cbd20-7630-4681-8857-f8b245018453",
                                     //   "assets/images/lepton2.png",
@@ -1231,14 +1243,13 @@ class HomePageImages extends StatelessWidget {
                                       height: 170.h,
                                     ),
                                   ),
-                                    // Image.asset(
-                                    //   //"https://firebasestorage.googleapis.com/v0/b/leptonscipro-31792.appspot.com/o/files%2Fimages%2FLepton-removebg-preview.png?alt=media&token=cb2cbd20-7630-4681-8857-f8b245018453",
-                                    //   "assets/images/lepton2.png",
+                                  // Image.asset(
+                                  //   //"https://firebasestorage.googleapis.com/v0/b/leptonscipro-31792.appspot.com/o/files%2Fimages%2FLepton-removebg-preview.png?alt=media&token=cb2cbd20-7630-4681-8857-f8b245018453",
+                                  //   "assets/images/lepton2.png",
 
-                                    //   width: 150.w,
-                                    //   height: 150.h,
-                                    // ),
-                                 
+                                  //   width: 150.w,
+                                  //   height: 150.h,
+                                  // ),
                                 ],
                               ),
                               Padding(
@@ -1303,148 +1314,136 @@ class HomePageImages extends StatelessWidget {
                             ),
                             fit: BoxFit.fill,
                           )),
-                          Container(
-                            margin: EdgeInsets.only(left: 650,top: 155),
-                            height: 800.h,
-                          width: 1100.w,
-                         // color: cBlue,
-                            child: Center(
-                              child: Column(
-                               // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      Container(
+                        margin: EdgeInsets.only(left: 650, top: 155),
+                        height: 800.h,
+                        width: 1100.w,
+                        // color: cBlue,
+                        child: Center(
+                          child: Column(
+                            // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              GoogleMonstserratWidgets(
+                                  color: cBlack,
+                                  fontWeight: FontWeight.w500,
+                                  fontsize: 14.sp,
+                                  text:
+                                      "The 'COSTECH DuJO The School App' is a collaborative effort between Lepton Communications and \n"
+                                      "\n"
+                                      "COSTECH, designed to serve as a comprehensive mobile application for efficiently managing various \n"
+                                      "\n"
+                                      "aspects of school infrastructure in the state of Kerala, India. The app offers a range of features and \n"
+                                      "\n"
+                                      "functionalities catering to different stakeholders within the educational ecosystem."),
+                              sizedBoxH30,
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  GoogleMonstserratWidgets(
-                                    color: cBlack,
-                                    fontWeight: FontWeight.w500,
-                                    fontsize: 14.sp,
-                                    text: "The 'COSTECH DuJO The School App' is a collaborative effort between Lepton Communications and \n"
-                                    "\n"
-                                    "COSTECH, designed to serve as a comprehensive mobile application for efficiently managing various \n"
-                                    "\n"
-                                    "aspects of school infrastructure in the state of Kerala, India. The app offers a range of features and \n"
-                                    "\n"
-                                    "functionalities catering to different stakeholders within the educational ecosystem."),
-                                                       sizedBoxH30,  
-                                                   Row(
-                                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                     children: [
-                                                       Column(
-                                                        mainAxisAlignment: MainAxisAlignment.start,
-                                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                                         children: [
-                                                           
-                                                                            GoogleMonstserratWidgets(
-                                                          color: cBlack,
-                                    fontsize: 14.sp,
-                                    fontWeight: FontWeight.w700,
-                                    text:    "* Admin Login\n"),
-                                                         
-                                                      GoogleMonstserratWidgets(
-                                                          color: cBlack,
-                                    fontsize: 14.sp,
-                                    fontWeight: FontWeight.w700,
-                                    text:     "* Class Teacher Login\n"),
-                                                         
-                                                         GoogleMonstserratWidgets(
-                                                          color: cBlack,
-                                    fontsize: 14.sp,
-                                    fontWeight: FontWeight.w700,
-                                    text: "* Parent Login\n"),
-                                                         
-                                                        GoogleMonstserratWidgets(
-                                                          color: cBlack,
-                                    fontsize: 14.sp,
-                                    fontWeight: FontWeight.w700,
-                                    text:   "* Student Login\n"),
-                                                         
-                                                       GoogleMonstserratWidgets(
-                                                          color: cBlack,
-                                    fontsize: 14.sp,
-                                    fontWeight: FontWeight.w700,
-                                    text:    "* Guardian Login \n"),
-                                                         
-                                                   
-                                    GoogleMonstserratWidgets( color: cBlack,
-                                    fontsize: 14.sp,
-                                    fontWeight: FontWeight.w700,
-                                    text: "* Online Classes \n"),
-
-                                      ],
-                                                       ),
-                                                         sizedBoxw20,
-                                                         sizedBoxw10,
-                                                     Column(
-                                                      mainAxisAlignment: MainAxisAlignment.start,
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                       children: [
-                                                         GoogleMonstserratWidgets(
-                                                              color: cBlack,
-                                    fontsize: 14.sp,
-                                    fontWeight: FontWeight.w700,
-                                    text:      "* Recorded Sessions\n"),
-                                                      
-                                                         
-                                                        GoogleMonstserratWidgets(
-                                                          color: cBlack,
-                                    fontsize: 14.sp,
-                                    fontWeight: FontWeight.w700,
-                                    text:   "* Study Materials \n"),
-                                                         
-                                                      GoogleMonstserratWidgets(
-                                                          color: cBlack,
-                                    fontsize: 14.sp,
-                                    fontWeight: FontWeight.w700,
-                                    text:     "* Notices and Events \n"),
-
-                                    GoogleMonstserratWidgets(
-                                                          color: cBlack,
-                                    fontsize: 14.sp,
-                                    fontWeight: FontWeight.w700,
-                                    text:   "* Attendance Updates \n"),
-
-                                     GoogleMonstserratWidgets(
-                                                          color: cBlack,
-                                    fontsize: 14.sp,
-                                    fontWeight: FontWeight.w700,
-                                    text:    "* Notifications and Alerts \n"),
-
-                                     GoogleMonstserratWidgets(
-                                                          color: cBlack,
-                                    fontsize: 14.sp,
-                                    fontWeight: FontWeight.w700,
-                                    text:       "* Chat Functionality \n"),
-
-                                                         
-                                  
-                                     ],
-                                                     ),
-                                     ],
-                                                   ),
-
-                                                //   sizedBoxH30,
-                                   GoogleMonstserratWidgets(
-                                    color: cBlack,
-                                    fontsize: 14 .sp,
-                                    fontWeight: FontWeight.w500,
-                                    text: 
-                                    "\n"
-                                    "'COSTECH DuJO The School App' aims to revolutionize the way schools in Kerala manage\n"
-                                    "\n"
-                                            "their infrastructure and interact with their stakeholders. By providing a centralized platform\n"
-                                            "\n"
-                                            "for communication,learning, and administration, the app enhances the educational experience\n"
-                                            "\n"
-                                            "for students,simplifies administrative tasks,and fosters a more connected and engaged \n"
-                                            "\n"
-                                            "educational community.",),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      GoogleMonstserratWidgets(
+                                          color: cBlack,
+                                          fontsize: 14.sp,
+                                          fontWeight: FontWeight.w700,
+                                          text: "* Admin Login\n"),
+                                      GoogleMonstserratWidgets(
+                                          color: cBlack,
+                                          fontsize: 14.sp,
+                                          fontWeight: FontWeight.w700,
+                                          text: "* Class Teacher Login\n"),
+                                      GoogleMonstserratWidgets(
+                                          color: cBlack,
+                                          fontsize: 14.sp,
+                                          fontWeight: FontWeight.w700,
+                                          text: "* Parent Login\n"),
+                                      GoogleMonstserratWidgets(
+                                          color: cBlack,
+                                          fontsize: 14.sp,
+                                          fontWeight: FontWeight.w700,
+                                          text: "* Student Login\n"),
+                                      GoogleMonstserratWidgets(
+                                          color: cBlack,
+                                          fontsize: 14.sp,
+                                          fontWeight: FontWeight.w700,
+                                          text: "* Guardian Login \n"),
+                                      GoogleMonstserratWidgets(
+                                          color: cBlack,
+                                          fontsize: 14.sp,
+                                          fontWeight: FontWeight.w700,
+                                          text: "* Online Classes \n"),
+                                    ],
+                                  ),
+                                  sizedBoxw20,
+                                  sizedBoxw10,
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      GoogleMonstserratWidgets(
+                                          color: cBlack,
+                                          fontsize: 14.sp,
+                                          fontWeight: FontWeight.w700,
+                                          text: "* Recorded Sessions\n"),
+                                      GoogleMonstserratWidgets(
+                                          color: cBlack,
+                                          fontsize: 14.sp,
+                                          fontWeight: FontWeight.w700,
+                                          text: "* Study Materials \n"),
+                                      GoogleMonstserratWidgets(
+                                          color: cBlack,
+                                          fontsize: 14.sp,
+                                          fontWeight: FontWeight.w700,
+                                          text: "* Notices and Events \n"),
+                                      GoogleMonstserratWidgets(
+                                          color: cBlack,
+                                          fontsize: 14.sp,
+                                          fontWeight: FontWeight.w700,
+                                          text: "* Attendance Updates \n"),
+                                      GoogleMonstserratWidgets(
+                                          color: cBlack,
+                                          fontsize: 14.sp,
+                                          fontWeight: FontWeight.w700,
+                                          text:
+                                              "* Notifications and Alerts \n"),
+                                      GoogleMonstserratWidgets(
+                                          color: cBlack,
+                                          fontsize: 14.sp,
+                                          fontWeight: FontWeight.w700,
+                                          text: "* Chat Functionality \n"),
+                                    ],
+                                  ),
                                 ],
                               ),
-                            ),
-                          )
+
+                              //   sizedBoxH30,
+                              GoogleMonstserratWidgets(
+                                color: cBlack,
+                                fontsize: 14.sp,
+                                fontWeight: FontWeight.w500,
+                                text: "\n"
+                                    "'COSTECH DuJO The School App' aims to revolutionize the way schools in Kerala manage\n"
+                                    "\n"
+                                    "their infrastructure and interact with their stakeholders. By providing a centralized platform\n"
+                                    "\n"
+                                    "for communication,learning, and administration, the app enhances the educational experience\n"
+                                    "\n"
+                                    "for students,simplifies administrative tasks,and fosters a more connected and engaged \n"
+                                    "\n"
+                                    "educational community.",
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
                     ],
                   ),
-                //  sizedBoxH20,
-                //  sizedBoxH20,
+                  //  sizedBoxH20,
+                  //  sizedBoxH20,
                   // Stack(
                   //   children: [
                   //     SizedBox(
@@ -1473,7 +1472,7 @@ class HomePageImages extends StatelessWidget {
                   //           ),
                   //           fit: BoxFit.fill,
                   //         )),
-                     
+
                   //   ],
                   // ),
                   // sizedBoxH20,
@@ -1489,16 +1488,15 @@ class HomePageImages extends StatelessWidget {
                   //           ),
                   //           fit: BoxFit.fill,
                   //         )),
-                      
+
                   //   ],
                   // ),
                 ],
               ),
               sizedBoxH40,
-              
               Divider(color: adminScreencolor
-              // Color(0xFFCE230C),
-              ),
+                  // Color(0xFFCE230C),
+                  ),
               sizedBoxH20,
               FooterHomeP()
             ]),

@@ -14,7 +14,7 @@ import firebase_storage
 import open_document
 import path_provider_foundation
 import printing
-import share_plus_macos
+import share_plus
 import shared_preferences_foundation
 import url_launcher_macos
 import wakelock_macos

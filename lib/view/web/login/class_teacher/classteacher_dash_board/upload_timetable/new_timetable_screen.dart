@@ -9,11 +9,12 @@ import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 
 class NewTimeTableScreen extends StatefulWidget {
-  String firebaseColor='';
-   NewTimeTableScreen({
+  String firebaseColor = '';
+  NewTimeTableScreen({
     super.key,
   });
 
@@ -23,7 +24,6 @@ class NewTimeTableScreen extends StatefulWidget {
 
 class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
   final _formKey = GlobalKey<FormState>();
-
 
   String dropdownValue1 = 'Select Day';
   String dropdownValue2 = 'Select Subject';
@@ -259,9 +259,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                 },
                               );
                             },
-                          )
-          
-                          ),
+                          )),
                       const SizedBox(height: 22.0),
                       Container(
                           decoration: BoxDecoration(
@@ -368,6 +366,22 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                           child: Container(
                             margin: const EdgeInsets.all(10.0),
                             child: TextField(
+                              onTap: () async {
+                                TimeOfDay? selectedStartTimee =
+                                    await showTimePicker(
+                                  context: context,
+                                  initialTime:
+                                      TimeOfDay.now(), // Set the initial time
+                                );
+                                String formattedTimestart =
+                                    DateFormat.Hm().format(
+                                  DateTime(0, 0, 0, selectedStartTimee!.hour,
+                                      selectedStartTimee.minute),
+                                );
+
+                                startTimeController.text =
+                                    formattedTimestart.toString();
+                              },
                               controller: startTimeController,
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(
@@ -382,6 +396,22 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                           child: Container(
                             margin: const EdgeInsets.all(10.0),
                             child: TextField(
+                              onTap: () async {
+                                TimeOfDay? selectedEndTimee =
+                                    await showTimePicker(
+                                  context: context,
+                                  initialTime:
+                                      TimeOfDay.now(), // Set the initial time
+                                );
+                                String formattedTimeend =
+                                    DateFormat.Hm().format(
+                                  DateTime(0, 0, 0, selectedEndTimee!.hour,
+                                      selectedEndTimee.minute),
+                                );
+
+                                endTimeController.text =
+                                    formattedTimeend.toString();
+                              },
                               controller: endTimeController,
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(
@@ -392,8 +422,6 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                             ),
                           ),
                         ),
-
-
                       ]),
                       const SizedBox(
                         height: 16,
@@ -419,8 +447,11 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                             setState(() {
                               log(newValue!.toString());
                               selectedColor = newValue;
-                             String result =selectedColor.toString().substring(29, selectedColor.toString().length - 1);
-                            widget.firebaseColor=result;
+                              String result = selectedColor
+                                  .toString()
+                                  .substring(
+                                      29, selectedColor.toString().length - 1);
+                              widget.firebaseColor = result;
                               log('COL :${selectedColor.toString().substring(29, selectedColor.toString().length - 1)}');
                             });
                           },

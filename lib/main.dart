@@ -1,3 +1,4 @@
+import 'package:dujo_kerala_website/leave_request_provider.dart';
 import 'package:dujo_kerala_website/ui%20team/abin/responsive%20mob/_/new_home_01_06.dart';
 import 'package:dujo_kerala_website/view/web/home/create_school/create_school.dart';
 import 'package:dujo_kerala_website/view/web/home/privacypolicy.dart';
@@ -5,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,9 +21,7 @@ void main() async {
         measurementId: "G-QC6SR6TLE0"),
   );
   ScreenUtil.ensureScreenSize();
- runApp(
- const MyApp()
-);
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -35,19 +35,21 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         designSize: const Size(1536, 792),
         builder: (context, child) {
-          return GetMaterialApp(
-              routes: {
-                PrivacyPolicy.route: (context) => const PrivacyPolicy(),
-                SchoolProfile.route: (context) => const SchoolProfile(),
-              },
-              title: 'COSTECH DuJo',
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                primaryColor: const Color(0xFF02BB9F),
-                primaryColorDark: const Color(0xFF167F67),
-              ),
-              home:
-                   HomePageImages());
+          return ChangeNotifierProvider(
+            create: (context) => LeaveRequestProvider(),
+            child: GetMaterialApp(
+                routes: {
+                  PrivacyPolicy.route: (context) => const PrivacyPolicy(),
+                  SchoolProfile.route: (context) => const SchoolProfile(),
+                },
+                title: 'COSTECH DuJo',
+                debugShowCheckedModeBanner: false,
+                theme: ThemeData(
+                  primaryColor: const Color(0xFF02BB9F),
+                  primaryColorDark: const Color(0xFF167F67),
+                ),
+                home: HomePageImages()),
+          );
         });
   }
 }

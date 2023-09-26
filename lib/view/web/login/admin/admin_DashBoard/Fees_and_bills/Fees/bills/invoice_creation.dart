@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:pdf/widgets.dart' as pw;
+// ignore: depend_on_referenced_packages
 import 'package:universal_html/html.dart' as html;
 
 Future<void> createStudentBill(
