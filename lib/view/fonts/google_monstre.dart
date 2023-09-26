@@ -31,6 +31,7 @@ class GoogleMonstserratWidgets extends StatelessWidget {
         fontSize: fontsize,
         fontWeight: fontWeight,
         color: color,
+        
       ),
     );
   }

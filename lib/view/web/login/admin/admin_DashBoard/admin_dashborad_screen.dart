@@ -9,7 +9,6 @@ import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_sc
 import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:dujo_kerala_website/view/google_poppins_widget/google_poppins_widget.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/list_of_classes.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/handle_parents/handle_parents.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/shift_class/shift_classpage.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_protection_group/students_proctection_group.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/teacher_section/add_teacher.dart';
@@ -101,7 +100,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'Class Promotion',
     'Non-Teaching Staffs',
     'Add Attendance',
-    'Handle Parents with\n Multiple Children'
+    // 'Handle Parents with\n Multiple Children'
   ];
 
   List<String> dashboardImagesList = [
@@ -127,7 +126,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'assets/images/attendance.png',
     'assets/images/admin.png',
     'assets/images/attendance.png',
-    'assets/images/admin.png'
+    // 'assets/images/admin.png'
   ];
 
   List<String> viewListNames = [
@@ -182,7 +181,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
       ShiftClassPage(),
       NonTeachingLogin(schoolID: widget.schoolID),
       AddAttendnceHomePage(),
-      const HandleParentsWithMultipleChildren()
+      // const HandleParentsWithMultipleChildren()
     ];
     List<Widget> drawerPages = [
       AllStudentList(),

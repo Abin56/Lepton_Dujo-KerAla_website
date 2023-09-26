@@ -1,6 +1,6 @@
 import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -64,7 +64,7 @@ class AdminLoginScreen extends StatelessWidget {
                           ),
                           sizedBoxH30,
                           SizedBox(
-                            height: 400.h,
+                            height: 400,
                             child: LottieBuilder.network(
                                 'https://assets10.lottiefiles.com/packages/lf20_q0vtqaxf.json'),
                           )
