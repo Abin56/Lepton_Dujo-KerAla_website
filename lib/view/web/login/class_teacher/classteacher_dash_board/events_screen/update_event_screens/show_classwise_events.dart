@@ -1,3 +1,4 @@
+import 'package:dujo_kerala_website/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -44,6 +45,13 @@ class ClassTeacherEventShow extends StatelessWidget {
                           hint: 'Event date',
                           controller: teacherEventController.dateController,
                           validator: checkFieldEmpty,
+                          readOnly: true,
+                          onTap: () async {
+                            final data = await dateTimePicker(context);
+                            if (data.isNotEmpty) {
+                              teacherEventController.dateController.text = data;
+                            }
+                          },
                         ),
                         sizedBoxH20,
                         TextFormFieldWidget(
@@ -121,16 +129,26 @@ class ClassTeacherEventShow extends StatelessWidget {
 }
 
 class TextFormFieldWidget extends StatelessWidget {
-  const TextFormFieldWidget(
-      {super.key, this.hint = '', required this.controller, this.validator});
+  const TextFormFieldWidget({
+    super.key,
+    this.hint = '',
+    required this.controller,
+    this.validator,
+    this.onTap,
+    this.readOnly = false,
+  });
   final String hint;
   final TextEditingController controller;
   final String? Function(String?)? validator;
+  final void Function()? onTap;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       validator: validator,
+      onTap: onTap,
+      readOnly: readOnly,
       decoration: InputDecoration(
         hintText: hint,
         border: OutlineInputBorder(
