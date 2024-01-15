@@ -15,6 +15,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
@@ -39,7 +40,7 @@ class _AddAchievementsState extends State<AddAchievements> {
 
   Future getImage() async {
     final pickedFile =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
+        await ImagePicker().getImage(source: ImageSource.gallery);
     File image;
 
     setState(() {
@@ -121,6 +122,7 @@ class _AddAchievementsState extends State<AddAchievements> {
   }
 
   final formKey = GlobalKey<FormState>();
+  GetFireBaseData getFireBaseData = Get.put(GetFireBaseData());
 
   @override
   Widget build(BuildContext context) {
@@ -245,6 +247,8 @@ class _AddAchievementsState extends State<AddAchievements> {
                             .collection('SchoolListCollection')
                             .doc(
                                 Get.find<AdminLoginScreenController>().schoolID)
+                            .collection(getFireBaseData.bYear.value)
+                            .doc(getFireBaseData.bYear.value)
                             .collection('classes')
                             .snapshots(),
                         builder: (context, snapshot) {

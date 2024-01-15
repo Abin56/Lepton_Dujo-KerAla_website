@@ -942,7 +942,7 @@ class HomePageResponse extends StatelessWidget {
                                             await Navigator.push(context,
                                                 MaterialPageRoute(
                                               builder: (context) {
-                                                return  LoginScreen();
+                                                return LoginScreen();
                                               },
                                             ));
                                           }
