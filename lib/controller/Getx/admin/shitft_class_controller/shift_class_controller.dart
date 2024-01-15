@@ -135,9 +135,13 @@ class ShiftClassController {
             .collection('Students');
 
         for (var element in addStudentstoNewClassList) {
-          firebasePath.doc(element.docid).set(element.toMap()).then((value) {
+          firebasePath
+              .doc(element.docid)
+              .set(element.toMap())
+              .then((value) async {
+            await fetchParentData(studentId: element.docid ?? "");
             //updating AllStudent Data classId
-            fireStore
+            await fireStore
                 .collection('SchoolListCollection')
                 .doc(Get.find<AdminLoginScreenController>().schoolID)
                 .collection('AllStudents')
@@ -153,6 +157,34 @@ class ShiftClassController {
       isLoadingSubmit.value = false;
       log(e.toString(), name: name);
       showToast(msg: "Something went wrong");
+    }
+  }
+
+//this is for add parents data to new year
+  Future<void> fetchParentData({required String studentId}) async {
+    final QuerySnapshot<Map<String, dynamic>> result = await fireStore
+        .collection('SchoolListCollection')
+        .doc(Get.find<AdminLoginScreenController>().schoolID)
+        .collection(Get.find<GetFireBaseData>().bYear.value)
+        .doc(Get.find<GetFireBaseData>().bYear.value)
+        .collection('classes')
+        .doc(oldClassId.value)
+        .collection('ParentCollection')
+        .where("studentID", isEqualTo: studentId)
+        .get();
+    final parentData = result.docs.first.data();
+
+    if (parentData.isNotEmpty) {
+      await fireStore
+          .collection('SchoolListCollection')
+          .doc(Get.find<AdminLoginScreenController>().schoolID)
+          .collection(batchId.value ?? "")
+          .doc(batchId.value)
+          .collection('classes')
+          .doc(newClassId.value)
+          .collection('ParentCollection')
+          .doc(parentData["docid"])
+          .set(parentData);
     }
   }
 
