@@ -303,24 +303,24 @@ class MonthWiseAttendanceController {
         await getClassName(Get.find<AttendanceController>().classId.value);
     sheetObject.merge(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: 0),
         CellIndex.indexByColumnRow(columnIndex: 10, rowIndex: 0),
-        customValue:
-            'Month :${monthWiseMonthId.value}   Class Name : $className   Subject Name : ${monthWiseSubjectId.value}');
+        customValue: TextCellValue(
+            'Month :${monthWiseMonthId.value}   Class Name : $className   Subject Name : ${monthWiseSubjectId.value}'));
 
     sheetObject
         .cell(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: 1))
-        .value = "Student Name";
+        .value = const TextCellValue("Student Name");
     sheetObject
         .cell(CellIndex.indexByColumnRow(columnIndex: 1, rowIndex: 1))
-        .value = "Present Hours";
+        .value = const TextCellValue("Present Hours");
     sheetObject
         .cell(CellIndex.indexByColumnRow(columnIndex: 2, rowIndex: 1))
-        .value = "Absent Hours";
+        .value = const TextCellValue("Absent Hours");
     sheetObject
         .cell(CellIndex.indexByColumnRow(columnIndex: 3, rowIndex: 1))
-        .value = "Total Hours (Present+Absent)";
+        .value = const TextCellValue("Total Hours (Present+Absent)");
     sheetObject
         .cell(CellIndex.indexByColumnRow(columnIndex: 4, rowIndex: 1))
-        .value = "Attendance Percentage";
+        .value = const TextCellValue("Attendance Percentage");
 
     for (int i = 0; i < studentNamesList.length; i++) {
       final Map<String, num> result = calculateMonthlyAttendance(
@@ -330,19 +330,19 @@ class MonthWiseAttendanceController {
       );
       sheetObject
           .cell(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: i + 2))
-          .value = studentNamesList[i];
+          .value = TextCellValue(studentNamesList[i]);
       sheetObject
           .cell(CellIndex.indexByColumnRow(columnIndex: 1, rowIndex: i + 2))
-          .value = result["present"];
+          .value = TextCellValue(result["present"].toString());
       sheetObject
           .cell(CellIndex.indexByColumnRow(columnIndex: 2, rowIndex: i + 2))
-          .value = result["absent"];
+          .value = TextCellValue(result["absent"].toString());
       sheetObject
           .cell(CellIndex.indexByColumnRow(columnIndex: 3, rowIndex: i + 2))
-          .value = result["total"];
+          .value = TextCellValue(result["total"].toString());
       sheetObject
           .cell(CellIndex.indexByColumnRow(columnIndex: 4, rowIndex: i + 2))
-          .value = "${result["percentage"]}%";
+          .value = TextCellValue("${result["percentage"]}%");
     }
     excel.save(fileName: 'abc.xlsx');
   }
