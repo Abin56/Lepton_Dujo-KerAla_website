@@ -15,7 +15,7 @@ import '../../../../../../controller/get_firebase-data/get_firebase_data.dart';
 import '../../../../../../utils/utils.dart';
 
 class AddStudentFromClassTeacher extends StatelessWidget {
-  AddStudentsFromClassController addStudentsFromClassController =
+ final AddStudentsFromClassController addStudentsFromClassController =
       Get.put(AddStudentsFromClassController());
   final String schoolID;
   final String teacherIDE;
