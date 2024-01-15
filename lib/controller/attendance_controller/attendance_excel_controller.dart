@@ -158,8 +158,8 @@ class AttendanceExcelReportController {
 
       sheetObject.merge(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: 0),
           CellIndex.indexByColumnRow(columnIndex: 10, rowIndex: 0),
-          // customValue:
-              );
+          customValue: TextCellValue(
+              'Date :${dayModel?.dDate ?? " "}   Class Name : $className'));
 
       ///after each iteration [rowindex] will increase with +1
       ///seperating students data
@@ -177,20 +177,20 @@ class AttendanceExcelReportController {
           //creating headings it shows only first row each column
           sheetObject
               .cell(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: 1))
-              .value = "Student Name" as CellValue?;
+              .value = const TextCellValue("Student Name");
 
           sheetObject
               .cell(CellIndex.indexByColumnRow(
                   columnIndex: periodIndex + i, rowIndex: 1))
-              .value = "Period" as CellValue?;
+              .value = const TextCellValue("Period");
           sheetObject
               .cell(CellIndex.indexByColumnRow(
                   columnIndex: subjectNameIndex + i, rowIndex: 1))
-              .value = "Subject" as CellValue?;
+              .value = const TextCellValue("Subject");
           sheetObject
               .cell(CellIndex.indexByColumnRow(
                   columnIndex: presentAbsentIndex + i, rowIndex: 1))
-              .value = "Present/Absent" as CellValue?;
+              .value = const TextCellValue("Present/Absent");
 
           //generating values to each fields
 
@@ -207,9 +207,11 @@ class AttendanceExcelReportController {
                   columnIndex: subjectNameIndex + i, rowIndex: rowIndex + 1))
               .value = values[i]["subjectName"];
           sheetObject
-              .cell(CellIndex.indexByColumnRow(
-                  columnIndex: presentAbsentIndex + i, rowIndex: rowIndex + 1));
-              // .value = (values[i]["present"]) ? "Present" : "Absent";
+                  .cell(CellIndex.indexByColumnRow(
+                      columnIndex: presentAbsentIndex + i,
+                      rowIndex: rowIndex + 1))
+                  .value =
+              TextCellValue((values[i]["present"]) ? "Present" : "Absent");
 
           periodIndex = periodIndex + 2;
           subjectNameIndex = subjectNameIndex + 2;
