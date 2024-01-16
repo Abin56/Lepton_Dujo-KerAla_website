@@ -40,7 +40,8 @@ class _AddAchievementsState extends State<AddAchievements> {
 
   Future getImage() async {
     final pickedFile =
-        await ImagePicker().getImage(source: ImageSource.gallery);
+     await ImagePicker().pickImage(source: ImageSource.gallery);
+        // await ImagePicker().getImage(source: ImageSource.gallery);
     File image;
 
     setState(() {
