@@ -1,3 +1,4 @@
+import 'package:dujo_kerala_website/firebase_options.dart';
 import 'package:dujo_kerala_website/view/web/home/create_school/create_school.dart';
 import 'package:dujo_kerala_website/view/web/home/privacypolicy.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -10,15 +11,8 @@ import 'view/web/dujo_homePage/main_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: const FirebaseOptions(
-        apiKey: "AIzaSyBPaQ4Ga-d_wTd9pCiU_kMTllMeuVblSP0",
-        authDomain: "leptondujokerala.firebaseapp.com",
-        projectId: "leptondujokerala",
-        storageBucket: "leptondujokerala.appspot.com",
-        messagingSenderId: "512252187081",
-        appId: "1:512252187081:web:29a9843fc66f17bc6f5818",
-        measurementId: "G-QC6SR6TLE0"),
-  );
+    options: DefaultFirebaseOptions.currentPlatform,
+);
   ScreenUtil.ensureScreenSize();
 
   runApp(const MyApp());

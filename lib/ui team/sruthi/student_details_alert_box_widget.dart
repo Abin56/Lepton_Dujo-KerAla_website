@@ -156,7 +156,8 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
                                 child: CircularProgressIndicator(),
                               );
                             } else {
-                              controller.getTeacherDetail(controller.classTeacherdocid.value);
+                              controller.getTeacherDetail(
+                                  controller.classTeacherdocid.value);
                               return ListTile(
                                 leading: const Icon(Icons.person),
                                 title: const Student_Info_text_Widget(
@@ -184,7 +185,12 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
                           Student_Info_Elevated_button_Widget(
                             text: 'promote Class',
                             onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => const UnderMaintanceScreen(),));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const UnderMaintanceScreen(),
+                                  ));
                             },
                           ),
                           sizedBoxH10,
@@ -206,12 +212,16 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
                                   } else {
                                     return Student_Info_Elevated_button_Widget(
                                       text: 'View Summary',
-                                      onPressed: () async{
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                        return StundentSummery(
-                                          studentId: studentID,
-                                          stundetAdmissionId: admissionNumber);
-                                      },));
+                                      onPressed: () async {
+                                        Navigator.push(context,
+                                            MaterialPageRoute(
+                                          builder: (context) {
+                                            return StundentSummery(
+                                                studentId: studentID,
+                                                stundetAdmissionId:
+                                                    admissionNumber);
+                                          },
+                                        ));
                                       },
                                     );
                                   }
@@ -293,13 +303,13 @@ class Student_Details_AlertBox_Widget extends StatelessWidget {
                   return TextButton(
                     child: const Text('Ok'),
                     onPressed: () {
-                      Get.to(GenrateTC(
-                          sno: sController.text.trim(),
-                          regNo: regController.text.trim(),
-                          parentName: controller.parentNAme.value,
-                          studentName: studentName,
-                          schoolName: controller.schoolName.value,
-                          schoolPlace: controller.placeNameofSchool.value));
+                      // Get.to(GenrateTC(
+                      //     sno: sController.text.trim(),
+                      //     regNo: regController.text.trim(),
+                      //     parentName: controller.parentNAme.value,
+                      //     studentName: studentName,
+                      //     schoolName: controller.schoolName.value,
+                      //     schoolPlace: controller.placeNameofSchool.value));
                     },
                   );
                 }

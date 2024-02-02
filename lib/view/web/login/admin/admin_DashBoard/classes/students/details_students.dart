@@ -64,8 +64,9 @@ class StudentsDetails extends StatelessWidget {
                       sizedBoxH40,
                       Row(
                         children: [
-                         
-                          SizedBox(width: 20.w,),
+                          SizedBox(
+                            width: 20.w,
+                          ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
@@ -195,7 +196,7 @@ class StudentsDetails extends StatelessWidget {
                                       padding: const EdgeInsets.all(8.0),
                                       child: GestureDetector(
                                           onTap: () {
-                                          Navigator.pop(context);
+                                            Navigator.pop(context);
                                           },
                                           child: const Text('back')),
                                     ),
@@ -482,20 +483,20 @@ class StudentsDetails extends StatelessWidget {
                                 Navigator.push(context, MaterialPageRoute(
                                     builder: (context) {
                                       return SampoornaHomeScreen(
-                                        studentId:allData[getxController.indexValue.value!]
-                                    .docid! ,
+                                          studentId: allData[getxController
+                                                  .indexValue.value!]
+                                              .docid!,
                                           schoolId: Get.find<
                                                   AdminLoginScreenController>()
                                               .schoolID);
                                     },
-                                  )) 
+                                  ))
                                 // ignore: use_build_context_synchronously
                                 : Navigator.push(context, MaterialPageRoute(
                                     builder: (context) {
                                       return StundentSummery(
-                                        studentId: allData[
-                                                getxController
-                                                    .indexValue.value!]
+                                        studentId: allData[getxController
+                                                .indexValue.value!]
                                             .docid!,
                                         stundetAdmissionId: allData[
                                                 getxController
@@ -645,10 +646,9 @@ class StudentsDetails extends StatelessWidget {
                                                     ],
                                                     title: const Text('Alert'),
                                                     content:
-                                                        SingleChildScrollView(
+                                                        const SingleChildScrollView(
                                                       child: ListBody(
-                                                        children: const <
-                                                            Widget>[
+                                                        children: <Widget>[
                                                           Text(
                                                               "By removing a student, you are deleting all the details associated with that student. Are you sure to proceed?")
                                                         ],
@@ -769,19 +769,19 @@ class _GenrateTcState extends State<GenrateTc> {
                       TextButton(
                         child: const Text('Ok'),
                         onPressed: () async {
-                          Navigator.push(context, MaterialPageRoute(
-                            builder: (context) {
-                              return GenrateTC(
-                                  sno: sNo.text.trim(),
-                                  regNo: regNo.text.trim(),
-                                  parentName: snappp.data!.docs[0]
-                                      ['nameOfStudentFather'],
-                                  studentName: snappp.data!.docs[0]
-                                      ['nameOfStudent'],
-                                  schoolName: schoolName,
-                                  schoolPlace: schoolplace);
-                            },
-                          ));
+                          // Navigator.push(context, MaterialPageRoute(
+                          //   builder: (context) {
+                          //     // return GenrateTC(
+                          //     //     sno: sNo.text.trim(),
+                          //     //     regNo: regNo.text.trim(),
+                          //     //     parentName: snappp.data!.docs[0]
+                          //     //         ['nameOfStudentFather'],
+                          //     //     studentName: snappp.data!.docs[0]
+                          //     //         ['nameOfStudent'],
+                          //     //     schoolName: schoolName,
+                          //     //     schoolPlace: schoolplace);
+                          //   },
+                          // ));
                         },
                       ),
                     ],

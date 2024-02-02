@@ -156,18 +156,17 @@ class AllStudentsController extends GetxController {
                         style: tea_style,
                       ),
                       GestureDetector(
-                         onTap: () {
-                                      showDialog(
-                                        barrierDismissible: false,
-                                        context: context,
-                                        builder: (context) =>
-                                            ParentAlert_box_Widget(
-                                          classID: classID,
-                                          studentID: docid,
-                                          text: 'Parent Info',
-                                        ),
-                                      );
-                                    },
+                        onTap: () {
+                          showDialog(
+                            barrierDismissible: false,
+                            context: context,
+                            builder: (context) => ParentAlert_box_Widget(
+                              classID: classID,
+                              studentID: docid,
+                              text: 'Parent Info',
+                            ),
+                          );
+                        },
                         child: Container(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -199,24 +198,25 @@ class AllStudentsController extends GetxController {
                                   sizedBoxW20,
                                   const Text(
                                     "Parents  ",
-                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
                                   ),
                                   const Icon(Icons.info_outlined),
                                 ],
                               ),
                               GestureDetector(
                                 onTap: () async {
-                                          showDialog(
-                                            barrierDismissible: false,
-                                            context: context,
-                                            builder: (context) =>
-                                                GuardianInfoAlert_box_Widget(
-                                              classID: classID,
-                                              studentID: docid,
-                                              text: 'Guardian Info',
-                                            ),
-                                          );
-                                        },
+                                  showDialog(
+                                    barrierDismissible: false,
+                                    context: context,
+                                    builder: (context) =>
+                                        GuardianInfoAlert_box_Widget(
+                                      classID: classID,
+                                      studentID: docid,
+                                      text: 'Guardian Info',
+                                    ),
+                                  );
+                                },
                                 child: Container(
                                   child: Row(
                                     children: [
@@ -244,8 +244,8 @@ class AllStudentsController extends GetxController {
                                       ),
                                       sizedBoxW20,
                                       const Text("Guardian  ",
-                                          style:
-                                              TextStyle(fontWeight: FontWeight.bold)),
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold)),
                                       const Icon(Icons.info_outlined),
                                     ],
                                   ),
@@ -297,14 +297,13 @@ class AllStudentsController extends GetxController {
                                   colorindex: 0,
                                   height: 42.h,
                                   width: 150.w,
-                                  child: 
-                                  Center(
-                                    child: GoogleMonstserratWidgets(text: 
-                                      'Genrate Sampoorna', fontsize: 13.w,
-                                      color:  const Color.fromARGB(
-                                              255, 255, 254, 254), 
-                                          fontWeight: FontWeight.w600
-                                    ),
+                                  child: Center(
+                                    child: GoogleMonstserratWidgets(
+                                        text: 'Genrate Sampoorna',
+                                        fontsize: 13.w,
+                                        color: const Color.fromARGB(
+                                            255, 255, 254, 254),
+                                        fontWeight: FontWeight.w600),
                                   ),
                                 ),
                               ),
@@ -599,9 +598,9 @@ class AllStudentsController extends GetxController {
                 const Text('Alert'),
               ],
             ),
-            content: SingleChildScrollView(
+            content: const SingleChildScrollView(
               child: ListBody(
-                children: const <Widget>[
+                children: <Widget>[
                   Text(
                       'By removing a student, you are deleting all the details associated with that student. Are you sure to proceed?')
                 ],
@@ -641,11 +640,9 @@ class AllStudentsController extends GetxController {
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text('Alert'),
-            content: SingleChildScrollView(
+            content: const SingleChildScrollView(
               child: ListBody(
-                children: const <Widget>[
-                  Text('Sorry you have no access to delete')
-                ],
+                children: <Widget>[Text('Sorry you have no access to delete')],
               ),
             ),
             actions: <Widget>[
@@ -705,13 +702,13 @@ class AllStudentsController extends GetxController {
                   return TextButton(
                     child: const Text('Ok'),
                     onPressed: () {
-                      Get.to(GenrateTC(
-                          sno: sController.text.trim(),
-                          regNo: regController.text.trim(),
-                          parentName: controller.parentNAme.value,
-                          studentName: studentName,
-                          schoolName: controller.schoolName.value,
-                          schoolPlace: controller.placeNameofSchool.value));
+                      // Get.to(GenrateTC(
+                      //     sno: sController.text.trim(),
+                      //     regNo: regController.text.trim(),
+                      //     parentName: controller.parentNAme.value,
+                      //     studentName: studentName,
+                      //     schoolName: controller.schoolName.value,
+                      //     schoolPlace: controller.placeNameofSchool.value));
                     },
                   );
                 }

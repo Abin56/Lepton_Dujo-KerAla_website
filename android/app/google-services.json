@@ -1,0 +1,235 @@
+{
+  "project_info": {
+    "project_number": "512252187081",
+    "firebase_url": "https://leptondujokerala-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "leptondujokerala",
+    "storage_bucket": "leptondujokerala.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:512252187081:android:08a371f7d2dccd2b6f5818",
+        "android_client_info": {
+          "package_name": "com.example.dash_board"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "512252187081-2fueetiqr0cblardt68s374fg5nq8rrg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPYQ232se8EQjwRWXEyrpD6S280gIWh1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "512252187081-2fueetiqr0cblardt68s374fg5nq8rrg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "512252187081-0gaibiptblg8t7rln2p9p882sqr0qmqf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.dujoSuperadmin"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:512252187081:android:0a94e61264970c066f5818",
+        "android_client_info": {
+          "package_name": "com.example.dujo_kerala_website"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "512252187081-2fueetiqr0cblardt68s374fg5nq8rrg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPYQ232se8EQjwRWXEyrpD6S280gIWh1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "512252187081-2fueetiqr0cblardt68s374fg5nq8rrg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "512252187081-0gaibiptblg8t7rln2p9p882sqr0qmqf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.dujoSuperadmin"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:512252187081:android:ee68c26eff92df286f5818",
+        "android_client_info": {
+          "package_name": "com.example.host_management"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "512252187081-2fueetiqr0cblardt68s374fg5nq8rrg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPYQ232se8EQjwRWXEyrpD6S280gIWh1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "512252187081-2fueetiqr0cblardt68s374fg5nq8rrg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "512252187081-0gaibiptblg8t7rln2p9p882sqr0qmqf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.dujoSuperadmin"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:512252187081:android:70b1cce31f67c7b26f5818",
+        "android_client_info": {
+          "package_name": "com.example.hostel_management_website"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "512252187081-2fueetiqr0cblardt68s374fg5nq8rrg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPYQ232se8EQjwRWXEyrpD6S280gIWh1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "512252187081-2fueetiqr0cblardt68s374fg5nq8rrg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "512252187081-0gaibiptblg8t7rln2p9p882sqr0qmqf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.dujoSuperadmin"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:512252187081:android:3a95d0ce9cb985786f5818",
+        "android_client_info": {
+          "package_name": "com.vectorwind.in"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "512252187081-2fueetiqr0cblardt68s374fg5nq8rrg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPYQ232se8EQjwRWXEyrpD6S280gIWh1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "512252187081-2fueetiqr0cblardt68s374fg5nq8rrg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "512252187081-0gaibiptblg8t7rln2p9p882sqr0qmqf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.dujoSuperadmin"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:512252187081:android:1ff4a847cb30eeea6f5818",
+        "android_client_info": {
+          "package_name": "in.DujoSchools.leptonCommunications"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "512252187081-oukpm7hd2rj5ibudeeaduk8eed0j8tge.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.DujoSchools.leptonCommunications",
+            "certificate_hash": "96122d8c1e52492d7c7d3e6dd9223b11043bfb34"
+          }
+        },
+        {
+          "client_id": "512252187081-2fueetiqr0cblardt68s374fg5nq8rrg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPYQ232se8EQjwRWXEyrpD6S280gIWh1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "512252187081-2fueetiqr0cblardt68s374fg5nq8rrg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "512252187081-0gaibiptblg8t7rln2p9p882sqr0qmqf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.dujoSuperadmin"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

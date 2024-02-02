@@ -26,9 +26,7 @@ class BillsCreationalPage extends StatelessWidget {
   final TextEditingController amountController = TextEditingController();
   final TextEditingController dateController = TextEditingController();
 
-
-
-  void clearAllFields(){
+  void clearAllFields() {
     studentNameController.clear();
     invoiceController.clear();
     categoryNameController.clear();
@@ -102,23 +100,23 @@ class BillsCreationalPage extends StatelessWidget {
                   onTap: () async {
                     try {
                       if (_formKey.currentState?.validate() ?? false) {
-                        final double amount =
-                            double.parse(amountController.text);
-                        await createStudentBill(
-                                studentName: studentNameController.text,
-                                studentId: studentIdController.text,
-                                invoiceNumber: invoiceController.text,
-                                date: dateController.text,
-                                amount: amount,
-                                category: categoryNameController.text)
-                            .then((value) {
-                          studentNameController.clear();
-                          studentIdController.clear();
-                          invoiceController.clear();
-                          dateController.clear();
-                          categoryNameController.clear();
-                          amountController.clear();
-                        });
+                        // final double amount =
+                        //     double.parse(amountController.text);
+                        // await createStudentBill(
+                        //         studentName: studentNameController.text,
+                        //         studentId: studentIdController.text,
+                        //         invoiceNumber: invoiceController.text,
+                        //         date: dateController.text,
+                        //         amount: amount,
+                        //         category: categoryNameController.text)
+                        //     .then((value) {
+                        //   studentNameController.clear();
+                        //   studentIdController.clear();
+                        //   invoiceController.clear();
+                        //   dateController.clear();
+                        //   categoryNameController.clear();
+                        //   amountController.clear();
+                        // });
                       }
                     } catch (e) {
                       log(e.toString());
