@@ -58,7 +58,7 @@ dependencies:
   fluttertoast:
   gcloud: 
   get: 
-  google_fonts: 
+  google_fonts: 6.1.0
   google_sign_in: 
   group_radio_button: 
   http: 

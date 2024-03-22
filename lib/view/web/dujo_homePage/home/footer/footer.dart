@@ -16,13 +16,13 @@ class FooterSectionScreen extends StatelessWidget {
               : 300,
       width: double.infinity,
       child: ResponsiveWebSite.isTablet(context)
-          ? Column(
+          ? const Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     WhoWeAreWidget(),
                     ConnecWidget(),
                   ],
@@ -30,7 +30,7 @@ class FooterSectionScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     LegalWidget(),
                     AddressWidget(),
                   ],
@@ -38,45 +38,45 @@ class FooterSectionScreen extends StatelessWidget {
               ],
             )
           : ResponsiveWebSite.isMobile(context)
-              ? Column(
+              ? const Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         WhoWeAreWidget(),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         ConnecWidget(),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         LegalWidget(),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         AddressWidget(),
                       ],
                     )
                   ],
                 )
-              : Column(
+              : const Column(
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         WhoWeAreWidget(),
                         ConnecWidget(),
                         LegalWidget(),
