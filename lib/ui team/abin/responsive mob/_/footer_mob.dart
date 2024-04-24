@@ -25,7 +25,7 @@ class FooterMob1 extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      'COSTECH DuJo',
+                      'LEPTON DuJo',
                       style: GoogleFonts.poppins(
                         fontSize: 15.h,
                         fontWeight: FontWeight.bold,
@@ -48,7 +48,7 @@ class FooterMob1 extends StatelessWidget {
                     SizedBox(
                         width: 80.h,
                         child: Text(
-                          'COSTECH DuJo For Business',
+                          'LEPTON DuJo For Business',
                           style: k,
                         )),
                     SizedBox(

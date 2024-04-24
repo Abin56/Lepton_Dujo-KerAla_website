@@ -27,7 +27,7 @@ class HomePageImages extends StatelessWidget {
       "https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/dujocolleges.jpeg?alt=media&token=0c3fa202-c59f-47bd-b997-88f3128e6871";
 
   String _description = "Any schools from Kerala can register on\n"
-      "COSTECH DuJo. COSTECH Dujo is a mobile application\n"
+      "LEPTON DuJo. LEPTON Dujo is a mobile application\n"
       "with student login,  parent login, teacher login";
 
   Uri _faceBookUrl =
@@ -1158,15 +1158,15 @@ class HomePageImages extends StatelessWidget {
                               fontsize: 15,
                               color: adminePrimayColor,
                               fontWeight: FontWeight.w500),
-                          SizedBox(
-                              height: 85,
-                              width: 270,
-                              // color: cred                ,
-                              child: Center(
-                                  child: Image.asset(
-                                "assets/images/COSTECH_bg.png",
-                                fit: BoxFit.cover,
-                              ))),
+                          // SizedBox(
+                          //     height: 85,
+                          //     width: 270,
+                          //     // color: cred                ,
+                          //     child: Center(
+                          //         child: Image.asset(
+                          //       "assets/images/COSTECH_bg.png",
+                          //       fit: BoxFit.cover,
+                          //     ))),
                           //sizedBoxH5,
                           GoogleMonstserratWidgets(
                             text: '10.00 AM to 06.00 PM, Mon-Fri',
@@ -1319,9 +1319,9 @@ class HomePageImages extends StatelessWidget {
                                   fontWeight: FontWeight.w500,
                                   fontsize: 14.sp,
                                   text:
-                                      "The 'COSTECH DuJO The School App' is a collaborative effort between Lepton Communications and \n"
+                                      "The 'LEPTON DuJO The School App' is a collaborative effort between Lepton Communications and \n"
                                       "\n"
-                                      "COSTECH, designed to serve as a comprehensive mobile application for efficiently managing various \n"
+                                      "LEPTON, designed to serve as a comprehensive mobile application for efficiently managing various \n"
                                       "\n"
                                       "aspects of school infrastructure in the state of Kerala, India. The app offers a range of features and \n"
                                       "\n"
@@ -1417,7 +1417,7 @@ class HomePageImages extends StatelessWidget {
                                 fontsize: 14.sp,
                                 fontWeight: FontWeight.w500,
                                 text: "\n"
-                                    "'COSTECH DuJO The School App' aims to revolutionize the way schools in Kerala manage\n"
+                                    "'LEPTON DuJO The School App' aims to revolutionize the way schools in Kerala manage\n"
                                     "\n"
                                     "their infrastructure and interact with their stakeholders. By providing a centralized platform\n"
                                     "\n"

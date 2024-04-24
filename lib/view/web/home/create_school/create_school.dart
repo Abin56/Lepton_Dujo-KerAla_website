@@ -101,7 +101,7 @@ class _SchoolProfileState extends State<SchoolProfile> {
                           width: 150.w,
                         ),
                         Text(
-                          'Hi ! COSTECH DuJo ',
+                          'Hi ! LEPTON DuJo ',
                           style: ralewayStyle.copyWith(
                             fontSize: 30.0.w,
                             color: AppColors.whiteColor,
@@ -1291,12 +1291,12 @@ showTermsandCondition(BuildContext context) async {
       Terms & Conditions
      
       
-      1.COSTECH DuJo - The School App, all of its forms, whether it be featured on any of DuJo
+      1.LEPTON DuJo - The School App, all of its forms, whether it be featured on any of DuJo
       mobile application or on the www.leptondujo.com online website services (“App”), is
       a product of Lepton Plus Communications (OPC) Private Ltd (“Lepton”).
      
       
-      2.By using the COSTECH DuJo - The School App services, you are agreeing to be bound
+      2.By using the LEPTON DuJo - The School App services, you are agreeing to be bound
       by the following terms and conditions.
 
       

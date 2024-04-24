@@ -12,7 +12,7 @@ const String _imageUrl =
     "https://firebasestorage.googleapis.com/v0/b/dujo-kerala-schools-1a6c5.appspot.com/o/dujocolleges.jpeg?alt=media&token=0c3fa202-c59f-47bd-b997-88f3128e6871";
 
 const String _description = "Any schools from Kerala can register on\n"
-    "COSTECH DuJo. COSTECH Dujo is a mobile application\n"
+    "LEPTON DuJo. LEPTON Dujo is a mobile application\n"
     "with student login,  parent login, teacher login";
 
 final Uri _faceBookUrl =
@@ -189,7 +189,7 @@ class ResponsiveMobileAppBar extends StatelessWidget {
                     child: Column(
                       children: [
                         GooglePoppinsWidgets(
-                          text: "COSTECH",
+                          text: "LEPTON",
                           fontsize: 14,
                           color: cWhite,
                           fontWeight: FontWeight.w600,

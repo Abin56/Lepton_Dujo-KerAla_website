@@ -71,12 +71,17 @@ dependencies:
   open_document: 
   open_file: 
   permission_handler: 
+  percent_indicator:
   pocketbase: 
   razorpay_web: 
   shared_preferences: 
   simple_gradient_text: 
   slider_button: 
   sprung:
+  sidebar_drawer:
+  syncfusion_flutter_gauges:
+  syncfusion_flutter_datagrid:
+  syncfusion_flutter_calendar:
   text_scroll: 
   toggle_switch:
   universal_html:

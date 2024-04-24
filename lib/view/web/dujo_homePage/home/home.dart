@@ -109,22 +109,22 @@ class DujoHOmeScreen extends StatelessWidget {
                                     : 15,
                                 color: adminePrimayColor,
                                 fontWeight: FontWeight.w500),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 10),
-                              child: SizedBox(
-                                  height: 85,
-                                  width: ResponsiveWebSite.isDesktop(context)
-                                      ? 270
-                                      : ResponsiveWebSite.isMobile(context)
-                                          ? 200
-                                          : 230,
-                                  // color: cred                ,
-                                  child: Center(
-                                      child: Image.asset(
-                                    "assets/images/COSTECH_bg.png",
-                                    fit: BoxFit.cover,
-                                  ))),
-                            ),
+                            // Padding(
+                            //   padding: const EdgeInsets.only(right: 10),
+                            //   child: SizedBox(
+                            //       height: 85,
+                            //       width: ResponsiveWebSite.isDesktop(context)
+                            //           ? 270
+                            //           : ResponsiveWebSite.isMobile(context)
+                            //               ? 200
+                            //               : 230,
+                            //       // color: cred                ,
+                            //       child: Center(
+                            //           child: Image.asset(
+                            //         "assets/images/COSTECH_bg.png",
+                            //         fit: BoxFit.cover,
+                            //       ))),
+                            // ),
                             //sizedBoxH5,
                             Padding(
                               padding: const EdgeInsets.only(right: 10),
@@ -207,7 +207,7 @@ class DujoHOmeScreen extends StatelessWidget {
 
                                 child: Center(
                                   child: GooglePoppinsWidgets(
-                                    text: "C O S T E C H",
+                                    text: "L E P T O N",
                                     fontsize: 30,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -274,20 +274,20 @@ class DujoHOmeScreen extends StatelessWidget {
                                   color: adminePrimayColor,
                                   fontWeight: FontWeight.w500),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 10),
-                              child: SizedBox(
-                                  height: 85,
-                                  width: ResponsiveWebSite.isDesktop(context)
-                                      ? 270
-                                      : 230,
-                                  // color: cred                ,
-                                  child: Center(
-                                      child: Image.asset(
-                                    "assets/images/COSTECH_bg.png",
-                                    fit: BoxFit.cover,
-                                  ))),
-                            ),
+                            // Padding(
+                            //   padding: const EdgeInsets.only(right: 10),
+                            //   child: SizedBox(
+                            //       height: 85,
+                            //       width: ResponsiveWebSite.isDesktop(context)
+                            //           ? 270
+                            //           : 230,
+                            //       // color: cred                ,
+                            //       child: Center(
+                            //           child: Image.asset(
+                            //         "assets/images/COSTECH_bg.png",
+                            //         fit: BoxFit.cover,
+                            //       ))),
+                            // ),
                             //sizedBoxH5,
                             Padding(
                               padding: const EdgeInsets.only(right: 10),
@@ -396,9 +396,9 @@ class WebSiteDiscriptionWidget extends StatelessWidget {
               child: Center(
                 child: GooglePoppinsWidgets(
                   text:
-                      "The 'COSTECH DuJO The School App' is a collaborative effort between Lepton Communications and \n"
+                      "The 'LEPTON DuJO The School App' is a collaborative effort between Lepton Communications and \n"
                       "\n"
-                      "COSTECH, designed to serve as a comprehensive mobile application for efficiently managing various \n"
+                      "LEPTON, designed to serve as a comprehensive mobile application for efficiently managing various \n"
                       "\n"
                       "aspects of school infrastructure in the state of Kerala, India. The app offers a range of features and \n"
                       "\n"
@@ -507,7 +507,7 @@ class WebSiteDiscriptionWidget extends StatelessWidget {
               child: Center(
                 child: GooglePoppinsWidgets(
                     text:
-                        "'COSTECH DuJO The School App' aims to revolutionize the way schools in Kerala manage\n"
+                        "'LEPTON DuJO The School App' aims to revolutionize the way schools in Kerala manage\n"
                         "\n"
                         "their infrastructure and interact with their stakeholders. By providing a centralized platform\n"
                         "\n"

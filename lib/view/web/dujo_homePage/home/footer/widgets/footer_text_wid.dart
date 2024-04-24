@@ -193,7 +193,7 @@ class WhoWeAreWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           GooglePoppinsWidgets(
-            text: 'COSTECH DUJO',
+            text: 'LEPTON DUJO',
             fontsize: 21,
             fontWeight: FontWeight.bold,
           ),
