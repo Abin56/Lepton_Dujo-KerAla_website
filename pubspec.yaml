@@ -40,6 +40,7 @@ dependencies:
   download: 
   draw_graph: 
   dropdown_search:
+  data_table_2:
   excel:
   file_picker:
   firebase_auth: 

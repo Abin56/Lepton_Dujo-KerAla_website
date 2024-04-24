@@ -64,43 +64,43 @@ class AppBarStudentPanel extends StatelessWidget {
                                 bottom: 5,
                               ),
                               child: Container(
-                                height: 45,
-                                width: 280,
-                                decoration: BoxDecoration(
-                                  color: Colors.grey.withOpacity(0.2),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Row(
-                                  children: [
+                                // height: 45,
+                                // width: 280,
+                                // decoration: BoxDecoration(
+                                //   color: Colors.grey.withOpacity(0.2),
+                                //   borderRadius: BorderRadius.circular(10),
+                                // ),
+                                // child: Row(
+                                //   children: [
                                     // const TextFontWidget(text: '🗓️', fontsize: 12),
-                                    const Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: Icon(Icons.calendar_month_outlined),
-                                    ),
-                                    TextFontWidget(
-                                        text: '{UserCredentialsController.batchId}', fontsize: 12),
-                                    const Spacer(),
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 10),
-                                      child: GestureDetector(
-                                        onTap: () {},
-                                        child: Container(
-                                          height: 34,
-                                          width: 34,
-                                          decoration: BoxDecoration(
-                                              color: cWhite,
-                                              borderRadius: BorderRadius.circular(20)),
-                                          child: const Center(
-                                            child: Icon(
-                                              Icons.settings_outlined,
-                                              color: cBlack,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
+                                    // const Padding(
+                                    //   padding: EdgeInsets.all(8.0),
+                                    //   child: Icon(Icons.calendar_month_outlined),
+                                    // ),
+                                    // TextFontWidget(
+                                    //     text: '{UserCredentialsController.batchId}', fontsize: 12),
+                                    // const Spacer(),
+                                    // Padding(
+                                    //   padding: const EdgeInsets.only(right: 10),
+                                    //   child: GestureDetector(
+                                    //     onTap: () {},
+                                    //     child: Container(
+                                    //       height: 34,
+                                    //       width: 34,
+                                    //       decoration: BoxDecoration(
+                                    //           color: cWhite,
+                                    //           borderRadius: BorderRadius.circular(20)),
+                                    //       child: const Center(
+                                    //         child: Icon(
+                                    //           Icons.settings_outlined,
+                                    //           color: cBlack,
+                                    //         ),
+                                    //       ),
+                                    //     ),
+                                    //   ),
+                                //     // )
+                                //   ],
+                                // ),
                               ),
                             ),
                           ],
@@ -155,7 +155,7 @@ class AppBarStudentPanel extends StatelessWidget {
                     backgroundColor: Colors.transparent,
                     radius: 20,
                     child: Image.asset(
-                      'webassets/png/avathar.png',
+                      'assets/png/avathar.png',
                       fit: BoxFit.cover,
                     ),
                   ),

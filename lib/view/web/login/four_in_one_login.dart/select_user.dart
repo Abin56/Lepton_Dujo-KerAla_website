@@ -1,4 +1,5 @@
 
+import 'package:dujo_kerala_website/view/web/login/parent_panel/parent_home.dart';
 import 'package:dujo_kerala_website/view/web/login/student/student_home.dart';
 import 'package:flutter/material.dart';
 
@@ -171,10 +172,10 @@ functionc(BuildContext context) {
                           ),
                           GestureDetector(
                             onTap: () { 
-                            //   Navigator.push(context,
-                            //     MaterialPageRoute(builder: (context) {
-                            //   return const ParentHomeScreen();
-                            // })),
+                              Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return const ParentHomeScreen();
+                            }));
                             },
                             child: GlassMorphism(
                               start: 0.3,
