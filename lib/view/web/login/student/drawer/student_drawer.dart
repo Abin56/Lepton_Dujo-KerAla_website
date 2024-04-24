@@ -23,7 +23,7 @@ class DrawerSelectedPagesSectionOfStudent extends StatelessWidget {
           color: selectedIndex == 0 ? themeColorBlue.withOpacity(0.1) : Colors.transparent,
           child: ListTile(
             leading:
-                SizedBox(height: 20, width: 20, child: Image.asset('webassets/png/dashboard.png')),
+                SizedBox(height: 20, width: 20, child: Image.asset('assets/png/dashboard.png')),
             onTap: () {
               index = 0;
               onTap.call(index);

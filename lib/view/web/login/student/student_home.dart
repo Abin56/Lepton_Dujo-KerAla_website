@@ -45,7 +45,7 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
                             SizedBox(
                               height: 30,
                               child: Image.asset(
-                                'webassets/images/leptonlogo.png',
+                                'assets/images/leptonlogo.png',
                                 fit: BoxFit.fill,
                               ),
                             ),

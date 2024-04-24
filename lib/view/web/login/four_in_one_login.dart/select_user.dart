@@ -1,4 +1,5 @@
 
+import 'package:dujo_kerala_website/view/web/login/student/student_home.dart';
 import 'package:flutter/material.dart';
 
 import '../../../google_poppins_widget/google_poppins_widget.dart';
@@ -134,10 +135,10 @@ functionc(BuildContext context) {
                           ),
                           GestureDetector(
                             onTap: () { 
-                            // Navigator.push(context,
-                            //     MaterialPageRoute(builder: (context) {
-                            //   return const StudentHomeScreen();
-                            // })),
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return const StudentHomeScreen();
+                            }));
                             },
                             child: GlassMorphism(
                               start: 0.3,
