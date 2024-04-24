@@ -5,6 +5,7 @@ import 'package:dujo_kerala_website/view/web/login/loginscreen.dart';
 import 'package:dujo_kerala_website/view/web/widgets/drop_DownList/schoolDropDownList.dart';
 import 'package:flutter/material.dart';
 
+import '../../../login/four_in_one_login.dart/login_page.dart';
 import '../footer/widgets/alertDilogueBox.dart';
 
 class LoginButton extends StatelessWidget {
@@ -71,7 +72,7 @@ class LoginButton extends StatelessWidget {
                                   await Navigator.push(context,
                                       MaterialPageRoute(
                                     builder: (context) {
-                                      return const LoginScreen();
+                                      return  LoginScreen();
                                     },
                                   ));
                                 }

@@ -7,7 +7,6 @@ import 'package:dujo_kerala_website/utils/responsive.dart';
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:dujo_kerala_website/view/web/home/create_school/create_school.dart';
-import 'package:dujo_kerala_website/view/web/login/loginscreen.dart';
 import 'package:dujo_kerala_website/view/web/widgets/drop_DownList/schoolDropDownList.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,6 +17,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../view/constant/constant.dart';
 import '../../../../view/constant/responsive_app.dart';
+import '../../../../view/web/login/four_in_one_login.dart/login_page.dart';
 import 'mob_view.dart/feature_tile.dart';
 
 class HomePageImages extends StatelessWidget {

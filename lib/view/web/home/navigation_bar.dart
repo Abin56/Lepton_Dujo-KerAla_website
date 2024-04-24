@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../login/admin/admin_DashBoard/create_Admin/add_new_admin.dart';
-import '../login/loginscreen.dart';
+import '../login/four_in_one_login.dart/login_page.dart';
 import '../widgets/drop_DownList/schoolDropDownList.dart';
 
 class NavigationBarWidget extends StatelessWidget {
@@ -118,9 +118,9 @@ class NavigationBarWidget extends StatelessWidget {
                   builder: (BuildContext context) {
                     return AlertDialog(
                       title: const Text('Enter Your School ID'),
-                      content: SingleChildScrollView(
+                      content: const SingleChildScrollView(
                         child: ListBody(
-                          children: const <Widget>[GetSchoolListDropDownButton()],
+                          children: <Widget>[GetSchoolListDropDownButton()],
                           // children: [
                           //   // TextFormField(
                           //   //   controller:schoolIdController,
