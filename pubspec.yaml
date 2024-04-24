@@ -83,6 +83,7 @@ dependencies:
   syncfusion_flutter_gauges:
   syncfusion_flutter_datagrid:
   syncfusion_flutter_calendar:
+  syncfusion_flutter_charts:
   text_scroll: 
   toggle_switch:
   universal_html:

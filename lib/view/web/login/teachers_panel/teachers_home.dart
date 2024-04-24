@@ -1,28 +1,31 @@
-// import 'package:dash_board/view/colors/colors.dart';
-// import 'package:dash_board/view/constant/constant.dart';
-// import 'package:dash_board/view/fonts/google_poppins.dart';
-// import 'package:dash_board/view/pages/home/users_panel/admin_panel/admin_appBar/admin_appBar.dart';
-// import 'package:dash_board/view/pages/home/users_panel/admin_panel/drawer/drawer_pages.dart';
-// import 'package:dash_board/view/pages/home/users_panel/parent_panel/pages/parent_dashboard/parent_dashboard.dart';
-import 'package:dujo_kerala_website/view/constant/constant.dart';
-import 'package:dujo_kerala_website/view/web/login/parent_panel/parent_dashboard/parent_dashboard.dart';
-import 'package:dujo_kerala_website/view/web/login/parent_panel/parent_dashboard/sections/parent_drawer/parent_drawer.dart';
-import 'package:dujo_kerala_website/view/web/login/student/app_bar/student_appBar.dart';
-import 'package:flutter/material.dart';
-import 'package:sidebar_drawer/sidebar_drawer.dart';
-import 'package:dujo_kerala_website/view/colors/colors.dart';
-import 'package:dujo_kerala_website/view/google_poppins_widget/google_poppins_widget.dart';
 
-class ParentHomeScreen extends StatefulWidget {
-  const ParentHomeScreen({super.key});
+import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
+import 'package:dujo_kerala_website/view/colors/colors.dart';
+import 'package:dujo_kerala_website/view/constant/constant.dart';
+import 'package:dujo_kerala_website/view/google_poppins_widget/google_poppins_widget.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/list_of_classes.dart';
+import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/events_screen/update_event_screens/list_classwise_event.dart';
+import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/my_stuents/my_students_list.dart';
+import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/notice_screen/class_notices.dart';
+import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/teachers_panel_screen.dart';
+import 'package:dujo_kerala_website/view/web/login/teachers_panel/drawer/drawer_pages.dart';
+import 'package:dujo_kerala_website/view/web/login/teachers_panel/teachers_appbar/teachers_appbar.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sidebar_drawer/sidebar_drawer.dart';
+
+import 'pages/teacher_dash_board/teachers_dashboard.dart';
+
+class TeachersHomeScreen extends StatefulWidget {
+  const TeachersHomeScreen({super.key});
 
   @override
-  State<ParentHomeScreen> createState() => _ParentHomeScreenState();
+  State<TeachersHomeScreen> createState() => _TeachersHomeScreenState();
 }
-
-class _ParentHomeScreenState extends State<ParentHomeScreen> {
+final AdminLoginScreenController adminLoginScreenController = Get.put(AdminLoginScreenController());
+class _TeachersHomeScreenState extends State<TeachersHomeScreen> {
   int selectedIndex = 0;
-  @override 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: cWhite,
@@ -30,7 +33,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
         child: SidebarDrawer(
             body: ListView(
               children: [
-                AppBarStudentPanel(),
+                const AppBarTeachersPanel(),
                 pages[selectedIndex],
               ],
             ),
@@ -38,26 +41,23 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
               color: cWhite,
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.only(
-                    left: 0,bottom: 550
-                  ),
+                  padding: const EdgeInsets.only(left: 10,bottom: 350),
                   child: Column(
-                     crossAxisAlignment: CrossAxisAlignment.start,
-                     
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(0),
                         child: Row(
                           children: [
                             SizedBox(
-                              height: 30,
+                              height: 40,
                               child: Image.asset(
-                                'assets/images/leptonlogo.png',
+                                'assets/images/leptonlogo5.png',
                                 fit: BoxFit.fill,
                               ),
                             ),
                             GooglePoppinsWidgets(
-                              text: "LEPTON VIDYAVEECHI",
+                              text: "LEPTON DUJO",
                               fontsize: 20,
                               fontWeight: FontWeight.w500,
                             )
@@ -76,7 +76,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                         ),
                       ),
                       sizedBoxH10,
-                      DrawerSelectedPagesSectionOfParent(
+                      DrawerSelectedPagesSection(
                         selectedIndex: selectedIndex,
                         onTap: (index) {
                           setState(() {
@@ -93,24 +93,23 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
     );
   }
 }
-
+  String teacherClassId = '';
 List<Widget> pages = [
-  const ParentDashBoardContainer(),
-  Center(
-    child: Text(sideMenu[1]),
-  ),
-  Center(
-    child: Text(sideMenu[2]),
-  ),
-  Center(
-    child: Text(sideMenu[3]),
-  ),
-  Center(
-    child: Text(sideMenu[4]),
-  ),
-  Center(
-    child: Text(sideMenu[5]),
-  ),
+  const TeacherDashBoardScreen(),
+  // ClassTeacherAdmin(
+  //                 schoolID: adminLoginScreenController.schoolID,
+  //                 teacherID: "value.user?.uid ?? """,
+  //                 teacherEmail: "value.user?.email ?? """),
+  //  ClassEventsPageList(
+  //       classId: "teacherClassId",
+  //       schoolId: adminLoginScreenController.schoolID,
+  //     ), //1
+  //     ClassNoticeTeacher(
+  //       schoolId:adminLoginScreenController.schoolID,
+  //       classId: "teacherClassId",
+  //     ), //2
+      // ListOfClassesScreen(),
+      // MyStudentsListViewScreen(),
   Center(
     child: Text(sideMenu[6]),
   ),

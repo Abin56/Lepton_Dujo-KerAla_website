@@ -4,8 +4,8 @@
 // import 'package:dash_board/view/pages/home/users_panel/parent_panel/pages/parent_dashboard/sections/table%20calender/table_calender.dart';
 // import 'package:dash_board/view/widgets/responsive/responsive.dart';
 import 'package:dujo_kerala_website/view/web/dujo_homePage/widgets/responsive/responsive.dart';
-import 'package:dujo_kerala_website/view/web/login/parent_panel/pages/parent_dashboard/sections/attendance/circularprogress.dart';
-import 'package:dujo_kerala_website/view/web/login/parent_panel/pages/parent_dashboard/sections/parent%20profile/parent_profile_widget.dart';
+import 'package:dujo_kerala_website/view/web/login/parent_panel/parent_dashboard/sections/attendance/circularprogress.dart';
+import 'package:dujo_kerala_website/view/web/login/parent_panel/parent_dashboard/sections/parent%20profile/parent_profile_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 // import 'package:vidyaveechi_website/view/users/parent_panel/pages/parent_dashboard/sections/table%20calender/table_calender.dart';

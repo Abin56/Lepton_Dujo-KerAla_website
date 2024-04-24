@@ -1,5 +1,5 @@
 import 'package:dujo_kerala_website/view/google_poppins_widget/google_poppins_widget.dart';
-import 'package:dujo_kerala_website/view/web/login/parent_panel/pages/parent_dashboard/sections/text%20feild%20widget/textfeildwidget.dart';
+import 'package:dujo_kerala_website/view/web/login/parent_panel/parent_dashboard/sections/text%20feild%20widget/textfeildwidget.dart';
 import 'package:flutter/material.dart';
 
 class AllExamResults extends StatelessWidget {
