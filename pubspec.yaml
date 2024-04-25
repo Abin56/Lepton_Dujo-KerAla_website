@@ -75,8 +75,10 @@ dependencies:
   razorpay_web: 
   shared_preferences: 
   simple_gradient_text: 
+  skeletonizer: ^1.1.1
   slider_button: 
   sprung:
+  syncfusion_flutter_charts: ^25.1.41+1
   text_scroll: 
   toggle_switch:
   universal_html:

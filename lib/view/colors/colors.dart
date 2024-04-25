@@ -11,6 +11,8 @@ class AppColors {
   static const Color blackColore = Color.fromARGB(255, 0, 0, 0);
 }
 
+const Color themeColorGreen = Color(0xFF26A69A);
+const Color themeColorBlue = Color.fromARGB(255, 6, 71, 157);
 const Color adminePrimayColor = Color.fromARGB(255, 27, 92, 176);
 const Color adminePrimayColor1 = Color.fromARGB(255, 67, 0, 212);
 const Color cWhite = Color(0xffFFFFFF);
@@ -18,6 +20,8 @@ const Color cBlack = Colors.black;
 const Color cBlue = Colors.blue;
 
 const Color adminScreencolor = Color.fromARGB(255, 48, 0, 70);
-const Color cred    = Color.fromARGB(255, 255, 0, 0);
-const Color cgreen  = Colors.green;
+const Color cred = Color.fromARGB(255, 255, 0, 0);
+const Color cgreen = Colors.green;
 const Color dujothemeColor = Color(0xFF26A69A);
+const Color screenContainerbackgroundColor = Color.fromARGB(255, 240, 241, 243);
+const Color white = Colors.white;

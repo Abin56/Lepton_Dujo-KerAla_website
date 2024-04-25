@@ -8,10 +8,10 @@ import 'package:dujo_kerala_website/controller/Getx/class_teacher/teacher_add_st
 import 'package:dujo_kerala_website/controller/admin_login_screen/admin_login_screen_controller.dart';
 import 'package:dujo_kerala_website/view/fonts/google_monstre.dart';
 import 'package:dujo_kerala_website/view/google_poppins_widget/google_poppins_widget.dart';
+// import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/admin_graph.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/admin_home_screen/admin_home_screen.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/classes/list_of_classes.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/shift_class/shift_classpage.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/students_protection_group/students_proctection_group.dart';
-import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/teacher_section/add_teacher.dart';
+import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/screens/dash_board/admin_dashboard.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/teacher_section/list_of_teachers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,37 +28,20 @@ import '../../../../constant/constant.dart';
 import '../../../widgets/button_container_widget.dart';
 import '../../../widgets/drop_DownList/get_batchYear.dart';
 import '../../../widgets/drop_DownList/get_classes.dart';
-import 'Fees_and_bills/Fees/fees_and_bills.dart';
-import 'Students_ScholarShip/student_scholarship.dart';
-import 'achievements/achievements.dart';
+
 import 'admin_meeting/admin_meeting_update/adminMeetingNew/admin_meeting_show.dart';
-import 'admin_meeting/meeting_in.dart';
-import 'admin_notice/add_new_notices.dart';
+
 import 'admin_notice/admin_notice_new_ui/admin_notice_show_new.dart';
 import 'admin_pta/admin_pta_screen.dart';
 import 'all_Students/all_students_view_Screen.dart';
-import 'alumni_association/alumni_association.dart';
-import 'attendance_edit/add_attendance_home_page.dart';
-import 'bus_Route/bus_route.dart';
-import 'classes/add_class.dart';
-import 'create_Admin/add_new_admin.dart';
-import 'events/events_screen.dart';
-import 'exam_notifications/school_notifications.dart';
-import 'food_and_beverages/food_and_bev.dart';
-import 'general_instructions/creation_general_instruction_.dart';
+
 import 'login_Register_history/date_wise.dart';
 import 'manage_notifications/main_screen_notifications.dart';
-import 'mothers_pta/mothers_pta_screen.dart';
 import 'non_Teaching_staff/non_teaching_staff.dart';
 import 'non_Teaching_staff/non_teaching_staff_view.dart';
 
 class AdminDashBoardPage extends StatefulWidget {
-  AdminDashBoardPage(
-      {super.key,
-      required this.schoolID,
-      this.wadmin,
-      this.loginTime,
-      this.date});
+  AdminDashBoardPage({super.key, required this.schoolID, this.wadmin, this.loginTime, this.date});
 
   //String id;
   final String schoolID;
@@ -70,8 +53,7 @@ class AdminDashBoardPage extends StatefulWidget {
 }
 
 class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
-  TeacherAddStudentController teacherAddStudentController =
-      Get.put(TeacherAddStudentController());
+  TeacherAddStudentController teacherAddStudentController = Get.put(TeacherAddStudentController());
   GetFireBaseData getFireBaseData = Get.put(GetFireBaseData());
   TextEditingController applynewBatchYearContoller = TextEditingController();
   TextEditingController selectedToDaterContoller = TextEditingController();
@@ -79,57 +61,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
   DateTime? _selectedToDate;
   final _formKey = GlobalKey<FormState>();
 
-  List<String> dashboardNamesList = [
-    'Create Admin',
-    'Teachers',
-    'Classes',
-    'General instructions',
-    'Notices',
-    'Events',
-    'Fees and Bills',
-    'Meetings',
-    'PTA',
-    'Mother\'s PTA',
-    'Achievements',
-    'School Protection\nGroup',
-    'Scholarship',
-    'Bus Route',
-    'Food and Beverages',
-    'Exam Notifications',
-    'Alumni Associations',
-    'Class Promotion',
-    'Non-Teaching Staffs',
-    'Add Attendance',
-    // 'Handle Parents with\n Multiple Children'
-  ];
-
-  List<String> dashboardImagesList = [
-    'assets/images/admin.png',
-    'assets/images/teacherr.png',
-    'assets/images/classes.png',
-    'assets/images/information.png',
-    'assets/images/notices.png',
-    'assets/images/events.png',
-    'assets/images/feesandbills.png',
-    'assets/images/meetings.png',
-    'assets/images/interview.png',
-    'assets/images/women.png',
-    'assets/images/success.png',
-    'assets/images/protection.png',
-    'assets/images/graduation.png',
-    'assets/images/route.png',
-    'assets/images/fast-food.png',
-    'assets/images/exam.png',
-    'assets/images/alumni.png',
-    'assets/images/exchange.png',
-    'assets/images/steward.png',
-    'assets/images/attendance.png',
-    'assets/images/admin.png',
-    'assets/images/attendance.png',
-    // 'assets/images/admin.png'
-  ];
-
   List<String> viewListNames = [
+    'Home',
     'All Students',
     'All Teachers',
     'Classes',
@@ -141,6 +74,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     'Manage Notifications',
   ];
   List<String> viewListImages = [
+    'assets/png/house.png',
     'assets/images/students.png',
     'assets/images/teacherr.png',
     'assets/images/classes.png',
@@ -154,36 +88,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> pages = [
-      AddNewAdmin(schoolID: widget.schoolID), //1-create admin
-      AddTeacherSectionScreen(schoolID: widget.schoolID), //2-Teachers
-      AddClassesSectionScreen(
-        schoolID: widget.schoolID,
-      ), //3-classes
-      CreationGeneralInstruction(
-          schoolId: widget.schoolID), //4-general instructions
-      AddNewNotices(schoolId: widget.schoolID), //5-notices
-      EventsUpdates(schoolID: widget.schoolID), //6-events
-      const FeesAndBillsWeb(), //fees and bills
-      MeetingCreates(
-        schoolId: widget.schoolID,
-      ), //8-Meetings\
-      AdminPtaScreen(), //9-PTA
-      MothersPtaScreen(), //10-Mothers PTA
-      Achievements(schoolID: widget.schoolID), //11-Achievements
-      StudentProtectionGroup(), //12-Students Protection Group
-      AdminScholarships(schoolID: widget.schoolID), //13-ScholarShip
-
-      const BusRoute(), //14-Bus Route
-      FoodBeverages(schoolID: widget.schoolID),
-      SchoolLevelNotifications(schoolID: widget.schoolID),
-      AlumniAssociation(),
-      ShiftClassPage(),
-      NonTeachingLogin(schoolID: widget.schoolID),
-      AddAttendnceHomePage(),
-      // const HandleParentsWithMultipleChildren()
-    ];
     List<Widget> drawerPages = [
+      AdminHomePage(schoolID: widget.schoolID),
       AllStudentList(),
       ListOfSchoolTeachers(schoolID: widget.schoolID),
       ListOfClassesScreen(),
@@ -236,17 +142,15 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                 FirebaseFirestore.instance
                                     .collection("SchoolListCollection")
                                     .doc(widget.schoolID)
-                                    .set({
-                                  'batchYear': schoolBatchYearListValue!['id']
-                                }, SetOptions(merge: true)).then((value) async {
+                                    .set({'batchYear': schoolBatchYearListValue!['id']},
+                                        SetOptions(merge: true)).then((value) async {
                                   await getFireBaseData.getBatchYearId();
                                   Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) {
                                         return AdminDashBoardPage(
-                                            loginTime:
-                                                LoginTimeIDSavingClass.id,
+                                            loginTime: LoginTimeIDSavingClass.id,
                                             schoolID: widget.schoolID);
                                       },
                                     ),
@@ -262,9 +166,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                   child: Text(
                                     "Set Academic Year",
                                     style: GoogleFonts.montserrat(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w600,
-                                        color: cWhite),
+                                        fontSize: 15, fontWeight: FontWeight.w600, color: cWhite),
                                   ),
                                 ),
                               ),
@@ -274,8 +176,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                 onPressed: () async {
                                   showDialog(
                                     context: context,
-                                    barrierDismissible:
-                                        false, // user must tap button!
+                                    barrierDismissible: false, // user must tap button!
                                     builder: (BuildContext context) {
                                       return AlertDialog(
                                         title: const Text('Add Academic Year'),
@@ -284,33 +185,24 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                             children: <Widget>[
                                               Expanded(
                                                 child: TextFormField(
-                                                  controller:
-                                                      applynewBatchYearContoller,
+                                                  controller: applynewBatchYearContoller,
                                                   readOnly: true,
-                                                  onTap: () =>
-                                                      _selectDate(context),
-                                                  decoration:
-                                                      const InputDecoration(
+                                                  onTap: () => _selectDate(context),
+                                                  decoration: const InputDecoration(
                                                     labelText: 'DD-MM-YYYY',
-                                                    border:
-                                                        OutlineInputBorder(),
+                                                    border: OutlineInputBorder(),
                                                   ),
                                                 ),
                                               ),
-                                              const Icon(Icons
-                                                  .arrow_downward_outlined),
+                                              const Icon(Icons.arrow_downward_outlined),
                                               Expanded(
                                                 child: TextFormField(
-                                                  controller:
-                                                      selectedToDaterContoller,
+                                                  controller: selectedToDaterContoller,
                                                   readOnly: true,
-                                                  onTap: () =>
-                                                      _selectToDate(context),
-                                                  decoration:
-                                                      const InputDecoration(
+                                                  onTap: () => _selectToDate(context),
+                                                  decoration: const InputDecoration(
                                                     labelText: 'To',
-                                                    border:
-                                                        OutlineInputBorder(),
+                                                    border: OutlineInputBorder(),
                                                   ),
                                                 ),
                                               ),
@@ -328,8 +220,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                             child: const Text('create'),
                                             onPressed: () async {
                                               await FirebaseFirestore.instance
-                                                  .collection(
-                                                      "SchoolListCollection")
+                                                  .collection("SchoolListCollection")
                                                   .doc(widget.schoolID)
                                                   .collection("BatchYear")
                                                   .doc(
@@ -368,8 +259,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                   margin: EdgeInsets.only(top: 20.h),
                                   height: 30.h,
                                   width: 80.w,
-                                  child:
-                                      Image.asset('assets/images/dujon.png')),
+                                  child: Image.asset('assets/images/dujon.png')),
                             ),
                             Row(
                               children: [
@@ -377,8 +267,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
-                                  icon: Icon(Icons.arrow_back,
-                                      color: cred, size: 22.w),
+                                  icon: Icon(Icons.arrow_back, color: cred, size: 22.w),
                                 ),
                                 Padding(
                                   padding: EdgeInsets.all(20.w),
@@ -393,23 +282,43 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                               ],
                             ),
                             Padding(
-                              padding: EdgeInsets.all(20.0.w),
+                              padding: EdgeInsets.all(15.0.w),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   const Icon(
-                                    Icons.home,
+                                    Icons.dashboard,
                                     color: Colors.white,
                                   ),
+                                  sizedBoxw10,
                                   Text(
-                                    'Home',
+                                    'Dashboard',
                                     style: GoogleFonts.poppins(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600),
+                                        color: Colors.white, fontWeight: FontWeight.w600),
                                   ),
                                 ],
                               ),
                             ),
+                            // Padding(
+                            //   padding: EdgeInsets.all(20.0.w),
+                            //   child: Row(
+                            //     crossAxisAlignment: CrossAxisAlignment.end,
+                            //     children: [
+                            //       const Icon(
+                            //         Icons.home,
+                            //         color: Colors.white,
+                            //       ),
+                            //       GestureDetector(
+                            //         onTap: () {},
+                            //         child: Text(
+                            //           'Home',
+                            //           style: GoogleFonts.poppins(
+                            //               color: Colors.white, fontWeight: FontWeight.w600),
+                            //         ),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
                             ListView.builder(
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
@@ -418,8 +327,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                   return Padding(
                                     padding: EdgeInsets.all(20.0.w),
                                     child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
                                         Image.asset(
                                           viewListImages[index],
@@ -443,8 +351,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                           child: Text(
                                             viewListNames[index],
                                             style: GoogleFonts.poppins(
-                                                color: Colors.white,
-                                                fontSize: 14.w),
+                                                color: Colors.white, fontSize: 14.w),
                                           ),
                                         )
                                       ],
@@ -465,8 +372,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                     SizedBox(
                                         width: 20.w,
                                         height: 10.h,
-                                        child: Image.asset(
-                                            'assets/images/students.png')),
+                                        child: Image.asset('assets/images/students.png')),
                                     GooglePoppinsWidgets(
                                       text: 'Add Student',
                                       fontsize: 13.w,
@@ -492,11 +398,9 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Text(
-                                  Get.find<AdminLoginScreenController>()
-                                      .schoolName,
+                                  Get.find<AdminLoginScreenController>().schoolName,
                                   style: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 14.w),
+                                      fontWeight: FontWeight.w500, fontSize: 14.w),
                                 ),
                                 SizedBox(
                                   width: screenSize.height / 12,
@@ -510,75 +414,52 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                             context: context,
                                             builder: (BuildContext context) {
                                               return AlertDialog(
-                                                title: const Text(
-                                                    'Change Academic Year'),
+                                                title: const Text('Change Academic Year'),
                                                 content: SingleChildScrollView(
                                                   child: ListBody(
                                                     children: <Widget>[
                                                       GetBatchYearListDropDownButton(
-                                                        schoolID:
-                                                            widget.schoolID,
+                                                        schoolID: widget.schoolID,
                                                       ),
                                                     ],
                                                   ),
                                                 ),
                                                 actions: <Widget>[
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            20.0),
+                                                    padding: const EdgeInsets.all(20.0),
                                                     child: MaterialButton(
                                                         color: Colors.red,
                                                         onPressed: () {
-                                                          Navigator.pop(
-                                                              context);
+                                                          Navigator.pop(context);
                                                         },
                                                         child: Text(
                                                           'Cancel',
-                                                          style: GoogleFonts
-                                                              .poppins(
-                                                                  color: Colors
-                                                                      .white),
+                                                          style: GoogleFonts.poppins(
+                                                              color: Colors.white),
                                                         )),
                                                   ),
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            20.0),
+                                                    padding: const EdgeInsets.all(20.0),
                                                     child: MaterialButton(
                                                         color: Colors.blue,
                                                         onPressed: () {
-                                                          FirebaseFirestore
-                                                              .instance
-                                                              .collection(
-                                                                  "SchoolListCollection")
-                                                              .doc(widget
-                                                                  .schoolID)
-                                                              .set(
-                                                                  {
-                                                                'batchYear':
-                                                                    schoolBatchYearListValue![
-                                                                        'id']
-                                                              },
-                                                                  SetOptions(
-                                                                      merge:
-                                                                          true)).then(
+                                                          FirebaseFirestore.instance
+                                                              .collection("SchoolListCollection")
+                                                              .doc(widget.schoolID)
+                                                              .set({
+                                                            'batchYear':
+                                                                schoolBatchYearListValue!['id']
+                                                          }, SetOptions(merge: true)).then(
                                                                   (value) async {
-                                                            await getFireBaseData
-                                                                .getBatchYearId();
-                                                            Navigator
-                                                                .pushReplacement(
+                                                            await getFireBaseData.getBatchYearId();
+                                                            Navigator.pushReplacement(
                                                               context,
                                                               MaterialPageRoute(
-                                                                builder:
-                                                                    (context) {
+                                                                builder: (context) {
                                                                   return AdminDashBoardPage(
                                                                       loginTime:
-                                                                          LoginTimeIDSavingClass
-                                                                              .id,
-                                                                      schoolID:
-                                                                          widget
-                                                                              .schoolID);
+                                                                          LoginTimeIDSavingClass.id,
+                                                                      schoolID: widget.schoolID);
                                                                 },
                                                               ),
                                                             );
@@ -586,41 +467,28 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                         },
                                                         child: Text(
                                                           'Set Academic Year',
-                                                          style: GoogleFonts
-                                                              .poppins(
-                                                                  color: Colors
-                                                                      .white),
+                                                          style: GoogleFonts.poppins(
+                                                              color: Colors.white),
                                                         )),
                                                   ),
                                                   GestureDetector(
                                                     onTap: () {
                                                       FirebaseFirestore.instance
-                                                          .collection(
-                                                              "SchoolListCollection")
+                                                          .collection("SchoolListCollection")
                                                           .doc(widget.schoolID)
-                                                          .set(
-                                                              {
-                                                            'batchYear':
-                                                                schoolBatchYearListValue![
-                                                                    'id']
-                                                          },
-                                                              SetOptions(
-                                                                  merge:
-                                                                      true)).then(
+                                                          .set({
+                                                        'batchYear': schoolBatchYearListValue!['id']
+                                                      }, SetOptions(merge: true)).then(
                                                               (value) async {
-                                                        await getFireBaseData
-                                                            .getBatchYearId();
-                                                        Navigator
-                                                            .pushReplacement(
+                                                        await getFireBaseData.getBatchYearId();
+                                                        Navigator.pushReplacement(
                                                           context,
                                                           MaterialPageRoute(
                                                             builder: (context) {
                                                               return AdminDashBoardPage(
                                                                   loginTime:
-                                                                      LoginTimeIDSavingClass
-                                                                          .id,
-                                                                  schoolID: widget
-                                                                      .schoolID);
+                                                                      LoginTimeIDSavingClass.id,
+                                                                  schoolID: widget.schoolID);
                                                             },
                                                           ),
                                                         );
@@ -631,47 +499,37 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                         onPressed: () {
                                                           showDialog(
                                                             context: context,
-                                                            builder:
-                                                                (BuildContext
-                                                                    context) {
+                                                            builder: (BuildContext context) {
                                                               return AlertDialog(
-                                                                title: const Text(
-                                                                    'Add Academic Year'),
-                                                                content:
-                                                                    SingleChildScrollView(
-                                                                  child:
-                                                                      ListBody(
-                                                                    children: <
-                                                                        Widget>[
+                                                                title:
+                                                                    const Text('Add Academic Year'),
+                                                                content: SingleChildScrollView(
+                                                                  child: ListBody(
+                                                                    children: <Widget>[
                                                                       TextFormField(
                                                                         controller:
                                                                             applynewBatchYearContoller,
-                                                                        readOnly:
-                                                                            true,
+                                                                        readOnly: true,
                                                                         onTap: () =>
                                                                             _selectDate(context),
                                                                         decoration:
                                                                             const InputDecoration(
-                                                                          labelText:
-                                                                              'DD-MM-YYYY',
+                                                                          labelText: 'DD-MM-YYYY',
                                                                           border:
                                                                               OutlineInputBorder(),
                                                                         ),
                                                                       ),
-                                                                      const Icon(
-                                                                          Icons
-                                                                              .arrow_downward_outlined),
+                                                                      const Icon(Icons
+                                                                          .arrow_downward_outlined),
                                                                       TextFormField(
                                                                         controller:
                                                                             selectedToDaterContoller,
-                                                                        readOnly:
-                                                                            true,
+                                                                        readOnly: true,
                                                                         onTap: () =>
                                                                             _selectToDate(context),
                                                                         decoration:
                                                                             const InputDecoration(
-                                                                          labelText:
-                                                                              'To',
+                                                                          labelText: 'To',
                                                                           border:
                                                                               OutlineInputBorder(),
                                                                         ),
@@ -679,41 +537,32 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                                     ],
                                                                   ),
                                                                 ),
-                                                                actions: <
-                                                                    Widget>[
+                                                                actions: <Widget>[
                                                                   TextButton(
-                                                                    child: const Text(
-                                                                        'Cancel'),
-                                                                    onPressed:
-                                                                        () async {
-                                                                      Navigator.of(
-                                                                              context)
-                                                                          .pop();
+                                                                    child: const Text('Cancel'),
+                                                                    onPressed: () async {
+                                                                      Navigator.of(context).pop();
                                                                     },
                                                                   ),
                                                                   TextButton(
-                                                                    child: const Text(
-                                                                        'Create'),
-                                                                    onPressed:
-                                                                        () async {
+                                                                    child: const Text('Create'),
+                                                                    onPressed: () async {
                                                                       await FirebaseFirestore
                                                                           .instance
                                                                           .collection(
                                                                               "SchoolListCollection")
-                                                                          .doc(Get.find<AdminLoginScreenController>()
+                                                                          .doc(Get.find<
+                                                                                  AdminLoginScreenController>()
                                                                               .schoolID)
-                                                                          .collection(
-                                                                              "BatchYear")
+                                                                          .collection("BatchYear")
                                                                           .doc(
                                                                               '${applynewBatchYearContoller.text.trim()}-${selectedToDaterContoller.text.trim()}')
                                                                           .set({
                                                                         'id':
                                                                             '${applynewBatchYearContoller.text.trim()}-${selectedToDaterContoller.text.trim()}'
                                                                       }).then((value) {
-                                                                        Navigator.of(context)
-                                                                            .pop();
-                                                                        Navigator.of(context)
-                                                                            .pop();
+                                                                        Navigator.of(context).pop();
+                                                                        Navigator.of(context).pop();
                                                                       });
                                                                     },
                                                                   ),
@@ -724,10 +573,8 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                         },
                                                         child: Text(
                                                           'Add Academic Year',
-                                                          style: GoogleFonts
-                                                              .poppins(
-                                                                  color: Colors
-                                                                      .white),
+                                                          style: GoogleFonts.poppins(
+                                                              color: Colors.white),
                                                         )),
                                                   ),
                                                 ],
@@ -738,8 +585,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                         child: SizedBox(
                                           height: 30.h,
                                           width: 60.w,
-                                          child: Image.asset(
-                                              "assets/images/Shiftbutton.png"),
+                                          child: Image.asset("assets/images/Shiftbutton.png"),
                                         ))),
                                 SizedBox(
                                   width: 8.w,
@@ -748,16 +594,14 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                   onTap: () async {
                                     showDialog(
                                       context: context,
-                                      barrierDismissible:
-                                          false, // user must tap button!
+                                      barrierDismissible: false, // user must tap button!
                                       builder: (BuildContext context) {
                                         return AlertDialog(
                                           title: const Text('Message'),
                                           content: SingleChildScrollView(
                                             child: ListBody(
                                               children: const <Widget>[
-                                                Text(
-                                                    'Are you sure you want to logout?')
+                                                Text('Are you sure you want to logout?')
                                               ],
                                             ),
                                           ),
@@ -775,37 +619,20 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                                                 log("dateee${LoginTimeIDSavingClass.date}");
                                                 log("idddddddd${LoginTimeIDSavingClass.id.toString()}");
                                                 await FirebaseFirestore.instance
-                                                    .collection(
-                                                        "SchoolListCollection")
+                                                    .collection("SchoolListCollection")
                                                     .doc(Get.find<AdminLoginScreenController>()
                                                         .schoolID)
-                                                    .collection(Get.find<
-                                                            GetFireBaseData>()
-                                                        .bYear
-                                                        .value)
-                                                    .doc(Get.find<
-                                                            GetFireBaseData>()
-                                                        .bYear
-                                                        .value)
-                                                    .collection("LoginHistory")
-                                                    .doc(LoginTimeIDSavingClass
-                                                        .date)
                                                     .collection(
-                                                        LoginTimeIDSavingClass
-                                                            .date)
-                                                    .doc(LoginTimeIDSavingClass
-                                                        .id)
-                                                    .set(
-                                                        {
-                                                      'logOutTime':
-                                                          DateTime.now()
-                                                              .toString(),
-                                                    },
-                                                        SetOptions(
-                                                            merge: true)).then(
-                                                        (value) => html
-                                                            .window.location
-                                                            .reload());
+                                                        Get.find<GetFireBaseData>().bYear.value)
+                                                    .doc(Get.find<GetFireBaseData>().bYear.value)
+                                                    .collection("LoginHistory")
+                                                    .doc(LoginTimeIDSavingClass.date)
+                                                    .collection(LoginTimeIDSavingClass.date)
+                                                    .doc(LoginTimeIDSavingClass.id)
+                                                    .set({
+                                                  'logOutTime': DateTime.now().toString(),
+                                                }, SetOptions(merge: true)).then(
+                                                        (value) => html.window.location.reload());
                                               },
                                             ),
                                           ],
@@ -840,59 +667,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                             ),
                           ),
                         ),
-                        Expanded(
-                          child: SizedBox(
-                            height: screenSize.height - 60,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(right: 50.0, left: 50),
-                              child: GridView.count(
-                                  crossAxisCount: 5,
-                                  crossAxisSpacing: 4.0,
-                                  mainAxisSpacing: 8.0,
-                                  children: List.generate(
-                                      dashboardNamesList.length, (index) {
-                                    return Center(
-                                        child: SizedBox(
-                                      height: 200.w,
-                                      width: 200.w,
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: ((context) =>
-                                                      pages[index])));
-                                        },
-                                        child: Card(
-                                            elevation: 50,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Image.asset(
-                                                  dashboardImagesList[index],
-                                                  width: 55.w,
-                                                  height: 55.w,
-                                                ),
-                                                SizedBox(
-                                                  height: 20.w,
-                                                ),
-                                                Text(
-                                                  dashboardNamesList[index],
-                                                  style: GoogleFonts.poppins(
-                                                      fontSize: 14.w),
-                                                )
-                                              ],
-                                            )),
-                                      ),
-                                    ));
-                                  })),
-                            ),
-                          ),
-                        )
+                        AdminDashBoardSections(),
                       ]),
                     )
                   ],
@@ -910,8 +685,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
     if (picked != null && picked != _selectedDateForApplyDate) {
       setState(() {
         _selectedDateForApplyDate = picked;
-        DateTime parseDate =
-            DateTime.parse(_selectedDateForApplyDate.toString());
+        DateTime parseDate = DateTime.parse(_selectedDateForApplyDate.toString());
         final DateFormat formatter = DateFormat('yyyy-MMMM');
         String formatted = formatter.format(parseDate);
 
@@ -962,20 +736,17 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                   TextFormField(
                     validator: checkFieldEmpty,
                     controller: studentNameController,
-                    decoration:
-                        const InputDecoration(hintText: 'Enter student name'),
+                    decoration: const InputDecoration(hintText: 'Enter student name'),
                   ),
                   TextFormField(
                     validator: checkFieldPhoneNumberIsValid,
                     controller: phoneNumberController,
-                    decoration:
-                        const InputDecoration(hintText: 'Enter phone number'),
+                    decoration: const InputDecoration(hintText: 'Enter phone number'),
                   ),
                   TextFormField(
                     validator: checkFieldEmpty,
                     controller: addmissionController,
-                    decoration: const InputDecoration(
-                        hintText: 'Enter admission number'),
+                    decoration: const InputDecoration(hintText: 'Enter admission number'),
                   ),
                 ],
               ),
@@ -998,8 +769,7 @@ class _NewAdminMainPanelState extends State<AdminDashBoardPage> {
                           classID: classesListValue!['docid'],
                           studentModel: AddStudentModel(
                             studentName: studentNameController.text.trim(),
-                            parentPhoneNumber:
-                                phoneNumberController.text.trim(),
+                            parentPhoneNumber: phoneNumberController.text.trim(),
                             admissionNumber: addmissionController.text.trim(),
                             classID: classesListValue!['docid'],
                             createDate: DateTime.now().toString(),
