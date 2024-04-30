@@ -1,3 +1,5 @@
+import 'package:dujo_kerala_website/view/colors/colors.dart';
+import 'package:dujo_kerala_website/view/web/dujo_homePage/widgets/responsive/responsive.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/Fees_and_bills/Fees/fees_and_bills.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/Students_ScholarShip/student_scholarship.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/achievements/achievements.dart';
@@ -112,48 +114,54 @@ class _AdminHomePageState extends State<AdminHomePage> {
     ];
 
     var screenSize = MediaQuery.of(context).size;
-    return Expanded(
-      child: SizedBox(
-        height: screenSize.height - 60,
-        child: Padding(
-          padding: const EdgeInsets.only(right: 50.0, left: 50),
-          child: GridView.count(
-              crossAxisCount: 5,
-              crossAxisSpacing: 4.0,
-              mainAxisSpacing: 8.0,
-              children: List.generate(dashboardNamesList.length, (index) {
-                return Center(
-                    child: SizedBox(
-                  height: 200.w,
-                  width: 200.w,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context, MaterialPageRoute(builder: ((context) => pages[index])));
-                    },
-                    child: Card(
-                        elevation: 50,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              dashboardImagesList[index],
-                              width: 55.w,
-                              height: 55.w,
-                            ),
-                            SizedBox(
-                              height: 20.w,
-                            ),
-                            Text(
-                              dashboardNamesList[index],
-                              style: GoogleFonts.poppins(fontSize: 14.w),
-                            )
-                          ],
-                        )),
-                  ),
-                ));
-              })),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Home'),
+        backgroundColor: adminePrimayColor,
+      ),
+      body: Expanded(
+        child: SizedBox(
+          height: screenSize.height - 60,
+          child: Padding(
+            padding: const EdgeInsets.only(right: 50.0, left: 50),
+            child: GridView.count(
+                crossAxisCount: ResponsiveWebSite.isMobile(context) ? 2 : 5,
+                crossAxisSpacing: 4.0,
+                mainAxisSpacing: 8.0,
+                children: List.generate(dashboardNamesList.length, (index) {
+                  return Center(
+                      child: SizedBox(
+                    height: ResponsiveWebSite.isMobile(context) ? 400.w : 200.w,
+                    width: ResponsiveWebSite.isMobile(context) ? 400.w : 200.w,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context, MaterialPageRoute(builder: ((context) => pages[index])));
+                      },
+                      child: Card(
+                          elevation: 50,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                dashboardImagesList[index],
+                                width: 55.w,
+                                height: 55.w,
+                              ),
+                              SizedBox(
+                                height: 20.w,
+                              ),
+                              Text(
+                                dashboardNamesList[index],
+                                style: GoogleFonts.poppins(fontSize: 14.w),
+                              )
+                            ],
+                          )),
+                    ),
+                  ));
+                })),
+          ),
         ),
       ),
     );

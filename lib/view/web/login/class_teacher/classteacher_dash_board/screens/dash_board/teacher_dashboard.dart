@@ -13,7 +13,7 @@ class TeacherDashBoardSections extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 650,
+      height: ResponsiveWebSite.isMobile(context) ? 1000 : 670,
       color: const Color.fromARGB(255, 240, 241, 243),
       child: Padding(
         padding: const EdgeInsets.only(left: 10),

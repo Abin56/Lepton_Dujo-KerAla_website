@@ -15,7 +15,46 @@ class IconButtonBackWidget extends StatelessWidget {
       onPressed: () {
         Navigator.pop(context);
       },
-      icon: Icon(Icons.arrow_back, color: color, size: 23, weight: 900),
+      icon: Icon(Icons.arrow_back,
+          color: color, size: MediaQuery.of(context).size.width * 0.01, weight: 900),
+    );
+  }
+}
+
+class IconDashButtonWidget extends StatelessWidget {
+  Color? color;
+  IconDashButtonWidget({
+    super.key,
+    this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: () {
+        Navigator.pop(context);
+      },
+      icon: Icon(Icons.dashboard,
+          color: color, size: MediaQuery.of(context).size.width * 0.01, weight: 900),
+    );
+  }
+}
+
+class IconLogOutButtonWidget extends StatelessWidget {
+  Color? color;
+  IconLogOutButtonWidget({
+    super.key,
+    this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: () {
+        Navigator.pop(context);
+      },
+      icon: Icon(Icons.logout_outlined,
+          color: color, size: MediaQuery.of(context).size.width * 0.01, weight: 900),
     );
   }
 }

@@ -1,4 +1,3 @@
- 
 import 'package:dujo_kerala_website/view/colors/colors.dart';
 import 'package:dujo_kerala_website/view/fonts/text_widget.dart';
 import 'package:dujo_kerala_website/view/web/dujo_homePage/widgets/responsive/responsive.dart';
@@ -13,8 +12,8 @@ class TotalStudentAttendanceContainer extends StatelessWidget {
     return Container(
       height: ResponsiveWebSite.isMobile(context) ? 320 : 420,
       width: ResponsiveWebSite.isMobile(context) ? double.infinity : 400,
-      decoration: BoxDecoration(
-          color: Colors.white, border: Border.all(color: cBlack.withOpacity(0.1))),
+      decoration:
+          BoxDecoration(color: Colors.white, border: Border.all(color: cBlack.withOpacity(0.1))),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

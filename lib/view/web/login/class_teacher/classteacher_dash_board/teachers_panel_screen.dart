@@ -2,15 +2,19 @@
 
 import 'dart:developer';
 import 'dart:html' as html;
+import 'dart:js';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dujo_kerala_website/view/fonts/text_widget.dart';
 import 'package:dujo_kerala_website/view/web/login/admin/admin_DashBoard/admin_dashborad_screen.dart';
 import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/screens/dash_board/teacher_dashboard.dart';
 import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/subject/subject_screen.dart';
 import 'package:dujo_kerala_website/view/web/login/class_teacher/classteacher_dash_board/teacher_home/teacher_home.dart';
 import 'package:dujo_kerala_website/view/web/widgets/Iconbackbutton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -40,7 +44,7 @@ import 'notice_screen/create_notice_screen.dart';
 import 'upload_timetable/new_timetable_screen.dart';
 
 class ClassTeacherAdmin extends StatefulWidget {
-  const ClassTeacherAdmin({
+  ClassTeacherAdmin({
     super.key,
     required this.schoolID,
     required this.teacherID,
@@ -51,7 +55,7 @@ class ClassTeacherAdmin extends StatefulWidget {
   final String schoolID;
   final String teacherID;
   final String teacherEmail;
-
+//  MediaQueryData media = MediaQuery.of(context as BuildContext);
   @override
   State<ClassTeacherAdmin> createState() => _NewAdminMainPanelState();
 }
@@ -418,6 +422,7 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                 child: Column(
                   children: [
                     // sizedBoxH20,
+
                     Container(
                         margin: EdgeInsets.only(top: 20.h),
                         height: 30.w,
@@ -425,8 +430,10 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                         child: Image.asset('assets/images/dujon.png')),
                     Row(
                       children: [
-                        IconButtonBackWidget(
-                          color: Colors.red,
+                        Flexible(
+                          child: IconButtonBackWidget(
+                            color: Colors.red,
+                          ),
                         ),
                         FittedBox(
                           child: Padding(
@@ -443,19 +450,27 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                     Padding(
                       padding: EdgeInsets.all(15.0.w),
                       child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          const Icon(
-                            Icons.dashboard,
-                            color: Colors.white,
+                          Flexible(
+                            child: IconDashButtonWidget(
+                              color: cWhite,
+                            ),
                           ),
-                          sizedBoxw10,
-                          Text(
-                            'Dashboard',
-                            style: GoogleFonts.poppins(
-                                color: Colors.white, fontWeight: FontWeight.w600),
+                          // sizedBoxw10,
+                          FittedBox(
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 5.w, right: 15.w),
+                              child: Text(
+                                ' Dashboard',
+                                style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 15.w),
+                              ),
+                            ),
                           ),
                         ],
+                        // size: MediaQuery.of(context).size.width * 0.01
                       ),
                     ),
                     // sizedBoxH30,
@@ -829,23 +844,26 @@ class _NewAdminMainPanelState extends State<ClassTeacherAdmin> {
                               child: SizedBox(
                                 height: 38.h,
                                 width: 160.w,
-                                child: Tooltip(
-                                  message: "Logout",
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.logout_outlined,
+                                child: Row(
+                                  children: [
+                                    Flexible(
+                                      child: IconLogOutButtonWidget(
+                                        color: Colors.black,
                                       ),
-                                      Container(
-                                        margin: EdgeInsets.only(top: 5.h),
-                                        height: 20.h,
-                                        child: GoogleMonstserratWidgets(
-                                          fontsize: 15.w,
-                                          text: 'logout',
+                                    ),
+                                    FittedBox(
+                                      child: Padding(
+                                        padding: EdgeInsets.only(left: 5.w, right: 15.w),
+                                        child: Text(
+                                          'LogOut',
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.red,
+                                              fontWeight: FontWeight.w800,
+                                              fontSize: 13.w),
                                         ),
-                                      )
-                                    ],
-                                  ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
